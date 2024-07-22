@@ -9,9 +9,9 @@ namespace Boruto
     public interface IRepository<T> where T: Microsoft.Xrm.Sdk.Entity, new()
     {
         T Get(Guid id);
-        Guid Create(T Entity);
+        Guid Create(T entity);
         void Update(T entity);
-        void Delete(T Entity);
+        void Delete(T entity);
         void Delete(Guid id);
         IQueryable<T> GetQuery();
     }

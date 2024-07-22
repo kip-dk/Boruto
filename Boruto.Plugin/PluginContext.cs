@@ -451,6 +451,11 @@ namespace Boruto
                             continue;
                         }
                         #endregion
+
+                        #region resolve iqueryable
+                        #endregion
+                        #region resolve irepository
+                        #endregion
                     }
                     finally
                     {
