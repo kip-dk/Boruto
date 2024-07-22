@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boruto.Angular", "Boruto.Angular\Boruto.Angular.csproj", "{A4A79D59-A481-410B-8DCF-0D2CE2EAE711}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boruto.Angular", "Boruto.Angular\Boruto.Angular.csproj", "{A4A79D59-A481-410B-8DCF-0D2CE2EAE711}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boruto.Plugin.Entities", "Boruto.Plugin.Entities\Boruto.Plugin.Entities.csproj", "{32BE3C34-F6E6-489B-A1EB-EB0234F31553}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boruto.Plugin", "Boruto.Plugin\Boruto.Plugin.csproj", "{35006762-EC5B-4954-A29A-341B1D22F6F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{A4A79D59-A481-410B-8DCF-0D2CE2EAE711}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4A79D59-A481-410B-8DCF-0D2CE2EAE711}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4A79D59-A481-410B-8DCF-0D2CE2EAE711}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32BE3C34-F6E6-489B-A1EB-EB0234F31553}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32BE3C34-F6E6-489B-A1EB-EB0234F31553}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32BE3C34-F6E6-489B-A1EB-EB0234F31553}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32BE3C34-F6E6-489B-A1EB-EB0234F31553}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35006762-EC5B-4954-A29A-341B1D22F6F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35006762-EC5B-4954-A29A-341B1D22F6F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35006762-EC5B-4954-A29A-341B1D22F6F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35006762-EC5B-4954-A29A-341B1D22F6F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

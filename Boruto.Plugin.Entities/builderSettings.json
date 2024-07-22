@@ -1,0 +1,30 @@
+{
+  "suppressINotifyPattern": false,
+  "suppressGeneratedCodeAttribute": false,
+  "language": "CS",
+  "namespace": "Boruto.Plugin.Entities",
+  "serviceContextName": "ServiceContext",
+  "generateSdkMessages": true,
+  "generateGlobalOptionSets": false,
+  "emitFieldsClasses": true,
+  "entityTypesFolder": ".\\ProxyClasses",
+  "messagesTypesFolder": ".\\ProxyClasses",
+  "optionSetsTypesFolder": ".\\ProxyClasses",
+  "entityNamesFilter": [
+    "account",
+    "businessunit",
+    "privilege",
+    "roleprivileges",
+    "role",
+    "contact",
+    "team",
+    "systemuser",
+    "calendar",
+    "calendarrule"
+  ],
+  "messageNamesFilter": [
+    "boruto_*"
+  ],
+  "emitEntityETC": false,
+  "emitVirtualAttributes": true
+}
