@@ -433,7 +433,7 @@ namespace Boruto
                         }
                         #endregion
 
-                        #region resolve action target
+                        #region resolve action request target
                         if (typeof(Microsoft.Xrm.Sdk.OrganizationRequest).IsAssignableFrom(arg.FromType))
                         {
                             var req = this._PluginExecutionContext.InputParameters["Target"] as Microsoft.Xrm.Sdk.OrganizationRequest;
