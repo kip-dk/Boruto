@@ -1,4 +1,5 @@
 ﻿using Boruto.Extensions.SDK;
+using Boruto.Implementations;
 using Boruto.Plugin;
 using Boruto.Reflection;
 using Microsoft.Xrm.Sdk;
@@ -284,6 +285,33 @@ namespace Boruto
                 return this._OrgSvcFactory;
             } 
         }
+
+        private Microsoft.Xrm.Sdk.Client.OrganizationServiceContext _AdminServiceContext;
+        internal Microsoft.Xrm.Sdk.Client.OrganizationServiceContext AdminServiceContext
+        {
+            get
+            {
+                if (this._AdminServiceContext == null)
+                {
+                    this._AdminServiceContext = new Microsoft.Xrm.Sdk.Client.OrganizationServiceContext(this.PluginAdminService);
+                }
+                return this._AdminServiceContext;
+            }
+        }
+
+        private Microsoft.Xrm.Sdk.Client.OrganizationServiceContext _UserServiceContext;
+        internal Microsoft.Xrm.Sdk.Client.OrganizationServiceContext UserServiceContext
+        {
+            get
+            {
+                if (this._UserServiceContext == null)
+                {
+                    this._UserServiceContext = new Microsoft.Xrm.Sdk.Client.OrganizationServiceContext(this.PluginAdminService);
+                }
+                return this._UserServiceContext;
+            }
+        }
+
         public void Trace(string message, [CallerMemberName] string method = null)
         {
         }
@@ -312,6 +340,7 @@ namespace Boruto
                     continue;
                 }
 
+                #region resolve arguments
                 var args = new object[method.Arguments.Length];
 
                 Microsoft.Xrm.Sdk.Entity strongTypeTarget = null;
@@ -453,8 +482,21 @@ namespace Boruto
                         #endregion
 
                         #region resolve iqueryable
+                        if (arg.FromType.IsInterface && arg.FromType.IsGenericType && arg.FromType.FullName.StartsWith("System.Linq.IQueryable"))
+                        {
+                            var repo = this.ResolveRepository(arg.FromType.GenericTypeArguments[0], arg.Admin);
+                            var queryMethd = repo.GetType().GetMethod("GetQuery", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+                            args[ix] = queryMethd.Invoke(repo, null);
+                            continue;
+                        }
                         #endregion
+
                         #region resolve irepository
+                        if (arg.FromType.IsInterface && arg.FromType.IsGenericType && arg.FromType.FullName.StartsWith("Boruto.IRepository"))
+                        {
+                            args[ix] = this.ResolveRepository(arg.FromType.GenericTypeArguments[0], arg.Admin);
+                            continue;
+                        }
                         #endregion
                     }
                     finally
@@ -462,6 +504,7 @@ namespace Boruto
                         ix++;
                     }
                 }
+                #endregion
             }
         }
         #endregion
@@ -478,11 +521,42 @@ namespace Boruto
             serviceResolverIndex[type] = new PluginServiceResolver(type);
             return serviceResolverIndex[type];
         }
+
+        private Dictionary<string, object> repositoryTypes = new Dictionary<string, object>();
+        private object ResolveRepository(Type entityType, bool admin)
+        {
+            var key = $"{entityType.FullName}:{admin}";
+            if (repositoryTypes.TryGetValue(key, out object o)) 
+            {
+                return o;
+            }
+            Type resultType = typeof(Implementations.Repository<>).MakeGenericType(entityType);
+
+            if (admin)
+            {
+                repositoryTypes[key] = Activator.CreateInstance(resultType, this.PluginAdminService, this.AdminServiceContext);
+            }
+            else
+            {
+                repositoryTypes[key] = Activator.CreateInstance(resultType, this.PluginUserService, this.UserServiceContext);
+            }
+            return repositoryTypes[key];
+        }
         #endregion
 
         #region dispose
         public void Dispose()
         {
+            if (this._AdminServiceContext != null)
+            {
+                this._AdminServiceContext.Dispose();
+            }
+
+            if (this._UserServiceContext != null)
+            {
+                this._UserServiceContext.Dispose();
+            }
+
             runnings.Remove(System.Threading.Thread.CurrentThread.ManagedThreadId);
         }
         #endregion
