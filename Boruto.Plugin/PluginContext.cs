@@ -7,6 +7,7 @@ using Microsoft.Xrm.Sdk.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace Boruto
@@ -29,11 +30,13 @@ namespace Boruto
         private string methodPattern;
         private List<string> logs = new List<string>();
 
-        internal PluginContext(BasePlugin plugin, IServiceProvider serviceProvider, string unsecure, string secure)
+        internal PluginContext(BasePlugin plugin, IServiceProvider standardServiceProvider, IServiceProvider customServiceProvider, Assembly[] assemblies, string unsecure, string secure)
         {
             this.plugin = plugin;
             this.Type = plugin.GetType();
-            this.ServiceProvider = serviceProvider;
+            this.StandardServiceProvider = standardServiceProvider;
+            this.CustomServiceProvider = customServiceProvider;
+            this.ServiceAssemblies = assemblies;
             this.Unsecure = unsecure;
             this.Secure = secure;
 
@@ -196,7 +199,7 @@ namespace Boruto
             {
                 if (this._InitiatingUserService == null)
                 {
-                    this._InitiatingUserService = this.ServiceProvider.GetOrganizationService(PluginExecutionContext.InitiatingUserId);
+                    this._InitiatingUserService = this.StandardServiceProvider.GetOrganizationService(PluginExecutionContext.InitiatingUserId);
                 }
                 return this._InitiatingUserService;
             } 
@@ -209,7 +212,7 @@ namespace Boruto
             {
                 if (this._PluginUserService == null)
                 {
-                    this._PluginUserService = this.ServiceProvider.GetOrganizationService(PluginExecutionContext.UserId); // User that the plugin is registered to run as, Could be same as current user.
+                    this._PluginUserService = this.StandardServiceProvider.GetOrganizationService(PluginExecutionContext.UserId); // User that the plugin is registered to run as, Could be same as current user.
 
                 }
                 return this._PluginUserService;
@@ -236,7 +239,7 @@ namespace Boruto
             {
                 if (this._PluginExecutionContext == null)
                 {
-                    this._PluginExecutionContext = ServiceProvider.Get<IPluginExecutionContext>();
+                    this._PluginExecutionContext = StandardServiceProvider.Get<IPluginExecutionContext>();
                 }
                 return this._PluginExecutionContext;
             }
@@ -249,7 +252,7 @@ namespace Boruto
             {
                 if (this._NotificationService == null)
                 {
-                    this._NotificationService = this.ServiceProvider.Get<IServiceEndpointNotificationService>();
+                    this._NotificationService = this.StandardServiceProvider.Get<IServiceEndpointNotificationService>();
 
                 }
                 return this._NotificationService;
@@ -263,14 +266,17 @@ namespace Boruto
             {
                 if (this._TracingService == null)
                 {
-                    this._TracingService = this.ServiceProvider.Get<ITracingService>();
+                    this._TracingService = this.StandardServiceProvider.Get<ITracingService>();
 
                 }
                 return this._TracingService;
             } 
         }
-        public IServiceProvider ServiceProvider { get; }
 
+        public IServiceProvider StandardServiceProvider { get; }
+        public IServiceProvider CustomServiceProvider { get; }
+
+        public Assembly[] ServiceAssemblies { get; }
 
         private IOrganizationServiceFactory _OrgSvcFactory;
         public IOrganizationServiceFactory OrgSvcFactory 
@@ -279,7 +285,7 @@ namespace Boruto
             {
                 if (this.OrgSvcFactory == null)
                 {
-                    this._OrgSvcFactory = this.ServiceProvider.Get<IOrganizationServiceFactory>();
+                    this._OrgSvcFactory = this.StandardServiceProvider.Get<IOrganizationServiceFactory>();
 
                 }
                 return this._OrgSvcFactory;
@@ -451,7 +457,7 @@ namespace Boruto
 
                         if (arg.FromType == typeof(IServiceProvider))
                         {
-                            args[ix] = this.ServiceProvider;
+                            args[ix] = this.StandardServiceProvider;
                             continue;
                         }
 
