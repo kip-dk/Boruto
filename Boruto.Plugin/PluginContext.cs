@@ -15,7 +15,6 @@ namespace Boruto
     public class PluginContext : IDisposable
     {
         private static Dictionary<int, PluginContext> runnings = new Dictionary<int, PluginContext>();
-
         private static Dictionary<Type, Reflection.PluginServiceResolver> serviceResolverIndex = new Dictionary<Type, Reflection.PluginServiceResolver>();
 
         public static PluginContext Current
@@ -114,6 +113,9 @@ namespace Boruto
                 if (this._preimage == null)
                 {
                     this._preimage = new Entity();
+                    this._preimage.LogicalName = this.PrimaryLogicalName;
+                    this._preimage.Id = this.PrimaryEntityId;
+
                     if (this.PluginExecutionContext.PreEntityImages != null)
                     {
                         foreach (var pe in this.PluginExecutionContext.PreEntityImages.Values)
@@ -137,6 +139,8 @@ namespace Boruto
                 if (this._postimage == null)
                 {
                     this._postimage = new Entity();
+                    this._postimage.LogicalName = this.PrimaryLogicalName;
+                    this._postimage.Id = this.PrimaryEntityId;
                     if (this.PluginExecutionContext.PostEntityImages != null)
                     {
                         foreach (var pe in this.PluginExecutionContext.PostEntityImages.Values)
@@ -159,18 +163,20 @@ namespace Boruto
             {
                 if (_merged == null)
                 {
-                    _merged = new Entity();
+                    this._merged = new Entity();
+                    this._merged.LogicalName = this.PrimaryLogicalName;
+                    this._merged.Id = this.PrimaryEntityId;
                     var pre = this.PreImage;
                     foreach (var att in pre.Attributes)
                     {
-                        _merged[att.Key] = att.Value;
+                        this._merged[att.Key] = att.Value;
                     }
 
                     var tar = this.Target;
 
                     foreach (var att in tar.Attributes)
                     {
-                        _merged[att.Key] = att.Value;
+                        this._merged[att.Key] = att.Value;
                     }
                 }
                 return _merged;
@@ -191,7 +197,7 @@ namespace Boruto
         }
         #endregion
 
-        #region service properties
+        #region microsoft service properties
         private IOrganizationService _InitiatingUserService;
         public IOrganizationService InitiatingUserService 
         {
@@ -316,10 +322,6 @@ namespace Boruto
                 }
                 return this._UserServiceContext;
             }
-        }
-
-        public void Trace(string message, [CallerMemberName] string method = null)
-        {
         }
         #endregion
 
@@ -512,6 +514,12 @@ namespace Boruto
                 }
                 #endregion
             }
+        }
+        #endregion
+
+        #region public methods
+        public void Trace(string message, [CallerMemberName] string method = null)
+        {
         }
         #endregion
 
