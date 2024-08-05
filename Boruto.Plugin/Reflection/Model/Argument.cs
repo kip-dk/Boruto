@@ -17,6 +17,8 @@ namespace Boruto.Reflection.Model
 
         internal Argument(Type pluginType, System.Reflection.MethodInfo method, System.Reflection.ParameterInfo parameterinfo, string primaryLogicalName)
         {
+            this.Name = parameterinfo.Name;
+            this.IsMethodArgument = true;
             this.pluginType = pluginType;
             this.method = method;
             this.parameterinfo = parameterinfo;
@@ -37,7 +39,7 @@ namespace Boruto.Reflection.Model
         internal bool IsPostImage { get; private set; }
         internal string LogicalName { get; private set; }
         internal Type FromType { get; private set; }
-        internal Type ToType { get; private set; }
+        internal Type EarlyBoundEntityType { get; private set; }
         internal bool FilteredAllAttributes { get; private set; } = false;
         internal string[] FilteredAttributes { get; private set; }
         internal bool PreAllAttributes { get; private set; } = false;
@@ -46,6 +48,8 @@ namespace Boruto.Reflection.Model
         internal string[] PostAttributes { get; private set; }
         internal bool IsTargetReference { get; private set; }
         internal bool Admin { get; private set; }
+        internal string Name { get; private set; }
+        internal bool IsMethodArgument { get; private set; }
 
         private void Resolve()
         {
@@ -143,19 +147,8 @@ namespace Boruto.Reflection.Model
             {
                 var strongType = this.FromType.StrongTypeOf();
                 this.LogicalName = strongType.LogicalName;
-                this.ToType = strongType.GetType();
+                this.EarlyBoundEntityType = strongType.GetType();
                 return;
-            }
-
-            if (this.FromType.IsGenericType && this.FromType.GenericTypeArguments != null && this.FromType.GenericTypeArguments.Length == 1)
-            {
-                if (this.FromType.GenericTypeArguments[0].IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity)))
-                {
-                    var strongType = this.FromType.GenericTypeArguments[0].StrongTypeOf();
-                    this.LogicalName = strongType.LogicalName;
-                    this.ToType = strongType.GetType();
-                    return;
-                }
             }
 
             var etas = this.method.GetCustomAttributes<Attributes.EntityTypeAttribute>();
@@ -167,7 +160,7 @@ namespace Boruto.Reflection.Model
                     if (stronType.LogicalName == this.primaryLogicalName)
                     {
                         this.LogicalName = stronType.LogicalName;
-                        this.ToType = stronType.GetType();
+                        this.EarlyBoundEntityType = stronType.GetType();
                         return;
                     }
                 }

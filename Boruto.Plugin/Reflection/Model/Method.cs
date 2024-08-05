@@ -19,7 +19,6 @@ namespace Boruto.Reflection.Model
         {
             this.pluginType = pluginType;
             this.method = method;
-            this.LogicalName = primaryLogicalName;
             this.Resolve();
             this.ResolveIf();
         }
@@ -109,6 +108,7 @@ namespace Boruto.Reflection.Model
             foreach (var pm in pms)
             {
                 var next = new Argument(this.pluginType, this.method, pm, this.LogicalName);
+
 
                 if (this.LogicalName != null && next.LogicalName != null && next.LogicalName != this.LogicalName)
                 {

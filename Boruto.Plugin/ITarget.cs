@@ -5,5 +5,5 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Boruto
 {
-    public interface ITarget : IEntity { }
+    public interface ITarget : IEntity, System.ComponentModel.INotifyPropertyChanged { }
 } 
