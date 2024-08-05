@@ -13,12 +13,16 @@ namespace Boruto.Reflection.Model
         private readonly Type pluginType;
         internal MethodInfo method { get; }
         private Argument[] arguments;
+
+        internal bool IsMatch { get; private set; }
         private Attributes.IfAttribute[] ifTypes;
 
         internal Method(Type pluginType, System.Reflection.MethodInfo method, string primaryLogicalName)
         {
             this.pluginType = pluginType;
             this.method = method;
+            this.IsMatch = true;
+            this.LogicalName = primaryLogicalName;
             this.Resolve();
             this.ResolveIf();
         }
@@ -112,7 +116,8 @@ namespace Boruto.Reflection.Model
 
                 if (this.LogicalName != null && next.LogicalName != null && next.LogicalName != this.LogicalName)
                 {
-                    throw new Exceptions.InconsistentEntityParameterException(this.pluginType, this.method, this.LogicalName, next.LogicalName);
+                    this.IsMatch = false;
+                    return;
                 }
                 result.Add(next);
             }

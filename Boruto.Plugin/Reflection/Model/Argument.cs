@@ -192,7 +192,7 @@ namespace Boruto.Reflection.Model
         {
             List<string> result = new List<string>();
             var interfaceProperties = this.FromType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            var instanceProperties = this.FromType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToDictionary(r => r.Name);
+            var instanceProperties = this.EarlyBoundEntityType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToDictionary(r => r.Name);
 
             foreach (var prop in interfaceProperties)
             {
@@ -216,7 +216,7 @@ namespace Boruto.Reflection.Model
         {
             List<string> result = new List<string>();
             var interfaceProperties = this.FromType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            var instanceProperties = this.FromType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToDictionary(r => r.Name);
+            var instanceProperties = this.EarlyBoundEntityType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToDictionary(r => r.Name);
 
             foreach (var prop in interfaceProperties)
             {
@@ -239,7 +239,7 @@ namespace Boruto.Reflection.Model
         {
             List<string> result = new List<string>();
             var interfaceProperties = this.FromType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            var instanceProperties = this.FromType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToDictionary(r => r.Name);
+            var instanceProperties = this.EarlyBoundEntityType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToDictionary(r => r.Name);
 
             foreach (var prop in interfaceProperties)
             {

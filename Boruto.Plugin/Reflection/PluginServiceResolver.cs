@@ -36,7 +36,7 @@ namespace Boruto.Reflection
             {
                 var next = new Model.Method(this.pluginType, method, primaryLogicalName);
 
-                if (primaryLogicalName == null || primaryLogicalName == next.LogicalName)
+                if (next.IsMatch)
                 {
                     result.Add(next);
                 }
