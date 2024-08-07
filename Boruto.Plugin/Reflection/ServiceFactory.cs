@@ -24,40 +24,104 @@ namespace Boruto.Reflection
                 return o;
             }
 
-            var result = this.DoResolve(argument.FromType);
+            var result = this.DoResolve(argument);
 
-            if (result is ITarget target)
+            if (argument.IsTarget)
             {
-                target.Attributes = this.ctx.Target.Attributes;
-                if (ctx.Stage <= 20 && ctx.Message == "Update")
+                var notifier = result as System.ComponentModel.INotifyPropertyChanged;
+                if (notifier != null && ctx.Stage <= 20 && ctx.Message == "Update")
                 {
-                    target.PropertyChanged += Target_PropertyChanged;
+                    notifier.PropertyChanged += Target_PropertyChanged;
+                }
+
+                if (result is Microsoft.Xrm.Sdk.Entity ent)
+                {
+                    ent.Attributes = this.ctx.Target.Attributes;
+                    ent.LogicalName = this.ctx.Target.LogicalName;
+                    return result;
+                }
+
+                if (result is ITarget target)
+                {
+                    target.Attributes = this.ctx.Target.Attributes;
                 }
                 return result;
             }
 
-            if (result is System.ComponentModel.INotifyPropertyChanged no)
+            if (argument.IsPreImage)
             {
+                if (result is Microsoft.Xrm.Sdk.Entity ent)
+                {
+                    ent.Attributes = this.ctx.PreImage.Attributes;
+                    ent.LogicalName = this.ctx.PreImage.LogicalName;
+                    return result;
+                }
 
+                if (result is IPreImage preimage)
+                {
+                    preimage.Attributes = this.ctx.PreImage.Attributes;
+                }
+
+                return result;
             }
 
+            if (argument.IsMergedImage)
+            {
+                var notifier = result as System.ComponentModel.INotifyPropertyChanged;
+                if (notifier != null && ctx.Stage <= 20 && ctx.Message == "Update")
+                {
+                    notifier.PropertyChanged += Merged_PropertyChanged;
+                }
+
+                if (result is Microsoft.Xrm.Sdk.Entity ent)
+                {
+                    ent.Attributes = this.ctx.Merged.Attributes;
+                    return result;
+                }
+
+                if (result is IMerged merged)
+                {
+                    merged.Attributes = this.ctx.Merged.Attributes;
+                }
+                return result;
+            }
 
             return result;
         }
 
+        private void Merged_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            this.ctx.Target[e.PropertyName.ToLower()] = this.ctx.Merged[e.PropertyName.ToLower()];
+        }
+
         private void Target_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            this.ctx.Merged[e.PropertyName] = this.ctx.Target[e.PropertyName];
+            this.ctx.Merged[e.PropertyName.ToLower()] = this.ctx.Target[e.PropertyName.ToLower()];
         }
 
         #region private helpers
-        private object DoResolve(Type type)
+        private object DoResolve(Reflection.Model.Argument argument)
         {
-            object result = new object();
+            if (argument.IsOrganizationRequest)
+            {
+                var orgR  = System.Activator.CreateInstance(argument.FromType) as Microsoft.Xrm.Sdk.OrganizationRequest;
+                orgR.RequestName = this.ctx.PluginExecutionContext.MessageName;
+                orgR.Parameters = this.ctx.PluginExecutionContext.InputParameters;
+                resolved[argument.FromType] = orgR;
+                return orgR;
+            }
 
+            if (argument.FromType.IsInterface && argument.IsTarget && typeof(ITarget).IsAssignableFrom(argument.FromType))
+            {
+            }
 
+            if (argument.IsTarget && argument.FromType.IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity)))
+            {
+            }
 
-            resolved[type] = result;
+            object result = null;
+
+            resolved[argument.FromType] = result;
             return result;
         }
 

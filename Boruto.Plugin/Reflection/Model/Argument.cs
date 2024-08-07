@@ -37,6 +37,7 @@ namespace Boruto.Reflection.Model
         internal bool IsPreImage { get; private set; }
         internal bool IsMergedImage { get; private set; }
         internal bool IsPostImage { get; private set; }
+        internal bool IsOrganizationRequest { get; private set; }
         internal string LogicalName { get; private set; }
         internal Type FromType { get; private set; }
         internal Type EarlyBoundEntityType { get; private set; }
@@ -138,6 +139,12 @@ namespace Boruto.Reflection.Model
                     this.ResolveLogicalName();
                     return;
                 }
+            }
+
+            if (typeof(Microsoft.Xrm.Sdk.OrganizationRequest).IsAssignableFrom(this.FromType))
+            {
+                this.IsOrganizationRequest = true;
+                return;
             }
         }
 

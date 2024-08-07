@@ -194,7 +194,7 @@ namespace Boruto
         }
 
         private Microsoft.Xrm.Sdk.EntityReference _targetReference;
-        private Microsoft.Xrm.Sdk.EntityReference TargetReference
+        public Microsoft.Xrm.Sdk.EntityReference TargetReference
         {
             get
             {
@@ -205,6 +205,23 @@ namespace Boruto
                 return this._targetReference;
             }
         }
+
+        private Microsoft.Xrm.Sdk.OrganizationRequest _orgRequest;
+
+        public Microsoft.Xrm.Sdk.OrganizationRequest OrganizationRequest
+        {
+            get
+            {
+                if (this._orgRequest == null)
+                {
+                    var req = new Microsoft.Xrm.Sdk.OrganizationRequest();
+                    req.RequestName = this.Message;
+                    req.Parameters = this.PluginExecutionContext.InputParameters;
+                }
+                return this._orgRequest;
+            }
+        }
+
         #endregion
 
         #region microsoft service properties
