@@ -14,14 +14,23 @@ namespace Boruto
 {
     public class PluginContext : IDisposable
     {
-        private static Dictionary<int, PluginContext> runnings = new Dictionary<int, PluginContext>();
+        private static Dictionary<System.Threading.Thread, List<PluginContext>> runnings = new Dictionary<System.Threading.Thread, List<PluginContext>>();
         private static Dictionary<Type, Reflection.PluginServiceResolver> serviceResolverIndex = new Dictionary<Type, Reflection.PluginServiceResolver>();
+
+        private static readonly object locker = new object();
 
         public static PluginContext Current
         {
             get
             {
-                return runnings[System.Threading.Thread.CurrentThread.ManagedThreadId];
+                lock (locker)
+                {
+                    if (runnings.TryGetValue(System.Threading.Thread.CurrentThread, out List<PluginContext> ctxs))
+                    {
+                        return ctxs.LastOrDefault();
+                    }
+                }
+                return null;
             }
         }
 
@@ -73,7 +82,15 @@ namespace Boruto
 
             this.methodPattern = methodName;
 
-            runnings[System.Threading.Thread.CurrentThread.ManagedThreadId] = this;
+            lock (locker)
+            {
+                if (!runnings.ContainsKey(System.Threading.Thread.CurrentThread))
+                {
+                    runnings[System.Threading.Thread.CurrentThread] = new List<PluginContext>();
+                }
+
+                runnings[System.Threading.Thread.CurrentThread].Add(this);
+            }
         }
 
         #region constructor properties
@@ -581,7 +598,21 @@ namespace Boruto
                 this._UserServiceContext.Dispose();
             }
 
-            runnings.Remove(System.Threading.Thread.CurrentThread.ManagedThreadId);
+            lock (locker)
+            {
+                if (runnings.TryGetValue(System.Threading.Thread.CurrentThread, out List<PluginContext> list))
+                {
+                    if (list.Count > 0)
+                    {
+                        list.Remove(list.Last());
+                    }
+
+                    if (list.Count == 0)
+                    {
+                        runnings.Remove(System.Threading.Thread.CurrentThread);
+                    }
+                }
+            }
         }
         #endregion
     }
