@@ -17,13 +17,6 @@ namespace Boruto.Plugin.UT.Extensions.Reflection
     [TestClass]
     public class ReflectionMethodsTest
     {
-        private static readonly Assembly[] resolveFrom = new Assembly[]
-        {
-            typeof(Boruto.Plugin.Entities.Account).Assembly,
-            typeof(Boruto.Plugin.Example.Entities.AccountStateChanged).Assembly,
-            typeof(Boruto.Plugin.UT.Extensions.Reflection.ReflectionMethodsTest).Assembly
-        };
-
         [TestMethod]
         public void IsEntityTypeTest()
         {
@@ -38,22 +31,22 @@ namespace Boruto.Plugin.UT.Extensions.Reflection
         [TestMethod]
         public void ResolveEntityTypeTest()
         {
-            Assert.AreEqual(typeof(Microsoft.Xrm.Sdk.Entity), typeof(Microsoft.Xrm.Sdk.Entity).ResolveEntityType(Entities.Account.EntityLogicalName, resolveFrom));
-            Assert.AreEqual(typeof(Entities.Account), typeof(Entities.Account).ResolveEntityType(Entities.Account.EntityLogicalName, resolveFrom));
+            Assert.AreEqual(typeof(Microsoft.Xrm.Sdk.Entity), typeof(Microsoft.Xrm.Sdk.Entity).ResolveEntityType(Entities.Account.EntityLogicalName, Consts.Assemblies));
+            Assert.AreEqual(typeof(Entities.Account), typeof(Entities.Account).ResolveEntityType(Entities.Account.EntityLogicalName, Consts.Assemblies));
 
-            Assert.AreEqual(typeof(Target), typeof(Target).ResolveEntityType(Entities.Account.EntityLogicalName, resolveFrom));
-            Assert.AreEqual(typeof(Preimage), typeof(Preimage).ResolveEntityType(Entities.Account.EntityLogicalName, resolveFrom));
-            Assert.AreEqual(typeof(Merged), typeof(Merged).ResolveEntityType(Entities.Account.EntityLogicalName, resolveFrom));
-            Assert.AreEqual(typeof(Postimage), typeof(Postimage).ResolveEntityType(Entities.Account.EntityLogicalName, resolveFrom));
+            Assert.AreEqual(typeof(Target), typeof(Target).ResolveEntityType(Entities.Account.EntityLogicalName, Consts.Assemblies));
+            Assert.AreEqual(typeof(Preimage), typeof(Preimage).ResolveEntityType(Entities.Account.EntityLogicalName, Consts.Assemblies));
+            Assert.AreEqual(typeof(Merged), typeof(Merged).ResolveEntityType(Entities.Account.EntityLogicalName, Consts.Assemblies));
+            Assert.AreEqual(typeof(Postimage), typeof(Postimage).ResolveEntityType(Entities.Account.EntityLogicalName, Consts.Assemblies));
 
-            Assert.AreEqual(typeof(AccountMyInterface), typeof(IMyInterFace).ResolveEntityType(Entities.Account.EntityLogicalName, resolveFrom));
-            Assert.AreEqual(typeof(ContactMyInterface), typeof(IMyInterFace).ResolveEntityType(Entities.Contact.EntityLogicalName, resolveFrom));
+            Assert.AreEqual(typeof(AccountMyInterface), typeof(IMyInterFace).ResolveEntityType(Entities.Account.EntityLogicalName, Consts.Assemblies));
+            Assert.AreEqual(typeof(ContactMyInterface), typeof(IMyInterFace).ResolveEntityType(Entities.Contact.EntityLogicalName, Consts.Assemblies));
 
-            Assert.IsNull(typeof(IMyInterFace).ResolveEntityType(Entities.SystemUser.EntityLogicalName, resolveFrom));
+            Assert.IsNull(typeof(IMyInterFace).ResolveEntityType(Entities.SystemUser.EntityLogicalName, Consts.Assemblies));
 
-            Assert.AreEqual(typeof(Boruto.Plugin.Example.Entities.AccountStateChanged), typeof(Boruto.Plugin.Example.Entities.AccountStateChanged.IStatChanged).ResolveEntityType(Entities.Account.EntityLogicalName, resolveFrom));
+            Assert.AreEqual(typeof(Boruto.Plugin.Example.Entities.AccountStateChanged), typeof(Boruto.Plugin.Example.Entities.AccountStateChanged.IStatChanged).ResolveEntityType(Entities.Account.EntityLogicalName, Consts.Assemblies));
 
-            Assert.AreEqual(typeof(VerySpecialAccount), typeof(IVerySpecialAccount).ResolveEntityType(Entities.Account.EntityLogicalName, resolveFrom));
+            Assert.AreEqual(typeof(VerySpecialAccount), typeof(IVerySpecialAccount).ResolveEntityType(Entities.Account.EntityLogicalName, Consts.Assemblies));
         }
 
 

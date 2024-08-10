@@ -12,5 +12,9 @@ namespace Boruto.Plugin.Example.Plugins.Account
         {
             target.OnStateChanged();
         }
+
+        public void OnPreDelete(ITargetReference<Boruto.Plugin.Entities.Account> target)
+        {
+        }
     }
 }

@@ -91,7 +91,7 @@ namespace Boruto.Plugin.Entities
 		Almpost = 5,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown = 8,
+		Andet = 8,
 	}
 	
 	/// <summary>
@@ -313,19 +313,19 @@ namespace Boruto.Plugin.Entities
 		Netto30dage = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown = 6,
+		Netto8dage = 6,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown1 = 7,
+		Netto14dage = 7,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown2 = 10,
+		Nettokontant = 10,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown3 = 11,
+		Lbendemned14dage = 11,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown4 = 12,
+		Lbendemned8dage = 12,
 	}
 	
 	/// <summary>
@@ -436,67 +436,10 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		ben = 1,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		BrevSendt = 979700000,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		SendBrevreminder1 = 979700001,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Brevreminder1sendt = 979700002,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Sendbrevreminder2 = 979700003,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Brevreminder2sendt = 979700004,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Interesseret = 979700005,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Tilbudsendt = 979700007,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Tilbudreminder1sendt = 979700008,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Tilbudreminder2sendt = 979700009,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		TilbudAaccepteret = 979700010,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		TilbudBaccepteret = 979700011,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Tilbudnejtak = 979700012,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Bounced = 979700013,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Forkertsamtykke = 979700014,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Samtykkemailsendt = 979700015,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Samtykkereminder1sendt = 979700016,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Samtykkereminder2sendt = 979700017,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Samtykkeikkebesvaret = 979700018,
+		Aktiv = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		Inaktiv = 2,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ikkeinteresseret = 979700006,
 	}
 	
 	/// <summary>
@@ -784,8 +727,6 @@ namespace Boruto.Plugin.Entities
 			public const string msdyn_PrimaryTimeZone = "msdyn_primarytimezone";
 			public const string msdyn_segmentid = "msdyn_segmentid";
 			public const string msdyn_segmentidName = "msdyn_segmentidname";
-			public const string msft_DataState = "msft_datastate";
-			public const string msft_datastateName = "msft_datastatename";
 			public const string mspp_userpreferredlcid = "mspp_userpreferredlcid";
 			public const string mspp_userpreferredlcidName = "mspp_userpreferredlcidname";
 			public const string NickName = "nickname";
@@ -855,46 +796,6 @@ namespace Boruto.Plugin.Entities
 			public const string TraversedPath = "traversedpath";
 			public const string UTCConversionTimeZoneCode = "utcconversiontimezonecode";
 			public const string VersionNumber = "versionnumber";
-			public const string vf_angivinteresseforfjernvarme = "vf_angivinteresseforfjernvarme";
-			public const string vf_angivinteresseforfjernvarmeName = "vf_angivinteresseforfjernvarmename";
-			public const string vf_benytteskuntilkommunikation = "vf_benytteskuntilkommunikation";
-			public const string vf_benytteskuntilkommunikationName = "vf_benytteskuntilkommunikationname";
-			public const string vf_contact_to_facility_migrated = "vf_contact_to_facility_migrated";
-			public const string vf_contact_to_facility_migratedName = "vf_contact_to_facility_migratedname";
-			public const string vf_cprnummer = "vf_cprnummer";
-			public const string vf_datamigreret = "vf_datamigreret";
-			public const string vf_datamigreretName = "vf_datamigreretname";
-			public const string vf_diffindaystilbudsendtandduedate = "vf_diffindaystilbudsendtandduedate";
-			public const string vf_diffindaystilbudsendtogtilbud2duedate = "vf_diffindaystilbudsendtogtilbud2duedate";
-			public const string vf_digitalexempt = "vf_digitalexempt";
-			public const string vf_digitalexemptName = "vf_digitalexemptname";
-			public const string vf_facilityrelation_rollup = "vf_facilityrelation_rollup";
-			public const string vf_facilityrelation_rollup_Date = "vf_facilityrelation_rollup_date";
-			public const string vf_facilityrelation_rollup_State = "vf_facilityrelation_rollup_state";
-			public const string vf_forceapisync = "vf_forceapisync";
-			public const string vf_forsyning = "vf_forsyning";
-			public const string vf_forsyningName = "vf_forsyningname";
-			public const string vf_kommune = "vf_kommune";
-			public const string vf_KundeID = "vf_kundeid";
-			public const string vf_lastapiupdate = "vf_lastapiupdate";
-			public const string vf_migrationnote = "vf_migrationnote";
-			public const string vf_mitiduuid = "vf_mitiduuid";
-			public const string vf_nationalid = "vf_nationalid";
-			public const string vf_politiskgodkendt = "vf_politiskgodkendt";
-			public const string vf_politiskgodkendtName = "vf_politiskgodkendtname";
-			public const string vf_robinsonlisten = "vf_robinsonlisten";
-			public const string vf_robinsonlistenName = "vf_robinsonlistenname";
-			public const string vf_tilbudreminder1duedate = "vf_tilbudreminder1duedate";
-			public const string vf_tilbudreminder2sendt = "vf_tilbudreminder2sendt";
-			public const string vf_tilbudsendtdato = "vf_tilbudsendtdato";
-			public const string vf_tilbudteminder1sendt = "vf_tilbudteminder1sendt";
-			public const string vf_tilbudteminder2duedate = "vf_tilbudteminder2duedate";
-			public const string vf_tilslutningsaar = "vf_tilslutningsaar";
-			public const string vf_today = "vf_today";
-			public const string vf_varme_mwh = "vf_varme_mwh";
-			public const string vf_varmedistriktid = "vf_varmedistriktid";
-			public const string vf_varmedistriktidName = "vf_varmedistriktidname";
-			public const string vf_aarligt_forbrug_pr_kvm_kwh = "vf_aarligt_forbrug_pr_kvm_kwh";
 			public const string WebSiteUrl = "websiteurl";
 			public const string YomiFirstName = "yomifirstname";
 			public const string YomiFullName = "yomifullname";
@@ -903,10 +804,18 @@ namespace Boruto.Plugin.Entities
 			public const string account_primary_contact = "account_primary_contact";
 			public const string Referencedcontact_customer_contacts = "Referencedcontact_customer_contacts";
 			public const string Referencedcontact_master_contact = "Referencedcontact_master_contact";
+			public const string lead_customer_contacts = "lead_customer_contacts";
+			public const string lead_parent_contact = "lead_parent_contact";
+			public const string opportunity_customer_contacts = "opportunity_customer_contacts";
+			public const string opportunity_parent_contact = "opportunity_parent_contact";
+			public const string quote_customer_contacts = "quote_customer_contacts";
+			public const string contactleads_association = "contactleads_association";
+			public const string contactquotes_association = "contactquotes_association";
 			public const string business_unit_contacts = "business_unit_contacts";
 			public const string contact_customer_accounts = "contact_customer_accounts";
 			public const string Referencingcontact_customer_contacts = "contact_customer_contacts";
 			public const string Referencingcontact_master_contact = "contact_master_contact";
+			public const string contact_originating_lead = "contact_originating_lead";
 			public const string contact_owning_user = "contact_owning_user";
 			public const string lk_contact_createdonbehalfby = "lk_contact_createdonbehalfby";
 			public const string lk_contact_modifiedonbehalfby = "lk_contact_modifiedonbehalfby";
@@ -5266,31 +5175,6 @@ namespace Boruto.Plugin.Entities
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msft_datastate")]
-		public virtual msft_datastate? msft_DataState
-		{
-			get
-			{
-				return ((msft_datastate?)(EntityOptionSetEnum.GetEnum(this, "msft_datastate")));
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msft_datastatename")]
-		public string msft_datastateName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("msft_datastate"))
-				{
-					return this.FormattedValues["msft_datastate"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
 		/// <summary>
 		/// Brugerens foretrukne portalsprog
 		/// </summary>
@@ -6433,594 +6317,6 @@ namespace Boruto.Plugin.Entities
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_angivinteresseforfjernvarme")]
-		public System.Nullable<bool> vf_angivinteresseforfjernvarme
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("vf_angivinteresseforfjernvarme");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_angivinteresseforfjernvarme");
-				this.SetAttributeValue("vf_angivinteresseforfjernvarme", value);
-				this.OnPropertyChanged("vf_angivinteresseforfjernvarme");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_angivinteresseforfjernvarmename")]
-		public string vf_angivinteresseforfjernvarmeName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("vf_angivinteresseforfjernvarme"))
-				{
-					return this.FormattedValues["vf_angivinteresseforfjernvarme"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_benytteskuntilkommunikation")]
-		public System.Nullable<bool> vf_benytteskuntilkommunikation
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("vf_benytteskuntilkommunikation");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_benytteskuntilkommunikation");
-				this.SetAttributeValue("vf_benytteskuntilkommunikation", value);
-				this.OnPropertyChanged("vf_benytteskuntilkommunikation");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_benytteskuntilkommunikationname")]
-		public string vf_benytteskuntilkommunikationName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("vf_benytteskuntilkommunikation"))
-				{
-					return this.FormattedValues["vf_benytteskuntilkommunikation"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_contact_to_facility_migrated")]
-		public System.Nullable<bool> vf_contact_to_facility_migrated
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("vf_contact_to_facility_migrated");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_contact_to_facility_migrated");
-				this.SetAttributeValue("vf_contact_to_facility_migrated", value);
-				this.OnPropertyChanged("vf_contact_to_facility_migrated");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_contact_to_facility_migratedname")]
-		public string vf_contact_to_facility_migratedName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("vf_contact_to_facility_migrated"))
-				{
-					return this.FormattedValues["vf_contact_to_facility_migrated"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_cprnummer")]
-		public string vf_cprnummer
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("vf_cprnummer");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_cprnummer");
-				this.SetAttributeValue("vf_cprnummer", value);
-				this.OnPropertyChanged("vf_cprnummer");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_datamigreret")]
-		public System.Nullable<bool> vf_datamigreret
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("vf_datamigreret");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_datamigreret");
-				this.SetAttributeValue("vf_datamigreret", value);
-				this.OnPropertyChanged("vf_datamigreret");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_datamigreretname")]
-		public string vf_datamigreretName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("vf_datamigreret"))
-				{
-					return this.FormattedValues["vf_datamigreret"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_diffindaystilbudsendtandduedate")]
-		public System.Nullable<int> vf_diffindaystilbudsendtandduedate
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<int>>("vf_diffindaystilbudsendtandduedate");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_diffindaystilbudsendtogtilbud2duedate")]
-		public System.Nullable<int> vf_diffindaystilbudsendtogtilbud2duedate
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<int>>("vf_diffindaystilbudsendtogtilbud2duedate");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_digitalexempt")]
-		public System.Nullable<bool> vf_digitalexempt
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("vf_digitalexempt");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_digitalexempt");
-				this.SetAttributeValue("vf_digitalexempt", value);
-				this.OnPropertyChanged("vf_digitalexempt");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_digitalexemptname")]
-		public string vf_digitalexemptName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("vf_digitalexempt"))
-				{
-					return this.FormattedValues["vf_digitalexempt"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_facilityrelation_rollup")]
-		public System.Nullable<int> vf_facilityrelation_rollup
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<int>>("vf_facilityrelation_rollup");
-			}
-		}
-		
-		/// <summary>
-		/// Tidspunkt for seneste opdatering af akkumuleringsfeltet Anlægsrelationer count.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_facilityrelation_rollup_date")]
-		public System.Nullable<System.DateTime> vf_facilityrelation_rollup_Date
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("vf_facilityrelation_rollup_date");
-			}
-		}
-		
-		/// <summary>
-		/// Tilstand for akkumuleringsfeltet Anlægsrelationer count.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_facilityrelation_rollup_state")]
-		public System.Nullable<int> vf_facilityrelation_rollup_State
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<int>>("vf_facilityrelation_rollup_state");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_forceapisync")]
-		public System.Nullable<System.DateTime> vf_forceapisync
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("vf_forceapisync");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_forceapisync");
-				this.SetAttributeValue("vf_forceapisync", value);
-				this.OnPropertyChanged("vf_forceapisync");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_forsyning")]
-		public virtual vf_forsyning? vf_forsyning
-		{
-			get
-			{
-				return ((vf_forsyning?)(EntityOptionSetEnum.GetEnum(this, "vf_forsyning")));
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_forsyning");
-				this.SetAttributeValue("vf_forsyning", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("vf_forsyning");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_forsyningname")]
-		public string vf_forsyningName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("vf_forsyning"))
-				{
-					return this.FormattedValues["vf_forsyning"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_kommune")]
-		public string vf_kommune
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("vf_kommune");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_kommune");
-				this.SetAttributeValue("vf_kommune", value);
-				this.OnPropertyChanged("vf_kommune");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_kundeid")]
-		public string vf_KundeID
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("vf_kundeid");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_KundeID");
-				this.SetAttributeValue("vf_kundeid", value);
-				this.OnPropertyChanged("vf_KundeID");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_lastapiupdate")]
-		public System.Nullable<System.DateTime> vf_lastapiupdate
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("vf_lastapiupdate");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_lastapiupdate");
-				this.SetAttributeValue("vf_lastapiupdate", value);
-				this.OnPropertyChanged("vf_lastapiupdate");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_migrationnote")]
-		public string vf_migrationnote
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("vf_migrationnote");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_migrationnote");
-				this.SetAttributeValue("vf_migrationnote", value);
-				this.OnPropertyChanged("vf_migrationnote");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_mitiduuid")]
-		public string vf_mitiduuid
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("vf_mitiduuid");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_mitiduuid");
-				this.SetAttributeValue("vf_mitiduuid", value);
-				this.OnPropertyChanged("vf_mitiduuid");
-			}
-		}
-		
-		/// <summary>
-		/// Feltet gemmes krypteret, derfor er længden sat til 400
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_nationalid")]
-		public string vf_nationalid
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("vf_nationalid");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_nationalid");
-				this.SetAttributeValue("vf_nationalid", value);
-				this.OnPropertyChanged("vf_nationalid");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_politiskgodkendt")]
-		public System.Nullable<bool> vf_politiskgodkendt
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("vf_politiskgodkendt");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_politiskgodkendt");
-				this.SetAttributeValue("vf_politiskgodkendt", value);
-				this.OnPropertyChanged("vf_politiskgodkendt");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_politiskgodkendtname")]
-		public string vf_politiskgodkendtName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("vf_politiskgodkendt"))
-				{
-					return this.FormattedValues["vf_politiskgodkendt"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_robinsonlisten")]
-		public System.Nullable<bool> vf_robinsonlisten
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("vf_robinsonlisten");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_robinsonlisten");
-				this.SetAttributeValue("vf_robinsonlisten", value);
-				this.OnPropertyChanged("vf_robinsonlisten");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_robinsonlistenname")]
-		public string vf_robinsonlistenName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("vf_robinsonlisten"))
-				{
-					return this.FormattedValues["vf_robinsonlisten"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_tilbudreminder1duedate")]
-		public System.Nullable<System.DateTime> vf_tilbudreminder1duedate
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("vf_tilbudreminder1duedate");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_tilbudreminder1duedate");
-				this.SetAttributeValue("vf_tilbudreminder1duedate", value);
-				this.OnPropertyChanged("vf_tilbudreminder1duedate");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_tilbudreminder2sendt")]
-		public System.Nullable<System.DateTime> vf_tilbudreminder2sendt
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("vf_tilbudreminder2sendt");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_tilbudreminder2sendt");
-				this.SetAttributeValue("vf_tilbudreminder2sendt", value);
-				this.OnPropertyChanged("vf_tilbudreminder2sendt");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_tilbudsendtdato")]
-		public System.Nullable<System.DateTime> vf_tilbudsendtdato
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("vf_tilbudsendtdato");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_tilbudsendtdato");
-				this.SetAttributeValue("vf_tilbudsendtdato", value);
-				this.OnPropertyChanged("vf_tilbudsendtdato");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_tilbudteminder1sendt")]
-		public System.Nullable<System.DateTime> vf_tilbudteminder1sendt
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("vf_tilbudteminder1sendt");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_tilbudteminder1sendt");
-				this.SetAttributeValue("vf_tilbudteminder1sendt", value);
-				this.OnPropertyChanged("vf_tilbudteminder1sendt");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_tilbudteminder2duedate")]
-		public System.Nullable<System.DateTime> vf_tilbudteminder2duedate
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("vf_tilbudteminder2duedate");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_tilbudteminder2duedate");
-				this.SetAttributeValue("vf_tilbudteminder2duedate", value);
-				this.OnPropertyChanged("vf_tilbudteminder2duedate");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_tilslutningsaar")]
-		public System.Nullable<int> vf_tilslutningsaar
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<int>>("vf_tilslutningsaar");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_tilslutningsaar");
-				this.SetAttributeValue("vf_tilslutningsaar", value);
-				this.OnPropertyChanged("vf_tilslutningsaar");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_today")]
-		public string vf_today
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("vf_today");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_today");
-				this.SetAttributeValue("vf_today", value);
-				this.OnPropertyChanged("vf_today");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_varme_mwh")]
-		public System.Nullable<double> vf_varme_mwh
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<double>>("vf_varme_mwh");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_varme_mwh");
-				this.SetAttributeValue("vf_varme_mwh", value);
-				this.OnPropertyChanged("vf_varme_mwh");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_varmedistriktid")]
-		public Microsoft.Xrm.Sdk.EntityReference vf_varmedistriktid
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("vf_varmedistriktid");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_varmedistriktid");
-				this.SetAttributeValue("vf_varmedistriktid", value);
-				this.OnPropertyChanged("vf_varmedistriktid");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_varmedistriktidname")]
-		public string vf_varmedistriktidName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("vf_varmedistriktid"))
-				{
-					return this.FormattedValues["vf_varmedistriktid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_aarligt_forbrug_pr_kvm_kwh")]
-		public System.Nullable<double> vf_aarligt_forbrug_pr_kvm_kwh
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<double>>("vf_aarligt_forbrug_pr_kvm_kwh");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_aarligt_forbrug_pr_kvm_kwh");
-				this.SetAttributeValue("vf_aarligt_forbrug_pr_kvm_kwh", value);
-				this.OnPropertyChanged("vf_aarligt_forbrug_pr_kvm_kwh");
-			}
-		}
-		
 		/// <summary>
 		/// Angiv kontaktens forretningswebsted eller personlige websted eller URL-adresse til blog.
 		/// </summary>
@@ -7160,6 +6456,132 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// 1:N lead_customer_contacts
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lead_customer_contacts")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> lead_customer_contacts
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_customer_contacts", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lead_customer_contacts");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_customer_contacts", null, value);
+				this.OnPropertyChanged("lead_customer_contacts");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lead_parent_contact
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lead_parent_contact")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> lead_parent_contact
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_parent_contact", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lead_parent_contact");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_parent_contact", null, value);
+				this.OnPropertyChanged("lead_parent_contact");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N opportunity_customer_contacts
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("opportunity_customer_contacts")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> opportunity_customer_contacts
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_customer_contacts", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("opportunity_customer_contacts");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_customer_contacts", null, value);
+				this.OnPropertyChanged("opportunity_customer_contacts");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N opportunity_parent_contact
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("opportunity_parent_contact")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> opportunity_parent_contact
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_parent_contact", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("opportunity_parent_contact");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_parent_contact", null, value);
+				this.OnPropertyChanged("opportunity_parent_contact");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N quote_customer_contacts
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("quote_customer_contacts")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> quote_customer_contacts
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("quote_customer_contacts", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("quote_customer_contacts");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("quote_customer_contacts", null, value);
+				this.OnPropertyChanged("quote_customer_contacts");
+			}
+		}
+		
+		/// <summary>
+		/// N:N contactleads_association
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("contactleads_association")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> contactleads_association
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("contactleads_association", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("contactleads_association");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("contactleads_association", null, value);
+				this.OnPropertyChanged("contactleads_association");
+			}
+		}
+		
+		/// <summary>
+		/// N:N contactquotes_association
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("contactquotes_association")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> contactquotes_association
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("contactquotes_association", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("contactquotes_association");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("contactquotes_association", null, value);
+				this.OnPropertyChanged("contactquotes_association");
+			}
+		}
+		
+		/// <summary>
 		/// N:1 business_unit_contacts
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningbusinessunit")]
@@ -7220,6 +6642,25 @@ namespace Boruto.Plugin.Entities
 			get
 			{
 				return this.GetRelatedEntity<Boruto.Plugin.Entities.Contact>("contact_master_contact", Microsoft.Xrm.Sdk.EntityRole.Referencing);
+			}
+		}
+		
+		/// <summary>
+		/// N:1 contact_originating_lead
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("originatingleadid")]
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("contact_originating_lead")]
+		public Boruto.Plugin.Entities.Lead contact_originating_lead
+		{
+			get
+			{
+				return this.GetRelatedEntity<Boruto.Plugin.Entities.Lead>("contact_originating_lead", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("contact_originating_lead");
+				this.SetRelatedEntity<Boruto.Plugin.Entities.Lead>("contact_originating_lead", null, value);
+				this.OnPropertyChanged("contact_originating_lead");
 			}
 		}
 		

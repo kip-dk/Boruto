@@ -101,8 +101,6 @@ namespace Boruto.Plugin.Entities
 			public const string ModifiedOnBehalfBy = "modifiedonbehalfby";
 			public const string ModifiedOnBehalfByName = "modifiedonbehalfbyname";
 			public const string ModifiedOnBehalfByYomiName = "modifiedonbehalfbyyominame";
-			public const string msft_DataState = "msft_datastate";
-			public const string msft_datastateName = "msft_datastatename";
 			public const string Name = "name";
 			public const string OrganizationId = "organizationid";
 			public const string OrganizationIdName = "organizationidname";
@@ -125,8 +123,11 @@ namespace Boruto.Plugin.Entities
 			public const string TraversedPath = "traversedpath";
 			public const string VersionNumber = "versionnumber";
 			public const string YomiName = "yominame";
+			public const string lead_owning_team = "lead_owning_team";
 			public const string team_accounts = "team_accounts";
 			public const string team_contacts = "team_contacts";
+			public const string team_opportunities = "team_opportunities";
+			public const string team_quotes = "team_quotes";
 			public const string teammembership_association = "teammembership_association";
 			public const string teamroles_association = "teamroles_association";
 			public const string business_unit_teams = "business_unit_teams";
@@ -135,6 +136,7 @@ namespace Boruto.Plugin.Entities
 			public const string lk_teambase_administratorid = "lk_teambase_administratorid";
 			public const string lk_teambase_createdby = "lk_teambase_createdby";
 			public const string lk_teambase_modifiedby = "lk_teambase_modifiedby";
+			public const string opportunity_Teams = "opportunity_Teams";
 		}
 		
 		/// <summary>
@@ -657,31 +659,6 @@ namespace Boruto.Plugin.Entities
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msft_datastate")]
-		public virtual msft_datastate? msft_DataState
-		{
-			get
-			{
-				return ((msft_datastate?)(EntityOptionSetEnum.GetEnum(this, "msft_datastate")));
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msft_datastatename")]
-		public string msft_datastateName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("msft_datastate"))
-				{
-					return this.FormattedValues["msft_datastate"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
 		/// <summary>
 		/// Navnet på gruppen.
 		/// </summary>
@@ -1048,6 +1025,24 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// 1:N lead_owning_team
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lead_owning_team")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> lead_owning_team
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_owning_team", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lead_owning_team");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_owning_team", null, value);
+				this.OnPropertyChanged("lead_owning_team");
+			}
+		}
+		
+		/// <summary>
 		/// 1:N team_accounts
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("team_accounts")]
@@ -1080,6 +1075,42 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("team_contacts");
 				this.SetRelatedEntities<Boruto.Plugin.Entities.Contact>("team_contacts", null, value);
 				this.OnPropertyChanged("team_contacts");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N team_opportunities
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("team_opportunities")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> team_opportunities
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("team_opportunities", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("team_opportunities");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("team_opportunities", null, value);
+				this.OnPropertyChanged("team_opportunities");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N team_quotes
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("team_quotes")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> team_quotes
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("team_quotes", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("team_quotes");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("team_quotes", null, value);
+				this.OnPropertyChanged("team_quotes");
 			}
 		}
 		
@@ -1206,6 +1237,25 @@ namespace Boruto.Plugin.Entities
 			get
 			{
 				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("lk_teambase_modifiedby", null);
+			}
+		}
+		
+		/// <summary>
+		/// N:1 opportunity_Teams
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("regardingobjectid")]
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("opportunity_Teams")]
+		public Boruto.Plugin.Entities.Opportunity opportunity_Teams
+		{
+			get
+			{
+				return this.GetRelatedEntity<Boruto.Plugin.Entities.Opportunity>("opportunity_Teams", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("opportunity_Teams");
+				this.SetRelatedEntity<Boruto.Plugin.Entities.Opportunity>("opportunity_Teams", null, value);
+				this.OnPropertyChanged("opportunity_Teams");
 			}
 		}
 	}

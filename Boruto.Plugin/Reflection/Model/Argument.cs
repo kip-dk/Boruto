@@ -148,6 +148,24 @@ namespace Boruto.Reflection.Model
                 if (typeof(ITargetReference).IsAssignableFrom(this.FromType))
                 {
                     this.IsTargetReference = true;
+
+                    if (this.FromType.IsGenericType && this.FromType.GenericTypeArguments.Length == 1) 
+                    {
+                        if (this.FromType.GenericTypeArguments.First().IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity)))
+                        {
+                            var instance = (Microsoft.Xrm.Sdk.Entity)System.Activator.CreateInstance(this.FromType.GenericTypeArguments.First());
+
+                            if (instance.LogicalName != this.primaryLogicalName)
+                            {
+                                IsEntityMatch = false;
+                            }
+                            IsEntityMatch = true;
+                            this.EarlyBoundEntityType = typeof(Boruto.Implementations.TargetReference<>).MakeGenericType(this.FromType.GenericTypeArguments.First());
+                        }
+                    } else
+                    {
+                        this.EarlyBoundEntityType = typeof(Boruto.Implementations.TargetReference);
+                    }
                     return;
                 }
 

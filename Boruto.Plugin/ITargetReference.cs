@@ -10,9 +10,10 @@ namespace Boruto
     {
         Guid Id { get; }
         string LogicalName { get; }
+        string Name { get; }
     }
 
-    public interface ITargetReference<T> where T: Microsoft.Xrm.Sdk.Entity, new()
+    public interface ITargetReference<T> : ITargetReference where T: Microsoft.Xrm.Sdk.Entity, new()
     {
     }
 }

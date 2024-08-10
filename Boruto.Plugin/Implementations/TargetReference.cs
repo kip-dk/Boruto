@@ -8,15 +8,18 @@ namespace Boruto.Implementations
 {
     internal class TargetReference : ITargetReference
     {
+        protected Microsoft.Xrm.Sdk.EntityReference re;
+
         internal TargetReference(Microsoft.Xrm.Sdk.EntityReference re)
         {
-            this.Id = re.Id;
-            this.LogicalName = re.LogicalName;
+            this.re = re;
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id => re.Id;
 
-        public string LogicalName { get; private set; }
+        public string LogicalName => re.LogicalName;
+
+        public string Name => re.Name;
 
         internal static object CreateInstance(Microsoft.Xrm.Sdk.EntityReference re, Type type)
         {
@@ -25,15 +28,10 @@ namespace Boruto.Implementations
         }
     }
 
-    internal class TargetReference<T> : ITargetReference<T> where T : Microsoft.Xrm.Sdk.Entity, new()
+    internal class TargetReference<T> : TargetReference, ITargetReference<T> where T : Microsoft.Xrm.Sdk.Entity, new()
     {
-        internal TargetReference(string logicalName, Guid id)
+        internal TargetReference(Microsoft.Xrm.Sdk.EntityReference re) : base(re)
         {
-            LogicalName = logicalName;
-            Id = id;
         }
-
-        public string LogicalName { get; }
-        public Guid Id { get; }
     }
 }

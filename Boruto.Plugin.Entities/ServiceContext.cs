@@ -75,6 +75,28 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.Lead"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Boruto.Plugin.Entities.Lead> LeadSet
+		{
+			get
+			{
+				return this.CreateQuery<Boruto.Plugin.Entities.Lead>();
+			}
+		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.Opportunity"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Boruto.Plugin.Entities.Opportunity> OpportunitySet
+		{
+			get
+			{
+				return this.CreateQuery<Boruto.Plugin.Entities.Opportunity>();
+			}
+		}
+		
+		/// <summary>
 		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.Privilege"/> entities.
 		/// </summary>
 		public System.Linq.IQueryable<Boruto.Plugin.Entities.Privilege> PrivilegeSet
@@ -82,6 +104,17 @@ namespace Boruto.Plugin.Entities
 			get
 			{
 				return this.CreateQuery<Boruto.Plugin.Entities.Privilege>();
+			}
+		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.Quote"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Boruto.Plugin.Entities.Quote> QuoteSet
+		{
+			get
+			{
+				return this.CreateQuery<Boruto.Plugin.Entities.Quote>();
 			}
 		}
 		

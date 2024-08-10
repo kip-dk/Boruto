@@ -151,6 +151,8 @@ namespace Boruto.Plugin.Entities
 			public const string ModifiedOnBehalfBy = "modifiedonbehalfby";
 			public const string ModifiedOnBehalfByName = "modifiedonbehalfbyname";
 			public const string ModifiedOnBehalfByYomiName = "modifiedonbehalfbyyominame";
+			public const string msdyn_Warehouse = "msdyn_warehouse";
+			public const string msdyn_WarehouseName = "msdyn_warehousename";
 			public const string Name = "name";
 			public const string OrganizationId = "organizationid";
 			public const string OrganizationIdName = "organizationidname";
@@ -170,7 +172,10 @@ namespace Boruto.Plugin.Entities
 			public const string business_unit_accounts = "business_unit_accounts";
 			public const string business_unit_calendars = "business_unit_calendars";
 			public const string business_unit_contacts = "business_unit_contacts";
+			public const string business_unit_leads = "business_unit_leads";
+			public const string business_unit_opportunities = "business_unit_opportunities";
 			public const string Referencedbusiness_unit_parent_business_unit = "Referencedbusiness_unit_parent_business_unit";
+			public const string business_unit_quotes = "business_unit_quotes";
 			public const string business_unit_roles = "business_unit_roles";
 			public const string business_unit_system_users = "business_unit_system_users";
 			public const string business_unit_teams = "business_unit_teams";
@@ -1514,6 +1519,40 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// Entydigt id for lagersted, der er tilknyttet afdeling.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_warehouse")]
+		public Microsoft.Xrm.Sdk.EntityReference msdyn_Warehouse
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("msdyn_warehouse");
+			}
+			set
+			{
+				this.OnPropertyChanging("msdyn_Warehouse");
+				this.SetAttributeValue("msdyn_warehouse", value);
+				this.OnPropertyChanged("msdyn_Warehouse");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_warehousename")]
+		public string msdyn_WarehouseName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("msdyn_warehouse"))
+				{
+					return this.FormattedValues["msdyn_warehouse"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
 		/// Afdelingens navn.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("name")]
@@ -1836,6 +1875,42 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// 1:N business_unit_leads
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("business_unit_leads")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> business_unit_leads
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("business_unit_leads", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("business_unit_leads");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("business_unit_leads", null, value);
+				this.OnPropertyChanged("business_unit_leads");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N business_unit_opportunities
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("business_unit_opportunities")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> business_unit_opportunities
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("business_unit_opportunities", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("business_unit_opportunities");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("business_unit_opportunities", null, value);
+				this.OnPropertyChanged("business_unit_opportunities");
+			}
+		}
+		
+		/// <summary>
 		/// 1:N business_unit_parent_business_unit
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("business_unit_parent_business_unit", Microsoft.Xrm.Sdk.EntityRole.Referenced)]
@@ -1850,6 +1925,24 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("Referencedbusiness_unit_parent_business_unit");
 				this.SetRelatedEntities<Boruto.Plugin.Entities.BusinessUnit>("business_unit_parent_business_unit", Microsoft.Xrm.Sdk.EntityRole.Referenced, value);
 				this.OnPropertyChanged("Referencedbusiness_unit_parent_business_unit");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N business_unit_quotes
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("business_unit_quotes")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> business_unit_quotes
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("business_unit_quotes", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("business_unit_quotes");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("business_unit_quotes", null, value);
+				this.OnPropertyChanged("business_unit_quotes");
 			}
 		}
 		

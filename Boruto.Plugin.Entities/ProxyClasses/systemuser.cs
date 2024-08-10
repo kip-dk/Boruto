@@ -461,6 +461,8 @@ namespace Boruto.Plugin.Entities
 			public const string FirstName = "firstname";
 			public const string FullName = "fullname";
 			public const string GovernmentId = "governmentid";
+			public const string hofor_provetager = "hofor_provetager";
+			public const string hofor_provetagerName = "hofor_provetagername";
 			public const string HomePhone = "homephone";
 			public const string IdentityId = "identityid";
 			public const string ImportSequenceNumber = "importsequencenumber";
@@ -564,6 +566,7 @@ namespace Boruto.Plugin.Entities
 			public const string YomiLastName = "yomilastname";
 			public const string YomiMiddleName = "yomimiddlename";
 			public const string contact_owning_user = "contact_owning_user";
+			public const string lead_owning_user = "lead_owning_user";
 			public const string lk_accountbase_createdby = "lk_accountbase_createdby";
 			public const string lk_accountbase_createdonbehalfby = "lk_accountbase_createdonbehalfby";
 			public const string lk_accountbase_modifiedby = "lk_accountbase_modifiedby";
@@ -580,6 +583,18 @@ namespace Boruto.Plugin.Entities
 			public const string lk_contact_modifiedonbehalfby = "lk_contact_modifiedonbehalfby";
 			public const string lk_contactbase_createdby = "lk_contactbase_createdby";
 			public const string lk_contactbase_modifiedby = "lk_contactbase_modifiedby";
+			public const string lk_lead_createdonbehalfby = "lk_lead_createdonbehalfby";
+			public const string lk_lead_modifiedonbehalfby = "lk_lead_modifiedonbehalfby";
+			public const string lk_leadbase_createdby = "lk_leadbase_createdby";
+			public const string lk_leadbase_modifiedby = "lk_leadbase_modifiedby";
+			public const string lk_opportunity_createdonbehalfby = "lk_opportunity_createdonbehalfby";
+			public const string lk_opportunity_modifiedonbehalfby = "lk_opportunity_modifiedonbehalfby";
+			public const string lk_opportunitybase_createdby = "lk_opportunitybase_createdby";
+			public const string lk_opportunitybase_modifiedby = "lk_opportunitybase_modifiedby";
+			public const string lk_quote_createdonbehalfby = "lk_quote_createdonbehalfby";
+			public const string lk_quote_modifiedonbehalfby = "lk_quote_modifiedonbehalfby";
+			public const string lk_quotebase_createdby = "lk_quotebase_createdby";
+			public const string lk_quotebase_modifiedby = "lk_quotebase_modifiedby";
 			public const string lk_role_createdonbehalfby = "lk_role_createdonbehalfby";
 			public const string lk_role_modifiedonbehalfby = "lk_role_modifiedonbehalfby";
 			public const string lk_rolebase_createdby = "lk_rolebase_createdby";
@@ -593,8 +608,10 @@ namespace Boruto.Plugin.Entities
 			public const string lk_teambase_administratorid = "lk_teambase_administratorid";
 			public const string lk_teambase_createdby = "lk_teambase_createdby";
 			public const string lk_teambase_modifiedby = "lk_teambase_modifiedby";
+			public const string opportunity_owning_user = "opportunity_owning_user";
 			public const string system_user_accounts = "system_user_accounts";
 			public const string system_user_contacts = "system_user_contacts";
+			public const string system_user_quotes = "system_user_quotes";
 			public const string user_accounts = "user_accounts";
 			public const string Referenceduser_parent_user = "Referenceduser_parent_user";
 			public const string systemuserroles_association = "systemuserroles_association";
@@ -2095,6 +2112,37 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("GovernmentId");
 				this.SetAttributeValue("governmentid", value);
 				this.OnPropertyChanged("GovernmentId");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_provetager")]
+		public System.Nullable<bool> hofor_provetager
+		{
+			get
+			{
+				return this.GetAttributeValue<System.Nullable<bool>>("hofor_provetager");
+			}
+			set
+			{
+				this.OnPropertyChanging("hofor_provetager");
+				this.SetAttributeValue("hofor_provetager", value);
+				this.OnPropertyChanged("hofor_provetager");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_provetagername")]
+		public string hofor_provetagerName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("hofor_provetager"))
+				{
+					return this.FormattedValues["hofor_provetager"];
+				}
+				else
+				{
+					return default(string);
+				}
 			}
 		}
 		
@@ -3850,6 +3898,24 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// 1:N lead_owning_user
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lead_owning_user")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> lead_owning_user
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_owning_user", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lead_owning_user");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_owning_user", null, value);
+				this.OnPropertyChanged("lead_owning_user");
+			}
+		}
+		
+		/// <summary>
 		/// 1:N lk_accountbase_createdby
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_accountbase_createdby")]
@@ -4138,6 +4204,222 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// 1:N lk_lead_createdonbehalfby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_lead_createdonbehalfby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> lk_lead_createdonbehalfby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("lk_lead_createdonbehalfby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_lead_createdonbehalfby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("lk_lead_createdonbehalfby", null, value);
+				this.OnPropertyChanged("lk_lead_createdonbehalfby");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lk_lead_modifiedonbehalfby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_lead_modifiedonbehalfby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> lk_lead_modifiedonbehalfby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("lk_lead_modifiedonbehalfby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_lead_modifiedonbehalfby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("lk_lead_modifiedonbehalfby", null, value);
+				this.OnPropertyChanged("lk_lead_modifiedonbehalfby");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lk_leadbase_createdby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_leadbase_createdby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> lk_leadbase_createdby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("lk_leadbase_createdby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_leadbase_createdby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("lk_leadbase_createdby", null, value);
+				this.OnPropertyChanged("lk_leadbase_createdby");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lk_leadbase_modifiedby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_leadbase_modifiedby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> lk_leadbase_modifiedby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("lk_leadbase_modifiedby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_leadbase_modifiedby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("lk_leadbase_modifiedby", null, value);
+				this.OnPropertyChanged("lk_leadbase_modifiedby");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lk_opportunity_createdonbehalfby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_opportunity_createdonbehalfby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> lk_opportunity_createdonbehalfby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunity_createdonbehalfby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_opportunity_createdonbehalfby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunity_createdonbehalfby", null, value);
+				this.OnPropertyChanged("lk_opportunity_createdonbehalfby");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lk_opportunity_modifiedonbehalfby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_opportunity_modifiedonbehalfby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> lk_opportunity_modifiedonbehalfby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunity_modifiedonbehalfby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_opportunity_modifiedonbehalfby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunity_modifiedonbehalfby", null, value);
+				this.OnPropertyChanged("lk_opportunity_modifiedonbehalfby");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lk_opportunitybase_createdby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_opportunitybase_createdby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> lk_opportunitybase_createdby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunitybase_createdby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_opportunitybase_createdby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunitybase_createdby", null, value);
+				this.OnPropertyChanged("lk_opportunitybase_createdby");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lk_opportunitybase_modifiedby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_opportunitybase_modifiedby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> lk_opportunitybase_modifiedby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunitybase_modifiedby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_opportunitybase_modifiedby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunitybase_modifiedby", null, value);
+				this.OnPropertyChanged("lk_opportunitybase_modifiedby");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lk_quote_createdonbehalfby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_quote_createdonbehalfby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> lk_quote_createdonbehalfby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quote_createdonbehalfby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_quote_createdonbehalfby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quote_createdonbehalfby", null, value);
+				this.OnPropertyChanged("lk_quote_createdonbehalfby");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lk_quote_modifiedonbehalfby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_quote_modifiedonbehalfby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> lk_quote_modifiedonbehalfby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quote_modifiedonbehalfby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_quote_modifiedonbehalfby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quote_modifiedonbehalfby", null, value);
+				this.OnPropertyChanged("lk_quote_modifiedonbehalfby");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lk_quotebase_createdby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_quotebase_createdby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> lk_quotebase_createdby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quotebase_createdby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_quotebase_createdby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quotebase_createdby", null, value);
+				this.OnPropertyChanged("lk_quotebase_createdby");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lk_quotebase_modifiedby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_quotebase_modifiedby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> lk_quotebase_modifiedby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quotebase_modifiedby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_quotebase_modifiedby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quotebase_modifiedby", null, value);
+				this.OnPropertyChanged("lk_quotebase_modifiedby");
+			}
+		}
+		
+		/// <summary>
 		/// 1:N lk_role_createdonbehalfby
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_role_createdonbehalfby")]
@@ -4372,6 +4654,24 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// 1:N opportunity_owning_user
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("opportunity_owning_user")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> opportunity_owning_user
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_owning_user", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("opportunity_owning_user");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_owning_user", null, value);
+				this.OnPropertyChanged("opportunity_owning_user");
+			}
+		}
+		
+		/// <summary>
 		/// 1:N system_user_accounts
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("system_user_accounts")]
@@ -4404,6 +4704,24 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("system_user_contacts");
 				this.SetRelatedEntities<Boruto.Plugin.Entities.Contact>("system_user_contacts", null, value);
 				this.OnPropertyChanged("system_user_contacts");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N system_user_quotes
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("system_user_quotes")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> system_user_quotes
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("system_user_quotes", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("system_user_quotes");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("system_user_quotes", null, value);
+				this.OnPropertyChanged("system_user_quotes");
 			}
 		}
 		

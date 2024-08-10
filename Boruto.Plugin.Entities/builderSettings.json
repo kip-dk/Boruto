@@ -20,7 +20,10 @@
     "team",
     "systemuser",
     "calendar",
-    "calendarrule"
+    "calendarrule",
+    "opportunity",
+    "quote",
+    "lead"
   ],
   "messageNamesFilter": [
     "boruto_*"

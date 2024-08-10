@@ -112,7 +112,7 @@ namespace Boruto.Plugin.Entities
 		Almpost = 5,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown = 8,
+		Andet = 8,
 	}
 	
 	/// <summary>
@@ -195,29 +195,41 @@ namespace Boruto.Plugin.Entities
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		Investor = 4,
 		
+		/// <summary>
+		/// The insurance provider.
+		/// </summary>
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		Forsikringsudbyder = 13,
+		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		Partner = 5,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Personderverindflydelse = 6,
+		Influencer = 6,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Trykp = 7,
+		Presse = 7,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kundeemne = 8,
+		Potentieltemne = 8,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		Forhandler = 9,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kreditor = 10,
+		Leverandr = 10,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Leverandr = 11,
+		Leverandr1 = 11,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		Andet = 12,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		Laboratorium = 329810000,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		HOFORkontakt = 329810001,
 	}
 	
 	/// <summary>
@@ -229,34 +241,34 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown = 34,
+		Landbrugjagtskovbrugogfiskeri = 34,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown1 = 35,
+		Energiogvand = 35,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown2 = 36,
+		Udvindingogforarbejdningafikkeenergetiskemineralerogderivaterkemiskindustri = 36,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown3 = 37,
+		Metalforarbejdendeindustrifinmekaniskindustri = 37,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown4 = 38,
+		Andenfremstillingsvirksomhed = 38,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown5 = 39,
+		Byggeoganlgsvirksomhed = 39,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown6 = 40,
+		Handelrestaurationsoghotelvirksomhedreparation = 40,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown7 = 41,
+		Transportogkommunikation = 41,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown8 = 42,
+		Kreditfinansieringsogforsikringsvirksomhedforretningsserviceudlejning = 42,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown9 = 43,
+		Andretjenesteydelser = 43,
 	}
 	
 	/// <summary>
@@ -292,19 +304,19 @@ namespace Boruto.Plugin.Entities
 		Netto30dage = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown = 6,
+		Netto8dage = 6,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown1 = 7,
+		Netto14dage = 7,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown2 = 10,
+		Nettokontant = 10,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown3 = 11,
+		Lbendemned14dage = 11,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Unknown4 = 12,
+		Lbendemned8dage = 12,
 	}
 	
 	/// <summary>
@@ -431,18 +443,6 @@ namespace Boruto.Plugin.Entities
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		Standardvrdi = 1,
-	}
-	
-	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum vf_account_vf_robinsonlisten
-	{
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ja = 979700000,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Nej = 979700001,
 	}
 	
 	/// <summary>
@@ -581,6 +581,25 @@ namespace Boruto.Plugin.Entities
 			public const string FollowEmail = "followemail";
 			public const string FollowEmailName = "followemailname";
 			public const string FtpSiteURL = "ftpsiteurl";
+			public const string hofor_datamigreringid = "hofor_datamigreringid";
+			public const string hofor_datamigreringidName = "hofor_datamigreringidname";
+			public const string hofor_egetLab = "hofor_egetlab";
+			public const string hofor_egetlabName = "hofor_egetlabname";
+			public const string hofor_firmatype = "hofor_firmatype";
+			public const string hofor_firmatypeName = "hofor_firmatypename";
+			public const string hofor_kontaktperson = "hofor_kontaktperson";
+			public const string hofor_kontakttype = "hofor_kontakttype";
+			public const string hofor_kontakttypeName = "hofor_kontakttypename";
+			public const string hofor_notenummer = "hofor_notenummer";
+			public const string hofor_stancode = "hofor_stancode";
+			public const string hofor_stancodeid = "hofor_stancodeid";
+			public const string hofor_stancodeidName = "hofor_stancodeidname";
+			public const string hofor_stancodeimportid = "hofor_stancodeimportid";
+			public const string hofor_stancodeimportidName = "hofor_stancodeimportidname";
+			public const string hofor_standatnr = "hofor_standatnr";
+			public const string hofor_stanlabaktiv = "hofor_stanlabaktiv";
+			public const string hofor_stanlabaktivName = "hofor_stanlabaktivname";
+			public const string hofor_stanlabid = "hofor_stanlabid";
 			public const string ImportSequenceNumber = "importsequencenumber";
 			public const string IndustryCode = "industrycode";
 			public const string IndustryCodeName = "industrycodename";
@@ -611,15 +630,32 @@ namespace Boruto.Plugin.Entities
 			public const string msa_managingpartneridYomiName = "msa_managingpartneridyominame";
 			public const string msdyn_accountkpiid = "msdyn_accountkpiid";
 			public const string msdyn_accountkpiidName = "msdyn_accountkpiidname";
+			public const string msdyn_BillingAccount = "msdyn_billingaccount";
+			public const string msdyn_BillingAccountName = "msdyn_billingaccountname";
+			public const string msdyn_BillingAccountYomiName = "msdyn_billingaccountyominame";
 			public const string msdyn_gdproptout = "msdyn_gdproptout";
 			public const string msdyn_gdproptoutName = "msdyn_gdproptoutname";
+			public const string msdyn_PreferredResource = "msdyn_preferredresource";
+			public const string msdyn_PreferredResourceName = "msdyn_preferredresourcename";
 			public const string msdyn_PrimaryTimeZone = "msdyn_primarytimezone";
 			public const string msdyn_salesaccelerationinsightid = "msdyn_salesaccelerationinsightid";
 			public const string msdyn_salesaccelerationinsightidName = "msdyn_salesaccelerationinsightidname";
+			public const string msdyn_SalesTaxCode = "msdyn_salestaxcode";
+			public const string msdyn_SalesTaxCodeName = "msdyn_salestaxcodename";
 			public const string msdyn_segmentid = "msdyn_segmentid";
 			public const string msdyn_segmentidName = "msdyn_segmentidname";
-			public const string msft_DataState = "msft_datastate";
-			public const string msft_datastateName = "msft_datastatename";
+			public const string msdyn_ServiceTerritory = "msdyn_serviceterritory";
+			public const string msdyn_ServiceTerritoryName = "msdyn_serviceterritoryname";
+			public const string msdyn_TaxExempt = "msdyn_taxexempt";
+			public const string msdyn_taxexemptName = "msdyn_taxexemptname";
+			public const string msdyn_TaxExemptNumber = "msdyn_taxexemptnumber";
+			public const string msdyn_TravelCharge = "msdyn_travelcharge";
+			public const string msdyn_travelcharge_Base = "msdyn_travelcharge_base";
+			public const string msdyn_TravelChargeType = "msdyn_travelchargetype";
+			public const string msdyn_travelchargetypeName = "msdyn_travelchargetypename";
+			public const string msdyn_workhourtemplate = "msdyn_workhourtemplate";
+			public const string msdyn_workhourtemplateName = "msdyn_workhourtemplatename";
+			public const string msdyn_WorkOrderInstructions = "msdyn_workorderinstructions";
 			public const string Name = "name";
 			public const string NumberOfEmployees = "numberofemployees";
 			public const string OnHoldTime = "onholdtime";
@@ -701,20 +737,23 @@ namespace Boruto.Plugin.Entities
 			public const string TraversedPath = "traversedpath";
 			public const string UTCConversionTimeZoneCode = "utcconversiontimezonecode";
 			public const string VersionNumber = "versionnumber";
-			public const string vf_cvr = "vf_cvr";
-			public const string vf_kundeid = "vf_kundeid";
-			public const string vf_Politiskgodkendt = "vf_politiskgodkendt";
-			public const string vf_politiskgodkendtName = "vf_politiskgodkendtname";
-			public const string vf_robinsonlisten = "vf_robinsonlisten";
-			public const string vf_robinsonlistenName = "vf_robinsonlistenname";
 			public const string WebSiteURL = "websiteurl";
 			public const string YomiName = "yominame";
 			public const string Referencedaccount_master_account = "Referencedaccount_master_account";
 			public const string Referencedaccount_parent_account = "Referencedaccount_parent_account";
 			public const string contact_customer_accounts = "contact_customer_accounts";
+			public const string lead_customer_accounts = "lead_customer_accounts";
+			public const string lead_parent_account = "lead_parent_account";
 			public const string Referencedmsa_account_managingpartner = "Referencedmsa_account_managingpartner";
 			public const string msa_contact_managingpartner = "msa_contact_managingpartner";
+			public const string Referencedmsdyn_account_account_BillingAccount = "Referencedmsdyn_account_account_BillingAccount";
+			public const string msdyn_account_quote_Account = "msdyn_account_quote_Account";
+			public const string opportunity_customer_accounts = "opportunity_customer_accounts";
+			public const string opportunity_parent_account = "opportunity_parent_account";
+			public const string quote_customer_accounts = "quote_customer_accounts";
+			public const string accountleads_association = "accountleads_association";
 			public const string Referencingaccount_master_account = "account_master_account";
+			public const string account_originating_lead = "account_originating_lead";
 			public const string Referencingaccount_parent_account = "account_parent_account";
 			public const string account_primary_contact = "account_primary_contact";
 			public const string business_unit_accounts = "business_unit_accounts";
@@ -723,6 +762,7 @@ namespace Boruto.Plugin.Entities
 			public const string lk_accountbase_modifiedby = "lk_accountbase_modifiedby";
 			public const string lk_accountbase_modifiedonbehalfby = "lk_accountbase_modifiedonbehalfby";
 			public const string Referencingmsa_account_managingpartner = "msa_account_managingpartner";
+			public const string Referencingmsdyn_account_account_BillingAccount = "msdyn_account_account_BillingAccount";
 			public const string system_user_accounts = "system_user_accounts";
 			public const string team_accounts = "team_accounts";
 			public const string user_accounts = "user_accounts";
@@ -2786,6 +2826,307 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// Entydigt id for Data migrering tilknyttet Firma.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_datamigreringid")]
+		public Microsoft.Xrm.Sdk.EntityReference hofor_datamigreringid
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("hofor_datamigreringid");
+			}
+			set
+			{
+				this.OnPropertyChanging("hofor_datamigreringid");
+				this.SetAttributeValue("hofor_datamigreringid", value);
+				this.OnPropertyChanged("hofor_datamigreringid");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_datamigreringidname")]
+		public string hofor_datamigreringidName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("hofor_datamigreringid"))
+				{
+					return this.FormattedValues["hofor_datamigreringid"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_egetlab")]
+		public virtual hofor_valgt? hofor_egetLab
+		{
+			get
+			{
+				return ((hofor_valgt?)(EntityOptionSetEnum.GetEnum(this, "hofor_egetlab")));
+			}
+			set
+			{
+				this.OnPropertyChanging("hofor_egetLab");
+				this.SetAttributeValue("hofor_egetlab", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
+				this.OnPropertyChanged("hofor_egetLab");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_egetlabname")]
+		public string hofor_egetlabName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("hofor_egetlab"))
+				{
+					return this.FormattedValues["hofor_egetlab"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_firmatype")]
+		public virtual System.Collections.Generic.IEnumerable<hofor_firmatype> hofor_firmatype
+		{
+			get
+			{
+				return EntityOptionSetEnum.GetMultiEnum<hofor_firmatype>(this, "hofor_firmatype");
+			}
+			set
+			{
+				this.OnPropertyChanging("hofor_firmatype");
+				this.SetAttributeValue("hofor_firmatype", EntityOptionSetEnum.GetMultiEnum(this, "hofor_firmatype", value));
+				this.OnPropertyChanged("hofor_firmatype");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_firmatypename")]
+		public string hofor_firmatypeName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("hofor_firmatype"))
+				{
+					return this.FormattedValues["hofor_firmatype"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_kontaktperson")]
+		public string hofor_kontaktperson
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("hofor_kontaktperson");
+			}
+			set
+			{
+				this.OnPropertyChanging("hofor_kontaktperson");
+				this.SetAttributeValue("hofor_kontaktperson", value);
+				this.OnPropertyChanged("hofor_kontaktperson");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_kontakttype")]
+		public virtual hofor_kontakttype? hofor_kontakttype
+		{
+			get
+			{
+				return ((hofor_kontakttype?)(EntityOptionSetEnum.GetEnum(this, "hofor_kontakttype")));
+			}
+			set
+			{
+				this.OnPropertyChanging("hofor_kontakttype");
+				this.SetAttributeValue("hofor_kontakttype", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
+				this.OnPropertyChanged("hofor_kontakttype");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_kontakttypename")]
+		public string hofor_kontakttypeName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("hofor_kontakttype"))
+				{
+					return this.FormattedValues["hofor_kontakttype"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_notenummer")]
+		public System.Nullable<int> hofor_notenummer
+		{
+			get
+			{
+				return this.GetAttributeValue<System.Nullable<int>>("hofor_notenummer");
+			}
+			set
+			{
+				this.OnPropertyChanging("hofor_notenummer");
+				this.SetAttributeValue("hofor_notenummer", value);
+				this.OnPropertyChanged("hofor_notenummer");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_stancode")]
+		public System.Nullable<int> hofor_stancode
+		{
+			get
+			{
+				return this.GetAttributeValue<System.Nullable<int>>("hofor_stancode");
+			}
+			set
+			{
+				this.OnPropertyChanging("hofor_stancode");
+				this.SetAttributeValue("hofor_stancode", value);
+				this.OnPropertyChanged("hofor_stancode");
+			}
+		}
+		
+		/// <summary>
+		/// Entydigt id for Stancode tilknyttet Firma.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_stancodeid")]
+		public Microsoft.Xrm.Sdk.EntityReference hofor_stancodeid
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("hofor_stancodeid");
+			}
+			set
+			{
+				this.OnPropertyChanging("hofor_stancodeid");
+				this.SetAttributeValue("hofor_stancodeid", value);
+				this.OnPropertyChanged("hofor_stancodeid");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_stancodeidname")]
+		public string hofor_stancodeidName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("hofor_stancodeid"))
+				{
+					return this.FormattedValues["hofor_stancodeid"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
+		/// Entydigt id for Stancode import tilknyttet Firma.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_stancodeimportid")]
+		public Microsoft.Xrm.Sdk.EntityReference hofor_stancodeimportid
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("hofor_stancodeimportid");
+			}
+			set
+			{
+				this.OnPropertyChanging("hofor_stancodeimportid");
+				this.SetAttributeValue("hofor_stancodeimportid", value);
+				this.OnPropertyChanged("hofor_stancodeimportid");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_stancodeimportidname")]
+		public string hofor_stancodeimportidName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("hofor_stancodeimportid"))
+				{
+					return this.FormattedValues["hofor_stancodeimportid"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_standatnr")]
+		public System.Nullable<int> hofor_standatnr
+		{
+			get
+			{
+				return this.GetAttributeValue<System.Nullable<int>>("hofor_standatnr");
+			}
+			set
+			{
+				this.OnPropertyChanging("hofor_standatnr");
+				this.SetAttributeValue("hofor_standatnr", value);
+				this.OnPropertyChanged("hofor_standatnr");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_stanlabaktiv")]
+		public System.Nullable<bool> hofor_stanlabaktiv
+		{
+			get
+			{
+				return this.GetAttributeValue<System.Nullable<bool>>("hofor_stanlabaktiv");
+			}
+			set
+			{
+				this.OnPropertyChanging("hofor_stanlabaktiv");
+				this.SetAttributeValue("hofor_stanlabaktiv", value);
+				this.OnPropertyChanged("hofor_stanlabaktiv");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_stanlabaktivname")]
+		public string hofor_stanlabaktivName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("hofor_stanlabaktiv"))
+				{
+					return this.FormattedValues["hofor_stanlabaktiv"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_stanlabid")]
+		public string hofor_stanlabid
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("hofor_stanlabid");
+			}
+			set
+			{
+				this.OnPropertyChanging("hofor_stanlabid");
+				this.SetAttributeValue("hofor_stanlabid", value);
+				this.OnPropertyChanged("hofor_stanlabid");
+			}
+		}
+		
+		/// <summary>
 		/// Entydigt id for den dataimport eller dataoverførsel, der oprettede denne post.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("importsequencenumber")]
@@ -3251,6 +3592,56 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// Reference til et andet firma, der skal bruges til fakturering (skal kun bruges, hvis faktureringsfirma er et andet)
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_billingaccount")]
+		public Microsoft.Xrm.Sdk.EntityReference msdyn_BillingAccount
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("msdyn_billingaccount");
+			}
+			set
+			{
+				this.OnPropertyChanging("msdyn_BillingAccount");
+				this.SetAttributeValue("msdyn_billingaccount", value);
+				this.OnPropertyChanged("msdyn_BillingAccount");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_billingaccountname")]
+		public string msdyn_BillingAccountName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("msdyn_billingaccount"))
+				{
+					return this.FormattedValues["msdyn_billingaccount"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_billingaccountyominame")]
+		public string msdyn_BillingAccountYomiName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("msdyn_billingaccount"))
+				{
+					return this.FormattedValues["msdyn_billingaccount"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
 		/// Beskriver, om et firma er frameldt eller ej
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_gdproptout")]
@@ -3276,6 +3667,37 @@ namespace Boruto.Plugin.Entities
 				if (this.FormattedValues.Contains("msdyn_gdproptout"))
 				{
 					return this.FormattedValues["msdyn_gdproptout"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_preferredresource")]
+		public Microsoft.Xrm.Sdk.EntityReference msdyn_PreferredResource
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("msdyn_preferredresource");
+			}
+			set
+			{
+				this.OnPropertyChanging("msdyn_PreferredResource");
+				this.SetAttributeValue("msdyn_preferredresource", value);
+				this.OnPropertyChanged("msdyn_PreferredResource");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_preferredresourcename")]
+		public string msdyn_PreferredResourceName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("msdyn_preferredresource"))
+				{
+					return this.FormattedValues["msdyn_preferredresource"];
 				}
 				else
 				{
@@ -3337,6 +3759,40 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// Standardsalgskode
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_salestaxcode")]
+		public Microsoft.Xrm.Sdk.EntityReference msdyn_SalesTaxCode
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("msdyn_salestaxcode");
+			}
+			set
+			{
+				this.OnPropertyChanging("msdyn_SalesTaxCode");
+				this.SetAttributeValue("msdyn_salestaxcode", value);
+				this.OnPropertyChanged("msdyn_SalesTaxCode");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_salestaxcodename")]
+		public string msdyn_SalesTaxCodeName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("msdyn_salestaxcode"))
+				{
+					return this.FormattedValues["msdyn_salestaxcode"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
 		/// Entydigt id for det segment, der er tilknyttet account.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_segmentid")]
@@ -3370,28 +3826,202 @@ namespace Boruto.Plugin.Entities
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msft_datastate")]
-		public virtual msft_datastate? msft_DataState
+		/// <summary>
+		/// Serviceterritoriet, som dette firma hører til. Det bruges til at optimere planlægning og rute
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_serviceterritory")]
+		public Microsoft.Xrm.Sdk.EntityReference msdyn_ServiceTerritory
 		{
 			get
 			{
-				return ((msft_datastate?)(EntityOptionSetEnum.GetEnum(this, "msft_datastate")));
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("msdyn_serviceterritory");
+			}
+			set
+			{
+				this.OnPropertyChanging("msdyn_ServiceTerritory");
+				this.SetAttributeValue("msdyn_serviceterritory", value);
+				this.OnPropertyChanged("msdyn_ServiceTerritory");
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msft_datastatename")]
-		public string msft_datastateName
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_serviceterritoryname")]
+		public string msdyn_ServiceTerritoryName
 		{
 			get
 			{
-				if (this.FormattedValues.Contains("msft_datastate"))
+				if (this.FormattedValues.Contains("msdyn_serviceterritory"))
 				{
-					return this.FormattedValues["msft_datastate"];
+					return this.FormattedValues["msdyn_serviceterritory"];
 				}
 				else
 				{
 					return default(string);
 				}
+			}
+		}
+		
+		/// <summary>
+		/// Vælg, om firmaet er fritaget for moms.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_taxexempt")]
+		public System.Nullable<bool> msdyn_TaxExempt
+		{
+			get
+			{
+				return this.GetAttributeValue<System.Nullable<bool>>("msdyn_taxexempt");
+			}
+			set
+			{
+				this.OnPropertyChanging("msdyn_TaxExempt");
+				this.SetAttributeValue("msdyn_taxexempt", value);
+				this.OnPropertyChanged("msdyn_TaxExempt");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_taxexemptname")]
+		public string msdyn_taxexemptName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("msdyn_taxexempt"))
+				{
+					return this.FormattedValues["msdyn_taxexempt"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
+		/// Viser SE-nummeret.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_taxexemptnumber")]
+		public string msdyn_TaxExemptNumber
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("msdyn_taxexemptnumber");
+			}
+			set
+			{
+				this.OnPropertyChanging("msdyn_TaxExemptNumber");
+				this.SetAttributeValue("msdyn_taxexemptnumber", value);
+				this.OnPropertyChanged("msdyn_TaxExemptNumber");
+			}
+		}
+		
+		/// <summary>
+		/// Angiv rejsegebyr, der skal medtages i arbejdsordrer. Denne værdi ganges med rejsegebyrtypen..
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_travelcharge")]
+		public Microsoft.Xrm.Sdk.Money msdyn_TravelCharge
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("msdyn_travelcharge");
+			}
+			set
+			{
+				this.OnPropertyChanging("msdyn_TravelCharge");
+				this.SetAttributeValue("msdyn_travelcharge", value);
+				this.OnPropertyChanged("msdyn_TravelCharge");
+			}
+		}
+		
+		/// <summary>
+		/// Værdien af rejseberegningen i grundvalutaen.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_travelcharge_base")]
+		public Microsoft.Xrm.Sdk.Money msdyn_travelcharge_Base
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("msdyn_travelcharge_base");
+			}
+		}
+		
+		/// <summary>
+		/// Angiv, hvordan rejse debiteres dette firma.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_travelchargetype")]
+		public virtual msdyn_travelchargetype? msdyn_TravelChargeType
+		{
+			get
+			{
+				return ((msdyn_travelchargetype?)(EntityOptionSetEnum.GetEnum(this, "msdyn_travelchargetype")));
+			}
+			set
+			{
+				this.OnPropertyChanging("msdyn_TravelChargeType");
+				this.SetAttributeValue("msdyn_travelchargetype", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
+				this.OnPropertyChanged("msdyn_TravelChargeType");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_travelchargetypename")]
+		public string msdyn_travelchargetypeName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("msdyn_travelchargetype"))
+				{
+					return this.FormattedValues["msdyn_travelchargetype"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_workhourtemplate")]
+		public Microsoft.Xrm.Sdk.EntityReference msdyn_workhourtemplate
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("msdyn_workhourtemplate");
+			}
+			set
+			{
+				this.OnPropertyChanging("msdyn_workhourtemplate");
+				this.SetAttributeValue("msdyn_workhourtemplate", value);
+				this.OnPropertyChanged("msdyn_workhourtemplate");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_workhourtemplatename")]
+		public string msdyn_workhourtemplateName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("msdyn_workhourtemplate"))
+				{
+					return this.FormattedValues["msdyn_workhourtemplate"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
+		/// Viser standardvejledningen, der skal vises i nye arbejdsordrer.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_workorderinstructions")]
+		public string msdyn_WorkOrderInstructions
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("msdyn_workorderinstructions");
+			}
+			set
+			{
+				this.OnPropertyChanging("msdyn_WorkOrderInstructions");
+				this.SetAttributeValue("msdyn_workorderinstructions", value);
+				this.OnPropertyChanged("msdyn_WorkOrderInstructions");
 			}
 		}
 		
@@ -4709,98 +5339,6 @@ namespace Boruto.Plugin.Entities
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_cvr")]
-		public string vf_cvr
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("vf_cvr");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_cvr");
-				this.SetAttributeValue("vf_cvr", value);
-				this.OnPropertyChanged("vf_cvr");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_kundeid")]
-		public string vf_kundeid
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("vf_kundeid");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_kundeid");
-				this.SetAttributeValue("vf_kundeid", value);
-				this.OnPropertyChanged("vf_kundeid");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_politiskgodkendt")]
-		public System.Nullable<bool> vf_Politiskgodkendt
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("vf_politiskgodkendt");
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_Politiskgodkendt");
-				this.SetAttributeValue("vf_politiskgodkendt", value);
-				this.OnPropertyChanged("vf_Politiskgodkendt");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_politiskgodkendtname")]
-		public string vf_politiskgodkendtName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("vf_politiskgodkendt"))
-				{
-					return this.FormattedValues["vf_politiskgodkendt"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_robinsonlisten")]
-		public virtual vf_account_vf_robinsonlisten? vf_robinsonlisten
-		{
-			get
-			{
-				return ((vf_account_vf_robinsonlisten?)(EntityOptionSetEnum.GetEnum(this, "vf_robinsonlisten")));
-			}
-			set
-			{
-				this.OnPropertyChanging("vf_robinsonlisten");
-				this.SetAttributeValue("vf_robinsonlisten", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("vf_robinsonlisten");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("vf_robinsonlistenname")]
-		public string vf_robinsonlistenName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("vf_robinsonlisten"))
-				{
-					return this.FormattedValues["vf_robinsonlisten"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
 		/// <summary>
 		/// Angiv URL-adressen til firmaets websted for at få hurtige oplysninger om firmaprofilen.
 		/// </summary>
@@ -4892,6 +5430,42 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// 1:N lead_customer_accounts
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lead_customer_accounts")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> lead_customer_accounts
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_customer_accounts", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lead_customer_accounts");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_customer_accounts", null, value);
+				this.OnPropertyChanged("lead_customer_accounts");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lead_parent_account
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lead_parent_account")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> lead_parent_account
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_parent_account", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lead_parent_account");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_parent_account", null, value);
+				this.OnPropertyChanged("lead_parent_account");
+			}
+		}
+		
+		/// <summary>
 		/// 1:N msa_account_managingpartner
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("msa_account_managingpartner", Microsoft.Xrm.Sdk.EntityRole.Referenced)]
@@ -4928,6 +5502,114 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// 1:N msdyn_account_account_BillingAccount
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("msdyn_account_account_BillingAccount", Microsoft.Xrm.Sdk.EntityRole.Referenced)]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Account> Referencedmsdyn_account_account_BillingAccount
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Account>("msdyn_account_account_BillingAccount", Microsoft.Xrm.Sdk.EntityRole.Referenced);
+			}
+			set
+			{
+				this.OnPropertyChanging("Referencedmsdyn_account_account_BillingAccount");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Account>("msdyn_account_account_BillingAccount", Microsoft.Xrm.Sdk.EntityRole.Referenced, value);
+				this.OnPropertyChanged("Referencedmsdyn_account_account_BillingAccount");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N msdyn_account_quote_Account
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("msdyn_account_quote_Account")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> msdyn_account_quote_Account
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("msdyn_account_quote_Account", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("msdyn_account_quote_Account");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("msdyn_account_quote_Account", null, value);
+				this.OnPropertyChanged("msdyn_account_quote_Account");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N opportunity_customer_accounts
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("opportunity_customer_accounts")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> opportunity_customer_accounts
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_customer_accounts", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("opportunity_customer_accounts");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_customer_accounts", null, value);
+				this.OnPropertyChanged("opportunity_customer_accounts");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N opportunity_parent_account
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("opportunity_parent_account")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> opportunity_parent_account
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_parent_account", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("opportunity_parent_account");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_parent_account", null, value);
+				this.OnPropertyChanged("opportunity_parent_account");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N quote_customer_accounts
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("quote_customer_accounts")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> quote_customer_accounts
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("quote_customer_accounts", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("quote_customer_accounts");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("quote_customer_accounts", null, value);
+				this.OnPropertyChanged("quote_customer_accounts");
+			}
+		}
+		
+		/// <summary>
+		/// N:N accountleads_association
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("accountleads_association")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> accountleads_association
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("accountleads_association", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("accountleads_association");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("accountleads_association", null, value);
+				this.OnPropertyChanged("accountleads_association");
+			}
+		}
+		
+		/// <summary>
 		/// N:1 account_master_account
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("masterid")]
@@ -4937,6 +5619,25 @@ namespace Boruto.Plugin.Entities
 			get
 			{
 				return this.GetRelatedEntity<Boruto.Plugin.Entities.Account>("account_master_account", Microsoft.Xrm.Sdk.EntityRole.Referencing);
+			}
+		}
+		
+		/// <summary>
+		/// N:1 account_originating_lead
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("originatingleadid")]
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("account_originating_lead")]
+		public Boruto.Plugin.Entities.Lead account_originating_lead
+		{
+			get
+			{
+				return this.GetRelatedEntity<Boruto.Plugin.Entities.Lead>("account_originating_lead", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("account_originating_lead");
+				this.SetRelatedEntity<Boruto.Plugin.Entities.Lead>("account_originating_lead", null, value);
+				this.OnPropertyChanged("account_originating_lead");
 			}
 		}
 		
@@ -5059,6 +5760,25 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("Referencingmsa_account_managingpartner");
 				this.SetRelatedEntity<Boruto.Plugin.Entities.Account>("msa_account_managingpartner", Microsoft.Xrm.Sdk.EntityRole.Referencing, value);
 				this.OnPropertyChanged("Referencingmsa_account_managingpartner");
+			}
+		}
+		
+		/// <summary>
+		/// N:1 msdyn_account_account_BillingAccount
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_billingaccount")]
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("msdyn_account_account_BillingAccount", Microsoft.Xrm.Sdk.EntityRole.Referencing)]
+		public Boruto.Plugin.Entities.Account Referencingmsdyn_account_account_BillingAccount
+		{
+			get
+			{
+				return this.GetRelatedEntity<Boruto.Plugin.Entities.Account>("msdyn_account_account_BillingAccount", Microsoft.Xrm.Sdk.EntityRole.Referencing);
+			}
+			set
+			{
+				this.OnPropertyChanging("Referencingmsdyn_account_account_BillingAccount");
+				this.SetRelatedEntity<Boruto.Plugin.Entities.Account>("msdyn_account_account_BillingAccount", Microsoft.Xrm.Sdk.EntityRole.Referencing, value);
+				this.OnPropertyChanged("Referencingmsdyn_account_account_BillingAccount");
 			}
 		}
 		
