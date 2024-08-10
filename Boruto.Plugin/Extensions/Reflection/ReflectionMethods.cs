@@ -10,6 +10,15 @@ namespace Boruto.Extensions.Reflection
 {
     public static class ReflectionMethods
     {
+        public static object DefaultValue(this Type type)
+        {
+            if (type.IsValueType)
+            {
+                return System.Activator.CreateInstance(type);
+            }
+            return null;
+        }
+
         public static bool IsEntityType(this Type value)
         {
             if (typeof(Microsoft.Xrm.Sdk.Entity).IsAssignableFrom(value))
@@ -92,12 +101,40 @@ namespace Boruto.Extensions.Reflection
                              where t.IsAbstract == false
                                && t.IsInterface == false
                                && fromType.IsAssignableFrom(t)
-                               && t.HasPublicDefaultConstructor()
+                               && t.HasPublicConstructor()
                              select t).ToArray();
 
                 foreach (var sType in types)
                 {
-                    var instance = System.Activator.CreateInstance(sType);
+                    var useType = sType;
+
+                    while (useType.BaseType.IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity)))
+                    {
+                        useType = sType.BaseType;
+                    }
+
+                    object instance = null;
+
+                    if (!useType.HasPublicDefaultConstructor())
+                    {
+                        var constructor = sType.GetConstructors(BindingFlags.Public | BindingFlags.Instance).OrderBy(r => (r.GetParameters() ?? new ParameterInfo[0]).Length).FirstOrDefault();
+                        if (constructor == null)
+                        {
+                            throw new Exceptions.UnresolveableEntityTypeException(sType);
+                        }
+                        var pms = constructor.GetParameters();
+                        var args = new object[pms.Length];
+                        var ix = 0;
+                        foreach (var pm in pms)
+                        {
+                            args[ix] = pm.ParameterType.DefaultValue();
+                        }
+                        instance = constructor.Invoke(args);
+                    }
+                    else
+                    {
+                        instance = System.Activator.CreateInstance(useType);
+                    }
 
                     {
                         if (instance is Microsoft.Xrm.Sdk.Entity ent)
@@ -132,6 +169,11 @@ namespace Boruto.Extensions.Reflection
         public static bool HasPublicDefaultConstructor(this Type type)
         {
             return type.GetConstructors(BindingFlags.Instance | BindingFlags.Public).Where(r => { var pms = r.GetParameters(); return pms == null || pms.Length == 0; }).Any();
+        }
+
+        public static bool HasPublicConstructor(this Type type)
+        {
+            return type.GetConstructors(BindingFlags.Instance | BindingFlags.Public).Any();
         }
 
         public static string[] ResolveAttributes(this Type fromType, Type toType, Type decorator, out bool allAttributes)

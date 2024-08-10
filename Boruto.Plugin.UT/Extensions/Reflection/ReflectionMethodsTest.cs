@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Runtime;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -49,6 +50,10 @@ namespace Boruto.Plugin.UT.Extensions.Reflection
             Assert.AreEqual(typeof(ContactMyInterface), typeof(IMyInterFace).ResolveEntityType(Entities.Contact.EntityLogicalName, resolveFrom));
 
             Assert.IsNull(typeof(IMyInterFace).ResolveEntityType(Entities.SystemUser.EntityLogicalName, resolveFrom));
+
+            Assert.AreEqual(typeof(Boruto.Plugin.Example.Entities.AccountStateChanged), typeof(Boruto.Plugin.Example.Entities.AccountStateChanged.IStatChanged).ResolveEntityType(Entities.Account.EntityLogicalName, resolveFrom));
+
+            Assert.AreEqual(typeof(VerySpecialAccount), typeof(IVerySpecialAccount).ResolveEntityType(Entities.Account.EntityLogicalName, resolveFrom));
         }
 
 
@@ -57,7 +62,7 @@ namespace Boruto.Plugin.UT.Extensions.Reflection
         {
             Assert.IsTrue(typeof(Microsoft.Xrm.Sdk.Entity).HasPublicDefaultConstructor());
             Assert.IsTrue(typeof(Boruto.Plugin.Entities.Account).HasPublicDefaultConstructor());
-            Assert.IsTrue(typeof(Boruto.Plugin.Example.Entities.AccountStateChanged).HasPublicDefaultConstructor());
+            Assert.IsFalse(typeof(Boruto.Plugin.Example.Entities.AccountStateChanged).HasPublicDefaultConstructor());
         }
 
 
@@ -216,6 +221,43 @@ namespace Boruto.Plugin.UT.Extensions.Reflection
             string IEntity.LogicalName => Entities.Account.EntityLogicalName;
 
             Microsoft.Xrm.Sdk.AttributeCollection IEntity.Attributes { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        }
+        #endregion
+
+        #region entity class that does not extend Account
+
+        public interface IVerySpecialAccount: Boruto.ITarget
+        {
+            string Name { get; }
+        }
+
+        public class VerySpecialAccount : IVerySpecialAccount
+        {
+            public VerySpecialAccount(Microsoft.Xrm.Sdk.ITracingService traceService)
+            {
+            }
+
+            private Microsoft.Xrm.Sdk.AttributeCollection attrs;
+            string IVerySpecialAccount.Name => "Special";
+
+            Guid IEntity.Id => Guid.Empty;
+
+            string IEntity.LogicalName => Boruto.Plugin.Entities.Account.EntityLogicalName;
+
+            Microsoft.Xrm.Sdk.AttributeCollection IEntity.Attributes { get => attrs; set => attrs = value; }
+
+            event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
+            {
+                add
+                {
+                    throw new NotImplementedException();
+                }
+
+                remove
+                {
+                    throw new NotImplementedException();
+                }
+            }
         }
         #endregion
     }
