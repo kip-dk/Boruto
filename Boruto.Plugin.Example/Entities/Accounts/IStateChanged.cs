@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xrm.Sdk;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,17 +9,17 @@ namespace Boruto.Plugin.Example.Entities
 {
     public partial class AccountStateChanged : Boruto.Plugin.Entities.Account, AccountStateChanged.IStatChanged
     {
-        public AccountStateChanged() : base()
-        {
-        }
+        private readonly ITracingService traceService;
 
-        public AccountStateChanged(Microsoft.Xrm.Sdk.ITracingService traceService) : this()
+        public AccountStateChanged(Microsoft.Xrm.Sdk.ITracingService traceService) : base()
         {
+            this.traceService = traceService;
         }
 
         void IStatChanged.OnStateChanged()
         {
             this.Description = $"{System.DateTime.UtcNow.ToString($"yyyy-MM-dd HH:mm:ss")} state changed to: { this.StateCode.Value.ToString() }";
+            this.traceService.Trace(this.Description);
         }
 
         public interface IStatChanged : ITarget
