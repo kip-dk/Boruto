@@ -1,10 +1,12 @@
-﻿using Boruto.Extensions.Reflection;
+﻿using Boruto.Attributes;
+using Boruto.Extensions.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -82,6 +84,37 @@ namespace Boruto.Plugin.UT.Extensions.Reflection
                 Assert.AreEqual("fullname", allTarget[0]);
                 Assert.IsFalse(all);
             }
+
+            {
+                var allTarget = typeof(IMyMerged).ResolveAttributes(typeof(AccountMyMerged), typeof(Boruto.Attributes.TargetFilterAttribute), out bool all);
+                Assert.AreEqual(1, allTarget.Length);
+                Assert.AreEqual("name", allTarget[0]);
+                Assert.IsFalse(all);
+            }
+
+            {
+                var allTarget = typeof(IMyMerged).ResolveAttributes(typeof(ContactMyMerged), typeof(Boruto.Attributes.TargetFilterAttribute), out bool all);
+                Assert.AreEqual(1, allTarget.Length);
+                Assert.AreEqual("fullname", allTarget[0]);
+                Assert.IsFalse(all);
+            }
+
+            {
+                var allTarget = typeof(IMyMerged).ResolveAttributes(typeof(AccountMyMerged), null, out bool all);
+                Assert.AreEqual(2, allTarget.Length);
+                Assert.AreEqual("name", allTarget.Where(r => r == "name").Single());
+                Assert.AreEqual("description", allTarget.Where(r => r == "description").Single());
+                Assert.IsFalse(all);
+            }
+
+            {
+                var allTarget = typeof(IMyMerged).ResolveAttributes(typeof(ContactMyMerged), null, out bool all);
+                Assert.AreEqual(2, allTarget.Length);
+                Assert.AreEqual("fullname", allTarget.Where(r => r == "fullname").Single());
+                Assert.AreEqual("description", allTarget.Where(r => r == "description").Single());
+                Assert.IsFalse(all);
+            }
+
         }
 
         #region multi target interface test
@@ -95,6 +128,27 @@ namespace Boruto.Plugin.UT.Extensions.Reflection
         }
 
         public class ContactMyInterface : Entities.Contact, IMyInterFace
+        {
+            [Microsoft.Xrm.Sdk.AttributeLogicalName("fullname")]
+            public string Name => this.FullName;
+        }
+        #endregion
+
+        #region multi merged interface test
+        public interface IMyMerged : IMerged
+        {
+            [TargetFilter]
+            string Name { get; }
+
+            string Description { get; }
+        }
+
+        public class AccountMyMerged : Entities.Account, IMyMerged
+        {
+        }
+
+
+        public class ContactMyMerged : Entities.Contact, IMyMerged
         {
             [Microsoft.Xrm.Sdk.AttributeLogicalName("fullname")]
             public string Name => this.FullName;

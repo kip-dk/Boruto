@@ -25,11 +25,14 @@ namespace Boruto.Reflection.Model
             this.assemblies = assemblies;
             this.Resolve();
 
-            var admin = method.GetCustomAttribute<Attributes.AdminAttribute>();
-
-            if (admin != null)
+            if (this.IsEntityMatch == null || this.IsEntityMatch == true)
             {
-                this.Admin = true;
+                var admin = method.GetCustomAttribute<Attributes.AdminAttribute>();
+
+                if (admin != null)
+                {
+                    this.Admin = true;
+                }
             }
         }
 
@@ -73,28 +76,39 @@ namespace Boruto.Reflection.Model
                 if (typeof(ITarget).IsAssignableFrom(this.FromType))
                 {
                     this.IsTarget = true;
-                    this.ResolveAttributes();
+                    this.FilteredAttributes = this.FromType.ResolveAttributes(this.EarlyBoundEntityType, null, out bool all);
+                    this.FilteredAllAttributes = all;
                     return;
                 }
 
                 if (typeof(IPreImage).IsAssignableFrom(this.FromType))
                 {
                     this.IsPreImage = true;
-                    this.ResolveAttributes();
+                    this.PreAttributes = this.FromType.ResolveAttributes(this.EarlyBoundEntityType, null, out bool all);
+                    this.PreAllAttributes = all;
                     return;
                 }
 
                 if (typeof(IMerged).IsAssignableFrom(this.FromType))
                 {
-                    this.IsMergedImage = true;
-                    this.ResolveAttributes();
+                    {
+                        this.IsMergedImage = true;
+                        this.FilteredAttributes = this.FromType.ResolveAttributes(this.EarlyBoundEntityType, typeof(Boruto.Attributes.TargetFilterAttribute), out bool all);
+                        this.FilteredAllAttributes = all;
+                    }
+
+                    {
+                        this.PreAttributes = this.FromType.ResolveAttributes(this.EarlyBoundEntityType, null, out bool all);
+                        this.PreAllAttributes = all;
+                    }
                     return;
                 }
 
                 if (typeof(IPostImage).IsAssignableFrom(this.FromType))
                 {
                     this.IsPostImage = true;
-                    this.ResolveAttributes();
+                    this.PostAttributes = this.FromType.ResolveAttributes(this.EarlyBoundEntityType, null, out bool all);
+                    this.PostAllAttributes = all;
                     return;
                 }
 
@@ -126,6 +140,8 @@ namespace Boruto.Reflection.Model
                                 this.PostAllAttributes = true;
                                 return;
                             }
+                        default:
+                            throw new Exceptions.NamingConventionViolationException(this.parameterinfo.Name, "target", "merged", "preimage", "postimage");
                     }
                 }
 
@@ -147,97 +163,6 @@ namespace Boruto.Reflection.Model
                 this.IsOrganizationRequest = true;
                 return;
             }
-        }
-
-        private void ResolveAttributes()
-        {
-            if (this.IsTarget)
-            {
-                this.ResolveTargetAttributes();
-                return;
-            }
-
-            if (this.IsPreImage || this.IsMergedImage)
-            {
-                this.ResolvePreAttributes();
-                return;
-            }
-
-            if (this.IsPostImage)
-            {
-                this.ResolvePostAttributes();
-                return;
-            }
-        }
-
-        private void ResolveTargetAttributes()
-        {
-            List<string> result = new List<string>();
-            var interfaceProperties = this.FromType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            var instanceProperties = this.EarlyBoundEntityType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToDictionary(r => r.Name);
-
-            foreach (var prop in interfaceProperties)
-            {
-                if (prop.GetGetMethod(false) != null)
-                {
-                    var targetAttr = prop.GetCustomAttribute<Attributes.TargetFilterAttribute>();
-                    if (targetAttr != null && instanceProperties.TryGetValue(prop.Name, out PropertyInfo instanceProperty))
-                    {
-                        var ma = instanceProperty.PropertyType.GetCustomAttribute<Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute>();
-                        if (ma != null)
-                        {
-                            result.Add(ma.LogicalName);
-                        }
-                    }
-                }
-            }
-            this.FilteredAttributes = result.Distinct().ToArray();
-        }
-
-        private void ResolvePreAttributes()
-        {
-            List<string> result = new List<string>();
-            var interfaceProperties = this.FromType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            var instanceProperties = this.EarlyBoundEntityType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToDictionary(r => r.Name);
-
-            foreach (var prop in interfaceProperties)
-            {
-                if (prop.GetGetMethod(false) != null)
-                {
-                    if (instanceProperties.TryGetValue(prop.Name, out PropertyInfo instanceProperty))
-                    {
-                        var ma = instanceProperty.PropertyType.GetCustomAttribute<Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute>();
-                        if (ma != null)
-                        {
-                            result.Add(ma.LogicalName);
-                        }
-                    }
-                }
-            }
-            this.PreAttributes = result.ToArray();
-        }
-
-        private void ResolvePostAttributes()
-        {
-            List<string> result = new List<string>();
-            var interfaceProperties = this.FromType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            var instanceProperties = this.EarlyBoundEntityType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToDictionary(r => r.Name);
-
-            foreach (var prop in interfaceProperties)
-            {
-                if (prop.GetGetMethod(false) != null)
-                {
-                    if (instanceProperties.TryGetValue(prop.Name, out PropertyInfo instanceProperty))
-                    {
-                        var ma = instanceProperty.PropertyType.GetCustomAttribute<Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute>();
-                        if (ma != null)
-                        {
-                            result.Add(ma.LogicalName);
-                        }
-                    }
-                }
-            }
-            this.PostAttributes = result.ToArray();
         }
     }
 }

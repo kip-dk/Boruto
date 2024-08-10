@@ -8,17 +8,24 @@ namespace Boruto.Plugin.Example.Entities
 {
     public partial class AccountStateChanged : Boruto.Plugin.Entities.Account, AccountStateChanged.IStatChanged
     {
-        public AccountStateChanged()
+        public AccountStateChanged() : base()
         {
         }
 
-        public AccountStateChanged(Microsoft.Xrm.Sdk.ITracingService traceService) : base()
+        public AccountStateChanged(Microsoft.Xrm.Sdk.ITracingService traceService) : this()
         {
+        }
+
+        void IStatChanged.OnStateChanged()
+        {
+            this.Description = $"{System.DateTime.UtcNow.ToString($"yyyy-MM-dd HH:mm:ss")} state changed to: { this.StateCode.Value.ToString() }";
         }
 
         public interface IStatChanged : ITarget
         {
             Plugin.Entities.account_statecode? StateCode { get; }
+
+            void OnStateChanged();
         }
      }
 }

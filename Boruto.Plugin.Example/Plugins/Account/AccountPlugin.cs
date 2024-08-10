@@ -10,9 +10,7 @@ namespace Boruto.Plugin.Example.Plugins.Account
     {
         public void OnPreUpdate(Boruto.Plugin.Example.Entities.AccountStateChanged.IStatChanged target)
         {
-            if (target.StateCode == Plugin.Entities.account_statecode.Inactive)
-            {
-            }
+            target.OnStateChanged();
         }
     }
 }
