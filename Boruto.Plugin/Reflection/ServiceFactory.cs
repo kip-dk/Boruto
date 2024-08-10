@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boruto.Extensions.Reflection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -86,6 +87,23 @@ namespace Boruto.Reflection
                 return result;
             }
 
+            if (argument.IsPostImage)
+            {
+                if (result is Microsoft.Xrm.Sdk.Entity ent)
+                {
+                    ent.Attributes = this.ctx.PreImage.Attributes;
+                    ent.LogicalName = this.ctx.PreImage.LogicalName;
+                    return result;
+                }
+
+                if (result is IPreImage postimage)
+                {
+                    postimage.Attributes = this.ctx.PreImage.Attributes;
+                }
+
+                return result;
+            }
+
             return result;
         }
 
@@ -111,13 +129,10 @@ namespace Boruto.Reflection
                 return orgR;
             }
 
-            if (argument.FromType.IsInterface && argument.IsTarget && typeof(ITarget).IsAssignableFrom(argument.FromType))
+            if (argument.FromType.IsEntityType())
             {
             }
 
-            if (argument.IsTarget && argument.FromType.IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity)))
-            {
-            }
 
             object result = null;
 

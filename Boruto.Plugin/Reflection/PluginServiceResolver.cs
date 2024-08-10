@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,11 +10,13 @@ namespace Boruto.Reflection
     internal class PluginServiceResolver
     {
         private readonly Type pluginType;
-        private Dictionary<string, Model.Method[]> methodIndex = new Dictionary<string, Model.Method[]>(); 
+        private Dictionary<string, Model.Method[]> methodIndex = new Dictionary<string, Model.Method[]>();
+        private Assembly[] assemblies;
 
-        internal PluginServiceResolver(Type pluginType)
+        internal PluginServiceResolver(Type pluginType, Assembly[] assemblies)
         {
             this.pluginType = pluginType;
+            this.assemblies = assemblies;
         }
 
         internal Model.Method[] GetMethods(string pattern, string primaryLogicalName)
@@ -34,7 +37,7 @@ namespace Boruto.Reflection
 
             foreach (var method in methods)
             {
-                var next = new Model.Method(this.pluginType, method, primaryLogicalName);
+                var next = new Model.Method(this.pluginType, method, primaryLogicalName, this.assemblies);
 
                 if (next.IsMatch)
                 {

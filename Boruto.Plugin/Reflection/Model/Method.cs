@@ -17,12 +17,15 @@ namespace Boruto.Reflection.Model
         internal bool IsMatch { get; private set; }
         private Attributes.IfAttribute[] ifTypes;
 
-        internal Method(Type pluginType, System.Reflection.MethodInfo method, string primaryLogicalName)
+        Assembly[] assemblies;
+
+        internal Method(Type pluginType, System.Reflection.MethodInfo method, string primaryLogicalName, Assembly[] assemblies)
         {
             this.pluginType = pluginType;
             this.method = method;
             this.IsMatch = true;
             this.LogicalName = primaryLogicalName;
+            this.assemblies = assemblies;
             this.Resolve();
             this.ResolveIf();
         }
@@ -111,10 +114,10 @@ namespace Boruto.Reflection.Model
             var pms = this.method.GetParameters();
             foreach (var pm in pms)
             {
-                var next = new Argument(this.pluginType, this.method, pm, this.LogicalName);
+                var next = new Argument(this.pluginType, this.method, pm, this.LogicalName, this.assemblies);
 
 
-                if (this.LogicalName != null && next.LogicalName != null && next.LogicalName != this.LogicalName)
+                if (next.IsEntityMatch != null && next.IsEntityMatch == false)
                 {
                     this.IsMatch = false;
                     return;

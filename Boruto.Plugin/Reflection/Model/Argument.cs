@@ -1,10 +1,8 @@
-﻿using Boruto.Extensions.SDK;
+﻿using Boruto.Extensions.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Boruto.Reflection.Model
 {
@@ -14,8 +12,9 @@ namespace Boruto.Reflection.Model
         private readonly MethodInfo method;
         private readonly ParameterInfo parameterinfo;
         private readonly string primaryLogicalName;
+        private Assembly[] assemblies;
 
-        internal Argument(Type pluginType, System.Reflection.MethodInfo method, System.Reflection.ParameterInfo parameterinfo, string primaryLogicalName)
+        internal Argument(Type pluginType, System.Reflection.MethodInfo method, System.Reflection.ParameterInfo parameterinfo, string primaryLogicalName, Assembly[] assemblies)
         {
             this.Name = parameterinfo.Name;
             this.IsMethodArgument = true;
@@ -23,6 +22,7 @@ namespace Boruto.Reflection.Model
             this.method = method;
             this.parameterinfo = parameterinfo;
             this.primaryLogicalName = primaryLogicalName;
+            this.assemblies = assemblies;
             this.Resolve();
 
             var admin = method.GetCustomAttribute<Attributes.AdminAttribute>();
@@ -38,7 +38,6 @@ namespace Boruto.Reflection.Model
         internal bool IsMergedImage { get; private set; }
         internal bool IsPostImage { get; private set; }
         internal bool IsOrganizationRequest { get; private set; }
-        internal string LogicalName { get; private set; }
         internal Type FromType { get; private set; }
         internal Type EarlyBoundEntityType { get; private set; }
         internal bool FilteredAllAttributes { get; private set; } = false;
@@ -51,17 +50,29 @@ namespace Boruto.Reflection.Model
         internal bool Admin { get; private set; }
         internal string Name { get; private set; }
         internal bool IsMethodArgument { get; private set; }
+        internal bool? IsEntityMatch { get; private set; }
 
         private void Resolve()
         {
             this.FromType = this.parameterinfo.ParameterType;
+
+            if (this.FromType.IsEntityType())
+            {
+                this.EarlyBoundEntityType = this.FromType.ResolveEntityType(this.primaryLogicalName, this.assemblies);
+
+                if (this.EarlyBoundEntityType == null)
+                {
+                    this.IsEntityMatch = false;
+                    return;
+                }
+                this.IsEntityMatch = true;
+            }
 
             if (this.primaryLogicalName != null)
             {
                 if (typeof(ITarget).IsAssignableFrom(this.FromType))
                 {
                     this.IsTarget = true;
-                    this.ResolveLogicalName();
                     this.ResolveAttributes();
                     return;
                 }
@@ -69,7 +80,6 @@ namespace Boruto.Reflection.Model
                 if (typeof(IPreImage).IsAssignableFrom(this.FromType))
                 {
                     this.IsPreImage = true;
-                    this.ResolveLogicalName();
                     this.ResolveAttributes();
                     return;
                 }
@@ -77,7 +87,6 @@ namespace Boruto.Reflection.Model
                 if (typeof(IMerged).IsAssignableFrom(this.FromType))
                 {
                     this.IsMergedImage = true;
-                    this.ResolveLogicalName();
                     this.ResolveAttributes();
                     return;
                 }
@@ -85,7 +94,6 @@ namespace Boruto.Reflection.Model
                 if (typeof(IPostImage).IsAssignableFrom(this.FromType))
                 {
                     this.IsPostImage = true;
-                    this.ResolveLogicalName();
                     this.ResolveAttributes();
                     return;
                 }
@@ -98,29 +106,24 @@ namespace Boruto.Reflection.Model
                             {
                                 this.IsTarget = true;
                                 this.FilteredAllAttributes = true;
-                                this.ResolveLogicalName();
                                 return;
                             }
                         case "merged":
                             {
                                 this.IsMergedImage = true;
                                 this.PreAllAttributes = true;
-                                this.ResolveLogicalName();
                                 return;
                             }
                         case "preimage":
                             {
                                 this.IsPreImage = true;
                                 this.PreAllAttributes = true;
-                                this.ResolveLogicalName();
-                                this.ResolveLogicalName();
                                 return;
                             }
                         case "postimage":
                             {
                                 this.IsPostImage = true;
                                 this.PostAllAttributes = true;
-                                this.ResolveLogicalName();
                                 return;
                             }
                     }
@@ -129,14 +132,12 @@ namespace Boruto.Reflection.Model
                 if (typeof(ITargetReference).IsAssignableFrom(this.FromType))
                 {
                     this.IsTargetReference = true;
-                    this.ResolveLogicalName();
                     return;
                 }
 
                 if (this.FromType == typeof(Microsoft.Xrm.Sdk.EntityReference))
                 {
                     this.IsTargetReference = true;
-                    this.ResolveLogicalName();
                     return;
                 }
             }
@@ -145,32 +146,6 @@ namespace Boruto.Reflection.Model
             {
                 this.IsOrganizationRequest = true;
                 return;
-            }
-        }
-
-        private void ResolveLogicalName()
-        {
-            if (this.FromType.IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity)))
-            {
-                var strongType = this.FromType.StrongTypeOf();
-                this.LogicalName = strongType.LogicalName;
-                this.EarlyBoundEntityType = strongType.GetType();
-                return;
-            }
-
-            var etas = this.method.GetCustomAttributes<Attributes.EntityTypeAttribute>();
-            if (etas != null)
-            {
-                foreach (var eta in etas)
-                {
-                    var stronType = eta.Type.StrongTypeOf();
-                    if (stronType.LogicalName == this.primaryLogicalName)
-                    {
-                        this.LogicalName = stronType.LogicalName;
-                        this.EarlyBoundEntityType = stronType.GetType();
-                        return;
-                    }
-                }
             }
         }
 

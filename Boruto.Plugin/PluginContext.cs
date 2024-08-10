@@ -580,7 +580,7 @@ namespace Boruto
                 return pe;
             }
 
-            serviceResolverIndex[type] = new PluginServiceResolver(type);
+            serviceResolverIndex[type] = new PluginServiceResolver(type, this.ServiceAssemblies);
             return serviceResolverIndex[type];
         }
         #endregion

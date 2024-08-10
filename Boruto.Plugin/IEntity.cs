@@ -8,7 +8,6 @@ namespace Boruto
 {
     /// <summary>
     /// Geneal properties for all objects devired from entity payload. 
-    /// Any implementation of the IEntity interface must be an extension of Microsoft.Xrm.Sdk.Entity
     /// </summary>
     public interface IEntity
     {

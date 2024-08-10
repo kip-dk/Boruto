@@ -8,6 +8,10 @@ namespace Boruto.Plugin.Example.Entities
 {
     public partial class AccountStateChanged : Boruto.Plugin.Entities.Account, AccountStateChanged.IStatChanged
     {
+        public AccountStateChanged()
+        {
+        }
+
         public AccountStateChanged(Microsoft.Xrm.Sdk.ITracingService traceService) : base()
         {
         }

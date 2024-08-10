@@ -45,6 +45,15 @@ namespace Boruto.Implementations
             return this.orgService.Retrieve(this.logicalName, id, ALL).ToEntity<T>();
         }
 
+        public T Get(Guid id, params string[] attributes)
+        {
+            if (attributes == null || attributes.Length == 0)
+            {
+                return this.Get(id);
+            }
+            return this.orgService.Retrieve(this.logicalName, id, new Microsoft.Xrm.Sdk.Query.ColumnSet(attributes.Select(r => r.ToLower()).ToArray())).ToEntity<T>();
+        }
+
         public IQueryable<T> GetQuery()
         {
             this.ClearCache();
