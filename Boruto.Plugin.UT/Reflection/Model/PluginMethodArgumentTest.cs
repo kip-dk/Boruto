@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Boruto.Plugin.UT.Reflection.Model
 {
     [TestClass]
-    public class ArgumentTest
+    public class PluginMethodArgumentTest
     {
 
         [TestMethod]
@@ -21,7 +21,7 @@ namespace Boruto.Plugin.UT.Reflection.Model
                     var method = pluginType.GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).Where(r => r.Name == "OnPreUpdate").First();
                     var parameter = method.GetParameters().Single();
 
-                    var arg = new Boruto.Reflection.Model.Argument(pluginType, method, parameter, Boruto.Plugin.Entities.Account.EntityLogicalName, Consts.Assemblies);
+                    var arg = new Boruto.Reflection.Model.PluginMethodArgument(pluginType, method, parameter, Boruto.Plugin.Entities.Account.EntityLogicalName, Consts.Assemblies);
 
                     Assert.IsTrue(arg.IsTarget);
                     Assert.IsFalse(arg.IsPreImage);
@@ -38,7 +38,7 @@ namespace Boruto.Plugin.UT.Reflection.Model
                     var method = pluginType.GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).Where(r => r.Name == "OnPreDelete").First();
                     var parameter = method.GetParameters().Single();
 
-                    var arg = new Boruto.Reflection.Model.Argument(pluginType, method, parameter, Boruto.Plugin.Entities.Account.EntityLogicalName, Consts.Assemblies);
+                    var arg = new Boruto.Reflection.Model.PluginMethodArgument(pluginType, method, parameter, Boruto.Plugin.Entities.Account.EntityLogicalName, Consts.Assemblies);
 
                     Assert.IsTrue(arg.IsTargetReference);
                     Assert.IsFalse(arg.IsTarget);
@@ -54,7 +54,7 @@ namespace Boruto.Plugin.UT.Reflection.Model
                 var method = pluginType.GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).Where(r => r.Name == "OnPost").First();
                 var parameter = method.GetParameters().Single();
 
-                var arg = new Boruto.Reflection.Model.Argument(pluginType, method, parameter, null, Consts.Assemblies);
+                var arg = new Boruto.Reflection.Model.PluginMethodArgument(pluginType, method, parameter, null, Consts.Assemblies);
                 Assert.IsFalse(arg.IsTargetReference);
                 Assert.IsFalse(arg.IsTarget);
                 Assert.IsFalse(arg.IsPreImage);

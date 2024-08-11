@@ -1,4 +1,5 @@
 ﻿using Boruto.Extensions.Reflection;
+using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,14 +19,9 @@ namespace Boruto.Reflection
             this.ctx = ctx;
         }
 
-        internal object Resolve(Reflection.Model.Argument argument)
+        internal object Resolve(Reflection.Model.PluginMethodArgument argument)
         {
-            if (resolved.TryGetValue(argument.FromType, out object o))
-            {
-                return o;
-            }
-
-            var result = this.DoResolve(argument);
+            var result = this.DoResolve(argument.FromType, argument.IsTargetReference, argument.IsOrganizationRequest, argument.Admin, argument.EarlyBoundEntityType);
 
             if (argument.IsTarget)
             {
@@ -118,25 +114,124 @@ namespace Boruto.Reflection
         }
 
         #region private helpers
-        private object DoResolve(Reflection.Model.Argument argument)
+        private object DoResolve(Type fromType, bool isTargetReference, bool isOrgRequest ,bool admin, Type toType)
         {
-            if (argument.IsOrganizationRequest)
+            if (resolved.TryGetValue(fromType, out object o))
             {
-                var orgR  = System.Activator.CreateInstance(argument.FromType) as Microsoft.Xrm.Sdk.OrganizationRequest;
+                return o;
+            }
+
+            #region resolve standard services
+            if (fromType == (typeof(Microsoft.Xrm.Sdk.ITracingService)))
+            {
+                return this.ctx.TracingService;
+            }
+
+            if (fromType == (typeof(Microsoft.Xrm.Sdk.IPluginExecutionContext)))
+            {
+                return this.ctx.PluginExecutionContext;
+            }
+
+            if (fromType == typeof(IServiceEndpointNotificationService))
+            {
+                return this.ctx.NotificationService;
+            }
+
+            if (fromType == typeof(IServiceProvider))
+            {
+                return this.ctx.StandardServiceProvider;
+            }
+
+            if (fromType == typeof(IOrganizationServiceFactory))
+            {
+                return this.ctx.OrgSvcFactory;
+            }
+            #endregion
+
+            #region resolve orgservice
+            if (fromType == typeof(Microsoft.Xrm.Sdk.IOrganizationService))
+            {
+                if (admin)
+                {
+                    return this.ctx.PluginAdminService;
+                }
+                else
+                {
+                    return this.ctx.PluginUserService;
+                }
+            }
+            #endregion
+
+            #region resolve target reference
+            if (isTargetReference)
+            {
+                if (fromType == typeof(Microsoft.Xrm.Sdk.EntityReference))
+                {
+                    return this.ctx.TargetReference;
+                }
+
+                var re = System.Activator.CreateInstance(toType, this.ctx.TargetReference);
+                resolved[fromType] = re;
+                return re;
+            }
+            #endregion
+
+            #region organization request
+            if (isOrgRequest)
+            {
+                var orgR = System.Activator.CreateInstance(fromType) as Microsoft.Xrm.Sdk.OrganizationRequest;
                 orgR.RequestName = this.ctx.PluginExecutionContext.MessageName;
                 orgR.Parameters = this.ctx.PluginExecutionContext.InputParameters;
-                resolved[argument.FromType] = orgR;
+                resolved[fromType] = orgR;
                 return orgR;
             }
+            #endregion
 
-            if (argument.FromType.IsEntityType())
+            #region resolve iqueryable
+            if (fromType.IsQueryable())
             {
+                var repo = this.ResolveRepository(fromType.GenericTypeArguments[0], admin);
+                var queryMethd = repo.GetType().GetMethod("GetQuery", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+                resolved[fromType] = queryMethd.Invoke(repo, null);
+                return resolved[fromType];
+            }
+            #endregion
+
+            #region resolve irepository
+            if (fromType.IsRepository())
+            {
+                resolved[fromType] = this.ResolveRepository(fromType.GenericTypeArguments[0], admin);
+                return resolved[fromType];
+            }
+            #endregion
+
+            #region resolve boruto services
+            if (fromType == typeof(Boruto.ServiceAPI.IMetadataService))
+            {
+                resolved[fromType] = new Implementations.Services.MetadataService(this.ctx.PluginAdminService);
+                return resolved[fromType];
             }
 
+            if (fromType == typeof(Boruto.ServiceAPI.INamingService))
+            {
+                var metaService = (Boruto.ServiceAPI.IMetadataService)DoResolve(typeof(Boruto.ServiceAPI.IMetadataService), false, false, false, null);
+                resolved[fromType] = new Implementations.Services.NamingService(metaService, this.ctx.PluginAdminService);
+                return resolved[fromType];
+            }
+            #endregion
+
+
+            #region resolve entity
+            if (toType != null)
+            {
+                resolved[fromType] = this.CreateServiceInstance(toType);
+                return resolved[fromType];
+            }
+            #endregion
 
             object result = null;
 
-            resolved[argument.FromType] = result;
+            resolved[fromType] = result;
             return result;
         }
 
@@ -160,9 +255,37 @@ namespace Boruto.Reflection
             }
             return repositoryTypes[key];
         }
-
         #endregion
 
+        #region service constructor
+        private List<Type> resolving = new List<Type>();
+        private object CreateServiceInstance(Type type)
+        {
+            if (resolving.Contains(type))
+            {
+                throw new Exceptions.CyclicalDependencyException(type, resolving.ToArray());
+            }
+
+            resolving.Add(type);
+            var con = Model.ServiceConstructor.ForType(type);
+
+            var args = new object[con.Parameters.Length];
+
+            for (var i = 0; i < args.Length; i++)
+            {
+                args[i] = this.ResolveServiceInstance(con.Parameters[0].Parameter.ParameterType, con.Parameters[0].Admin);
+            }
+
+            var result = con.Constructor.Invoke(args);
+            resolving.Remove(type);
+            return result;
+        }
+
+        private object ResolveServiceInstance(Type type, bool admin)
+        {
+            return null;
+        }
+        #endregion
 
         #region disposeable
         public void Dispose()

@@ -49,6 +49,15 @@ namespace Boruto.Extensions.Reflection
             return false;
         }
 
+        public static bool IsRepository(this Type type)
+        {
+            return type.IsInterface && type.IsGenericType && type.FullName.StartsWith("Boruto.IRepository") && type.GetGenericArguments().First().IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity));
+        }
+
+        public static bool IsQueryable(this Type type)
+        {
+            return type.IsInterface && type.IsGenericType && type.FullName.StartsWith("System.Linq.IQueryable") && type.GetGenericArguments().First().IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity));
+        }
 
         private static Dictionary<string, Type> resolvedEntityTypes = new Dictionary<string, Type>();
         public static Type ResolveEntityType(this Type fromType, string logicalName, Assembly[] assms)

@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Boruto.Reflection.Model
 {
-    internal class Argument
+    internal class PluginMethodArgument
     {
         private readonly Type pluginType;
         private readonly MethodInfo method;
@@ -14,7 +14,7 @@ namespace Boruto.Reflection.Model
         private readonly string primaryLogicalName;
         private Assembly[] assemblies;
 
-        internal Argument(Type pluginType, System.Reflection.MethodInfo method, System.Reflection.ParameterInfo parameterinfo, string primaryLogicalName, Assembly[] assemblies)
+        internal PluginMethodArgument(Type pluginType, System.Reflection.MethodInfo method, System.Reflection.ParameterInfo parameterinfo, string primaryLogicalName, Assembly[] assemblies)
         {
             this.Name = parameterinfo.Name;
             this.IsMethodArgument = true;

@@ -1,4 +1,5 @@
-﻿using Boruto.Extensions.SDK;
+﻿using Boruto.Extensions.Framework;
+using Boruto.Extensions.SDK;
 using Boruto.Implementations;
 using Boruto.Plugin;
 using Boruto.Reflection;
@@ -54,33 +55,7 @@ namespace Boruto
             this.PrimaryLogicalName = this.PluginExecutionContext.PrimaryEntityName;
             this.PrimaryEntityId = this.PluginExecutionContext.PrimaryEntityId;
 
-            var methodName = "On";
-
-            switch (this.Stage)
-            {
-                case 10: methodName += "Validate"; break;
-                case 20: methodName += "Pre"; break;
-                case 30: break; // virtual plugin
-                case 40: methodName += "Post"; break;
-            }
-
-            switch (this.Message)
-            {
-                case "Create":
-                case "Update":
-                case "Delete":
-                    {
-                        methodName += this.Message;
-                        break;
-                    }
-            }
-
-            if (this.IsAsync)
-            {
-                methodName += "Async";
-            }
-
-            this.methodPattern = methodName;
+            this.methodPattern = this.Stage.ToMethodName(this.Message, this.PluginExecutionContext.Mode);
 
             lock (locker)
             {
@@ -397,168 +372,19 @@ namespace Boruto
                     #region resolve arguments
                     var args = new object[method.Arguments.Length];
 
-                    Microsoft.Xrm.Sdk.Entity strongTypeTarget = null;
-                    Microsoft.Xrm.Sdk.Entity strongTypePre = null;
-                    Microsoft.Xrm.Sdk.Entity strongTypeMerged = null;
-                    Microsoft.Xrm.Sdk.Entity strongTypePost = null;
-
                     var ix = 0;
                     foreach (var arg in method.Arguments)
                     {
                         try
                         {
-                            #region resolve Entity parameters
-                            if (arg.IsTarget)
-                            {
-                                if (strongTypeTarget == null)
-                                {
-                                    strongTypeTarget = this.Target.StrongTypeOf(arg.EarlyBoundEntityType);
-                                }
-                                args[ix] = strongTypeTarget;
-                                continue;
-                            }
-
-                            if (arg.IsPreImage)
-                            {
-                                if (strongTypePre == null)
-                                {
-                                    strongTypePre = this.PreImage.StrongTypeOf(arg.EarlyBoundEntityType);
-                                }
-                                args[ix] = strongTypePre;
-                                continue;
-                            }
-
-                            if (arg.IsMergedImage)
-                            {
-                                if (strongTypeMerged == null)
-                                {
-                                    strongTypeMerged = this.Merged.StrongTypeOf(arg.EarlyBoundEntityType);
-                                }
-                                args[ix] = strongTypeMerged;
-                            }
-
-                            if (arg.IsPostImage)
-                            {
-                                if (strongTypePost == null)
-                                {
-                                    strongTypePost = this.PostImage.StrongTypeOf(arg.EarlyBoundEntityType);
-                                }
-                                args[ix] = strongTypePost;
-                            }
-                            #endregion
-
-                            #region resolve target reference
-                            if (arg.IsTargetReference)
-                            {
-                                if (arg.EarlyBoundEntityType == typeof(Microsoft.Xrm.Sdk.EntityReference))
-                                {
-                                    args[ix] = this.TargetReference;
-                                    continue;
-                                }
-
-                                if (arg.FromType == typeof(ITargetReference))
-                                {
-                                    args[ix] = new Implementations.TargetReference(this.TargetReference);
-                                    continue;
-                                }
-
-                                if (arg.FromType.IsGenericType)
-                                {
-                                    args[ix] = Implementations.TargetReference.CreateInstance(this.TargetReference, arg.FromType.GenericTypeArguments.First());
-                                    continue;
-                                }
-                            }
-                            #endregion
-
-                            #region resolve orgservice
-                            if (arg.FromType == typeof(Microsoft.Xrm.Sdk.IOrganizationService))
-                            {
-                                if (arg.Admin)
-                                {
-                                    args[ix] = this.PluginAdminService;
-                                }
-                                else
-                                {
-                                    args[ix] = this.PluginUserService;
-                                }
-                                continue;
-                            }
-                            #endregion
-
-                            #region resolve standard services
-                            if (arg.FromType == (typeof(Microsoft.Xrm.Sdk.ITracingService)))
-                            {
-                                args[ix] = this.TracingService;
-                                continue;
-                            }
-
-                            if (arg.FromType == (typeof(Microsoft.Xrm.Sdk.IPluginExecutionContext)))
-                            {
-                                args[ix] = this.PluginExecutionContext;
-                                continue;
-                            }
-
-                            if (arg.FromType == typeof(IServiceEndpointNotificationService))
-                            {
-                                args[ix] = this.NotificationService;
-                                continue;
-                            }
-
-                            if (arg.FromType == typeof(IServiceProvider))
-                            {
-                                args[ix] = this.StandardServiceProvider;
-                                continue;
-                            }
-
-                            if (arg.FromType == typeof(IOrganizationServiceFactory))
-                            {
-                                args[ix] = this.OrgSvcFactory;
-                                continue;
-                            }
-                            #endregion
-
-                            #region resolve action request target
-                            if (typeof(Microsoft.Xrm.Sdk.OrganizationRequest).IsAssignableFrom(arg.FromType))
-                            {
-                                var req = this._PluginExecutionContext.InputParameters["Target"] as Microsoft.Xrm.Sdk.OrganizationRequest;
-                                if (req.GetType() == arg.FromType)
-                                {
-                                    args[ix] = req;
-                                    continue;
-                                }
-
-                                var strongReq = (Microsoft.Xrm.Sdk.OrganizationRequest)System.Activator.CreateInstance(arg.FromType);
-                                strongReq.Parameters = req.Parameters;
-                                strongReq.RequestName = req.RequestName;
-                                strongReq.RequestId = req.RequestId;
-                                args[ix] = strongReq;
-                                continue;
-                            }
-                            #endregion
-
-                            #region resolve iqueryable
-                            if (arg.FromType.IsInterface && arg.FromType.IsGenericType && arg.FromType.FullName.StartsWith("System.Linq.IQueryable"))
-                            {
-                                //var repo = this.ResolveRepository(arg.FromType.GenericTypeArguments[0], arg.Admin);
-                                //var queryMethd = repo.GetType().GetMethod("GetQuery", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-                                //args[ix] = queryMethd.Invoke(repo, null);
-                                continue;
-                            }
-                            #endregion
-
-                            #region resolve irepository
-                            if (arg.FromType.IsInterface && arg.FromType.IsGenericType && arg.FromType.FullName.StartsWith("Boruto.IRepository"))
-                            {
-                                //args[ix] = this.ResolveRepository(arg.FromType.GenericTypeArguments[0], arg.Admin);
-                                continue;
-                            }
-                            #endregion
+                            args[ix] = fac.Resolve(arg);
                         }
                         finally
                         {
                             ix++;
                         }
                     }
+
                     #endregion
                 }
             }
@@ -574,14 +400,16 @@ namespace Boruto
         #region private helpers
         private PluginServiceResolver GetPluginServiceResolver()
         {
-            var type = this.plugin.GetType();
-            if (serviceResolverIndex.TryGetValue(type, out PluginServiceResolver pe))
+            lock (locker)
             {
-                return pe;
-            }
+                if (serviceResolverIndex.TryGetValue(this.Type, out PluginServiceResolver pe))
+                {
+                    return pe;
+                }
 
-            serviceResolverIndex[type] = new PluginServiceResolver(type, this.ServiceAssemblies);
-            return serviceResolverIndex[type];
+                serviceResolverIndex[this.Type] = new PluginServiceResolver(this.Type, this.ServiceAssemblies);
+                return serviceResolverIndex[this.Type];
+            }
         }
         #endregion
 

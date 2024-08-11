@@ -10,7 +10,7 @@ namespace Boruto.Reflection
     internal class PluginServiceResolver
     {
         private readonly Type pluginType;
-        private Dictionary<string, Model.Method[]> methodIndex = new Dictionary<string, Model.Method[]>();
+        private Dictionary<string, Model.PluginMethod[]> methodIndex = new Dictionary<string, Model.PluginMethod[]>();
         private Assembly[] assemblies;
 
         internal PluginServiceResolver(Type pluginType, Assembly[] assemblies)
@@ -19,25 +19,25 @@ namespace Boruto.Reflection
             this.assemblies = assemblies;
         }
 
-        internal Model.Method[] GetMethods(string pattern, string primaryLogicalName)
+        internal Model.PluginMethod[] GetMethods(string pattern, string primaryLogicalName)
         {
             var key = this.Key(pattern, primaryLogicalName);
-            if (this.methodIndex.TryGetValue(key, out Model.Method[] ms))
+            if (this.methodIndex.TryGetValue(key, out Model.PluginMethod[] ms))
             {
                 return ms;
             }
-            return this.ResolveMethods(key, primaryLogicalName);
+            return this.ResolveMethods(pattern, primaryLogicalName);
         }
 
-        private Model.Method[] ResolveMethods(string pattern, string primaryLogicalName)
+        private Model.PluginMethod[] ResolveMethods(string pattern, string primaryLogicalName)
         {
-            var result = new List<Model.Method>();
+            var result = new List<Model.PluginMethod>();
 
             var methods = this.pluginType.GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).Where(r => r.Name == pattern).ToArray();
 
             foreach (var method in methods)
             {
-                var next = new Model.Method(this.pluginType, method, primaryLogicalName, this.assemblies);
+                var next = new Model.PluginMethod(this.pluginType, method, primaryLogicalName, this.assemblies);
 
                 if (next.IsMatch)
                 {

@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace Boruto.Reflection.Model
 {
-    internal class Method
+    internal class PluginMethod
     {
         private readonly Type pluginType;
         internal MethodInfo method { get; }
-        private Argument[] arguments;
+        private PluginMethodArgument[] arguments;
 
         internal bool IsMatch { get; private set; }
         private Attributes.IfAttribute[] ifTypes;
 
         Assembly[] assemblies;
 
-        internal Method(Type pluginType, System.Reflection.MethodInfo method, string primaryLogicalName, Assembly[] assemblies)
+        internal PluginMethod(Type pluginType, System.Reflection.MethodInfo method, string primaryLogicalName, Assembly[] assemblies)
         {
             this.pluginType = pluginType;
             this.method = method;
@@ -31,7 +31,7 @@ namespace Boruto.Reflection.Model
         }
 
         internal string LogicalName { get; }
-        internal Argument[] Arguments => this.arguments;
+        internal PluginMethodArgument[] Arguments => this.arguments;
 
         private bool? _allTargetFilter;
         internal bool AllTargetFilter
@@ -110,11 +110,11 @@ namespace Boruto.Reflection.Model
 
         private void Resolve()
         {
-            var result = new List<Argument>();
+            var result = new List<PluginMethodArgument>();
             var pms = this.method.GetParameters();
             foreach (var pm in pms)
             {
-                var next = new Argument(this.pluginType, this.method, pm, this.LogicalName, this.assemblies);
+                var next = new PluginMethodArgument(this.pluginType, this.method, pm, this.LogicalName, this.assemblies);
 
 
                 if (next.IsEntityMatch != null && next.IsEntityMatch == false)
