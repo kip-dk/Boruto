@@ -175,6 +175,25 @@ namespace Boruto.Extensions.Reflection
             return null;
         }
 
+        public static Type ResolveImplementingType(this Type source, Assembly[] assemblies)
+        {
+            foreach (var ass in assemblies)
+            {
+                var can = (from t in ass.GetTypes()
+                           where t.IsInterface == false
+                             && t.IsAbstract == false
+                             && t.IsAssignableFrom(source)
+                             && t.HasPublicConstructor()
+                           select t).FirstOrDefault();
+
+                if (can != null)
+                {
+                    return can;
+                }
+            }
+            return null;
+        }
+
         public static bool HasPublicDefaultConstructor(this Type type)
         {
             return type.GetConstructors(BindingFlags.Instance | BindingFlags.Public).Where(r => { var pms = r.GetParameters(); return pms == null || pms.Length == 0; }).Any();

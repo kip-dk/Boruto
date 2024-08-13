@@ -21,7 +21,12 @@ namespace Boruto.Reflection
 
         internal object Resolve(Reflection.Model.PluginMethodArgument argument)
         {
-            var result = this.DoResolve(argument.FromType, argument.IsTargetReference, argument.IsOrganizationRequest, argument.Admin, argument.EarlyBoundEntityType);
+            var result = this.DoResolve(argument.FromType, argument.IsTargetReference, argument.IsOrganizationRequest, argument.Admin, argument.EarlyBoundEntityType ?? argument.ToType);
+
+            if (argument.EarlyBoundEntityType == null && argument.ToType == null)
+            {
+                argument.ToType = result.GetType();
+            }
 
             if (argument.IsTarget)
             {
@@ -221,7 +226,7 @@ namespace Boruto.Reflection
             #endregion
 
 
-            #region resolve entity
+            #region resolve types already mapped
             if (toType != null)
             {
                 resolved[fromType] = this.CreateServiceInstance(toType);
@@ -229,9 +234,61 @@ namespace Boruto.Reflection
             }
             #endregion
 
-            object result = null;
+            #region resolve from implementation
+            if (fromType.IsInterface || fromType.IsAbstract)
+            {
+                var resolveToType = fromType.ResolveImplementingType(this.ctx.ServiceAssemblies);
+                if (resolveToType != null)
+                {
+                    resolved[fromType] = this.CreateServiceInstance(resolveToType);
+                    return resolved[fromType];
+                }
+            }
+            #endregion
 
-            resolved[fromType] = result;
+            #region resolve simply by it self
+            if (!fromType.IsInterface && !fromType.IsAbstract && fromType.HasPublicConstructor())
+            {
+                resolved[fromType] = this.CreateServiceInstance(fromType);
+                return resolved[fromType];
+            }
+            #endregion
+
+            #region custom service provider
+            if (this.ctx.CustomServiceProvider != null)
+            {
+                object result = this.ResolveCustomService(fromType);
+
+                if (result != null)
+                {
+                    resolved[fromType] = result;
+                    return result;
+                }
+            }
+            #endregion
+
+            #region resolve my service type search
+            #endregion
+
+            throw new Exceptions.UnresolveableEntityTypeException(fromType);
+        }
+
+        private static Dictionary<Type, bool> customService = new Dictionary<Type, bool>();
+        private object ResolveCustomService(Type fromType)
+        {
+            if (customService.TryGetValue(fromType, out bool isCustom))
+            {
+                if (isCustom)
+                {
+                    return ctx.CustomServiceProvider.GetService(fromType);
+                } else
+                {
+                    return null;
+                }
+            }
+
+            var result = this.ctx.CustomServiceProvider.GetService(fromType);
+            customService[fromType] = result != null;
             return result;
         }
 
@@ -283,7 +340,7 @@ namespace Boruto.Reflection
 
         private object ResolveServiceInstance(Type type, bool admin)
         {
-            return null;
+            return this.DoResolve(type, false, false, admin, null);
         }
         #endregion
 

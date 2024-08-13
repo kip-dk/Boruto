@@ -43,6 +43,7 @@ namespace Boruto.Reflection.Model
         internal bool IsOrganizationRequest { get; private set; }
         internal Type FromType { get; private set; }
         internal Type EarlyBoundEntityType { get; private set; }
+        internal Type ToType { get; set; }
         internal bool FilteredAllAttributes { get; private set; } = false;
         internal string[] FilteredAttributes { get; private set; }
         internal bool PreAllAttributes { get; private set; } = false;
