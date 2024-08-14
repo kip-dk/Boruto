@@ -30,6 +30,8 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>dataverse;plugin;solid;</PackageTags>
     <PackageReleaseNotes>Still very ALFA, and not ready at all</PackageReleaseNotes>
+    <PackAsTool>False</PackAsTool>
+    <ToolCommandName>boruto.plugin</ToolCommandName>
   </PropertyGroup>
 
   <ItemGroup>

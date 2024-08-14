@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Boruto.Exceptions
 {
-    public class UnresolveableEntityTypeException : BaseException
+    public class UnresolveableTypeException : BaseException
     {
-        public UnresolveableEntityTypeException(Type type) : base($"{ type.FullName } could not be resolved to an strongly typed entity with a default constructor")
+        public UnresolveableTypeException(Type type) : base($"{ type.FullName } could not be resolved. No implementation with at least one public constructor was found")
         {
         }
     }

@@ -7,6 +7,7 @@ using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -209,6 +210,7 @@ namespace Boruto
                     var req = new Microsoft.Xrm.Sdk.OrganizationRequest();
                     req.RequestName = this.Message;
                     req.Parameters = this.PluginExecutionContext.InputParameters;
+                    this._orgRequest = req;
                 }
                 return this._orgRequest;
             }
@@ -375,16 +377,21 @@ namespace Boruto
                     var ix = 0;
                     foreach (var arg in method.Arguments)
                     {
-                        try
-                        {
                             args[ix] = fac.Resolve(arg);
-                        }
-                        finally
-                        {
                             ix++;
+                    }
+                    #endregion
+
+                    #region invoke
+                    var result = method.method.Invoke(this.plugin, args);
+
+                    if (this.Stage == 40 && this.IsAsync == false && result is Microsoft.Xrm.Sdk.OrganizationResponse re && re.Results != null)
+                    {
+                        foreach (var p in re.Results)
+                        {
+                            this.PluginExecutionContext.OutputParameters[p.Key] = p.Value;
                         }
                     }
-
                     #endregion
                 }
             }
