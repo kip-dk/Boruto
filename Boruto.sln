@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boruto.Plugin.UT", "Boruto.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boruto.Plugin.Example", "Boruto.Plugin.Example\Boruto.Plugin.Example.csproj", "{BD862D55-CA58-453C-B7BD-86D999F956D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boruto", "Boruto\Boruto.csproj", "{38F2F0AB-4DA8-47AF-B599-9882EBFC73F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{BD862D55-CA58-453C-B7BD-86D999F956D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD862D55-CA58-453C-B7BD-86D999F956D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD862D55-CA58-453C-B7BD-86D999F956D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38F2F0AB-4DA8-47AF-B599-9882EBFC73F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38F2F0AB-4DA8-47AF-B599-9882EBFC73F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38F2F0AB-4DA8-47AF-B599-9882EBFC73F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38F2F0AB-4DA8-47AF-B599-9882EBFC73F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
