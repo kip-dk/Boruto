@@ -182,6 +182,10 @@ export class Filter {
         if (this.value != null && this.value.hasOwnProperty('value')) {
           _v = this.value.value;
         }
+
+        if (this.value != null && this.value instanceof Date) {
+          _v = this.value.toISOString();
+        }
       }
   
       if (_v == null) {
