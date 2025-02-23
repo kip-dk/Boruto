@@ -1,7 +1,6 @@
 
-export interface XrmFormContext {
+export interface XrmRoot {
     Navigation: Navigation;
-    EnkeltProveoprettelse: EnkeltProveoprettelse | null;
 }
 
 export interface Navigation {
@@ -12,8 +11,4 @@ export interface PageInputEntityRecord {
     pageType: "entityrecord" | "entitylist";
     entityName: string;
     entityId: string;
-}
-
-interface EnkeltProveoprettelse {
-    setAntalValgte(v: number): void;
 }
