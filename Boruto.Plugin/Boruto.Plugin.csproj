@@ -24,7 +24,7 @@
     <Description>This is a base library for building Dataverse plugin using the software princip for SOLID, it is a "reinvention" of the Kipon Solid Plguin framework, but it only target online solutions and has been simplified to use standard tools such as pac as much as possible</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <RootNamespace>Boruto</RootNamespace>
-    <Copyright>Kipon ApS, 2024</Copyright>
+    <Copyright>Kipon ApS, 2025</Copyright>
     <Title>Boruto Dataverse plugin - building plugins as SOLID</Title>
     <RepositoryUrl>https://github.com/kip-dk/Boruto.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
