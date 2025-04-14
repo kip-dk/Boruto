@@ -14,7 +14,7 @@ namespace Boruto.Plugin.Entities
 	
 	
 	/// <summary>
-	/// Den fase i salgsprocessen, som objektet er i.
+	/// The sales process stage that this entity is in.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -22,7 +22,7 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kvalificer = 0,
+		Qualify = 0,
 	}
 }
 #pragma warning restore CS1591

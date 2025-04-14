@@ -13,25 +13,16 @@ namespace Boruto.Plugin.Entities
 {
 	
 	
-	/// <summary>
-	/// Den fase i salgsprocessen, som objektet er i.
-	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum opportunity_salesstage
+	public enum arbo_labelingresponsible
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kvalificer = 0,
+		Arbodania = 500000000,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Opstiltilbud = 1,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Afgivtilbud = 2,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Luk = 3,
+		Partner_supplierorcustomer = 500000001,
 	}
 }
 #pragma warning restore CS1591

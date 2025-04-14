@@ -15,20 +15,20 @@ namespace Boruto.Plugin.Entities
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum msdyn_travelchargetype
+	public enum arbo_invoicemodel
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Timevis = 690970000,
+		Sendbyemail = 500000000,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Afstand = 690970001,
+		Postbypaper = 500000001,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Rettet = 690970002,
+		Edi = 500000002,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ingen = 690970003,
+		Navision = 500000003,
 	}
 }
 #pragma warning restore CS1591

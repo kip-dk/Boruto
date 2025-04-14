@@ -14,7 +14,7 @@ namespace Boruto.Plugin.Entities
 	
 	
 	/// <summary>
-	/// Power Pages-sprog
+	/// Power Pages Languages
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -22,139 +22,139 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Arabisk = 1025,
+		Arabic = 1025,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Baskiskbaskisk = 1069,
+		BasqueBasque = 1069,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		BulgarskBulgarien = 1026,
+		BulgarianBulgaria = 1026,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Catalanskcatalansk = 1027,
+		CatalanCatalan = 1027,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		KinesiskKina = 2052,
+		ChineseChina = 2052,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		KinesiskSARHongkong = 3076,
+		ChineseHongKongSAR = 3076,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kinesisktraditionelt = 1028,
+		ChineseTraditional = 1028,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		KroatiskKroatien = 1050,
+		CroatianCroatia = 1050,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		TjekkiskDenTjekkiskeRepublik = 1029,
+		CzechCzechRepublic = 1029,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DanskDanmark = 1030,
+		DanishDenmark = 1030,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		HollandskNederlandene = 1043,
+		DutchNetherlands = 1043,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Engelsk = 1033,
+		English = 1033,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		EstiskEstland = 1061,
+		EstonianEstonia = 1061,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		FinskFinland = 1035,
+		FinnishFinland = 1035,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		FranskFrankrig = 1036,
+		FrenchFrance = 1036,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		GaliciskSpanien = 1110,
+		GalicianSpain = 1110,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		TyskTyskland = 1031,
+		GermanGermany = 1031,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		GrskGrkenland = 1032,
+		GreekGreece = 1032,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Hebraisk = 1037,
+		Hebrew = 1037,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		HindiIndien = 1081,
+		HindiIndia = 1081,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		UngarskUngarn = 1038,
+		HungarianHungary = 1038,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		IndonesiskIndonesien = 1057,
+		IndonesianIndonesia = 1057,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		ItalienskItalien = 1040,
+		ItalianItaly = 1040,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		JapanskJapan = 1041,
+		JapaneseJapan = 1041,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		KasakhiskKasakhstan = 1087,
+		KazakhKazakhstan = 1087,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		KoreanskSydkorea = 1042,
+		KoreanKorea = 1042,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		LettiskLetland = 1062,
+		LatvianLatvia = 1062,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		LitauiskLitauen = 1063,
+		LithuanianLithuania = 1063,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		MalajiskMalaysia = 1086,
+		MalayMalaysia = 1086,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Norsk_bokmlNorge = 1044,
+		Norwegian_BokmlNorway = 1044,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		PolskPolen = 1045,
+		PolishPoland = 1045,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		PortugisiskBrasilien = 1046,
+		PortugueseBrazil = 1046,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		PortugisiskPortugal = 2070,
+		PortuguesePortugal = 2070,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		RumnskRumnien = 1048,
+		RomanianRomania = 1048,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		RussiskRusland = 1049,
+		RussianRussia = 1049,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Serbisk_kyrilliskSerbien = 3098,
+		Serbian_CyrillicSerbia = 3098,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Serbisk_latinskSerbien = 2074,
+		Serbian_LatinSerbia = 2074,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		SlovakiskSlovakiet = 1051,
+		SlovakSlovakia = 1051,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		SlovenskSlovenien = 1060,
+		SlovenianSlovenia = 1060,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Spansk_traditionelsorteringSpanien = 3082,
+		Spanish_TraditionalSortSpain = 3082,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		SvenskSverige = 1053,
+		SwedishSweden = 1053,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		ThailandskThailand = 1054,
+		ThaiThailand = 1054,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		TyrkiskTyrkiet = 1055,
+		TurkishTrkiye = 1055,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		UkrainskUkraine = 1058,
+		UkrainianUkraine = 1058,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		VietnamesiskVietnam = 1066,
+		VietnameseVietnam = 1066,
 	}
 }
 #pragma warning restore CS1591

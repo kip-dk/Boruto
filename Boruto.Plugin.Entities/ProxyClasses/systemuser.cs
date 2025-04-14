@@ -14,7 +14,7 @@ namespace Boruto.Plugin.Entities
 	
 	
 	/// <summary>
-	/// Brugertype.
+	/// Type of user.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -22,26 +22,26 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Lseskrive = 0,
+		ReadWrite = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Administrativ = 1,
+		Administrative = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Lse = 2,
+		Read = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Supportbruger = 3,
+		SupportUser = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ikkeinteraktiv = 4,
+		Noninteractive = 4,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Stedfortrderadministrator = 5,
+		DelegatedAdmin = 5,
 	}
 	
 	/// <summary>
-	/// Adressetypen for adresse 1, f.eks. faktureringsadresse, forsendelsesadresse eller primær adresse.
+	/// Type of address for address 1, such as billing, shipping, or primary address.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -49,11 +49,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Forsendelsesmåde for adresse 1.
+	/// Method of shipment for address 1.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -61,11 +61,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Adressetypen for adresse 2, f.eks. faktureringsadresse, forsendelsesadresse eller primær adresse.
+	/// Type of address for address 2, such as billing, shipping, or primary address.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -73,11 +73,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Forsendelsesmåde for adresse 2.
+	/// Method of shipment for address 2.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -85,11 +85,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Azure-tilstand for bruger.
+	/// Azure state of user.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -97,17 +97,17 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Findes = 0,
+		Exists = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Manueltslettet = 1,
+		Softdeleted = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ikkefundetellerslettetpermanent = 2,
+		Notfoundorharddeleted = 2,
 	}
 	
 	/// <summary>
-	/// Brugerens licenstype. Dette bruges kun i versionen i det lokale miljø af produktet. Onlinelicenser administreres via Microsoft 365 Office Portal.
+	/// License type of user. This is used only in the on-premises version of the product. Online licenses are managed through Microsoft 365 Office Portal.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -118,13 +118,13 @@ namespace Boruto.Plugin.Entities
 		Professional = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Administrativ = 1,
+		Administrative = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Grundlggende = 2,
+		Basic = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		EnhedProfessional = 3,
+		DeviceProfessional = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		DeviceBasic = 4,
@@ -139,10 +139,10 @@ namespace Boruto.Plugin.Entities
 		Enterprise = 7,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		EnhedenEnterprise = 8,
+		DeviceEnterprise = 8,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Salg = 9,
+		Sales = 9,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		Service = 10,
@@ -155,7 +155,7 @@ namespace Boruto.Plugin.Entities
 	}
 	
 	/// <summary>
-	/// Slet brugertilstand.
+	/// User delete state.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -163,14 +163,14 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ikkeslettet = 0,
+		Notdeleted = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Manueltslettet = 1,
+		Softdeleted = 1,
 	}
 	
 	/// <summary>
-	/// Angiver godkendelsesindstillingerne for synkronisering på serversiden eller adgang til E-mail Router.
+	/// Indicates the approval options for server-side synchronization or Email Router access.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -178,20 +178,20 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Tom = 0,
+		Empty = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Godkendt = 1,
+		Approved = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Afventergodkendelse = 2,
+		PendingApproval = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Afvist = 3,
+		Rejected = 3,
 	}
 	
 	/// <summary>
-	/// Leveringsmetode for indgående e-mail for brugeren.
+	/// Incoming email delivery method for the user.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -199,20 +199,20 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ingen = 0,
+		None = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		MicrosoftDynamics365tilOutlook = 1,
+		MicrosoftDynamics365forOutlook = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		SynkroniseringpserversidenellerEmailRouter = 2,
+		ServerSideSynchronizationorEmailRouter = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Postkassetilvideresendelse = 3,
+		ForwardMailbox = 3,
 	}
 	
 	/// <summary>
-	/// Status for brugerinvitation.
+	/// User invitation status.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -220,25 +220,25 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Invitationerikkesendt = 0,
+		InvitationNotSent = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Inviteret = 1,
+		Invited = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Invitationenernstenudlbet = 2,
+		InvitationNearExpired = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Invitationenerudlbet = 3,
+		InvitationExpired = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Invitationeneraccepteret = 4,
+		InvitationAccepted = 4,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Invitationenerafvist = 5,
+		InvitationRejected = 5,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Invitationenertilbagekaldt = 6,
+		InvitationRevoked = 6,
 	}
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
@@ -247,14 +247,14 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Programbruger = 192350000,
+		Applicationuser = 192350000,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Robotprogrambruger = 192350001,
+		Botapplicationuser = 192350001,
 	}
 	
 	/// <summary>
-	/// Angiver robottypen
+	/// Indicates the type of bot
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -265,19 +265,19 @@ namespace Boruto.Plugin.Entities
 		/// CCI first party Bot
 		/// </summary>
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Virtuelagent = 192350000,
+		VirtualAgent = 192350000,
 		
 		/// <summary>
 		/// Other type of bot
 		/// </summary>
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Andet = 192350001,
+		Other = 192350001,
 		
 		/// <summary>
 		/// Indicates that the user is not a bot
 		/// </summary>
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ingen = 192350002,
+		None = 192350002,
 	}
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
@@ -286,14 +286,14 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		CRMbruger = 192350000,
+		CRMUser = 192350000,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Robotbruger = 192350001,
+		BOTUser = 192350001,
 	}
 	
 	/// <summary>
-	/// Leveringsmetode for udgående e-mail for brugeren.
+	/// Outgoing email delivery method for the user.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -301,17 +301,17 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ingen = 0,
+		None = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		MicrosoftDynamics365tilOutlook = 1,
+		MicrosoftDynamics365forOutlook = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		SynkroniseringpserversidenellerEmailRouter = 2,
+		ServerSideSynchronizationorEmailRouter = 2,
 	}
 	
 	/// <summary>
-	/// Brugerens foretrukne adresse.
+	/// Preferred address for the user.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -319,14 +319,14 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Postadresse = 1,
+		MailingAddress = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Andenadresse = 2,
+		OtherAddress = 2,
 	}
 	
 	/// <summary>
-	/// Brugerens foretrukne e-mail-adresse.
+	/// Preferred email address for the user.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -334,11 +334,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Brugerens foretrukne telefonnummer.
+	/// Preferred phone number for the user.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -346,20 +346,35 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Primrtelefon = 1,
+		MainPhone = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Andentelefon = 2,
+		OtherPhone = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Telefon_privat = 3,
+		HomePhone = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Mobiltelefon = 4,
+		MobilePhone = 4,
 	}
 	
 	/// <summary>
-	/// En person, der har adgang til Microsoft CRM, og som ejer objekter i Microsoft CRM-databasen.
+	/// The type of user
+	/// </summary>
+	[System.Runtime.Serialization.DataContractAttribute()]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	public enum systemuser_systemmanagedusertype
+	{
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		EntraUser = 0,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		C2User = 1,
+	}
+	
+	/// <summary>
+	/// Person with access to the Microsoft CRM system and who owns objects in the Microsoft CRM database.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("systemuser")]
@@ -424,6 +439,8 @@ namespace Boruto.Plugin.Entities
 			public const string Address2_UTCOffset = "address2_utcoffset";
 			public const string ApplicationId = "applicationid";
 			public const string ApplicationIdUri = "applicationiduri";
+			public const string arbo_allowoverridebelow = "arbo_allowoverridebelow";
+			public const string arbo_allowoverridebelowName = "arbo_allowoverridebelowname";
 			public const string AzureActiveDirectoryObjectId = "azureactivedirectoryobjectid";
 			public const string AzureDeletedOn = "azuredeletedon";
 			public const string AzureState = "azurestate";
@@ -461,8 +478,6 @@ namespace Boruto.Plugin.Entities
 			public const string FirstName = "firstname";
 			public const string FullName = "fullname";
 			public const string GovernmentId = "governmentid";
-			public const string hofor_provetager = "hofor_provetager";
-			public const string hofor_provetagerName = "hofor_provetagername";
 			public const string HomePhone = "homephone";
 			public const string IdentityId = "identityid";
 			public const string ImportSequenceNumber = "importsequencenumber";
@@ -471,6 +486,8 @@ namespace Boruto.Plugin.Entities
 			public const string InternalEMailAddress = "internalemailaddress";
 			public const string InviteStatusCode = "invitestatuscode";
 			public const string InviteStatusCodeName = "invitestatuscodename";
+			public const string IsAllowedByIpFirewall = "isallowedbyipfirewall";
+			public const string isallowedbyipfirewallName = "isallowedbyipfirewallname";
 			public const string IsDisabled = "isdisabled";
 			public const string IsDisabledName = "isdisabledname";
 			public const string IsEmailAddressApprovedByO365Admin = "isemailaddressapprovedbyo365admin";
@@ -545,6 +562,8 @@ namespace Boruto.Plugin.Entities
 			public const string SiteIdName = "siteidname";
 			public const string Skills = "skills";
 			public const string StageId = "stageid";
+			public const string SystemManagedUserType = "systemmanagedusertype";
+			public const string systemmanagedusertypeName = "systemmanagedusertypename";
 			public const string SystemUserId = "systemuserid";
 			public const string Id = "systemuserid";
 			public const string TerritoryId = "territoryid";
@@ -571,14 +590,10 @@ namespace Boruto.Plugin.Entities
 			public const string lk_accountbase_createdonbehalfby = "lk_accountbase_createdonbehalfby";
 			public const string lk_accountbase_modifiedby = "lk_accountbase_modifiedby";
 			public const string lk_accountbase_modifiedonbehalfby = "lk_accountbase_modifiedonbehalfby";
-			public const string lk_businessunit_createdonbehalfby = "lk_businessunit_createdonbehalfby";
-			public const string lk_businessunit_modifiedonbehalfby = "lk_businessunit_modifiedonbehalfby";
-			public const string lk_businessunitbase_createdby = "lk_businessunitbase_createdby";
-			public const string lk_businessunitbase_modifiedby = "lk_businessunitbase_modifiedby";
-			public const string lk_calendar_createdby = "lk_calendar_createdby";
-			public const string lk_calendar_createdonbehalfby = "lk_calendar_createdonbehalfby";
-			public const string lk_calendar_modifiedby = "lk_calendar_modifiedby";
-			public const string lk_calendar_modifiedonbehalfby = "lk_calendar_modifiedonbehalfby";
+			public const string lk_bor_plugindemo_createdby = "lk_bor_plugindemo_createdby";
+			public const string lk_bor_plugindemo_createdonbehalfby = "lk_bor_plugindemo_createdonbehalfby";
+			public const string lk_bor_plugindemo_modifiedby = "lk_bor_plugindemo_modifiedby";
+			public const string lk_bor_plugindemo_modifiedonbehalfby = "lk_bor_plugindemo_modifiedonbehalfby";
 			public const string lk_contact_createdonbehalfby = "lk_contact_createdonbehalfby";
 			public const string lk_contact_modifiedonbehalfby = "lk_contact_modifiedonbehalfby";
 			public const string lk_contactbase_createdby = "lk_contactbase_createdby";
@@ -587,37 +602,15 @@ namespace Boruto.Plugin.Entities
 			public const string lk_lead_modifiedonbehalfby = "lk_lead_modifiedonbehalfby";
 			public const string lk_leadbase_createdby = "lk_leadbase_createdby";
 			public const string lk_leadbase_modifiedby = "lk_leadbase_modifiedby";
-			public const string lk_opportunity_createdonbehalfby = "lk_opportunity_createdonbehalfby";
-			public const string lk_opportunity_modifiedonbehalfby = "lk_opportunity_modifiedonbehalfby";
-			public const string lk_opportunitybase_createdby = "lk_opportunitybase_createdby";
-			public const string lk_opportunitybase_modifiedby = "lk_opportunitybase_modifiedby";
-			public const string lk_quote_createdonbehalfby = "lk_quote_createdonbehalfby";
-			public const string lk_quote_modifiedonbehalfby = "lk_quote_modifiedonbehalfby";
-			public const string lk_quotebase_createdby = "lk_quotebase_createdby";
-			public const string lk_quotebase_modifiedby = "lk_quotebase_modifiedby";
-			public const string lk_role_createdonbehalfby = "lk_role_createdonbehalfby";
-			public const string lk_role_modifiedonbehalfby = "lk_role_modifiedonbehalfby";
-			public const string lk_rolebase_createdby = "lk_rolebase_createdby";
-			public const string lk_rolebase_modifiedby = "lk_rolebase_modifiedby";
 			public const string Referencedlk_systemuser_createdonbehalfby = "Referencedlk_systemuser_createdonbehalfby";
 			public const string Referencedlk_systemuser_modifiedonbehalfby = "Referencedlk_systemuser_modifiedonbehalfby";
 			public const string Referencedlk_systemuserbase_createdby = "Referencedlk_systemuserbase_createdby";
 			public const string Referencedlk_systemuserbase_modifiedby = "Referencedlk_systemuserbase_modifiedby";
-			public const string lk_team_createdonbehalfby = "lk_team_createdonbehalfby";
-			public const string lk_team_modifiedonbehalfby = "lk_team_modifiedonbehalfby";
-			public const string lk_teambase_administratorid = "lk_teambase_administratorid";
-			public const string lk_teambase_createdby = "lk_teambase_createdby";
-			public const string lk_teambase_modifiedby = "lk_teambase_modifiedby";
-			public const string opportunity_owning_user = "opportunity_owning_user";
 			public const string system_user_accounts = "system_user_accounts";
 			public const string system_user_contacts = "system_user_contacts";
-			public const string system_user_quotes = "system_user_quotes";
 			public const string user_accounts = "user_accounts";
+			public const string user_bor_plugindemo = "user_bor_plugindemo";
 			public const string Referenceduser_parent_user = "Referenceduser_parent_user";
-			public const string systemuserroles_association = "systemuserroles_association";
-			public const string teammembership_association = "teammembership_association";
-			public const string business_unit_system_users = "business_unit_system_users";
-			public const string calendar_system_users = "calendar_system_users";
 			public const string Referencinglk_systemuser_createdonbehalfby = "lk_systemuser_createdonbehalfby";
 			public const string Referencinglk_systemuser_modifiedonbehalfby = "lk_systemuser_modifiedonbehalfby";
 			public const string Referencinglk_systemuserbase_createdby = "lk_systemuserbase_createdby";
@@ -660,7 +653,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugertype.
+		/// Type of user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("accessmode")]
 		public virtual systemuser_accessmode? AccessMode
@@ -694,7 +687,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for adresse 1.
+		/// Unique identifier for address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_addressid")]
 		public System.Nullable<System.Guid> Address1_AddressId
@@ -712,7 +705,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Adressetypen for adresse 1, f.eks. faktureringsadresse, forsendelsesadresse eller primær adresse.
+		/// Type of address for address 1, such as billing, shipping, or primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_addresstypecode")]
 		public virtual systemuser_address1_addresstypecode? Address1_AddressTypeCode
@@ -746,7 +739,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Bynavn i adresse 1.
+		/// City name for address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_city")]
 		public string Address1_City
@@ -764,7 +757,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser den fulde primære adresse.
+		/// Shows the complete primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_composite")]
 		public string Address1_Composite
@@ -776,7 +769,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Lande-/områdenavn i adresse 1.
+		/// Country/region name in address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_country")]
 		public string Address1_Country
@@ -794,7 +787,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Region i adresse 1.
+		/// County name for address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_county")]
 		public string Address1_County
@@ -812,7 +805,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Faxnummer til adresse 1.
+		/// Fax number for address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_fax")]
 		public string Address1_Fax
@@ -830,7 +823,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Breddegrad for adresse 1.
+		/// Latitude for address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_latitude")]
 		public System.Nullable<double> Address1_Latitude
@@ -848,7 +841,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Første linje til angivelse af oplysninger om adresse 1.
+		/// First line for entering address 1 information.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_line1")]
 		public string Address1_Line1
@@ -866,7 +859,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Anden linje til angivelse af oplysninger om adresse 1.
+		/// Second line for entering address 1 information.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_line2")]
 		public string Address1_Line2
@@ -884,7 +877,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Tredje linje til angivelse af oplysninger om adresse 1.
+		/// Third line for entering address 1 information.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_line3")]
 		public string Address1_Line3
@@ -902,7 +895,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Længdegrad for adresse 1.
+		/// Longitude for address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_longitude")]
 		public System.Nullable<double> Address1_Longitude
@@ -920,7 +913,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Det navn, der skal angives for adresse 1.
+		/// Name to enter for address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_name")]
 		public string Address1_Name
@@ -938,7 +931,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Postnummer i adresse 1.
+		/// ZIP Code or postal code for address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_postalcode")]
 		public string Address1_PostalCode
@@ -956,7 +949,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Postboksnummer i adresse 1.
+		/// Post office box number for address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_postofficebox")]
 		public string Address1_PostOfficeBox
@@ -974,7 +967,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Forsendelsesmåde for adresse 1.
+		/// Method of shipment for address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_shippingmethodcode")]
 		public virtual systemuser_address1_shippingmethodcode? Address1_ShippingMethodCode
@@ -1008,7 +1001,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Område i adresse 1.
+		/// State or province for address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_stateorprovince")]
 		public string Address1_StateOrProvince
@@ -1026,7 +1019,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Første telefonnummer, der er tilknyttet adresse 1.
+		/// First telephone number associated with address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_telephone1")]
 		public string Address1_Telephone1
@@ -1044,7 +1037,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Andet telefonnummer, der er tilknyttet adresse 1.
+		/// Second telephone number associated with address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_telephone2")]
 		public string Address1_Telephone2
@@ -1062,7 +1055,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Tredje telefonnummer, der er tilknyttet adresse 1.
+		/// Third telephone number associated with address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_telephone3")]
 		public string Address1_Telephone3
@@ -1080,7 +1073,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// UPS-zone (United Parcel Service) for adresse 1.
+		/// United Parcel Service (UPS) zone for address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_upszone")]
 		public string Address1_UPSZone
@@ -1098,7 +1091,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Forskydning fra GMT for adresse 1. Dette er forskellen mellem lokal tid og GMT-standardtid.
+		/// UTC offset for address 1. This is the difference between local time and standard Coordinated Universal Time.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_utcoffset")]
 		public System.Nullable<int> Address1_UTCOffset
@@ -1116,7 +1109,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for adresse 2.
+		/// Unique identifier for address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_addressid")]
 		public System.Nullable<System.Guid> Address2_AddressId
@@ -1134,7 +1127,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Adressetypen for adresse 2, f.eks. faktureringsadresse, forsendelsesadresse eller primær adresse.
+		/// Type of address for address 2, such as billing, shipping, or primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_addresstypecode")]
 		public virtual systemuser_address2_addresstypecode? Address2_AddressTypeCode
@@ -1168,7 +1161,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Bynavn i adresse 2.
+		/// City name for address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_city")]
 		public string Address2_City
@@ -1186,7 +1179,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser den fulde sekundære adresse.
+		/// Shows the complete secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_composite")]
 		public string Address2_Composite
@@ -1198,7 +1191,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Lande-/områdenavn i adresse 2.
+		/// Country/region name in address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_country")]
 		public string Address2_Country
@@ -1216,7 +1209,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Region i adresse 2.
+		/// County name for address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_county")]
 		public string Address2_County
@@ -1234,7 +1227,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Faxnummer til adresse 2.
+		/// Fax number for address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_fax")]
 		public string Address2_Fax
@@ -1252,7 +1245,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Breddegrad for adresse 2.
+		/// Latitude for address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_latitude")]
 		public System.Nullable<double> Address2_Latitude
@@ -1270,7 +1263,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Første linje til angivelse af oplysninger om adresse 2.
+		/// First line for entering address 2 information.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_line1")]
 		public string Address2_Line1
@@ -1288,7 +1281,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Anden linje til angivelse af oplysninger om adresse 2.
+		/// Second line for entering address 2 information.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_line2")]
 		public string Address2_Line2
@@ -1306,7 +1299,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Tredje linje til angivelse af oplysninger om adresse 2.
+		/// Third line for entering address 2 information.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_line3")]
 		public string Address2_Line3
@@ -1324,7 +1317,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Længdegrad for adresse 2.
+		/// Longitude for address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_longitude")]
 		public System.Nullable<double> Address2_Longitude
@@ -1342,7 +1335,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Det navn, der skal angives for adresse 2.
+		/// Name to enter for address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_name")]
 		public string Address2_Name
@@ -1360,7 +1353,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Postnummer i adresse 2.
+		/// ZIP Code or postal code for address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_postalcode")]
 		public string Address2_PostalCode
@@ -1378,7 +1371,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Postboksnummer i adresse 2.
+		/// Post office box number for address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_postofficebox")]
 		public string Address2_PostOfficeBox
@@ -1396,7 +1389,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Forsendelsesmåde for adresse 2.
+		/// Method of shipment for address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_shippingmethodcode")]
 		public virtual systemuser_address2_shippingmethodcode? Address2_ShippingMethodCode
@@ -1430,7 +1423,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Område i adresse 2.
+		/// State or province for address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_stateorprovince")]
 		public string Address2_StateOrProvince
@@ -1448,7 +1441,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Første telefonnummer, der er tilknyttet adresse 2.
+		/// First telephone number associated with address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_telephone1")]
 		public string Address2_Telephone1
@@ -1466,7 +1459,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Andet telefonnummer, der er tilknyttet adresse 2.
+		/// Second telephone number associated with address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_telephone2")]
 		public string Address2_Telephone2
@@ -1484,7 +1477,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Tredje telefonnummer, der er tilknyttet adresse 2.
+		/// Third telephone number associated with address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_telephone3")]
 		public string Address2_Telephone3
@@ -1502,7 +1495,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// UPS-zone (United Parcel Service) for adresse 2.
+		/// United Parcel Service (UPS) zone for address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_upszone")]
 		public string Address2_UPSZone
@@ -1520,7 +1513,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Forskydning fra GMT for adresse 2. Dette er forskellen mellem lokal tid og GMT-standardtid.
+		/// UTC offset for address 2. This is the difference between local time and standard Coordinated Universal Time.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_utcoffset")]
 		public System.Nullable<int> Address2_UTCOffset
@@ -1538,7 +1531,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Id'et for programmet. Dette bruges til at få adgang til data i et andet program.
+		/// The identifier for the application. This is used to access data in another application.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("applicationid")]
 		public System.Nullable<System.Guid> ApplicationId
@@ -1556,7 +1549,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Den URI, der blev brugt som et entydigt logisk id for den eksterne app. Dette kan bruges til at validere programmet.
+		/// The URI used as a unique logical identifier for the external app. This can be used to validate the application.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("applicationiduri")]
 		public string ApplicationIdUri
@@ -1567,8 +1560,39 @@ namespace Boruto.Plugin.Entities
 			}
 		}
 		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_allowoverridebelow")]
+		public System.Nullable<bool> arbo_allowoverridebelow
+		{
+			get
+			{
+				return this.GetAttributeValue<System.Nullable<bool>>("arbo_allowoverridebelow");
+			}
+			set
+			{
+				this.OnPropertyChanging("arbo_allowoverridebelow");
+				this.SetAttributeValue("arbo_allowoverridebelow", value);
+				this.OnPropertyChanged("arbo_allowoverridebelow");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_allowoverridebelowname")]
+		public string arbo_allowoverridebelowName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("arbo_allowoverridebelow"))
+				{
+					return this.FormattedValues["arbo_allowoverridebelow"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
 		/// <summary>
-		/// Dette er objekt-id'et for programmappen.
+		/// This is the application directory object Id.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("azureactivedirectoryobjectid")]
 		public System.Nullable<System.Guid> AzureActiveDirectoryObjectId
@@ -1580,7 +1604,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Dato og klokkeslæt, hvor brugeren blev slettet manuelt i Azure.
+		/// Date and time when the user was set as soft deleted in Azure.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("azuredeletedon")]
 		public System.Nullable<System.DateTime> AzureDeletedOn
@@ -1592,7 +1616,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Azure-tilstand for bruger
+		/// Azure state of user
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("azurestate")]
 		public virtual systemuser_azurestate? AzureState
@@ -1626,7 +1650,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for den afdeling, som brugeren er tilknyttet.
+		/// Unique identifier of the business unit with which the user is associated.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("businessunitid")]
 		public Microsoft.Xrm.Sdk.EntityReference BusinessUnitId
@@ -1660,7 +1684,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Den regnskabskalender, der er tilknyttet brugeren.
+		/// Fiscal calendar associated with the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("calendarid")]
 		public Microsoft.Xrm.Sdk.EntityReference CalendarId
@@ -1678,7 +1702,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens licenstype. Dette bruges kun i versionen i det lokale miljø af produktet. Onlinelicenser administreres via Microsoft 365 Office Portal
+		/// License type of user. This is used only in the on-premises version of the product. Online licenses are managed through Microsoft 365 Office Portal
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("caltype")]
 		public virtual systemuser_caltype? CALType
@@ -1712,7 +1736,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for den bruger, der oprettede brugeren.
+		/// Unique identifier of the user who created the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdby")]
 		public Microsoft.Xrm.Sdk.EntityReference CreatedBy
@@ -1756,7 +1780,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Dato og klokkeslæt for oprettelse af brugeren.
+		/// Date and time when the user was created.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdon")]
 		public System.Nullable<System.DateTime> CreatedOn
@@ -1768,7 +1792,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for den stedfortræderbruger, der oprettede systembrugeren.
+		/// Unique identifier of the delegate user who created the systemuser.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdonbehalfby")]
 		public Microsoft.Xrm.Sdk.EntityReference CreatedOnBehalfBy
@@ -1812,7 +1836,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver, om standardfiltrene i Outlook er blevet udfyldt.
+		/// Indicates if default outlook filters have been populated.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("defaultfilterspopulated")]
 		public System.Nullable<bool> DefaultFiltersPopulated
@@ -1824,7 +1848,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den postkasse, der er tilknyttet denne bruger.
+		/// Select the mailbox associated with this user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("defaultmailbox")]
 		public Microsoft.Xrm.Sdk.EntityReference DefaultMailbox
@@ -1852,7 +1876,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et standardmappenavn for brugerens placering af OneDrive for Business.
+		/// Type a default folder name for the user's OneDrive For Business location.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("defaultodbfoldername")]
 		public string DefaultOdbFolderName
@@ -1864,7 +1888,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Slet brugertilstand
+		/// User delete state
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("deletedstate")]
 		public virtual systemuser_deletestate? DeletedState
@@ -1892,7 +1916,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Årsag til deaktivering af brugeren.
+		/// Reason for disabling the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("disabledreason")]
 		public string DisabledReason
@@ -1904,7 +1928,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver, om brugeren skal vises i servicevisninger.
+		/// Whether to display the user in service views.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("displayinserviceviews")]
 		public System.Nullable<bool> DisplayInServiceViews
@@ -1938,7 +1962,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Det Active Directory-domæne, som brugeren er medlem af.
+		/// Active Directory domain of which the user is a member.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("domainname")]
 		public string DomainName
@@ -1956,7 +1980,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser statussen for den primære e-mail-adresse.
+		/// Shows the status of the primary email address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("emailrouteraccessapproval")]
 		public virtual systemuser_emailrouteraccessapproval? EmailRouterAccessApproval
@@ -1990,7 +2014,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens medarbejder-id.
+		/// Employee identifier for the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("employeeid")]
 		public string EmployeeId
@@ -2008,7 +2032,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser postens standardbillede.
+		/// Shows the default image for the record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("entityimage")]
 		public byte[] EntityImage
@@ -2044,7 +2068,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kun til intern brug.
+		/// For internal use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("entityimageid")]
 		public System.Nullable<System.Guid> EntityImageId
@@ -2056,7 +2080,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Valutakurs for den valuta, der er tilknyttet systembrugeren, i forhold til grundvalutaen.
+		/// Exchange rate for the currency associated with the systemuser with respect to the base currency.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("exchangerate")]
 		public System.Nullable<decimal> ExchangeRate
@@ -2068,7 +2092,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens fornavn.
+		/// First name of the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("firstname")]
 		public string FirstName
@@ -2086,7 +2110,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens fulde navn.
+		/// Full name of the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("fullname")]
 		public string FullName
@@ -2098,7 +2122,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens cpr.nr.
+		/// Government identifier for the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("governmentid")]
 		public string GovernmentId
@@ -2115,39 +2139,8 @@ namespace Boruto.Plugin.Entities
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_provetager")]
-		public System.Nullable<bool> hofor_provetager
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("hofor_provetager");
-			}
-			set
-			{
-				this.OnPropertyChanging("hofor_provetager");
-				this.SetAttributeValue("hofor_provetager", value);
-				this.OnPropertyChanged("hofor_provetager");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("hofor_provetagername")]
-		public string hofor_provetagerName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("hofor_provetager"))
-				{
-					return this.FormattedValues["hofor_provetager"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
 		/// <summary>
-		/// Brugerens private telefonnummer.
+		/// Home phone number for the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("homephone")]
 		public string HomePhone
@@ -2165,7 +2158,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kun til intern brug.
+		/// For internal use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("identityid")]
 		public System.Nullable<int> IdentityId
@@ -2177,7 +2170,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for den dataimport eller dataoverførsel, der oprettede denne post.
+		/// Unique identifier of the data import or data migration that created this record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("importsequencenumber")]
 		public System.Nullable<int> ImportSequenceNumber
@@ -2195,7 +2188,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Leveringsmetode for indgående e-mail for brugeren.
+		/// Incoming email delivery method for the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("incomingemaildeliverymethod")]
 		public virtual systemuser_incomingemaildeliverymethod? IncomingEmailDeliveryMethod
@@ -2229,7 +2222,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens interne e-mail-adresse.
+		/// Internal email address for the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("internalemailaddress")]
 		public string InternalEMailAddress
@@ -2247,7 +2240,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Status for brugerinvitation.
+		/// User invitation status.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("invitestatuscode")]
 		public virtual systemuser_invitestatuscode? InviteStatusCode
@@ -2281,7 +2274,41 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver, om brugeren er aktiveret.
+		/// Bypasses the selected user from IP firewall restriction
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("isallowedbyipfirewall")]
+		public System.Nullable<bool> IsAllowedByIpFirewall
+		{
+			get
+			{
+				return this.GetAttributeValue<System.Nullable<bool>>("isallowedbyipfirewall");
+			}
+			set
+			{
+				this.OnPropertyChanging("IsAllowedByIpFirewall");
+				this.SetAttributeValue("isallowedbyipfirewall", value);
+				this.OnPropertyChanged("IsAllowedByIpFirewall");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("isallowedbyipfirewallname")]
+		public string isallowedbyipfirewallName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("isallowedbyipfirewall"))
+				{
+					return this.FormattedValues["isallowedbyipfirewall"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
+		/// Information about whether the user is enabled.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("isdisabled")]
 		public System.Nullable<bool> IsDisabled
@@ -2315,7 +2342,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser status for O365-administratorens godkendelse af e-mail-adressen.
+		/// Shows the status of approval of the email address by O365 Admin.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("isemailaddressapprovedbyo365admin")]
 		public System.Nullable<bool> IsEmailAddressApprovedByO365Admin
@@ -2327,7 +2354,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kontrollér, om brugeren er en integrationsbruger.
+		/// Check if user is an integration user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("isintegrationuser")]
 		public System.Nullable<bool> IsIntegrationUser
@@ -2361,7 +2388,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver, om brugeren har licens.
+		/// Information about whether the user is licensed.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("islicensed")]
 		public System.Nullable<bool> IsLicensed
@@ -2395,7 +2422,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Oplysninger om, hvorvidt brugeren og mappen er synkroniseret.
+		/// Information about whether the user is synced with the directory.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("issyncwithdirectory")]
 		public System.Nullable<bool> IsSyncWithDirectory
@@ -2413,7 +2440,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens stillingsbetegnelse.
+		/// Job title of the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("jobtitle")]
 		public string JobTitle
@@ -2449,7 +2476,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens mellemnavn.
+		/// Middle name of the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("middlename")]
 		public string MiddleName
@@ -2467,7 +2494,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens e-mail-adresse til mobile beskeder.
+		/// Mobile alert email address for the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("mobilealertemail")]
 		public string MobileAlertEMail
@@ -2485,7 +2512,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Elementer for en bestemt systembruger.
+		/// Items contained with a particular SystemUser.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("mobileofflineprofileid")]
 		public Microsoft.Xrm.Sdk.EntityReference MobileOfflineProfileId
@@ -2525,7 +2552,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens mobilnummer.
+		/// Mobile phone number for the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("mobilephone")]
 		public string MobilePhone
@@ -2543,7 +2570,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for den bruger, der sidst ændrede brugeren.
+		/// Unique identifier of the user who last modified the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedby")]
 		public Microsoft.Xrm.Sdk.EntityReference ModifiedBy
@@ -2587,7 +2614,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Dato og klokkeslæt for den seneste ændring af brugeren.
+		/// Date and time when the user was last modified.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedon")]
 		public System.Nullable<System.DateTime> ModifiedOn
@@ -2599,7 +2626,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for den stedfortræderbruger, der senest ændrede systembrugeren.
+		/// Unique identifier of the delegate user who last modified the systemuser.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedonbehalfby")]
 		public Microsoft.Xrm.Sdk.EntityReference ModifiedOnBehalfBy
@@ -2643,7 +2670,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugertype – Programbruger eller bruger af robotprogram
+		/// Type of user - Application user or Bot application user
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_agentType")]
 		public virtual msdyn_systemuser_msdyn_agentType? msdyn_AgentType
@@ -2677,7 +2704,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Program-id for robotten.
+		/// Application ID of the bot.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_botapplicationid")]
 		public string msdyn_BotApplicationId
@@ -2695,7 +2722,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Beskrivelse af robotbruger
+		/// BOT User Description
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_botdescription")]
 		public string msdyn_BotDescription
@@ -2713,7 +2740,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Slutpunkt for robotbruger
+		/// Bot User Endpoint
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_botendpoint")]
 		public string msdyn_BotEndpoint
@@ -2731,7 +2758,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Robot-handle
+		/// Bot handle
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_bothandle")]
 		public string msdyn_bothandle
@@ -2749,7 +2776,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver robottypen
+		/// Indicates the type of bot
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_botprovider")]
 		public virtual msdyn_systemuser_msdyn_botprovider? msdyn_BotProvider
@@ -2783,7 +2810,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Hemmelige nøgler for robotbruger
+		/// Bot User Secret Keys
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_botsecretkeys")]
 		public string msdyn_BotSecretKeys
@@ -2801,7 +2828,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kapacitet, der er tilknyttet brugeren.
+		/// Capacity associated with the User.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_capacity")]
 		public System.Nullable<int> msdyn_Capacity
@@ -2819,7 +2846,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for tilstedeværelse, der er tilknyttet brugeren.
+		/// Unique identifier for Presence associated with User.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_defaultpresenceiduser")]
 		public Microsoft.Xrm.Sdk.EntityReference msdyn_DefaultPresenceIdUser
@@ -2853,7 +2880,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Beskriver, om brugeren er frameldt eller ej
+		/// Describes whether user is opted out or not
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_gdproptout")]
 		public System.Nullable<bool> msdyn_gdproptout
@@ -2887,7 +2914,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Felt til at binde kontrolelementet Gitterombrydning
+		/// Field to bind grid wrapper control
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_gridwrappercontrolfield")]
 		public string msdyn_gridwrappercontrolfield
@@ -2905,7 +2932,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kontrollér, om sammensætning er aktiveret for eksperterne.
+		/// Check if swarm is enabled for the experts.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_isexpertenabledforswarm")]
 		public System.Nullable<bool> msdyn_isexpertenabledforswarm
@@ -2939,7 +2966,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Miljø-id for det CDS-miljø, der ejer robotbrugeren.
+		/// Environment Id of the CDS environment that owns the bot user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_owningenvironmentid")]
 		public string msdyn_OwningEnvironmentId
@@ -2957,7 +2984,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugertype - CRM eller robotbruger
+		/// Type of user - CRM or BOT user
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_usertype")]
 		public virtual msdyn_systemuser_msdyn_usertype? msdyn_UserType
@@ -2991,7 +3018,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens kælenavn.
+		/// Nickname of the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("nickname")]
 		public string NickName
@@ -3009,7 +3036,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for den organisation, der er tilknyttet brugeren.
+		/// Unique identifier of the organization associated with the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("organizationid")]
 		public System.Nullable<System.Guid> OrganizationId
@@ -3037,7 +3064,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Leveringsmetode for udgående e-mail for brugeren.
+		/// Outgoing email delivery method for the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("outgoingemaildeliverymethod")]
 		public virtual systemuser_outgoingemaildeliverymethod? OutgoingEmailDeliveryMethod
@@ -3071,7 +3098,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Dato og klokkeslæt for overførsel af posten.
+		/// Date and time that the record was migrated.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("overriddencreatedon")]
 		public System.Nullable<System.DateTime> OverriddenCreatedOn
@@ -3089,7 +3116,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for brugerens leder.
+		/// Unique identifier of the manager of the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("parentsystemuserid")]
 		public Microsoft.Xrm.Sdk.EntityReference ParentSystemUserId
@@ -3139,7 +3166,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kun til intern brug.
+		/// For internal use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("passporthi")]
 		public System.Nullable<int> PassportHi
@@ -3157,7 +3184,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kun til intern brug.
+		/// For internal use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("passportlo")]
 		public System.Nullable<int> PassportLo
@@ -3175,7 +3202,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens personlige e-mail-adresse.
+		/// Personal email address of the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("personalemailaddress")]
 		public string PersonalEMailAddress
@@ -3193,7 +3220,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// URL-adresse til det websted, hvor der findes et billede af brugeren.
+		/// URL for the Website on which a photo of the user is located.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("photourl")]
 		public string PhotoUrl
@@ -3211,7 +3238,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugers placering i den hierarkiske sikkerhedsmodel.
+		/// User's position in hierarchical security model.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("positionid")]
 		public Microsoft.Xrm.Sdk.EntityReference PositionId
@@ -3245,7 +3272,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens foretrukne adresse.
+		/// Preferred address for the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredaddresscode")]
 		public virtual systemuser_preferredaddresscode? PreferredAddressCode
@@ -3279,7 +3306,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens foretrukne e-mail-adresse.
+		/// Preferred email address for the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredemailcode")]
 		public virtual systemuser_preferredemailcode? PreferredEmailCode
@@ -3313,7 +3340,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens foretrukne telefonnummer.
+		/// Preferred phone number for the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredphonecode")]
 		public virtual systemuser_preferredphonecode? PreferredPhoneCode
@@ -3347,7 +3374,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser processens id.
+		/// Shows the ID of the process.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("processid")]
 		public System.Nullable<System.Guid> ProcessId
@@ -3365,7 +3392,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for standardkøen for brugeren.
+		/// Unique identifier of the default queue for the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("queueid")]
 		public Microsoft.Xrm.Sdk.EntityReference QueueId
@@ -3399,7 +3426,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Titulering, der skal bruges i korrespondance til brugeren.
+		/// Salutation for correspondence with the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("salutation")]
 		public string Salutation
@@ -3417,7 +3444,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kontrollér, om brugeren er en installationsbruger.
+		/// Check if user is a setup user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("setupuser")]
 		public System.Nullable<bool> SetupUser
@@ -3451,7 +3478,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// SharePoint-mailadresse (arbejde)
+		/// SharePoint Work Email Address
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("sharepointemailaddress")]
 		public string SharePointEmailAddress
@@ -3469,7 +3496,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Den lokation, hvor brugeren er placeret.
+		/// site_system_users
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("siteid")]
 		public Microsoft.Xrm.Sdk.EntityReference SiteId
@@ -3503,7 +3530,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens færdigheder.
+		/// Skill set of the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("skills")]
 		public string Skills
@@ -3521,7 +3548,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser fasens id.
+		/// Shows the ID of the stage.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("stageid")]
 		public System.Nullable<System.Guid> StageId
@@ -3539,7 +3566,41 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for brugeren.
+		/// The type of user
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("systemmanagedusertype")]
+		public virtual systemuser_systemmanagedusertype? SystemManagedUserType
+		{
+			get
+			{
+				return ((systemuser_systemmanagedusertype?)(EntityOptionSetEnum.GetEnum(this, "systemmanagedusertype")));
+			}
+			set
+			{
+				this.OnPropertyChanging("SystemManagedUserType");
+				this.SetAttributeValue("systemmanagedusertype", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
+				this.OnPropertyChanged("SystemManagedUserType");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("systemmanagedusertypename")]
+		public string systemmanagedusertypeName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("systemmanagedusertype"))
+				{
+					return this.FormattedValues["systemmanagedusertype"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
+		/// Unique identifier for the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("systemuserid")]
 		public System.Nullable<System.Guid> SystemUserId
@@ -3578,7 +3639,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for det distrikt, brugeren er tildelt.
+		/// territory_system_users
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("territoryid")]
 		public Microsoft.Xrm.Sdk.EntityReference TerritoryId
@@ -3612,7 +3673,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kun til intern brug.
+		/// For internal use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("timezoneruleversionnumber")]
 		public System.Nullable<int> TimeZoneRuleVersionNumber
@@ -3630,7 +3691,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens titel.
+		/// Title of the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("title")]
 		public string Title
@@ -3648,7 +3709,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for den valuta, der er tilknyttet systembrugeren.
+		/// Unique identifier of the currency associated with the systemuser.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("transactioncurrencyid")]
 		public Microsoft.Xrm.Sdk.EntityReference TransactionCurrencyId
@@ -3682,7 +3743,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kun til intern brug.
+		/// For internal use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("traversedpath")]
 		public string TraversedPath
@@ -3700,7 +3761,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser brugerlicenstypen.
+		/// Shows the type of user license.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("userlicensetype")]
 		public System.Nullable<int> UserLicenseType
@@ -3718,7 +3779,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		///  PUID-brugeroplysninger
+		///  User PUID User Identifiable Information
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("userpuid")]
 		public string UserPuid
@@ -3730,7 +3791,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Den tidszonekode, der var i brug ved oprettelse af posten.
+		/// Time zone code that was in use when the record was created.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("utcconversiontimezonecode")]
 		public System.Nullable<int> UTCConversionTimeZoneCode
@@ -3748,7 +3809,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Versionsnummeret for brugeren.
+		/// Version number of the user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("versionnumber")]
 		public System.Nullable<long> VersionNumber
@@ -3778,7 +3839,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens login-mailadresse til Yammer.
+		/// User's Yammer login email address
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yammeremailaddress")]
 		public string YammerEmailAddress
@@ -3796,7 +3857,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens Yammer-id
+		/// User's Yammer ID
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yammeruserid")]
 		public string YammerUserId
@@ -3814,7 +3875,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Udtale af brugerens fornavn, skrevet i fonetiske hiragana- eller katakana-tegn.
+		/// Pronunciation of the first name of the user, written in phonetic hiragana or katakana characters.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yomifirstname")]
 		public string YomiFirstName
@@ -3832,7 +3893,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Udtale af brugerens fulde navn, skrevet i fonetiske hiragana- eller katakana-tegn.
+		/// Pronunciation of the full name of the user, written in phonetic hiragana or katakana characters.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yomifullname")]
 		public string YomiFullName
@@ -3844,7 +3905,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Udtale af brugerens efternavn, skrevet i fonetiske hiragana- eller katakana-tegn.
+		/// Pronunciation of the last name of the user, written in phonetic hiragana or katakana characters.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yomilastname")]
 		public string YomiLastName
@@ -3862,7 +3923,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Udtale af brugerens mellemnavn, skrevet i fonetiske hiragana- eller katakana-tegn.
+		/// Pronunciation of the middle name of the user, written in phonetic hiragana or katakana characters.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yomimiddlename")]
 		public string YomiMiddleName
@@ -3988,146 +4049,74 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// 1:N lk_businessunit_createdonbehalfby
+		/// 1:N lk_bor_plugindemo_createdby
 		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_businessunit_createdonbehalfby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.BusinessUnit> lk_businessunit_createdonbehalfby
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_plugindemo_createdby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.bor_plugindemo> lk_bor_plugindemo_createdby
 		{
 			get
 			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.BusinessUnit>("lk_businessunit_createdonbehalfby", null);
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.bor_plugindemo>("lk_bor_plugindemo_createdby", null);
 			}
 			set
 			{
-				this.OnPropertyChanging("lk_businessunit_createdonbehalfby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.BusinessUnit>("lk_businessunit_createdonbehalfby", null, value);
-				this.OnPropertyChanged("lk_businessunit_createdonbehalfby");
+				this.OnPropertyChanging("lk_bor_plugindemo_createdby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.bor_plugindemo>("lk_bor_plugindemo_createdby", null, value);
+				this.OnPropertyChanged("lk_bor_plugindemo_createdby");
 			}
 		}
 		
 		/// <summary>
-		/// 1:N lk_businessunit_modifiedonbehalfby
+		/// 1:N lk_bor_plugindemo_createdonbehalfby
 		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_businessunit_modifiedonbehalfby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.BusinessUnit> lk_businessunit_modifiedonbehalfby
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_plugindemo_createdonbehalfby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.bor_plugindemo> lk_bor_plugindemo_createdonbehalfby
 		{
 			get
 			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.BusinessUnit>("lk_businessunit_modifiedonbehalfby", null);
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.bor_plugindemo>("lk_bor_plugindemo_createdonbehalfby", null);
 			}
 			set
 			{
-				this.OnPropertyChanging("lk_businessunit_modifiedonbehalfby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.BusinessUnit>("lk_businessunit_modifiedonbehalfby", null, value);
-				this.OnPropertyChanged("lk_businessunit_modifiedonbehalfby");
+				this.OnPropertyChanging("lk_bor_plugindemo_createdonbehalfby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.bor_plugindemo>("lk_bor_plugindemo_createdonbehalfby", null, value);
+				this.OnPropertyChanged("lk_bor_plugindemo_createdonbehalfby");
 			}
 		}
 		
 		/// <summary>
-		/// 1:N lk_businessunitbase_createdby
+		/// 1:N lk_bor_plugindemo_modifiedby
 		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_businessunitbase_createdby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.BusinessUnit> lk_businessunitbase_createdby
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_plugindemo_modifiedby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.bor_plugindemo> lk_bor_plugindemo_modifiedby
 		{
 			get
 			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.BusinessUnit>("lk_businessunitbase_createdby", null);
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.bor_plugindemo>("lk_bor_plugindemo_modifiedby", null);
 			}
 			set
 			{
-				this.OnPropertyChanging("lk_businessunitbase_createdby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.BusinessUnit>("lk_businessunitbase_createdby", null, value);
-				this.OnPropertyChanged("lk_businessunitbase_createdby");
+				this.OnPropertyChanging("lk_bor_plugindemo_modifiedby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.bor_plugindemo>("lk_bor_plugindemo_modifiedby", null, value);
+				this.OnPropertyChanged("lk_bor_plugindemo_modifiedby");
 			}
 		}
 		
 		/// <summary>
-		/// 1:N lk_businessunitbase_modifiedby
+		/// 1:N lk_bor_plugindemo_modifiedonbehalfby
 		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_businessunitbase_modifiedby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.BusinessUnit> lk_businessunitbase_modifiedby
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_plugindemo_modifiedonbehalfby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.bor_plugindemo> lk_bor_plugindemo_modifiedonbehalfby
 		{
 			get
 			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.BusinessUnit>("lk_businessunitbase_modifiedby", null);
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.bor_plugindemo>("lk_bor_plugindemo_modifiedonbehalfby", null);
 			}
 			set
 			{
-				this.OnPropertyChanging("lk_businessunitbase_modifiedby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.BusinessUnit>("lk_businessunitbase_modifiedby", null, value);
-				this.OnPropertyChanged("lk_businessunitbase_modifiedby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_calendar_createdby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_calendar_createdby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Calendar> lk_calendar_createdby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Calendar>("lk_calendar_createdby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_calendar_createdby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Calendar>("lk_calendar_createdby", null, value);
-				this.OnPropertyChanged("lk_calendar_createdby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_calendar_createdonbehalfby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_calendar_createdonbehalfby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Calendar> lk_calendar_createdonbehalfby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Calendar>("lk_calendar_createdonbehalfby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_calendar_createdonbehalfby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Calendar>("lk_calendar_createdonbehalfby", null, value);
-				this.OnPropertyChanged("lk_calendar_createdonbehalfby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_calendar_modifiedby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_calendar_modifiedby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Calendar> lk_calendar_modifiedby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Calendar>("lk_calendar_modifiedby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_calendar_modifiedby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Calendar>("lk_calendar_modifiedby", null, value);
-				this.OnPropertyChanged("lk_calendar_modifiedby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_calendar_modifiedonbehalfby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_calendar_modifiedonbehalfby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Calendar> lk_calendar_modifiedonbehalfby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Calendar>("lk_calendar_modifiedonbehalfby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_calendar_modifiedonbehalfby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Calendar>("lk_calendar_modifiedonbehalfby", null, value);
-				this.OnPropertyChanged("lk_calendar_modifiedonbehalfby");
+				this.OnPropertyChanging("lk_bor_plugindemo_modifiedonbehalfby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.bor_plugindemo>("lk_bor_plugindemo_modifiedonbehalfby", null, value);
+				this.OnPropertyChanged("lk_bor_plugindemo_modifiedonbehalfby");
 			}
 		}
 		
@@ -4276,222 +4265,6 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// 1:N lk_opportunity_createdonbehalfby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_opportunity_createdonbehalfby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> lk_opportunity_createdonbehalfby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunity_createdonbehalfby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_opportunity_createdonbehalfby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunity_createdonbehalfby", null, value);
-				this.OnPropertyChanged("lk_opportunity_createdonbehalfby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_opportunity_modifiedonbehalfby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_opportunity_modifiedonbehalfby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> lk_opportunity_modifiedonbehalfby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunity_modifiedonbehalfby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_opportunity_modifiedonbehalfby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunity_modifiedonbehalfby", null, value);
-				this.OnPropertyChanged("lk_opportunity_modifiedonbehalfby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_opportunitybase_createdby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_opportunitybase_createdby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> lk_opportunitybase_createdby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunitybase_createdby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_opportunitybase_createdby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunitybase_createdby", null, value);
-				this.OnPropertyChanged("lk_opportunitybase_createdby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_opportunitybase_modifiedby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_opportunitybase_modifiedby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> lk_opportunitybase_modifiedby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunitybase_modifiedby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_opportunitybase_modifiedby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("lk_opportunitybase_modifiedby", null, value);
-				this.OnPropertyChanged("lk_opportunitybase_modifiedby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_quote_createdonbehalfby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_quote_createdonbehalfby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> lk_quote_createdonbehalfby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quote_createdonbehalfby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_quote_createdonbehalfby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quote_createdonbehalfby", null, value);
-				this.OnPropertyChanged("lk_quote_createdonbehalfby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_quote_modifiedonbehalfby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_quote_modifiedonbehalfby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> lk_quote_modifiedonbehalfby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quote_modifiedonbehalfby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_quote_modifiedonbehalfby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quote_modifiedonbehalfby", null, value);
-				this.OnPropertyChanged("lk_quote_modifiedonbehalfby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_quotebase_createdby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_quotebase_createdby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> lk_quotebase_createdby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quotebase_createdby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_quotebase_createdby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quotebase_createdby", null, value);
-				this.OnPropertyChanged("lk_quotebase_createdby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_quotebase_modifiedby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_quotebase_modifiedby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> lk_quotebase_modifiedby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quotebase_modifiedby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_quotebase_modifiedby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("lk_quotebase_modifiedby", null, value);
-				this.OnPropertyChanged("lk_quotebase_modifiedby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_role_createdonbehalfby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_role_createdonbehalfby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Role> lk_role_createdonbehalfby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Role>("lk_role_createdonbehalfby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_role_createdonbehalfby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Role>("lk_role_createdonbehalfby", null, value);
-				this.OnPropertyChanged("lk_role_createdonbehalfby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_role_modifiedonbehalfby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_role_modifiedonbehalfby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Role> lk_role_modifiedonbehalfby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Role>("lk_role_modifiedonbehalfby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_role_modifiedonbehalfby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Role>("lk_role_modifiedonbehalfby", null, value);
-				this.OnPropertyChanged("lk_role_modifiedonbehalfby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_rolebase_createdby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_rolebase_createdby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Role> lk_rolebase_createdby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Role>("lk_rolebase_createdby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_rolebase_createdby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Role>("lk_rolebase_createdby", null, value);
-				this.OnPropertyChanged("lk_rolebase_createdby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_rolebase_modifiedby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_rolebase_modifiedby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Role> lk_rolebase_modifiedby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Role>("lk_rolebase_modifiedby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_rolebase_modifiedby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Role>("lk_rolebase_modifiedby", null, value);
-				this.OnPropertyChanged("lk_rolebase_modifiedby");
-			}
-		}
-		
-		/// <summary>
 		/// 1:N lk_systemuser_createdonbehalfby
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_systemuser_createdonbehalfby", Microsoft.Xrm.Sdk.EntityRole.Referenced)]
@@ -4564,114 +4337,6 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// 1:N lk_team_createdonbehalfby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_team_createdonbehalfby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Team> lk_team_createdonbehalfby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Team>("lk_team_createdonbehalfby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_team_createdonbehalfby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Team>("lk_team_createdonbehalfby", null, value);
-				this.OnPropertyChanged("lk_team_createdonbehalfby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_team_modifiedonbehalfby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_team_modifiedonbehalfby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Team> lk_team_modifiedonbehalfby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Team>("lk_team_modifiedonbehalfby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_team_modifiedonbehalfby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Team>("lk_team_modifiedonbehalfby", null, value);
-				this.OnPropertyChanged("lk_team_modifiedonbehalfby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_teambase_administratorid
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_teambase_administratorid")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Team> lk_teambase_administratorid
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Team>("lk_teambase_administratorid", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_teambase_administratorid");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Team>("lk_teambase_administratorid", null, value);
-				this.OnPropertyChanged("lk_teambase_administratorid");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_teambase_createdby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_teambase_createdby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Team> lk_teambase_createdby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Team>("lk_teambase_createdby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_teambase_createdby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Team>("lk_teambase_createdby", null, value);
-				this.OnPropertyChanged("lk_teambase_createdby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lk_teambase_modifiedby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_teambase_modifiedby")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Team> lk_teambase_modifiedby
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Team>("lk_teambase_modifiedby", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lk_teambase_modifiedby");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Team>("lk_teambase_modifiedby", null, value);
-				this.OnPropertyChanged("lk_teambase_modifiedby");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N opportunity_owning_user
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("opportunity_owning_user")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> opportunity_owning_user
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_owning_user", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("opportunity_owning_user");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_owning_user", null, value);
-				this.OnPropertyChanged("opportunity_owning_user");
-			}
-		}
-		
-		/// <summary>
 		/// 1:N system_user_accounts
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("system_user_accounts")]
@@ -4708,24 +4373,6 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// 1:N system_user_quotes
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("system_user_quotes")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> system_user_quotes
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("system_user_quotes", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("system_user_quotes");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("system_user_quotes", null, value);
-				this.OnPropertyChanged("system_user_quotes");
-			}
-		}
-		
-		/// <summary>
 		/// 1:N user_accounts
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("user_accounts")]
@@ -4744,6 +4391,24 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// 1:N user_bor_plugindemo
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("user_bor_plugindemo")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.bor_plugindemo> user_bor_plugindemo
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.bor_plugindemo>("user_bor_plugindemo", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("user_bor_plugindemo");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.bor_plugindemo>("user_bor_plugindemo", null, value);
+				this.OnPropertyChanged("user_bor_plugindemo");
+			}
+		}
+		
+		/// <summary>
 		/// 1:N user_parent_user
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("user_parent_user", Microsoft.Xrm.Sdk.EntityRole.Referenced)]
@@ -4758,80 +4423,6 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("Referenceduser_parent_user");
 				this.SetRelatedEntities<Boruto.Plugin.Entities.SystemUser>("user_parent_user", Microsoft.Xrm.Sdk.EntityRole.Referenced, value);
 				this.OnPropertyChanged("Referenceduser_parent_user");
-			}
-		}
-		
-		/// <summary>
-		/// N:N systemuserroles_association
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("systemuserroles_association")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Role> systemuserroles_association
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Role>("systemuserroles_association", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("systemuserroles_association");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Role>("systemuserroles_association", null, value);
-				this.OnPropertyChanged("systemuserroles_association");
-			}
-		}
-		
-		/// <summary>
-		/// N:N teammembership_association
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("teammembership_association")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Team> teammembership_association
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Team>("teammembership_association", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("teammembership_association");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Team>("teammembership_association", null, value);
-				this.OnPropertyChanged("teammembership_association");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 business_unit_system_users
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("businessunitid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("business_unit_system_users")]
-		public Boruto.Plugin.Entities.BusinessUnit business_unit_system_users
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.BusinessUnit>("business_unit_system_users", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("business_unit_system_users");
-				this.SetRelatedEntity<Boruto.Plugin.Entities.BusinessUnit>("business_unit_system_users", null, value);
-				this.OnPropertyChanged("business_unit_system_users");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 calendar_system_users
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("calendarid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("calendar_system_users")]
-		public Boruto.Plugin.Entities.Calendar calendar_system_users
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.Calendar>("calendar_system_users", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("calendar_system_users");
-				this.SetRelatedEntity<Boruto.Plugin.Entities.Calendar>("calendar_system_users", null, value);
-				this.OnPropertyChanged("calendar_system_users");
 			}
 		}
 		

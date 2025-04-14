@@ -13,34 +13,22 @@ namespace Boruto.Plugin.Entities
 {
 	
 	
-	/// <summary>
-	/// Liste med forsyningstyper
-	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum vf_forsyning
+	public enum pw_portallanguage
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Gas = 979700006,
+		English = 266890000,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Naturgas = 979700000,
+		Danish = 266890001,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Andet = 979700001,
+		German = 266890002,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Elvarme = 979700002,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Fjernblokvarme = 979700003,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Olie = 979700004,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Varmepumpe = 979700005,
+		French = 266890003,
 	}
 }
 #pragma warning restore CS1591

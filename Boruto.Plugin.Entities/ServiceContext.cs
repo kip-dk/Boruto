@@ -42,24 +42,13 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.BusinessUnit"/> entities.
+		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.bor_plugindemo"/> entities.
 		/// </summary>
-		public System.Linq.IQueryable<Boruto.Plugin.Entities.BusinessUnit> BusinessUnitSet
+		public System.Linq.IQueryable<Boruto.Plugin.Entities.bor_plugindemo> bor_plugindemoSet
 		{
 			get
 			{
-				return this.CreateQuery<Boruto.Plugin.Entities.BusinessUnit>();
-			}
-		}
-		
-		/// <summary>
-		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.Calendar"/> entities.
-		/// </summary>
-		public System.Linq.IQueryable<Boruto.Plugin.Entities.Calendar> CalendarSet
-		{
-			get
-			{
-				return this.CreateQuery<Boruto.Plugin.Entities.Calendar>();
+				return this.CreateQuery<Boruto.Plugin.Entities.bor_plugindemo>();
 			}
 		}
 		
@@ -86,61 +75,6 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.Opportunity"/> entities.
-		/// </summary>
-		public System.Linq.IQueryable<Boruto.Plugin.Entities.Opportunity> OpportunitySet
-		{
-			get
-			{
-				return this.CreateQuery<Boruto.Plugin.Entities.Opportunity>();
-			}
-		}
-		
-		/// <summary>
-		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.Privilege"/> entities.
-		/// </summary>
-		public System.Linq.IQueryable<Boruto.Plugin.Entities.Privilege> PrivilegeSet
-		{
-			get
-			{
-				return this.CreateQuery<Boruto.Plugin.Entities.Privilege>();
-			}
-		}
-		
-		/// <summary>
-		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.Quote"/> entities.
-		/// </summary>
-		public System.Linq.IQueryable<Boruto.Plugin.Entities.Quote> QuoteSet
-		{
-			get
-			{
-				return this.CreateQuery<Boruto.Plugin.Entities.Quote>();
-			}
-		}
-		
-		/// <summary>
-		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.Role"/> entities.
-		/// </summary>
-		public System.Linq.IQueryable<Boruto.Plugin.Entities.Role> RoleSet
-		{
-			get
-			{
-				return this.CreateQuery<Boruto.Plugin.Entities.Role>();
-			}
-		}
-		
-		/// <summary>
-		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.RolePrivileges"/> entities.
-		/// </summary>
-		public System.Linq.IQueryable<Boruto.Plugin.Entities.RolePrivileges> RolePrivilegesSet
-		{
-			get
-			{
-				return this.CreateQuery<Boruto.Plugin.Entities.RolePrivileges>();
-			}
-		}
-		
-		/// <summary>
 		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.SystemUser"/> entities.
 		/// </summary>
 		public System.Linq.IQueryable<Boruto.Plugin.Entities.SystemUser> SystemUserSet
@@ -148,17 +82,6 @@ namespace Boruto.Plugin.Entities
 			get
 			{
 				return this.CreateQuery<Boruto.Plugin.Entities.SystemUser>();
-			}
-		}
-		
-		/// <summary>
-		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.Team"/> entities.
-		/// </summary>
-		public System.Linq.IQueryable<Boruto.Plugin.Entities.Team> TeamSet
-		{
-			get
-			{
-				return this.CreateQuery<Boruto.Plugin.Entities.Team>();
 			}
 		}
 	}

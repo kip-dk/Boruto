@@ -15,20 +15,26 @@ namespace Boruto.Plugin.Entities
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum msdyn_opportunitygradeoptset
+	public enum arbo_certificatrequest
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		KlassifikationA = 0,
+		GlobalGAP = 500000000,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		KlassifikationB = 1,
+		Heattreatedpallets = 500000004,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		KlassifikationC = 2,
+		ISO = 500000002,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		KlassifikationD = 3,
+		MPS = 500000001,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		NaturBaum = 500000005,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		None = 500000003,
 	}
 }
 #pragma warning restore CS1591

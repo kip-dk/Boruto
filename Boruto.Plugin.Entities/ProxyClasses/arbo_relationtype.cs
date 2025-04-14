@@ -13,22 +13,22 @@ namespace Boruto.Plugin.Entities
 {
 	
 	
+	/// <summary>
+	/// Type of relation with business counter party
+	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum hofor_kontakttype
+	public enum arbo_relationtype
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Vandforsyning = 1,
+		Customer = 500000000,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Firma = 2,
+		Supplier = 500000001,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Privatperson = 3,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		KbenhavnsEnergi = 4,
+		Carrier = 500000002,
 	}
 }
 #pragma warning restore CS1591

@@ -13,19 +13,22 @@ namespace Boruto.Plugin.Entities
 {
 	
 	
+	/// <summary>
+	/// Defines the the a truck can be loaded
+	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum hofor_firmatype
+	public enum arbo_loadingmethod
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kunde = 1,
+		Sideways = 500000000,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ejer = 2,
+		Frombehind = 500000001,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Forsyning = 3,
+		Manually = 500000002,
 	}
 }
 #pragma warning restore CS1591

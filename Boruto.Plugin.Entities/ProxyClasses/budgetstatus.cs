@@ -14,7 +14,7 @@ namespace Boruto.Plugin.Entities
 	
 	
 	/// <summary>
-	/// Har de et budget?
+	/// Do they have a budget?
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -22,16 +22,16 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Intetbindendebudget = 0,
+		NoCommittedBudget = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kbermske = 1,
+		MayBuy = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kankbe = 2,
+		CanBuy = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kber = 3,
+		WillBuy = 3,
 	}
 }
 #pragma warning restore CS1591

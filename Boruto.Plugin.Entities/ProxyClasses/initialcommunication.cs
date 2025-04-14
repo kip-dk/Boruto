@@ -14,7 +14,7 @@ namespace Boruto.Plugin.Entities
 	
 	
 	/// <summary>
-	/// Om der har været indledende kommunikation med dette kundeemne.
+	/// If there has been initial communication with this lead.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -22,10 +22,10 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kontaktet = 0,
+		Contacted = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ikkekontaktet = 1,
+		NotContacted = 1,
 	}
 }
 #pragma warning restore CS1591

@@ -11,8 +11,8 @@ namespace Boruto.Plugin.Example.Plugins
     {
         private static readonly Assembly[] assms = new Assembly[]
         {
-            typeof(Boruto.Plugin.Entities.Account).Assembly,
-            typeof(Boruto.Plugin.Example.Entities.AccountStateChanged).Assembly
+            // typeof(Boruto.Plugin.Entities.).Assembly,
+            // typeof(Boruto.Plugin.Example.Entities.AccountStateChanged).Assembly
         };
 
         public BasePlugin() : base()

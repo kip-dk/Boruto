@@ -14,7 +14,7 @@ namespace Boruto.Plugin.Entities
 	
 	
 	/// <summary>
-	/// Adressetypen for adresse 1, f.eks. faktureringsadresse, forsendelsesadresse eller primær adresse.
+	/// Type of address for address 1, such as billing, shipping, or primary address.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -22,11 +22,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Forsendelsesmåde for adresse 1.
+	/// Method of shipment for address 1.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -34,11 +34,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Adressetypen for adresse 2, f.eks. faktureringsadresse, forsendelsesadresse eller primær adresse.
+	/// Type of address for address 2, such as billing, shipping, or primary address.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -46,11 +46,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Forsendelsesmåde for adresse 2.
+	/// Method of shipment for address 2.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -58,11 +58,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Den type branche, som kundeemnets virksomhed eller organisation er tilknyttet.
+	/// Type of industry with which the company or organization of the lead is associated.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -70,38 +70,107 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Landbrugjagtskovbrugogfiskeri = 34,
+		Accounting = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Energiogvand = 35,
+		AgricultureandNonpetrolNaturalResourceExtraction = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Udvindingogforarbejdningafikkeenergetiskemineralerogderivaterkemiskindustri = 36,
+		BroadcastingPrintingandPublishing = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Metalforarbejdendeindustrifinmekaniskindustri = 37,
+		Brokers = 4,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Andenfremstillingsvirksomhed = 38,
+		BuildingSupplyRetail = 5,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Byggeoganlgsvirksomhed = 39,
+		BusinessServices = 6,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Handelrestaurationsoghotelvirksomhedreparation = 40,
+		Consulting = 7,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Transportogkommunikation = 41,
+		ConsumerServices = 8,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kreditfinansieringsogforsikringsvirksomhedforretningsserviceudlejning = 42,
+		DesignDirectionandCreativeManagement = 9,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Andretjenesteydelser = 43,
+		DistributorsDispatchersandProcessors = 10,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		DoctorsOfficesandClinics = 11,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		DurableManufacturing = 12,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		EatingandDrinkingPlaces = 13,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		EntertainmentRetail = 14,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		EquipmentRentalandLeasing = 15,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		Financial = 16,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		FoodandTobaccoProcessing = 17,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		InboundCapitalIntensiveProcessing = 18,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		InboundRepairandServices = 19,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		Insurance = 20,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		LegalServices = 21,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		NonDurableMerchandiseRetail = 22,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		OutboundConsumerService = 23,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		PetrochemicalExtractionandDistribution = 24,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		ServiceRetail = 25,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		SIGAffiliations = 26,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		SocialServices = 27,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		SpecialOutboundTradeContractors = 28,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		SpecialtyRealty = 29,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		Transportation = 30,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		UtilityCreationandDistribution = 31,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		VehicleRetail = 32,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		Wholesale = 33,
 	}
 	
 	/// <summary>
-	/// Kundeemnets kvalitet, f.eks. lovende, mulig eller dårlig.
+	/// Quality of the lead, such as hot, warm, or cold.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -112,14 +181,14 @@ namespace Boruto.Plugin.Entities
 		Hot = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Varm = 2,
+		Warm = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kold = 3,
+		Cold = 3,
 	}
 	
 	/// <summary>
-	/// Kilden til kundeemnet.
+	/// Source of the lead.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -127,13 +196,13 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Reklame = 1,
+		Advertisement = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Medarbejderhenvisning = 2,
+		EmployeeReferral = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Eksternhenvisning = 3,
+		ExternalReferral = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		Partner = 4,
@@ -145,31 +214,16 @@ namespace Boruto.Plugin.Entities
 		Seminar = 6,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Messe = 7,
+		TradeShow = 7,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Internet = 8,
+		Web = 8,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Mundtilmund = 9,
+		WordofMouth = 9,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Andre = 10,
-	}
-	
-	/// <summary>
-	/// Om kundeemnet vedrører et elementbaseret eller et servicevedligeholdelsesbaseret salg
-	/// </summary>
-	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum msdyn_lead_msdyn_ordertype
-	{
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Elementbaseret = 192350000,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Servicevedligeholdelsesbaseret = 690970002,
+		Other = 10,
 	}
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
@@ -178,14 +232,14 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Fuldfrt = 0,
+		Succeeded = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Mislykkedes = 1,
+		Failed = 1,
 	}
 	
 	/// <summary>
-	/// Kundeemnets foretrukne kontaktmetode.
+	/// Preferred contact method for the lead.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -193,23 +247,23 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ethvert = 1,
+		Any = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Mail = 2,
+		Email = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Telefon = 3,
+		Phone = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		Fax = 4,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Mail1 = 5,
+		Mail = 5,
 	}
 	
 	/// <summary>
-	/// Kundeemnets prioritet.
+	/// Priority of the lead.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -217,11 +271,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Nuværende salgsfase for kundeemnet.
+	/// Current stage of the sales process for the lead.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -229,11 +283,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Status for kundeemnet.
+	/// Status of the lead.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -251,7 +305,7 @@ namespace Boruto.Plugin.Entities
 	}
 	
 	/// <summary>
-	/// Årsag til kundeemnets status.
+	/// Reason for the status of the lead.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -259,29 +313,29 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ny = 1,
+		New = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kontaktet = 2,
+		Contacted = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kvalificeret = 3,
+		Qualified = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Tabt = 4,
+		Lost = 4,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kanikkekontaktes = 5,
+		CannotContact = 5,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ikkelngereinteresseret = 6,
+		NoLongerInterested = 6,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Annulleret = 7,
+		Canceled = 7,
 	}
 	
 	/// <summary>
-	/// Kundeemne eller potentiel salgsmulighed. Kundeemner konverteres til firmaer, kontakter eller salgsmuligheder, når de er kvalificerede. Ellers slettes eller arkiveres de.
+	/// Prospect or potential sales opportunity. Leads are converted into accounts, contacts, or opportunities when they are qualified. Otherwise, they are deleted or archived.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("lead")]
@@ -443,8 +497,6 @@ namespace Boruto.Plugin.Entities
 			public const string msdyn_LeadScore = "msdyn_leadscore";
 			public const string msdyn_LeadScoreTrend = "msdyn_leadscoretrend";
 			public const string msdyn_leadscoretrendName = "msdyn_leadscoretrendname";
-			public const string msdyn_ordertype = "msdyn_ordertype";
-			public const string msdyn_ordertypeName = "msdyn_ordertypename";
 			public const string msdyn_PredictiveScoreId = "msdyn_predictivescoreid";
 			public const string msdyn_PredictiveScoreIdName = "msdyn_predictivescoreidname";
 			public const string msdyn_salesassignmentresult = "msdyn_salesassignmentresult";
@@ -530,18 +582,14 @@ namespace Boruto.Plugin.Entities
 			public const string account_originating_lead = "account_originating_lead";
 			public const string contact_originating_lead = "contact_originating_lead";
 			public const string Referencedlead_master_lead = "Referencedlead_master_lead";
-			public const string opportunity_originating_lead = "opportunity_originating_lead";
 			public const string accountleads_association = "accountleads_association";
 			public const string contactleads_association = "contactleads_association";
-			public const string business_unit_leads = "business_unit_leads";
 			public const string lead_customer_accounts = "lead_customer_accounts";
 			public const string lead_customer_contacts = "lead_customer_contacts";
 			public const string Referencinglead_master_lead = "lead_master_lead";
-			public const string lead_owning_team = "lead_owning_team";
 			public const string lead_owning_user = "lead_owning_user";
 			public const string lead_parent_account = "lead_parent_account";
 			public const string lead_parent_contact = "lead_parent_contact";
-			public const string lead_qualifying_opportunity = "lead_qualifying_opportunity";
 			public const string lk_lead_createdonbehalfby = "lk_lead_createdonbehalfby";
 			public const string lk_lead_modifiedonbehalfby = "lk_lead_modifiedonbehalfby";
 			public const string lk_leadbase_createdby = "lk_leadbase_createdby";
@@ -583,7 +631,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for det firma, som kundeemnet er tilknyttet.
+		/// Unique identifier of the account with which the lead is associated.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("accountid")]
 		public Microsoft.Xrm.Sdk.EntityReference AccountId
@@ -627,7 +675,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for adresse 1.
+		/// Unique identifier for address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_addressid")]
 		public System.Nullable<System.Guid> Address1_AddressId
@@ -645,7 +693,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den primære adressetype.
+		/// Select the primary address type.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_addresstypecode")]
 		public virtual lead_address1_addresstypecode? Address1_AddressTypeCode
@@ -679,7 +727,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv byen for den primære adresse.
+		/// Type the city for the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_city")]
 		public string Address1_City
@@ -697,7 +745,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser den fulde primære adresse.
+		/// Shows the complete primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_composite")]
 		public string Address1_Composite
@@ -709,7 +757,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv landet eller området for den primære adresse.
+		/// Type the country or region for the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_country")]
 		public string Address1_Country
@@ -727,7 +775,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv regionen for den primære adresse.
+		/// Type the county for the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_county")]
 		public string Address1_County
@@ -745,7 +793,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv det faxnummer, der er tilknyttet den primære adresse.
+		/// Type the fax number associated with the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_fax")]
 		public string Address1_Fax
@@ -763,7 +811,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv værdien for breddegraden for den primære adresse til brug ved kortlægning og andre programmer.
+		/// Type the latitude value for the primary address for use in mapping and other applications.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_latitude")]
 		public System.Nullable<double> Address1_Latitude
@@ -781,7 +829,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den første linje i den primære adresse.
+		/// Type the first line of the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_line1")]
 		public string Address1_Line1
@@ -799,7 +847,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den anden linje i den primære adresse.
+		/// Type the second line of the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_line2")]
 		public string Address1_Line2
@@ -817,7 +865,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den tredje linje i den primære adresse.
+		/// Type the third line of the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_line3")]
 		public string Address1_Line3
@@ -835,7 +883,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv værdien for længdegraden for den primære adresse til brug ved kortlægning og andre programmer.
+		/// Type the longitude value for the primary address for use in mapping and other applications.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_longitude")]
 		public System.Nullable<double> Address1_Longitude
@@ -853,7 +901,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et beskrivende navn til den primære adresse, f.eks. koncernhovedsæde.
+		/// Type a descriptive name for the primary address, such as Corporate Headquarters.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_name")]
 		public string Address1_Name
@@ -871,7 +919,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv postnummeret for den primære adresse.
+		/// Type the ZIP Code or postal code for the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_postalcode")]
 		public string Address1_PostalCode
@@ -889,7 +937,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv postboksnummeret for den primære adresse.
+		/// Type the post office box number of the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_postofficebox")]
 		public string Address1_PostOfficeBox
@@ -907,7 +955,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg en forsendelsesmetode til leverancer, der sendes til denne adresse.
+		/// Select a shipping method for deliveries sent to this address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_shippingmethodcode")]
 		public virtual lead_address1_shippingmethodcode? Address1_ShippingMethodCode
@@ -941,7 +989,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv staten eller området for den primære adresse.
+		/// Type the state or province of the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_stateorprovince")]
 		public string Address1_StateOrProvince
@@ -959,7 +1007,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv det hovedtelefonnummer, der er tilknyttet den primære adresse.
+		/// Type the main phone number associated with the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_telephone1")]
 		public string Address1_Telephone1
@@ -977,7 +1025,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et andet telefonnummer, der er tilknyttet den primære adresse.
+		/// Type a second phone number associated with the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_telephone2")]
 		public string Address1_Telephone2
@@ -995,7 +1043,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et tredje telefonnummer, der er tilknyttet den primære adresse.
+		/// Type a third phone number associated with the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_telephone3")]
 		public string Address1_Telephone3
@@ -1013,7 +1061,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv UPS-zonen for den primære adresse for at sikre, at forsendelsesgebyrer beregnes korrekt, og at leverancer foretages prompte, hvis forsendelse sker med UPS.
+		/// Type the UPS zone of the primary address to make sure shipping charges are calculated correctly and deliveries are made promptly, if shipped by UPS.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_upszone")]
 		public string Address1_UPSZone
@@ -1031,7 +1079,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg tidszonen, eller forskydningen fra GMT, for denne adresse, så andre kan referere til den, når de kontakter nogen på denne adresse.
+		/// Select the time zone, or UTC offset, for this address so that other people can reference it when they contact someone at this address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_utcoffset")]
 		public System.Nullable<int> Address1_UTCOffset
@@ -1049,7 +1097,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for adresse 2.
+		/// Unique identifier for address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_addressid")]
 		public System.Nullable<System.Guid> Address2_AddressId
@@ -1067,7 +1115,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den sekundære adressetype.
+		/// Select the secondary address type.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_addresstypecode")]
 		public virtual lead_address2_addresstypecode? Address2_AddressTypeCode
@@ -1101,7 +1149,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv byen for den sekundære adresse.
+		/// Type the city for the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_city")]
 		public string Address2_City
@@ -1119,7 +1167,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser den fulde sekundære adresse.
+		/// Shows the complete secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_composite")]
 		public string Address2_Composite
@@ -1131,7 +1179,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv landet eller området for den sekundære adresse.
+		/// Type the country or region for the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_country")]
 		public string Address2_Country
@@ -1149,7 +1197,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv regionen for den sekundære adresse.
+		/// Type the county for the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_county")]
 		public string Address2_County
@@ -1167,7 +1215,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv det faxnummer, der er tilknyttet den sekundære adresse.
+		/// Type the fax number associated with the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_fax")]
 		public string Address2_Fax
@@ -1185,7 +1233,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv værdien for breddegraden for den sekundære adresse til brug ved kortlægning og andre programmer.
+		/// Type the latitude value for the secondary address for use in mapping and other applications.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_latitude")]
 		public System.Nullable<double> Address2_Latitude
@@ -1203,7 +1251,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den første linje i den sekundære adresse.
+		/// Type the first line of the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_line1")]
 		public string Address2_Line1
@@ -1221,7 +1269,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den anden linje i den sekundære adresse.
+		/// Type the second line of the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_line2")]
 		public string Address2_Line2
@@ -1239,7 +1287,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den tredje linje i den sekundære adresse.
+		/// Type the third line of the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_line3")]
 		public string Address2_Line3
@@ -1257,7 +1305,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv værdien for længdegraden for den sekundære adresse til brug ved kortlægning og andre programmer.
+		/// Type the longitude value for the secondary address for use in mapping and other applications.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_longitude")]
 		public System.Nullable<double> Address2_Longitude
@@ -1275,7 +1323,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et beskrivende navn til den sekundære adresse, f.eks. koncernhovedsæde.
+		/// Type a descriptive name for the secondary address, such as Corporate Headquarters.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_name")]
 		public string Address2_Name
@@ -1293,7 +1341,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv postnummeret for den sekundære adresse.
+		/// Type the ZIP Code or postal code for the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_postalcode")]
 		public string Address2_PostalCode
@@ -1311,7 +1359,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv postboksnummeret for den sekundære adresse.
+		/// Type the post office box number of the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_postofficebox")]
 		public string Address2_PostOfficeBox
@@ -1329,7 +1377,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg en forsendelsesmetode til leverancer, der sendes til denne adresse.
+		/// Select a shipping method for deliveries sent to this address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_shippingmethodcode")]
 		public virtual lead_address2_shippingmethodcode? Address2_ShippingMethodCode
@@ -1363,7 +1411,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv staten eller området for den sekundære adresse.
+		/// Type the state or province of the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_stateorprovince")]
 		public string Address2_StateOrProvince
@@ -1381,7 +1429,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv det hovedtelefonnummer, der er tilknyttet den sekundære adresse.
+		/// Type the main phone number associated with the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_telephone1")]
 		public string Address2_Telephone1
@@ -1399,7 +1447,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et andet telefonnummer, der er tilknyttet den sekundære adresse.
+		/// Type a second phone number associated with the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_telephone2")]
 		public string Address2_Telephone2
@@ -1417,7 +1465,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et tredje telefonnummer, der er tilknyttet den sekundære adresse.
+		/// Type a third phone number associated with the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_telephone3")]
 		public string Address2_Telephone3
@@ -1435,7 +1483,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv UPS-zonen for den sekundære adresse for at sikre, at forsendelsesgebyrer beregnes korrekt, og at leverancer foretages prompte, hvis forsendelse sker med UPS.
+		/// Type the UPS zone of the secondary address to make sure shipping charges are calculated correctly and deliveries are made promptly, if shipped by UPS.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_upszone")]
 		public string Address2_UPSZone
@@ -1453,7 +1501,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg tidszonen, eller forskydningen fra GMT, for denne adresse, så andre kan referere til den, når de kontakter nogen på denne adresse.
+		/// Select the time zone, or UTC offset, for this address so that other people can reference it when they contact someone at this address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_utcoffset")]
 		public System.Nullable<int> Address2_UTCOffset
@@ -1471,7 +1519,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Oplysninger om budgetbeløbet for kundeemnets virksomhed eller organisation.
+		/// Information about the budget amount of the lead's company or organization.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("budgetamount")]
 		public Microsoft.Xrm.Sdk.Money BudgetAmount
@@ -1489,7 +1537,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Value of the Budgetbeløb in base currency.
+		/// Base currency equivalent of the estimated budget of the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("budgetamount_base")]
 		public Microsoft.Xrm.Sdk.Money BudgetAmount_Base
@@ -1501,7 +1549,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Oplysninger om budgetstatussen for kundeemnets virksomhed eller organisation.
+		/// Information about the budget status of the lead's company or organization.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("budgetstatus")]
 		public virtual budgetstatus? BudgetStatus
@@ -1535,7 +1583,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Gemmer billede af visitkortet
+		/// Stores Image of the Business Card
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("businesscard")]
 		public string BusinessCard
@@ -1553,7 +1601,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Gemmer egenskaber for kontrolelement for visitkort.
+		/// Stores Business Card Control Properties.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("businesscardattributes")]
 		public string BusinessCardAttributes
@@ -1571,7 +1619,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den kampagne, som kundeemnet er genereret ud fra, for at spore, hvor effektive marketingkampagner er, og identificere den kommunikation, der blev modtaget af kundeemnet.
+		/// campaign_leads
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("campaignid")]
 		public Microsoft.Xrm.Sdk.EntityReference CampaignId
@@ -1605,7 +1653,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv navnet på den virksomhed, der er tilknyttet kundeemnet. Dette bliver firmanavnet, når kundeemnet er kvalificeret og konverteret til en kundekonto.
+		/// Type the name of the company associated with the lead. This becomes the account name when the lead is qualified and converted to a customer account.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("companyname")]
 		public string CompanyName
@@ -1623,7 +1671,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kundeemnet har bekræftet sin interesse for dine tilbud. Dette er med til at fastlægge kvaliteten af kundeemnet.
+		/// Select whether the lead confirmed interest in your offerings. This helps in determining the lead quality.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("confirminterest")]
 		public System.Nullable<bool> ConfirmInterest
@@ -1657,7 +1705,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for den kontaktperson, som kundeemnet er tilknyttet.
+		/// Unique identifier of the contact with which the lead is associated.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("contactid")]
 		public Microsoft.Xrm.Sdk.EntityReference ContactId
@@ -1701,7 +1749,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser, hvem der oprettede posten.
+		/// Shows who created the record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdby")]
 		public Microsoft.Xrm.Sdk.EntityReference CreatedBy
@@ -1745,7 +1793,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Dato og klokkeslæt for, hvornår posten blev oprettet.
+		/// Date and time when the record was created.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdon")]
 		public System.Nullable<System.DateTime> CreatedOn
@@ -1757,7 +1805,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser, hvem der oprettede posten på vegne af en anden bruger.
+		/// lk_lead_createdonbehalfby
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdonbehalfby")]
 		public Microsoft.Xrm.Sdk.EntityReference CreatedOnBehalfBy
@@ -1801,7 +1849,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg kundefirmaet eller -kontakten for at angive et hurtigt link til flere kundeoplysninger som f.eks. firmaoplysninger, aktiviteter og salgsmuligheder.
+		/// lead_customer_contacts
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("customerid")]
 		public Microsoft.Xrm.Sdk.EntityReference CustomerId
@@ -1851,7 +1899,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om dine kommentarer indeholder oplysninger om, hvem der træffer købsbeslutningerne i kundeemnets virksomhed.
+		/// Select whether your notes include information about who makes the purchase decisions at the lead's company.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("decisionmaker")]
 		public System.Nullable<bool> DecisionMaker
@@ -1885,7 +1933,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv flere oplysninger for at beskrive kundeemnet, f.eks. et uddrag fra firmaets websted.
+		/// Type additional information to describe the lead, such as an excerpt from the company's website.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("description")]
 		public string Description
@@ -1903,7 +1951,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kundeemnet accepterer masseforsendelser af e-mails, der sendes via marketingkampagner eller lynkampagner. Hvis Tillad ikke er valgt, kan kundeemnet tilføjes på marketinglisten, men er udelukket fra e-mailen.
+		/// Select whether the lead accepts bulk email sent through marketing campaigns or quick campaigns. If Do Not Allow is selected, the lead can be added to marketing lists, but will be excluded from the email.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotbulkemail")]
 		public System.Nullable<bool> DoNotBulkEMail
@@ -1937,7 +1985,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kundeemnet tillader, at der sendes direct mail fra Microsoft Dynamics 365.
+		/// Select whether the lead allows direct email sent from Microsoft Dynamics 365.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotemail")]
 		public System.Nullable<bool> DoNotEMail
@@ -1971,7 +2019,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kundeemnet tillader faxer.
+		/// Select whether the lead allows faxes.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotfax")]
 		public System.Nullable<bool> DoNotFax
@@ -2005,7 +2053,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kundeemnet tillader telefonopkald.
+		/// Select whether the lead allows phone calls.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotphone")]
 		public System.Nullable<bool> DoNotPhone
@@ -2039,7 +2087,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kundeemnet tillader direct mail.
+		/// Select whether the lead allows direct mail.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotpostalmail")]
 		public System.Nullable<bool> DoNotPostalMail
@@ -2089,7 +2137,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kundeemnet accepterer marketingmateriale som f.eks. brochurer eller kataloger. Kundeemner, der har frameldt dette, kan udelukkes fra marketinginitiativer.
+		/// Select whether the lead accepts marketing materials, such as brochures or catalogs. Leads that opt out can be excluded from marketing initiatives.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotsendmm")]
 		public System.Nullable<bool> DoNotSendMM
@@ -2107,7 +2155,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kundeemnets primære e-mail-adresse.
+		/// Type the primary email address for the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("emailaddress1")]
 		public string EMailAddress1
@@ -2125,7 +2173,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kundeemnets sekundære e-mail-adresse.
+		/// Type the secondary email address for the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("emailaddress2")]
 		public string EMailAddress2
@@ -2143,7 +2191,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv en tredje e-mail-adresse til kundeemnet.
+		/// Type a third email address for the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("emailaddress3")]
 		public string EMailAddress3
@@ -2161,7 +2209,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser postens standardbillede.
+		/// Shows the default image for the record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("entityimage")]
 		public byte[] EntityImage
@@ -2196,6 +2244,9 @@ namespace Boruto.Plugin.Entities
 			}
 		}
 		
+		/// <summary>
+		/// For internal use only.
+		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("entityimageid")]
 		public System.Nullable<System.Guid> EntityImageId
 		{
@@ -2206,7 +2257,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv værdien af den anslåede omsætning, som dette kundeemne genererer, til brug for salgsprognoser og -planlægning.
+		/// Type the estimated revenue value that this lead will generate to assist in sales forecasting and planning.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("estimatedamount")]
 		public Microsoft.Xrm.Sdk.Money EstimatedAmount
@@ -2224,7 +2275,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Value of the Anslået værdi in base currency.
+		/// Shows the Est. Value field converted to the system's default base currency. The calculation uses the exchange rate specified in the Currencies area.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("estimatedamount_base")]
 		public Microsoft.Xrm.Sdk.Money EstimatedAmount_Base
@@ -2236,7 +2287,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den forventede lukkedato for kundeemnet, så salgsteamet kan planlægge opfølgningsmøder rettidigt i forhold til at flytte det potentielle emne til næste salgsfase.
+		/// Enter the expected close date for the lead, so that the sales team can schedule timely follow-up meetings to move the prospect to the next sales stage.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("estimatedclosedate")]
 		public System.Nullable<System.DateTime> EstimatedCloseDate
@@ -2254,7 +2305,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv en numerisk værdi for kundeemnets anslåede værdi, f.eks. et produktantal, hvis der ikke kan angives et omsætningsbeløb i feltet Anslået værdi. Denne kan bruges i forbindelse med salgsprognoser og -planlægning.
+		/// Type a numeric value of the lead's estimated value, such as a product quantity, if no revenue amount can be specified in the Est. Value field. This can be used for sales forecasting and planning.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("estimatedvalue")]
 		public System.Nullable<double> EstimatedValue
@@ -2272,7 +2323,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om overensstemmelsen mellem kundeemnets behov og dine tilbud er evalueret.
+		/// Select whether the fit between the lead's requirements and your offerings was evaluated.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("evaluatefit")]
 		public System.Nullable<bool> EvaluateFit
@@ -2306,7 +2357,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser omregningskursen for postens valuta. Valutakursen bruges til at konvertere alle pengefelter i posten fra den lokale valuta til systemets standardvaluta.
+		/// Shows the conversion rate of the record's currency. The exchange rate is used to convert all money fields in the record from the local currency to the system's default currency.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("exchangerate")]
 		public System.Nullable<decimal> ExchangeRate
@@ -2318,7 +2369,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv faxnummeret til den primære kontakt for kundeemnet.
+		/// Type the fax number for the primary contact for the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("fax")]
 		public string Fax
@@ -2336,7 +2387,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv fornavnet på den primære kontakt for kundeemnet for at sikre, at det potentielle emne tituleres korrekt i salgsopkald, e-mail og marketingkampagner.
+		/// Type the first name of the primary contact for the lead to make sure the prospect is addressed correctly in sales calls, email, and marketing campaigns.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("firstname")]
 		public string FirstName
@@ -2354,7 +2405,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Oplysninger om, om det er tilladt at følge mailaktivitet som åbninger, visning af vedhæftede filer og klik på links for mails, der sendes til kundeemnet.
+		/// Information about whether to allow following email activity like opens, attachment views and link clicks for emails sent to the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("followemail")]
 		public System.Nullable<bool> FollowEmail
@@ -2388,7 +2439,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kombinerer og viser kundeemnets for- og efternavn, så det fulde navn kan vises i visninger og rapporter.
+		/// Combines and shows the lead's first and last names so the full name can be displayed in views and reports.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("fullname")]
 		public string FullName
@@ -2400,7 +2451,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Sekvensnummer af den import, der oprettede denne post.
+		/// Sequence number of the import that created this record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("importsequencenumber")]
 		public System.Nullable<int> ImportSequenceNumber
@@ -2418,7 +2469,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den primære branche, som kundeemnets forretning fokuserer på, til brug ved marketingsegmentering og demografiske analyser.
+		/// Select the primary industry in which the lead's business is focused, for use in marketing segmentation and demographic analysis.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("industrycode")]
 		public virtual lead_industrycode? IndustryCode
@@ -2452,7 +2503,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om en person fra salgsteamet tidligere har kontaktet dette kundeemne.
+		/// Choose whether someone from the sales team contacted this lead earlier.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("initialcommunication")]
 		public virtual initialcommunication? InitialCommunication
@@ -2518,7 +2569,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv stillingen for den primære kontakt for dette kundeemne for at sikre, at det potentielle emne tituleres korrekt i salgsopkald, e-mail og marketingkampagner.
+		/// Type the job title of the primary contact for this lead to make sure the prospect is addressed correctly in sales calls, email, and marketing campaigns.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("jobtitle")]
 		public string JobTitle
@@ -2536,7 +2587,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv efternavnet på den primære kontakt for kundeemnet for at sikre, at det potentielle emne tituleres korrekt i salgsopkald, e-mail og marketingkampagner.
+		/// Type the last name of the primary contact for the lead to make sure the prospect is addressed correctly in sales calls, email, and marketing campaigns.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("lastname")]
 		public string LastName
@@ -2554,7 +2605,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Indeholder dato- og klokkeslætsstemplet for den seneste tid i venteposition.
+		/// Contains the date and time stamp of the last on hold time.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("lastonholdtime")]
 		public System.Nullable<System.DateTime> LastOnHoldTime
@@ -2572,7 +2623,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser den dato, hvor kundeemnet sidst blev inkluderet i en marketingkampagne eller lynkampagne.
+		/// Shows the date when the lead was last included in a marketing campaign or quick campaign.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("lastusedincampaign")]
 		public System.Nullable<System.DateTime> LastUsedInCampaign
@@ -2590,7 +2641,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for kundeemnet.
+		/// Unique identifier of the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("leadid")]
 		public System.Nullable<System.Guid> LeadId
@@ -2629,7 +2680,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg en klassificeringsværdi for at angive kundeemnets potentiale for at blive kunde.
+		/// Select a rating value to indicate the lead's potential to become a customer.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("leadqualitycode")]
 		public virtual lead_leadqualitycode? LeadQualityCode
@@ -2663,7 +2714,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den primære marketingkilde, der fik kundeemnet til at kontakte dig.
+		/// Select the primary marketing source that prompted the lead to contact you.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("leadsourcecode")]
 		public virtual lead_leadsourcecode? LeadSourceCode
@@ -2697,7 +2748,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for hovedkundeemnet til fletning.
+		/// lead_master_lead
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("masterid")]
 		public Microsoft.Xrm.Sdk.EntityReference MasterId
@@ -2741,7 +2792,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver, om kundeemnet er blevet flettet med et andet kundeemne.
+		/// Tells whether the lead has been merged with another lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("merged")]
 		public System.Nullable<bool> Merged
@@ -2769,7 +2820,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv mellemnavnet eller initialerne på den primære kontakt for kundeemnet for at sikre, at det potentielle emne tituleres korrekt.
+		/// Type the middle name or initial of the primary contact for the lead to make sure the prospect is addressed correctly.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("middlename")]
 		public string MiddleName
@@ -2787,7 +2838,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv mobiltelefonnummeret på den primære kontakt for kundeemnet.
+		/// Type the mobile phone number for the primary contact for the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("mobilephone")]
 		public string MobilePhone
@@ -2805,7 +2856,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser, hvem der sidst opdaterede posten.
+		/// Shows who last updated the record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedby")]
 		public Microsoft.Xrm.Sdk.EntityReference ModifiedBy
@@ -2849,7 +2900,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Dato og klokkeslæt for, hvornår posten blev ændret.
+		/// Date and time when the record was modified.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedon")]
 		public System.Nullable<System.DateTime> ModifiedOn
@@ -2861,7 +2912,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser, hvem der sidst opdaterede posten på vegne af en anden bruger.
+		/// lk_lead_modifiedonbehalfby
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedonbehalfby")]
 		public Microsoft.Xrm.Sdk.EntityReference ModifiedOnBehalfBy
@@ -2905,7 +2956,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Beskriver, om kundeemnet er frameldt eller ej
+		/// Describes whether lead is opted out or not
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_gdproptout")]
 		public System.Nullable<bool> msdyn_gdproptout
@@ -3050,41 +3101,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Om salgsmuligheden, der blev oprettet, da dette kundeemne blev kvalificeret, vedrører et elementbaseret eller et arbejdsbaseret salg
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_ordertype")]
-		public virtual msdyn_lead_msdyn_ordertype? msdyn_ordertype
-		{
-			get
-			{
-				return ((msdyn_lead_msdyn_ordertype?)(EntityOptionSetEnum.GetEnum(this, "msdyn_ordertype")));
-			}
-			set
-			{
-				this.OnPropertyChanging("msdyn_ordertype");
-				this.SetAttributeValue("msdyn_ordertype", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("msdyn_ordertype");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_ordertypename")]
-		public string msdyn_ordertypeName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("msdyn_ordertype"))
-				{
-					return this.FormattedValues["msdyn_ordertype"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Forudsigende point
+		/// Predictive score
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_predictivescoreid")]
 		public Microsoft.Xrm.Sdk.EntityReference msdyn_PredictiveScoreId
@@ -3118,7 +3135,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Resultat af tildelingsregelprocessen
+		/// Result of the assignment rule process
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_salesassignmentresult")]
 		public virtual msdyn_lead_msdyn_salesassignmentresult? msdyn_salesassignmentresult
@@ -3182,7 +3199,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for det segment, der er tilknyttet kundeemnet.
+		/// Unique identifier for Segment associated with Lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_segmentid")]
 		public Microsoft.Xrm.Sdk.EntityReference msdyn_segmentid
@@ -3216,7 +3233,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, hvor stort behovet er for kundeemnets virksomhed.
+		/// Choose how high the level of need is for the lead's company.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("need")]
 		public virtual need? Need
@@ -3250,7 +3267,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv antallet af medarbejdere, der arbejder i den virksomhed, der er tilknyttet kundeemnet, til brug for marketingsegmentering og demografiske analyser.
+		/// Type the number of employees that work at the company associated with the lead, for use in marketing segmentation and demographic analysis.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("numberofemployees")]
 		public System.Nullable<int> NumberOfEmployees
@@ -3268,7 +3285,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser, hvor længe posten var i venteposition i minutter.
+		/// Shows how long, in minutes, that the record was on hold.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("onholdtime")]
 		public System.Nullable<int> OnHoldTime
@@ -3280,7 +3297,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Denne attribut bruges til eksempel på serviceforretningsprocesser.
+		/// OriginatingCase_Lead
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("originatingcaseid")]
 		public Microsoft.Xrm.Sdk.EntityReference OriginatingCaseId
@@ -3314,7 +3331,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Dato og klokkeslæt for migrering af posten.
+		/// Date and time that the record was migrated.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("overriddencreatedon")]
 		public System.Nullable<System.DateTime> OverriddenCreatedOn
@@ -3332,7 +3349,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Ejer-id
+		/// Owner Id
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("ownerid")]
 		public Microsoft.Xrm.Sdk.EntityReference OwnerId
@@ -3349,9 +3366,6 @@ namespace Boruto.Plugin.Entities
 			}
 		}
 		
-		/// <summary>
-		/// Name of the owner
-		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owneridname")]
 		public string OwnerIdName
 		{
@@ -3368,9 +3382,6 @@ namespace Boruto.Plugin.Entities
 			}
 		}
 		
-		/// <summary>
-		/// Yomi name of the owner
-		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owneridyominame")]
 		public string OwnerIdYomiName
 		{
@@ -3388,7 +3399,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for den virksomhedsenhed, der ejer posten
+		/// Unique identifier for the business unit that owns the record
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningbusinessunit")]
 		public Microsoft.Xrm.Sdk.EntityReference OwningBusinessUnit
@@ -3416,7 +3427,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for det team, der ejer posten.
+		/// Unique identifier for the team that owns the record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningteam")]
 		public Microsoft.Xrm.Sdk.EntityReference OwningTeam
@@ -3428,7 +3439,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id den bruger, der ejer posten.
+		/// Unique identifier for the user that owns the record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owninguser")]
 		public Microsoft.Xrm.Sdk.EntityReference OwningUser
@@ -3440,7 +3451,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv personsøgernummeret på den primære kontakt for kundeemnet.
+		/// Type the pager number for the primary contact for the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("pager")]
 		public string Pager
@@ -3458,7 +3469,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg et firma, som dette kundeemne skal knyttes til, så relationen er synlig i rapporter og analyser.
+		/// lead_parent_account
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("parentaccountid")]
 		public Microsoft.Xrm.Sdk.EntityReference ParentAccountId
@@ -3508,7 +3519,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg en kontakt, som dette kundeemne skal knyttes til, så relationen er synlig i rapporter og analyser.
+		/// lead_parent_contact
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("parentcontactid")]
 		public Microsoft.Xrm.Sdk.EntityReference ParentContactId
@@ -3558,7 +3569,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser, om kundeemnet deltager i arbejdsprocesregler.
+		/// Shows whether the lead participates in workflow rules.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("participatesinworkflow")]
 		public System.Nullable<bool> ParticipatesInWorkflow
@@ -3592,7 +3603,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den foretrukne kontaktmetode.
+		/// Select the preferred method of contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredcontactmethodcode")]
 		public virtual lead_preferredcontactmethodcode? PreferredContactMethodCode
@@ -3626,7 +3637,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg prioriteten, så de foretrukne kunder eller kritiske problemer håndteres hurtigt.
+		/// Select the priority so that preferred customers or critical issues are handled quickly.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("prioritycode")]
 		public virtual lead_prioritycode? PriorityCode
@@ -3660,7 +3671,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Indeholder id'et for den proces, der er knyttet til objektet.
+		/// Contains the id of the process associated with the entity.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("processid")]
 		public System.Nullable<System.Guid> ProcessId
@@ -3678,7 +3689,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om en enkeltperson eller et udvalg bliver involveret i købsprocessen for kundeemnet.
+		/// Choose whether an individual or a committee will be involved in the  purchase process for the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("purchaseprocess")]
 		public virtual purchaseprocess? PurchaseProcess
@@ -3712,7 +3723,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, hvor lang tid kundeemnet sandsynligvis vil være om at foretage købet, så salgsteamet er orienteret.
+		/// Choose how long the lead will likely take to make the purchase, so the sales team will be aware.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("purchasetimeframe")]
 		public virtual purchasetimeframe? PurchaseTimeFrame
@@ -3746,7 +3757,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kommentarer til kundeemnets kvalificering eller score.
+		/// Type comments about the qualification or scoring of the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("qualificationcomments")]
 		public string QualificationComments
@@ -3764,7 +3775,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den salgsmulighed, som kundeemnet blev kvalificeret ud fra og derefter konverteret til.
+		/// lead_qualifying_opportunity
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("qualifyingopportunityid")]
 		public Microsoft.Xrm.Sdk.EntityReference QualifyingOpportunityId
@@ -3798,7 +3809,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Relateret kampagnerespons.
+		/// CampaignResponse_Lead
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("relatedobjectid")]
 		public Microsoft.Xrm.Sdk.EntityReference RelatedObjectId
@@ -3832,7 +3843,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv årsomsætningen for den virksomhed, der er tilknyttet kundeemnet, for at forstå det potentielle emnes forretning.
+		/// Type the annual revenue of the company associated with the lead to provide an understanding of the prospect's business.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("revenue")]
 		public Microsoft.Xrm.Sdk.Money Revenue
@@ -3850,7 +3861,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Value of the Årsomsætning in base currency.
+		/// Shows the Annual Revenue field converted to the system's default base currency. The calculation uses the exchange rate specified in the Currencies area.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("revenue_base")]
 		public Microsoft.Xrm.Sdk.Money Revenue_Base
@@ -3862,7 +3873,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg dette kundeemnes salgsfase for at gøre det nemmere for salgsteamet at konvertere dette kundeemne til en salgsmulighed.
+		/// Select the sales stage of this lead to aid the sales team in their efforts to convert this lead to an opportunity.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("salesstage")]
 		public virtual lead_salesstage? SalesStage
@@ -3880,7 +3891,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg salgsprocesfasen for kundeemnet for at fastlægge sandsynligheden for, at kundeemnet konverteres til en salgsmulighed.
+		/// Select the sales process stage for the lead to help determine the probability of the lead converting to an opportunity.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("salesstagecode")]
 		public virtual lead_salesstagecode? SalesStageCode
@@ -3930,7 +3941,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv tituleringen af den primære kontakt for dette kundeemne for at sikre, at det potentielle emne tituleres korrekt i salgsopkald, e-mails og marketingkampagner.
+		/// Type the salutation of the primary contact for this lead to make sure the prospect is addressed correctly in sales calls, email messages, and marketing campaigns.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("salutation")]
 		public string Salutation
@@ -3948,7 +3959,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv dato og klokkeslæt for det undersøgende opfølgningsmøde med kundeemnet.
+		/// Enter the date and time of the prospecting follow-up meeting with the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("schedulefollowup_prospect")]
 		public System.Nullable<System.DateTime> ScheduleFollowUp_Prospect
@@ -3966,7 +3977,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv dato og klokkeslæt for det opfølgende kvalificeringsmøde med kundeemnet.
+		/// Enter the date and time of the qualifying follow-up meeting with the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("schedulefollowup_qualify")]
 		public System.Nullable<System.DateTime> ScheduleFollowUp_Qualify
@@ -3984,7 +3995,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv SIC-koden (Standard Industrial Classification), der angiver kundeemnets primære branche, til brug for marketingsegmentering og demografiske analyser.
+		/// Type the Standard Industrial Classification (SIC) code that indicates the lead's primary industry of business for use in marketing segmentation and demographic analysis.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("sic")]
 		public string SIC
@@ -4002,7 +4013,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den serviceaftale (SLA), du vil anvende på kundeemneposten.
+		/// Choose the service level agreement (SLA) that you want to apply to the Lead record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("slaid")]
 		public Microsoft.Xrm.Sdk.EntityReference SLAId
@@ -4020,7 +4031,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Den SLA, der sidst blev anvendt på denne sag. Dette felt er kun beregnet til intern brug.
+		/// sla_lead
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("slainvokedid")]
 		public Microsoft.Xrm.Sdk.EntityReference SLAInvokedId
@@ -4064,7 +4075,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Contains the id of the stage where the entity is located.
+		/// processstage_lead
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("stageid")]
 		public System.Nullable<System.Guid> StageId
@@ -4082,7 +4093,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser, om kundeemnet er åbent, kvalificeret eller diskvalificeret. Kvalificerede og diskvalificerede kundeemner er skrivebeskyttede og kan ikke redigeres, medmindre de genaktiveres.
+		/// Shows whether the lead is open, qualified, or disqualified. Qualified and disqualified leads are read-only and can't be edited unless they are reactivated.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("statecode")]
 		public virtual lead_statecode? StateCode
@@ -4116,7 +4127,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg kundeemnets status.
+		/// Select the lead's status.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("statuscode")]
 		public virtual lead_statuscode? StatusCode
@@ -4150,7 +4161,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et emne eller beskrivende navn, f.eks. den forventede ordre, firmanavnet eller marketingkildelisten, for at identificere kundeemnet.
+		/// Type a subject or descriptive name, such as the expected order, company name, or marketing source list, to identify the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("subject")]
 		public string Subject
@@ -4168,7 +4179,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Antal af brugere eller samtaler, der fulgte posten
+		/// Number of users or conversations followed the record
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("teamsfollowed")]
 		public System.Nullable<int> TeamsFollowed
@@ -4186,7 +4197,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv arbejdstelefonnummeret på den primære kontakt for kundeemnet.
+		/// Type the work phone number for the primary contact for the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("telephone1")]
 		public string Telephone1
@@ -4204,7 +4215,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv det private telefonnummer på den primære kontakt for kundeemnet.
+		/// Type the home phone number for the primary contact for the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("telephone2")]
 		public string Telephone2
@@ -4222,7 +4233,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et alternativt telefonnummer på den primære kontakt for kundeemnet.
+		/// Type an alternate phone number for the primary contact for the lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("telephone3")]
 		public string Telephone3
@@ -4240,7 +4251,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Samlet tid jeg har brugt på mails (læsning og skrivning) samt møder i relation til kundeemneposten.
+		/// Total time spent for emails (read and write) and meetings by me in relation to the lead record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("timespentbymeonemailandmeetings")]
 		public string TimeSpentByMeOnEmailAndMeetings
@@ -4252,7 +4263,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kun til internt brug.
+		/// For internal use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("timezoneruleversionnumber")]
 		public System.Nullable<int> TimeZoneRuleVersionNumber
@@ -4270,7 +4281,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den lokale valuta til posten for at sikre, at budgetter rapporteres i den korrekte valuta.
+		/// Choose the local currency for the record to make sure budgets are reported in the correct currency.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("transactioncurrencyid")]
 		public Microsoft.Xrm.Sdk.EntityReference TransactionCurrencyId
@@ -4304,7 +4315,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// A comma separated list of string values representing the unique identifiers of stages in a Business Process Flow Instance in the order that they occur.
+		/// For internal use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("traversedpath")]
 		public string TraversedPath
@@ -4322,7 +4333,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Den tidszonekode, der var i brug, da posten blev oprettet.
+		/// Time zone code that was in use when the record was created.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("utcconversiontimezonecode")]
 		public System.Nullable<int> UTCConversionTimeZoneCode
@@ -4340,7 +4351,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Versionsnummer
+		/// Version Number
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("versionnumber")]
 		public System.Nullable<long> VersionNumber
@@ -4352,7 +4363,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv webstedets URL-adresse for den virksomhed, der er tilknyttet dette kundeemne.
+		/// Type the website URL for the company associated with this lead.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("websiteurl")]
 		public string WebSiteUrl
@@ -4370,7 +4381,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den fonestiske stavemåde for kundeemnets firmanavn, hvis navnet er angivet på japansk, for at sikre, at navnet udtales korrekt i telefonopkald med det potentielle emne.
+		/// Type the phonetic spelling of the lead's company name, if the name is specified in Japanese, to make sure the name is pronounced correctly in phone calls with the prospect.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yomicompanyname")]
 		public string YomiCompanyName
@@ -4388,7 +4399,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den fonestiske stavemåde for kundeemnets fornavn, hvis navnet er angivet på japansk, for at sikre, at navnet udtales korrekt i telefonopkald med det potentielle emne.
+		/// Type the phonetic spelling of the lead's first name, if the name is specified in Japanese, to make sure the name is pronounced correctly in phone calls with the prospect.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yomifirstname")]
 		public string YomiFirstName
@@ -4406,7 +4417,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kombinerer og viser kundeemnets Yomi-for- og efternavn, så det fulde fonetiske navn kan vises i visninger og rapporter.
+		/// Combines and shows the lead's Yomi first and last names so the full phonetic name can be displayed in views and reports.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yomifullname")]
 		public string YomiFullName
@@ -4418,7 +4429,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den fonestiske stavemåde for kundeemnets efternavn, hvis navnet er angivet på japansk, for at sikre, at navnet udtales korrekt i telefonopkald med det potentielle emne.
+		/// Type the phonetic spelling of the lead's last name, if the name is specified in Japanese, to make sure the name is pronounced correctly in phone calls with the prospect.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yomilastname")]
 		public string YomiLastName
@@ -4436,7 +4447,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den fonestiske stavemåde for kundeemnets mellemnavn, hvis navnet er angivet på japansk, for at sikre, at navnet udtales korrekt i telefonopkald med det potentielle emne.
+		/// Type the phonetic spelling of the lead's middle name, if the name is specified in Japanese, to make sure the name is pronounced correctly in phone calls with the prospect.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yomimiddlename")]
 		public string YomiMiddleName
@@ -4508,24 +4519,6 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// 1:N opportunity_originating_lead
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("opportunity_originating_lead")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> opportunity_originating_lead
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_originating_lead", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("opportunity_originating_lead");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_originating_lead", null, value);
-				this.OnPropertyChanged("opportunity_originating_lead");
-			}
-		}
-		
-		/// <summary>
 		/// N:N accountleads_association
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("accountleads_association")]
@@ -4558,19 +4551,6 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("contactleads_association");
 				this.SetRelatedEntities<Boruto.Plugin.Entities.Contact>("contactleads_association", null, value);
 				this.OnPropertyChanged("contactleads_association");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 business_unit_leads
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningbusinessunit")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("business_unit_leads")]
-		public Boruto.Plugin.Entities.BusinessUnit business_unit_leads
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.BusinessUnit>("business_unit_leads", null);
 			}
 		}
 		
@@ -4626,19 +4606,6 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// N:1 lead_owning_team
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningteam")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lead_owning_team")]
-		public Boruto.Plugin.Entities.Team lead_owning_team
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.Team>("lead_owning_team", null);
-			}
-		}
-		
-		/// <summary>
 		/// N:1 lead_owning_user
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owninguser")]
@@ -4686,25 +4653,6 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("lead_parent_contact");
 				this.SetRelatedEntity<Boruto.Plugin.Entities.Contact>("lead_parent_contact", null, value);
 				this.OnPropertyChanged("lead_parent_contact");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 lead_qualifying_opportunity
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("qualifyingopportunityid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lead_qualifying_opportunity")]
-		public Boruto.Plugin.Entities.Opportunity lead_qualifying_opportunity
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.Opportunity>("lead_qualifying_opportunity", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lead_qualifying_opportunity");
-				this.SetRelatedEntity<Boruto.Plugin.Entities.Opportunity>("lead_qualifying_opportunity", null, value);
-				this.OnPropertyChanged("lead_qualifying_opportunity");
 			}
 		}
 		

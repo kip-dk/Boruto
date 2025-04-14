@@ -15,17 +15,14 @@ namespace Boruto.Plugin.Entities
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum hofor_valgt
+	public enum arbo_loadarchive
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Nej = 0,
+		Russian = 500000000,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ja = 1,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ikkerelevant = 999,
+		Ukrainian = 500000001,
 	}
 }
 #pragma warning restore CS1591

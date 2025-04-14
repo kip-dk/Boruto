@@ -14,7 +14,7 @@ namespace Boruto.Plugin.Entities
 	
 	
 	/// <summary>
-	/// Kontaktpersonens rolle i firmaet.
+	/// Account role of the contact.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -22,17 +22,17 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Beslutningstager = 1,
+		DecisionMaker = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Medarbejder = 2,
+		Employee = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Personderverindflydelse = 3,
+		Influencer = 3,
 	}
 	
 	/// <summary>
-	/// Adressetypen for adresse 1, f.eks. faktureringsadresse, forsendelsesadresse eller primær adresse.
+	/// Type of address for address 1, such as billing, shipping, or primary address.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -40,20 +40,20 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Fakturatil = 1,
+		BillTo = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Levertil = 2,
+		ShipTo = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Primr = 3,
+		Primary = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Andet = 4,
+		Other = 4,
 	}
 	
 	/// <summary>
-	/// Fragtbetingelser for adresse 1.
+	/// Freight terms for address 1.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -64,11 +64,11 @@ namespace Boruto.Plugin.Entities
 		FOB = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Udenberegning = 2,
+		NoCharge = 2,
 	}
 	
 	/// <summary>
-	/// Forsendelsesmåde for adresse 1.
+	/// Method of shipment for address 1.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -76,7 +76,7 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Luftfragt = 1,
+		Airborne = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		DHL = 2,
@@ -88,14 +88,17 @@ namespace Boruto.Plugin.Entities
 		UPS = 4,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Almpost = 5,
+		PostalMail = 5,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Andet = 8,
+		FullLoad = 6,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
+		WillCall = 7,
 	}
 	
 	/// <summary>
-	/// Adressetypen for adresse 2, f.eks. faktureringsadresse, forsendelsesadresse eller primær adresse.
+	/// Type of address for address 2, such as billing, shipping, or primary address.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -103,11 +106,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Fragtbetingelser for adresse 2.
+	/// Freight terms for address 2.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -115,11 +118,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Forsendelsesmåde for adresse 2.
+	/// Method of shipment for address 2.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -127,11 +130,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Adressetypen for adresse 3, f.eks. faktureringsadresse, forsendelsesadresse eller primær adresse.
+	/// Type of address for address 3, such as billing, shipping, or primary address.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -139,11 +142,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Fragtbetingelser for adresse 3.
+	/// Freight terms for address 3.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -151,11 +154,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Forsendelsesmåde for adresse 3.
+	/// Method of shipment for address 3.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -163,11 +166,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Størrelsen af kontaktpersonens forretning.
+	/// Size of the contact's business.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -175,11 +178,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Den type forretning, der er tilknyttet kontaktpersonen.
+	/// Type of business associated with the contact.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -187,11 +190,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Kontaktpersonens uddannelsesniveau.
+	/// Formal education level that the contact has attained.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -199,11 +202,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Kontaktpersonens civile status.
+	/// Marital status of the contact.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -214,17 +217,17 @@ namespace Boruto.Plugin.Entities
 		Single = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Gift = 2,
+		Married = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Skilt = 3,
+		Divorced = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Enkestand = 4,
+		Widowed = 4,
 	}
 	
 	/// <summary>
-	/// Kontaktpersonens køn.
+	/// Gender of the contact.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -232,14 +235,14 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Mand = 1,
+		Male = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Kvinde = 2,
+		Female = 2,
 	}
 	
 	/// <summary>
-	/// Angiver, om kontaktpersonen har nogen børn.
+	/// Information about whether the contact has children.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -247,11 +250,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Kilden til det kundeemne, som kontaktpersonen er tilknyttet.
+	/// Source of the lead of the contact.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -259,11 +262,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Angiver indflydelse på køb ved hjælp af etiket
+	/// Indicate buying influence using label
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -271,20 +274,20 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Beslutningstager = 0,
+		Decisionmaker = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		Influencer = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Blokering = 2,
+		Blocker = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ukendt = 3,
+		Unknown = 3,
 	}
 	
 	/// <summary>
-	/// Kun til intern brug
+	/// For Internal Use only
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -292,17 +295,17 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ingenfeedback = 0,
+		NoFeedback = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ikkeifirmaet = 1,
+		NotatCompany = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ignorer = 2,
+		Ignore = 2,
 	}
 	
 	/// <summary>
-	/// Kontaktpersonens betalingsbetingelser.
+	/// Payment terms for the contact.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -310,26 +313,20 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Netto30dage = 1,
+		Net30 = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Netto8dage = 6,
+		_210Net30 = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Netto14dage = 7,
+		Net45 = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Nettokontant = 10,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Lbendemned14dage = 11,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Lbendemned8dage = 12,
+		Net60 = 4,
 	}
 	
 	/// <summary>
-	/// Den ugedag, som kontaktpersonen foretrækker til planlægning af serviceaktiviteter.
+	/// Day of the week that the contact prefers for scheduling service activities.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -337,29 +334,29 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Sndag = 0,
+		Sunday = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Mandag = 1,
+		Monday = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Tirsdag = 2,
+		Tuesday = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Onsdag = 3,
+		Wednesday = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Torsdag = 4,
+		Thursday = 4,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Fredag = 5,
+		Friday = 5,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Lrdag = 6,
+		Saturday = 6,
 	}
 	
 	/// <summary>
-	/// Det tidspunkt på dagen, som kontaktpersonen foretrækker til planlægning af serviceaktiviteter.
+	/// Time of day that the contact prefers for scheduling service activities.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -367,17 +364,17 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Morgen = 1,
+		Morning = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Eftermiddag = 2,
+		Afternoon = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Aften = 3,
+		Evening = 3,
 	}
 	
 	/// <summary>
-	/// Kontaktpersonens foretrukne kontaktmetode.
+	/// Preferred contact method for the contact.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -385,23 +382,23 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ethvert = 1,
+		Any = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Mail = 2,
+		Email = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Telefon = 3,
+		Phone = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		Fax = 4,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Post = 5,
+		Mail = 5,
 	}
 	
 	/// <summary>
-	/// Forsendelsesmåde for kontaktpersonen.
+	/// Method of shipping for the contact.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -409,11 +406,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Status for kontaktpersonen.
+	/// Status of the contact.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -428,7 +425,7 @@ namespace Boruto.Plugin.Entities
 	}
 	
 	/// <summary>
-	/// Årsag til kontaktpersonens status.
+	/// Reason for the status of the contact.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -436,14 +433,14 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Aktiv = 1,
+		Active = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Inaktiv = 2,
+		Inactive = 2,
 	}
 	
 	/// <summary>
-	/// Entydigt id for det distrikt, kontaktpersonen er tilknyttet.
+	/// Unique identifier of the territory to which the contact is assigned.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -451,11 +448,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standardvrdi = 1,
+		DefaultValue = 1,
 	}
 	
 	/// <summary>
-	/// Person, som en afdeling har en relation til, f.eks. kunde, leverandør og medarbejder.
+	/// Person with whom a business unit has a relationship, such as customer, supplier, and colleague.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("contact")]
@@ -600,6 +597,12 @@ namespace Boruto.Plugin.Entities
 			public const string Anniversary = "anniversary";
 			public const string AnnualIncome = "annualincome";
 			public const string AnnualIncome_Base = "annualincome_base";
+			public const string arbo_id = "arbo_id";
+			public const string arbo_phoneuserid = "arbo_phoneuserid";
+			public const string arbo_phoneuseridName = "arbo_phoneuseridname";
+			public const string arbo_portalinvitationcode = "arbo_portalinvitationcode";
+			public const string arbo_portalpasswordrequestid = "arbo_portalpasswordrequestid";
+			public const string arbo_supplierid = "arbo_supplierid";
 			public const string AssistantName = "assistantname";
 			public const string AssistantPhone = "assistantphone";
 			public const string BirthDate = "birthdate";
@@ -744,6 +747,9 @@ namespace Boruto.Plugin.Entities
 			public const string OwningTeam = "owningteam";
 			public const string OwningUser = "owninguser";
 			public const string Pager = "pager";
+			public const string parent_contactid = "parent_contactid";
+			public const string parent_contactidName = "parent_contactidname";
+			public const string parent_contactidYomiName = "parent_contactidyominame";
 			public const string ParentContactId = "parentcontactid";
 			public const string ParentContactIdName = "parentcontactidname";
 			public const string ParentContactIdYomiName = "parentcontactidyominame";
@@ -802,28 +808,33 @@ namespace Boruto.Plugin.Entities
 			public const string YomiLastName = "yomilastname";
 			public const string YomiMiddleName = "yomimiddlename";
 			public const string account_primary_contact = "account_primary_contact";
+			public const string arbo_chainresponsible_contact_account = "arbo_chainresponsible_contact_account";
+			public const string arbo_contact_account_contract = "arbo_contact_account_contract";
+			public const string arbo_contact_account_finance = "arbo_contact_account_finance";
+			public const string arbo_contact_account_logistic = "arbo_contact_account_logistic";
+			public const string arbo_salesresponsiblecontact_account = "arbo_salesresponsiblecontact_account";
+			public const string arbo_superior1_contact_account = "arbo_superior1_contact_account";
+			public const string arbo_superior2_contact_account = "arbo_superior2_contact_account";
+			public const string arbo_suppliersupport_contact_account = "arbo_suppliersupport_contact_account";
 			public const string Referencedcontact_customer_contacts = "Referencedcontact_customer_contacts";
 			public const string Referencedcontact_master_contact = "Referencedcontact_master_contact";
+			public const string Referencedcontact_parent_contact = "Referencedcontact_parent_contact";
 			public const string lead_customer_contacts = "lead_customer_contacts";
 			public const string lead_parent_contact = "lead_parent_contact";
-			public const string opportunity_customer_contacts = "opportunity_customer_contacts";
-			public const string opportunity_parent_contact = "opportunity_parent_contact";
-			public const string quote_customer_contacts = "quote_customer_contacts";
+			public const string arbo_contactallowportalaccountaccess = "arbo_contactallowportalaccountaccess";
 			public const string contactleads_association = "contactleads_association";
-			public const string contactquotes_association = "contactquotes_association";
-			public const string business_unit_contacts = "business_unit_contacts";
 			public const string contact_customer_accounts = "contact_customer_accounts";
 			public const string Referencingcontact_customer_contacts = "contact_customer_contacts";
 			public const string Referencingcontact_master_contact = "contact_master_contact";
 			public const string contact_originating_lead = "contact_originating_lead";
 			public const string contact_owning_user = "contact_owning_user";
+			public const string Referencingcontact_parent_contact = "contact_parent_contact";
 			public const string lk_contact_createdonbehalfby = "lk_contact_createdonbehalfby";
 			public const string lk_contact_modifiedonbehalfby = "lk_contact_modifiedonbehalfby";
 			public const string lk_contactbase_createdby = "lk_contactbase_createdby";
 			public const string lk_contactbase_modifiedby = "lk_contactbase_modifiedby";
 			public const string msa_contact_managingpartner = "msa_contact_managingpartner";
 			public const string system_user_contacts = "system_user_contacts";
-			public const string team_contacts = "team_contacts";
 		}
 		
 		/// <summary>
@@ -861,7 +872,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for det firma, som kontaktpersonen er tilknyttet.
+		/// Unique identifier of the account with which the contact is associated.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("accountid")]
 		public Microsoft.Xrm.Sdk.EntityReference AccountId
@@ -905,7 +916,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg kontaktens rolle i firmaet eller salgsprocessen, f.eks. beslutningstager, medarbejder eller person, der øver indflydelse.
+		/// Select the contact's role within the company or sales process, such as decision maker, employee, or influencer.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("accountrolecode")]
 		public virtual contact_accountrolecode? AccountRoleCode
@@ -939,7 +950,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for adresse 1.
+		/// Unique identifier for address 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_addressid")]
 		public System.Nullable<System.Guid> Address1_AddressId
@@ -957,7 +968,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den primære adressetype.
+		/// Select the primary address type.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_addresstypecode")]
 		public virtual contact_address1_addresstypecode? Address1_AddressTypeCode
@@ -991,7 +1002,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv byen for den primære adresse.
+		/// Type the city for the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_city")]
 		public string Address1_City
@@ -1009,7 +1020,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser den fulde primære adresse.
+		/// Shows the complete primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_composite")]
 		public string Address1_Composite
@@ -1021,7 +1032,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv landet eller området for den primære adresse.
+		/// Type the country or region for the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_country")]
 		public string Address1_Country
@@ -1039,7 +1050,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv regionen for den primære adresse.
+		/// Type the county for the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_county")]
 		public string Address1_County
@@ -1057,7 +1068,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv det faxnummer, der er tilknyttet den primære adresse.
+		/// Type the fax number associated with the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_fax")]
 		public string Address1_Fax
@@ -1075,7 +1086,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg fragtbetingelser for den primære adresse for at sikre, at forsendelsesordrer behandles korrekt.
+		/// Select the freight terms for the primary address to make sure shipping orders are processed correctly.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_freighttermscode")]
 		public virtual contact_address1_freighttermscode? Address1_FreightTermsCode
@@ -1109,7 +1120,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv værdien for breddegraden for den primære adresse til brug ved kortlægning og andre programmer.
+		/// Type the latitude value for the primary address for use in mapping and other applications.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_latitude")]
 		public System.Nullable<double> Address1_Latitude
@@ -1127,7 +1138,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den første linje i den primære adresse.
+		/// Type the first line of the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_line1")]
 		public string Address1_Line1
@@ -1145,7 +1156,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den anden linje i den primære adresse.
+		/// Type the second line of the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_line2")]
 		public string Address1_Line2
@@ -1163,7 +1174,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den tredje linje i den primære adresse.
+		/// Type the third line of the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_line3")]
 		public string Address1_Line3
@@ -1181,7 +1192,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv værdien for længdegraden for den primære adresse til brug ved kortlægning og andre programmer.
+		/// Type the longitude value for the primary address for use in mapping and other applications.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_longitude")]
 		public System.Nullable<double> Address1_Longitude
@@ -1199,7 +1210,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et beskrivende navn til den primære adresse, f.eks. koncernhovedsæde.
+		/// Type a descriptive name for the primary address, such as Corporate Headquarters.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_name")]
 		public string Address1_Name
@@ -1217,7 +1228,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv postnummeret for den primære adresse.
+		/// Type the ZIP Code or postal code for the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_postalcode")]
 		public string Address1_PostalCode
@@ -1235,7 +1246,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv postboksnummeret for den primære adresse.
+		/// Type the post office box number of the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_postofficebox")]
 		public string Address1_PostOfficeBox
@@ -1253,7 +1264,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv navnet på hovedkontakten på firmaets primære adresse.
+		/// Type the name of the main contact at the account's primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_primarycontactname")]
 		public string Address1_PrimaryContactName
@@ -1271,7 +1282,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg en forsendelsesmetode til leverancer, der sendes til denne adresse.
+		/// Select a shipping method for deliveries sent to this address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_shippingmethodcode")]
 		public virtual contact_address1_shippingmethodcode? Address1_ShippingMethodCode
@@ -1305,7 +1316,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv staten eller området for den primære adresse.
+		/// Type the state or province of the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_stateorprovince")]
 		public string Address1_StateOrProvince
@@ -1323,7 +1334,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv det hovedtelefonnummer, der er tilknyttet den primære adresse.
+		/// Type the main phone number associated with the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_telephone1")]
 		public string Address1_Telephone1
@@ -1341,7 +1352,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et andet telefonnummer, der er tilknyttet den primære adresse.
+		/// Type a second phone number associated with the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_telephone2")]
 		public string Address1_Telephone2
@@ -1359,7 +1370,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et tredje telefonnummer, der er tilknyttet den primære adresse.
+		/// Type a third phone number associated with the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_telephone3")]
 		public string Address1_Telephone3
@@ -1377,7 +1388,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv UPS-zonen for den primære adresse for at sikre, at forsendelsesgebyrer beregnes korrekt, og at leverancer foretages prompte, hvis forsendelse sker med UPS.
+		/// Type the UPS zone of the primary address to make sure shipping charges are calculated correctly and deliveries are made promptly, if shipped by UPS.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_upszone")]
 		public string Address1_UPSZone
@@ -1395,7 +1406,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg tidszonen, eller forskydningen fra GMT, for denne adresse, så andre kan referere til den, når de kontakter nogen på denne adresse.
+		/// Select the time zone, or UTC offset, for this address so that other people can reference it when they contact someone at this address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_utcoffset")]
 		public System.Nullable<int> Address1_UTCOffset
@@ -1413,7 +1424,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for adresse 2.
+		/// Unique identifier for address 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_addressid")]
 		public System.Nullable<System.Guid> Address2_AddressId
@@ -1431,7 +1442,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den sekundære adressetype.
+		/// Select the secondary address type.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_addresstypecode")]
 		public virtual contact_address2_addresstypecode? Address2_AddressTypeCode
@@ -1465,7 +1476,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv byen for den sekundære adresse.
+		/// Type the city for the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_city")]
 		public string Address2_City
@@ -1483,7 +1494,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser den fulde sekundære adresse.
+		/// Shows the complete secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_composite")]
 		public string Address2_Composite
@@ -1495,7 +1506,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv landet eller området for den sekundære adresse.
+		/// Type the country or region for the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_country")]
 		public string Address2_Country
@@ -1513,7 +1524,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv regionen for den sekundære adresse.
+		/// Type the county for the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_county")]
 		public string Address2_County
@@ -1531,7 +1542,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv det faxnummer, der er tilknyttet den sekundære adresse.
+		/// Type the fax number associated with the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_fax")]
 		public string Address2_Fax
@@ -1549,7 +1560,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg fragtbetingelser for den sekundære adresse for at sikre, at forsendelsesordrer behandles korrekt.
+		/// Select the freight terms for the secondary address to make sure shipping orders are processed correctly.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_freighttermscode")]
 		public virtual contact_address2_freighttermscode? Address2_FreightTermsCode
@@ -1583,7 +1594,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv værdien for breddegraden for den sekundære adresse til brug ved kortlægning og andre programmer.
+		/// Type the latitude value for the secondary address for use in mapping and other applications.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_latitude")]
 		public System.Nullable<double> Address2_Latitude
@@ -1601,7 +1612,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den første linje i den sekundære adresse.
+		/// Type the first line of the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_line1")]
 		public string Address2_Line1
@@ -1619,7 +1630,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den anden linje i den sekundære adresse.
+		/// Type the second line of the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_line2")]
 		public string Address2_Line2
@@ -1637,7 +1648,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den tredje linje i den sekundære adresse.
+		/// Type the third line of the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_line3")]
 		public string Address2_Line3
@@ -1655,7 +1666,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv værdien for længdegraden for den sekundære adresse til brug ved kortlægning og andre programmer.
+		/// Type the longitude value for the secondary address for use in mapping and other applications.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_longitude")]
 		public System.Nullable<double> Address2_Longitude
@@ -1673,7 +1684,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et beskrivende navn til den sekundære adresse, f.eks. koncernhovedsæde.
+		/// Type a descriptive name for the secondary address, such as Corporate Headquarters.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_name")]
 		public string Address2_Name
@@ -1691,7 +1702,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv postnummeret for den sekundære adresse.
+		/// Type the ZIP Code or postal code for the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_postalcode")]
 		public string Address2_PostalCode
@@ -1709,7 +1720,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv postboksnummeret for den sekundære adresse.
+		/// Type the post office box number of the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_postofficebox")]
 		public string Address2_PostOfficeBox
@@ -1727,7 +1738,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv navnet på hovedkontakten på firmaets sekundære adresse.
+		/// Type the name of the main contact at the account's secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_primarycontactname")]
 		public string Address2_PrimaryContactName
@@ -1745,7 +1756,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg en forsendelsesmetode til leverancer, der sendes til denne adresse.
+		/// Select a shipping method for deliveries sent to this address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_shippingmethodcode")]
 		public virtual contact_address2_shippingmethodcode? Address2_ShippingMethodCode
@@ -1779,7 +1790,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv staten eller området for den sekundære adresse.
+		/// Type the state or province of the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_stateorprovince")]
 		public string Address2_StateOrProvince
@@ -1797,7 +1808,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv det hovedtelefonnummer, der er tilknyttet den sekundære adresse.
+		/// Type the main phone number associated with the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_telephone1")]
 		public string Address2_Telephone1
@@ -1815,7 +1826,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et andet telefonnummer, der er tilknyttet den sekundære adresse.
+		/// Type a second phone number associated with the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_telephone2")]
 		public string Address2_Telephone2
@@ -1833,7 +1844,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et tredje telefonnummer, der er tilknyttet den sekundære adresse.
+		/// Type a third phone number associated with the secondary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_telephone3")]
 		public string Address2_Telephone3
@@ -1851,7 +1862,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv UPS-zonen for den sekundære adresse for at sikre, at forsendelsesgebyrer beregnes korrekt, og at leverancer foretages prompte, hvis forsendelse sker med UPS.
+		/// Type the UPS zone of the secondary address to make sure shipping charges are calculated correctly and deliveries are made promptly, if shipped by UPS.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_upszone")]
 		public string Address2_UPSZone
@@ -1869,7 +1880,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg tidszonen, eller forskydningen fra GMT, for denne adresse, så andre kan referere til den, når de kontakter nogen på denne adresse.
+		/// Select the time zone, or UTC offset, for this address so that other people can reference it when they contact someone at this address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_utcoffset")]
 		public System.Nullable<int> Address2_UTCOffset
@@ -1887,7 +1898,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for adresse 3.
+		/// Unique identifier for address 3.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_addressid")]
 		public System.Nullable<System.Guid> Address3_AddressId
@@ -1905,7 +1916,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den tredje adressetype.
+		/// Select the third address type.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_addresstypecode")]
 		public virtual contact_address3_addresstypecode? Address3_AddressTypeCode
@@ -1939,7 +1950,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv byen i adresse 3.
+		/// Type the city for the 3rd address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_city")]
 		public string Address3_City
@@ -1957,7 +1968,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser den fulde tredje adresse.
+		/// Shows the complete third address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_composite")]
 		public string Address3_Composite
@@ -1969,7 +1980,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// landet/området for adresse 3.
+		/// the country or region for the 3rd address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_country")]
 		public string Address3_Country
@@ -1987,7 +1998,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv regionen for den tredje adresse.
+		/// Type the county for the third address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_county")]
 		public string Address3_County
@@ -2005,7 +2016,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv det faxnummer, der er tilknyttet den tredje adresse.
+		/// Type the fax number associated with the third address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_fax")]
 		public string Address3_Fax
@@ -2023,7 +2034,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg fragtbetingelser for den tredje adresse for at sikre, at forsendelsesordrer behandles korrekt.
+		/// Select the freight terms for the third address to make sure shipping orders are processed correctly.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_freighttermscode")]
 		public virtual contact_address3_freighttermscode? Address3_FreightTermsCode
@@ -2057,7 +2068,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv værdien for breddegraden for den tredje adresse til brug ved kortlægning og i andre programmer.
+		/// Type the latitude value for the third address for use in mapping and other applications.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_latitude")]
 		public System.Nullable<double> Address3_Latitude
@@ -2075,7 +2086,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// den første linje i adresse 3.
+		/// the first line of the 3rd address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_line1")]
 		public string Address3_Line1
@@ -2093,7 +2104,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// den anden linje i adresse 3.
+		/// the second line of the 3rd address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_line2")]
 		public string Address3_Line2
@@ -2111,7 +2122,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// den tredje linje i adresse 3.
+		/// the third line of the 3rd address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_line3")]
 		public string Address3_Line3
@@ -2129,7 +2140,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv værdien for længdegraden for den tredje adresse til brug ved kortlægning og i andre programmer.
+		/// Type the longitude value for the third address for use in mapping and other applications.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_longitude")]
 		public System.Nullable<double> Address3_Longitude
@@ -2147,7 +2158,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et beskrivende navn til den tredje adresse, f.eks. koncernhovedsæde.
+		/// Type a descriptive name for the third address, such as Corporate Headquarters.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_name")]
 		public string Address3_Name
@@ -2165,7 +2176,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// postnummeret i adresse 3.
+		/// the ZIP Code or postal code for the 3rd address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_postalcode")]
 		public string Address3_PostalCode
@@ -2183,7 +2194,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// postboksnummeret i adresse 3.
+		/// the post office box number of the 3rd address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_postofficebox")]
 		public string Address3_PostOfficeBox
@@ -2201,7 +2212,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv navnet på hovedkontakten på firmaets tredje adresse.
+		/// Type the name of the main contact at the account's third address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_primarycontactname")]
 		public string Address3_PrimaryContactName
@@ -2219,7 +2230,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg en forsendelsesmetode til leverancer, der sendes til denne adresse.
+		/// Select a shipping method for deliveries sent to this address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_shippingmethodcode")]
 		public virtual contact_address3_shippingmethodcode? Address3_ShippingMethodCode
@@ -2253,7 +2264,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// området i adresse 3.
+		/// the state or province of the third address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_stateorprovince")]
 		public string Address3_StateOrProvince
@@ -2271,7 +2282,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv det hovedtelefonnummer, der er tilknyttet den tredje adresse.
+		/// Type the main phone number associated with the third address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_telephone1")]
 		public string Address3_Telephone1
@@ -2289,7 +2300,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et andet telefonnummer, der er tilknyttet den tredje adresse.
+		/// Type a second phone number associated with the third address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_telephone2")]
 		public string Address3_Telephone2
@@ -2307,7 +2318,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et tredje telefonnummer, der er tilknyttet den primære adresse.
+		/// Type a third phone number associated with the primary address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_telephone3")]
 		public string Address3_Telephone3
@@ -2325,7 +2336,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv UPS-zonen for den tredje adresse for at sikre, at forsendelsesgebyrer beregnes korrekt, og at leverancer foretages prompte, hvis forsendelse sker med UPS.
+		/// Type the UPS zone of the third address to make sure shipping charges are calculated correctly and deliveries are made promptly, if shipped by UPS.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_upszone")]
 		public string Address3_UPSZone
@@ -2343,7 +2354,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg tidszonen, eller forskydningen fra GMT, for denne adresse, så andre kan referere til den, når de kontakter nogen på denne adresse.
+		/// Select the time zone, or UTC offset, for this address so that other people can reference it when they contact someone at this address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address3_utcoffset")]
 		public System.Nullable<int> Address3_UTCOffset
@@ -2422,7 +2433,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser det aktuelle antal mislykkede forsøg på brug af adgangskode for kontakten.
+		/// Shows the current count of failed password attempts for the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adx_identity_accessfailedcount")]
 		public System.Nullable<int> adx_identity_accessfailedcount
@@ -2440,7 +2451,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Bestemmer, om mailen bliver bekræftet af kontakten.
+		/// Determines if the email is confirmed by the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adx_identity_emailaddress1confirmed")]
 		public System.Nullable<bool> adx_identity_emailaddress1confirmed
@@ -2474,7 +2485,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver den sidste dato og klokkeslæt for den bruger, der er logget på en portal.
+		/// Indicates the last date and time the user successfully signed in to a portal.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adx_identity_lastsuccessfullogin")]
 		public System.Nullable<System.DateTime> adx_identity_lastsuccessfullogin
@@ -2492,7 +2503,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver, at kontakten ikke længere kan logge på portalen med den lokale konto.
+		/// Indicates that the contact can no longer sign in to the portal using the local account.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adx_identity_locallogindisabled")]
 		public System.Nullable<bool> adx_identity_locallogindisabled
@@ -2526,7 +2537,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Bestemmer, om denne kontakt vil spore mislykkede adgangsforsøg og låses efter for mange mislykkede forsøg. Du kan forhindre, at kontakten låses ved at deaktivere denne indstilling.
+		/// Determines if this contact will track failed access attempts and become locked after too many failed attempts. To prevent the contact from becoming locked, you can disable this setting.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adx_identity_lockoutenabled")]
 		public System.Nullable<bool> adx_identity_lockoutenabled
@@ -2560,7 +2571,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser det tidspunkt, hvor låsen fjernes fra den låste kontakt.
+		/// Shows the moment in time when the locked contact becomes unlocked again.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adx_identity_lockoutenddate")]
 		public System.Nullable<System.DateTime> adx_identity_lockoutenddate
@@ -2578,7 +2589,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Bestemmer, om webgodkendelse er aktiveret for kontakten.
+		/// Determines if web authentication is enabled for the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adx_identity_logonenabled")]
 		public System.Nullable<bool> adx_identity_logonenabled
@@ -2612,7 +2623,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Bestemmer, om telefonnummeret bliver bekræftet af kontakten.
+		/// Determines if the phone number is confirmed by the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adx_identity_mobilephoneconfirmed")]
 		public System.Nullable<bool> adx_identity_mobilephoneconfirmed
@@ -2676,7 +2687,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Et token, der bruges til at styre webgodkendelsessessionen.
+		/// A token used to manage the web authentication session.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adx_identity_securitystamp")]
 		public string adx_identity_securitystamp
@@ -2694,7 +2705,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Bestemmer, om to faktor-godkendelse aktiveres for kontakten.
+		/// Determines if two-factor authentication is enabled for the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adx_identity_twofactorenabled")]
 		public System.Nullable<bool> adx_identity_twofactorenabled
@@ -2728,7 +2739,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser bruger-id'et til lokal webgodkendelse.
+		/// Shows the user identity for local web authentication.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adx_identity_username")]
 		public string adx_identity_username
@@ -2791,7 +2802,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens foretrukne portal-LCID
+		/// User’s preferred portal LCID
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adx_preferredlcid")]
 		public System.Nullable<int> adx_preferredlcid
@@ -2961,7 +2972,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kun til systembrug.
+		/// For system use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("aging30")]
 		public Microsoft.Xrm.Sdk.Money Aging30
@@ -2973,7 +2984,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser feltet Aldersfordeling 30 konverteret til systemets standardgrundvaluta. I beregningerne bruges den valutakurs, der er angivet i området Valutaer.
+		/// Shows the Aging 30 field converted to the system's default base currency. The calculations use the exchange rate specified in the Currencies area.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("aging30_base")]
 		public Microsoft.Xrm.Sdk.Money Aging30_Base
@@ -2985,7 +2996,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kun til systembrug.
+		/// For system use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("aging60")]
 		public Microsoft.Xrm.Sdk.Money Aging60
@@ -2997,7 +3008,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser feltet Aldersfordeling 60 konverteret til systemets standardgrundvaluta. I beregningerne bruges den valutakurs, der er angivet i området Valutaer.
+		/// Shows the Aging 60 field converted to the system's default base currency. The calculations use the exchange rate specified in the Currencies area.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("aging60_base")]
 		public Microsoft.Xrm.Sdk.Money Aging60_Base
@@ -3009,7 +3020,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kun til systembrug.
+		/// For system use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("aging90")]
 		public Microsoft.Xrm.Sdk.Money Aging90
@@ -3021,7 +3032,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser feltet Aldersfordeling 90 konverteret til systemets standardgrundvaluta. I beregningerne bruges den valutakurs, der er angivet i området Valutaer.
+		/// Shows the Aging 90 field converted to the system's default base currency. The calculations use the exchange rate specified in the Currencies area.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("aging90_base")]
 		public Microsoft.Xrm.Sdk.Money Aging90_Base
@@ -3033,7 +3044,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv datoen for kontaktens bryllupsdag eller årsdagen for servicen til brug i gaveprogrammer til kunder eller anden kommunikation.
+		/// Enter the date of the contact's wedding or service anniversary for use in customer gift programs or other communications.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("anniversary")]
 		public System.Nullable<System.DateTime> Anniversary
@@ -3051,7 +3062,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens årlige indkomst til brug i profileringer og økonomiske analyser.
+		/// Type the contact's annual income for use in profiling and financial analysis.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("annualincome")]
 		public Microsoft.Xrm.Sdk.Money AnnualIncome
@@ -3069,7 +3080,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser feltet Årlig indkomst konverteret til systemets standardgrundvaluta. I beregningerne bruges den valutakurs, der er angivet i området Valutaer.
+		/// Shows the Annual Income field converted to the system's default base currency. The calculations use the exchange rate specified in the Currencies area.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("annualincome_base")]
 		public Microsoft.Xrm.Sdk.Money AnnualIncome_Base
@@ -3080,8 +3091,102 @@ namespace Boruto.Plugin.Entities
 			}
 		}
 		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_id")]
+		public string arbo_id
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("arbo_id");
+			}
+			set
+			{
+				this.OnPropertyChanging("arbo_id");
+				this.SetAttributeValue("arbo_id", value);
+				this.OnPropertyChanged("arbo_id");
+			}
+		}
+		
 		/// <summary>
-		/// Angiv navnet på kontaktpersonens assistent.
+		/// Unique identifier for Phone User associated with Contact.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_phoneuserid")]
+		public Microsoft.Xrm.Sdk.EntityReference arbo_phoneuserid
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_phoneuserid");
+			}
+			set
+			{
+				this.OnPropertyChanging("arbo_phoneuserid");
+				this.SetAttributeValue("arbo_phoneuserid", value);
+				this.OnPropertyChanged("arbo_phoneuserid");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_phoneuseridname")]
+		public string arbo_phoneuseridName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("arbo_phoneuserid"))
+				{
+					return this.FormattedValues["arbo_phoneuserid"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_portalinvitationcode")]
+		public string arbo_portalinvitationcode
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("arbo_portalinvitationcode");
+			}
+			set
+			{
+				this.OnPropertyChanging("arbo_portalinvitationcode");
+				this.SetAttributeValue("arbo_portalinvitationcode", value);
+				this.OnPropertyChanged("arbo_portalinvitationcode");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_portalpasswordrequestid")]
+		public string arbo_portalpasswordrequestid
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("arbo_portalpasswordrequestid");
+			}
+			set
+			{
+				this.OnPropertyChanging("arbo_portalpasswordrequestid");
+				this.SetAttributeValue("arbo_portalpasswordrequestid", value);
+				this.OnPropertyChanged("arbo_portalpasswordrequestid");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_supplierid")]
+		public string arbo_supplierid
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("arbo_supplierid");
+			}
+			set
+			{
+				this.OnPropertyChanging("arbo_supplierid");
+				this.SetAttributeValue("arbo_supplierid", value);
+				this.OnPropertyChanged("arbo_supplierid");
+			}
+		}
+		
+		/// <summary>
+		/// Type the name of the contact's assistant.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("assistantname")]
 		public string AssistantName
@@ -3099,7 +3204,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv telefonnummeret til kontaktpersonens assistent.
+		/// Type the phone number for the contact's assistant.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("assistantphone")]
 		public string AssistantPhone
@@ -3117,7 +3222,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens fødselsdag til brug i gaveprogrammer til kunder eller anden kommunikation.
+		/// Enter the contact's birthday for use in customer gift programs or other communications.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("birthdate")]
 		public System.Nullable<System.DateTime> BirthDate
@@ -3135,7 +3240,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et andet arbejdstelefonnummer til denne kontakt.
+		/// Type a second business phone number for this contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("business2")]
 		public string Business2
@@ -3153,7 +3258,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Gemmer billede af visitkortet
+		/// Stores Image of the Business Card
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("businesscard")]
 		public string BusinessCard
@@ -3171,7 +3276,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Gemmer egenskaber for kontrolelement for visitkort.
+		/// Stores Business Card Control Properties.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("businesscardattributes")]
 		public string BusinessCardAttributes
@@ -3189,7 +3294,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et tilbagekaldstelefonnummer til denne kontakt.
+		/// Type a callback phone number for this contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("callback")]
 		public string Callback
@@ -3207,7 +3312,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv navnene på kontaktens børn som reference i kommunikation og klientprogrammer.
+		/// Type the names of the contact's children for reference in communications and client programs.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("childrensnames")]
 		public string ChildrensNames
@@ -3225,7 +3330,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens firmatelefon.
+		/// Type the company phone of the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("company")]
 		public string Company
@@ -3243,7 +3348,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for kontaktpersonen.
+		/// Unique identifier of the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("contactid")]
 		public System.Nullable<System.Guid> ContactId
@@ -3282,7 +3387,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser, hvem der har oprettet posten.
+		/// Shows who created the record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdby")]
 		public Microsoft.Xrm.Sdk.EntityReference CreatedBy
@@ -3294,7 +3399,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser den eksterne part, der oprettede posten.
+		/// Shows the external party who created the record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdbyexternalparty")]
 		public Microsoft.Xrm.Sdk.EntityReference CreatedByExternalParty
@@ -3370,7 +3475,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser dato og klokkeslæt for oprettelse af posten. Datoen og klokkeslættet vises i den tidszone, der er valgt i indstillingerne i Microsoft Dynamics 365.
+		/// Shows the date and time when the record was created. The date and time are displayed in the time zone selected in Microsoft Dynamics 365 options.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdon")]
 		public System.Nullable<System.DateTime> CreatedOn
@@ -3382,7 +3487,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser, hvem der oprettede posten på vegne af en anden bruger.
+		/// Shows who created the record on behalf of another user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdonbehalfby")]
 		public Microsoft.Xrm.Sdk.EntityReference CreatedOnBehalfBy
@@ -3426,7 +3531,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens kreditgrænse som reference, når du håndterer faktura- og regnskabsproblemer over for kunden.
+		/// Type the credit limit of the contact for reference when you address invoice and accounting issues with the customer.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("creditlimit")]
 		public Microsoft.Xrm.Sdk.Money CreditLimit
@@ -3444,7 +3549,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser feltet Kreditgrænse konverteret til systemets standardgrundvaluta til brug for rapportering. I beregningerne bruges den valutakurs, der er angivet i området Valutaer.
+		/// Shows the Credit Limit field converted to the system's default base currency for reporting purposes. The calculations use the exchange rate specified in the Currencies area.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("creditlimit_base")]
 		public Microsoft.Xrm.Sdk.Money CreditLimit_Base
@@ -3456,7 +3561,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kontakten er genstand for kreditstop, som reference ved håndtering af faktura- og regnskabsproblemer.
+		/// Select whether the contact is on a credit hold, for reference when addressing invoice and accounting issues.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("creditonhold")]
 		public System.Nullable<bool> CreditOnHold
@@ -3490,7 +3595,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg størrelsen på kontaktens firma til brug for segmentering og rapportering.
+		/// Select the size of the contact's company for segmentation and reporting purposes.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("customersizecode")]
 		public virtual contact_customersizecode? CustomerSizeCode
@@ -3524,7 +3629,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den kategori, der bedst beskriver relationen mellem kontakten og din organisation.
+		/// Select the category that best describes the relationship between the contact and your organization.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("customertypecode")]
 		public virtual contact_customertypecode? CustomerTypeCode
@@ -3558,7 +3663,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den standardprisliste, der er tilknyttet kontakten, for at sikre, at salgsmuligheder, tilbud og ordrer anvender de korrekte produktpriser over for denne kunde.
+		/// price_level_contacts
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("defaultpricelevelid")]
 		public Microsoft.Xrm.Sdk.EntityReference DefaultPriceLevelId
@@ -3592,7 +3697,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den division eller afdeling, hvor kontakten arbejder, i moderselskabet eller den overordnede afdeling.
+		/// Type the department or business unit where the contact works in the parent company or business.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("department")]
 		public string Department
@@ -3610,7 +3715,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv flere oplysninger for at beskrive kontakten, f.eks. et uddrag fra firmaets websted.
+		/// Type additional information to describe the contact, such as an excerpt from the company's website.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("description")]
 		public string Description
@@ -3628,7 +3733,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kontakten accepterer masseforsendelser af e-mails, der sendes via marketingkampagner eller lynkampagner. Hvis Tillad ikke er valgt, kan kontakten tilføjes på marketinglisten, men er udelukket fra e-mailen.
+		/// Select whether the contact accepts bulk email sent through marketing campaigns or quick campaigns. If Do Not Allow is selected, the contact can be added to marketing lists, but will be excluded from the email.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotbulkemail")]
 		public System.Nullable<bool> DoNotBulkEMail
@@ -3662,7 +3767,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kontakten accepterer masseforsendelser af almindelig post, der sendes via marketingkampagner eller lynkampagner. Hvis Tillad ikke er valgt, kan kontakten tilføjes på marketinglisten, men er udelukket fra brevene.
+		/// Select whether the contact accepts bulk postal mail sent through marketing campaigns or quick campaigns. If Do Not Allow is selected, the contact can be added to marketing lists, but will be excluded from the letters.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotbulkpostalmail")]
 		public System.Nullable<bool> DoNotBulkPostalMail
@@ -3696,7 +3801,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kontakten tillader, at der sendes direct mail fra Microsoft Dynamics 365. Hvis Tillad ikke er valgt, sender Microsoft Dynamics 365 ikke mailen.
+		/// Select whether the contact allows direct email sent from Microsoft Dynamics 365. If Do Not Allow is selected, Microsoft Dynamics 365 will not send the email.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotemail")]
 		public System.Nullable<bool> DoNotEMail
@@ -3730,7 +3835,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kontakten tillader faxer. Hvis Tillad ikke er valgt, udelukkes kontakten fra alle faxaktiviteter, der distribueres i marketingkampagner.
+		/// Select whether the contact allows faxes. If Do Not Allow is selected, the contact will be excluded from any fax activities distributed in marketing campaigns.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotfax")]
 		public System.Nullable<bool> DoNotFax
@@ -3764,7 +3869,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kontakten accepterer telefonopkald. Hvis Tillad ikke er valgt, udelukkes kontakten fra alle telefonopkaldsaktiviteter, der distribueres i marketingkampagner.
+		/// Select whether the contact accepts phone calls. If Do Not Allow is selected, the contact will be excluded from any phone call activities distributed in marketing campaigns.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotphone")]
 		public System.Nullable<bool> DoNotPhone
@@ -3798,7 +3903,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kontakten tillader direct mail. Hvis Tillad ikke er valgt, udelukkes kontakten fra brevaktiviteter, der distribueres i marketingkampagner.
+		/// Select whether the contact allows direct mail. If Do Not Allow is selected, the contact will be excluded from letter activities distributed in marketing campaigns.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotpostalmail")]
 		public System.Nullable<bool> DoNotPostalMail
@@ -3848,7 +3953,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kontakten accepterer marketingmateriale som f.eks. brochurer eller kataloger. Kontakter, der har frameldt dette, kan udelukkes fra marketinginitiativer.
+		/// Select whether the contact accepts marketing materials, such as brochures or catalogs. Contacts that opt out can be excluded from marketing initiatives.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotsendmm")]
 		public System.Nullable<bool> DoNotSendMM
@@ -3866,7 +3971,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg kontaktens højeste uddannelsesniveau til brug ved segmentering og analyser.
+		/// Select the contact's highest level of education for use in segmentation and analysis.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("educationcode")]
 		public virtual contact_educationcode? EducationCode
@@ -3900,7 +4005,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens primære e-mail-adresse.
+		/// Type the primary email address for the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("emailaddress1")]
 		public string EMailAddress1
@@ -3918,7 +4023,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens sekundære e-mail-adresse.
+		/// Type the secondary email address for the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("emailaddress2")]
 		public string EMailAddress2
@@ -3936,7 +4041,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens alternative e-mail-adresse.
+		/// Type an alternate email address for the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("emailaddress3")]
 		public string EMailAddress3
@@ -3954,7 +4059,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens medarbejder-id eller -nummer som reference i ordrer, servicesager eller anden kommunikation med kontaktens organisation.
+		/// Type the employee ID or number for the contact for reference in orders, service cases, or other communications with the contact's organization.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("employeeid")]
 		public string EmployeeId
@@ -3972,7 +4077,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser postens standardbillede.
+		/// Shows the default image for the record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("entityimage")]
 		public byte[] EntityImage
@@ -4008,7 +4113,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kun til intern brug.
+		/// For internal use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("entityimageid")]
 		public System.Nullable<System.Guid> EntityImageId
@@ -4020,7 +4125,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser omregningskursen for postens valuta. Valutakursen bruges til at konvertere alle pengefelter i posten fra den lokale valuta til systemets standardvaluta.
+		/// Shows the conversion rate of the record's currency. The exchange rate is used to convert all money fields in the record from the local currency to the system's default currency.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("exchangerate")]
 		public System.Nullable<decimal> ExchangeRate
@@ -4032,7 +4137,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Id for en ekstern bruger.
+		/// Identifier for an external user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("externaluseridentifier")]
 		public string ExternalUserIdentifier
@@ -4050,7 +4155,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg kontaktens civilstand som reference i opfølgende telefonopkald og anden kommunikation.
+		/// Select the marital status of the contact for reference in follow-up phone calls and other communications.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("familystatuscode")]
 		public virtual contact_familystatuscode? FamilyStatusCode
@@ -4084,7 +4189,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens faxnummer.
+		/// Type the fax number for the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("fax")]
 		public string Fax
@@ -4102,7 +4207,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens fornavn for at sikre, at kontakten tituleres korrekt i salgsopkald, e-mail og marketingkampagner.
+		/// Type the contact's first name to make sure the contact is addressed correctly in sales calls, email, and marketing campaigns.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("firstname")]
 		public string FirstName
@@ -4120,7 +4225,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Oplysninger om, hvorvidt følgende mailaktivitet som åbninger, visning af vedhæftede filer og klik på links skal tillades for mails, der sendes til kontakten.
+		/// Information about whether to allow following email activity like opens, attachment views and link clicks for emails sent to the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("followemail")]
 		public System.Nullable<bool> FollowEmail
@@ -4154,7 +4259,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv URL-adressen til kontaktens FTP-websted, for at brugerne kan få adgang til data og dele dokumenter.
+		/// Type the URL for the contact's FTP site to enable users to access data and share documents.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("ftpsiteurl")]
 		public string FtpSiteUrl
@@ -4172,7 +4277,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kombinerer og viser kontaktens for- og efternavn, så det fulde navn kan vises i visninger og rapporter.
+		/// Combines and shows the contact's first and last names so that the full name can be displayed in views and reports.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("fullname")]
 		public string FullName
@@ -4184,7 +4289,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg kontaktens køn for at sikre, at kontakten tituleres korrekt i salgsopkald, e-mail og marketingkampagner.
+		/// Select the contact's gender to make sure the contact is addressed correctly in sales calls, email, and marketing campaigns.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("gendercode")]
 		public virtual contact_gendercode? GenderCode
@@ -4218,7 +4323,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv pasnummeret eller cpr-nummeret på kontakten til brug i dokumenter eller rapporter.
+		/// Type the passport number or other government ID for the contact for use in documents or reports.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("governmentid")]
 		public string GovernmentId
@@ -4236,7 +4341,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kontaktens har børn, som reference i opfølgende telefonopkald og anden kommunikation.
+		/// Select whether the contact has any children for reference in follow-up phone calls and other communications.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("haschildrencode")]
 		public virtual contact_haschildrencode? HasChildrenCode
@@ -4270,7 +4375,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et andet privat telefonnummer til denne kontakt.
+		/// Type a second home phone number for this contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("home2")]
 		public string Home2
@@ -4288,7 +4393,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for den dataimport eller dataoverførsel, der oprettede denne post.
+		/// Unique identifier of the data import or data migration that created this record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("importsequencenumber")]
 		public System.Nullable<int> ImportSequenceNumber
@@ -4306,7 +4411,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg, om kontakten findes i et separat regnskabssystem eller et andet system, f.eks. Microsoft Dynamics GP eller en anden ERP-database, til brug i integrationsprocesser.
+		/// Select whether the contact exists in a separate accounting or other system, such as Microsoft Dynamics GP or another ERP database, for use in integration processes.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("isbackofficecustomer")]
 		public System.Nullable<bool> IsBackofficeCustomer
@@ -4356,7 +4461,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens stilling for at sikre, at kontakten tituleres korrekt i salgsopkald, e-mail og marketingkampagner.
+		/// Type the job title of the contact to make sure the contact is addressed correctly in sales calls, email, and marketing campaigns.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("jobtitle")]
 		public string JobTitle
@@ -4374,7 +4479,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens efternavn for at sikre, at kontakten tituleres korrekt i salgsopkald, e-mail og marketingkampagner.
+		/// Type the contact's last name to make sure the contact is addressed correctly in sales calls, email, and marketing campaigns.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("lastname")]
 		public string LastName
@@ -4392,7 +4497,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Indeholder dato- og klokkeslætsstemplet for den seneste tid for I venteposition.
+		/// Contains the date and time stamp of the last on hold time.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("lastonholdtime")]
 		public System.Nullable<System.DateTime> LastOnHoldTime
@@ -4410,7 +4515,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser den dato, hvor kontakten sidst blev inkluderet i en marketingkampagne eller lynkampagne.
+		/// Shows the date when the contact was last included in a marketing campaign or quick campaign.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("lastusedincampaign")]
 		public System.Nullable<System.DateTime> LastUsedInCampaign
@@ -4428,7 +4533,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den primære marketingkilde, der dirigerede kontakten til din organisation.
+		/// Select the primary marketing source that directed the contact to your organization.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("leadsourcecode")]
 		public virtual contact_leadsourcecode? LeadSourceCode
@@ -4462,7 +4567,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv navnet på kontaktens overordnede til brug ved eskalering af problemer eller anden opfølgende kommunikation med kontakten.
+		/// Type the name of the contact's manager for use in escalating issues or other follow-up communications with the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("managername")]
 		public string ManagerName
@@ -4480,7 +4585,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv telefonnummeret til kontaktpersonens overordnede.
+		/// Type the phone number for the contact's manager.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("managerphone")]
 		public string ManagerPhone
@@ -4498,7 +4603,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver, om det kun er til marketingbrug
+		/// Whether is only for marketing
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("marketingonly")]
 		public System.Nullable<bool> MarketingOnly
@@ -4564,7 +4669,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for hovedkontaktpersonen til fletning.
+		/// Unique identifier of the master contact for merge.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("masterid")]
 		public Microsoft.Xrm.Sdk.EntityReference MasterId
@@ -4576,7 +4681,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser, om firmaet er blevet flettet med en hovedkontaktperson.
+		/// Shows whether the account has been merged with a master contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("merged")]
 		public System.Nullable<bool> Merged
@@ -4604,7 +4709,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens mellemnavn eller initialer for at sikre, at kontakten tituleres korrekt.
+		/// Type the contact's middle name or initial to make sure the contact is addressed correctly.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("middlename")]
 		public string MiddleName
@@ -4622,7 +4727,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktpersonens mobilnummer.
+		/// Type the mobile phone number for the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("mobilephone")]
 		public string MobilePhone
@@ -4640,7 +4745,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser, hvem der sidst har opdateret posten.
+		/// Shows who last updated the record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedby")]
 		public Microsoft.Xrm.Sdk.EntityReference ModifiedBy
@@ -4652,7 +4757,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser den eksterne part, der ændrede posten.
+		/// Shows the external party who modified the record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedbyexternalparty")]
 		public Microsoft.Xrm.Sdk.EntityReference ModifiedByExternalParty
@@ -4728,7 +4833,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser dato og klokkeslæt for den seneste opdatering af posten. Datoen og klokkeslættet vises i den tidszone, der er valgt i indstillingerne i Microsoft Dynamics 365.
+		/// Shows the date and time when the record was last updated. The date and time are displayed in the time zone selected in Microsoft Dynamics 365 options.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedon")]
 		public System.Nullable<System.DateTime> ModifiedOn
@@ -4740,7 +4845,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser, hvem der sidst har opdateret posten på vegne af en anden bruger.
+		/// Shows who last updated the record on behalf of another user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedonbehalfby")]
 		public Microsoft.Xrm.Sdk.EntityReference ModifiedOnBehalfBy
@@ -4784,7 +4889,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for det firma, der er tilknyttet Kontakt.
+		/// Unique identifier for Account associated with Contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msa_managingpartnerid")]
 		public Microsoft.Xrm.Sdk.EntityReference msa_managingpartnerid
@@ -4834,7 +4939,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Knytter til nøgletalsposter for kontakter
+		/// Maps to contact KPI records
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_contactkpiid")]
 		public Microsoft.Xrm.Sdk.EntityReference msdyn_contactkpiid
@@ -4868,7 +4973,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver indflydelse på køb ved hjælp af etiketter
+		/// Indicate buying influence using labels
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_decisioninfluencetag")]
 		public virtual contact_msdyn_decisioninfluencetag? msdyn_decisioninfluencetag
@@ -4902,7 +5007,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver, at kontakten har frameldt sig websporing.
+		/// Indicates that the contact has opted out of web tracking.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_disablewebtracking")]
 		public System.Nullable<bool> msdyn_disablewebtracking
@@ -4936,7 +5041,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Beskriver, om kontakten er frameldt eller ej
+		/// Describes whether contact is opted out or not
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_gdproptout")]
 		public System.Nullable<bool> msdyn_gdproptout
@@ -4970,7 +5075,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Beskriver, om kontakten er en assistent i organisationsdiagrammet
+		/// Describes if the contact is an assistant in org chart
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_isassistantinorgchart")]
 		public System.Nullable<bool> msdyn_isassistantinorgchart
@@ -5004,7 +5109,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver, at kontakten betragtes som mindreårig i henhold til de lokale bestemmelser.
+		/// Indicates that the contact is considered a minor in their jurisdiction.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_isminor")]
 		public System.Nullable<bool> msdyn_isminor
@@ -5038,7 +5143,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver, at kontakten betragtes som mindreårig i henhold til de lokale bestemmelser og har forældresamtykke.
+		/// Indicates that the contact is considered a minor in their jurisdiction and has parental consent.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_isminorwithparentalconsent")]
 		public System.Nullable<bool> msdyn_isminorwithparentalconsent
@@ -5072,7 +5177,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver, om kontakten er tilhører det tilknyttede firma
+		/// Whether or not the contact belongs to the associated account
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_orgchangestatus")]
 		public virtual contact_msdyn_orgchangestatus? msdyn_orgchangestatus
@@ -5106,7 +5211,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver den dato og det klokkeslæt, hvor personen accepterede vilkårene og betingelserne for portalen.
+		/// Indicates the date and time that the person agreed to the portal terms and conditions.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_portaltermsagreementdate")]
 		public System.Nullable<System.DateTime> msdyn_portaltermsagreementdate
@@ -5124,7 +5229,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiver den primære tidszone, som kontaktpersonen arbejder med.
+		/// Indicates the primary time zone that the contact works on.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_primarytimezone")]
 		public System.Nullable<int> msdyn_PrimaryTimeZone
@@ -5142,7 +5247,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for det segment, der er tilknyttet contact.
+		/// Unique identifier for Segment associated with contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_segmentid")]
 		public Microsoft.Xrm.Sdk.EntityReference msdyn_segmentid
@@ -5176,7 +5281,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Brugerens foretrukne portalsprog
+		/// User’s preferred portal language
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("mspp_userpreferredlcid")]
 		public virtual powerpagelanguages? mspp_userpreferredlcid
@@ -5210,7 +5315,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktpersonens kælenavn.
+		/// Type the contact's nickname.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("nickname")]
 		public string NickName
@@ -5228,7 +5333,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv antal børn tilhørende kontakten, som reference i opfølgende telefonopkald og anden kommunikation.
+		/// Type the number of children the contact has for reference in follow-up phone calls and other communications.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("numberofchildren")]
 		public System.Nullable<int> NumberOfChildren
@@ -5246,7 +5351,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser, hvor længe posten var i venteposition i minutter.
+		/// Shows how long, in minutes, that the record was on hold.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("onholdtime")]
 		public System.Nullable<int> OnHoldTime
@@ -5258,7 +5363,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser det kundeemne, som kontakten er oprettet ud fra, hvis kontakten er oprettet ved konvertering af et kundeemne i Microsoft Dynamics 365. Dette bruges til at relatere kontakten til dataene i det oprindelige kundeemne til brug ved rapportering og analyser.
+		/// contact_originating_lead
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("originatingleadid")]
 		public Microsoft.Xrm.Sdk.EntityReference OriginatingLeadId
@@ -5308,7 +5413,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Dato og klokkeslæt for overførsel af posten.
+		/// Date and time that the record was migrated.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("overriddencreatedon")]
 		public System.Nullable<System.DateTime> OverriddenCreatedOn
@@ -5326,7 +5431,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den bruger eller det team, der er tildelt til at administrere posten. Dette felt opdateres, hver gang posten tildeles en ny bruger.
+		/// Enter the user or team who is assigned to manage the record. This field is updated every time the record is assigned to a different user.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("ownerid")]
 		public Microsoft.Xrm.Sdk.EntityReference OwnerId
@@ -5376,7 +5481,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for den afdeling, der ejer kontaktpersonen.
+		/// Unique identifier of the business unit that owns the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningbusinessunit")]
 		public Microsoft.Xrm.Sdk.EntityReference OwningBusinessUnit
@@ -5404,7 +5509,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for den gruppe, der ejer kontakten.
+		/// Unique identifier of the team who owns the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningteam")]
 		public Microsoft.Xrm.Sdk.EntityReference OwningTeam
@@ -5416,7 +5521,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for den bruger, der ejer kontakten.
+		/// Unique identifier of the user who owns the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owninguser")]
 		public Microsoft.Xrm.Sdk.EntityReference OwningUser
@@ -5428,7 +5533,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens personsøgernummer.
+		/// Type the pager number for the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("pager")]
 		public string Pager
@@ -5446,7 +5551,57 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for den overordnede kontaktperson.
+		/// For internal use only
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("parent_contactid")]
+		public Microsoft.Xrm.Sdk.EntityReference parent_contactid
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("parent_contactid");
+			}
+			set
+			{
+				this.OnPropertyChanging("parent_contactid");
+				this.SetAttributeValue("parent_contactid", value);
+				this.OnPropertyChanged("parent_contactid");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("parent_contactidname")]
+		public string parent_contactidName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("parent_contactid"))
+				{
+					return this.FormattedValues["parent_contactid"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("parent_contactidyominame")]
+		public string parent_contactidYomiName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("parent_contactid"))
+				{
+					return this.FormattedValues["parent_contactid"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
+		/// Unique identifier of the parent contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("parentcontactid")]
 		public Microsoft.Xrm.Sdk.EntityReference ParentContactId
@@ -5490,7 +5645,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg det overordnede firma eller den overordnede kontakt for kontakten for at give et hurtigt link til flere oplysninger som f.eks. økonomiske oplysninger, aktiviteter og salgsmuligheder.
+		/// Select the parent account or parent contact for the contact to provide a quick link to additional details, such as financial information, activities, and opportunities.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("parentcustomerid")]
 		public Microsoft.Xrm.Sdk.EntityReference ParentCustomerId
@@ -5540,7 +5695,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser, om kontaktpersonen deltager i arbejdsprocesregler.
+		/// Shows whether the contact participates in workflow rules.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("participatesinworkflow")]
 		public System.Nullable<bool> ParticipatesInWorkflow
@@ -5574,7 +5729,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg betalingsbetingelserne for at angive, hvornår kunden skal betale det samlede beløb.
+		/// Select the payment terms to indicate when the customer needs to pay the total amount.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("paymenttermscode")]
 		public virtual contact_paymenttermscode? PaymentTermsCode
@@ -5608,7 +5763,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den foretrukne ugedag til serviceaftaler.
+		/// Select the preferred day of the week for service appointments.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredappointmentdaycode")]
 		public virtual contact_preferredappointmentdaycode? PreferredAppointmentDayCode
@@ -5642,7 +5797,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg det foretrukne tidspunkt til serviceaftaler.
+		/// Select the preferred time of day for service appointments.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredappointmenttimecode")]
 		public virtual contact_preferredappointmenttimecode? PreferredAppointmentTimeCode
@@ -5676,7 +5831,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den foretrukne kontaktmetode.
+		/// Select the preferred method of contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredcontactmethodcode")]
 		public virtual contact_preferredcontactmethodcode? PreferredContactMethodCode
@@ -5710,7 +5865,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg kontaktens foretrukne servicelokale eller -udstyr for at sikre, at servicer planlægges korrekt i forhold til kunden.
+		/// equipment_contacts
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredequipmentid")]
 		public Microsoft.Xrm.Sdk.EntityReference PreferredEquipmentId
@@ -5744,7 +5899,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg kontaktens foretrukne service for at sikre, at servicer planlægges korrekt i forhold til kunden.
+		/// service_contacts
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredserviceid")]
 		public Microsoft.Xrm.Sdk.EntityReference PreferredServiceId
@@ -5778,7 +5933,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den regelmæssige eller foretrukne kundeservicemedarbejder som reference, når du planlægger serviceaktiviteter for kontakten.
+		/// Choose the regular or preferred customer service representative for reference when scheduling service activities for the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredsystemuserid")]
 		public Microsoft.Xrm.Sdk.EntityReference PreferredSystemUserId
@@ -5828,7 +5983,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser processens id.
+		/// Shows the ID of the process.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("processid")]
 		public System.Nullable<System.Guid> ProcessId
@@ -5846,7 +6001,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens titulering for at sikre, at kontakten tituleres korrekt i salgsopkald, e-mails og marketingkampagner.
+		/// Type the salutation of the contact to make sure the contact is addressed correctly in sales calls, email messages, and marketing campaigns.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("salutation")]
 		public string Salutation
@@ -5864,7 +6019,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg en forsendelsesmetode til leverancer, der sendes til denne adresse.
+		/// Select a shipping method for deliveries sent to this address.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("shippingmethodcode")]
 		public virtual contact_shippingmethodcode? ShippingMethodCode
@@ -5898,7 +6053,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den serviceaftale (SLA), du vil anvende på kontaktposten.
+		/// Choose the service level agreement (SLA) that you want to apply to the Contact record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("slaid")]
 		public Microsoft.Xrm.Sdk.EntityReference SLAId
@@ -5916,7 +6071,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Sidste SLA, der blev anvendt til denne sag. Dette felt er kun beregnet til intern brug.
+		/// Last SLA that was applied to this case. This field is for internal use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("slainvokedid")]
 		public Microsoft.Xrm.Sdk.EntityReference SLAInvokedId
@@ -5960,7 +6115,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv navnet på kontaktens ægtefælle eller partner som reference ved opkald, arrangementer eller anden kommunikation med kontakten.
+		/// Type the name of the contact's spouse or partner for reference during calls, events, or other communications with the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("spousesname")]
 		public string SpousesName
@@ -5978,7 +6133,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser fasens id.
+		/// Shows the ID of the stage.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("stageid")]
 		public System.Nullable<System.Guid> StageId
@@ -5996,7 +6151,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser, om kontakten er aktiv eller inaktiv. Inaktive kontakter er skrivebeskyttede og kan ikke redigeres, medmindre de genaktiveres.
+		/// Shows whether the contact is active or inactive. Inactive contacts are read-only and can't be edited unless they are reactivated.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("statecode")]
 		public virtual contact_statecode? StateCode
@@ -6030,7 +6185,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg kontaktens status.
+		/// Select the contact's status.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("statuscode")]
 		public virtual contact_statuscode? StatusCode
@@ -6064,7 +6219,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kun til intern brug.
+		/// For internal use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("subscriptionid")]
 		public System.Nullable<System.Guid> SubscriptionId
@@ -6082,7 +6237,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv det suffiks, der bruges i kontaktens navn, f.eks. Jr. eller Sr. for at sikre, at kontakten tituleres korrekt i salgsopkald, e-mail og marketingkampagner.
+		/// Type the suffix used in the contact's name, such as Jr. or Sr. to make sure the contact is addressed correctly in sales calls, email, and marketing campaigns.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("suffix")]
 		public string Suffix
@@ -6100,7 +6255,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Antal af brugere eller samtaler, der fulgte posten
+		/// Number of users or conversations followed the record
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("teamsfollowed")]
 		public System.Nullable<int> TeamsFollowed
@@ -6118,7 +6273,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv hovedtelefonnummeret til denne kontakt.
+		/// Type the main phone number for this contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("telephone1")]
 		public string Telephone1
@@ -6136,7 +6291,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et andet telefonnummer til denne kontakt.
+		/// Type a second phone number for this contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("telephone2")]
 		public string Telephone2
@@ -6154,7 +6309,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv et tredje telefonnummer til denne kontakt.
+		/// Type a third phone number for this contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("telephone3")]
 		public string Telephone3
@@ -6172,7 +6327,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg et område eller distrikt for kontakten til brug ved segmentering og analyser.
+		/// Select a region or territory for the contact for use in segmentation and analysis.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("territorycode")]
 		public virtual contact_territorycode? TerritoryCode
@@ -6206,7 +6361,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Samlet tid jeg har brugt på mails (læsning og skrivning) samt møder i relation til kontakten.
+		/// Total time spent for emails (read and write) and meetings by me in relation to the contact record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("timespentbymeonemailandmeetings")]
 		public string TimeSpentByMeOnEmailAndMeetings
@@ -6218,7 +6373,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kun til intern brug.
+		/// For internal use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("timezoneruleversionnumber")]
 		public System.Nullable<int> TimeZoneRuleVersionNumber
@@ -6236,7 +6391,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Vælg den lokale valuta til posten for at sikre, at budgetter rapporteres i den korrekte valuta.
+		/// Choose the local currency for the record to make sure budgets are reported in the correct currency.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("transactioncurrencyid")]
 		public Microsoft.Xrm.Sdk.EntityReference TransactionCurrencyId
@@ -6270,7 +6425,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Kun til intern brug.
+		/// For internal use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("traversedpath")]
 		public string TraversedPath
@@ -6288,7 +6443,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Den tidszonekode, der var i brug ved oprettelse af posten.
+		/// Time zone code that was in use when the record was created.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("utcconversiontimezonecode")]
 		public System.Nullable<int> UTCConversionTimeZoneCode
@@ -6306,7 +6461,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Versionsnummeret for kontakten.
+		/// Version number of the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("versionnumber")]
 		public System.Nullable<long> VersionNumber
@@ -6318,7 +6473,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv kontaktens forretningswebsted eller personlige websted eller URL-adresse til blog.
+		/// Type the contact's professional or personal website or blog URL.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("websiteurl")]
 		public string WebSiteUrl
@@ -6336,7 +6491,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den fonestiske stavemåde for kontaktens fornavn, hvis navnet er angivet på japansk, for at sikre, at navnet udtales korrekt i telefonopkald med kontakten.
+		/// Type the phonetic spelling of the contact's first name, if the name is specified in Japanese, to make sure the name is pronounced correctly in phone calls with the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yomifirstname")]
 		public string YomiFirstName
@@ -6354,7 +6509,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Viser kontaktens kombinerede Yomi-fornavn og -efternavn, så det fulde fonetiske navn kan vises i visninger og rapporter.
+		/// Shows the combined Yomi first and last names of the contact so that the full phonetic name can be displayed in views and reports.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yomifullname")]
 		public string YomiFullName
@@ -6366,7 +6521,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den fonestiske stavemåde for kontaktens efternavn, hvis navnet er angivet på japansk, for at sikre, at navnet udtales korrekt i telefonopkald med kontakten.
+		/// Type the phonetic spelling of the contact's last name, if the name is specified in Japanese, to make sure the name is pronounced correctly in phone calls with the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yomilastname")]
 		public string YomiLastName
@@ -6384,7 +6539,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Angiv den fonestiske stavemåde for kontaktens mellemnavn, hvis navnet er angivet på japansk, for at sikre, at navnet udtales korrekt i telefonopkald med kontakten.
+		/// Type the phonetic spelling of the contact's middle name, if the name is specified in Japanese, to make sure the name is pronounced correctly in phone calls with the contact.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yomimiddlename")]
 		public string YomiMiddleName
@@ -6416,6 +6571,150 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("account_primary_contact");
 				this.SetRelatedEntities<Boruto.Plugin.Entities.Account>("account_primary_contact", null, value);
 				this.OnPropertyChanged("account_primary_contact");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N arbo_chainresponsible_contact_account
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_chainresponsible_contact_account")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Account> arbo_chainresponsible_contact_account
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_chainresponsible_contact_account", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("arbo_chainresponsible_contact_account");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_chainresponsible_contact_account", null, value);
+				this.OnPropertyChanged("arbo_chainresponsible_contact_account");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N arbo_contact_account_contract
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_contact_account_contract")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Account> arbo_contact_account_contract
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_contact_account_contract", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("arbo_contact_account_contract");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_contact_account_contract", null, value);
+				this.OnPropertyChanged("arbo_contact_account_contract");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N arbo_contact_account_finance
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_contact_account_finance")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Account> arbo_contact_account_finance
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_contact_account_finance", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("arbo_contact_account_finance");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_contact_account_finance", null, value);
+				this.OnPropertyChanged("arbo_contact_account_finance");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N arbo_contact_account_logistic
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_contact_account_logistic")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Account> arbo_contact_account_logistic
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_contact_account_logistic", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("arbo_contact_account_logistic");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_contact_account_logistic", null, value);
+				this.OnPropertyChanged("arbo_contact_account_logistic");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N arbo_salesresponsiblecontact_account
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_salesresponsiblecontact_account")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Account> arbo_salesresponsiblecontact_account
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_salesresponsiblecontact_account", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("arbo_salesresponsiblecontact_account");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_salesresponsiblecontact_account", null, value);
+				this.OnPropertyChanged("arbo_salesresponsiblecontact_account");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N arbo_superior1_contact_account
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_superior1_contact_account")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Account> arbo_superior1_contact_account
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_superior1_contact_account", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("arbo_superior1_contact_account");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_superior1_contact_account", null, value);
+				this.OnPropertyChanged("arbo_superior1_contact_account");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N arbo_superior2_contact_account
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_superior2_contact_account")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Account> arbo_superior2_contact_account
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_superior2_contact_account", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("arbo_superior2_contact_account");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_superior2_contact_account", null, value);
+				this.OnPropertyChanged("arbo_superior2_contact_account");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N arbo_suppliersupport_contact_account
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_suppliersupport_contact_account")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Account> arbo_suppliersupport_contact_account
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_suppliersupport_contact_account", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("arbo_suppliersupport_contact_account");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_suppliersupport_contact_account", null, value);
+				this.OnPropertyChanged("arbo_suppliersupport_contact_account");
 			}
 		}
 		
@@ -6456,6 +6755,24 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// 1:N contact_parent_contact
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("contact_parent_contact", Microsoft.Xrm.Sdk.EntityRole.Referenced)]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Contact> Referencedcontact_parent_contact
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Contact>("contact_parent_contact", Microsoft.Xrm.Sdk.EntityRole.Referenced);
+			}
+			set
+			{
+				this.OnPropertyChanging("Referencedcontact_parent_contact");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Contact>("contact_parent_contact", Microsoft.Xrm.Sdk.EntityRole.Referenced, value);
+				this.OnPropertyChanged("Referencedcontact_parent_contact");
+			}
+		}
+		
+		/// <summary>
 		/// 1:N lead_customer_contacts
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lead_customer_contacts")]
@@ -6492,56 +6809,20 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// 1:N opportunity_customer_contacts
+		/// N:N arbo_contactallowportalaccountaccess
 		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("opportunity_customer_contacts")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> opportunity_customer_contacts
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_contactallowportalaccountaccess")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Account> arbo_contactallowportalaccountaccess
 		{
 			get
 			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_customer_contacts", null);
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_contactallowportalaccountaccess", null);
 			}
 			set
 			{
-				this.OnPropertyChanging("opportunity_customer_contacts");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_customer_contacts", null, value);
-				this.OnPropertyChanged("opportunity_customer_contacts");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N opportunity_parent_contact
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("opportunity_parent_contact")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Opportunity> opportunity_parent_contact
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_parent_contact", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("opportunity_parent_contact");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Opportunity>("opportunity_parent_contact", null, value);
-				this.OnPropertyChanged("opportunity_parent_contact");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N quote_customer_contacts
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("quote_customer_contacts")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> quote_customer_contacts
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("quote_customer_contacts", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("quote_customer_contacts");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("quote_customer_contacts", null, value);
-				this.OnPropertyChanged("quote_customer_contacts");
+				this.OnPropertyChanging("arbo_contactallowportalaccountaccess");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.Account>("arbo_contactallowportalaccountaccess", null, value);
+				this.OnPropertyChanged("arbo_contactallowportalaccountaccess");
 			}
 		}
 		
@@ -6560,37 +6841,6 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("contactleads_association");
 				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("contactleads_association", null, value);
 				this.OnPropertyChanged("contactleads_association");
-			}
-		}
-		
-		/// <summary>
-		/// N:N contactquotes_association
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("contactquotes_association")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Quote> contactquotes_association
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Quote>("contactquotes_association", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("contactquotes_association");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Quote>("contactquotes_association", null, value);
-				this.OnPropertyChanged("contactquotes_association");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 business_unit_contacts
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningbusinessunit")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("business_unit_contacts")]
-		public Boruto.Plugin.Entities.BusinessUnit business_unit_contacts
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.BusinessUnit>("business_unit_contacts", null);
 			}
 		}
 		
@@ -6674,6 +6924,25 @@ namespace Boruto.Plugin.Entities
 			get
 			{
 				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("contact_owning_user", null);
+			}
+		}
+		
+		/// <summary>
+		/// N:1 contact_parent_contact
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("parent_contactid")]
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("contact_parent_contact", Microsoft.Xrm.Sdk.EntityRole.Referencing)]
+		public Boruto.Plugin.Entities.Contact Referencingcontact_parent_contact
+		{
+			get
+			{
+				return this.GetRelatedEntity<Boruto.Plugin.Entities.Contact>("contact_parent_contact", Microsoft.Xrm.Sdk.EntityRole.Referencing);
+			}
+			set
+			{
+				this.OnPropertyChanging("Referencingcontact_parent_contact");
+				this.SetRelatedEntity<Boruto.Plugin.Entities.Contact>("contact_parent_contact", Microsoft.Xrm.Sdk.EntityRole.Referencing, value);
+				this.OnPropertyChanged("Referencingcontact_parent_contact");
 			}
 		}
 		
@@ -6764,19 +7033,6 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("system_user_contacts");
 				this.SetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("system_user_contacts", null, value);
 				this.OnPropertyChanged("system_user_contacts");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 team_contacts
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningteam")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("team_contacts")]
-		public Boruto.Plugin.Entities.Team team_contacts
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.Team>("team_contacts", null);
 			}
 		}
 	}

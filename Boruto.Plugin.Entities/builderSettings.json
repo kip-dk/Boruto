@@ -12,18 +12,11 @@
   "optionSetsTypesFolder": ".\\ProxyClasses",
   "entityNamesFilter": [
     "account",
-    "businessunit",
-    "privilege",
-    "roleprivileges",
-    "role",
-    "contact",
-    "team",
+    "lead",
+    "bor_plugindemo",
     "systemuser",
-    "calendar",
-    "calendarrule",
-    "opportunity",
-    "quote",
-    "lead"
+    "contact"
+
   ],
   "messageNamesFilter": [
     "boruto_*"

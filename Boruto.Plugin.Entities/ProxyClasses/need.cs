@@ -14,7 +14,7 @@ namespace Boruto.Plugin.Entities
 	
 	
 	/// <summary>
-	/// Behovstype
+	/// Need type
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -22,16 +22,16 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Mhave = 0,
+		Musthave = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Brhave = 1,
+		Shouldhave = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Godtathave = 2,
+		Goodtohave = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Intetbehov = 3,
+		Noneed = 3,
 	}
 }
 #pragma warning restore CS1591

@@ -10,7 +10,6 @@ namespace Boruto.Plugin.UT.Reflection.Model
     [TestClass]
     public class PluginMethodArgumentTest
     {
-
         [TestMethod]
         public void ArgumentConstructorTest()
         {

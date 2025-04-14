@@ -15,14 +15,14 @@ namespace Boruto.Plugin.Entities
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum quotecreationmethod
+	public enum arbo_heighttype
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ukendt = 776160000,
+		Halftop = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Revision = 776160001,
+		Fulltop10cm = 2,
 	}
 }
 #pragma warning restore CS1591

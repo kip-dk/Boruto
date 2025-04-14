@@ -19,16 +19,16 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Opadgende = 0,
+		Improving = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Stabil = 1,
+		Steady = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Faldende = 2,
+		Declining = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ikketilstrkkeligeoplysninger = 3,
+		Notenoughinfo = 3,
 	}
 }
 #pragma warning restore CS1591

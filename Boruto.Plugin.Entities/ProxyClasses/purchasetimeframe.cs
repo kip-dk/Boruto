@@ -14,7 +14,7 @@ namespace Boruto.Plugin.Entities
 	
 	
 	/// <summary>
-	/// Den sandsynlige tidsramme for, hvornår dette kundeemne foretager et køb.
+	/// The timeframe that this lead is likely to make a purchase in.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -22,19 +22,19 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Omgende = 0,
+		Immediate = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Dettekvartal = 1,
+		ThisQuarter = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Nstekvartal = 2,
+		NextQuarter = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Detter = 3,
+		ThisYear = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ukendt = 4,
+		Unknown = 4,
 	}
 }
 #pragma warning restore CS1591

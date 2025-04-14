@@ -14,7 +14,7 @@ namespace Boruto.Plugin.Entities
 	
 	
 	/// <summary>
-	/// Typen af købsproces for dette kundeemne.
+	/// The type of Purchase Process for this lead.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -22,13 +22,13 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Individuel = 0,
+		Individual = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Udvalg = 1,
+		Committee = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ukendt = 2,
+		Unknown = 2,
 	}
 }
 #pragma warning restore CS1591

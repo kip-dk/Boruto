@@ -19,16 +19,16 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		KlassifikationA = 0,
+		GradeA = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		KlassifikationB = 1,
+		GradeB = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		KlassifikationC = 2,
+		GradeC = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		KlassifikationD = 3,
+		GradeD = 3,
 	}
 }
 #pragma warning restore CS1591

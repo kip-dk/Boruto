@@ -13,19 +13,16 @@ namespace Boruto.Plugin.Entities
 {
 	
 	
-	/// <summary>
-	/// Baseret på indstillingerne i SkipPriceCalculation springes OOB-prisberegningen for qooi-niveauet over
-	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum qooi_skippricecalculation
+	public enum arbo_palletlabelsize
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DoPriceCalcAlways = 0,
+		Runninglist = 500000000,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		SkipPriceCalcOnRetrieve = 1,
+		A4 = 500000001,
 	}
 }
 #pragma warning restore CS1591
