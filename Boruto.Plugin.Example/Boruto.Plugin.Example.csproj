@@ -5,8 +5,8 @@
     <PowerAppsTargetsPath>$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\PowerApps</PowerAppsTargetsPath>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Boruto.Plugin.Example.snk</AssemblyOriginatorKeyFile>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
     <ProjectTypeGuids>{4C25E9B5-9FA6-436c-8E19-B395D2A65FAF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
 
@@ -33,10 +33,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Boruto.Plugin.Entities\Boruto.Plugin.Entities.csproj" />
     <ProjectReference Include="..\Boruto.Plugin\Boruto.Plugin.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Plugins\bor_plugindemos\" />
   </ItemGroup>
 
   <Import Project="$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Plugin.targets" Condition="Exists('$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Plugin.targets')" />

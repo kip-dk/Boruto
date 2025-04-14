@@ -353,21 +353,26 @@ namespace Boruto
         #region run plugin
         internal void Execute()
         {
+            this.Trace("In execute");
             using (var fac = new Reflection.ServiceFactory(this))
             {
                 var resolver = this.GetPluginServiceResolver();
                 foreach (var method in resolver.GetMethods(this.methodPattern, this.PrimaryLogicalName))
                 {
+                    this.Trace($"In execute: { method.method.Name }");
+
                     if ((this.Message == "Create" || this.Message == "Update") && !method.AllTargetFilter)
                     {
                         if (!this.Target.Attributes.Keys.Where(r => method.TargetFilter.Contains(r)).Any())
                         {
+                            this.Trace("exit on target filter");
                             continue;
                         }
                     }
 
                     if (!method.IsRelevant(this.PluginExecutionContext))
                     {
+                        this.Trace("exit on relevance");
                         continue;
                     }
 
@@ -383,7 +388,9 @@ namespace Boruto
                     #endregion
 
                     #region invoke
+                    this.Trace("before invoke");
                     var result = method.method.Invoke(this.plugin, args);
+                    this.Trace("after invoke");
 
                     if (this.Stage == 40 && this.IsAsync == false && result is Microsoft.Xrm.Sdk.OrganizationResponse re && re.Results != null)
                     {
@@ -401,6 +408,7 @@ namespace Boruto
         #region public methods
         public void Trace(string message, [CallerMemberName] string method = null)
         {
+            this.TracingService.Trace(message);
         }
         #endregion
 

@@ -85,15 +85,17 @@ namespace Boruto.Extensions.Reflection
                     return null;
                 }
 
-                var defaultConstructor = constructors.Where(r => { var pms = r.GetParameters(); return pms == null || pms.Length == 0; }).SingleOrDefault();
-                if (defaultConstructor == null)
-                {
-                    return null;
-                }
 
                 if (fromType.IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity)))
                 {
-                    var entity = (Microsoft.Xrm.Sdk.Entity)System.Activator.CreateInstance(fromType);
+                    var useType = fromType;
+                    var defaultConstructor = constructors.Where(r => { var pms = r.GetParameters(); return pms == null || pms.Length == 0; }).SingleOrDefault();
+                    if (defaultConstructor == null)
+                    {
+                        useType = fromType.BaseType;
+                    }
+
+                    var entity = (Microsoft.Xrm.Sdk.Entity)System.Activator.CreateInstance(useType);
 
                     if (entity.LogicalName == logicalName)
                     {
