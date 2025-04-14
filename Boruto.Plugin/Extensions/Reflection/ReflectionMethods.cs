@@ -129,7 +129,7 @@ namespace Boruto.Extensions.Reflection
                         var constructor = sType.GetConstructors(BindingFlags.Public | BindingFlags.Instance).OrderBy(r => (r.GetParameters() ?? new ParameterInfo[0]).Length).FirstOrDefault();
                         if (constructor == null)
                         {
-                            throw new Exceptions.UnresolveableEntityTypeException(sType);
+                            throw new Exceptions.UnresolveableEntityTypeException(sType, nameof(ReflectionMethods));
                         }
                         var pms = constructor.GetParameters();
                         var args = new object[pms.Length];
@@ -182,7 +182,7 @@ namespace Boruto.Extensions.Reflection
                 var can = (from t in ass.GetTypes()
                            where t.IsInterface == false
                              && t.IsAbstract == false
-                             && t.IsAssignableFrom(source)
+                             && source.IsAssignableFrom(t)
                              && t.HasPublicConstructor()
                            select t).FirstOrDefault();
 

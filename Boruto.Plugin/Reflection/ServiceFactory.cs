@@ -234,6 +234,19 @@ namespace Boruto.Reflection
             }
             #endregion
 
+            #region custom service provider
+            if (this.ctx.CustomServiceProvider != null)
+            {
+                object result = this.ResolveCustomService(fromType);
+
+                if (result != null)
+                {
+                    resolved[fromType] = result;
+                    return result;
+                }
+            }
+            #endregion
+
             #region resolve from implementation
             if (fromType.IsInterface || fromType.IsAbstract)
             {
@@ -254,23 +267,10 @@ namespace Boruto.Reflection
             }
             #endregion
 
-            #region custom service provider
-            if (this.ctx.CustomServiceProvider != null)
-            {
-                object result = this.ResolveCustomService(fromType);
-
-                if (result != null)
-                {
-                    resolved[fromType] = result;
-                    return result;
-                }
-            }
-            #endregion
-
             #region resolve my service type search
             #endregion
 
-            throw new Exceptions.UnresolveableEntityTypeException(fromType);
+            throw new Exceptions.UnresolveableTypeException(fromType);
         }
 
         private static Dictionary<Type, bool> customService = new Dictionary<Type, bool>();

@@ -8,7 +8,7 @@ namespace Boruto.Exceptions
 {
     public class UnresolveableEntityTypeException : BaseException
     {
-        public UnresolveableEntityTypeException(Type type) : base($"{ type.FullName } could not be resolved to an strongly typed entity with a default constructor")
+        public UnresolveableEntityTypeException(Type type, string source) : base($"{ type.FullName } could not be resolved to an strongly typed entity with a default constructor, { source }")
         {
         }
     }
