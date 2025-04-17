@@ -15,7 +15,7 @@ namespace Boruto.Implementations
         private string logicalName;
         private static readonly Microsoft.Xrm.Sdk.Query.ColumnSet ALL = new Microsoft.Xrm.Sdk.Query.ColumnSet(true);
 
-        internal Repository(
+        public Repository(
             Microsoft.Xrm.Sdk.IOrganizationService orgService,
             Microsoft.Xrm.Sdk.Client.OrganizationServiceContext ctx
             )

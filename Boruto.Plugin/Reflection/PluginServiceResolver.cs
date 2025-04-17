@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Xrm.Sdk;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,11 +39,16 @@ namespace Boruto.Reflection
 
             foreach (var method in methods)
             {
+                this.Trace($"Found methos: { method.Name }");
                 var next = new Model.PluginMethod(this.pluginType, method, primaryLogicalName, this.assemblies);
 
                 if (next.IsMatch)
                 {
                     result.Add(next);
+                    this.Trace("Next is match");
+                } else
+                {
+                    this.Trace("Next is NOT match");
                 }
             }
 
@@ -57,6 +64,19 @@ namespace Boruto.Reflection
                 return pattern;
             }
             return $"{pattern}:{primaryLogicalName}";
+        }
+
+        private void Trace(string message)
+        {
+            var ctx = PluginContext.Current;
+
+            if (ctx != null)
+            {
+                ctx.Trace(message);
+            } else
+            {
+                Console.WriteLine(message);
+            }
         }
     }
 }

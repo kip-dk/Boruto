@@ -304,11 +304,15 @@ namespace Boruto.Reflection
 
             if (admin)
             {
-                repositoryTypes[key] = Activator.CreateInstance(resultType, this.ctx.PluginAdminService, this.ctx.AdminServiceContext);
+                var orgService = this.ctx.PluginAdminService;
+                var orgContext = this.ctx.AdminServiceContext;
+                repositoryTypes[key] = Activator.CreateInstance(resultType, orgService, orgContext);
             }
             else
             {
-                repositoryTypes[key] = Activator.CreateInstance(resultType, this.ctx.PluginUserService, this.ctx.UserServiceContext);
+                var orgService = this.ctx.PluginUserService;
+                var orgContext = this.ctx.UserServiceContext;
+                repositoryTypes[key] = Activator.CreateInstance(resultType, orgService, orgContext);
             }
             return repositoryTypes[key];
         }

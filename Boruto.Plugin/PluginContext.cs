@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 
 namespace Boruto
 {
@@ -221,26 +222,26 @@ namespace Boruto
 
         #region microsoft service properties
         private IOrganizationService _InitiatingUserService;
-        public IOrganizationService InitiatingUserService 
+        public IOrganizationService InitiatingUserService
         {
             get
             {
                 if (this._InitiatingUserService == null)
                 {
-                    this._InitiatingUserService = this.StandardServiceProvider.GetOrganizationService(PluginExecutionContext.InitiatingUserId);
+                    this._InitiatingUserService = this.OrgSvcFactory.CreateOrganizationService(PluginExecutionContext.InitiatingUserId);
                 }
                 return this._InitiatingUserService;
-            } 
+            }
         }
 
         private IOrganizationService _PluginUserService;
-        public IOrganizationService PluginUserService 
+        public IOrganizationService PluginUserService
         {
             get
             {
                 if (this._PluginUserService == null)
                 {
-                    this._PluginUserService = this.StandardServiceProvider.GetOrganizationService(PluginExecutionContext.UserId); // User that the plugin is registered to run as, Could be same as current user.
+                    this._PluginUserService = this.OrgSvcFactory.CreateOrganizationService(PluginExecutionContext.UserId); // User that the plugin is registered to run as, Could be same as current user.
 
                 }
                 return this._PluginUserService;
@@ -248,7 +249,7 @@ namespace Boruto
         }
 
         private IOrganizationService _PluginAdminService;
-        public IOrganizationService PluginAdminService 
+        public IOrganizationService PluginAdminService
         {
             get
             {
@@ -257,11 +258,11 @@ namespace Boruto
                     this._PluginAdminService = this.OrgSvcFactory.CreateOrganizationService(null);
                 }
                 return this._PluginAdminService;
-            } 
+            }
         }
 
         private IPluginExecutionContext _PluginExecutionContext;
-        public IPluginExecutionContext PluginExecutionContext 
+        public IPluginExecutionContext PluginExecutionContext
         {
             get
             {
@@ -274,7 +275,7 @@ namespace Boruto
         }
 
         private IServiceEndpointNotificationService _NotificationService;
-        public IServiceEndpointNotificationService NotificationService 
+        public IServiceEndpointNotificationService NotificationService
         {
             get
             {
@@ -288,7 +289,7 @@ namespace Boruto
         }
 
         private ITracingService _TracingService;
-        public ITracingService TracingService 
+        public ITracingService TracingService
         {
             get
             {
@@ -298,7 +299,7 @@ namespace Boruto
 
                 }
                 return this._TracingService;
-            } 
+            }
         }
 
         public IServiceProvider StandardServiceProvider { get; }
@@ -307,17 +308,25 @@ namespace Boruto
         public Assembly[] ServiceAssemblies { get; }
 
         private IOrganizationServiceFactory _OrgSvcFactory;
-        public IOrganizationServiceFactory OrgSvcFactory 
+        public IOrganizationServiceFactory OrgSvcFactory
         {
             get
             {
-                if (this.OrgSvcFactory == null)
+                if (this._OrgSvcFactory == null)
                 {
+                    this.Trace("org service fac resolve");
                     this._OrgSvcFactory = this.StandardServiceProvider.Get<IOrganizationServiceFactory>();
+                    var proxyProvider = _OrgSvcFactory as IProxyTypesAssemblyProvider;
 
+                    if (proxyProvider != null)
+                    {
+                        var type = this.GetOrganizationServiceContextType();
+                        this.Trace($"org service fac resolve: { type.FullName }");
+                        proxyProvider.ProxyTypesAssembly = type.Assembly;
+                    }
                 }
                 return this._OrgSvcFactory;
-            } 
+            }
         }
 
         private Microsoft.Xrm.Sdk.Client.OrganizationServiceContext _AdminServiceContext;
@@ -327,7 +336,7 @@ namespace Boruto
             {
                 if (this._AdminServiceContext == null)
                 {
-                    this._AdminServiceContext = new Microsoft.Xrm.Sdk.Client.OrganizationServiceContext(this.PluginAdminService);
+                    this._AdminServiceContext = this.GetOrganizationServiceContext(this.PluginAdminService);
                 }
                 return this._AdminServiceContext;
             }
@@ -340,7 +349,7 @@ namespace Boruto
             {
                 if (this._UserServiceContext == null)
                 {
-                    this._UserServiceContext = new Microsoft.Xrm.Sdk.Client.OrganizationServiceContext(this.PluginAdminService);
+                    this._UserServiceContext = this.GetOrganizationServiceContext(this.PluginUserService);
                 }
                 return this._UserServiceContext;
             }
@@ -354,13 +363,13 @@ namespace Boruto
         #region run plugin
         internal void Execute()
         {
-            this.Trace("In execute");
+            this.Trace($"In execute: {this.methodPattern}, {this.PrimaryLogicalName}");
             using (var fac = new Reflection.ServiceFactory(this))
             {
                 var resolver = this.GetPluginServiceResolver();
                 foreach (var method in resolver.GetMethods(this.methodPattern, this.PrimaryLogicalName))
                 {
-                    this.Trace($"In execute: { method.method.Name }");
+                    this.Trace($"In execute: {method.method.Name}");
 
                     if ((this.Message == "Create" || this.Message == "Update") && !method.AllTargetFilter)
                     {
@@ -383,8 +392,8 @@ namespace Boruto
                     var ix = 0;
                     foreach (var arg in method.Arguments)
                     {
-                            args[ix] = fac.Resolve(arg);
-                            ix++;
+                        args[ix] = fac.Resolve(arg);
+                        ix++;
                     }
                     #endregion
 
@@ -426,6 +435,49 @@ namespace Boruto
                 serviceResolverIndex[this.Type] = new PluginServiceResolver(this.Type, this.ServiceAssemblies);
                 return serviceResolverIndex[this.Type];
             }
+        }
+
+        private static readonly Type ORG_TYPE = typeof(Microsoft.Xrm.Sdk.IOrganizationService);
+        private static readonly Type OSC_TYPE = typeof(Microsoft.Xrm.Sdk.Client.OrganizationServiceContext);
+        private Microsoft.Xrm.Sdk.Client.OrganizationServiceContext GetOrganizationServiceContext(Microsoft.Xrm.Sdk.IOrganizationService orgService)
+        {
+            var orServiceType = this.GetOrganizationServiceContextType();
+            return (Microsoft.Xrm.Sdk.Client.OrganizationServiceContext)System.Activator.CreateInstance(orServiceType, orgService);
+        }
+
+        private static Type _orgServiceContextType;
+        private Type GetOrganizationServiceContextType()
+        {
+            if (_orgServiceContextType == null)
+            {
+                foreach (var asm in this.ServiceAssemblies)
+                {
+                    var local = (from type in asm.GetTypes()
+                                 where type.BaseType == OSC_TYPE
+                                 select type).FirstOrDefault();
+
+                    if (local != null)
+                    {
+                        foreach (var con in local.GetConstructors())
+                        {
+                            if (con.IsPublic)
+                            {
+                                var pms = con.GetParameters();
+                                if (pms.Length == 1 && pms[0].ParameterType == ORG_TYPE)
+                                {
+                                    _orgServiceContextType = local;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (_orgServiceContextType == null)
+            {
+                throw new InvalidPluginExecutionException($"Unable to find an extending implementation of OrganizationServiceContext");
+            }
+            return _orgServiceContextType;
         }
         #endregion
 

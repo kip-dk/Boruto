@@ -101,8 +101,14 @@
   <ItemGroup>
     <Compile Include="Consts.cs" />
     <Compile Include="Extensions\Reflection\ReflectionMethodsTest.cs" />
+    <Compile Include="Fakes\OrganizationService.cs" />
+    <Compile Include="Fakes\OrganizationServiceFactory.cs" />
+    <Compile Include="Fakes\PluginExecutionContext.cs" />
+    <Compile Include="Fakes\StandardServiceProvider.cs" />
+    <Compile Include="Fakes\TraceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\Model\PluginMethodArgumentTest.cs" />
+    <Compile Include="Reflection\PluginServiceResolverTest.cs" />
     <Compile Include="Tests\ReflectionTest.cs" />
   </ItemGroup>
   <ItemGroup>

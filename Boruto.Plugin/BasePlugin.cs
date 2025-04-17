@@ -20,7 +20,7 @@ namespace Boruto
             this.secureString = secureString;
         }
 
-        public void Execute(IServiceProvider serviceProvider)
+        public void Execute(IServiceProvider platformServiceProvider)
         {
             var assemblies = new List<Assembly>();
             if (this.ServiceAssemblies != null && this.ServiceAssemblies.Length > 0)
@@ -35,14 +35,19 @@ namespace Boruto
                 assemblies.Add(me);
             }
 
-            using (var ctx = new PluginContext(this, serviceProvider, this.ServiceProvider, this.ServiceAssemblies, unsecure, secureString))
+            using (var ctx = this.GetContext(platformServiceProvider))
             {
                 ctx.Execute();
             }
         }
 
+
+        internal PluginContext GetContext(IServiceProvider platformServiceProvider)
+        {
+            return new PluginContext(this, platformServiceProvider, this.ServiceProvider, this.ServiceAssemblies, unsecure, secureString);
+        }
+
         protected virtual IServiceProvider ServiceProvider => null;
         protected virtual Assembly[] ServiceAssemblies => null;
-
     }
 }
