@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boruto.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,46 @@ namespace Boruto.Plugin.Example.Plugins.bor_plugindemo
 {
     public class bor_plugindemoPlugin : BasePlugin
     {
-        public void OnPreCreate(Entities.bor_plugindemos.bor_plugindemo target, ServiceAPI.IPluginDemoService service)
+        [Sort(1)]
+        public void OnPreCreate(Entities.bor_plugindemos.NameChanged.INameChanged target, ServiceAPI.IPluginDemoService service)
         {
             service.OnCreate(target);
+        }
+
+        [Sort(2)]
+        public void OnPreCreate(Entities.bor_plugindemos.NumberChanged.INumberChanged target)
+        {
+            target.DoStuff();
+        }
+
+        [Sort(1)]
+        public void OnPreUpdate(Entities.bor_plugindemos.NameChanged.INameChanged target, ServiceAPI.IPluginDemoService service)
+        {
+            service.OnCreate(target);
+        }
+
+        [Sort(2)]
+        public void OnPreUpdate(Entities.bor_plugindemos.NumberChanged.INumberChanged mergedimage)
+        {
+            mergedimage.DoStuff();
+        }
+
+        public void OnPreDelete(Boruto.Plugin.Example.Entities.bor_plugindemos.PreNumber.IPreNumber preimage, IRepository<Boruto.Plugin.Entities.bor_plugindemo> demoRepo)
+        {
+            if (preimage.bor_number != null)
+            {
+                var other = (from o in demoRepo.GetQuery()
+                             where o.bor_number == preimage.bor_number
+                               && o.bor_plugindemoId != preimage.Id
+                             select o.bor_plugindemoId).FirstOrDefault();
+
+                if (other != null)
+                {
+                    var clean = new Boruto.Plugin.Entities.bor_plugindemo { bor_plugindemoId = other.Value };
+                    clean.bor_changelog = $"delete: {preimage.Id}: { preimage.bor_number }";
+                    demoRepo.Update(clean);
+                }
+            }
         }
     }
 }

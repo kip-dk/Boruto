@@ -54,7 +54,9 @@ namespace Boruto.Plugin.Entities
 		/// </summary>
 		public partial class Fields
 		{
+			public const string bor_changelog = "bor_changelog";
 			public const string bor_name = "bor_name";
+			public const string bor_number = "bor_number";
 			public const string bor_plugindemoId = "bor_plugindemoid";
 			public const string Id = "bor_plugindemoid";
 			public const string bor_processmessage = "bor_processmessage";
@@ -129,6 +131,21 @@ namespace Boruto.Plugin.Entities
 			}
 		}
 		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_changelog")]
+		public string bor_changelog
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("bor_changelog");
+			}
+			set
+			{
+				this.OnPropertyChanging("bor_changelog");
+				this.SetAttributeValue("bor_changelog", value);
+				this.OnPropertyChanged("bor_changelog");
+			}
+		}
+		
 		/// <summary>
 		/// The name of the custom entity.
 		/// </summary>
@@ -144,6 +161,21 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("bor_name");
 				this.SetAttributeValue("bor_name", value);
 				this.OnPropertyChanged("bor_name");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_number")]
+		public System.Nullable<int> bor_number
+		{
+			get
+			{
+				return this.GetAttributeValue<System.Nullable<int>>("bor_number");
+			}
+			set
+			{
+				this.OnPropertyChanging("bor_number");
+				this.SetAttributeValue("bor_number", value);
+				this.OnPropertyChanged("bor_number");
 			}
 		}
 		

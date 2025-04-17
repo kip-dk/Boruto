@@ -8,6 +8,6 @@ namespace Boruto.Plugin.Example.ServiceAPI
 {
     public interface IPluginDemoService
     {
-        void OnCreate(Entities.bor_plugindemos.bor_plugindemo.INameChanged target);
+        void OnCreate(Entities.bor_plugindemos.NameChanged.INameChanged target);
     }
 }

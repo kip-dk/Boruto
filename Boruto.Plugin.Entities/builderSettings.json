@@ -7,9 +7,9 @@
   "generateSdkMessages": true,
   "generateGlobalOptionSets": false,
   "emitFieldsClasses": true,
-  "entityTypesFolder": ".\\ProxyClasses",
-  "messagesTypesFolder": ".\\ProxyClasses",
-  "optionSetsTypesFolder": ".\\ProxyClasses",
+  "entityTypesFolder": ".\\Entities\\ProxyClasses",
+  "messagesTypesFolder": ".\\Entities\\ProxyClasses",
+  "optionSetsTypesFolder": ".\\Entities\\ProxyClasses",
   "entityNamesFilter": [
     "account",
     "lead",

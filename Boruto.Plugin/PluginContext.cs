@@ -120,7 +120,7 @@ namespace Boruto
                         }
                     }
                 }
-                return this._target;
+                return this._preimage;
             }
         }
 
@@ -173,6 +173,7 @@ namespace Boruto
                     foreach (var att in pre.Attributes)
                     {
                         this._merged[att.Key] = att.Value;
+                        this._merged[$"preimage_{att.Key}"] = att.Value;
                     }
 
                     var tar = this.Target;

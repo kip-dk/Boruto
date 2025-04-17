@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Boruto.Plugin.Example.Entities.bor_plugindemos
 {
-    public partial class bor_plugindemo : Boruto.Plugin.Entities.bor_plugindemo, bor_plugindemo.INameChanged
+    public partial class NameChanged : Boruto.Plugin.Entities.bor_plugindemo, NameChanged.INameChanged
     {
-        public bor_plugindemo(Microsoft.Xrm.Sdk.ITracingService traceService): base()
+        public NameChanged(Microsoft.Xrm.Sdk.ITracingService traceService): base()
         {
             traceService.Trace($"trace service was injected into an entity instance.");
         }
