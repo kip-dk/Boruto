@@ -56,6 +56,7 @@ namespace Boruto.Reflection
                 {
                     ent.Attributes = this.ctx.PreImage.Attributes;
                     ent.LogicalName = this.ctx.PreImage.LogicalName;
+                    ent.Id = this.ctx.PreImage.Id;
                     return result;
                 }
 

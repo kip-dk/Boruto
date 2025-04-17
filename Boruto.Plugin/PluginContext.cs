@@ -109,6 +109,7 @@ namespace Boruto
                     this._preimage = new Entity();
                     this._preimage.LogicalName = this.PrimaryLogicalName;
                     this._preimage.Id = this.PrimaryEntityId;
+                    this.ResolveInfoFromDeleteMessage(_preimage, "preimage");
 
                     if (this.PluginExecutionContext.PreEntityImages != null)
                     {
@@ -135,6 +136,8 @@ namespace Boruto
                     this._postimage = new Entity();
                     this._postimage.LogicalName = this.PrimaryLogicalName;
                     this._postimage.Id = this.PrimaryEntityId;
+                    this.ResolveInfoFromDeleteMessage(_postimage,"postimage");
+
                     if (this.PluginExecutionContext.PostEntityImages != null)
                     {
                         foreach (var pe in this.PluginExecutionContext.PostEntityImages.Values)
@@ -170,6 +173,7 @@ namespace Boruto
                     this._merged = new Entity();
                     this._merged.LogicalName = this.PrimaryLogicalName;
                     this._merged.Id = this.PrimaryEntityId;
+
                     var pre = this.PreImage;
                     foreach (var att in pre.Attributes)
                     {
@@ -215,6 +219,18 @@ namespace Boruto
                     this._orgRequest = req;
                 }
                 return this._orgRequest;
+            }
+        }
+
+        private void ResolveInfoFromDeleteMessage(Microsoft.Xrm.Sdk.Entity entity, string type)
+        {
+            if (this.PluginExecutionContext.MessageName == "Delete")
+            {
+                var target = this.TargetReference;
+                entity.Id = target.Id;
+                entity.LogicalName = target.LogicalName;
+                this.Trace($"Resolved ({type}): { entity.Id }/{ target.Id }");
+                this.Trace($"Resolved ({type}): {entity.LogicalName}/{target.LogicalName}");
             }
         }
 
