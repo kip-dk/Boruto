@@ -9,16 +9,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Boruto.Plugin.Entities
+namespace Boruto.Deployment.Entities
 {
 	
 	
 	/// <summary>
-	/// Status of the plugindemo
+	/// Status of the Plugin Package
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum bor_plugindemo_statecode
+	public enum pluginpackage_statecode
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -29,11 +29,11 @@ namespace Boruto.Plugin.Entities
 	}
 	
 	/// <summary>
-	/// Reason for the status of the plugindemo
+	/// Reason for the status of the Plugin Package
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum bor_plugindemo_statuscode
+	public enum pluginpackage_statuscode
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -44,24 +44,20 @@ namespace Boruto.Plugin.Entities
 	}
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("bor_plugindemo")]
+	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("pluginpackage")]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public partial class bor_plugindemo : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	public partial class pluginpackage : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	{
 		
 		/// <summary>
-		/// Available fields, a the time of codegen, for the bor_plugindemo entity
+		/// Available fields, a the time of codegen, for the pluginpackage entity
 		/// </summary>
 		public partial class Fields
 		{
-			public const string bor_changelog = "bor_changelog";
-			public const string bor_name = "bor_name";
-			public const string bor_number = "bor_number";
-			public const string bor_plugindemoId = "bor_plugindemoid";
-			public const string Id = "bor_plugindemoid";
-			public const string bor_processmessage = "bor_processmessage";
-			public const string bor_triggeraction = "bor_triggeraction";
-			public const string bor_triggeractionName = "bor_triggeractionname";
+			public const string ComponentIdUnique = "componentidunique";
+			public const string ComponentState = "componentstate";
+			public const string componentstateName = "componentstatename";
+			public const string Content = "content";
 			public const string CreatedBy = "createdby";
 			public const string CreatedByName = "createdbyname";
 			public const string CreatedByYomiName = "createdbyyominame";
@@ -69,7 +65,15 @@ namespace Boruto.Plugin.Entities
 			public const string CreatedOnBehalfBy = "createdonbehalfby";
 			public const string CreatedOnBehalfByName = "createdonbehalfbyname";
 			public const string CreatedOnBehalfByYomiName = "createdonbehalfbyyominame";
+			public const string ExportKeyVersion = "exportkeyversion";
+			public const string FileId = "fileid";
+			public const string FileId_Name = "fileid_name";
 			public const string ImportSequenceNumber = "importsequencenumber";
+			public const string IsCustomizable = "iscustomizable";
+			public const string IsManaged = "ismanaged";
+			public const string ismanagedName = "ismanagedname";
+			public const string managedidentityid = "managedidentityid";
+			public const string managedidentityidName = "managedidentityidname";
 			public const string ModifiedBy = "modifiedby";
 			public const string ModifiedByName = "modifiedbyname";
 			public const string ModifiedByYomiName = "modifiedbyyominame";
@@ -77,41 +81,41 @@ namespace Boruto.Plugin.Entities
 			public const string ModifiedOnBehalfBy = "modifiedonbehalfby";
 			public const string ModifiedOnBehalfByName = "modifiedonbehalfbyname";
 			public const string ModifiedOnBehalfByYomiName = "modifiedonbehalfbyyominame";
+			public const string name = "name";
+			public const string OrganizationId = "organizationid";
+			public const string OrganizationIdName = "organizationidname";
 			public const string OverriddenCreatedOn = "overriddencreatedon";
-			public const string OwnerId = "ownerid";
-			public const string OwnerIdName = "owneridname";
-			public const string OwnerIdYomiName = "owneridyominame";
-			public const string OwningBusinessUnit = "owningbusinessunit";
-			public const string OwningBusinessUnitName = "owningbusinessunitname";
-			public const string OwningTeam = "owningteam";
-			public const string OwningUser = "owninguser";
+			public const string OverwriteTime = "overwritetime";
+			public const string Package = "package";
+			public const string Package_Name = "package_name";
+			public const string pluginpackageId = "pluginpackageid";
+			public const string Id = "pluginpackageid";
+			public const string SolutionId = "solutionid";
 			public const string statecode = "statecode";
 			public const string statecodeName = "statecodename";
 			public const string statuscode = "statuscode";
 			public const string statuscodeName = "statuscodename";
 			public const string TimeZoneRuleVersionNumber = "timezoneruleversionnumber";
+			public const string UniqueName = "uniquename";
 			public const string UTCConversionTimeZoneCode = "utcconversiontimezonecode";
+			public const string Version = "version";
 			public const string VersionNumber = "versionnumber";
-			public const string lk_bor_plugindemo_createdby = "lk_bor_plugindemo_createdby";
-			public const string lk_bor_plugindemo_createdonbehalfby = "lk_bor_plugindemo_createdonbehalfby";
-			public const string lk_bor_plugindemo_modifiedby = "lk_bor_plugindemo_modifiedby";
-			public const string lk_bor_plugindemo_modifiedonbehalfby = "lk_bor_plugindemo_modifiedonbehalfby";
-			public const string user_bor_plugindemo = "user_bor_plugindemo";
+			public const string pluginpackage_pluginassembly = "pluginpackage_pluginassembly";
 		}
 		
 		/// <summary>
 		/// Default Constructor.
 		/// </summary>
-		public bor_plugindemo() : 
+		public pluginpackage() : 
 				base(EntityLogicalName)
 		{
 		}
 		
-		public const string EntityLogicalName = "bor_plugindemo";
+		public const string EntityLogicalName = "pluginpackage";
 		
-		public const string EntityLogicalCollectionName = "bor_plugindemos";
+		public const string EntityLogicalCollectionName = "pluginpackages";
 		
-		public const string EntitySetName = "bor_plugindemos";
+		public const string EntitySetName = "pluginpackages";
 		
 		public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 		
@@ -133,136 +137,58 @@ namespace Boruto.Plugin.Entities
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_changelog")]
-		public string bor_changelog
+		/// <summary>
+		/// For internal use only.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("componentidunique")]
+		public System.Nullable<System.Guid> ComponentIdUnique
 		{
 			get
 			{
-				return this.GetAttributeValue<string>("bor_changelog");
-			}
-			set
-			{
-				this.OnPropertyChanging("bor_changelog");
-				this.SetAttributeValue("bor_changelog", value);
-				this.OnPropertyChanged("bor_changelog");
+				return this.GetAttributeValue<System.Nullable<System.Guid>>("componentidunique");
 			}
 		}
 		
 		/// <summary>
-		/// The name of the custom entity.
+		/// For internal use only.
 		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_name")]
-		public string bor_name
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("componentstate")]
+		public virtual componentstate? ComponentState
 		{
 			get
 			{
-				return this.GetAttributeValue<string>("bor_name");
-			}
-			set
-			{
-				this.OnPropertyChanging("bor_name");
-				this.SetAttributeValue("bor_name", value);
-				this.OnPropertyChanged("bor_name");
+				return ((componentstate?)(EntityOptionSetEnum.GetEnum(this, "componentstate")));
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_number")]
-		public System.Nullable<int> bor_number
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("componentstatename")]
+		public string componentstateName
 		{
 			get
 			{
-				return this.GetAttributeValue<System.Nullable<int>>("bor_number");
-			}
-			set
-			{
-				this.OnPropertyChanging("bor_number");
-				this.SetAttributeValue("bor_number", value);
-				this.OnPropertyChanged("bor_number");
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for entity instances
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_plugindemoid")]
-		public System.Nullable<System.Guid> bor_plugindemoId
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.Guid>>("bor_plugindemoid");
-			}
-			set
-			{
-				this.OnPropertyChanging("bor_plugindemoId");
-				this.SetAttributeValue("bor_plugindemoid", value);
-				if (value.HasValue)
+				if (this.FormattedValues.Contains("componentstate"))
 				{
-					base.Id = value.Value;
-				}
-				else
-				{
-					base.Id = System.Guid.Empty;
-				}
-				this.OnPropertyChanged("bor_plugindemoId");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_plugindemoid")]
-		public override System.Guid Id
-		{
-			get
-			{
-				return base.Id;
-			}
-			set
-			{
-				this.bor_plugindemoId = value;
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_processmessage")]
-		public string bor_processmessage
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("bor_processmessage");
-			}
-			set
-			{
-				this.OnPropertyChanging("bor_processmessage");
-				this.SetAttributeValue("bor_processmessage", value);
-				this.OnPropertyChanged("bor_processmessage");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_triggeraction")]
-		public System.Nullable<bool> bor_triggeraction
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("bor_triggeraction");
-			}
-			set
-			{
-				this.OnPropertyChanging("bor_triggeraction");
-				this.SetAttributeValue("bor_triggeraction", value);
-				this.OnPropertyChanged("bor_triggeraction");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_triggeractionname")]
-		public string bor_triggeractionName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("bor_triggeraction"))
-				{
-					return this.FormattedValues["bor_triggeraction"];
+					return this.FormattedValues["componentstate"];
 				}
 				else
 				{
 					return default(string);
 				}
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("content")]
+		public string Content
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("content");
+			}
+			set
+			{
+				this.OnPropertyChanging("Content");
+				this.SetAttributeValue("content", value);
+				this.OnPropertyChanged("Content");
 			}
 		}
 		
@@ -367,6 +293,52 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// Export Key Version
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("exportkeyversion")]
+		public System.Nullable<int> ExportKeyVersion
+		{
+			get
+			{
+				return this.GetAttributeValue<System.Nullable<int>>("exportkeyversion");
+			}
+			set
+			{
+				this.OnPropertyChanging("ExportKeyVersion");
+				this.SetAttributeValue("exportkeyversion", value);
+				this.OnPropertyChanged("ExportKeyVersion");
+			}
+		}
+		
+		/// <summary>
+		/// Lookup to FileAttachment
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("fileid")]
+		public object FileId
+		{
+			get
+			{
+				return this.GetAttributeValue<object>("fileid");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("fileid_name")]
+		public string FileId_Name
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("fileid"))
+				{
+					return this.FormattedValues["fileid"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
 		/// Sequence number of the import that created this record.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("importsequencenumber")]
@@ -381,6 +353,86 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("ImportSequenceNumber");
 				this.SetAttributeValue("importsequencenumber", value);
 				this.OnPropertyChanged("ImportSequenceNumber");
+			}
+		}
+		
+		/// <summary>
+		/// For internal use only.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("iscustomizable")]
+		public Microsoft.Xrm.Sdk.BooleanManagedProperty IsCustomizable
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.BooleanManagedProperty>("iscustomizable");
+			}
+			set
+			{
+				this.OnPropertyChanging("IsCustomizable");
+				this.SetAttributeValue("iscustomizable", value);
+				this.OnPropertyChanged("IsCustomizable");
+			}
+		}
+		
+		/// <summary>
+		/// Indicates whether the solution component is part of a managed solution.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("ismanaged")]
+		public System.Nullable<bool> IsManaged
+		{
+			get
+			{
+				return this.GetAttributeValue<System.Nullable<bool>>("ismanaged");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("ismanagedname")]
+		public string ismanagedName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("ismanaged"))
+				{
+					return this.FormattedValues["ismanaged"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
+		/// Managed Identity Id to look up to ManagedIdentity Entity
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("managedidentityid")]
+		public Microsoft.Xrm.Sdk.EntityReference managedidentityid
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("managedidentityid");
+			}
+			set
+			{
+				this.OnPropertyChanging("managedidentityid");
+				this.SetAttributeValue("managedidentityid", value);
+				this.OnPropertyChanged("managedidentityid");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("managedidentityidname")]
+		public string managedidentityidName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("managedidentityid"))
+				{
+					return this.FormattedValues["managedidentityid"];
+				}
+				else
+				{
+					return default(string);
+				}
 			}
 		}
 		
@@ -485,6 +537,52 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// The name of the plugin package entity.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("name")]
+		public string name
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("name");
+			}
+			set
+			{
+				this.OnPropertyChanging("name");
+				this.SetAttributeValue("name", value);
+				this.OnPropertyChanged("name");
+			}
+		}
+		
+		/// <summary>
+		/// Unique identifier for the organization
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("organizationid")]
+		public Microsoft.Xrm.Sdk.EntityReference OrganizationId
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("organizationid");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("organizationidname")]
+		public string OrganizationIdName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("organizationid"))
+				{
+					return this.FormattedValues["organizationid"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
 		/// Date and time that the record was migrated.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("overriddencreatedon")]
@@ -503,122 +601,105 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Owner Id
+		/// For internal use only.
 		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("ownerid")]
-		public Microsoft.Xrm.Sdk.EntityReference OwnerId
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("overwritetime")]
+		public System.Nullable<System.DateTime> OverwriteTime
 		{
 			get
 			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("ownerid");
+				return this.GetAttributeValue<System.Nullable<System.DateTime>>("overwritetime");
+			}
+		}
+		
+		/// <summary>
+		/// Lookup to FileAttachment
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("package")]
+		public object Package
+		{
+			get
+			{
+				return this.GetAttributeValue<object>("package");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("package_name")]
+		public string Package_Name
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("package"))
+				{
+					return this.FormattedValues["package"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
+		/// Unique identifier for entity instances
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("pluginpackageid")]
+		public System.Nullable<System.Guid> pluginpackageId
+		{
+			get
+			{
+				return this.GetAttributeValue<System.Nullable<System.Guid>>("pluginpackageid");
 			}
 			set
 			{
-				this.OnPropertyChanging("OwnerId");
-				this.SetAttributeValue("ownerid", value);
-				this.OnPropertyChanged("OwnerId");
-			}
-		}
-		
-		/// <summary>
-		/// Name of the owner
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owneridname")]
-		public string OwnerIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("ownerid"))
+				this.OnPropertyChanging("pluginpackageId");
+				this.SetAttributeValue("pluginpackageid", value);
+				if (value.HasValue)
 				{
-					return this.FormattedValues["ownerid"];
+					base.Id = value.Value;
 				}
 				else
 				{
-					return default(string);
+					base.Id = System.Guid.Empty;
 				}
+				this.OnPropertyChanged("pluginpackageId");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("pluginpackageid")]
+		public override System.Guid Id
+		{
+			get
+			{
+				return base.Id;
+			}
+			set
+			{
+				this.pluginpackageId = value;
 			}
 		}
 		
 		/// <summary>
-		/// Yomi name of the owner
+		/// Unique identifier of the associated solution.
 		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owneridyominame")]
-		public string OwnerIdYomiName
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("solutionid")]
+		public System.Nullable<System.Guid> SolutionId
 		{
 			get
 			{
-				if (this.FormattedValues.Contains("ownerid"))
-				{
-					return this.FormattedValues["ownerid"];
-				}
-				else
-				{
-					return default(string);
-				}
+				return this.GetAttributeValue<System.Nullable<System.Guid>>("solutionid");
 			}
 		}
 		
 		/// <summary>
-		/// Unique identifier for the business unit that owns the record
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningbusinessunit")]
-		public Microsoft.Xrm.Sdk.EntityReference OwningBusinessUnit
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("owningbusinessunit");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningbusinessunitname")]
-		public string OwningBusinessUnitName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("owningbusinessunit"))
-				{
-					return this.FormattedValues["owningbusinessunit"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for the team that owns the record.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningteam")]
-		public Microsoft.Xrm.Sdk.EntityReference OwningTeam
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("owningteam");
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for the user that owns the record.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owninguser")]
-		public Microsoft.Xrm.Sdk.EntityReference OwningUser
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("owninguser");
-			}
-		}
-		
-		/// <summary>
-		/// Status of the plugindemo
+		/// Status of the Plugin Package
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("statecode")]
-		public virtual bor_plugindemo_statecode? statecode
+		public virtual pluginpackage_statecode? statecode
 		{
 			get
 			{
-				return ((bor_plugindemo_statecode?)(EntityOptionSetEnum.GetEnum(this, "statecode")));
+				return ((pluginpackage_statecode?)(EntityOptionSetEnum.GetEnum(this, "statecode")));
 			}
 			set
 			{
@@ -645,14 +726,14 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Reason for the status of the plugindemo
+		/// Reason for the status of the Plugin Package
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("statuscode")]
-		public virtual bor_plugindemo_statuscode? statuscode
+		public virtual pluginpackage_statuscode? statuscode
 		{
 			get
 			{
-				return ((bor_plugindemo_statuscode?)(EntityOptionSetEnum.GetEnum(this, "statuscode")));
+				return ((pluginpackage_statuscode?)(EntityOptionSetEnum.GetEnum(this, "statuscode")));
 			}
 			set
 			{
@@ -697,6 +778,24 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// Unique name for the package
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("uniquename")]
+		public string UniqueName
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("uniquename");
+			}
+			set
+			{
+				this.OnPropertyChanging("UniqueName");
+				this.SetAttributeValue("uniquename", value);
+				this.OnPropertyChanged("UniqueName");
+			}
+		}
+		
+		/// <summary>
 		/// Time zone code that was in use when the record was created.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("utcconversiontimezonecode")]
@@ -715,6 +814,24 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// Version of the package
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("version")]
+		public string Version
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("version");
+			}
+			set
+			{
+				this.OnPropertyChanging("Version");
+				this.SetAttributeValue("version", value);
+				this.OnPropertyChanged("Version");
+			}
+		}
+		
+		/// <summary>
 		/// Version Number
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("versionnumber")]
@@ -727,67 +844,20 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// N:1 lk_bor_plugindemo_createdby
+		/// 1:N pluginpackage_pluginassembly
 		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdby")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_plugindemo_createdby")]
-		public Boruto.Plugin.Entities.SystemUser lk_bor_plugindemo_createdby
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("pluginpackage_pluginassembly")]
+		public System.Collections.Generic.IEnumerable<Boruto.Deployment.Entities.PluginAssembly> pluginpackage_pluginassembly
 		{
 			get
 			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("lk_bor_plugindemo_createdby", null);
+				return this.GetRelatedEntities<Boruto.Deployment.Entities.PluginAssembly>("pluginpackage_pluginassembly", null);
 			}
-		}
-		
-		/// <summary>
-		/// N:1 lk_bor_plugindemo_createdonbehalfby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdonbehalfby")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_plugindemo_createdonbehalfby")]
-		public Boruto.Plugin.Entities.SystemUser lk_bor_plugindemo_createdonbehalfby
-		{
-			get
+			set
 			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("lk_bor_plugindemo_createdonbehalfby", null);
-			}
-		}
-		
-		/// <summary>
-		/// N:1 lk_bor_plugindemo_modifiedby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedby")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_plugindemo_modifiedby")]
-		public Boruto.Plugin.Entities.SystemUser lk_bor_plugindemo_modifiedby
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("lk_bor_plugindemo_modifiedby", null);
-			}
-		}
-		
-		/// <summary>
-		/// N:1 lk_bor_plugindemo_modifiedonbehalfby
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedonbehalfby")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_plugindemo_modifiedonbehalfby")]
-		public Boruto.Plugin.Entities.SystemUser lk_bor_plugindemo_modifiedonbehalfby
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("lk_bor_plugindemo_modifiedonbehalfby", null);
-			}
-		}
-		
-		/// <summary>
-		/// N:1 user_bor_plugindemo
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owninguser")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("user_bor_plugindemo")]
-		public Boruto.Plugin.Entities.SystemUser user_bor_plugindemo
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("user_bor_plugindemo", null);
+				this.OnPropertyChanging("pluginpackage_pluginassembly");
+				this.SetRelatedEntities<Boruto.Deployment.Entities.PluginAssembly>("pluginpackage_pluginassembly", null, value);
+				this.OnPropertyChanged("pluginpackage_pluginassembly");
 			}
 		}
 	}

@@ -86,6 +86,52 @@ namespace Boruto
         #endregion
 
         #region entity properties
+        internal string TargetLogicalName
+        {
+            get
+            {
+                {
+                    var t = this.Target;
+                    if (t != null)
+                    {
+                        return t.LogicalName;
+                    }
+
+                    {
+                        var r = this.TargetReference;
+                        if (r != null)
+                        {
+                            return r.LogicalName;
+                        }
+                    }
+                    return this.PluginExecutionContext.PrimaryEntityName;
+                }
+            }
+        }
+
+        internal Guid TargetId
+        {
+            get
+            {
+                {
+                    var t = this.Target;
+                    if (t != null)
+                    {
+                        return t.Id;
+                    }
+
+                    {
+                        var r = this.TargetReference;
+                        if (r != null)
+                        {
+                            return r.Id;
+                        }
+                    }
+                    return this.PluginExecutionContext.PrimaryEntityId;
+                }
+            }
+        }
+
         private Microsoft.Xrm.Sdk.Entity _target;
         internal Microsoft.Xrm.Sdk.Entity Target
         {

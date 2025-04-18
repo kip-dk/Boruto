@@ -39,7 +39,8 @@ namespace Boruto.Reflection
                 if (result is Microsoft.Xrm.Sdk.Entity ent)
                 {
                     ent.Attributes = this.ctx.Target.Attributes;
-                    ent.LogicalName = this.ctx.Target.LogicalName;
+                    ent.LogicalName = this.ctx.TargetLogicalName;
+                    ent.Id = this.ctx.TargetId;
                     return result;
                 }
 
@@ -55,8 +56,8 @@ namespace Boruto.Reflection
                 if (result is Microsoft.Xrm.Sdk.Entity ent)
                 {
                     ent.Attributes = this.ctx.PreImage.Attributes;
-                    ent.LogicalName = this.ctx.PreImage.LogicalName;
-                    ent.Id = this.ctx.PreImage.Id;
+                    ent.LogicalName = this.ctx.TargetLogicalName;
+                    ent.Id = this.ctx.TargetId;
                     return result;
                 }
 
@@ -79,6 +80,8 @@ namespace Boruto.Reflection
                 if (result is Microsoft.Xrm.Sdk.Entity ent)
                 {
                     ent.Attributes = this.ctx.Merged.Attributes;
+                    ent.LogicalName = this.ctx.TargetLogicalName;
+                    ent.Id = this.ctx.TargetId;
                     return result;
                 }
 
@@ -94,7 +97,8 @@ namespace Boruto.Reflection
                 if (result is Microsoft.Xrm.Sdk.Entity ent)
                 {
                     ent.Attributes = this.ctx.PreImage.Attributes;
-                    ent.LogicalName = this.ctx.PreImage.LogicalName;
+                    ent.LogicalName = this.ctx.TargetLogicalName;
+                    ent.Id = this.ctx.TargetId;
                     return result;
                 }
 
@@ -165,6 +169,18 @@ namespace Boruto.Reflection
                 {
                     return this.ctx.PluginUserService;
                 }
+            }
+            #endregion
+
+            #region queryable
+            if (fromType == typeof(Microsoft.Xrm.Sdk.Query.QueryExpression))
+            {
+                return this.QueryExpression;
+            }
+
+            if (fromType == typeof(Microsoft.Xrm.Sdk.Query.FetchExpression))
+            {
+                return this.FetchExpression;
             }
             #endregion
 
@@ -268,9 +284,6 @@ namespace Boruto.Reflection
             }
             #endregion
 
-            #region resolve my service type search
-            #endregion
-
             throw new Exceptions.UnresolveableTypeException(fromType);
         }
 
@@ -319,6 +332,72 @@ namespace Boruto.Reflection
         }
         #endregion
 
+        #region queries
+        private Microsoft.Xrm.Sdk.Query.QueryExpression _queryExpression;
+        private Microsoft.Xrm.Sdk.Query.QueryExpression QueryExpression
+        {
+            get
+            {
+                if (this._queryExpression != null)
+                {
+                    return this._queryExpression;
+                }
+
+                if (this.ctx.PluginExecutionContext.InputParameters.TryGetValue("Query", out object o))
+                {
+                    if (o is Microsoft.Xrm.Sdk.Query.QueryExpression qe)
+                    {
+                        this._queryExpression = qe;
+                        return this._queryExpression;
+                    }
+
+                    if (o is Microsoft.Xrm.Sdk.Query.FetchExpression fe)
+                    {
+                        var resp = (Microsoft.Crm.Sdk.Messages.FetchXmlToQueryExpressionResponse)this.ctx.PluginAdminService.Execute(new Microsoft.Crm.Sdk.Messages.FetchXmlToQueryExpressionRequest
+                        {
+                            FetchXml = fe.Query
+                        });
+                        this._queryExpression = resp.Query;
+                        return this._queryExpression;
+                    }
+                }
+                return null;
+            }
+        }
+
+        private Microsoft.Xrm.Sdk.Query.FetchExpression _fetchExpression;
+        private  Microsoft.Xrm.Sdk.Query.FetchExpression FetchExpression
+        {
+            get
+            {
+                if (_fetchExpression != null)
+                {
+                    return _fetchExpression;
+                }
+
+                if (this.ctx.PluginExecutionContext.InputParameters.TryGetValue("Query", out object o))
+                {
+                    if (o is Microsoft.Xrm.Sdk.Query.FetchExpression qe)
+                    {
+                        this._fetchExpression = qe;
+                        return this._fetchExpression;
+                    }
+
+                    if (o is Microsoft.Xrm.Sdk.Query.QueryExpression fe)
+                    {
+                        var resp = (Microsoft.Crm.Sdk.Messages.QueryExpressionToFetchXmlResponse)this.ctx.PluginAdminService.Execute(new Microsoft.Crm.Sdk.Messages.QueryExpressionToFetchXmlRequest
+                        {
+                            Query = fe
+                            
+                        });
+                        this._fetchExpression = new Microsoft.Xrm.Sdk.Query.FetchExpression(resp.FetchXml);
+                        return this._fetchExpression;
+                    }
+                }
+                return null;
+            }
+        }
+        #endregion
         #region service constructor
         private List<Type> resolving = new List<Type>();
         private object CreateServiceInstance(Type type)

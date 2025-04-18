@@ -268,6 +268,9 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
+		PDFoverview = 500000001,
+		
+		[System.Runtime.Serialization.EnumMemberAttribute()]
 		Exceloverview = 500000000,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]

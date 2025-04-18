@@ -33,6 +33,11 @@ namespace Boruto.Plugin.Example.Plugins.bor_plugindemo
             mergedimage.DoStuff();
         }
 
+        public void OnPreUpdate(Entities.bor_plugindemos.TriggerActionChanged.ITriggerActionChanged target)
+        {
+            target.DoStuff();
+        }
+
         public void OnPostDelete(
             Boruto.Plugin.Example.Entities.bor_plugindemos.PreNumber.IPreNumber preimage,
             IQueryable<Boruto.Plugin.Entities.Account> accountQuery,
