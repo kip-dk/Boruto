@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,7 +55,25 @@ namespace Boruto.Deployment.Models
                 return false;
             }
 
+            if (this.Plugin.ResolveLibraries == null || this.Plugin.ResolveLibraries.Length == 0)
+            {
+                Console.WriteLine($"Please provide list of libraries for plugin and service resolve");
+                return false;
+            }
+
             return true;
+        }
+
+        public bool Resolve(Assembly assm)
+        {
+            foreach (var rl in this.Plugin.ResolveLibraries)
+            {
+                if (assm.FullName.StartsWith($"{rl},"))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
 
@@ -67,9 +86,6 @@ namespace Boruto.Deployment.Models
         #endregion
 
         #region properties
-        [DataMember(Name = "connectionString")]
-        public string ConnectionString { get; set; }
-
         [DataMember(Name = "solution")]
         public string Solution { get; set; }
 
@@ -88,6 +104,9 @@ namespace Boruto.Deployment.Models
 
             [DataMember(Name = "package")]
             public string Package { get; set; }
+
+            [DataMember(Name = "resolvelibraries")]
+            public string[] ResolveLibraries { get; set; }
         }
         #endregion
     }

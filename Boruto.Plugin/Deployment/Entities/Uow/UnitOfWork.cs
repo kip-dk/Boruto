@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace Boruto.Deployment.Entities
         private ServiceContext ctx;
         public UnitOfWork(Microsoft.Xrm.Sdk.IOrganizationService orgService)
         {
+
             this.ctx = new ServiceContext(orgService);
             this.orgService = orgService;
         }

@@ -4,7 +4,11 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            using (var instance = new Microsoft.PowerPlatform.Dataverse.Client.ServiceClient(args[0]))
+            {
+                var deployer = new Boruto.Deployment.Deployer(instance);
+                deployer.Deploy();
+            }
         }
     }
 }
