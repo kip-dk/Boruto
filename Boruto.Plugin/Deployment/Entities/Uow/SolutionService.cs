@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Entities.Uow
 {
+    [Export(typeof(ServiceAPI.ISolutionService))]
     public class SolutionService : ServiceAPI.ISolutionService
     {
 
@@ -38,7 +39,7 @@ namespace Boruto.Deployment.Entities.Uow
             this.Initialize();
             if (this.solution != null)
             {
-                this.AddSolutionComponent(package.pluginpackageId.Value, 10113, false);
+                this.AddSolutionComponent(package.pluginpackageId.Value, 10476, false);
             }
         }
 

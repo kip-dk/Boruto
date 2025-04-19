@@ -2,15 +2,19 @@
 using Microsoft.Xrm.Sdk.Client;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Entities
 {
+    [Export(typeof(IUnitOfWork))]
     public class UnitOfWork : IUnitOfWork
     {
         private ServiceContext ctx;
+
+        [ImportingConstructor]
         public UnitOfWork(Microsoft.Xrm.Sdk.IOrganizationService orgService)
         {
 

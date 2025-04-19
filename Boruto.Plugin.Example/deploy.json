@@ -1,0 +1,12 @@
+{
+  "solution": "Boruto",
+  "plugin": {
+    "name": "Boruto.Plugin.Example",
+    "path": ".\\bin\\debug\\",
+    "package": "Boruto.Plugin.Example",
+    "resolvelibraries": [
+      "Boruto.Plugin.Example",
+      "Boruto.Plugin.Entities"
+    ]
+  }
+}

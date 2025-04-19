@@ -9,22 +9,25 @@ namespace Boruto.Deployment.Models
 {
     public class NugetSpec
     {
-        public NugetSpec(string filename)
+        public NugetSpec(System.IO.Stream fs, string fileName)
         {
-            using (var fs = new System.IO.FileStream(filename, System.IO.FileMode.Open))
-            {
-                var xml = new XmlDocument();
-                xml.Load(fs);
+            var xml = new XmlDocument();
+            var ns = new XmlNamespaceManager(xml.NameTable);
+            ns.AddNamespace("ns", "http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd");
+            xml.Load(fs);
 
-                var metaNode = xml.SelectSingleNode("/package/metadata");
-                this.Metadata = new MetadataClass
-                {
-                    Id = metaNode.SelectSingleNode("id")?.InnerText,
-                    Version = metaNode.SelectSingleNode("version")?.InnerText,
-                    Title = metaNode.SelectSingleNode("title")?.InnerText
-                };
-            }
+            var metaNode = xml.SelectSingleNode("/ns:package/ns:metadata", ns);
+            this.Metadata = new MetadataClass
+            {
+                Id = metaNode.SelectSingleNode("ns:id", ns).InnerText,
+                Version = metaNode.SelectSingleNode("ns:version", ns).InnerText,
+                Title = metaNode.SelectSingleNode("ns:description", ns).InnerText
+            };
+
+            this.Filename = fileName;
         }
+
+        public string Filename { get; }
 
         public MetadataClass Metadata { get; set; }
 

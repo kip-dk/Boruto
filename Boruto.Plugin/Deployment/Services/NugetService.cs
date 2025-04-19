@@ -15,6 +15,7 @@ namespace Boruto.Deployment.Services
     {
         private Models.Config config;
         private Models.NugetSpec spec;
+        private DLLCode[] dlls;
 
         [ImportingConstructor]
         public NugetService()
@@ -24,28 +25,53 @@ namespace Boruto.Deployment.Services
 
         public Models.NugetSpec GetSpec()
         {
-            if (spec != null)
-            {
-                return spec;
-            }
-
-            Models.Config.ThrowIFMissing();
-
-            this.spec = new Boruto.Deployment.Models.NugetSpec(config.Plugin.Spec);
-            return spec;
+            this.initialize();
+            return this.spec;
         }
 
         public DLLCode[] GetLibNet64()
         {
-            var nuget = this.GetSpec();
+            this.initialize();
+            return this.dlls;
+        }
 
-            using (ZipArchive zip = ZipFile.OpenRead(this.config.Plugin.Package.Replace("$version", nuget.Metadata.Version)))
+        private string _packageFile;
+        private string PackageFile()
+        {
+            var dirInfo = new System.IO.DirectoryInfo(this.config.Plugin.Path);
+            var file = dirInfo.GetFiles().Where(r => r.FullName.EndsWith(".nupkg") && r.Name.StartsWith($"{this.config.Plugin.Package}.")).OrderByDescending(r => r.CreationTime).Select(r => r.FullName).FirstOrDefault();
+            if (string.IsNullOrEmpty(file))
+            {
+                throw new System.IO.FileNotFoundException($"No files like: {this.config.Plugin.Path}{ this.config.Plugin.Package }.$version.nupkg not found"); 
+            }
+            return file;
+        }
+        private void initialize()
+        {
+            if (spec != null)
+            {
+                return;
+            }
+
+            var file = this.PackageFile();
+            Console.WriteLine($"Found package: { file }");
+
+            using (ZipArchive zip = ZipFile.OpenRead(file))
             {
                 var result = new List<Models.DLLCode>();
 
                 foreach (var entry in zip.Entries)
                 {
-                    if (entry.FullName.StartsWith("lib/net462/") && entry.Name != "Kipon.Xrm.dll")
+                    if (entry.FullName == $"{this.config.Plugin.Package}.nuspec")
+                    {
+                        using (var ent = entry.Open())
+                        {
+                            this.spec = new NugetSpec(ent, file);
+                            continue;
+                        }
+                    }
+
+                    if (entry.FullName.StartsWith("lib/net462/") && entry.Name != "Boruto.Plugin.dll")
                     {
                         var next = new DLLCode
                         {
@@ -62,7 +88,12 @@ namespace Boruto.Deployment.Services
                         }
                     }
                 }
-                return result.ToArray();
+                this.dlls = result.ToArray();
+            }
+
+            if (spec == null || dlls == null || dlls.Length == 0)
+            {
+                throw new Exception($"Nuget package for deploy could not be resolved");
             }
         }
     }

@@ -34,7 +34,6 @@ namespace Boruto.Deployment.Services
             ServiceAPI.IPublishereService pubService,
             ServiceAPI.IPluginPackagesService pacService,
             ServiceAPI.INugetService nugetService
-
             )
         {
             this.pluginDeployService = pluginDeployService;
@@ -55,14 +54,14 @@ namespace Boruto.Deployment.Services
                 var prefix = this.pubService.ComponentPrefix;
                 var nuget = this.nugetService.GetSpec();
 
-                var pluginPackageName = $"{pubService.ComponentPrefix}_{nuget.Metadata.Id}";
+                var pluginPackageName = $"{pubService.ComponentPrefix}_{config.Plugin.Name}";
 
                 var pluginPackage = this.pacService.GetPluginPackage(pluginPackageName);
 
                 var wasCreate = false;
                 if (pluginPackage == null)
                 {
-                    var pid = pacService.Create(this.config.Plugin.Name, pluginPackageName, nuget.Metadata.Version, System.IO.File.ReadAllBytes(this.config.Plugin.Package.Replace("$version", nuget.Metadata.Version)));
+                    var pid = pacService.Create(this.config.Plugin.Name, pluginPackageName, nuget.Metadata.Version, System.IO.File.ReadAllBytes(nuget.Filename));
                     Console.WriteLine("PluginPackage was uploaded");
 
                     this.solutionService.AddMissingPluginPackage(new Boruto.Deployment.Entities.pluginpackage { pluginpackageId = pid });
@@ -83,7 +82,6 @@ namespace Boruto.Deployment.Services
 
 
                 var dyns = new Dictionary<string, Assembly>();
-                System.Reflection.Assembly pluginAssm = null;
 
 
                 List<Assembly> serviceAssemblies = new List<Assembly>();
@@ -96,15 +94,6 @@ namespace Boruto.Deployment.Services
                     {
                         serviceAssemblies.Add(code);
                     }
-                }
-
-                if (pluginAssm == null)
-                {
-                    if (wasCreate)
-                    {
-                        this.pacService.Delete(pluginPackage.pluginpackageId.Value);
-                    }
-                    throw new Exception($"Plugin assembly was not loaded, it is not possible to determin needed steps to be created: {pluginAssemblies[0].Name}");
                 }
 
                 Assembly DynamicResolver(object sender, ResolveEventArgs args)

@@ -49,9 +49,9 @@ namespace Boruto.Deployment.Models
                 return false;
             }
 
-            if (string.IsNullOrEmpty(this.Plugin.Spec))
+            if (string.IsNullOrEmpty(this.Plugin.Path))
             {
-                Console.WriteLine($"Please provide filename for the plugin nuget spec in the config file");
+                Console.WriteLine($"Please provide a base path where to find the nuget package to be deployed");
                 return false;
             }
 
@@ -99,8 +99,8 @@ namespace Boruto.Deployment.Models
         {
             [DataMember(Name = "name")]
             public string Name { get; set; }
-            [DataMember(Name = "spec")]
-            public string Spec { get; set; }
+            [DataMember(Name = "path")]
+            public string Path { get; set; }
 
             [DataMember(Name = "package")]
             public string Package { get; set; }
