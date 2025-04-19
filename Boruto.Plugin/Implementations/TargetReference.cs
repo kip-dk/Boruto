@@ -10,7 +10,7 @@ namespace Boruto.Implementations
     {
         protected Microsoft.Xrm.Sdk.EntityReference re;
 
-        internal TargetReference(Microsoft.Xrm.Sdk.EntityReference re)
+        public TargetReference(Microsoft.Xrm.Sdk.EntityReference re)
         {
             this.re = re;
         }
@@ -24,7 +24,7 @@ namespace Boruto.Implementations
 
     internal class TargetReference<T> : TargetReference, ITargetReference<T> where T : Microsoft.Xrm.Sdk.Entity, new()
     {
-        internal TargetReference(Microsoft.Xrm.Sdk.EntityReference re) : base(re)
+        public TargetReference(Microsoft.Xrm.Sdk.EntityReference re) : base(re)
         {
         }
     }

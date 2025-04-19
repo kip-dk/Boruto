@@ -38,6 +38,11 @@ namespace Boruto.Plugin.Example.Plugins.bor_plugindemo
             target.DoStuff();
         }
 
+        public void OnPreDelete(Boruto.ITargetReference<Boruto.Plugin.Entities.bor_plugindemo> target, Microsoft.Xrm.Sdk.ITracingService trace)
+        {
+            trace.Trace($"Pre bor_plugindemo: { target.Id } { target.LogicalName }");
+        }
+
         public void OnPostDelete(
             Boruto.Plugin.Example.Entities.bor_plugindemos.PreNumber.IPreNumber preimage,
             IQueryable<Boruto.Plugin.Entities.Account> accountQuery,

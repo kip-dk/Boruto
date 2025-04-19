@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Boruto.Plugin.Example.Plugins.Account
 {
-    /*
     public class AccountPlugin : BasePlugin
     {
         public void OnPreUpdate(Boruto.Plugin.Example.Entities.AccountStateChanged.IStatChanged target)
@@ -14,9 +13,9 @@ namespace Boruto.Plugin.Example.Plugins.Account
             target.OnStateChanged();
         }
 
-        public void OnPreDelete(ITargetReference<Boruto.Plugin.Entities.Account> target)
+        public void OnPreDelete(ITargetReference<Boruto.Plugin.Entities.Account> target, Microsoft.Xrm.Sdk.ITracingService trace)
         {
+            trace.Trace($"Deleting: { target.LogicalName } { target.Id }");
         }
     }
-    */
 }

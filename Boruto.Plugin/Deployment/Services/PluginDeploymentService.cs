@@ -87,7 +87,7 @@ namespace Boruto.Deployment.Services
                                     Stage = stage
                                 };
 
-                                if (step.TargetFilterAttributes != null || step.PostImage != null || step.PreImage != null)
+                                if (message == "Create" || message == "Delete" || step.TargetFilterAttributes != null || step.PostImage != null || step.PreImage != null)
                                 {
                                     allLogicalSteps.Add(step);
                                 }
@@ -167,6 +167,12 @@ namespace Boruto.Deployment.Services
 
         public static string[] ToLogicalName(this MethodInfo method, Assembly[] assms)
         {
+            var entityTypeAttrs = method.GetCustomAttributes<Boruto.Attributes.EntityTypeAttribute>()?.ToArray();
+            if (entityTypeAttrs != null && entityTypeAttrs.Length > 0)
+            {
+                return entityTypeAttrs.Select(r => r.LogicalName).ToArray();
+            }
+
             foreach (var arg in method.GetParameters())
             {
                 var type = arg.ParameterType;
@@ -194,8 +200,13 @@ namespace Boruto.Deployment.Services
                 {
                     return type.ToLogicalNames(assms);
                 }
-            }
 
+                if (type.IsInterface && type.IsGenericType && typeof(Boruto.ITargetReference).IsAssignableFrom(type))
+                {
+                    var entityType = type.GetGenericArguments().First();
+                    return new string[] { entityType.ToLogicalName() };
+                }
+            }
             return null;
         }
 
