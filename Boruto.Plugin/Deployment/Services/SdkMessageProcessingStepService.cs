@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Boruto.Deployment.Services
 {
     [Export(typeof(ServiceAPI.ISdkMessageProcessingStepService))]
-    public class SdkMessageProcessingStepService : ServiceAPI.ISdkMessageProcessingStepService
+    internal class SdkMessageProcessingStepService : ServiceAPI.ISdkMessageProcessingStepService
     {
 
         private Entities.IUnitOfWork uow;
@@ -169,7 +169,7 @@ namespace Boruto.Deployment.Services
             if (updated)
             {
                 uow.Update(clean);
-                this.messageService.Inform($"Updated step {crmStep.Name} on {crmStep.LogicalName}.");
+                this.messageService.Inform($"Updated step {crmStep.Name.Split('.').Last()} on {crmStep.LogicalName}.");
             }
 
             this.UpdateImage(crmStep, 1, step.Stage, step.IsAsync, step.Message, step.PreImage);
@@ -202,7 +202,7 @@ namespace Boruto.Deployment.Services
             }
 
             uow.Create(next);
-            this.messageService.Inform($"Created step: {next.Name}");
+            this.messageService.Inform($"Created step: {next.Name.Split('.').Last()}");
 
             if (step.PreImage != null)
             {
@@ -228,7 +228,7 @@ namespace Boruto.Deployment.Services
                 if (existingImage != null)
                 {
                     uow.Delete(existingImage);
-                    this.messageService.Inform($"Removed images {IMAGE_NAME} from {crmStep.Name}");
+                    this.messageService.Inform($"Removed images {IMAGE_NAME} from {crmStep.Name.Split('.').Last()}");
                 }
                 return;
             }
@@ -291,7 +291,7 @@ namespace Boruto.Deployment.Services
             }
 
             uow.Create(image);
-            messageService.Inform($"Created image {IMAGE_NAME} on step {crmStep.Name}");
+            messageService.Inform($"Created image {IMAGE_NAME} on step {crmStep.Name.Split('.').Last()}");
         }
 
         private Dictionary<string, SdkMessage> sdkmessages;

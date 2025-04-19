@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Boruto.Deployment.Services
 {
     [Export(typeof(ServiceAPI.IPluginPackagesService))]
-    public class PluginPackagesService : ServiceAPI.IPluginPackagesService
+    internal class PluginPackagesService : ServiceAPI.IPluginPackagesService
     {
         private readonly Entities.IUnitOfWork uow;
 

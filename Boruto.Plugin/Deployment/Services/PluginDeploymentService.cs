@@ -9,7 +9,7 @@ using System.Reflection;
 namespace Boruto.Deployment.Services
 {
     [Export(typeof(ServiceAPI.IPluginDeploymentService))]
-    public class PluginDeploymentService : ServiceAPI.IPluginDeploymentService
+    internal class PluginDeploymentService : ServiceAPI.IPluginDeploymentService
     {
         private readonly ServiceAPI.IMessageService messageService;
         private readonly Entities.IUnitOfWork uow;
@@ -124,7 +124,7 @@ namespace Boruto.Deployment.Services
         }
     }
 
-    public static class PluginDeploymentServiceLocalExtensions
+    internal static class PluginDeploymentServiceLocalExtensions
     {
         private static readonly Type ORG_REQ = typeof(Microsoft.Xrm.Sdk.OrganizationRequest);
         private static readonly Type ENTITY = typeof(Microsoft.Xrm.Sdk.Entity);
@@ -249,7 +249,7 @@ namespace Boruto.Deployment.Services
             return 1;
         }
 
-        public static Image PostImage(this MethodInfo method, string message, string logicalName, Assembly[] assms)
+        internal static Image PostImage(this MethodInfo method, string message, string logicalName, Assembly[] assms)
         {
             if (message != "Create" && message != "Update" && message != "Delete")
             {
@@ -283,10 +283,19 @@ namespace Boruto.Deployment.Services
                     continue;
                 }
             }
+
+            if (result.Count > 0)
+            {
+                return new Image
+                {
+                    AllAttributes = false,
+                    FilteredAttributes = result.Distinct().ToArray()
+                };
+            }
             return null;
         }
 
-        public static Image PreImage(this MethodInfo method, string message, string logicalName, Assembly[] assms)
+        internal static Image PreImage(this MethodInfo method, string message, string logicalName, Assembly[] assms)
         {
             if (message != "Update" && message != "Delete") 
             {
@@ -334,10 +343,19 @@ namespace Boruto.Deployment.Services
                     continue;
                 }
             }
+
+            if (result.Count > 0)
+            {
+                return new Image
+                {
+                    AllAttributes =false,
+                    FilteredAttributes = result.Distinct().ToArray()
+                };
+            }
             return null;
         }
 
-        public static Image TargetFilters(this MethodInfo method, string logicalName, Assembly[] assms)
+        internal static Image TargetFilters(this MethodInfo method, string logicalName, Assembly[] assms)
         {
             var result = new List<string>();
 
@@ -431,7 +449,7 @@ namespace Boruto.Deployment.Services
               .ToArray();
         }
 
-        public static Image Accumulate(this IEnumerable<Image> images)
+        internal static Image Accumulate(this IEnumerable<Image> images)
         {
             if (images == null)
             {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Models
 {
-    public class Plugin
+    internal class Plugin
     {
         private List<Step> steps = new List<Step>();
 

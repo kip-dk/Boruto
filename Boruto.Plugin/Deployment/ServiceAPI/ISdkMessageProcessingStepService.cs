@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.ServiceAPI
 {
-    public interface ISdkMessageProcessingStepService
+    internal interface ISdkMessageProcessingStepService
     {
         Entities.SdkMessageProcessingStep[] ForPluginAssembly(Guid pluginassemblyid);
         Entities.SdkMessageProcessingStep[] Cleanup(Entities.SdkMessageProcessingStep[] steps, Models.Plugin[] plugins);

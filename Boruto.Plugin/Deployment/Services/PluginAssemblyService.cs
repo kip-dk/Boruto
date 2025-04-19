@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Boruto.Deployment.Services
 {
     [Export(typeof(ServiceAPI.IPluginAssemblyService))]
-    public class PluginAssemblyService : ServiceAPI.IPluginAssemblyService
+    internal class PluginAssemblyService : ServiceAPI.IPluginAssemblyService
     {
         private Entities.IUnitOfWork uow;
         private ServiceAPI.IMessageService messageService;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Models
 {
-    public class Image
+    internal class Image
     {
         public bool AllAttributes { get; set; }
         public string[] FilteredAttributes { get; set; }

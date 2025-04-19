@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Boruto.Deployment.Entities
 {
     [Export(typeof(IUnitOfWork))]
-    public class UnitOfWork : IUnitOfWork
+    internal class UnitOfWork : IUnitOfWork
     {
         private ServiceContext ctx;
 

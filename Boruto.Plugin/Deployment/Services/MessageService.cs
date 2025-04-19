@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Boruto.Deployment.Services
 {
     [Export(typeof(ServiceAPI.IMessageService))]
-    public class MessageService : ServiceAPI.IMessageService
+    internal class MessageService : ServiceAPI.IMessageService
     {
         [ImportingConstructor]
         public MessageService()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.ServiceAPI
 {
-    public interface IPluginAssemblyService
+    internal interface IPluginAssemblyService
     {
         System.Reflection.Assembly Assembly { get; }
         Entities.PluginAssembly FindOrCreate(string assemblyfilename);

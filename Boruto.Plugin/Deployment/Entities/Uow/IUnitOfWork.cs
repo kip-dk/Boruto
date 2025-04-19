@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Entities
 {
-    public interface IUnitOfWork
+    internal interface IUnitOfWork
     {
         IRepository<Entities.Solution> Solutions { get; }
         IRepository<Entities.SolutionComponent> SolutionComponents { get; }

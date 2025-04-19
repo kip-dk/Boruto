@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.ServiceAPI
 {
-    public interface IDeployService
+    internal interface IDeployService
     {
         void Deploy();
     }

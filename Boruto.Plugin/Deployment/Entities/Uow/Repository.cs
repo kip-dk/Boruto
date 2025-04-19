@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Entities
 {
-    public class Repository<T> : IRepository<T> where T: Microsoft.Xrm.Sdk.Entity, new()
+    internal class Repository<T> : IRepository<T> where T: Microsoft.Xrm.Sdk.Entity, new()
     {
         /// <summary>
         /// The context.

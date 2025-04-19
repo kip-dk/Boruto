@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.ServiceAPI
 {
-    public interface IPublishereService
+    internal interface IPublishereService
     {
         string ComponentPrefix { get; }
     }

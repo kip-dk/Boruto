@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.ServiceAPI
 {
-    public interface IPluginDeploymentService
+    internal interface IPluginDeploymentService
     {
         Models.Plugin[] ForAssembly(System.Reflection.Assembly[] assembly);
 

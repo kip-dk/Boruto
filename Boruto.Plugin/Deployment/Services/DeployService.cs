@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Boruto.Deployment.Services
 {
     [Export(typeof(ServiceAPI.IDeployService))]
-    public class DeployService : ServiceAPI.IDeployService
+    internal class DeployService : ServiceAPI.IDeployService
     {
         private readonly IPluginDeploymentService pluginDeployService;
         private readonly IPluginAssemblyService pluginAssmService;
@@ -125,7 +125,7 @@ namespace Boruto.Deployment.Services
 
                 if (!wasCreate)
                 {
-                    pacService.Update(pluginPackage.pluginpackageId.Value, nuget.Metadata.Version, System.IO.File.ReadAllBytes(this.config.Plugin.Package.Replace("$version", nuget.Metadata.Version)));
+                    pacService.Update(pluginPackage.pluginpackageId.Value, nuget.Metadata.Version, System.IO.File.ReadAllBytes(nuget.Filename));
                 }
 
                 // now map existing plugin types with existing upcomming, and create new plugintypes on the fly and map to upcomming if applicable

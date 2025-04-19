@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.ServiceAPI
 {
-    public interface IPluginPackagesService
+    internal interface IPluginPackagesService
     {
         Entities.pluginpackage GetPluginPackage(string name);
         Guid Create(string displayName, string uniqueName, string version, byte[] nugetpackage);

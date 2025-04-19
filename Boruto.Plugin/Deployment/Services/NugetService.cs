@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Boruto.Deployment.Services
 {
     [Export(typeof(ServiceAPI.INugetService))]
-    public class NugetService : ServiceAPI.INugetService
+    internal class NugetService : ServiceAPI.INugetService
     {
         private Models.Config config;
         private Models.NugetSpec spec;

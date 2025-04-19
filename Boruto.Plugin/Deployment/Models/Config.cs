@@ -10,7 +10,7 @@ using Boruto.Deployment.Extensions;
 namespace Boruto.Deployment.Models
 {
     [DataContract]
-    public class Config
+    internal class Config
     {
         public static readonly Config Instance;
 

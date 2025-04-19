@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace Boruto.Deployment.Models
 {
-    public class NugetSpec
+    internal class NugetSpec
     {
         public NugetSpec(System.IO.Stream fs, string fileName)
         {

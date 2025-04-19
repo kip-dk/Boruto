@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.ServiceAPI
 {
-    public interface INugetService
+    internal interface INugetService
     {
         Models.NugetSpec GetSpec();
         Models.DLLCode[] GetLibNet64();

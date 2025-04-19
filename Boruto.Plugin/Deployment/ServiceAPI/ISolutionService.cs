@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.ServiceAPI
 {
-    public interface ISolutionService
+    internal interface ISolutionService
     {
         Entities.Solution Get(string unieuqName);
         void AddMissingPluginPackage(Entities.pluginpackage package);

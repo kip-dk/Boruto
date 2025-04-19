@@ -14,8 +14,6 @@ namespace Bor
             {
                 var deployer = new Boruto.Deployment.Deployer(instance);
                 deployer.Deploy();
-
-                // deployer.ListComponentTypesFor("Boruto");
             }
         }
     }

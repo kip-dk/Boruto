@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Extensions
 {
-    public static class ExtensionsMethods
+    internal static class ExtensionsMethods
     {
         public static string CommandlineValue(this string name)
         {

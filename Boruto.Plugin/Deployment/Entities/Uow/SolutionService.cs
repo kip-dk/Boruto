@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Boruto.Deployment.Entities.Uow
 {
     [Export(typeof(ServiceAPI.ISolutionService))]
-    public class SolutionService : ServiceAPI.ISolutionService
+    internal class SolutionService : ServiceAPI.ISolutionService
     {
 
         private Entities.IUnitOfWork uow;

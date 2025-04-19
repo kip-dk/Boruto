@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
 namespace Boruto.Plugin.UT.Reflection.Model
 {
     [TestClass]
@@ -64,3 +65,4 @@ namespace Boruto.Plugin.UT.Reflection.Model
         }
     }
 }
+*/

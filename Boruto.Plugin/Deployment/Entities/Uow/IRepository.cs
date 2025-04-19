@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Entities
 {
-    public interface IRepository<T> where T: Microsoft.Xrm.Sdk.Entity, new()
+    internal interface IRepository<T> where T: Microsoft.Xrm.Sdk.Entity, new()
     {
         /// <summary>
         /// Gets an <see cref="IQueryable{T}"/> to perform further operations.

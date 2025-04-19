@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Models
 {
-    public class DLLCode
+    internal class DLLCode
     {
         public string Name { get; set; }
         public byte[] Code { get; set; }

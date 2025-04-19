@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Models
 {
-    public class Step
+    internal class Step
     {
         public int Stage { get; set; }
         public string Message { get; set; }

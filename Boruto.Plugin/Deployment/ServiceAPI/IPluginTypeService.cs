@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.ServiceAPI
 {
-    public interface IPluginTypeService
+    internal interface IPluginTypeService
     {
         Entities.PluginType[] ForPluginAssembly(Guid pluginAssemblyId);
         void JoinAndCleanup(Entities.PluginType[] currents, Models.Plugin[] tobees);

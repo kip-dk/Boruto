@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.ServiceAPI
 {
-    public interface IMessageService
+    internal interface IMessageService
     {
         void Inform(string message);
         void Warning(string message);

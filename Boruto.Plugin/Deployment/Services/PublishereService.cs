@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Boruto.Deployment.Services
 {
     [Export(typeof(ServiceAPI.IPublishereService))]
-    public class PublishereService : ServiceAPI.IPublishereService
+    internal class PublishereService : ServiceAPI.IPublishereService
     {
         private readonly Entities.IUnitOfWork uow;
         private string _componentString;
