@@ -21,7 +21,7 @@
     <Version>$(FileVersion)</Version>
     <Authors>kip</Authors>
     <Company>Kipon ApS</Company>
-    <Description>This is a base library for building Dataverse plugin using the software princip for SOLID, it is a "reinvention" of the Kipon Solid Plguin framework, but it only target online solutions and has been simplified to use standard tools such as pac as much as possible</Description>
+    <Description>This is a base library for building Dataverse plugin using the software princip for SOLID, it is a "reinvention" of the Kipon Solid Plguin framework, but it only target online solutions and has been simplified to use standard tools such as pac as much as possible. </Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <RootNamespace>Boruto</RootNamespace>
     <Copyright>Kipon ApS, 2025</Copyright>
@@ -32,6 +32,10 @@
     <PackageReleaseNotes>Still very ALFA, and not ready at all</PackageReleaseNotes>
     <PackAsTool>False</PackAsTool>
     <ToolCommandName>boruto.plugin</ToolCommandName>
+    <PackageReadmeFile>DOCUMENTATION.MD</PackageReadmeFile>
+    <PackageIcon>cow.png</PackageIcon>
+    <PackageProjectUrl>https://kipon.dk/borutoplugin</PackageProjectUrl>
+    <Product>Boruto Dataverse plugin</Product>
   </PropertyGroup>
 
   <ItemGroup>
@@ -42,6 +46,17 @@
 
   <ItemGroup>
     <Folder Include="Deployment\Entities\ProxyClasses\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Documentations\cow.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\Documentations\DOCUMENTATION.MD">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

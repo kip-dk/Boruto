@@ -17,6 +17,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boruto", "Boruto\Boruto.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bor", "Bor\Bor.csproj", "{D11BD6FF-DC2B-4CFF-AA29-5970AF849A22}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{450DCB85-AB99-4118-9AF8-A47B9A5BCDAE}"
+	ProjectSection(SolutionItems) = preProject
+		Documentations\cow.png = Documentations\cow.png
+		Documentations\DOCUMENTATION.MD = Documentations\DOCUMENTATION.MD
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
