@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boruto.Plugin.Example.Plugins.bor_demoviews
 {
-    public class bor_demoviewsPlugin : Boruto.BasePlugin
+    public class bor_demoviewsPlugin : BasePlugin
     {
         public Guid OnCreate(Boruto.Plugin.Entities.bor_demoviews target, IRepository<Boruto.Plugin.Entities.bor_plugindemo> dRepo)
         {
@@ -18,7 +18,7 @@ namespace Boruto.Plugin.Example.Plugins.bor_demoviews
             return dRepo.Create(clean);
         }
 
-        public Guid OnUpdate(Boruto.Plugin.Entities.bor_demoviews target, IRepository<Boruto.Plugin.Entities.bor_plugindemo> dRepo)
+        public void OnUpdate(Boruto.Plugin.Entities.bor_demoviews target, IRepository<Boruto.Plugin.Entities.bor_plugindemo> dRepo)
         {
             var clean = new Boruto.Plugin.Entities.bor_plugindemo{ bor_plugindemoId = target.bor_demoviewsId.Value };
 
@@ -32,7 +32,6 @@ namespace Boruto.Plugin.Example.Plugins.bor_demoviews
                 clean.bor_number = target.bor_number;
             }
             dRepo.Update(clean);
-            return dRepo.Create(clean);
         }
 
         public Boruto.Plugin.Entities.bor_demoviews OnRetrieve(Guid primaryentityid, string primaryentityname, IRepository<Boruto.Plugin.Entities.bor_plugindemo> dRepo)
@@ -46,10 +45,30 @@ namespace Boruto.Plugin.Example.Plugins.bor_demoviews
             };
         }
 
-        public Boruto.EntityCollection<Boruto.Plugin.Entities.bor_demoviews> OnRetrieveMultiple(string primaryentityname, Microsoft.Xrm.Sdk.Query.QueryExpression query, Microsoft.Xrm.Sdk.IOrganizationService orgService)
+        public Boruto.EntityCollection<Boruto.Plugin.Entities.bor_demoviews> OnRetrieveMultiple(IQueryable<Boruto.Plugin.Entities.bor_plugindemo> demoQuery)
         {
-            query.EntityName = primaryentityname;
-            return new EntityCollection<Plugin.Entities.bor_demoviews>(orgService.RetrieveMultiple(query));
+            var result = (from d in demoQuery
+                          where d.statecode == Plugin.Entities.bor_plugindemo_statecode.Active
+                          select d).ToArray();
+
+            var final = new Microsoft.Xrm.Sdk.EntityCollection
+            {
+                MinActiveRowVersion = null,
+                MoreRecords = false,
+                PagingCookie = null,
+                Entities = new Microsoft.Xrm.Sdk.DataCollection<Microsoft.Xrm.Sdk.Entity>(result.Length)
+            };
+
+            foreach (var r in result)
+            {
+                final.Entities.Add(new Boruto.Plugin.Entities.bor_demoviews
+                {
+                    bor_demoviewsId = r.bor_plugindemoId,
+                    bor_name = r.bor_name,
+                    bor_number = r.bor_number
+                });
+            }
+            return new EntityCollection<Plugin.Entities.bor_demoviews>(final);
         }
     }
 }

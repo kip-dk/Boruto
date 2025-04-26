@@ -5,8 +5,8 @@
     <PowerAppsTargetsPath>$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\PowerApps</PowerAppsTargetsPath>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Boruto.Plugin.snk</AssemblyOriginatorKeyFile>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
+    <AssemblyVersion>1.0.0.2</AssemblyVersion>
+    <FileVersion>1.0.0.2</FileVersion>
     <ProjectTypeGuids>{4C25E9B5-9FA6-436c-8E19-B395D2A65FAF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
 
@@ -19,7 +19,7 @@
   <PropertyGroup>
     <PackageId>Boruto.Dataverse.Plugin</PackageId>
     <Version>$(FileVersion)</Version>
-    <Authors>kip</Authors>
+    <Authors>Kjeld Ingemann Poulsen</Authors>
     <Company>Kipon ApS</Company>
     <Description>This is a base library for building Dataverse plugin using the software princip for SOLID, it is a "reinvention" of the Kipon Solid Plguin framework, but it only target online solutions and has been simplified to use standard tools such as pac as much as possible. </Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -29,13 +29,15 @@
     <RepositoryUrl>https://github.com/kip-dk/Boruto.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>dataverse;plugin;solid;</PackageTags>
-    <PackageReleaseNotes>Still very ALFA, and not ready at all</PackageReleaseNotes>
+    <PackageReleaseNotes>First release trial. The api is finalized, but there might still be som bugs to fix</PackageReleaseNotes>
     <PackAsTool>False</PackAsTool>
     <ToolCommandName>boruto.plugin</ToolCommandName>
     <PackageReadmeFile>DOCUMENTATION.MD</PackageReadmeFile>
     <PackageIcon>cow.png</PackageIcon>
     <PackageProjectUrl>https://kipon.dk/borutoplugin</PackageProjectUrl>
     <Product>Boruto Dataverse plugin</Product>
+    <PackageLicenseFile>License.md</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
@@ -54,6 +56,10 @@
       <PackagePath>\</PackagePath>
     </None>
     <None Include="..\Documentations\DOCUMENTATION.MD">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\Documentations\License.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

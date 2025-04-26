@@ -1,4 +1,5 @@
 ﻿using Boruto.Deployment.Services;
+using Boruto.Extensions.Reflection;
 using Microsoft.Crm.Sdk.Messages;
 using System;
 using System.Collections.Generic;
@@ -33,35 +34,10 @@ namespace Boruto.Reflection.Model
 
             if (this.IsMatch == true && !this.WasMatched && !string.IsNullOrEmpty(primaryLogicalName))
             {
-                // arguments did not define a matching entity, we must see if there is an entity property match for the method
-                var entityTypeAttrs = method.GetCustomAttributes<Boruto.Attributes.EntityTypeAttribute>()?.ToArray();
-                var  type = entityTypeAttrs?.Where(r => r.LogicalName == primaryLogicalName).FirstOrDefault();
+                var type = method.ResolveEntityType(primaryLogicalName, assemblies);
                 this.IsMatch = type != null;
                 this.WasMatched = true;
                 return;
-            }
-
-            if (this.IsMatch == true && !this.WasMatched && !string.IsNullOrEmpty(primaryLogicalName) && method.ReturnType != null)
-            {
-                if (method.ReturnType.BaseType == typeof(Microsoft.Xrm.Sdk.Entity))
-                {
-                    var entityType = (Microsoft.Xrm.Sdk.Entity)System.Activator.CreateInstance(method.ReturnType);
-                    this.IsMatch = entityType.LogicalName == primaryLogicalName;
-                    this.WasMatched = true;
-                    return;
-                }
-            }
-
-            if (this.IsMatch && !this.WasMatched && !string.IsNullOrEmpty(primaryLogicalName) && method.ReturnType != null)
-            {
-                if (method.ReturnType.IsGenericType && method.ReturnType.GetGenericTypeDefinition() == typeof(Boruto.EntityCollection<>))
-                {
-                    var gType = method.ReturnType.GetGenericArguments().First();
-                    var entityType = (Microsoft.Xrm.Sdk.Entity)System.Activator.CreateInstance(gType);
-                    this.IsMatch = entityType.LogicalName == primaryLogicalName;
-                    this.WasMatched = true;
-                    return;
-                }
             }
         }
 

@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 	ProjectSection(SolutionItems) = preProject
 		Documentations\cow.png = Documentations\cow.png
 		Documentations\DOCUMENTATION.MD = Documentations\DOCUMENTATION.MD
+		Documentations\License.md = Documentations\License.md
 	EndProjectSection
 EndProject
 Global

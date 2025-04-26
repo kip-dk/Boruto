@@ -19,6 +19,12 @@ namespace Boruto
         public bool MoreRecords { get; }
         public string PagingCookie { get; }
 
+        public EntityCollection()
+        {
+            this.EntityName = new T().LogicalName;
+            this.MoreRecords = false;
+        }
+
         public EntityCollection(Microsoft.Xrm.Sdk.EntityCollection source) 
         {
             this.Entities = source.Entities;
@@ -50,16 +56,20 @@ namespace Boruto
             result.MoreRecords = this.MoreRecords;
             result.PagingCookie = this.PagingCookie;
 
-            var pt = new T();
-            foreach (var e in this.Entities)
+
+            if (this.Entities != null)
             {
-                var next = new Microsoft.Xrm.Sdk.Entity
+                var pt = new T();
+                foreach (var e in this.Entities)
                 {
-                    Id = e.Id,
-                    LogicalName = pt.LogicalName,
-                    Attributes = e.Attributes
-                };
-                this.Entities.Add(next);
+                    var next = new Microsoft.Xrm.Sdk.Entity
+                    {
+                        Id = e.Id,
+                        LogicalName = pt.LogicalName,
+                        Attributes = e.Attributes
+                    };
+                    result.Entities.Add(next);
+                }
             }
             return result;
         }

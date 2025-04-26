@@ -39,7 +39,6 @@ namespace Boruto.Reflection
 
             foreach (var method in methods)
             {
-                this.Trace($"Found methos: { method.Name }");
                 var next = new Model.PluginMethod(this.pluginType, method, primaryLogicalName, this.assemblies);
 
                 if (next.IsMatch)

@@ -1,4 +1,5 @@
 ﻿using Boruto.Deployment.Services;
+using Microsoft.Crm.Sdk.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace Boruto.Extensions.Reflection
         public static bool IsEntityType(this Type value)
         {
             if (typeof(Microsoft.Xrm.Sdk.Entity).IsAssignableFrom(value))
+            {
+                return true;
+            }
+
+            if (typeof(IEntity).IsAssignableFrom(value))
             {
                 return true;
             }
@@ -170,6 +176,23 @@ namespace Boruto.Extensions.Reflection
 
             METHOD_ENTITY_TYPES[method] = result.ToArray();
             return METHOD_ENTITY_TYPES[method];
+        }
+
+        public static Type ResolveEntityType(this System.Reflection.MethodInfo method, string logicalName, Assembly[] assms)
+        {
+            var types = method.ResolveEntityTypes(assms);
+            if (types != null && types.Length > 0)
+            {
+                foreach (var type in types)
+                {
+                    var ln = type.ToEarlyBoundEntityType(assms).GetEntity().LogicalName;
+                    if (ln == logicalName)
+                    {
+                        return type;
+                    }
+                }
+            }
+            return null;
         }
 
         private static readonly Dictionary<Type, Type[]> TYPE_TO_ENTITYTYPE = new Dictionary<Type, Type[]>();

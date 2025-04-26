@@ -1,7 +1,6 @@
 ﻿using Boruto.Extensions.Framework;
 using Boruto.Extensions.SDK;
 using Boruto.Implementations;
-using Boruto.Plugin;
 using Boruto.Reflection;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Extensions;
@@ -44,6 +43,11 @@ namespace Boruto
 
         internal PluginContext(BasePlugin plugin, IServiceProvider standardServiceProvider, IServiceProvider customServiceProvider, Assembly[] assemblies, string unsecure, string secure)
         {
+            if (assemblies == null || assemblies.Length == 0)
+            {
+                throw new InvalidPluginExecutionException($"At least one assembly for service resolve should be provided");
+            }
+
             this.plugin = plugin;
             this.Type = plugin.GetType();
             this.StandardServiceProvider = standardServiceProvider;
@@ -302,7 +306,8 @@ namespace Boruto
             {
                 if (this._PluginUserService == null)
                 {
-                    this._PluginUserService = this.OrgSvcFactory.CreateOrganizationService(PluginExecutionContext.UserId); // User that the plugin is registered to run as, Could be same as current user.
+                    var orgFac = this.OrgSvcFactory;
+                    this._PluginUserService = orgFac.CreateOrganizationService(PluginExecutionContext.UserId); // User that the plugin is registered to run as, Could be same as current user.
 
                 }
                 return this._PluginUserService;
@@ -425,76 +430,80 @@ namespace Boruto
             using (var fac = new Reflection.ServiceFactory(this))
             {
                 var resolver = this.GetPluginServiceResolver();
-                foreach (var method in resolver.GetMethods(this.methodPattern, this.PrimaryLogicalName))
-                {
-                    if ((this.Message == "Create" || this.Message == "Update") && !method.AllTargetFilter)
+                var methods = resolver.GetMethods(this.methodPattern, this.PrimaryLogicalName);
+
+                if (methods != null && methods.Length > 0) {
+                    foreach (var method in methods)
                     {
-                        if (!this.Target.Attributes.Keys.Where(r => method.TargetFilter.Contains(r)).Any())
+                        if ((this.Message == "Create" || this.Message == "Update") && !method.AllTargetFilter)
+                        {
+                            if (!this.Target.Attributes.Keys.Where(r => method.TargetFilter.Contains(r)).Any())
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (!method.IsRelevant(this.PluginExecutionContext))
                         {
                             continue;
                         }
-                    }
 
-                    if (!method.IsRelevant(this.PluginExecutionContext))
-                    {
-                        continue;
-                    }
+                        #region resolve arguments
+                        var args = new object[method.Arguments.Length];
 
-                    #region resolve arguments
-                    var args = new object[method.Arguments.Length];
-
-                    var ix = 0;
-                    foreach (var arg in method.Arguments)
-                    {
-                        args[ix] = fac.Resolve(arg);
-                        ix++;
-                    }
-                    #endregion
-
-                    #region invoke
-                    var result = method.method.Invoke(this.plugin, args);
-
-                    if (result != null)
-                    {
-                        if (this.Stage == 40 && this.IsAsync == false && result is Microsoft.Xrm.Sdk.OrganizationResponse re && re.Results != null)
+                        var ix = 0;
+                        foreach (var arg in method.Arguments)
                         {
-                            foreach (var p in re.Results)
-                            {
-                                this.PluginExecutionContext.OutputParameters[p.Key] = p.Value;
-                            }
+                            args[ix] = fac.Resolve(arg);
+                            ix++;
                         }
+                        #endregion
 
-                        if (this.Stage == 30 && this.Message == "Create" && result is Guid g)
-                        {
-                            this.PluginExecutionContext.OutputParameters["id"] = g;
-                        }
+                        #region invoke
+                        var result = method.method.Invoke(this.plugin, args);
 
-                        if (this.Stage == 30 && this.Message == "Retrieve" && result is Microsoft.Xrm.Sdk.Entity ent)
+                        if (result != null)
                         {
-                            if (ent.GetType() == typeof(Microsoft.Xrm.Sdk.Entity))
+                            if (this.Stage == 40 && this.IsAsync == false && result is Microsoft.Xrm.Sdk.OrganizationResponse re && re.Results != null)
                             {
-                                this.PluginExecutionContext.OutputParameters["BusinessEntity"] = ent;
-                            }
-                            else
-                            {
-                                var r = new Microsoft.Xrm.Sdk.Entity
+                                foreach (var p in re.Results)
                                 {
-                                    Id = ent.Id,
-                                    LogicalName = ent.LogicalName,
-                                    Attributes = ent.Attributes
-                                };
-                                this.PluginExecutionContext.OutputParameters["BusinessEntity"] = r;
+                                    this.PluginExecutionContext.OutputParameters[p.Key] = p.Value;
+                                }
                             }
-                        }
 
-                        if (this.Stage == 30 && this.Message == "RetrieveMultiple" && result is Microsoft.Xrm.Sdk.EntityCollection col)
-                        {
-                            this.PluginExecutionContext.OutputParameters["BusinessEntityCollection"] = col;
-                        }
+                            if (this.Stage == 30 && this.Message == "Create" && result is Guid g)
+                            {
+                                this.PluginExecutionContext.OutputParameters["id"] = g;
+                            }
 
-                        if (this.Stage == 30 && this.Message == "RetrieveMultiple" && result is Boruto.EntityCollection bCol)
-                        {
-                            this.PluginExecutionContext.OutputParameters["BusinessEntityCollection"] = bCol.ToEntityCollection();
+                            if (this.Stage == 30 && this.Message == "Retrieve" && result is Microsoft.Xrm.Sdk.Entity ent)
+                            {
+                                if (ent.GetType() == typeof(Microsoft.Xrm.Sdk.Entity))
+                                {
+                                    this.PluginExecutionContext.OutputParameters["BusinessEntity"] = ent;
+                                }
+                                else
+                                {
+                                    var r = new Microsoft.Xrm.Sdk.Entity
+                                    {
+                                        Id = ent.Id,
+                                        LogicalName = ent.LogicalName,
+                                        Attributes = ent.Attributes
+                                    };
+                                    this.PluginExecutionContext.OutputParameters["BusinessEntity"] = r;
+                                }
+                            }
+
+                            if (this.Stage == 30 && this.Message == "RetrieveMultiple" && result is Microsoft.Xrm.Sdk.EntityCollection col)
+                            {
+                                this.PluginExecutionContext.OutputParameters["BusinessEntityCollection"] = col;
+                            }
+
+                            if (this.Stage == 30 && this.Message == "RetrieveMultiple" && result is Boruto.EntityCollection bCol)
+                            {
+                                this.PluginExecutionContext.OutputParameters["BusinessEntityCollection"] = bCol.ToEntityCollection();
+                            }
                         }
                     }
                     #endregion
@@ -538,6 +547,7 @@ namespace Boruto
         {
             if (_orgServiceContextType == null)
             {
+                var count = this.ServiceAssemblies != null ? this.ServiceAssemblies.Length : 0;
                 foreach (var asm in this.ServiceAssemblies)
                 {
                     var local = (from type in asm.GetTypes()
@@ -551,7 +561,7 @@ namespace Boruto
                             if (con.IsPublic)
                             {
                                 var pms = con.GetParameters();
-                                if (pms.Length == 1 && pms[0].ParameterType == ORG_TYPE)
+                                if (pms != null && pms.Length == 1 && pms[0].ParameterType == ORG_TYPE)
                                 {
                                     _orgServiceContextType = local;
                                 }

@@ -48,6 +48,6 @@ namespace Boruto
         }
 
         protected virtual IServiceProvider ServiceProvider => null;
-        protected virtual Assembly[] ServiceAssemblies => null;
+        protected abstract Assembly[] ServiceAssemblies { get; }
     }
 }
