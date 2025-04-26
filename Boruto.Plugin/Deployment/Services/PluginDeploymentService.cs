@@ -36,6 +36,7 @@ namespace Boruto.Deployment.Services
                     if (!type.IsInterface && !type.IsAbstract && BORUTO_PLUGIN.IsAssignableFrom(type) && type.HasPublicDefaultConstructor())
                     {
                         var allLogicalSteps = new List<Step>();
+                        var hasVirtualSteps = false;
                         var methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(r => r.Name.StartsWith("On")).ToArray();
 
                         foreach (var method in methods)
@@ -43,6 +44,7 @@ namespace Boruto.Deployment.Services
                             var stage = method.Name.ToStage();
                             if (stage == 30)
                             {
+                                hasVirtualSteps = true;
                                 continue;
                             }
 
@@ -100,7 +102,7 @@ namespace Boruto.Deployment.Services
                             }
                         }
 
-                        if (allLogicalSteps.Count == 0)
+                        if (allLogicalSteps.Count == 0 && !hasVirtualSteps)
                         {
                             this.messageService.Warning($"No steps was found for: { type.FullName }");
                             continue;
@@ -120,7 +122,7 @@ namespace Boruto.Deployment.Services
                                          PreImage = grp.Select(r => r.PreImage).Accumulate()
                                      }).ToArray();
 
-                        var next = new Models.Plugin(type, steps,false);
+                        var next = new Models.Plugin(type, steps,hasVirtualSteps);
                         result.Add(next);
                     }
                 }
