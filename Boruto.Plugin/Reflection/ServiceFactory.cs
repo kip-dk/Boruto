@@ -21,6 +21,16 @@ namespace Boruto.Reflection
 
         internal object Resolve(Reflection.Model.PluginMethodArgument argument)
         {
+            if (argument.Name.ToLower() == "primaryentityid" && argument.FromType == typeof(Guid))
+            {
+                return this.ctx.PrimaryEntityId;
+            }
+
+            if (argument.Name.ToLower() == "primaryentityname")
+            {
+                return this.ctx.PrimaryLogicalName;
+            }
+
             var result = this.DoResolve(argument.FromType, argument.IsTargetReference, argument.IsOrganizationRequest, argument.Admin, argument.EarlyBoundEntityType ?? argument.ToType);
 
             if (argument.EarlyBoundEntityType == null && argument.ToType == null)
@@ -130,6 +140,8 @@ namespace Boruto.Reflection
             {
                 return o;
             }
+
+
 
             #region resolve standard services
             if (fromType == (typeof(Microsoft.Xrm.Sdk.ITracingService)))

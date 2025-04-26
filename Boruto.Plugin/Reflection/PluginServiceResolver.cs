@@ -45,10 +45,6 @@ namespace Boruto.Reflection
                 if (next.IsMatch)
                 {
                     result.Add(next);
-                    this.Trace("Next is match");
-                } else
-                {
-                    this.Trace("Next is NOT match");
                 }
             }
 

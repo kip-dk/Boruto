@@ -58,6 +58,37 @@ namespace Boruto.Plugin.UT.Extensions.Reflection
             Assert.IsFalse(typeof(Boruto.Plugin.Example.Entities.AccountStateChanged).HasPublicDefaultConstructor());
         }
 
+        [TestMethod]
+        public void ResolveVEEntityTypesTypeTest()
+        {
+            {
+                var method = typeof(Boruto.Plugin.Example.Plugins.bor_demoviews.bor_demoviewsPlugin).GetMethods().Where(r => r.Name == "OnCreate").Single();
+                var types = method.ResolveEntityTypes(Boruto.Plugin.UT.Consts.PluginLibs);
+                Assert.AreEqual(1, types.Length);
+                Assert.AreEqual(types[0], typeof(Entities.bor_demoviews));
+            }
+
+            {
+                var method = typeof(Boruto.Plugin.Example.Plugins.bor_demoviews.bor_demoviewsPlugin).GetMethods().Where(r => r.Name == "OnUpdate").Single();
+                var types = method.ResolveEntityTypes(Boruto.Plugin.UT.Consts.PluginLibs);
+                Assert.AreEqual(1, types.Length);
+                Assert.AreEqual(types[0], typeof(Entities.bor_demoviews));
+            }
+
+            {
+                var method = typeof(Boruto.Plugin.Example.Plugins.bor_demoviews.bor_demoviewsPlugin).GetMethods().Where(r => r.Name == "OnRetrieve").Single();
+                var types = method.ResolveEntityTypes(Boruto.Plugin.UT.Consts.PluginLibs);
+                Assert.AreEqual(1, types.Length);
+                Assert.AreEqual(types[0], typeof(Entities.bor_demoviews));
+            }
+
+            {
+                var method = typeof(Boruto.Plugin.Example.Plugins.bor_demoviews.bor_demoviewsPlugin).GetMethods().Where(r => r.Name == "OnRetrieveMultiple").Single();
+                var types = method.ResolveEntityTypes(Boruto.Plugin.UT.Consts.PluginLibs);
+                Assert.AreEqual(1, types.Length);
+                Assert.AreEqual(types[0], typeof(Entities.bor_demoviews));
+            }
+        }
 
         [TestMethod]
         public void ResolveAttributesTest()

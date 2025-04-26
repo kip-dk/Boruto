@@ -18,6 +18,12 @@ namespace Boruto.Deployment.Models
         static Config()
         {
             var file = "config".CommandlineValue();
+
+            if (string.IsNullOrEmpty(file) && System.IO.File.Exists("deploy.json"))
+            {
+                file = "deploy.json";
+            }
+
             if (!string.IsNullOrEmpty(file))
             {
                 using (var fs = new System.IO.FileStream(file, System.IO.FileMode.Open))

@@ -40,7 +40,7 @@ namespace Boruto.Plugin.UT.Fakes
             throw new NotImplementedException();
         }
 
-        public EntityCollection RetrieveMultiple(QueryBase query)
+        public Microsoft.Xrm.Sdk.EntityCollection RetrieveMultiple(QueryBase query)
         {
             throw new NotImplementedException();
         }

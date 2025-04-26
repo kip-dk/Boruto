@@ -42,6 +42,17 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.bor_demoviews"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Boruto.Plugin.Entities.bor_demoviews> bor_demoviewsSet
+		{
+			get
+			{
+				return this.CreateQuery<Boruto.Plugin.Entities.bor_demoviews>();
+			}
+		}
+		
+		/// <summary>
 		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.bor_plugindemo"/> entities.
 		/// </summary>
 		public System.Linq.IQueryable<Boruto.Plugin.Entities.bor_plugindemo> bor_plugindemoSet

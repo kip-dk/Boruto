@@ -27,7 +27,7 @@ namespace Boruto.Plugin.UT.Reflection
             var plugin = new Boruto.Plugin.Example.Plugins.bor_plugindemo.bor_plugindemoPlugin();
             var entity = new Entities.bor_plugindemo { bor_plugindemoId = Guid.NewGuid(), bor_number = 1 };
 
-            using (var serviceProvider = new StandardServiceProvider(40, false, "Delete", Entities.bor_plugindemo.EntityLogicalName, entity.Id))
+            using (var serviceProvider = new StandardServiceProvider(40, false, "Delete", Entities.bor_plugindemo.EntityLogicalName, entity.bor_plugindemoId.Value))
             {
                 plugin.Execute(serviceProvider);
             }

@@ -16,5 +16,10 @@ namespace Boruto.Plugin.UT
             typeof(Boruto.Plugin.UT.Extensions.Reflection.ReflectionMethodsTest).Assembly
         };
 
+        public static readonly Assembly[] PluginLibs = new Assembly[]
+        {
+            typeof(Boruto.Plugin.Entities.Account).Assembly,
+            typeof(Boruto.Plugin.Example.Entities.AccountStateChanged).Assembly,
+        };
     }
 }

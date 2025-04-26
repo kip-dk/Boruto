@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography;
 
 namespace Boruto
@@ -275,8 +276,6 @@ namespace Boruto
                 var target = this.TargetReference;
                 entity.Id = target.Id;
                 entity.LogicalName = target.LogicalName;
-                this.Trace($"Resolved ({type}): { entity.Id }/{ target.Id }");
-                this.Trace($"Resolved ({type}): {entity.LogicalName}/{target.LogicalName}");
             }
         }
 
@@ -376,14 +375,12 @@ namespace Boruto
             {
                 if (this._OrgSvcFactory == null)
                 {
-                    this.Trace("org service fac resolve");
                     this._OrgSvcFactory = this.StandardServiceProvider.Get<IOrganizationServiceFactory>();
                     var proxyProvider = _OrgSvcFactory as IProxyTypesAssemblyProvider;
 
                     if (proxyProvider != null)
                     {
                         var type = this.GetOrganizationServiceContextType();
-                        this.Trace($"org service fac resolve: { type.FullName }");
                         proxyProvider.ProxyTypesAssembly = type.Assembly;
                     }
                 }
@@ -425,26 +422,21 @@ namespace Boruto
         #region run plugin
         internal void Execute()
         {
-            this.Trace($"In execute: {this.methodPattern}, {this.PrimaryLogicalName}");
             using (var fac = new Reflection.ServiceFactory(this))
             {
                 var resolver = this.GetPluginServiceResolver();
                 foreach (var method in resolver.GetMethods(this.methodPattern, this.PrimaryLogicalName))
                 {
-                    this.Trace($"In execute: {method.method.Name}");
-
                     if ((this.Message == "Create" || this.Message == "Update") && !method.AllTargetFilter)
                     {
                         if (!this.Target.Attributes.Keys.Where(r => method.TargetFilter.Contains(r)).Any())
                         {
-                            this.Trace("exit on target filter");
                             continue;
                         }
                     }
 
                     if (!method.IsRelevant(this.PluginExecutionContext))
                     {
-                        this.Trace("exit on relevance");
                         continue;
                     }
 
@@ -460,15 +452,49 @@ namespace Boruto
                     #endregion
 
                     #region invoke
-                    this.Trace("before invoke");
                     var result = method.method.Invoke(this.plugin, args);
-                    this.Trace("after invoke");
 
-                    if (this.Stage == 40 && this.IsAsync == false && result is Microsoft.Xrm.Sdk.OrganizationResponse re && re.Results != null)
+                    if (result != null)
                     {
-                        foreach (var p in re.Results)
+                        if (this.Stage == 40 && this.IsAsync == false && result is Microsoft.Xrm.Sdk.OrganizationResponse re && re.Results != null)
                         {
-                            this.PluginExecutionContext.OutputParameters[p.Key] = p.Value;
+                            foreach (var p in re.Results)
+                            {
+                                this.PluginExecutionContext.OutputParameters[p.Key] = p.Value;
+                            }
+                        }
+
+                        if (this.Stage == 30 && this.Message == "Create" && result is Guid g)
+                        {
+                            this.PluginExecutionContext.OutputParameters["id"] = g;
+                        }
+
+                        if (this.Stage == 30 && this.Message == "Retrieve" && result is Microsoft.Xrm.Sdk.Entity ent)
+                        {
+                            if (ent.GetType() == typeof(Microsoft.Xrm.Sdk.Entity))
+                            {
+                                this.PluginExecutionContext.OutputParameters["BusinessEntity"] = ent;
+                            }
+                            else
+                            {
+                                var r = new Microsoft.Xrm.Sdk.Entity
+                                {
+                                    Id = ent.Id,
+                                    LogicalName = ent.LogicalName,
+                                    Attributes = ent.Attributes
+                                };
+                                this.PluginExecutionContext.OutputParameters["BusinessEntity"] = r;
+                            }
+                        }
+
+                        if (this.Stage == 30 && this.Message == "RetrieveMultiple" && result is Microsoft.Xrm.Sdk.EntityCollection col)
+                        {
+                            this.PluginExecutionContext.OutputParameters["BusinessEntityCollection"] = col;
+                        }
+
+                        if (this.Stage == 30 && this.Message == "RetrieveMultiple" && result is Boruto.EntityCollection bCol)
+                        {
+                            this.PluginExecutionContext.OutputParameters["BusinessEntityCollection"] = bCol.ToEntityCollection();
                         }
                     }
                     #endregion

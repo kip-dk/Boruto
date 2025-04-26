@@ -17,6 +17,11 @@ namespace Boruto.Plugin.UT.Fakes
             this.MessageName = message;
             this.PrimaryEntityName = logicalname;
             this.PrimaryEntityId = id ?? Guid.Empty;
+
+            if (message == "Delete" && !string.IsNullOrEmpty(logicalname) && id != null)
+            {
+                this.InputParameters["Target"] = new Microsoft.Xrm.Sdk.EntityReference(logicalname, id.Value);
+            }
         }
 
         public int Stage { get; }
@@ -37,11 +42,11 @@ namespace Boruto.Plugin.UT.Fakes
 
         public string SecondaryEntityName => null;
 
-        public ParameterCollection InputParameters => new ParameterCollection();
+        public ParameterCollection InputParameters { get; } = new ParameterCollection();
 
-        public ParameterCollection OutputParameters => new ParameterCollection();
+        public ParameterCollection OutputParameters { get; } = new ParameterCollection();
 
-        public ParameterCollection SharedVariables => new ParameterCollection();
+        public ParameterCollection SharedVariables { get; } = new ParameterCollection();
 
         public Guid UserId => new Guid();
 

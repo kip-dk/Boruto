@@ -1,4 +1,5 @@
-﻿using Microsoft.Crm.Sdk.Messages;
+﻿using Boruto.Deployment.Services;
+using Microsoft.Crm.Sdk.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Boruto.Reflection.Model
         private PluginMethodArgument[] arguments;
 
         internal bool IsMatch { get; private set; }
+        private bool WasMatched { get; set; }
         private Attributes.IfAttribute[] ifTypes;
 
         Assembly[] assemblies;
@@ -28,6 +30,39 @@ namespace Boruto.Reflection.Model
             this.assemblies = assemblies;
             this.Resolve();
             this.ResolveIf();
+
+            if (this.IsMatch == true && !this.WasMatched && !string.IsNullOrEmpty(primaryLogicalName))
+            {
+                // arguments did not define a matching entity, we must see if there is an entity property match for the method
+                var entityTypeAttrs = method.GetCustomAttributes<Boruto.Attributes.EntityTypeAttribute>()?.ToArray();
+                var  type = entityTypeAttrs?.Where(r => r.LogicalName == primaryLogicalName).FirstOrDefault();
+                this.IsMatch = type != null;
+                this.WasMatched = true;
+                return;
+            }
+
+            if (this.IsMatch == true && !this.WasMatched && !string.IsNullOrEmpty(primaryLogicalName) && method.ReturnType != null)
+            {
+                if (method.ReturnType.BaseType == typeof(Microsoft.Xrm.Sdk.Entity))
+                {
+                    var entityType = (Microsoft.Xrm.Sdk.Entity)System.Activator.CreateInstance(method.ReturnType);
+                    this.IsMatch = entityType.LogicalName == primaryLogicalName;
+                    this.WasMatched = true;
+                    return;
+                }
+            }
+
+            if (this.IsMatch && !this.WasMatched && !string.IsNullOrEmpty(primaryLogicalName) && method.ReturnType != null)
+            {
+                if (method.ReturnType.IsGenericType && method.ReturnType.GetGenericTypeDefinition() == typeof(Boruto.EntityCollection<>))
+                {
+                    var gType = method.ReturnType.GetGenericArguments().First();
+                    var entityType = (Microsoft.Xrm.Sdk.Entity)System.Activator.CreateInstance(gType);
+                    this.IsMatch = entityType.LogicalName == primaryLogicalName;
+                    this.WasMatched = true;
+                    return;
+                }
+            }
         }
 
         internal string LogicalName { get; }
@@ -117,10 +152,16 @@ namespace Boruto.Reflection.Model
                 var next = new PluginMethodArgument(this.pluginType, this.method, pm, this.LogicalName, this.assemblies);
 
 
-                if (next.IsEntityMatch != null && next.IsEntityMatch == false)
+                if (next.IsEntityMatch != null)
                 {
-                    this.IsMatch = false;
-                    return;
+                    this.IsMatch = next.IsEntityMatch.Value;
+                    this.WasMatched = true;
+
+                    if (next.IsEntityMatch == false)
+                    {
+                        this.IsMatch = false;
+                        return;
+                    }
                 }
                 result.Add(next);
             }

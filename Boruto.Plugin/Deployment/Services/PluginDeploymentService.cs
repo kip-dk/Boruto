@@ -41,6 +41,11 @@ namespace Boruto.Deployment.Services
                         foreach (var method in methods)
                         {
                             var stage = method.Name.ToStage();
+                            if (stage == 30)
+                            {
+                                continue;
+                            }
+
                             var isAsync = method.Name.EndsWith("Async");
                             var message = method.ToMessage();
                             if (string.IsNullOrEmpty(message))
@@ -167,6 +172,7 @@ namespace Boruto.Deployment.Services
 
         public static string[] ToLogicalName(this MethodInfo method, Assembly[] assms)
         {
+#warning HER
             var entityTypeAttrs = method.GetCustomAttributes<Boruto.Attributes.EntityTypeAttribute>()?.ToArray();
             if (entityTypeAttrs != null && entityTypeAttrs.Length > 0)
             {
@@ -424,22 +430,46 @@ namespace Boruto.Deployment.Services
 
         public static Type GetEntityTypeImplementation(this Type interfaceType, string logicalName, Assembly[] assms)
         {
-            foreach (var asm in assms)
+            var types = interfaceType.GetEntityTypeImplementations(assms);
+            if (types != null && types.Length > 0)
             {
-                foreach (var type in asm.GetTypes())
+                foreach (var type in types)
                 {
-                    if (!type.IsAbstract && !type.IsInterface && type.IsSubclassOf(ENTITY) && interfaceType.IsAssignableFrom(type))
+                    var entity = type.GetEntity();
+                    if (entity.LogicalName == logicalName)
                     {
-                        var entity = type.GetEntity();
-                        if (entity.LogicalName == logicalName)
-                        {
-                            return type;
-                        }
+                        return type;
                     }
                 }
             }
             return null;
         }
+
+        private static readonly Dictionary<Type, Type[]> ENTITY_TYPE_IMPL = new Dictionary<Type, Type[]>();
+        public static Type[] GetEntityTypeImplementations(this Type interfaceType, Assembly[] assms)
+        {
+            if (ENTITY_TYPE_IMPL.TryGetValue(interfaceType, out Type[] types))
+            {
+                return types;
+            }
+            var result = new List<Type>();
+
+            foreach (var asm in assms)
+            {
+                foreach (var type in asm.GetTypes())
+                {
+                    type.IsEntityType();
+                    if (!type.IsAbstract && !type.IsInterface && type.IsEntityType() && interfaceType.IsAssignableFrom(type) && type.HasPublicConstructor())
+                    {
+                        result.Add(type);
+                    }
+                }
+            }
+
+            ENTITY_TYPE_IMPL[interfaceType] = result.ToArray();
+            return ENTITY_TYPE_IMPL[interfaceType];
+        }
+
 
         public static string[] GetEntityAttributes(this Type interfaceType, Type implType, Func<PropertyInfo, bool> interfaceTypeFilter)
         {

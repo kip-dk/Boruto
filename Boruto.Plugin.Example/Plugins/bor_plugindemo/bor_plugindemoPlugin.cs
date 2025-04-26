@@ -49,11 +49,8 @@ namespace Boruto.Plugin.Example.Plugins.bor_plugindemo
             IRepository<Boruto.Plugin.Entities.bor_plugindemo> demoRepo
             )
         {
-            PluginContext.Current.Trace($"In: OnPostDelete");
             if (preimage.bor_number != null)
             {
-                PluginContext.Current.Trace($"In: OnPostDelete: { preimage.bor_number }");
-
                 var other = (from o in demoRepo.GetQuery()
                              where o.bor_number == preimage.bor_number
                                && o.bor_plugindemoId != preimage.Id
@@ -65,7 +62,6 @@ namespace Boruto.Plugin.Example.Plugins.bor_plugindemo
 
                 if (other != null)
                 {
-                    PluginContext.Current.Trace($"In: OnPreDelete: {other}");
                     var clean = new Boruto.Plugin.Entities.bor_plugindemo { bor_plugindemoId = other.Value };
                     clean.bor_changelog = $"delete: {preimage.Id}: { preimage.bor_number }: Accounts: { accounts.Length }";
                     demoRepo.Update(clean);
