@@ -3,6 +3,7 @@ using Boruto.Deployment.ServiceAPI;
 using Boruto.Extensions.FilterExpression;
 using Boruto.Extensions.QueryExpression;
 using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Messages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -43,8 +44,19 @@ namespace Boruto.Deployment.Services
             Initialize();
             if (solution != null)
             {
-                AddSolutionComponent(package.pluginpackageId.Value, 10476, false);
+                AddSolutionComponent(package.pluginpackageId.Value, this.GetEntityObjectTypeCode(Entities.pluginpackage.EntityLogicalName), false);
             }
+        }
+
+        public int GetEntityObjectTypeCode(string logicalname)
+        {
+            var req = new RetrieveEntityRequest
+            {
+                LogicalName = Entities.pluginpackage.EntityLogicalName
+            };
+
+            var res = (RetrieveEntityResponse)this.orgService.Execute(req);
+            return res.EntityMetadata.ObjectTypeCode.Value;
         }
 
         public void AddMissingPluginAssembly(PluginAssembly assm)
