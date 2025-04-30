@@ -44,10 +44,16 @@ namespace Boruto
 
         internal PluginContext GetContext(IServiceProvider platformServiceProvider)
         {
-            return new PluginContext(this, platformServiceProvider, this.ServiceProvider, this.ServiceAssemblies, unsecure, secureString);
+            var res =  new PluginContext(this, platformServiceProvider, this.ServiceAssemblies, unsecure, secureString);
+            res.SetCustomServiceProvider(this.ServiceProvider(res));
+            return res;
         }
 
-        protected virtual IServiceProvider ServiceProvider => null;
+        protected virtual IServiceProvider ServiceProvider(ServiceAPI.IServiceContext ServiceContext) 
+        {
+            return null;
+        }
+
         protected abstract Assembly[] ServiceAssemblies { get; }
     }
 }

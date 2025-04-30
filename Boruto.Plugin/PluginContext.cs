@@ -2,6 +2,7 @@
 using Boruto.Extensions.SDK;
 using Boruto.Implementations;
 using Boruto.Reflection;
+using Boruto.ServiceAPI;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Extensions;
 using System;
@@ -15,14 +16,14 @@ using System.Security.Cryptography;
 
 namespace Boruto
 {
-    public class PluginContext : IDisposable
+    internal class PluginContext: IDisposable, ServiceAPI.IServiceContext 
     {
         private static Dictionary<System.Threading.Thread, List<PluginContext>> runnings = new Dictionary<System.Threading.Thread, List<PluginContext>>();
         private static Dictionary<Type, Reflection.PluginServiceResolver> serviceResolverIndex = new Dictionary<Type, Reflection.PluginServiceResolver>();
 
         private static readonly object locker = new object();
 
-        public static PluginContext Current
+        internal static PluginContext Current
         {
             get
             {
@@ -41,7 +42,7 @@ namespace Boruto
         private string methodPattern;
         private List<string> logs = new List<string>();
 
-        internal PluginContext(BasePlugin plugin, IServiceProvider standardServiceProvider, IServiceProvider customServiceProvider, Assembly[] assemblies, string unsecure, string secure)
+        internal PluginContext(BasePlugin plugin, IServiceProvider standardServiceProvider, Assembly[] assemblies, string unsecure, string secure)
         {
             if (assemblies == null || assemblies.Length == 0)
             {
@@ -51,7 +52,6 @@ namespace Boruto
             this.plugin = plugin;
             this.Type = plugin.GetType();
             this.StandardServiceProvider = standardServiceProvider;
-            this.CustomServiceProvider = customServiceProvider;
             this.ServiceAssemblies = assemblies;
             this.Unsecure = unsecure;
             this.Secure = secure;
@@ -75,18 +75,23 @@ namespace Boruto
             }
         }
 
+        internal void SetCustomServiceProvider(IServiceProvider customServiceProvider)
+        {
+            this.CustomServiceProvider = customServiceProvider;
+        } 
+
         #region constructor properties
-        public Type Type { get; }
-        public string Unsecure { get; }
-        public string Secure { get; }
+        internal Type Type { get; }
+        internal string Unsecure { get; }
+        internal string Secure { get; }
         #endregion
 
         #region message properties
-        public string Message { get; }
-        public int Stage { get; }
-        public bool IsAsync { get; }
-        public string PrimaryLogicalName { get; }
-        public Guid PrimaryEntityId { get; }
+        internal string Message { get; }
+        internal int Stage { get; }
+        internal bool IsAsync { get; }
+        internal string PrimaryLogicalName { get; }
+        internal Guid PrimaryEntityId { get; }
 
         #endregion
 
@@ -205,7 +210,7 @@ namespace Boruto
         }
 
         private Microsoft.Xrm.Sdk.Entity _merged;
-        public Microsoft.Xrm.Sdk.Entity Merged
+        internal Microsoft.Xrm.Sdk.Entity Merged
         {
             get
             {
@@ -244,7 +249,7 @@ namespace Boruto
         }
 
         private Microsoft.Xrm.Sdk.EntityReference _targetReference;
-        public Microsoft.Xrm.Sdk.EntityReference TargetReference
+        internal Microsoft.Xrm.Sdk.EntityReference TargetReference
         {
             get
             {
@@ -258,7 +263,7 @@ namespace Boruto
 
         private Microsoft.Xrm.Sdk.OrganizationRequest _orgRequest;
 
-        public Microsoft.Xrm.Sdk.OrganizationRequest OrganizationRequest
+        internal Microsoft.Xrm.Sdk.OrganizationRequest OrganizationRequest
         {
             get
             {
@@ -287,7 +292,7 @@ namespace Boruto
 
         #region microsoft service properties
         private IOrganizationService _InitiatingUserService;
-        public IOrganizationService InitiatingUserService
+        internal IOrganizationService InitiatingUserService
         {
             get
             {
@@ -300,7 +305,7 @@ namespace Boruto
         }
 
         private IOrganizationService _PluginUserService;
-        public IOrganizationService PluginUserService
+        internal IOrganizationService PluginUserService
         {
             get
             {
@@ -315,7 +320,7 @@ namespace Boruto
         }
 
         private IOrganizationService _PluginAdminService;
-        public IOrganizationService PluginAdminService
+        internal IOrganizationService PluginAdminService
         {
             get
             {
@@ -328,7 +333,7 @@ namespace Boruto
         }
 
         private IPluginExecutionContext _PluginExecutionContext;
-        public IPluginExecutionContext PluginExecutionContext
+        internal IPluginExecutionContext PluginExecutionContext
         {
             get
             {
@@ -341,7 +346,7 @@ namespace Boruto
         }
 
         private IServiceEndpointNotificationService _NotificationService;
-        public IServiceEndpointNotificationService NotificationService
+        internal IServiceEndpointNotificationService NotificationService
         {
             get
             {
@@ -355,7 +360,7 @@ namespace Boruto
         }
 
         private ITracingService _TracingService;
-        public ITracingService TracingService
+        internal ITracingService TracingService
         {
             get
             {
@@ -368,13 +373,13 @@ namespace Boruto
             }
         }
 
-        public IServiceProvider StandardServiceProvider { get; }
-        public IServiceProvider CustomServiceProvider { get; }
+        internal IServiceProvider StandardServiceProvider { get; }
+        internal IServiceProvider CustomServiceProvider { get; private set; }
 
-        public Assembly[] ServiceAssemblies { get; }
+        internal Assembly[] ServiceAssemblies { get; }
 
         private IOrganizationServiceFactory _OrgSvcFactory;
-        public IOrganizationServiceFactory OrgSvcFactory
+        internal IOrganizationServiceFactory OrgSvcFactory
         {
             get
             {
@@ -421,7 +426,7 @@ namespace Boruto
         #endregion
 
         #region context settings
-        public TraceLevel TraceLevel { get; set; } = TraceLevel.Error;
+        internal TraceLevel TraceLevel { get; set; } = TraceLevel.Error;
         #endregion
 
         #region run plugin
@@ -513,7 +518,7 @@ namespace Boruto
         #endregion
 
         #region public methods
-        public void Trace(string message, [CallerMemberName] string method = null)
+        internal void Trace(string message, [CallerMemberName] string method = null)
         {
             this.TracingService.Trace(message);
         }
@@ -608,6 +613,21 @@ namespace Boruto
                 }
             }
         }
+        #endregion
+
+        #region iservicecontext
+        IOrganizationService IServiceContext.UserOrganizationService => this.PluginUserService;
+
+        IOrganizationService IServiceContext.InitiatingUserOrganizationService => this.InitiatingUserService;
+
+        IOrganizationService IServiceContext.AdminOrganizationService => this.PluginAdminService;
+
+        IOrganizationServiceFactory IServiceContext.OrganizationServiceFactory => this.OrgSvcFactory;
+
+        ITracingService IServiceContext.TraceService => this.TracingService;
+
+        IPluginExecutionContext IServiceContext.PluginExecutionContext => this.PluginExecutionContext;
+
         #endregion
     }
 }

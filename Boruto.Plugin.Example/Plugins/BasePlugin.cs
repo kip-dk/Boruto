@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boruto.Plugin.Example.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -23,7 +24,10 @@ namespace Boruto.Plugin.Example.Plugins
         {
         }
 
-        protected override IServiceProvider ServiceProvider => new Services.ExampleServiceProvider();
+        protected override IServiceProvider ServiceProvider(Boruto.ServiceAPI.IServiceContext ctx) 
+        {
+            return new ExampleServiceProvider(ctx);
+        }
 
         protected override Assembly[] ServiceAssemblies => assms;
     }
