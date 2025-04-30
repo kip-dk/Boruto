@@ -19,7 +19,7 @@ namespace Boruto.Deployment.Entities
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("plugintype")]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public partial class PluginType : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	internal partial class PluginType : AbstractBaseEntity
 	{
 		
 		/// <summary>
@@ -75,12 +75,10 @@ namespace Boruto.Deployment.Entities
 		/// <summary>
 		/// Default Constructor.
 		/// </summary>
-		public PluginType() : 
-				base(EntityLogicalName)
-		{
-		}
-		
-		public const string EntityLogicalName = "plugintype";
+		public PluginType() : base(EntityLogicalName) { }
+        public PluginType(Microsoft.Xrm.Sdk.Entity e) : base(e) { }
+
+        public const string EntityLogicalName = "plugintype";
 		
 		public const string EntityLogicalCollectionName = "plugintypes";
 		
@@ -670,61 +668,6 @@ namespace Boruto.Deployment.Entities
 				this.OnPropertyChanging("WorkflowActivityGroupName");
 				this.SetAttributeValue("workflowactivitygroupname", value);
 				this.OnPropertyChanged("WorkflowActivityGroupName");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N plugintype_sdkmessageprocessingstep
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("plugintype_sdkmessageprocessingstep")]
-		public System.Collections.Generic.IEnumerable<Boruto.Deployment.Entities.SdkMessageProcessingStep> plugintype_sdkmessageprocessingstep
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Deployment.Entities.SdkMessageProcessingStep>("plugintype_sdkmessageprocessingstep", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("plugintype_sdkmessageprocessingstep");
-				this.SetRelatedEntities<Boruto.Deployment.Entities.SdkMessageProcessingStep>("plugintype_sdkmessageprocessingstep", null, value);
-				this.OnPropertyChanged("plugintype_sdkmessageprocessingstep");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N plugintypeid_sdkmessageprocessingstep
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("plugintypeid_sdkmessageprocessingstep")]
-		public System.Collections.Generic.IEnumerable<Boruto.Deployment.Entities.SdkMessageProcessingStep> plugintypeid_sdkmessageprocessingstep
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Deployment.Entities.SdkMessageProcessingStep>("plugintypeid_sdkmessageprocessingstep", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("plugintypeid_sdkmessageprocessingstep");
-				this.SetRelatedEntities<Boruto.Deployment.Entities.SdkMessageProcessingStep>("plugintypeid_sdkmessageprocessingstep", null, value);
-				this.OnPropertyChanged("plugintypeid_sdkmessageprocessingstep");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 pluginassembly_plugintype
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("pluginassemblyid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("pluginassembly_plugintype")]
-		public Boruto.Deployment.Entities.PluginAssembly pluginassembly_plugintype
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Deployment.Entities.PluginAssembly>("pluginassembly_plugintype", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("pluginassembly_plugintype");
-				this.SetRelatedEntity<Boruto.Deployment.Entities.PluginAssembly>("pluginassembly_plugintype", null, value);
-				this.OnPropertyChanged("pluginassembly_plugintype");
 			}
 		}
 	}

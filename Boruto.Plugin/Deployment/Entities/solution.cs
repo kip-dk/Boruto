@@ -18,7 +18,7 @@ namespace Boruto.Deployment.Entities
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum solution_solutiontype
+	internal enum solution_solutiontype
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -33,7 +33,7 @@ namespace Boruto.Deployment.Entities
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum solution_sourcecontrolsyncstatus
+	internal enum solution_sourcecontrolsyncstatus
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -58,7 +58,7 @@ namespace Boruto.Deployment.Entities
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("solution")]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public partial class Solution : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	internal partial class Solution : AbstractBaseEntity
 	{
 		
 		/// <summary>
@@ -121,12 +121,10 @@ namespace Boruto.Deployment.Entities
 		/// <summary>
 		/// Default Constructor.
 		/// </summary>
-		public Solution() : 
-				base(EntityLogicalName)
-		{
-		}
-		
-		public const string EntityLogicalName = "solution";
+		public Solution() : base(EntityLogicalName){}
+        public Solution(Microsoft.Xrm.Sdk.Entity e) : base(e) { }
+
+        public const string EntityLogicalName = "solution";
 		
 		public const string EntityLogicalCollectionName = "solutions";
 		
@@ -840,73 +838,6 @@ namespace Boruto.Deployment.Entities
 			}
 		}
 		
-		/// <summary>
-		/// 1:N solution_parent_solution
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("solution_parent_solution", Microsoft.Xrm.Sdk.EntityRole.Referenced)]
-		public System.Collections.Generic.IEnumerable<Boruto.Deployment.Entities.Solution> Referencedsolution_parent_solution
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Deployment.Entities.Solution>("solution_parent_solution", Microsoft.Xrm.Sdk.EntityRole.Referenced);
-			}
-			set
-			{
-				this.OnPropertyChanging("Referencedsolution_parent_solution");
-				this.SetRelatedEntities<Boruto.Deployment.Entities.Solution>("solution_parent_solution", Microsoft.Xrm.Sdk.EntityRole.Referenced, value);
-				this.OnPropertyChanged("Referencedsolution_parent_solution");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N solution_solutioncomponent
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("solution_solutioncomponent")]
-		public System.Collections.Generic.IEnumerable<Boruto.Deployment.Entities.SolutionComponent> solution_solutioncomponent
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Deployment.Entities.SolutionComponent>("solution_solutioncomponent", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("solution_solutioncomponent");
-				this.SetRelatedEntities<Boruto.Deployment.Entities.SolutionComponent>("solution_solutioncomponent", null, value);
-				this.OnPropertyChanged("solution_solutioncomponent");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 publisher_solution
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("publisherid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("publisher_solution")]
-		public Boruto.Deployment.Entities.Publisher publisher_solution
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Deployment.Entities.Publisher>("publisher_solution", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("publisher_solution");
-				this.SetRelatedEntity<Boruto.Deployment.Entities.Publisher>("publisher_solution", null, value);
-				this.OnPropertyChanged("publisher_solution");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 solution_parent_solution
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("parentsolutionid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("solution_parent_solution", Microsoft.Xrm.Sdk.EntityRole.Referencing)]
-		public Boruto.Deployment.Entities.Solution Referencingsolution_parent_solution
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Deployment.Entities.Solution>("solution_parent_solution", Microsoft.Xrm.Sdk.EntityRole.Referencing);
-			}
-		}
 	}
 }
 #pragma warning restore CS1591

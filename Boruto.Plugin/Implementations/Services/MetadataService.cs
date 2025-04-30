@@ -12,43 +12,88 @@ namespace Boruto.Implementations.Services
 {
     internal class MetadataService : ServiceAPI.IMetadataService
     {
-        private static Dictionary<string, Container> metadatas = new Dictionary<string, Container>();
         private readonly IOrganizationService orgService;
+        private static readonly Dictionary<string, MetaContainer> entities = new Dictionary<string, MetaContainer>();
 
-        internal MetadataService(Microsoft.Xrm.Sdk.IOrganizationService orgService)
+        public MetadataService(IOrganizationService orgService)
         {
             this.orgService = orgService;
         }
 
         public EntityMetadata ForEntity(string logicalName)
         {
-            if (metadatas.TryGetValue(logicalName, out Container c) && c.Timeout < System.DateTime.UtcNow)
+            if (entities.TryGetValue(logicalName, out MetaContainer m))
             {
-                return c.Meta;
+                if (m.timeout < System.DateTime.UtcNow)
+                {
+                    return m.meta;
+                }
             }
 
             var req = new RetrieveEntityRequest
             {
                 EntityFilters = EntityFilters.All,
-                LogicalName = logicalName,
-                RetrieveAsIfPublished = false
+                LogicalName = logicalName
             };
-            var response = (RetrieveEntityResponse)this.orgService.Execute(req);
-
-            metadatas[logicalName] = new Container(response.EntityMetadata);
-            return metadatas[logicalName].Meta;
+            var res = (RetrieveEntityResponse)this.orgService.Execute(req);
+            var con = new MetaContainer
+            {
+                meta = res.EntityMetadata,
+                timeout = System.DateTime.UtcNow.AddMinutes(15)
+            };
+            entities[logicalName] = con;
+            return con.meta;
         }
 
-        internal class Container
+        public string PrimaryKey(string logicalName)
         {
-            internal Container(Microsoft.Xrm.Sdk.Metadata.EntityMetadata meta)
+            var meta = this.ForEntity(logicalName);
+            return meta.Attributes.Where(r => r.IsPrimaryId == true).Select(r => r.LogicalName).Single();
+
+        }
+        public string PrimaryName(string logicalName)
+        {
+            var meta = this.ForEntity(logicalName);
+            return meta.Attributes.Where(r => r.IsPrimaryName == true).Select(r => r.LogicalName).Single();
+        }
+
+        public string[] CanCreateAttributeName(string logicalName)
+        {
+            var meta = this.ForEntity(logicalName);
+            return meta.Attributes.Where(r => r.IsValidForCreate == true).Select(r => r.LogicalName).ToArray();
+        }
+
+        public string[] CanUpdateAttributeName(string logicalName)
+        {
+            var meta = this.ForEntity(logicalName);
+            return meta.Attributes.Where(r => r.IsValidForUpdate == true).Select(r => r.LogicalName).ToArray();
+        }
+
+        public Entity CloneForCreate(Entity source, params string[] ommit)
+        {
+            var allOmmit = new List<string> { this.PrimaryKey(source.LogicalName), "createdon", "createdby", "modifiedon", "modifiedby" };
+            if (ommit != null && ommit.Length > 0)
             {
-                Meta = meta;
-                this.Timeout = System.DateTime.UtcNow.AddMinutes(60);
+                allOmmit.AddRange(ommit);
             }
 
-            internal EntityMetadata Meta { get; }
-            internal DateTime Timeout { get; }
+            var allInclude = this.CanCreateAttributeName(source.LogicalName);
+
+            var result = new Entity(source.LogicalName);
+            foreach (var key in source.Attributes.Keys)
+            {
+                if (allInclude.Contains(key) && !ommit.Contains(key))
+                {
+                    result[key] = source[key];
+                }
+            }
+            return result;
+        }
+
+        public class MetaContainer
+        {
+            internal DateTime timeout { get; set; }
+            internal EntityMetadata meta { get; set; }
         }
     }
 }

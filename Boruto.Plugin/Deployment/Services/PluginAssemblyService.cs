@@ -6,13 +6,17 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Boruto.Extensions.FilterExpression;
+using Microsoft.Xrm.Sdk;
+using System.Xml.Linq;
+using Boruto.Extensions.QueryExpression;
 
 namespace Boruto.Deployment.Services
 {
     [Export(typeof(ServiceAPI.IPluginAssemblyService))]
     internal class PluginAssemblyService : ServiceAPI.IPluginAssemblyService
     {
-        private Entities.IUnitOfWork uow;
+        private readonly IOrganizationService orgService;
         private ServiceAPI.IMessageService messageService;
         private readonly IPluginTypeService typeService;
         private readonly ISdkMessageProcessingStepService stepService;
@@ -24,12 +28,12 @@ namespace Boruto.Deployment.Services
 
         [ImportingConstructor]
         public PluginAssemblyService(
-            Entities.IUnitOfWork uow,
+            Microsoft.Xrm.Sdk.IOrganizationService orgService,
             ServiceAPI.IMessageService messageService,
             ServiceAPI.IPluginTypeService typeService,
             ServiceAPI.ISdkMessageProcessingStepService stepService)
         {
-            this.uow = uow;
+            this.orgService = orgService;
             this.messageService = messageService;
             this.typeService = typeService;
             this.stepService = stepService;
@@ -47,17 +51,16 @@ namespace Boruto.Deployment.Services
                 name = name.Substring(0, name.Length - 4);
             }
 
-            var r = (from p in uow.PluginAssemblies.GetQuery()
-                     where p.Name == name
-                     select p).SingleOrDefault();
-            if (r != null)
+            var res = this.GetPluginAssembly(name);
+
+            if (res != null)
             {
-                this.pluginAssembly = r;
+                this.pluginAssembly = res;
                 this.isNew = false;
-                return r;
+                return this.pluginAssembly;
             }
 
-            r = new PluginAssembly
+            var r = new PluginAssembly
             {
                 PluginAssemblyId = Guid.NewGuid(),
                 Content = System.Convert.ToBase64String(code),
@@ -69,7 +72,7 @@ namespace Boruto.Deployment.Services
                 PublicKeyToken = publickeytoken,
                 Version = "1.0"
             };
-            uow.Create(r);
+            this.orgService.Create(r.ToEntity());
             this.messageService.Inform("Assembly code was created");
 
             this.pluginAssembly = r;
@@ -85,7 +88,7 @@ namespace Boruto.Deployment.Services
             {
                 var clean = new Entities.PluginAssembly { PluginAssemblyId = this.pluginAssembly.PluginAssemblyId };
                 clean.Content = System.Convert.ToBase64String(code);
-                uow.Update(clean);
+                this.orgService.Update(clean.ToEntity());
                 this.messageService.Inform("Assembly code updated");
             }
         }
@@ -93,16 +96,24 @@ namespace Boruto.Deployment.Services
 
         public Entities.PluginAssembly GetPluginAssembly(string name)
         {
-            return (from pa in uow.PluginAssemblies.GetQuery()
-                    where pa.Name == name
-                    select pa).SingleOrDefault();
+            var query = Entities.PluginAssembly.EntityLogicalName.ToQueryExpression();
+            query.Criteria.Equal(Entities.PluginAssembly.Fields.Name, name);
+
+            var res = this.orgService.RetrieveMultiple(query).Entities.FirstOrDefault();
+
+            if (res != null)
+            {
+                return new PluginAssembly(res);
+            }
+            return null;
         }
 
         public Entities.PluginAssembly[] ForPackage(Guid pluginPackageId)
         {
-            return (from pa in uow.PluginAssemblies.GetQuery()
-                    where pa.PackageId.Id == pluginPackageId
-                    select pa).ToArray();
+            var query = Entities.PluginAssembly.EntityLogicalName.ToQueryExpression();
+            query.Criteria.Equal(Entities.PluginAssembly.Fields.PackageId, pluginPackageId);
+
+            return this.orgService.RetrieveMultiple(query).Entities.Select(r => new Entities.PluginAssembly(r)).ToArray();
         }
 
         private string GetPublicKeyTokenFromAssembly()

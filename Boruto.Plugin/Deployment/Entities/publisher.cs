@@ -18,7 +18,7 @@ namespace Boruto.Deployment.Entities
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum publisher_address1_addresstypecode
+	internal enum publisher_address1_addresstypecode
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -30,7 +30,7 @@ namespace Boruto.Deployment.Entities
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum publisher_address1_shippingmethodcode
+	internal enum publisher_address1_shippingmethodcode
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -42,7 +42,7 @@ namespace Boruto.Deployment.Entities
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum publisher_address2_addresstypecode
+	internal enum publisher_address2_addresstypecode
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -54,7 +54,7 @@ namespace Boruto.Deployment.Entities
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum publisher_address2_shippingmethodcode
+	internal enum publisher_address2_shippingmethodcode
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -67,7 +67,7 @@ namespace Boruto.Deployment.Entities
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("publisher")]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public partial class Publisher : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	internal partial class Publisher : AbstractBaseEntity
 	{
 		
 		/// <summary>
@@ -162,8 +162,13 @@ namespace Boruto.Deployment.Entities
 				base(EntityLogicalName)
 		{
 		}
-		
-		public const string EntityLogicalName = "publisher";
+
+        public Publisher(Microsoft.Xrm.Sdk.Entity e) :
+                base(e)
+        {
+        }
+
+        public const string EntityLogicalName = "publisher";
 		
 		public const string EntityLogicalCollectionName = "publishers";
 		
@@ -1460,24 +1465,6 @@ namespace Boruto.Deployment.Entities
 			get
 			{
 				return this.GetAttributeValue<System.Nullable<long>>("versionnumber");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N publisher_solution
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("publisher_solution")]
-		public System.Collections.Generic.IEnumerable<Boruto.Deployment.Entities.Solution> publisher_solution
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Deployment.Entities.Solution>("publisher_solution", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("publisher_solution");
-				this.SetRelatedEntities<Boruto.Deployment.Entities.Solution>("publisher_solution", null, value);
-				this.OnPropertyChanged("publisher_solution");
 			}
 		}
 	}

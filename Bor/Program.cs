@@ -15,6 +15,7 @@ namespace Bor
             if (args == null || args.Length == 0)
             {
                 Console.WriteLine($"Please provide tool as first argument.");
+                return;
             }
 
             var tool = args[0];

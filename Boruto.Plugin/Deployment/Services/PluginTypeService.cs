@@ -1,4 +1,7 @@
 ﻿using Boruto.Deployment.Entities;
+using Boruto.Extensions.FilterExpression;
+using Boruto.Extensions.QueryExpression;
+using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -11,21 +14,22 @@ namespace Boruto.Deployment.Services
     [Export(typeof(ServiceAPI.IPluginTypeService))]
     internal class PluginTypeService : ServiceAPI.IPluginTypeService
     {
-        private Entities.IUnitOfWork uow;
+        private readonly IOrganizationService orgService;
         private ServiceAPI.IMessageService messageService;
 
         [ImportingConstructor]
-        public PluginTypeService(Entities.IUnitOfWork uow, ServiceAPI.IMessageService messageService)
+        public PluginTypeService(Microsoft.Xrm.Sdk.IOrganizationService orgService, ServiceAPI.IMessageService messageService)
         {
-            this.uow = uow;
+            this.orgService = orgService;
             this.messageService = messageService;
         }
 
         public PluginType[] ForPluginAssembly(Guid pluginAssemblyId)
         {
-            return (from pt in uow.PluginTypes.GetQuery()
-                    where pt.PluginAssemblyId.Id == pluginAssemblyId
-                    select pt).ToArray();
+            var query = Entities.PluginType.EntityLogicalName.ToQueryExpression();
+            query.Criteria.Equal(Entities.PluginType.Fields.PluginAssemblyId, pluginAssemblyId);
+
+            return this.orgService.RetrieveMultiple(query).Entities.Select(r => new PluginType(r)).ToArray();
         }
 
         public void JoinAndCleanup(Entities.PluginType[] currents, Models.Plugin[] tobee)
@@ -59,7 +63,7 @@ namespace Boruto.Deployment.Services
                         Name = tobee.Type.FullName,
                         TypeName = tobee.Type.FullName,
                     };
-                    uow.Create(next);
+                    this.orgService.Create(next.ToEntity());
                     tobee.CurrentCrmInstance = next;
                 }
             }
@@ -71,10 +75,11 @@ namespace Boruto.Deployment.Services
             {
                 if (tobee.CurrentCrmInstance == null)
                 {
-                    tobee.CurrentCrmInstance = (from pt in uow.PluginTypes.GetQuery()
-                                                where pt.PluginAssemblyId.Id == pluginassemblyId
-                                                  && pt.Name == tobee.Type.FullName
-                                                select pt).SingleOrDefault();
+                    var query = Entities.PluginType.EntityLogicalName.ToQueryExpression();
+                    query.Criteria.Equal(Entities.PluginType.Fields.PluginAssemblyId, pluginassemblyId);
+                    query.Criteria.Equal(Entities.PluginType.Fields.Name, tobee.Type.FullName);
+
+                    tobee.CurrentCrmInstance = this.orgService.RetrieveMultiple(query).Entities.Select(r => new Entities.PluginType(r)).SingleOrDefault();
 
                     if (tobee.CurrentCrmInstance == null)
                     {
@@ -87,21 +92,25 @@ namespace Boruto.Deployment.Services
 
         private void Delete(Entities.PluginType pluginType)
         {
-            var steps = (from s in uow.SdkMessageProcessingSteps.GetQuery()
-                         where s.EventHandler.Id == pluginType.PluginTypeId
-                         select s).ToArray();
+            var query = Entities.SdkMessageProcessingStep.EntityLogicalName.ToQueryExpression();
+            query.Criteria.Equal(Entities.SdkMessageProcessingStep.Fields.EventHandler, pluginType.PluginTypeId);
+
+            var steps = this.orgService.RetrieveMultiple(query).Entities.Select(r => new SdkMessageProcessingStep(r)).ToArray();
+
             foreach (var step in steps)
             {
-                var images = (from i in uow.SdkMessageProcessingStepImages.GetQuery()
-                              where i.SdkMessageProcessingStepId.Id == step.SdkMessageProcessingStepId
-                              select i).ToArray();
+                query = Entities.SdkMessageProcessingStepImage.EntityLogicalName.ToQueryExpression();
+                query.Criteria.Equal(Entities.SdkMessageProcessingStepImage.Fields.SdkMessageProcessingStepId, step.SdkMessageProcessingStepId);
+
+                var images = this.orgService.RetrieveMultiple(query).Entities.Select(r => new SdkMessageProcessingStepImage(r)).ToArray();
+
                 foreach (var img in images)
                 {
-                    uow.Delete(img);
+                    this.orgService.Delete(img.LogicalName, img.Id);
                 }
-                uow.Delete(step);
+                this.orgService.Delete(step.LogicalName, step.Id);
             }
-            uow.Delete(pluginType);
+            this.orgService.Delete(pluginType.LogicalName, pluginType.Id);
 
             messageService.Inform($"Removed plugin: {pluginType.Name}");
         }

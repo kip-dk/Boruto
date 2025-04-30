@@ -18,7 +18,7 @@ namespace Boruto.Deployment.Entities
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum pluginpackage_statecode
+	internal enum pluginpackage_statecode
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -33,7 +33,7 @@ namespace Boruto.Deployment.Entities
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum pluginpackage_statuscode
+	internal enum pluginpackage_statuscode
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -46,7 +46,7 @@ namespace Boruto.Deployment.Entities
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("pluginpackage")]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public partial class pluginpackage : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	internal partial class pluginpackage : AbstractBaseEntity
 	{
 		
 		/// <summary>
@@ -106,12 +106,10 @@ namespace Boruto.Deployment.Entities
 		/// <summary>
 		/// Default Constructor.
 		/// </summary>
-		public pluginpackage() : 
-				base(EntityLogicalName)
-		{
-		}
-		
-		public const string EntityLogicalName = "pluginpackage";
+		internal pluginpackage() : base(EntityLogicalName){ }
+        internal pluginpackage(Microsoft.Xrm.Sdk.Entity e) : base(e) { }
+
+        public const string EntityLogicalName = "pluginpackage";
 		
 		public const string EntityLogicalCollectionName = "pluginpackages";
 		
@@ -840,24 +838,6 @@ namespace Boruto.Deployment.Entities
 			get
 			{
 				return this.GetAttributeValue<System.Nullable<long>>("versionnumber");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N pluginpackage_pluginassembly
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("pluginpackage_pluginassembly")]
-		public System.Collections.Generic.IEnumerable<Boruto.Deployment.Entities.PluginAssembly> pluginpackage_pluginassembly
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Deployment.Entities.PluginAssembly>("pluginpackage_pluginassembly", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("pluginpackage_pluginassembly");
-				this.SetRelatedEntities<Boruto.Deployment.Entities.PluginAssembly>("pluginpackage_pluginassembly", null, value);
-				this.OnPropertyChanged("pluginpackage_pluginassembly");
 			}
 		}
 	}

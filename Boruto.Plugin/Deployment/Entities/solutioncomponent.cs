@@ -18,7 +18,7 @@ namespace Boruto.Deployment.Entities
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum solutioncomponent_rootcomponentbehavior
+	internal enum solutioncomponent_rootcomponentbehavior
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -37,7 +37,7 @@ namespace Boruto.Deployment.Entities
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("solutioncomponent")]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public partial class SolutionComponent : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	internal partial class SolutionComponent : AbstractBaseEntity
 	{
 		
 		/// <summary>
@@ -78,8 +78,13 @@ namespace Boruto.Deployment.Entities
 				base(EntityLogicalName)
 		{
 		}
-		
-		public const string EntityLogicalName = "solutioncomponent";
+
+        public SolutionComponent(Microsoft.Xrm.Sdk.Entity e) :
+                base(e)
+        {
+        }
+
+        public const string EntityLogicalName = "solutioncomponent";
 		
 		public const string EntityLogicalCollectionName = "solutioncomponentss";
 		
@@ -379,49 +384,6 @@ namespace Boruto.Deployment.Entities
 			}
 		}
 		
-		/// <summary>
-		/// 1:N solutioncomponent_parent_solutioncomponent
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("solutioncomponent_parent_solutioncomponent", Microsoft.Xrm.Sdk.EntityRole.Referenced)]
-		public System.Collections.Generic.IEnumerable<Boruto.Deployment.Entities.SolutionComponent> Referencedsolutioncomponent_parent_solutioncomponent
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Deployment.Entities.SolutionComponent>("solutioncomponent_parent_solutioncomponent", Microsoft.Xrm.Sdk.EntityRole.Referenced);
-			}
-			set
-			{
-				this.OnPropertyChanging("Referencedsolutioncomponent_parent_solutioncomponent");
-				this.SetRelatedEntities<Boruto.Deployment.Entities.SolutionComponent>("solutioncomponent_parent_solutioncomponent", Microsoft.Xrm.Sdk.EntityRole.Referenced, value);
-				this.OnPropertyChanged("Referencedsolutioncomponent_parent_solutioncomponent");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 solution_solutioncomponent
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("solutionid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("solution_solutioncomponent")]
-		public Boruto.Deployment.Entities.Solution solution_solutioncomponent
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Deployment.Entities.Solution>("solution_solutioncomponent", null);
-			}
-		}
-		
-		/// <summary>
-		/// N:1 solutioncomponent_parent_solutioncomponent
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("rootsolutioncomponentid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("solutioncomponent_parent_solutioncomponent", Microsoft.Xrm.Sdk.EntityRole.Referencing)]
-		public Boruto.Deployment.Entities.SolutionComponent Referencingsolutioncomponent_parent_solutioncomponent
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Deployment.Entities.SolutionComponent>("solutioncomponent_parent_solutioncomponent", Microsoft.Xrm.Sdk.EntityRole.Referencing);
-			}
-		}
 	}
 }
 #pragma warning restore CS1591

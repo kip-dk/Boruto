@@ -1,4 +1,8 @@
 ﻿using Boruto.Deployment.Entities;
+using Boruto.Deployment.ServiceAPI;
+using Boruto.Extensions.FilterExpression;
+using Boruto.Extensions.QueryExpression;
+using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -12,24 +16,31 @@ namespace Boruto.Deployment.Services
     [Export(typeof(ServiceAPI.ISdkMessageProcessingStepService))]
     internal class SdkMessageProcessingStepService : ServiceAPI.ISdkMessageProcessingStepService
     {
-
-        private Entities.IUnitOfWork uow;
         private ServiceAPI.IMessageService messageService;
+        private readonly ISolutionService solutionService;
+        private readonly IOrganizationService orgService;
         private const string IMAGE_NAME = "BorutoImage";
 
         [ImportingConstructor]
-        public SdkMessageProcessingStepService(Entities.IUnitOfWork uow, ServiceAPI.IMessageService messageService)
+        public SdkMessageProcessingStepService(
+            ServiceAPI.IMessageService messageService, 
+            ServiceAPI.ISolutionService solutionService,
+            Microsoft.Xrm.Sdk.IOrganizationService orgService)
         {
-            this.uow = uow;
             this.messageService = messageService;
+            this.solutionService = solutionService;
+            this.orgService = orgService;
         }
 
         public SdkMessageProcessingStep[] ForPluginAssembly(Guid pluginassemblyid)
         {
-            return (from sm in uow.SdkMessageProcessingSteps.GetQuery()
-                    join pt in uow.PluginTypes.GetQuery() on sm.EventHandler.Id equals pt.PluginTypeId
-                    where pt.PluginAssemblyId.Id == pluginassemblyid
-                    select sm).ToArray();
+            var query = Entities.SdkMessageProcessingStep.EntityLogicalName.ToQueryExpression();
+            var link = query.Inner("pt", Entities.PluginType.EntityLogicalName, Entities.SdkMessageProcessingStep.Fields.EventHandler, Entities.PluginType.Fields.PluginTypeId);
+            link.LinkCriteria.Equal(Entities.PluginType.Fields.PluginAssemblyId, pluginassemblyid);
+
+            return this.orgService.RetrieveMultiple(query).Entities.Select(r => new SdkMessageProcessingStep(r)).ToArray();
+
+
         }
 
 
@@ -59,7 +70,7 @@ namespace Boruto.Deployment.Services
             var removes = (from s in steps where !remains.Contains(s) && (int)s.Stage.Value != 30 select s).ToArray();
             foreach (var remove in removes)
             {
-                uow.Delete(remove);
+                this.orgService.Delete(remove.LogicalName, remove.Id);
                 this.messageService.Inform($"Removed step {remove.Name} on {remove.LogicalName}.");
             }
 
@@ -95,54 +106,55 @@ namespace Boruto.Deployment.Services
 
         public Entities.SdkMessageProcessingStep[] ForSolution(string name)
         {
-            var solutionId = (from s in this.uow.Solutions.GetQuery()
-                              where s.UniqueName == name
-                              select s.SolutionId).SingleOrDefault();
+            var solutionId = this.solutionService.Get(name)?.SolutionId.Value;
 
             if (solutionId == null)
             {
                 throw new ArgumentException($"No solution found with uniquename {name}");
             }
 
-            return (from s in uow.SdkMessageProcessingSteps.GetQuery()
-                    join c in uow.SolutionComponents.GetQuery() on s.SdkMessageProcessingStepId equals c.ObjectId
-                    where c.SolutionId.Id == solutionId
-                    select s).ToArray();
+            var query = Entities.SdkMessageProcessingStep.EntityLogicalName.ToQueryExpression();
+            query.Inner("sc", Entities.SolutionComponent.EntityLogicalName, Entities.SdkMessageProcessingStep.Fields.SdkMessageProcessingStepId, Entities.SolutionComponent.Fields.ObjectId);
+
+            return this.orgService.RetrieveMultiple(query).Entities.Select(r => new SdkMessageProcessingStep(r)).ToArray();
         }
 
         public Entities.SdkMessageProcessingStepImage[] ImagesForSolution(string name)
         {
-            var solutionId = (from s in this.uow.Solutions.GetQuery()
-                              where s.UniqueName == name
-                              select s.SolutionId).SingleOrDefault();
+            var solution = this.solutionService.Get(name);
 
-            if (solutionId == null)
+            if (solution == null)
             {
                 throw new ArgumentException($"No solution found with uniquename {name}");
             }
 
-            return (from i in uow.SdkMessageProcessingStepImages.GetQuery()
-                    join s in uow.SdkMessageProcessingSteps.GetQuery() on i.SdkMessageProcessingStepId.Id equals s.SdkMessageProcessingStepId
-                    join c in uow.SolutionComponents.GetQuery() on i.SdkMessageProcessingStepId.Id equals c.ObjectId
-                    select i).ToArray();
+            var query = Entities.SdkMessageProcessingStepImage.EntityLogicalName.ToQueryExpression();
+            var compLink = query.Inner("sc", Entities.SolutionComponent.EntityLogicalName, Entities.SdkMessageProcessingStepImage.Fields.SdkMessageProcessingStepId, Entities.SolutionComponent.Fields.ObjectId);
+            compLink.LinkCriteria.Equal(Entities.SolutionComponent.Fields.SolutionId, solution.Id);
+
+            return this.orgService.RetrieveMultiple(query).Entities.Select(r => new SdkMessageProcessingStepImage(r)).ToArray();
+
         }
 
         public Entities.SdkMessageProcessingStepImage[] ImagesForPluginAssembly(Guid id)
         {
-            return (from i in uow.SdkMessageProcessingStepImages.GetQuery()
-                    join s in uow.SdkMessageProcessingSteps.GetQuery() on i.SdkMessageProcessingStepId.Id equals s.SdkMessageProcessingStepId
-                    join t in uow.PluginTypes.GetQuery() on s.EventHandler.Id equals t.PluginTypeId
-                    where t.PluginAssemblyId.Id == id
-                    select i).Distinct().ToArray();
+            var query = Entities.SdkMessageProcessingStepImage.EntityLogicalName.ToQueryExpression();
+            query.Distinct = true;
+            var stepLink = query.Inner("ST", Entities.SdkMessageProcessingStep.EntityLogicalName, Entities.SdkMessageProcessingStepImage.Fields.SdkMessageProcessingStepId, Entities.SdkMessageProcessingStep.Fields.SdkMessageProcessingStepId);
+            var pluginType = stepLink.Inner("PT", Entities.PluginType.EntityLogicalName, Entities.SdkMessageProcessingStep.Fields.EventExpander, Entities.PluginType.Fields.PluginTypeId);
+            pluginType.LinkCriteria.Equal(Entities.PluginType.Fields.PluginAssemblyId, id);
 
+            return this.orgService.RetrieveMultiple(query).Entities.Select(r => new Entities.SdkMessageProcessingStepImage(r)).ToArray();
         }
 
         public Entities.SdkMessageFilter[] FiltersForAssembly(Guid id)
         {
-            return (from f in uow.SdkMessageFilters.GetQuery()
-                    join s in uow.SdkMessageProcessingSteps.GetQuery() on f.SdkMessageFilterId equals s.SdkMessageFilterId.Id
-                    join t in uow.PluginTypes.GetQuery() on s.EventHandler.Id equals t.PluginTypeId
-                    select f).Distinct().ToArray();
+            var query = Entities.SdkMessageFilter.EntityLogicalName.ToQueryExpression();
+            var stepLink = query.Inner("ST", Entities.SdkMessageProcessingStep.EntityLogicalName, Entities.SdkMessageFilter.Fields.SdkMessageFilterId, Entities.SdkMessageProcessingStep.Fields.SdkMessageFilterId);
+            var typeLink = stepLink.Inner("TY", Entities.PluginType.EntityLogicalName, SdkMessageProcessingStep.Fields.EventHandler, Entities.PluginType.Fields.PluginTypeId);
+            typeLink.LinkCriteria.Equal(Entities.PluginType.Fields.PluginAssemblyId, id);
+
+            return this.orgService.RetrieveMultiple(query).Entities.Select(r => new SdkMessageFilter(r)).ToArray();
         }
 
 
@@ -168,7 +180,7 @@ namespace Boruto.Deployment.Services
 
             if (updated)
             {
-                uow.Update(clean);
+                this.orgService.Update(clean.ToEntity());
                 this.messageService.Inform($"Updated step {crmStep.Name.Split('.').Last()} on {crmStep.LogicalName}.");
             }
 
@@ -201,7 +213,7 @@ namespace Boruto.Deployment.Services
                 next.FilteringAttributes = string.Join(",", step.TargetFilterAttributes.FilteredAttributes);
             }
 
-            uow.Create(next);
+            this.orgService.Create(next.ToEntity());
             this.messageService.Inform($"Created step: {next.Name.Split('.').Last()}");
 
             if (step.PreImage != null)
@@ -222,16 +234,17 @@ namespace Boruto.Deployment.Services
         }
         private void UpdateImage(SdkMessageProcessingStep crmStep, int pre1post2, int stage, bool async, string message, Models.Image imgDef)
         {
-            var existingImage = (from ig in uow.SdkMessageProcessingStepImages.GetQuery()
-                                 where ig.SdkMessageProcessingStepId.Id == crmStep.SdkMessageProcessingStepId
-                                   && ig.Name == this.ImageName(pre1post2)
-                                 select ig).SingleOrDefault();
+            var query = Entities.SdkMessageProcessingStep.EntityLogicalName.ToQueryExpression();
+            query.Criteria.Equal(Entities.SdkMessageProcessingStepImage.Fields.Name, this.ImageName(pre1post2));
+
+            var existingImage = this.orgService.RetrieveMultiple(query).Entities.Select(r => new Entities.SdkMessageProcessingStepImage(r)).SingleOrDefault();
+
 
             if (imgDef == null)
             {
                 if (existingImage != null)
                 {
-                    uow.Delete(existingImage);
+                    this.orgService.Delete(existingImage.LogicalName, existingImage.Id);
                     this.messageService.Inform($"Removed images {IMAGE_NAME} from {crmStep.Name.Split('.').Last()}");
                 }
                 return;
@@ -256,14 +269,14 @@ namespace Boruto.Deployment.Services
 
                 if (existingImage.Attributes1 != null && filterAttr == null)
                 {
-                    uow.Delete(existingImage);
+                    this.orgService.Delete(existingImage.LogicalName, existingImage.Id);
                     this.CreateImage(crmStep, pre1post2, stage, async, message, imgDef);
                     return;
                 }
 
                 if (existingImage.Attributes1 != filterAttr)
                 {
-                    uow.Delete(existingImage);
+                    this.orgService.Delete(existingImage.LogicalName, existingImage.Id);
                     this.CreateImage(crmStep, pre1post2, stage, async, message, imgDef);
                     return;
                 }
@@ -294,7 +307,7 @@ namespace Boruto.Deployment.Services
                 image.Attributes1 = filterAttr;
             }
 
-            uow.Create(image);
+            this.orgService.Create(image.ToEntity());
             messageService.Inform($"Created image {this.ImageName(pre1post2)} on step {crmStep.Name.Split('.').Last()}");
         }
 
@@ -303,8 +316,8 @@ namespace Boruto.Deployment.Services
         {
             if (this.sdkmessages == null)
             {
-                this.sdkmessages = (from s in uow.SdkMessages.GetQuery()
-                                    select s).ToDictionary(r => r.Name);
+                var query = Entities.SdkMessage.EntityLogicalName.ToQueryExpression();
+                this.sdkmessages = this.orgService.RetrieveMultiple(query).Entities.Select(r => new SdkMessage(r)).ToDictionary(r => r.Name);
             }
             return this.sdkmessages[message];
         }
@@ -327,10 +340,19 @@ namespace Boruto.Deployment.Services
                 }
             }
 
-            filters[key] = (from f in uow.SdkMessageFilters.GetQuery()
-                            where f.SdkMessageId.Id == sdkMessage.SdkMessageId
-                               && f.PrimaryObjectTypeCode == logicalname
-                            select f).SingleOrDefault();
+            var query = Entities.SdkMessageFilter.EntityLogicalName.ToQueryExpression();
+            query.Criteria.Equal(Entities.SdkMessageFilter.Fields.SdkMessageId, sdkMessage.SdkMessageId);
+
+            if (!string.IsNullOrEmpty(logicalname))
+            {
+                query.Criteria.Equal(Entities.SdkMessageFilter.Fields.PrimaryObjectTypeCode, logicalname);
+            } else
+            {
+                query.Criteria.IsNull(Entities.SdkMessageFilter.Fields.PrimaryObjectTypeCode);
+
+            }
+
+            filters[key] = this.orgService.RetrieveMultiple(query).Entities.Select(r => new Entities.SdkMessageFilter(r)).SingleOrDefault();
 
             return GetFilterFor(sdkMessage, logicalname);
         }

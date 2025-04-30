@@ -1,29 +1,38 @@
 ﻿using Boruto.Deployment.Entities;
+using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Boruto.Extensions.FilterExpression;
+using Boruto.Extensions.QueryExpression;
 
 namespace Boruto.Deployment.Services
 {
     [Export(typeof(ServiceAPI.IPluginPackagesService))]
     internal class PluginPackagesService : ServiceAPI.IPluginPackagesService
     {
-        private readonly Entities.IUnitOfWork uow;
+        private readonly IOrganizationService orgService;
 
         [ImportingConstructor]
-        public PluginPackagesService(Entities.IUnitOfWork uow)
+        public PluginPackagesService(Microsoft.Xrm.Sdk.IOrganizationService orgService)
         {
-            this.uow = uow;
+            this.orgService = orgService;
         }
 
         public pluginpackage GetPluginPackage(string name)
         {
-            return (from p in this.uow.PluginPackages.GetQuery()
-                    where p.UniqueName == name
-                    select p).SingleOrDefault();
+            var query = Entities.pluginpackage.EntityLogicalName.ToQueryExpression();
+            query.Criteria.Equal(nameof(Entities.pluginpackage.UniqueName).ToLower(), name);
+
+            var result = this.orgService.RetrieveMultiple(query);
+            if (result.Entities != null && result.Entities.Count == 1)
+            {
+                return new pluginpackage(result.Entities.First());
+            }
+            return null;
         }
 
         public Guid Create(string display, string name, string version, byte[] nugetpackage)
@@ -46,7 +55,7 @@ namespace Boruto.Deployment.Services
                 Version = version,
                 name = name
             };
-            uow.Create(clean);
+            this.orgService.Create(clean.ToEntity());
 
             return clean.pluginpackageId.Value;
         }
@@ -59,12 +68,12 @@ namespace Boruto.Deployment.Services
                 Content = System.Convert.ToBase64String(nugetpackage),
                 Version = version,
             };
-            uow.Update(clean);
+            this.orgService.Update(clean.ToEntity());
         }
 
         public void Delete(Guid packageId)
         {
-            uow.Delete(new Entities.pluginpackage { pluginpackageId = packageId });
+            this.orgService.Delete(Entities.pluginpackage.EntityLogicalName, packageId );
         }
     }
 }

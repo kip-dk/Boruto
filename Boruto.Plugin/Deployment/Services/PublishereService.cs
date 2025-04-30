@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Boruto.Extensions.FilterExpression;
+using Boruto.Extensions.QueryExpression;
+using Microsoft.Xrm.Sdk;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Drawing;
@@ -11,13 +14,13 @@ namespace Boruto.Deployment.Services
     [Export(typeof(ServiceAPI.IPublishereService))]
     internal class PublishereService : ServiceAPI.IPublishereService
     {
-        private readonly Entities.IUnitOfWork uow;
+        private readonly IOrganizationService orgService;
         private string _componentString;
 
         [ImportingConstructor]
-        public PublishereService(Entities.IUnitOfWork uow)
+        public PublishereService(Microsoft.Xrm.Sdk.IOrganizationService orgService)
         {
-            this.uow = uow;
+            this.orgService = orgService;
         }
 
         public string ComponentPrefix
@@ -32,21 +35,20 @@ namespace Boruto.Deployment.Services
                         throw new Exception("No solution found in configuration setup");
                     }
 
-                    var pub = (from p in uow.Publishers.GetQuery()
-                               join s in uow.Solutions.GetQuery() on p.PublisherId equals s.PublisherId.Id
-                               where s.UniqueName == sol
-                               select new
-                               {
-                                   Id = p.PublisherId.Value,
-                                   Prefix = p.CustomizationPrefix
-                               }).SingleOrDefault();
+                    var solQuery = Entities.Solution.EntityLogicalName.ToQueryExpression();
+                    solQuery.Criteria.Equal(Entities.Solution.Fields.UniqueName, sol);
 
-                    if (pub == null)
+                    var solution = this.orgService.RetrieveMultiple(solQuery).Entities.Select(r => new Entities.Solution(r)).FirstOrDefault();
+                    if (solution == null)
                     {
-                        throw new Exception($"Could not find solution with unique name: {sol}");
+                        throw new Exception($"Not solution with unique id { sol } was found");
                     }
 
-                    this._componentString = pub.Prefix;
+                    var pubQuery = Entities.Publisher.EntityLogicalName.ToQueryExpression();
+                    pubQuery.Criteria.Equal(Entities.Publisher.Fields.PublisherId, solution.PublisherId.Id);
+                    var publish = this.orgService.RetrieveMultiple(pubQuery).Entities.Select(r => new Entities.Publisher(r)).Single();
+
+                    this._componentString = publish.CustomizationPrefix;
                 }
                 return _componentString;
             }

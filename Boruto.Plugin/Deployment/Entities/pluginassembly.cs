@@ -18,7 +18,7 @@ namespace Boruto.Deployment.Entities
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum pluginassembly_authtype
+	internal enum pluginassembly_authtype
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -30,7 +30,7 @@ namespace Boruto.Deployment.Entities
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum pluginassembly_isolationmode
+	internal enum pluginassembly_isolationmode
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -48,7 +48,7 @@ namespace Boruto.Deployment.Entities
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum pluginassembly_sourcetype
+	internal enum pluginassembly_sourcetype
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -73,7 +73,7 @@ namespace Boruto.Deployment.Entities
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("pluginassembly")]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public partial class PluginAssembly : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	internal partial class PluginAssembly : AbstractBaseEntity
 	{
 		
 		/// <summary>
@@ -138,12 +138,10 @@ namespace Boruto.Deployment.Entities
 		/// <summary>
 		/// Default Constructor.
 		/// </summary>
-		public PluginAssembly() : 
-				base(EntityLogicalName)
-		{
-		}
-		
-		public const string EntityLogicalName = "pluginassembly";
+		internal PluginAssembly() :base(EntityLogicalName) {	}
+        internal PluginAssembly(Microsoft.Xrm.Sdk.Entity e) : base(e) { }
+
+        public const string EntityLogicalName = "pluginassembly";
 		
 		public const string EntityLogicalCollectionName = "pluginassemblies";
 		
@@ -937,43 +935,6 @@ namespace Boruto.Deployment.Entities
 			get
 			{
 				return this.GetAttributeValue<System.Nullable<long>>("versionnumber");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N pluginassembly_plugintype
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("pluginassembly_plugintype")]
-		public System.Collections.Generic.IEnumerable<Boruto.Deployment.Entities.PluginType> pluginassembly_plugintype
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Deployment.Entities.PluginType>("pluginassembly_plugintype", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("pluginassembly_plugintype");
-				this.SetRelatedEntities<Boruto.Deployment.Entities.PluginType>("pluginassembly_plugintype", null, value);
-				this.OnPropertyChanged("pluginassembly_plugintype");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 pluginpackage_pluginassembly
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("packageid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("pluginpackage_pluginassembly")]
-		public Boruto.Deployment.Entities.pluginpackage pluginpackage_pluginassembly
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Deployment.Entities.pluginpackage>("pluginpackage_pluginassembly", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("pluginpackage_pluginassembly");
-				this.SetRelatedEntity<Boruto.Deployment.Entities.pluginpackage>("pluginpackage_pluginassembly", null, value);
-				this.OnPropertyChanged("pluginpackage_pluginassembly");
 			}
 		}
 	}

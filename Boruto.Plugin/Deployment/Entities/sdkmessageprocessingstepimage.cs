@@ -18,7 +18,7 @@ namespace Boruto.Deployment.Entities
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum sdkmessageprocessingstepimage_imagetype
+	internal enum sdkmessageprocessingstepimage_imagetype
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -37,7 +37,7 @@ namespace Boruto.Deployment.Entities
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("sdkmessageprocessingstepimage")]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public partial class SdkMessageProcessingStepImage : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	internal partial class SdkMessageProcessingStepImage : AbstractBaseEntity
 	{
 		
 		/// <summary>
@@ -89,8 +89,13 @@ namespace Boruto.Deployment.Entities
 				base(EntityLogicalName)
 		{
 		}
-		
-		public const string EntityLogicalName = "sdkmessageprocessingstepimage";
+
+        public SdkMessageProcessingStepImage(Microsoft.Xrm.Sdk.Entity e) :
+                base(e)
+        {
+        }
+
+        public const string EntityLogicalName = "sdkmessageprocessingstepimage";
 		
 		public const string EntityLogicalCollectionName = "sdkmessageprocessingstepimages";
 		
@@ -625,25 +630,6 @@ namespace Boruto.Deployment.Entities
 			get
 			{
 				return this.GetAttributeValue<System.Nullable<long>>("versionnumber");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 sdkmessageprocessingstepid_sdkmessageprocessingstepimage
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("sdkmessageprocessingstepid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("sdkmessageprocessingstepid_sdkmessageprocessingstepimage")]
-		public Boruto.Deployment.Entities.SdkMessageProcessingStep sdkmessageprocessingstepid_sdkmessageprocessingstepimage
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Deployment.Entities.SdkMessageProcessingStep>("sdkmessageprocessingstepid_sdkmessageprocessingstepimage", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("sdkmessageprocessingstepid_sdkmessageprocessingstepimage");
-				this.SetRelatedEntity<Boruto.Deployment.Entities.SdkMessageProcessingStep>("sdkmessageprocessingstepid_sdkmessageprocessingstepimage", null, value);
-				this.OnPropertyChanged("sdkmessageprocessingstepid_sdkmessageprocessingstepimage");
 			}
 		}
 	}

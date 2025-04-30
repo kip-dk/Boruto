@@ -14,23 +14,20 @@ namespace Boruto.Deployment.Entities
 	
 	
 	/// <summary>
-	/// Message that is supported by the SDK.
+	/// Filter that defines which SDK messages are valid for each type of entity.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("sdkmessage")]
+	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("sdkmessagefilter")]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public partial class SdkMessage : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	internal partial class SdkMessageFilter : AbstractBaseEntity
 	{
 		
 		/// <summary>
-		/// Available fields, a the time of codegen, for the sdkmessage entity
+		/// Available fields, a the time of codegen, for the sdkmessagefilter entity
 		/// </summary>
 		public partial class Fields
 		{
-			public const string AutoTransact = "autotransact";
-			public const string AutoTransactName = "autotransactname";
 			public const string Availability = "availability";
-			public const string CategoryName = "categoryname";
 			public const string ComponentState = "componentstate";
 			public const string CreatedBy = "createdby";
 			public const string CreatedByName = "createdbyname";
@@ -39,19 +36,12 @@ namespace Boruto.Deployment.Entities
 			public const string CreatedOnBehalfByName = "createdonbehalfbyname";
 			public const string CreatedOnBehalfByYomiName = "createdonbehalfbyyominame";
 			public const string CustomizationLevel = "customizationlevel";
-			public const string ExecutePrivilegeName = "executeprivilegename";
-			public const string Expand = "expand";
-			public const string ExpandName = "expandname";
 			public const string IntroducedVersion = "introducedversion";
-			public const string IsActive = "isactive";
-			public const string IsActiveName = "isactivename";
+			public const string IsCustomProcessingStepAllowed = "iscustomprocessingstepallowed";
+			public const string IsCustomProcessingStepAllowedName = "iscustomprocessingstepallowedname";
 			public const string IsManaged = "ismanaged";
 			public const string IsManagedName = "ismanagedname";
-			public const string IsPrivate = "isprivate";
-			public const string IsPrivateName = "isprivatename";
-			public const string IsReadOnly = "isreadonly";
-			public const string IsReadOnlyName = "isreadonlyname";
-			public const string IsValidForExecuteAsync = "isvalidforexecuteasync";
+			public const string IsVisible = "isvisible";
 			public const string ModifiedBy = "modifiedby";
 			public const string ModifiedByName = "modifiedbyname";
 			public const string ModifiedOn = "modifiedon";
@@ -61,33 +51,42 @@ namespace Boruto.Deployment.Entities
 			public const string Name = "name";
 			public const string OrganizationId = "organizationid";
 			public const string OverwriteTime = "overwritetime";
+			public const string PrimaryObjectTypeCode = "primaryobjecttypecode";
+			public const string PrimaryObjectTypeCodeName = "primaryobjecttypecodename";
+			public const string RestrictionLevel = "restrictionlevel";
+			public const string SdkMessageFilterId = "sdkmessagefilterid";
+			public const string Id = "sdkmessagefilterid";
+			public const string SdkMessageFilterIdUnique = "sdkmessagefilteridunique";
 			public const string SdkMessageId = "sdkmessageid";
-			public const string Id = "sdkmessageid";
-			public const string SdkMessageIdUnique = "sdkmessageidunique";
+			public const string SdkMessageIdName = "sdkmessageidname";
+			public const string SecondaryObjectTypeCode = "secondaryobjecttypecode";
+			public const string SecondaryObjectTypeCodeName = "secondaryobjecttypecodename";
 			public const string SolutionId = "solutionid";
-			public const string Template = "template";
-			public const string TemplateName = "templatename";
-			public const string ThrottleSettings = "throttlesettings";
 			public const string VersionNumber = "versionnumber";
 			public const string WorkflowSdkStepEnabled = "workflowsdkstepenabled";
 			public const string WorkflowSdkStepEnabledName = "workflowsdkstepenabledname";
+			public const string sdkmessagefilterid_sdkmessageprocessingstep = "sdkmessagefilterid_sdkmessageprocessingstep";
 			public const string sdkmessageid_sdkmessagefilter = "sdkmessageid_sdkmessagefilter";
-			public const string sdkmessageid_sdkmessageprocessingstep = "sdkmessageid_sdkmessageprocessingstep";
 		}
 		
 		/// <summary>
 		/// Default Constructor.
 		/// </summary>
-		public SdkMessage() : 
+		public SdkMessageFilter() : 
 				base(EntityLogicalName)
 		{
 		}
+
+        public SdkMessageFilter(Microsoft.Xrm.Sdk.Entity e) :
+                base(e)
+        {
+        }
+
+        public const string EntityLogicalName = "sdkmessagefilter";
 		
-		public const string EntityLogicalName = "sdkmessage";
+		public const string EntityLogicalCollectionName = "sdkmessagefilters";
 		
-		public const string EntityLogicalCollectionName = "sdkmessages";
-		
-		public const string EntitySetName = "sdkmessages";
+		public const string EntitySetName = "sdkmessagefilters";
 		
 		public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 		
@@ -110,40 +109,6 @@ namespace Boruto.Deployment.Entities
 		}
 		
 		/// <summary>
-		/// Information about whether the SDK message is automatically transacted.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("autotransact")]
-		public System.Nullable<bool> AutoTransact
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("autotransact");
-			}
-			set
-			{
-				this.OnPropertyChanging("AutoTransact");
-				this.SetAttributeValue("autotransact", value);
-				this.OnPropertyChanged("AutoTransact");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("autotransactname")]
-		public string AutoTransactName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("autotransact"))
-				{
-					return this.FormattedValues["autotransact"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
 		/// Identifies where a method will be exposed. 0 - Server, 1 - Client, 2 - both.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("availability")]
@@ -162,24 +127,6 @@ namespace Boruto.Deployment.Entities
 		}
 		
 		/// <summary>
-		/// If this is a categorized method, this is the name, otherwise None.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("categoryname")]
-		public string CategoryName
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("categoryname");
-			}
-			set
-			{
-				this.OnPropertyChanging("CategoryName");
-				this.SetAttributeValue("categoryname", value);
-				this.OnPropertyChanged("CategoryName");
-			}
-		}
-		
-		/// <summary>
 		/// For internal use only.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("componentstate")]
@@ -192,7 +139,7 @@ namespace Boruto.Deployment.Entities
 		}
 		
 		/// <summary>
-		/// Unique identifier of the user who created the SDK message.
+		/// Unique identifier of the user who created the SDK message filter.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdby")]
 		public Microsoft.Xrm.Sdk.EntityReference CreatedBy
@@ -220,7 +167,7 @@ namespace Boruto.Deployment.Entities
 		}
 		
 		/// <summary>
-		/// Date and time when the SDK message was created.
+		/// Date and time when the SDK message filter was created.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdon")]
 		public System.Nullable<System.DateTime> CreatedOn
@@ -232,7 +179,7 @@ namespace Boruto.Deployment.Entities
 		}
 		
 		/// <summary>
-		/// Unique identifier of the delegate user who created the sdkmessage.
+		/// Unique identifier of the delegate user who created the sdkmessagefilter.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdonbehalfby")]
 		public Microsoft.Xrm.Sdk.EntityReference CreatedOnBehalfBy
@@ -276,7 +223,7 @@ namespace Boruto.Deployment.Entities
 		}
 		
 		/// <summary>
-		/// Customization level of the SDK message.
+		/// Customization level of the SDK message filter.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("customizationlevel")]
 		public System.Nullable<int> CustomizationLevel
@@ -284,58 +231,6 @@ namespace Boruto.Deployment.Entities
 			get
 			{
 				return this.GetAttributeValue<System.Nullable<int>>("customizationlevel");
-			}
-		}
-		
-		/// <summary>
-		/// Name of the privilege that allows execution of the SDK message
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("executeprivilegename")]
-		public string ExecutePrivilegeName
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("executeprivilegename");
-			}
-			set
-			{
-				this.OnPropertyChanging("ExecutePrivilegeName");
-				this.SetAttributeValue("executeprivilegename", value);
-				this.OnPropertyChanged("ExecutePrivilegeName");
-			}
-		}
-		
-		/// <summary>
-		/// Indicates whether the SDK message should have its requests expanded per primary entity defined in its filters.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("expand")]
-		public System.Nullable<bool> Expand
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("expand");
-			}
-			set
-			{
-				this.OnPropertyChanging("Expand");
-				this.SetAttributeValue("expand", value);
-				this.OnPropertyChanged("Expand");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("expandname")]
-		public string ExpandName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("expand"))
-				{
-					return this.FormattedValues["expand"];
-				}
-				else
-				{
-					return default(string);
-				}
 			}
 		}
 		
@@ -358,31 +253,31 @@ namespace Boruto.Deployment.Entities
 		}
 		
 		/// <summary>
-		/// Information about whether the SDK message is active.
+		/// Indicates whether a custom SDK message processing step is allowed.
 		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("isactive")]
-		public System.Nullable<bool> IsActive
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("iscustomprocessingstepallowed")]
+		public System.Nullable<bool> IsCustomProcessingStepAllowed
 		{
 			get
 			{
-				return this.GetAttributeValue<System.Nullable<bool>>("isactive");
+				return this.GetAttributeValue<System.Nullable<bool>>("iscustomprocessingstepallowed");
 			}
 			set
 			{
-				this.OnPropertyChanging("IsActive");
-				this.SetAttributeValue("isactive", value);
-				this.OnPropertyChanged("IsActive");
+				this.OnPropertyChanging("IsCustomProcessingStepAllowed");
+				this.SetAttributeValue("iscustomprocessingstepallowed", value);
+				this.OnPropertyChanged("IsCustomProcessingStepAllowed");
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("isactivename")]
-		public string IsActiveName
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("iscustomprocessingstepallowedname")]
+		public string IsCustomProcessingStepAllowedName
 		{
 			get
 			{
-				if (this.FormattedValues.Contains("isactive"))
+				if (this.FormattedValues.Contains("iscustomprocessingstepallowed"))
 				{
-					return this.FormattedValues["isactive"];
+					return this.FormattedValues["iscustomprocessingstepallowed"];
 				}
 				else
 				{
@@ -420,87 +315,19 @@ namespace Boruto.Deployment.Entities
 		}
 		
 		/// <summary>
-		/// Indicates whether the SDK message is private.
+		/// Indicates whether the filter should be visible.
 		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("isprivate")]
-		public System.Nullable<bool> IsPrivate
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("isvisible")]
+		public System.Nullable<bool> IsVisible
 		{
 			get
 			{
-				return this.GetAttributeValue<System.Nullable<bool>>("isprivate");
-			}
-			set
-			{
-				this.OnPropertyChanging("IsPrivate");
-				this.SetAttributeValue("isprivate", value);
-				this.OnPropertyChanged("IsPrivate");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("isprivatename")]
-		public string IsPrivateName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("isprivate"))
-				{
-					return this.FormattedValues["isprivate"];
-				}
-				else
-				{
-					return default(string);
-				}
+				return this.GetAttributeValue<System.Nullable<bool>>("isvisible");
 			}
 		}
 		
 		/// <summary>
-		/// Identifies whether an SDK message will be ReadOnly or Read Write. false - ReadWrite, true - ReadOnly .
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("isreadonly")]
-		public System.Nullable<bool> IsReadOnly
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("isreadonly");
-			}
-			set
-			{
-				this.OnPropertyChanging("IsReadOnly");
-				this.SetAttributeValue("isreadonly", value);
-				this.OnPropertyChanged("IsReadOnly");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("isreadonlyname")]
-		public string IsReadOnlyName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("isreadonly"))
-				{
-					return this.FormattedValues["isreadonly"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// For internal use only.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("isvalidforexecuteasync")]
-		public System.Nullable<bool> IsValidForExecuteAsync
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("isvalidforexecuteasync");
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier of the user who last modified the SDK message.
+		/// Unique identifier of the user who last modified the SDK message filter.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedby")]
 		public Microsoft.Xrm.Sdk.EntityReference ModifiedBy
@@ -528,7 +355,7 @@ namespace Boruto.Deployment.Entities
 		}
 		
 		/// <summary>
-		/// Date and time when the SDK message was last modified.
+		/// Date and time when the SDK message filter was last modified.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedon")]
 		public System.Nullable<System.DateTime> ModifiedOn
@@ -540,7 +367,7 @@ namespace Boruto.Deployment.Entities
 		}
 		
 		/// <summary>
-		/// Unique identifier of the delegate user who last modified the sdkmessage.
+		/// Unique identifier of the delegate user who last modified the sdkmessagefilter.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedonbehalfby")]
 		public Microsoft.Xrm.Sdk.EntityReference ModifiedOnBehalfBy
@@ -584,7 +411,7 @@ namespace Boruto.Deployment.Entities
 		}
 		
 		/// <summary>
-		/// Name of the SDK message.
+		/// Name of the SDK message filter.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("name")]
 		public string Name
@@ -602,7 +429,7 @@ namespace Boruto.Deployment.Entities
 		}
 		
 		/// <summary>
-		/// Unique identifier of the organization with which the SDK message is associated.
+		/// Unique identifier of the organization with which the SDK message filter is associated.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("organizationid")]
 		public Microsoft.Xrm.Sdk.EntityReference OrganizationId
@@ -626,19 +453,65 @@ namespace Boruto.Deployment.Entities
 		}
 		
 		/// <summary>
-		/// Unique identifier of the SDK message entity.
+		/// Type of entity with which the SDK message filter is primarily associated.
 		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("sdkmessageid")]
-		public System.Nullable<System.Guid> SdkMessageId
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("primaryobjecttypecode")]
+		public string PrimaryObjectTypeCode
 		{
 			get
 			{
-				return this.GetAttributeValue<System.Nullable<System.Guid>>("sdkmessageid");
+				return this.GetAttributeValue<string>("primaryobjecttypecode");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("primaryobjecttypecodename")]
+		public string PrimaryObjectTypeCodeName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("primaryobjecttypecode"))
+				{
+					return this.FormattedValues["primaryobjecttypecode"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
+		/// For internal use only.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("restrictionlevel")]
+		public System.Nullable<int> RestrictionLevel
+		{
+			get
+			{
+				return this.GetAttributeValue<System.Nullable<int>>("restrictionlevel");
 			}
 			set
 			{
-				this.OnPropertyChanging("SdkMessageId");
-				this.SetAttributeValue("sdkmessageid", value);
+				this.OnPropertyChanging("RestrictionLevel");
+				this.SetAttributeValue("restrictionlevel", value);
+				this.OnPropertyChanged("RestrictionLevel");
+			}
+		}
+		
+		/// <summary>
+		/// Unique identifier of the SDK message filter entity.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("sdkmessagefilterid")]
+		public System.Nullable<System.Guid> SdkMessageFilterId
+		{
+			get
+			{
+				return this.GetAttributeValue<System.Nullable<System.Guid>>("sdkmessagefilterid");
+			}
+			set
+			{
+				this.OnPropertyChanging("SdkMessageFilterId");
+				this.SetAttributeValue("sdkmessagefilterid", value);
 				if (value.HasValue)
 				{
 					base.Id = value.Value;
@@ -647,11 +520,11 @@ namespace Boruto.Deployment.Entities
 				{
 					base.Id = System.Guid.Empty;
 				}
-				this.OnPropertyChanged("SdkMessageId");
+				this.OnPropertyChanged("SdkMessageFilterId");
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("sdkmessageid")]
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("sdkmessagefilterid")]
 		public override System.Guid Id
 		{
 			get
@@ -660,19 +533,81 @@ namespace Boruto.Deployment.Entities
 			}
 			set
 			{
-				this.SdkMessageId = value;
+				this.SdkMessageFilterId = value;
 			}
 		}
 		
 		/// <summary>
-		/// Unique identifier of the SDK message.
+		/// Unique identifier of the SDK message filter.
 		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("sdkmessageidunique")]
-		public System.Nullable<System.Guid> SdkMessageIdUnique
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("sdkmessagefilteridunique")]
+		public System.Nullable<System.Guid> SdkMessageFilterIdUnique
 		{
 			get
 			{
-				return this.GetAttributeValue<System.Nullable<System.Guid>>("sdkmessageidunique");
+				return this.GetAttributeValue<System.Nullable<System.Guid>>("sdkmessagefilteridunique");
+			}
+		}
+		
+		/// <summary>
+		/// Unique identifier of the related SDK message.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("sdkmessageid")]
+		public Microsoft.Xrm.Sdk.EntityReference SdkMessageId
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("sdkmessageid");
+			}
+			set
+			{
+				this.OnPropertyChanging("SdkMessageId");
+				this.SetAttributeValue("sdkmessageid", value);
+				this.OnPropertyChanged("SdkMessageId");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("sdkmessageidname")]
+		public string SdkMessageIdName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("sdkmessageid"))
+				{
+					return this.FormattedValues["sdkmessageid"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
+		/// Type of entity with which the SDK message filter is secondarily associated.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("secondaryobjecttypecode")]
+		public string SecondaryObjectTypeCode
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("secondaryobjecttypecode");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("secondaryobjecttypecodename")]
+		public string SecondaryObjectTypeCodeName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("secondaryobjecttypecode"))
+				{
+					return this.FormattedValues["secondaryobjecttypecode"];
+				}
+				else
+				{
+					return default(string);
+				}
 			}
 		}
 		
@@ -688,55 +623,6 @@ namespace Boruto.Deployment.Entities
 			}
 		}
 		
-		/// <summary>
-		/// Indicates whether the SDK message is a template.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("template")]
-		public System.Nullable<bool> Template
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("template");
-			}
-			set
-			{
-				this.OnPropertyChanging("Template");
-				this.SetAttributeValue("template", value);
-				this.OnPropertyChanged("Template");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("templatename")]
-		public string TemplateName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("template"))
-				{
-					return this.FormattedValues["template"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// For internal use only.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("throttlesettings")]
-		public string ThrottleSettings
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("throttlesettings");
-			}
-		}
-		
-		/// <summary>
-		/// Number that identifies a specific revision of the SDK message. 
-		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("versionnumber")]
 		public System.Nullable<long> VersionNumber
 		{
@@ -771,42 +657,6 @@ namespace Boruto.Deployment.Entities
 				{
 					return default(string);
 				}
-			}
-		}
-		
-		/// <summary>
-		/// 1:N sdkmessageid_sdkmessagefilter
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("sdkmessageid_sdkmessagefilter")]
-		public System.Collections.Generic.IEnumerable<Boruto.Deployment.Entities.SdkMessageFilter> sdkmessageid_sdkmessagefilter
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Deployment.Entities.SdkMessageFilter>("sdkmessageid_sdkmessagefilter", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("sdkmessageid_sdkmessagefilter");
-				this.SetRelatedEntities<Boruto.Deployment.Entities.SdkMessageFilter>("sdkmessageid_sdkmessagefilter", null, value);
-				this.OnPropertyChanged("sdkmessageid_sdkmessagefilter");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N sdkmessageid_sdkmessageprocessingstep
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("sdkmessageid_sdkmessageprocessingstep")]
-		public System.Collections.Generic.IEnumerable<Boruto.Deployment.Entities.SdkMessageProcessingStep> sdkmessageid_sdkmessageprocessingstep
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Deployment.Entities.SdkMessageProcessingStep>("sdkmessageid_sdkmessageprocessingstep", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("sdkmessageid_sdkmessageprocessingstep");
-				this.SetRelatedEntities<Boruto.Deployment.Entities.SdkMessageProcessingStep>("sdkmessageid_sdkmessageprocessingstep", null, value);
-				this.OnPropertyChanged("sdkmessageid_sdkmessageprocessingstep");
 			}
 		}
 	}

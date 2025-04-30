@@ -19,7 +19,7 @@ namespace Boruto.Deployment.Entities
 		/// <summary>
 		/// Returns the integer version of an OptionSetValue
 		/// </summary>
-		public static System.Nullable<int> GetEnum(Microsoft.Xrm.Sdk.Entity entity, string attributeLogicalName)
+		public static System.Nullable<int> GetEnum(AbstractBaseEntity entity, string attributeLogicalName)
 		{
 			if (entity.Attributes.ContainsKey(attributeLogicalName))
 			{
@@ -35,7 +35,7 @@ namespace Boruto.Deployment.Entities
 		/// <summary>
 		/// Returns a collection of integer version's of an Multi-Select OptionSetValue for a given attribute on the passed entity
 		/// </summary>
-		public static System.Collections.Generic.IEnumerable<T> GetMultiEnum<T>(Microsoft.Xrm.Sdk.Entity entity, string attributeLogicalName)
+		public static System.Collections.Generic.IEnumerable<T> GetMultiEnum<T>(AbstractBaseEntity entity, string attributeLogicalName)
 		
 		{
 			Microsoft.Xrm.Sdk.OptionSetValueCollection value = entity.GetAttributeValue<Microsoft.Xrm.Sdk.OptionSetValueCollection>(attributeLogicalName);
@@ -51,7 +51,7 @@ namespace Boruto.Deployment.Entities
 		/// <summary>
 		/// Returns a OptionSetValueCollection based on a list of Multi-Select OptionSetValues
 		/// </summary>
-		public static Microsoft.Xrm.Sdk.OptionSetValueCollection GetMultiEnum<T>(Microsoft.Xrm.Sdk.Entity entity, string attributeLogicalName, System.Collections.Generic.IEnumerable<T> values)
+		public static Microsoft.Xrm.Sdk.OptionSetValueCollection GetMultiEnum<T>(AbstractBaseEntity entity, string attributeLogicalName, System.Collections.Generic.IEnumerable<T> values)
 		
 		{
 			if (values == null)

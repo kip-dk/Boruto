@@ -12,17 +12,15 @@ namespace Boruto.Deployment.Services
     internal class PluginDeploymentService : ServiceAPI.IPluginDeploymentService
     {
         private readonly ServiceAPI.IMessageService messageService;
-        private readonly Entities.IUnitOfWork uow;
         private int[] stages = new int[] { 10, 20, 40 };
         private string[] entityLogicalNames;
 
         private static readonly Type BORUTO_PLUGIN = typeof(Boruto.BasePlugin);
 
         [ImportingConstructor]
-        public PluginDeploymentService(ServiceAPI.IMessageService messageService, Entities.IUnitOfWork uow)
+        public PluginDeploymentService(ServiceAPI.IMessageService messageService)
         {
             this.messageService = messageService;
-            this.uow = uow;
         }
 
         public Models.Plugin[] ForAssembly(Assembly[] assemblies)
