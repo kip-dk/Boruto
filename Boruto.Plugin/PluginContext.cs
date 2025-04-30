@@ -93,6 +93,8 @@ namespace Boruto
         internal string PrimaryLogicalName { get; }
         internal Guid PrimaryEntityId { get; }
 
+        internal bool _isAdmin;
+
         #endregion
 
         #region entity properties
@@ -165,7 +167,7 @@ namespace Boruto
                     this._preimage = new Entity();
                     this._preimage.LogicalName = this.PrimaryLogicalName;
                     this._preimage.Id = this.PrimaryEntityId;
-                    this.ResolveInfoFromDeleteMessage(_preimage, "preimage");
+                    this.ResolveInfoFromDeleteMessage(_preimage);
 
                     if (this.PluginExecutionContext.PreEntityImages != null)
                     {
@@ -192,7 +194,7 @@ namespace Boruto
                     this._postimage = new Entity();
                     this._postimage.LogicalName = this.PrimaryLogicalName;
                     this._postimage.Id = this.PrimaryEntityId;
-                    this.ResolveInfoFromDeleteMessage(_postimage,"postimage");
+                    this.ResolveInfoFromDeleteMessage(_postimage);
 
                     if (this.PluginExecutionContext.PostEntityImages != null)
                     {
@@ -278,7 +280,7 @@ namespace Boruto
             }
         }
 
-        private void ResolveInfoFromDeleteMessage(Microsoft.Xrm.Sdk.Entity entity, string type)
+        private void ResolveInfoFromDeleteMessage(Microsoft.Xrm.Sdk.Entity entity)
         {
             if (this.PluginExecutionContext.MessageName == "Delete")
             {
@@ -462,6 +464,11 @@ namespace Boruto
                         var ix = 0;
                         foreach (var arg in method.Arguments)
                         {
+                            this._isAdmin = false;
+                            if (arg.Admin)
+                            {
+                                this._isAdmin = true;
+                            }
                             args[ix] = fac.Resolve(arg);
                             ix++;
                         }
@@ -626,6 +633,59 @@ namespace Boruto
         ITracingService IServiceContext.TraceService => this.TracingService;
         IPluginExecutionContext IServiceContext.PluginExecutionContext => this.PluginExecutionContext;
         System.IServiceProvider IServiceContext.SdkServiceProvider => this.StandardServiceProvider;
+
+        bool IServiceContext.IsAdmin => this._isAdmin;
+
+        string IServiceContext.Message => this.Message;
+
+        T IServiceContext.Target<T>()
+        {
+            var t = this.Target;
+            if (t != null)
+            {
+                return t.ToEntity<T>();
+            }
+            return default(T);
+        }
+
+        T IServiceContext.Preimage<T>()
+        {
+            var p = this.PreImage;
+            if (this.PreImage != null)
+            {
+                return this.PreImage.ToEntity<T>();
+            }
+            return default(T);
+        }
+
+        T IServiceContext.PostImage<T>()
+        {
+            var p = this.PostImage;
+            if (this.PostImage != null)
+            {
+                return this.PostImage.ToEntity<T>();
+            }
+            return default(T);
+        }
+
+        T IServiceContext.MergedImage<T>()
+        {
+            var p = this.PostImage;
+            if (this.PostImage != null)
+            {
+                return this.PostImage.ToEntity<T>();
+            }
+            return default(T);
+        }
+
+        T IServiceContext.OrganizationRequest<T>()
+        {
+            var orgR = this.OrganizationRequest;
+            var result = new T();
+            result.RequestName = orgR.RequestName;
+            result.Parameters = orgR.Parameters;
+            return result;
+        }
         #endregion
     }
 }

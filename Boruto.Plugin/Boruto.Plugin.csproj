@@ -5,8 +5,8 @@
     <PowerAppsTargetsPath>$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\PowerApps</PowerAppsTargetsPath>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Boruto.Plugin.snk</AssemblyOriginatorKeyFile>
-    <AssemblyVersion>1.0.1.1</AssemblyVersion>
-    <FileVersion>1.0.1.1</FileVersion>
+    <AssemblyVersion>1.0.1.2</AssemblyVersion>
+    <FileVersion>1.0.1.2</FileVersion>
     <ProjectTypeGuids>{4C25E9B5-9FA6-436c-8E19-B395D2A65FAF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
 
@@ -29,7 +29,7 @@
     <RepositoryUrl>https://github.com/kip-dk/Boruto.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>dataverse;plugin;solid;</PackageTags>
-    <PackageReleaseNotes>CustomService provider on Boruto.BasePlugin has been changed from a property to a method, to allow parse of a IServiceContext, so custom service provider has access to basic service instance create by the boruto platform. This change i "breaking" in the sence that you library will not compile after upgrade. The fix should be simple.</PackageReleaseNotes>
+    <PackageReleaseNotes>expose more info in Boruto.ServiceAPI.IServiceContext</PackageReleaseNotes>
     <PackAsTool>False</PackAsTool>
     <ToolCommandName>boruto.plugin</ToolCommandName>
     <PackageReadmeFile>DOCUMENTATION.MD</PackageReadmeFile>
