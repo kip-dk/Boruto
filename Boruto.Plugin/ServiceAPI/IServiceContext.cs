@@ -14,5 +14,6 @@ namespace Boruto.ServiceAPI
         Microsoft.Xrm.Sdk.IOrganizationServiceFactory OrganizationServiceFactory { get; }
         Microsoft.Xrm.Sdk.ITracingService TraceService { get; }
         Microsoft.Xrm.Sdk.IPluginExecutionContext PluginExecutionContext { get; }
+        System.IServiceProvider SdkServiceProvider { get; }
     }
 }

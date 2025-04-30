@@ -427,6 +427,8 @@ namespace Boruto
 
         #region context settings
         internal TraceLevel TraceLevel { get; set; } = TraceLevel.Error;
+
+        private Reflection.ServiceFactory _serviceFactory;
         #endregion
 
         #region run plugin
@@ -434,6 +436,7 @@ namespace Boruto
         {
             using (var fac = new Reflection.ServiceFactory(this))
             {
+                this._serviceFactory = fac; 
                 var resolver = this.GetPluginServiceResolver();
                 var methods = resolver.GetMethods(this.methodPattern, this.PrimaryLogicalName);
 
@@ -617,17 +620,12 @@ namespace Boruto
 
         #region iservicecontext
         IOrganizationService IServiceContext.UserOrganizationService => this.PluginUserService;
-
         IOrganizationService IServiceContext.InitiatingUserOrganizationService => this.InitiatingUserService;
-
         IOrganizationService IServiceContext.AdminOrganizationService => this.PluginAdminService;
-
         IOrganizationServiceFactory IServiceContext.OrganizationServiceFactory => this.OrgSvcFactory;
-
         ITracingService IServiceContext.TraceService => this.TracingService;
-
         IPluginExecutionContext IServiceContext.PluginExecutionContext => this.PluginExecutionContext;
-
+        System.IServiceProvider IServiceContext.SdkServiceProvider => this.StandardServiceProvider;
         #endregion
     }
 }

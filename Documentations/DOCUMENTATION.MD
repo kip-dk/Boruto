@@ -31,6 +31,10 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 
 ## Changelog
 
+### 1.0.1.1 2025-04-30: Boruto.BasePlugin.ServiceProvider change from a property to a method, taking Boruto.ServiceAPI.IServiceContext as argument to allow custom service provider to use Dataverse service directly or, provided by the Boruto platform
+
+### 1.0.0.4 2025-04-30: Plugin tool is not using early bound entities anymore, to avoid conlict with other libraries
+
 ### 1.0.0.3 2025-04-27: Added extensions methods from Kipon.Solid
 
 ### 1.0.0.2 2025-04-26: Initial release
