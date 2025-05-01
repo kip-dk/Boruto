@@ -494,25 +494,27 @@ namespace Boruto
 
                             if (this.Stage == 30 && this.Message == "Retrieve" && result is Microsoft.Xrm.Sdk.Entity ent)
                             {
-                                if (ent.GetType() == typeof(Microsoft.Xrm.Sdk.Entity))
-                                {
-                                    this.PluginExecutionContext.OutputParameters["BusinessEntity"] = ent;
-                                }
-                                else
-                                {
-                                    var r = new Microsoft.Xrm.Sdk.Entity
-                                    {
-                                        Id = ent.Id,
-                                        LogicalName = ent.LogicalName,
-                                        Attributes = ent.Attributes
-                                    };
-                                    this.PluginExecutionContext.OutputParameters["BusinessEntity"] = r;
-                                }
+                                this.PluginExecutionContext.OutputParameters["BusinessEntity"] = ent.ToPlainEntity();
                             }
 
                             if (this.Stage == 30 && this.Message == "RetrieveMultiple" && result is Microsoft.Xrm.Sdk.EntityCollection col)
                             {
-                                this.PluginExecutionContext.OutputParameters["BusinessEntityCollection"] = col;
+                                var pub = new Microsoft.Xrm.Sdk.EntityCollection
+                                {
+                                    EntityName = col.EntityName,
+                                    MinActiveRowVersion = col.MinActiveRowVersion,
+                                    MoreRecords = col.MoreRecords,
+                                    PagingCookie = col.PagingCookie,
+                                    TotalRecordCount = col.TotalRecordCount,
+                                    TotalRecordCountLimitExceeded = col.TotalRecordCountLimitExceeded
+                                };
+
+                                foreach (var e in col.Entities)
+                                {
+                                    pub.Entities.Add(e.ToPlainEntity());
+                                }
+
+                                this.PluginExecutionContext.OutputParameters["BusinessEntityCollection"] = pub;
                             }
 
                             if (this.Stage == 30 && this.Message == "RetrieveMultiple" && result is Boruto.EntityCollection bCol)
@@ -687,5 +689,23 @@ namespace Boruto
             return result;
         }
         #endregion
+    }
+
+    internal static class PluginContextLocalExtensions
+    {
+        public static Microsoft.Xrm.Sdk.Entity ToPlainEntity(this Microsoft.Xrm.Sdk.Entity instance)
+        {
+            if (instance.GetType() == typeof(Microsoft.Xrm.Sdk.Entity))
+            {
+                return instance;
+            }
+            var result = new Microsoft.Xrm.Sdk.Entity
+            {
+                Id = instance.Id,
+                LogicalName = instance.LogicalName,
+                Attributes = instance.Attributes
+            };
+            return result;
+        }
     }
 }
