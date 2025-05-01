@@ -87,6 +87,18 @@ namespace Boruto.Deployment.Services
                 List<Assembly> serviceAssemblies = new List<Assembly>();
                 foreach (var dll in dlls)
                 {
+                    if (dll.Name.StartsWith("System."))
+                    {
+                        // do not load system.dll's dynamic
+                        continue;
+                    }
+
+                    if (dll.Name.StartsWith("Boruto.Plugin.dll"))
+                    {
+                        // do not load boruto lib dynamically
+                        continue;
+                    }
+
                     var code = System.AppDomain.CurrentDomain.Load(dll.Code);
                     Console.WriteLine($"Loaded: {code.FullName}");
                     dyns.Add(code.FullName, code);
