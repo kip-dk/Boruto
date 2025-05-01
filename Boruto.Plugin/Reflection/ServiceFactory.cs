@@ -26,7 +26,7 @@ namespace Boruto.Reflection
                 return this.ctx.PrimaryEntityId;
             }
 
-            if (argument.Name.ToLower() == "primaryentityname")
+            if (argument.Name.ToLower() == "primaryentityname" && argument.FromType == typeof(string))
             {
                 return this.ctx.PrimaryLogicalName;
             }
@@ -426,7 +426,7 @@ namespace Boruto.Reflection
 
             for (var i = 0; i < args.Length; i++)
             {
-                args[i] = this.ResolveServiceInstance(con.Parameters[0].Parameter.ParameterType, con.Parameters[0].Admin);
+                args[i] = this.ResolveServiceInstance(con.Parameters[i].Parameter.ParameterType, con.Parameters[i].Admin);
             }
 
             var result = con.Constructor.Invoke(args);

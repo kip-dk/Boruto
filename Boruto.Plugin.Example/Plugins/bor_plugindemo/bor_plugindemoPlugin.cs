@@ -22,8 +22,11 @@ namespace Boruto.Plugin.Example.Plugins.bor_plugindemo
         }
 
         [Sort(1)]
-        public void OnPreUpdate(Entities.bor_plugindemos.NameChanged.INameChanged target, ServiceAPI.IPluginDemoService service)
+        public void OnPreUpdate(
+            Entities.bor_plugindemos.NameChanged.INameChanged target, ServiceAPI.IPluginDemoService service,
+            Microsoft.Xrm.Sdk.ITracingService traceService, ServiceAPI.IMultiQueryService multiQuery)
         {
+            multiQuery.DoSomeQuery();
             service.OnCreate(target);
         }
 

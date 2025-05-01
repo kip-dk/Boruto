@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2025-04-27 08:40
+## updated: 2025-05-01 08:30
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -10,6 +10,8 @@ For documentation:
 
 
 ## DISCLAIMER
+We are still in process of stabalizing the concept and improving documentation. We will make an expicit RELEASED note when the concept is readly for adoption.
+
 This software is provided as-is, and is used on your own risk. Kipon ApS does not take any responsibility of damages directly or indirectly caused by the
 use of this software.
 
@@ -30,6 +32,8 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. Less restrictive in terms of always using interfaces for injection. 
 
 ## Changelog
+
+### 1.0.1.5 2025-05-01 Services with more than one parameter in constructor, multi registration og images
 
 ### 1.0.1.1 2025-04-30: Boruto.BasePlugin.ServiceProvider change from a property to a method, taking Boruto.ServiceAPI.IServiceContext as argument to allow custom service provider to use Dataverse service directly or, provided by the Boruto platform
 
