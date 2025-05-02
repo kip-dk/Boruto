@@ -74,6 +74,47 @@ namespace Boruto.Extensions.SDK
             return attributes.ValueOf<T>($"preimage_{attrName}");
         }
 
+        public static T TargetValueOf<T>(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string attrName)
+        {
+            if (!string.IsNullOrEmpty(attrName) && ctx.InputParameters["Target"] is Microsoft.Xrm.Sdk.Entity target)
+            {
+                return target.Attributes.ValueOf<T>(attrName);
+            }
+            return default(T);
+        }
+
+        public static T PreValueOf<T>(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string attrName)
+        {
+            if (!string.IsNullOrEmpty(attrName) && ctx.PreEntityImages != null)
+            {
+                foreach (var preimage in ctx.PreEntityImages)
+                {
+                    var entity = preimage.Value;
+                    if (entity.Attributes.ContainsKey(attrName.ToLower()))
+                    {
+                        return entity.Attributes.ValueOf<T>(attrName);
+                    }
+                }
+            }
+            return default(T);
+        }
+
+        public static T PostValueOf<T>(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string attrName)
+        {
+            if (!string.IsNullOrEmpty(attrName) && ctx.PostEntityImages != null)
+            {
+                foreach (var postimage in ctx.PostEntityImages)
+                {
+                    var entity = postimage.Value;
+                    if (entity.Attributes.ContainsKey(attrName.ToLower()))
+                    {
+                        return entity.Attributes.ValueOf<T>(attrName);
+                    }
+                }
+            }
+            return default(T);
+        }
+
         public static T ToTValueType<T>(this object value)
         {
             if (value is T t)
