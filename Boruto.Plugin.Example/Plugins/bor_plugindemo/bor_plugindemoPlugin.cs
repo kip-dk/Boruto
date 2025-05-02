@@ -10,7 +10,9 @@ namespace Boruto.Plugin.Example.Plugins.bor_plugindemo
     public class bor_plugindemoPlugin : BasePlugin
     {
         [Sort(1)]
-        public void OnPreCreate(Entities.bor_plugindemos.NameChanged.INameChanged target, ServiceAPI.IPluginDemoService service)
+        public void OnPreCreate(
+            Entities.bor_plugindemos.NameChanged.INameChanged target, 
+            ServiceAPI.IPluginDemoService service)
         {
             service.OnCreate(target);
         }

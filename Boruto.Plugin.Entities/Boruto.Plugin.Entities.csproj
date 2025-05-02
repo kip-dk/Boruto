@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Entities\Uow\" />
     <Folder Include="Entities\ProxyClasses\" />
   </ItemGroup>
 
