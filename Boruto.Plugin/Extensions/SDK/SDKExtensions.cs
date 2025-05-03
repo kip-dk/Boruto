@@ -15,6 +15,8 @@ namespace Boruto.Extensions.SDK
 
             var result = new T();
             result.Attributes = entity.Attributes;
+            result.Id = entity.Id;
+            result.LogicalName = entity.LogicalName;
             return result;
         }
 
@@ -22,6 +24,8 @@ namespace Boruto.Extensions.SDK
         {
             var t = (T)System.Activator.CreateInstance(type);
             t.Attributes = entity.Attributes;
+            t.Id = entity.Id;
+            t.LogicalName = entity.LogicalName;
             return t;
         }
 
@@ -34,6 +38,8 @@ namespace Boruto.Extensions.SDK
 
             var next = type.StrongTypeOf();
             next.Attributes = entity.Attributes;
+            next.Id = entity.Id;
+            next.LogicalName = entity.LogicalName;
             return next;
         }
 
@@ -50,6 +56,14 @@ namespace Boruto.Extensions.SDK
             }
         }
 
+
+        /// <summary>
+        /// return the strongly type value of an attribut by its name or default if not in the attributes collection, or null
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="attributes"></param>
+        /// <param name="attrName"></param>
+        /// <returns></returns>
         public static T ValueOf<T>(this Microsoft.Xrm.Sdk.AttributeCollection attributes, string attrName)
         {
             attrName = attrName.ToLower();
@@ -63,25 +77,63 @@ namespace Boruto.Extensions.SDK
                     return default(T);
                 }
 
-                return obj.ToTValueType<T>();
+                return obj.ToValueType<T>();
             }
 
             return default(T);
         }
 
+        /// <summary>
+        /// Returns true if the attrName is part of the Target entity payload (assigned in the process), otherwise false
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="attrName"></param>
+        /// <returns></returns>
+        public static bool IsTargetAttribute(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string attrName)
+        {
+            if (!string.IsNullOrEmpty(attrName) && ctx.InputParameters["Target"] is Microsoft.Xrm.Sdk.Entity target)
+            {
+                return target.Attributes.ContainsKey(attrName.ToLower());
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Returns true if the attrName is in the target payload, and it is assigned the null value
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="attrName"></param>
+        /// <returns></returns>
+        public static bool IsSetTargetNull(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string attrName)
+        {
+            if (!string.IsNullOrEmpty(attrName) && ctx.InputParameters["Target"] is Microsoft.Xrm.Sdk.Entity target)
+            {
+                var att = attrName.ToLower();
+                return target.Attributes.ContainsKey(att) && target.Attributes[att] == null;
+            }
+            return false;
+        }
+
+
+        /// <summary>
+        /// This method is intended for MERGED IMAGE only and will return the prevalue directly
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="attributes"></param>
+        /// <param name="attrName"></param>
+        /// <returns></returns>
         public static T PreValueOf<T>(this Microsoft.Xrm.Sdk.AttributeCollection attributes, string attrName)
         {
             return attributes.ValueOf<T>($"preimage_{attrName}");
         }
 
-        public static T TargetValueOf<T>(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string attrName)
-        {
-            if (!string.IsNullOrEmpty(attrName) && ctx.InputParameters["Target"] is Microsoft.Xrm.Sdk.Entity target)
-            {
-                return target.Attributes.ValueOf<T>(attrName);
-            }
-            return default(T);
-        }
+        /// <summary>
+        /// find the attr value in the preentityimages payload, and if found, returns the value T, otherwise it returns default
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ctx"></param>
+        /// <param name="attrName"></param>
+        /// <returns></returns>
 
         public static T PreValueOf<T>(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string attrName)
         {
@@ -99,6 +151,13 @@ namespace Boruto.Extensions.SDK
             return default(T);
         }
 
+        /// <summary>
+        /// find the att value in the postentityimage payload and if found, returns the value T, otherwise it returns default
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ctx"></param>
+        /// <param name="attrName"></param>
+        /// <returns></returns>
         public static T PostValueOf<T>(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string attrName)
         {
             if (!string.IsNullOrEmpty(attrName) && ctx.PostEntityImages != null)
@@ -115,7 +174,7 @@ namespace Boruto.Extensions.SDK
             return default(T);
         }
 
-        public static T ToTValueType<T>(this object value)
+        public static T ToValueType<T>(this object value)
         {
             if (value is T t)
             {
