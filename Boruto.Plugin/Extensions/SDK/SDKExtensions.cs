@@ -114,6 +114,16 @@ namespace Boruto.Extensions.SDK
             return false;
         }
 
+        public static T TargetValueOf<T>(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string attrName)
+        {
+            if (!string.IsNullOrEmpty(attrName) && ctx.InputParameters["Target"] is Microsoft.Xrm.Sdk.Entity target)
+            {
+                return target.Attributes.ValueOf<T>(attrName);
+            }
+
+            return default(T);
+        }
+
 
         /// <summary>
         /// This method is intended for MERGED IMAGE only and will return the prevalue directly
