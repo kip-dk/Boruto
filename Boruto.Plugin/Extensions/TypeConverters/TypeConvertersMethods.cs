@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI.WebControls;
 
 
 namespace Boruto.Extensions.TypeConverters
@@ -221,5 +223,20 @@ namespace Boruto.Extensions.TypeConverters
             return int.Parse(expression.Split('(').Last().Replace(")", ""));
         }
 
+
+        public static Microsoft.Xrm.Sdk.EntityReference ToEntityReference(this string logicalname, int no, string name)
+        {
+            return new EntityReference(logicalname, no.ToGuid()) { Name = name };
+        }
+
+        public static Guid[] Guids(this int count)
+        {
+            var result = new List<Guid>();
+            for (var i=1;i<count;i++)
+            {
+                result.Add(i.ToGuid());
+            }
+            return result.ToArray();
+        }
     }
 }

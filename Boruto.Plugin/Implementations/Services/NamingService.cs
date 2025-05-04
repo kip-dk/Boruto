@@ -58,5 +58,72 @@ namespace Boruto.Implementations.Services
             }
             return re.Name;
         }
+
+        public Microsoft.Xrm.Sdk.EntityReference[] NameReferencesOff(string entityLogicalName, params Guid[] ids)
+        {
+            if (string.IsNullOrEmpty(entityLogicalName))
+            {
+                return null;
+            }
+
+            if (ids == null || ids.Length == 0)
+            {
+                return null;
+            }
+
+            var meta = this.metaService.ForEntity(entityLogicalName);
+
+
+            var qe = new Microsoft.Xrm.Sdk.Query.QueryExpression(entityLogicalName);
+            qe.ColumnSet.AddColumn(meta.PrimaryIdAttribute);
+            qe.ColumnSet.AddColumn(meta.PrimaryNameAttribute);
+
+            var filter = new FilterExpression(LogicalOperator.Or);
+            foreach (var id in ids)
+            {
+                filter.AddCondition(new ConditionExpression(meta.PrimaryIdAttribute, Microsoft.Xrm.Sdk.Query.ConditionOperator.Equal, id));
+            }
+            qe.Criteria.Filters.Add(filter);
+
+            var result = this.orgService.RetrieveMultiple(qe);
+
+            return (from r in result.Entities
+                    select new Microsoft.Xrm.Sdk.EntityReference
+                    {
+                        Id = (Guid)r[meta.PrimaryIdAttribute],
+                        LogicalName = entityLogicalName,
+                        Name = (string)r[meta.PrimaryNameAttribute]
+                    }).ToArray();
+        }
+
+        public string Concat(params Microsoft.Xrm.Sdk.EntityReference[] refs)
+        {
+            return this.Concat(", ", refs);
+        }
+        public string Concat(string sep, params Microsoft.Xrm.Sdk.EntityReference[] refs)
+        {
+            if (refs == null || refs.Length == 0)
+            {
+                return null;
+            }
+
+            var comma = string.Empty;
+            var sb = new StringBuilder();
+
+            foreach (var re in refs)
+            {
+                if (re != null)
+                {
+                    var next = this.NameOf(re);
+                    if (!string.IsNullOrEmpty(next))
+                    {
+                        sb.Append($"{comma}{next}");
+                        comma = sep;
+                    }
+                }
+            }
+            return sb.ToString();
+        }
+
     }
 }
