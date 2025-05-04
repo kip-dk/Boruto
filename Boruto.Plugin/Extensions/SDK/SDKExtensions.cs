@@ -91,7 +91,7 @@ namespace Boruto.Extensions.SDK
         /// <returns></returns>
         public static bool IsTargetAttribute(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string attrName)
         {
-            if (!string.IsNullOrEmpty(attrName) && ctx.InputParameters["Target"] is Microsoft.Xrm.Sdk.Entity target)
+            if (!string.IsNullOrEmpty(attrName) && ctx.InputParameters != null && ctx.InputParameters.ContainsKey("Target") && ctx.InputParameters["Target"] is Microsoft.Xrm.Sdk.Entity target)
             {
                 return target.Attributes.ContainsKey(attrName.ToLower());
             }
@@ -106,7 +106,7 @@ namespace Boruto.Extensions.SDK
         /// <returns></returns>
         public static bool IsSetTargetNull(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string attrName)
         {
-            if (!string.IsNullOrEmpty(attrName) && ctx.InputParameters["Target"] is Microsoft.Xrm.Sdk.Entity target)
+            if (!string.IsNullOrEmpty(attrName) && ctx.InputParameters != null && ctx.InputParameters != null && ctx.InputParameters.ContainsKey("Target") && ctx.InputParameters.ContainsKey("Target") && ctx.InputParameters["Target"] is Microsoft.Xrm.Sdk.Entity target)
             {
                 var att = attrName.ToLower();
                 return target.Attributes.ContainsKey(att) && target.Attributes[att] == null;
@@ -116,7 +116,7 @@ namespace Boruto.Extensions.SDK
 
         public static T TargetValueOf<T>(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string attrName)
         {
-            if (!string.IsNullOrEmpty(attrName) && ctx.InputParameters["Target"] is Microsoft.Xrm.Sdk.Entity target)
+            if (!string.IsNullOrEmpty(attrName) && ctx.InputParameters != null && ctx.InputParameters.ContainsKey("Target") && ctx.InputParameters["Target"] is Microsoft.Xrm.Sdk.Entity target)
             {
                 return target.Attributes.ValueOf<T>(attrName);
             }
