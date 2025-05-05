@@ -40,7 +40,8 @@ namespace Boruto
                 try
                 {
                     ctx.Execute();
-                } finally
+                }
+                finally
                 {
                     if (ctx.CustomServiceProvider != null && ctx.CustomServiceProvider is System.IDisposable dis)
                     {

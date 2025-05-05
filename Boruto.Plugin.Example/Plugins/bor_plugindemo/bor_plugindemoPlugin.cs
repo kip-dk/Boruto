@@ -40,7 +40,13 @@ namespace Boruto.Plugin.Example.Plugins.bor_plugindemo
 
         public void OnPreUpdate(Entities.bor_plugindemos.TriggerActionChanged.ITriggerActionChanged target)
         {
+            Boruto.Trace.Info("TriggerActionChanged");
             target.DoStuff();
+        }
+
+        public void OnPostUpdate(Boruto.Plugin.Entities.bor_plugindemo target, Boruto.Plugin.Entities.bor_plugindemo merged)
+        {
+            Boruto.Trace.Info($"target: { target.bor_number }: Merged: { merged.bor_name }");
         }
 
         public void OnPreDelete(Boruto.ITargetReference<Boruto.Plugin.Entities.bor_plugindemo> target, Microsoft.Xrm.Sdk.ITracingService trace)

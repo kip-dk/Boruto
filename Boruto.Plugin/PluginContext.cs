@@ -169,15 +169,18 @@ namespace Boruto
                     this._preimage.Id = this.PrimaryEntityId;
                     this.ResolveInfoFromDeleteMessage(_preimage);
 
-                    if (this.PluginExecutionContext.PreEntityImages != null)
+                    var key = Boruto.Deployment.Services.SdkMessageProcessingStepService.ImageName(1);
+
+                    if (this.PluginExecutionContext.PreEntityImages != null && this.PluginExecutionContext.PreEntityImages.ContainsKey(key))
                     {
-                        foreach (var pe in this.PluginExecutionContext.PreEntityImages.Values)
+                        var pe = this.PluginExecutionContext.PreEntityImages[key];
+                        foreach (var att in pe.Attributes)
                         {
-                            foreach (var att in pe.Attributes)
-                            {
-                                this._preimage[att.Key] = att.Value;
-                            }
+                            this._preimage[att.Key] = att.Value;
                         }
+                    } else
+                    {
+                        Boruto.Trace.Error($"{ key } was expected, but not found in pre entity images");
                     }
                 }
                 return this._preimage;
@@ -196,15 +199,18 @@ namespace Boruto
                     this._postimage.Id = this.PrimaryEntityId;
                     this.ResolveInfoFromDeleteMessage(_postimage);
 
-                    if (this.PluginExecutionContext.PostEntityImages != null)
+                    var key = Boruto.Deployment.Services.SdkMessageProcessingStepService.ImageName(2);
+
+                    if (this.PluginExecutionContext.PostEntityImages != null && this.PluginExecutionContext.PostEntityImages.ContainsKey(key))
                     {
-                        foreach (var pe in this.PluginExecutionContext.PostEntityImages.Values)
+                        var pe = this.PluginExecutionContext.PostEntityImages[key];
+                        foreach (var att in pe.Attributes)
                         {
-                            foreach (var att in pe.Attributes)
-                            {
-                                this._postimage[att.Key] = att.Value;
-                            }
+                            this._postimage[att.Key] = att.Value;
                         }
+                    } else
+                    {
+                        Boruto.Trace.Error($"{ key } was expected, but not found as post image");
                     }
                 }
                 return this._postimage;
@@ -440,6 +446,7 @@ namespace Boruto
             {
                 this._serviceFactory = fac; 
                 var resolver = this.GetPluginServiceResolver();
+
                 var methods = resolver.GetMethods(this.methodPattern, this.PrimaryLogicalName);
 
                 if (methods != null && methods.Length > 0) {
@@ -469,6 +476,7 @@ namespace Boruto
                             {
                                 this._isAdmin = true;
                             }
+
                             args[ix] = fac.Resolve(arg);
                             ix++;
                         }

@@ -331,6 +331,22 @@ namespace Boruto.Deployment.Services
                     };
                 }
 
+                if (arg.Name.ToLower() == "merged" && type.IsSubclassOf(ENTITY) && logicalName == type.ToLogicalName())
+                {
+                    return new Image
+                    {
+                        AllAttributes = true
+                    };
+                }
+
+                if (arg.Name.ToLower() == "mergedimage" && type.IsSubclassOf(ENTITY) && logicalName == type.ToLogicalName())
+                {
+                    return new Image
+                    {
+                        AllAttributes = true
+                    };
+                }
+
                 if (type.IsInterface && IPREIMAGE.IsAssignableFrom(type))
                 {
 

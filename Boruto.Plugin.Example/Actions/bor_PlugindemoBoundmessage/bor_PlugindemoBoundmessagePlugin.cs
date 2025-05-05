@@ -13,7 +13,7 @@ namespace Boruto.Plugin.Example.Actions.bor_PlugindemoBoundmessage
         {
             return new bor_PlugindemoBoundmessageResponse
             {
-                _output = $"{request.Input}: vi sætter noget output: {request.Target.Id}"
+                _output = $"{request.Input}: vi sætter noget output: {request.Target.Id}: { System.DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") }"
             };
         }
     }

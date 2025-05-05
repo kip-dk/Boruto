@@ -32,12 +32,17 @@ namespace Boruto.Reflection.Model
             this.Resolve();
             this.ResolveIf();
 
-            if (this.IsMatch == true && !this.WasMatched && !string.IsNullOrEmpty(primaryLogicalName))
+            var isOrg = this.Arguments.Where(r => r.IsOrganizationRequest).FirstOrDefault();
+
+            if (isOrg == null)
             {
-                var type = method.ResolveEntityType(primaryLogicalName, assemblies);
-                this.IsMatch = type != null;
-                this.WasMatched = true;
-                return;
+                if (this.IsMatch == true && !this.WasMatched && !string.IsNullOrEmpty(primaryLogicalName))
+                {
+                    var type = method.ResolveEntityType(primaryLogicalName, assemblies);
+                    this.IsMatch = type != null;
+                    this.WasMatched = true;
+                    return;
+                }
             }
         }
 

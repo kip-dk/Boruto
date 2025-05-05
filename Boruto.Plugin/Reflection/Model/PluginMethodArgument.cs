@@ -60,6 +60,41 @@ namespace Boruto.Reflection.Model
         {
             this.FromType = this.parameterinfo.ParameterType;
 
+            if (!this.FromType.IsInterface && !this.FromType.IsAbstract && this.FromType.IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity)))
+            {
+                switch (this.parameterinfo.Name.ToLower())
+                {
+                    case "target":
+                        {
+                            this.IsTarget = true;
+                            this.FilteredAllAttributes = true;
+                            return;
+                        }
+                    case "merged":
+                    case "mergedimage":
+                        {
+                            this.IsMergedImage = true;
+                            this.PreAllAttributes = true;
+                            return;
+                        }
+                    case "preimage":
+                        {
+                            this.IsPreImage = true;
+                            this.PreAllAttributes = true;
+                            return;
+                        }
+                    case "postimage":
+                        {
+                            this.IsPostImage = true;
+                            this.PostAllAttributes = true;
+                            return;
+                        }
+                    default:
+                        throw new Exceptions.NamingConventionViolationException(this.parameterinfo.Name, "target", "merged", "mergedimage", "preimage", "postimage");
+                }
+            }
+
+
             if (this.FromType.IsEntityType())
             {
                 this.EarlyBoundEntityType = this.FromType.ResolveEntityType(this.primaryLogicalName, this.assemblies);
@@ -111,39 +146,6 @@ namespace Boruto.Reflection.Model
                     this.PostAttributes = this.FromType.ResolveAttributes(this.EarlyBoundEntityType, null, out bool all);
                     this.PostAllAttributes = all;
                     return;
-                }
-
-                if (this.FromType.IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity)))
-                {
-                    switch (this.parameterinfo.Name.ToLower())
-                    {
-                        case "target":
-                            {
-                                this.IsTarget = true;
-                                this.FilteredAllAttributes = true;
-                                return;
-                            }
-                        case "merged":
-                            {
-                                this.IsMergedImage = true;
-                                this.PreAllAttributes = true;
-                                return;
-                            }
-                        case "preimage":
-                            {
-                                this.IsPreImage = true;
-                                this.PreAllAttributes = true;
-                                return;
-                            }
-                        case "postimage":
-                            {
-                                this.IsPostImage = true;
-                                this.PostAllAttributes = true;
-                                return;
-                            }
-                        default:
-                            throw new Exceptions.NamingConventionViolationException(this.parameterinfo.Name, "target", "merged", "preimage", "postimage");
-                    }
                 }
 
                 if (typeof(ITargetReference).IsAssignableFrom(this.FromType))

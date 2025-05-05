@@ -27,6 +27,7 @@ namespace Boruto.Plugin.Example.Entities.bor_plugindemos
                     Target = new EntityReference(this.LogicalName, this.Id),
                     Input = System.DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm:ss") + " from trigger"
                 };
+
                 var res = (Boruto.Plugin.Entities.bor_PlugindemoBoundmessageResponse)this.orgService.Execute(req);
                 this.bor_changelog = res.Output;
             }
