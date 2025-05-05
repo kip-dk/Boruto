@@ -37,7 +37,16 @@ namespace Boruto
 
             using (var ctx = this.GetContext(platformServiceProvider))
             {
-                ctx.Execute();
+                try
+                {
+                    ctx.Execute();
+                } finally
+                {
+                    if (ctx.CustomServiceProvider != null && ctx.CustomServiceProvider is System.IDisposable dis)
+                    {
+                        dis.Dispose();
+                    }
+                }
             }
         }
 
