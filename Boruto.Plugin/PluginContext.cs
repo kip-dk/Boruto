@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography;
 
@@ -476,7 +477,6 @@ namespace Boruto
                             {
                                 this._isAdmin = true;
                             }
-
                             args[ix] = fac.Resolve(arg);
                             ix++;
                         }
@@ -484,6 +484,8 @@ namespace Boruto
 
                         #region invoke
                         var result = method.method.Invoke(this.plugin, args);
+
+                        fac.UnregistrePM();
 
                         if (result != null)
                         {

@@ -3,6 +3,7 @@ using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,18 @@ namespace Boruto.Reflection
         internal ServiceFactory(PluginContext ctx)
         {
             this.ctx = ctx;
+        }
+
+        private Dictionary<PropertyMirror, System.ComponentModel.INotifyPropertyChanged> PM = new Dictionary<PropertyMirror, System.ComponentModel.INotifyPropertyChanged>();
+        internal void UnregistrePM()
+        {
+            foreach (var key in PM.Keys)
+            {
+                var no = PM[key];
+                no.PropertyChanged -= key.MirrorpropertyChanged;
+            }
+
+            PM.Clear();
         }
 
         internal object Resolve(Reflection.Model.PluginMethodArgument argument)
@@ -40,23 +53,27 @@ namespace Boruto.Reflection
 
             if (argument.IsTarget)
             {
-                var notifier = result as System.ComponentModel.INotifyPropertyChanged;
-                if (notifier != null && ctx.Stage <= 20 && ctx.Message == "Update")
-                {
-                    notifier.PropertyChanged += Target_PropertyChanged;
-                }
-
+                var attrWasSet = false;
                 if (result is Microsoft.Xrm.Sdk.Entity ent)
                 {
                     ent.Attributes = this.ctx.Target.Attributes;
                     ent.LogicalName = this.ctx.TargetLogicalName;
                     ent.Id = this.ctx.TargetId;
-                    return result;
+                    attrWasSet = true;
                 }
 
-                if (result is ITarget target)
+                if (!attrWasSet && result is ITarget target)
                 {
                     target.Attributes = this.ctx.Target.Attributes;
+                    attrWasSet = true;
+                }
+
+                var notifier = result as System.ComponentModel.INotifyPropertyChanged;
+                if (notifier != null && ctx.Stage <= 20 && ctx.Message == "Update")
+                {
+                    var targetMirror = new PropertyMirror((Microsoft.Xrm.Sdk.Entity)this.ctx.Merged);
+                    notifier.PropertyChanged += targetMirror.MirrorpropertyChanged;
+                    this.PM.Add(targetMirror, notifier);
                 }
                 return result;
             }
@@ -81,23 +98,28 @@ namespace Boruto.Reflection
 
             if (argument.IsMergedImage)
             {
-                var notifier = result as System.ComponentModel.INotifyPropertyChanged;
-                if (notifier != null && ctx.Stage <= 20 && ctx.Message == "Update")
-                {
-                    notifier.PropertyChanged += Merged_PropertyChanged;
-                }
-
+                var attrWasSet = false;
                 if (result is Microsoft.Xrm.Sdk.Entity ent)
                 {
                     ent.Attributes = this.ctx.Merged.Attributes;
                     ent.LogicalName = this.ctx.TargetLogicalName;
                     ent.Id = this.ctx.TargetId;
-                    return result;
+                    attrWasSet = true;
                 }
 
-                if (result is IMerged merged)
+                if (!attrWasSet && result is IMerged merged)
                 {
                     merged.Attributes = this.ctx.Merged.Attributes;
+                    attrWasSet = true;
+                }
+
+                var notifier = result as System.ComponentModel.INotifyPropertyChanged;
+                if (notifier != null && ctx.Stage <= 20 && ctx.Message == "Update")
+                {
+                    var tg = (Microsoft.Xrm.Sdk.Entity)this.ctx.Target;
+                    var mergedimageMirror = new PropertyMirror(tg);
+                    notifier.PropertyChanged += mergedimageMirror.MirrorpropertyChanged;
+                    PM.Add(mergedimageMirror, notifier);
                 }
                 return result;
             }
@@ -121,16 +143,6 @@ namespace Boruto.Reflection
             }
 
             return result;
-        }
-
-        private void Merged_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            this.ctx.Target[e.PropertyName.ToLower()] = this.ctx.Merged[e.PropertyName.ToLower()];
-        }
-
-        private void Target_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            this.ctx.Merged[e.PropertyName.ToLower()] = this.ctx.Target[e.PropertyName.ToLower()];
         }
 
         #region private helpers
@@ -452,5 +464,35 @@ namespace Boruto.Reflection
             }
         }
         #endregion
+
+        #region image helper classes
+        private class PropertyMirror
+        {
+            private Microsoft.Xrm.Sdk.Entity mirrorTo;
+
+            internal PropertyMirror(Microsoft.Xrm.Sdk.Entity mirrorTo)
+            {
+                this.mirrorTo = mirrorTo;
+            }
+
+            internal void MirrorpropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+            {
+                var prop = sender.GetType().GetProperty(e.PropertyName);
+                if (prop != null)
+                {
+                    var attr = (Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute)prop.GetCustomAttributes(typeof(Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute), false).FirstOrDefault();
+                    if (attr != null)
+                    {
+                        var source = sender as Microsoft.Xrm.Sdk.Entity;
+                        if (source != null)
+                        {
+                            mirrorTo[attr.LogicalName] = source[attr.LogicalName];
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
     }
 }

@@ -5,8 +5,8 @@
     <PowerAppsTargetsPath>$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\PowerApps</PowerAppsTargetsPath>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Boruto.Plugin.snk</AssemblyOriginatorKeyFile>
-    <AssemblyVersion>1.0.1.18</AssemblyVersion>
-    <FileVersion>1.0.1.18</FileVersion>
+    <AssemblyVersion>1.0.1.19</AssemblyVersion>
+    <FileVersion>1.0.1.19</FileVersion>
     <ProjectTypeGuids>{4C25E9B5-9FA6-436c-8E19-B395D2A65FAF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
 
@@ -29,7 +29,7 @@
     <RepositoryUrl>https://github.com/kip-dk/Boruto.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>dataverse;plugin;solid;</PackageTags>
-    <PackageReleaseNotes>Images of type all was not loaded correctly</PackageReleaseNotes>
+    <PackageReleaseNotes>Assigning value in prestate through merged image did not work as expected</PackageReleaseNotes>
     <PackAsTool>False</PackAsTool>
     <ToolCommandName>boruto.plugin</ToolCommandName>
     <PackageReadmeFile>DOCUMENTATION.MD</PackageReadmeFile>

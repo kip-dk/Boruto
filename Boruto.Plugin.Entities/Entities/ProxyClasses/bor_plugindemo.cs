@@ -55,6 +55,7 @@ namespace Boruto.Plugin.Entities
 		public partial class Fields
 		{
 			public const string bor_changelog = "bor_changelog";
+			public const string bor_empty = "bor_empty";
 			public const string bor_name = "bor_name";
 			public const string bor_number = "bor_number";
 			public const string bor_plugindemoId = "bor_plugindemoid";
@@ -145,6 +146,21 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("bor_changelog");
 				this.SetAttributeValue("bor_changelog", value);
 				this.OnPropertyChanged("bor_changelog");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_empty")]
+		public string bor_empty
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("bor_empty");
+			}
+			set
+			{
+				this.OnPropertyChanging("bor_empty");
+				this.SetAttributeValue("bor_empty", value);
+				this.OnPropertyChanged("bor_empty");
 			}
 		}
 		

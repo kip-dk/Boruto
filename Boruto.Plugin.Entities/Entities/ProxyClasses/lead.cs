@@ -3135,7 +3135,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Result of the assignment rule process
+		/// (Deprecated)Result of the assignment rule process
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_salesassignmentresult")]
 		public virtual msdyn_lead_msdyn_salesassignmentresult? msdyn_salesassignmentresult
