@@ -27,6 +27,8 @@ namespace Boruto.Plugin.Example.Entities.bor_plugindemos
             string bor_changelog { get; set; }
             int? Pre_bor_number { get; }
 
+            string bor_empty { get; }
+
             void DoStuff();
         }
     }

@@ -5,8 +5,8 @@
     <PowerAppsTargetsPath>$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\PowerApps</PowerAppsTargetsPath>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Boruto.Plugin.snk</AssemblyOriginatorKeyFile>
-    <AssemblyVersion>1.0.1.20</AssemblyVersion>
-    <FileVersion>1.0.1.20</FileVersion>
+    <AssemblyVersion>1.0.1.21</AssemblyVersion>
+    <FileVersion>1.0.1.21</FileVersion>
     <ProjectTypeGuids>{4C25E9B5-9FA6-436c-8E19-B395D2A65FAF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
 
@@ -28,8 +28,8 @@
     <Title>Boruto Dataverse plugin - building plugins as SOLID</Title>
     <RepositoryUrl>https://github.com/kip-dk/Boruto.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>dataverse;plugin;solid;</PackageTags>
-    <PackageReleaseNotes>Catch exception throun by plugin execute, log to tracelog, and convert to InvalidPluginExecutionException</PackageReleaseNotes>
+    <PackageTags>dynamics 365;dataverse;plugin;solid;</PackageTags>
+    <PackageReleaseNotes>If images are changed for a pluginType it will be removed and registred in the deploy process. This is due to the fact the Dataverse i caching image rules very hard, and it can take significant time for a new image definition to take effect.</PackageReleaseNotes>
     <PackAsTool>False</PackAsTool>
     <ToolCommandName>boruto.plugin</ToolCommandName>
     <PackageReadmeFile>DOCUMENTATION.MD</PackageReadmeFile>

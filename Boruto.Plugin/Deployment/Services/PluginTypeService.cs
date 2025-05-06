@@ -1,4 +1,5 @@
 ﻿using Boruto.Deployment.Entities;
+using Boruto.Deployment.Models;
 using Boruto.Extensions.FilterExpression;
 using Boruto.Extensions.QueryExpression;
 using Microsoft.Xrm.Sdk;
@@ -40,12 +41,18 @@ namespace Boruto.Deployment.Services
                                where t.Type.FullName == current.Name
                                select t).SingleOrDefault();
 
-                if (inTobee != null)
+                var imChanged = this.ImagesChanged(current, inTobee);
+
+                if (inTobee != null && !imChanged)
                 {
                     inTobee.CurrentCrmInstance = current;
                     continue;
                 }
-                this.Delete(current);
+
+                if (!imChanged)
+                {
+                    this.Delete(current, false);
+                }
             }
         }
 
@@ -89,8 +96,93 @@ namespace Boruto.Deployment.Services
             }
         }
 
+        private bool ImagesChanged(Entities.PluginType pluginType, Models.Plugin tobee)
+        {
+            if (tobee == null)
+            {
+                return false;
+            }
 
-        private void Delete(Entities.PluginType pluginType)
+            var query = Entities.SdkMessageProcessingStep.EntityLogicalName.ToQueryExpression();
+            query.Criteria.Equal(Entities.SdkMessageProcessingStep.Fields.EventHandler, pluginType.PluginTypeId);
+
+            var crmSteps = this.orgService.RetrieveMultiple(query).Entities.Select(r => new Entities.SdkMessageProcessingStep(r)).ToArray();
+
+            foreach (var nextStep in tobee.Steps)
+            {
+                var crmStep = crmSteps.Where(r => r.SdkMessageId.Name == nextStep.Message && (int)r.Stage == nextStep.Stage && ((int)r.Mode == 1) == nextStep.IsAsync).SingleOrDefault();
+                if (crmStep == null)
+                {
+                    // it is a new step, no worry abount images
+                    continue;
+                }
+                query = Entities.SdkMessageProcessingStepImage.EntityLogicalName.ToQueryExpression();
+                query.Criteria.Equal(Entities.SdkMessageProcessingStepImage.Fields.SdkMessageProcessingStepId, crmStep.SdkMessageProcessingStepId);
+                var images = this.orgService.RetrieveMultiple(query).Entities.Select(r => new SdkMessageProcessingStepImage(r)).ToArray();
+
+                if (images.Length == 0 && nextStep.PreImage == null && nextStep.PostImage == null)
+                {
+                    // no worry, no images in current setup, no images in new setup
+                    continue;
+                }
+
+                if (nextStep.PreImage != null)
+                {
+                    var curPre = images.Where(r => r.ImageType == sdkmessageprocessingstepimage_imagetype.PreImage).SingleOrDefault();
+
+                    if (curPre == null)
+                    {
+                        this.Delete(pluginType, true);
+                        return true;
+                    }
+
+                    if (nextStep.PreImage.AllAttributes && string.IsNullOrEmpty(curPre.Attributes1)) 
+                    {
+                        // no worry, registred with all , and still all
+                        continue;
+                    }
+
+
+                    var curFilter = string.Join(",", curPre.Attributes1?.Split(',').OrderBy(r => r)) ?? string.Empty;
+                    var nexFilter = string.Join(",",nextStep.PreImage.FilteredAttributes?.OrderBy(r => r));
+
+                    if (curFilter != nexFilter)
+                    {
+                        this.Delete(pluginType, true);
+                        return true;
+                    }
+                }
+
+                if (nextStep.PostImage != null)
+                {
+                    var curPos = images.Where(r => r.ImageType == sdkmessageprocessingstepimage_imagetype.PostImage).SingleOrDefault();
+
+                    if (curPos == null)
+                    {
+                        this.Delete(pluginType, true);
+                        return true;
+                    }
+
+                    if (nextStep.PostImage.AllAttributes && string.IsNullOrEmpty(curPos.Attributes1))
+                    {
+                        // no worry, registred with all , and still all
+                        continue;
+                    }
+
+                    var curFilter = string.Join(",", curPos.Attributes1?.Split(',').OrderBy(r => r)) ?? string.Empty;
+                    var nexFilter = string.Join(",", nextStep.PostImage.FilteredAttributes?.OrderBy(r => r)) ?? string.Empty;
+
+                    if (curFilter != nexFilter)
+                    {
+                        this.Delete(pluginType, true);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private void Delete(Entities.PluginType pluginType, bool imagesChanged)
         {
             var query = Entities.SdkMessageProcessingStep.EntityLogicalName.ToQueryExpression();
             query.Criteria.Equal(Entities.SdkMessageProcessingStep.Fields.EventHandler, pluginType.PluginTypeId);
@@ -112,7 +204,14 @@ namespace Boruto.Deployment.Services
             }
             this.orgService.Delete(pluginType.LogicalName, pluginType.Id);
 
-            messageService.Inform($"Removed plugin: {pluginType.Name}");
+            if (imagesChanged)
+            {
+                messageService.Inform($"Image changed for plugin: {pluginType.Name}");
+            }
+            else
+            {
+                messageService.Inform($"Removed plugin: {pluginType.Name}");
+            }
         }
     }
 }
