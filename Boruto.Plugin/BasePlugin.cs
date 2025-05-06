@@ -40,6 +40,22 @@ namespace Boruto
                 try
                 {
                     ctx.Execute();
+                } catch (Exception ex)
+                {
+                    if (ex is Microsoft.Xrm.Sdk.InvalidPluginExecutionException)
+                    {
+                        throw;
+                    }
+                    Boruto.Trace.Error(ex.Message);
+                    Boruto.Trace.Error(ex.StackTrace);
+                    var inner = ex.InnerException;
+                    while (inner != null)
+                    {
+                        Boruto.Trace.Error($"-> {inner.Message}");
+                        Boruto.Trace.Error($"   {inner.StackTrace}");
+                        inner = inner.InnerException;
+                    }
+                    throw new InvalidPluginExecutionException($"Unexpected exception: {ex.Message}");
                 }
                 finally
                 {
