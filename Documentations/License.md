@@ -2,7 +2,7 @@
 
 ## LICENSE
 The software is licensed under MIT, and can be used and distributed for free. It is prohibited to sell the software as "standalone" under any circumstances. 
-The software can however be include in any commercial or non-commercial solution and redistrubuted with no restrictions.
+The software can however be include in any commercial or non-commercial solution and redistrubuted without restrictions.
 
 
 ## DISCLAIMER
