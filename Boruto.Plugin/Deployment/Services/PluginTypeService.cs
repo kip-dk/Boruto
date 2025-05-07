@@ -2,6 +2,7 @@
 using Boruto.Deployment.Models;
 using Boruto.Extensions.FilterExpression;
 using Boruto.Extensions.QueryExpression;
+using Microsoft.Win32;
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 
 namespace Boruto.Deployment.Services
 {
@@ -108,14 +110,31 @@ namespace Boruto.Deployment.Services
 
             var crmSteps = this.orgService.RetrieveMultiple(query).Entities.Select(r => new Entities.SdkMessageProcessingStep(r)).ToArray();
 
+            if (crmSteps.Length == 0)
+            {
+                return false;
+            }
+
+            var deletedSteps = 0;
+
             foreach (var nextStep in tobee.Steps)
             {
-                var crmStep = crmSteps.Where(r => r.SdkMessageId.Name == nextStep.Message && (int)r.Stage == nextStep.Stage && ((int)r.Mode == 1) == nextStep.IsAsync).SingleOrDefault();
-                if (crmStep == null)
+                if (nextStep.Message != "Create" && nextStep.Message != "Update" && nextStep.Message != "Delete")
+                {
+                    continue;
+                }
+
+                var name = tobee.NameOf(nextStep.Stage, nextStep.Message, nextStep.IsAsync, nextStep.PrimaryEntityLogicalName);
+
+                var nsl = crmSteps.Where(r =>  r.Name == name).ToArray();
+                if (nsl.Length == 0)
                 {
                     // it is a new step, no worry abount images
                     continue;
                 }
+
+                var crmStep = nsl[0];
+
                 query = Entities.SdkMessageProcessingStepImage.EntityLogicalName.ToQueryExpression();
                 query.Criteria.Equal(Entities.SdkMessageProcessingStepImage.Fields.SdkMessageProcessingStepId, crmStep.SdkMessageProcessingStepId);
                 var images = this.orgService.RetrieveMultiple(query).Entities.Select(r => new SdkMessageProcessingStepImage(r)).ToArray();
@@ -126,30 +145,40 @@ namespace Boruto.Deployment.Services
                     continue;
                 }
 
+                if (images.Length == 0 && (nextStep.PreImage != null || nextStep.PostImage != null))
+                {
+                    this.Delete(crmStep, null);
+                    deletedSteps++;
+                    continue;
+                }
+
                 if (nextStep.PreImage != null)
                 {
                     var curPre = images.Where(r => r.ImageType == sdkmessageprocessingstepimage_imagetype.PreImage).SingleOrDefault();
 
                     if (curPre == null)
                     {
-                        this.Delete(pluginType, true);
-                        return true;
+                        this.Delete(crmStep, null);
+                        deletedSteps++;
+                        continue;
                     }
 
-                    if (nextStep.PreImage.AllAttributes && string.IsNullOrEmpty(curPre.Attributes1)) 
+                    if (nextStep.PreImage.AllAttributes && !string.IsNullOrEmpty(curPre.Attributes1))
                     {
-                        // no worry, registred with all , and still all
+                        this.Delete(crmStep, curPre);
+                        deletedSteps++;
                         continue;
                     }
 
 
-                    var curFilter = string.Join(",", curPre.Attributes1?.Split(',').OrderBy(r => r)) ?? string.Empty;
-                    var nexFilter = string.Join(",",nextStep.PreImage.FilteredAttributes?.OrderBy(r => r));
+                    var curFilter = string.Join(",", curPre.Attributes1?.Split(',').OrderBy(r => r).ToArray() ?? new string[0]);
+                    var nexFilter = string.Join(",",nextStep.PreImage.FilteredAttributes?.OrderBy(r => r).ToArray() ?? new string[0]);
 
                     if (curFilter != nexFilter)
                     {
-                        this.Delete(pluginType, true);
-                        return true;
+                        this.Delete(crmStep, curPre);
+                        deletedSteps++;
+                        continue;
                     }
                 }
 
@@ -159,27 +188,40 @@ namespace Boruto.Deployment.Services
 
                     if (curPos == null)
                     {
-                        this.Delete(pluginType, true);
-                        return true;
+                        this.Delete(crmStep, null);
+                        deletedSteps++;
                     }
 
-                    if (nextStep.PostImage.AllAttributes && string.IsNullOrEmpty(curPos.Attributes1))
+                    if (nextStep.PreImage.AllAttributes && !string.IsNullOrEmpty(curPos.Attributes1))
                     {
-                        // no worry, registred with all , and still all
+                        this.Delete(crmStep, curPos);
+                        deletedSteps++;
                         continue;
                     }
 
-                    var curFilter = string.Join(",", curPos.Attributes1?.Split(',').OrderBy(r => r)) ?? string.Empty;
-                    var nexFilter = string.Join(",", nextStep.PostImage.FilteredAttributes?.OrderBy(r => r)) ?? string.Empty;
+                    var curFilter = string.Join(",", curPos.Attributes1?.Split(',').OrderBy(r => r).ToArray() ?? new string[0]);
+                    var nexFilter = string.Join(",", nextStep.PostImage.FilteredAttributes?.OrderBy(r => r).ToArray() ?? new string[0]);
 
                     if (curFilter != nexFilter)
                     {
-                        this.Delete(pluginType, true);
-                        return true;
+                        this.Delete(crmStep, curPos);
+                        deletedSteps++;
+                        continue;
                     }
                 }
             }
             return false;
+        }
+
+
+        private void Delete(Entities.SdkMessageProcessingStep step, Entities.SdkMessageProcessingStepImage image)
+        {
+            if (image != null)
+            {
+                this.orgService.Delete(image.LogicalName, image.Id);
+            }
+            this.orgService.Delete(step.LogicalName, step.Id);
+            messageService.Inform($"Image changed for step: {step.Name}");
         }
 
         private void Delete(Entities.PluginType pluginType, bool imagesChanged)
