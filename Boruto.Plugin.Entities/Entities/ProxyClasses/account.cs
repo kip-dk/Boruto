@@ -14,7 +14,7 @@ namespace Boruto.Plugin.Entities
 	
 	
 	/// <summary>
-	/// Drop-down list for selecting the category of the account.
+	/// Rulleliste til valg af firmakategori.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -22,14 +22,14 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		PreferredCustomer = 1,
+		Foretrukkenkunde = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		Standard = 2,
 	}
 	
 	/// <summary>
-	/// Drop-down list for classifying an account.
+	/// Rulleliste til klassificering af et firma.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -37,11 +37,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DefaultValue = 1,
+		Standardvrdi = 1,
 	}
 	
 	/// <summary>
-	/// Drop-down list for selecting account ratings.
+	/// Rulleliste til valg af firmaklassifikationer.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -49,11 +49,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DefaultValue = 1,
+		Standardvrdi = 1,
 	}
 	
 	/// <summary>
-	/// Type of address for address 1, such as billing, shipping, or primary address.
+	/// Adressetypen for adresse 1, f.eks. faktureringsadresse, forsendelsesadresse eller primær adresse.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -61,20 +61,20 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		BillTo = 1,
+		Fakturatil = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		ShipTo = 2,
+		Levertil = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Primary = 3,
+		Primr = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Other = 4,
+		Andet = 4,
 	}
 	
 	/// <summary>
-	/// Freight terms for address 1.
+	/// Fragtbetingelser for adresse 1.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -82,20 +82,14 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DAP = 1,
+		FOB = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		EXW = 2,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DDP = 500000000,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		na = 500000001,
+		Udenberegning = 2,
 	}
 	
 	/// <summary>
-	/// Method of shipment for address 1.
+	/// Forsendelsesmåde for adresse 1.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -103,7 +97,7 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Airborne = 1,
+		Luftfragt = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		DHL = 2,
@@ -115,17 +109,14 @@ namespace Boruto.Plugin.Entities
 		UPS = 4,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		PostalMail = 5,
+		Almpost = 5,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		FullLoad = 6,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		WillCall = 7,
+		Andet = 8,
 	}
 	
 	/// <summary>
-	/// Type of address for address 2, such as billing, shipping, or primary address.
+	/// Adressetypen for adresse 2, f.eks. faktureringsadresse, forsendelsesadresse eller primær adresse.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -133,11 +124,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DefaultValue = 1,
+		Standardvrdi = 1,
 	}
 	
 	/// <summary>
-	/// Freight terms for address 2.
+	/// Fragtbetingelser for adresse 2.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -145,11 +136,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DefaultValue = 1,
+		Standardvrdi = 1,
 	}
 	
 	/// <summary>
-	/// Method of shipment for address 2.
+	/// Forsendelsesmåde for adresse 2.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -157,164 +148,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DefaultValue = 1,
-	}
-	
-	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum arbo_account_arbo_approles
-	{
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		ProductionRegistration = 1,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		GoodsReception = 2,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Inventory = 4,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		LoadInLane = 8,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		FinalizeLoad = 16,
-	}
-	
-	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum arbo_account_arbo_autoinvoicelevel
-	{
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Transportation = 500000000,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		TransportationBlanketorder = 500000001,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		TransportationDeliveryorder = 500000002,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		TransportationBlanketorderDeliveryorder = 500000003,
-	}
-	
-	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum arbo_account_arbo_bcintegration
-	{
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		InvoiceandCreditnotessendtoBC = 500000000,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		ClaiminvoicesNOTsendtoBC = 500000001,
-	}
-	
-	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum arbo_account_arbo_contracttype
-	{
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Fullservice = 500000000,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Threeatrootnoservices = 500000001,
-	}
-	
-	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum arbo_account_arbo_labellayout
-	{
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Standard = 500000000,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Russianwithweight = 500000001,
-	}
-	
-	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum arbo_account_arbo_pendingpalletindication
-	{
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Pcsreported = 500000000,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Palletscanned = 500000001,
-	}
-	
-	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum arbo_account_arbo_printlabelsatstation
-	{
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Never = 500000000,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Ifweightrequired = 500000001,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Always = 500000002,
-	}
-	
-	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum arbo_account_arbo_reportrequest
-	{
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		PDFoverview = 500000001,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Exceloverview = 500000000,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Reportrequested = 500000999,
-	}
-	
-	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum arbo_account_arbo_scanpallettolaneorder
-	{
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		_19_fromcaboftruck = 500000000,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		_91_Fromrearendoftruck = 500000001,
-	}
-	
-	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum arbo_account_arbo_selfbilling
-	{
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		InvoiceandCreditissuedbyArbodania = 500000000,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Cireditnoteissuedbycustomer = 500000001,
-	}
-	
-	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum arbo_account_arbo_transportationorderchecklist
-	{
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Normal = 500000000,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Russia = 500000001,
+		Standardvrdi = 1,
 	}
 	
 	/// <summary>
-	/// Type of business associated with the account.
+	/// Den type forretning, der er tilknyttet firmaet.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -322,11 +160,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DefaultValue = 1,
+		Standardvrdi = 1,
 	}
 	
 	/// <summary>
-	/// Size of the account.
+	/// Firmaets størrelse.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -334,11 +172,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DefaultValue = 1,
+		Standardvrdi = 1,
 	}
 	
 	/// <summary>
-	/// Type of the account.
+	/// Firmatypen.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -346,13 +184,13 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Competitor = 1,
+		Konkurrent = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Consultant = 2,
+		Konsulent = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Customer = 3,
+		Kunde = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		Investor = 4,
@@ -361,29 +199,29 @@ namespace Boruto.Plugin.Entities
 		Partner = 5,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Influencer = 6,
+		Personderverindflydelse = 6,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Press = 7,
+		Trykp = 7,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Prospect = 8,
+		Kundeemne = 8,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Reseller = 9,
+		Forhandler = 9,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Supplier = 10,
+		Kreditor = 10,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Vendor = 11,
+		Leverandr = 11,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Other = 12,
+		Andet = 12,
 	}
 	
 	/// <summary>
-	/// Type of industry with which the account is associated.
+	/// Den type branche, som firmaet er tilknyttet.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -391,107 +229,38 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Accounting = 1,
+		Landbrugjagtskovbrugogfiskeri = 34,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		AgricultureandNonpetrolNaturalResourceExtraction = 2,
+		Energiogvand = 35,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		BroadcastingPrintingandPublishing = 3,
+		Udvindingogforarbejdningafikkeenergetiskemineralerogderivaterkemiskindustri = 36,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Brokers = 4,
+		Metalforarbejdendeindustrifinmekaniskindustri = 37,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		BuildingSupplyRetail = 5,
+		Andenfremstillingsvirksomhed = 38,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		BusinessServices = 6,
+		Byggeoganlgsvirksomhed = 39,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Consulting = 7,
+		Handelrestaurationsoghotelvirksomhedreparation = 40,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		ConsumerServices = 8,
+		Transportogkommunikation = 41,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DesignDirectionandCreativeManagement = 9,
+		Kreditfinansieringsogforsikringsvirksomhedforretningsserviceudlejning = 42,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DistributorsDispatchersandProcessors = 10,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DoctorsOfficesandClinics = 11,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DurableManufacturing = 12,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		EatingandDrinkingPlaces = 13,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		EntertainmentRetail = 14,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		EquipmentRentalandLeasing = 15,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Financial = 16,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		FoodandTobaccoProcessing = 17,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		InboundCapitalIntensiveProcessing = 18,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		InboundRepairandServices = 19,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Insurance = 20,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		LegalServices = 21,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		NonDurableMerchandiseRetail = 22,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		OutboundConsumerService = 23,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		PetrochemicalExtractionandDistribution = 24,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		ServiceRetail = 25,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		SIGAffiliations = 26,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		SocialServices = 27,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		SpecialOutboundTradeContractors = 28,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		SpecialtyRealty = 29,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Transportation = 30,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		UtilityCreationandDistribution = 31,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		VehicleRetail = 32,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Wholesale = 33,
+		Andretjenesteydelser = 43,
 	}
 	
 	/// <summary>
-	/// Type of company ownership, such as public or private.
+	/// Virksomhedens ejerskabstype, f.eks. offentlig eller privat.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -499,20 +268,20 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Public = 1,
+		Offentligt = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Private = 2,
+		Privat = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Subsidiary = 3,
+		Datterselskab = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Other = 4,
+		Andet = 4,
 	}
 	
 	/// <summary>
-	/// Payment terms for the account.
+	/// Betalingsbetingelser for firmaet.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -520,26 +289,26 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Net45 = 5,
+		Netto30dage = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Net60 = 6,
+		Netto8dage = 6,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Net30 = 1,
+		Netto14dage = 7,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		_210Net30 = 2,
+		Nettokontant = 10,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Net451 = 3,
+		Lbendemned14dage = 11,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Net601 = 4,
+		Lbendemned8dage = 12,
 	}
 	
 	/// <summary>
-	/// Day of the week that the account prefers for scheduling service activities.
+	/// Den ugedag, som firmaet foretrækker til planlægning af serviceaktiviteter.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -547,29 +316,29 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Sunday = 0,
+		Sndag = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Monday = 1,
+		Mandag = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Tuesday = 2,
+		Tirsdag = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Wednesday = 3,
+		Onsdag = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Thursday = 4,
+		Torsdag = 4,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Friday = 5,
+		Fredag = 5,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Saturday = 6,
+		Lrdag = 6,
 	}
 	
 	/// <summary>
-	/// Time of day that the account prefers for scheduling service activities.
+	/// Det tidspunkt på dagen, som firmaet foretrækker til planlægning af serviceaktiviteter.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -577,17 +346,17 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Morning = 1,
+		Morgen = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Afternoon = 2,
+		Eftermiddag = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Evening = 3,
+		Aften = 3,
 	}
 	
 	/// <summary>
-	/// Preferred contact method for the account.
+	/// Foretrukken kontaktmetode for firmaet.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -595,23 +364,23 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Any = 1,
+		Ethvert = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Email = 2,
+		Mail = 2,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Phone = 3,
+		Telefon = 3,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
 		Fax = 4,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Mail = 5,
+		Post = 5,
 	}
 	
 	/// <summary>
-	/// Method of shipment for the account.
+	/// Forsendelsesmåde for firmaet.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -619,29 +388,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Airborne = 1,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DHL = 2,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		FedEx = 3,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		UPS = 4,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		PostalMail = 5,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		FullLoad = 6,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		WillCall = 7,
+		Standardvrdi = 1,
 	}
 	
 	/// <summary>
-	/// Status of the account.
+	/// Status for firmaet.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -656,7 +407,7 @@ namespace Boruto.Plugin.Entities
 	}
 	
 	/// <summary>
-	/// Reason for the status of the account.
+	/// Årsag til statussen for firmaet.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -664,14 +415,14 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Active = 1,
+		Aktiv = 1,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Inactive = 2,
+		Inaktiv = 2,
 	}
 	
 	/// <summary>
-	/// Territory to which the account belongs.
+	/// Det distrikt, firmaet tilhører.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -679,11 +430,11 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		DefaultValue = 1,
+		Standardvrdi = 1,
 	}
 	
 	/// <summary>
-	/// Business that represents a customer or potential customer. The company that is billed in business transactions.
+	/// En virksomhed, der repræsenterer en kunde eller potentiel kunde. Virksomheden, der faktureres ved forretningstransaktioner.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("account")]
@@ -769,185 +520,6 @@ namespace Boruto.Plugin.Entities
 			public const string Aging60_Base = "aging60_base";
 			public const string Aging90 = "aging90";
 			public const string Aging90_Base = "aging90_base";
-			public const string arbo_Address2CountryId = "arbo_address2countryid";
-			public const string arbo_Address2CountryIdName = "arbo_address2countryidname";
-			public const string arbo_allowpalletregulation = "arbo_allowpalletregulation";
-			public const string arbo_allowpalletregulationName = "arbo_allowpalletregulationname";
-			public const string arbo_allowpurchasebeforeorder = "arbo_allowpurchasebeforeorder";
-			public const string arbo_allowpurchasebeforeorderName = "arbo_allowpurchasebeforeordername";
-			public const string arbo_approles = "arbo_approles";
-			public const string arbo_approlesName = "arbo_approlesname";
-			public const string arbo_ArbodaniaIDatCustomer = "arbo_arbodaniaidatcustomer";
-			public const string arbo_AutoBillClaims = "arbo_autobillclaims";
-			public const string arbo_autobillclaimsName = "arbo_autobillclaimsname";
-			public const string arbo_AutoBillInvoice = "arbo_autobillinvoice";
-			public const string arbo_autobillinvoiceName = "arbo_autobillinvoicename";
-			public const string arbo_AutoInvoiceLevel = "arbo_autoinvoicelevel";
-			public const string arbo_autoinvoicelevelName = "arbo_autoinvoicelevelname";
-			public const string arbo_Bankaccountnumber = "arbo_bankaccountnumber";
-			public const string arbo_Banknameandaddress = "arbo_banknameandaddress";
-			public const string arbo_Bankphone = "arbo_bankphone";
-			public const string arbo_bankreg = "arbo_bankreg";
-			public const string arbo_bcintegration = "arbo_bcintegration";
-			public const string arbo_bcintegrationName = "arbo_bcintegrationname";
-			public const string arbo_BillTo = "arbo_billto";
-			public const string arbo_BillToAddressCity = "arbo_billtoaddresscity";
-			public const string arbo_BillToAddressCountry = "arbo_billtoaddresscountry";
-			public const string arbo_BillToAddressCountryName = "arbo_billtoaddresscountryname";
-			public const string arbo_BillToAddressLine1 = "arbo_billtoaddressline1";
-			public const string arbo_BillToAddressLine2 = "arbo_billtoaddressline2";
-			public const string arbo_BillToAddressStateOrProvince = "arbo_billtoaddressstateorprovince";
-			public const string arbo_BillToGLN = "arbo_billtogln";
-			public const string arbo_BrandGroupId = "arbo_brandgroupid";
-			public const string arbo_BrandGroupIdName = "arbo_brandgroupidname";
-			public const string arbo_candownloadloadzip = "arbo_candownloadloadzip";
-			public const string arbo_candownloadloadzipName = "arbo_candownloadloadzipname";
-			public const string arbo_certificatrequests = "arbo_certificatrequests";
-			public const string arbo_certificatrequestsName = "arbo_certificatrequestsname";
-			public const string arbo_chainresponsibleid = "arbo_chainresponsibleid";
-			public const string arbo_chainresponsibleidName = "arbo_chainresponsibleidname";
-			public const string arbo_chainresponsibleidYomiName = "arbo_chainresponsibleidyominame";
-			public const string arbo_ClaimInvoicenotifications = "arbo_claiminvoicenotifications";
-			public const string arbo_Claimnotification = "arbo_claimnotification";
-			public const string arbo_claimsinyeartotal = "arbo_claimsinyeartotal";
-			public const string arbo_claimsinyeartotalName = "arbo_claimsinyeartotalname";
-			public const string arbo_ContractresponsibleId = "arbo_contractresponsibleid";
-			public const string arbo_ContractresponsibleIdName = "arbo_contractresponsibleidname";
-			public const string arbo_ContractresponsibleIdYomiName = "arbo_contractresponsibleidyominame";
-			public const string arbo_Contracttype = "arbo_contracttype";
-			public const string arbo_contracttypeName = "arbo_contracttypename";
-			public const string arbo_CountryId = "arbo_countryid";
-			public const string arbo_CountryIdName = "arbo_countryidname";
-			public const string arbo_creditensuranceexpiredate = "arbo_creditensuranceexpiredate";
-			public const string arbo_Creditinsurance = "arbo_creditinsurance";
-			public const string arbo_Creditinsuranceamount = "arbo_creditinsuranceamount";
-			public const string arbo_creditinsuranceamount_Base = "arbo_creditinsuranceamount_base";
-			public const string arbo_creditnotesendtodefault = "arbo_creditnotesendtodefault";
-			public const string arbo_datamatrixonloadplan = "arbo_datamatrixonloadplan";
-			public const string arbo_datamatrixonloadplanName = "arbo_datamatrixonloadplanname";
-			public const string arbo_dayorderforautoload = "arbo_dayorderforautoload";
-			public const string arbo_defaultinvoicecustomeronclaim = "arbo_defaultinvoicecustomeronclaim";
-			public const string arbo_defaultinvoicecustomeronclaimName = "arbo_defaultinvoicecustomeronclaimname";
-			public const string arbo_dropoffnonamingscheme = "arbo_dropoffnonamingscheme";
-			public const string arbo_enableoioinvoice = "arbo_enableoioinvoice";
-			public const string arbo_enableoioinvoiceName = "arbo_enableoioinvoicename";
-			public const string arbo_FinanceresponsibleId = "arbo_financeresponsibleid";
-			public const string arbo_FinanceresponsibleIdName = "arbo_financeresponsibleidname";
-			public const string arbo_FinanceresponsibleIdYomiName = "arbo_financeresponsibleidyominame";
-			public const string arbo_Freight = "arbo_freight";
-			public const string arbo_freight_Base = "arbo_freight_base";
-			public const string arbo_FreighttermId = "arbo_freighttermid";
-			public const string arbo_FreighttermIdName = "arbo_freighttermidname";
-			public const string arbo_friendlyname = "arbo_friendlyname";
-			public const string arbo_gapid = "arbo_gapid";
-			public const string arbo_GLN = "arbo_gln";
-			public const string arbo_heighttype = "arbo_heighttype";
-			public const string arbo_heighttypeName = "arbo_heighttypename";
-			public const string arbo_hidearbodaniabrandonlabels = "arbo_hidearbodaniabrandonlabels";
-			public const string arbo_hidearbodaniabrandonlabelsName = "arbo_hidearbodaniabrandonlabelsname";
-			public const string arbo_inforcedeliverytolerances = "arbo_inforcedeliverytolerances";
-			public const string arbo_inforcedeliverytolerancesName = "arbo_inforcedeliverytolerancesname";
-			public const string arbo_Invoicingmethod = "arbo_invoicingmethod";
-			public const string arbo_invoicingmethodName = "arbo_invoicingmethodname";
-			public const string arbo_LABELLAYOUT = "arbo_labellayout";
-			public const string arbo_labellayoutName = "arbo_labellayoutname";
-			public const string arbo_Labelresponsible = "arbo_labelresponsible";
-			public const string arbo_labelresponsibleName = "arbo_labelresponsiblename";
-			public const string arbo_Language = "arbo_language";
-			public const string arbo_languageName = "arbo_languagename";
-			public const string arbo_lastconfirmedgapcertificationdate = "arbo_lastconfirmedgapcertificationdate";
-			public const string arbo_loadarchive = "arbo_loadarchive";
-			public const string arbo_loadarchiveName = "arbo_loadarchivename";
-			public const string arbo_loadconversely = "arbo_loadconversely";
-			public const string arbo_loadconverselyName = "arbo_loadconverselyname";
-			public const string arbo_loadcostcrossstoreblt = "arbo_loadcostcrossstoreblt";
-			public const string arbo_loadcostcrossstoreblt_Base = "arbo_loadcostcrossstoreblt_base";
-			public const string arbo_LoadcostextradropoffDE = "arbo_loadcostextradropoffde";
-			public const string arbo_loadcostextradropoffde_Base = "arbo_loadcostextradropoffde_base";
-			public const string arbo_Loadcostextradropoffother = "arbo_loadcostextradropoffother";
-			public const string arbo_loadcostextradropoffother_Base = "arbo_loadcostextradropoffother_base";
-			public const string arbo_loadcostextrapickuponrelocation = "arbo_loadcostextrapickuponrelocation";
-			public const string arbo_loadcostextrapickuponrelocation_Base = "arbo_loadcostextrapickuponrelocation_base";
-			public const string arbo_Loadcostloadsaturdaysunday = "arbo_loadcostloadsaturdaysunday";
-			public const string arbo_loadcostloadsaturdaysunday_Base = "arbo_loadcostloadsaturdaysunday_base";
-			public const string arbo_loadcostloosetrees = "arbo_loadcostloosetrees";
-			public const string arbo_loadcostloosetrees_Base = "arbo_loadcostloosetrees_base";
-			public const string arbo_loadcostpaperrussia = "arbo_loadcostpaperrussia";
-			public const string arbo_loadcostpaperrussia_Base = "arbo_loadcostpaperrussia_base";
-			public const string arbo_Loadcostpaperukrania = "arbo_loadcostpaperukrania";
-			public const string arbo_loadcostpaperukrania_Base = "arbo_loadcostpaperukrania_base";
-			public const string arbo_loadmethod = "arbo_loadmethod";
-			public const string arbo_loadmethodName = "arbo_loadmethodname";
-			public const string arbo_loadserie = "arbo_loadserie";
-			public const string arbo_LogisticresponsibleId = "arbo_logisticresponsibleid";
-			public const string arbo_LogisticresponsibleIdName = "arbo_logisticresponsibleidname";
-			public const string arbo_LogisticresponsibleIdYomiName = "arbo_logisticresponsibleidyominame";
-			public const string arbo_Marketingfeekickbackbonus = "arbo_marketingfeekickbackbonus";
-			public const string arbo_maxloadperday = "arbo_maxloadperday";
-			public const string arbo_NationalIdentificationNo = "arbo_nationalidentificationno";
-			public const string arbo_oioproductledgergroupid = "arbo_oioproductledgergroupid";
-			public const string arbo_oioproductledgergroupidName = "arbo_oioproductledgergroupidname";
-			public const string arbo_oioproductledgergroupumomsid = "arbo_oioproductledgergroupumomsid";
-			public const string arbo_oioproductledgergroupumomsidName = "arbo_oioproductledgergroupumomsidname";
-			public const string arbo_oioproductnumber = "arbo_oioproductnumber";
-			public const string arbo_oioproductnumberumoms = "arbo_oioproductnumberumoms";
-			public const string arbo_palletlabelsize = "arbo_palletlabelsize";
-			public const string arbo_palletlabelsizeName = "arbo_palletlabelsizename";
-			public const string arbo_palletstobeweighed = "arbo_palletstobeweighed";
-			public const string arbo_palletstobeweighedName = "arbo_palletstobeweighedname";
-			public const string arbo_Payfreight = "arbo_payfreight";
-			public const string arbo_payfreightName = "arbo_payfreightname";
-			public const string arbo_PaymenttermId = "arbo_paymenttermid";
-			public const string arbo_PaymenttermIdName = "arbo_paymenttermidname";
-			public const string arbo_pendingpalletindication = "arbo_pendingpalletindication";
-			public const string arbo_pendingpalletindicationName = "arbo_pendingpalletindicationname";
-			public const string arbo_phoneholders = "arbo_phoneholders";
-			public const string arbo_pickupname = "arbo_pickupname";
-			public const string arbo_PrimaryRelationType = "arbo_primaryrelationtype";
-			public const string arbo_primaryrelationtypeName = "arbo_primaryrelationtypename";
-			public const string arbo_printdeliveryaddressoninvoice = "arbo_printdeliveryaddressoninvoice";
-			public const string arbo_printdeliveryaddressoninvoiceName = "arbo_printdeliveryaddressoninvoicename";
-			public const string arbo_printlabelsatstation = "arbo_printlabelsatstation";
-			public const string arbo_printlabelsatstationName = "arbo_printlabelsatstationname";
-			public const string arbo_Priority = "arbo_priority";
-			public const string arbo_priority2 = "arbo_priority2";
-			public const string arbo_proformatagging = "arbo_proformatagging";
-			public const string arbo_proformataggingName = "arbo_proformataggingname";
-			public const string arbo_reportrequest = "arbo_reportrequest";
-			public const string arbo_reportrequestName = "arbo_reportrequestname";
-			public const string arbo_requirebafromcustomer = "arbo_requirebafromcustomer";
-			public const string arbo_requirebafromcustomerName = "arbo_requirebafromcustomername";
-			public const string arbo_requireordersbyedi = "arbo_requireordersbyedi";
-			public const string arbo_requireordersbyediName = "arbo_requireordersbyediname";
-			public const string arbo_requireproductionpallets = "arbo_requireproductionpallets";
-			public const string arbo_requireproductionpalletsName = "arbo_requireproductionpalletsname";
-			public const string arbo_salesresponsibleid = "arbo_salesresponsibleid";
-			public const string arbo_salesresponsibleidName = "arbo_salesresponsibleidname";
-			public const string arbo_salesresponsibleidYomiName = "arbo_salesresponsibleidyominame";
-			public const string arbo_samegroupcompany = "arbo_samegroupcompany";
-			public const string arbo_samegroupcompanyName = "arbo_samegroupcompanyname";
-			public const string arbo_scanpallettolaneorder = "arbo_scanpallettolaneorder";
-			public const string arbo_scanpallettolaneorderName = "arbo_scanpallettolaneordername";
-			public const string arbo_SecondaryAccountName = "arbo_secondaryaccountname";
-			public const string arbo_selfbilling = "arbo_selfbilling";
-			public const string arbo_selfbillingName = "arbo_selfbillingname";
-			public const string arbo_sendproformatinvoiceto = "arbo_sendproformatinvoiceto";
-			public const string arbo_Superior1id = "arbo_superior1id";
-			public const string arbo_Superior1idName = "arbo_superior1idname";
-			public const string arbo_Superior1idYomiName = "arbo_superior1idyominame";
-			public const string arbo_superior2id = "arbo_superior2id";
-			public const string arbo_superior2idName = "arbo_superior2idname";
-			public const string arbo_superior2idYomiName = "arbo_superior2idyominame";
-			public const string arbo_suppliersupportid = "arbo_suppliersupportid";
-			public const string arbo_suppliersupportidName = "arbo_suppliersupportidname";
-			public const string arbo_suppliersupportidYomiName = "arbo_suppliersupportidyominame";
-			public const string arbo_TaxId = "arbo_taxid";
-			public const string arbo_TaxIdName = "arbo_taxidname";
-			public const string arbo_transportationorderchecklist = "arbo_transportationorderchecklist";
-			public const string arbo_transportationorderchecklistName = "arbo_transportationorderchecklistname";
-			public const string arbo_Vatno = "arbo_vatno";
-			public const string arbo_vatvalidated = "arbo_vatvalidated";
-			public const string arbo_vatvalidatedName = "arbo_vatvalidatedname";
 			public const string BusinessTypeCode = "businesstypecode";
 			public const string BusinessTypeCodeName = "businesstypecodename";
 			public const string CreatedBy = "createdby";
@@ -968,8 +540,6 @@ namespace Boruto.Plugin.Entities
 			public const string CustomerSizeCodeName = "customersizecodename";
 			public const string CustomerTypeCode = "customertypecode";
 			public const string CustomerTypeCodeName = "customertypecodename";
-			public const string DefaultPriceLevelId = "defaultpricelevelid";
-			public const string DefaultPriceLevelIdName = "defaultpricelevelidname";
 			public const string Description = "description";
 			public const string DoNotBulkEMail = "donotbulkemail";
 			public const string DoNotBulkEMailName = "donotbulkemailname";
@@ -1025,30 +595,9 @@ namespace Boruto.Plugin.Entities
 			public const string msa_managingpartnerid = "msa_managingpartnerid";
 			public const string msa_managingpartneridName = "msa_managingpartneridname";
 			public const string msa_managingpartneridYomiName = "msa_managingpartneridyominame";
-			public const string msdyn_accountkpiid = "msdyn_accountkpiid";
-			public const string msdyn_accountkpiidName = "msdyn_accountkpiidname";
-			public const string msdyn_gdproptout = "msdyn_gdproptout";
-			public const string msdyn_gdproptoutName = "msdyn_gdproptoutname";
-			public const string msdyn_PrimaryTimeZone = "msdyn_primarytimezone";
-			public const string msdyn_salesaccelerationinsightid = "msdyn_salesaccelerationinsightid";
-			public const string msdyn_salesaccelerationinsightidName = "msdyn_salesaccelerationinsightidname";
-			public const string msdyn_segmentid = "msdyn_segmentid";
-			public const string msdyn_segmentidName = "msdyn_segmentidname";
 			public const string Name = "name";
-			public const string new_PDFReceiptSend = "new_pdfreceiptsend";
-			public const string new_pdfreceiptsendName = "new_pdfreceiptsendname";
 			public const string NumberOfEmployees = "numberofemployees";
 			public const string OnHoldTime = "onholdtime";
-			public const string OpenDeals = "opendeals";
-			public const string OpenDeals_Date = "opendeals_date";
-			public const string OpenDeals_State = "opendeals_state";
-			public const string OpenRevenue = "openrevenue";
-			public const string OpenRevenue_Base = "openrevenue_base";
-			public const string OpenRevenue_Date = "openrevenue_date";
-			public const string OpenRevenue_State = "openrevenue_state";
-			public const string OriginatingLeadId = "originatingleadid";
-			public const string OriginatingLeadIdName = "originatingleadidname";
-			public const string OriginatingLeadIdYomiName = "originatingleadidyominame";
 			public const string OverriddenCreatedOn = "overriddencreatedon";
 			public const string OwnerId = "ownerid";
 			public const string OwnerIdName = "owneridname";
@@ -1072,10 +621,6 @@ namespace Boruto.Plugin.Entities
 			public const string PreferredAppointmentTimeCodeName = "preferredappointmenttimecodename";
 			public const string PreferredContactMethodCode = "preferredcontactmethodcode";
 			public const string PreferredContactMethodCodeName = "preferredcontactmethodcodename";
-			public const string PreferredEquipmentId = "preferredequipmentid";
-			public const string PreferredEquipmentIdName = "preferredequipmentidname";
-			public const string PreferredServiceId = "preferredserviceid";
-			public const string PreferredServiceIdName = "preferredserviceidname";
 			public const string PreferredSystemUserId = "preferredsystemuserid";
 			public const string PreferredSystemUserIdName = "preferredsystemuseridname";
 			public const string PreferredSystemUserIdYomiName = "preferredsystemuseridyominame";
@@ -1101,14 +646,11 @@ namespace Boruto.Plugin.Entities
 			public const string StatusCode = "statuscode";
 			public const string StatusCodeName = "statuscodename";
 			public const string StockExchange = "stockexchange";
-			public const string TeamsFollowed = "teamsfollowed";
 			public const string Telephone1 = "telephone1";
 			public const string Telephone2 = "telephone2";
 			public const string Telephone3 = "telephone3";
 			public const string TerritoryCode = "territorycode";
 			public const string TerritoryCodeName = "territorycodename";
-			public const string TerritoryId = "territoryid";
-			public const string TerritoryIdName = "territoryidname";
 			public const string TickerSymbol = "tickersymbol";
 			public const string TimeSpentByMeOnEmailAndMeetings = "timespentbymeonemailandmeetings";
 			public const string TimeZoneRuleVersionNumber = "timezoneruleversionnumber";
@@ -1122,24 +664,11 @@ namespace Boruto.Plugin.Entities
 			public const string Referencedaccount_master_account = "Referencedaccount_master_account";
 			public const string Referencedaccount_parent_account = "Referencedaccount_parent_account";
 			public const string contact_customer_accounts = "contact_customer_accounts";
-			public const string lead_customer_accounts = "lead_customer_accounts";
-			public const string lead_parent_account = "lead_parent_account";
 			public const string Referencedmsa_account_managingpartner = "Referencedmsa_account_managingpartner";
 			public const string msa_contact_managingpartner = "msa_contact_managingpartner";
-			public const string accountleads_association = "accountleads_association";
-			public const string arbo_contactallowportalaccountaccess = "arbo_contactallowportalaccountaccess";
 			public const string Referencingaccount_master_account = "account_master_account";
-			public const string account_originating_lead = "account_originating_lead";
 			public const string Referencingaccount_parent_account = "account_parent_account";
 			public const string account_primary_contact = "account_primary_contact";
-			public const string arbo_chainresponsible_contact_account = "arbo_chainresponsible_contact_account";
-			public const string arbo_contact_account_contract = "arbo_contact_account_contract";
-			public const string arbo_contact_account_finance = "arbo_contact_account_finance";
-			public const string arbo_contact_account_logistic = "arbo_contact_account_logistic";
-			public const string arbo_salesresponsiblecontact_account = "arbo_salesresponsiblecontact_account";
-			public const string arbo_superior1_contact_account = "arbo_superior1_contact_account";
-			public const string arbo_superior2_contact_account = "arbo_superior2_contact_account";
-			public const string arbo_suppliersupport_contact_account = "arbo_suppliersupport_contact_account";
 			public const string lk_accountbase_createdby = "lk_accountbase_createdby";
 			public const string lk_accountbase_createdonbehalfby = "lk_accountbase_createdonbehalfby";
 			public const string lk_accountbase_modifiedby = "lk_accountbase_modifiedby";
@@ -1184,7 +713,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select a category to indicate whether the customer account is standard or preferred.
+		/// Vælg en kategori for at angive, om kundekontoen er standard eller foretrukket.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("accountcategorycode")]
 		public virtual account_accountcategorycode? AccountCategoryCode
@@ -1218,7 +747,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select a classification code to indicate the potential value of the customer account based on the projected return on investment, cooperation level, sales cycle length or other criteria.
+		/// Vælg en klassifikationskode for at angive kundekontoens potentielle værdi baseret på forventet afkast, samarbejdsniveau, salgscyklussens længde eller andre kriterier.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("accountclassificationcode")]
 		public virtual account_accountclassificationcode? AccountClassificationCode
@@ -1252,7 +781,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Unique identifier of the account.
+		/// Entydigt id for firmaet.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("accountid")]
 		public System.Nullable<System.Guid> AccountId
@@ -1291,7 +820,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type an ID number or code for the account to quickly search and identify the account in system views.
+		/// Angiv et id-nummer eller en kode for firmaet for hurtigt at søge efter og identificere firmaet i systemvisninger.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("accountnumber")]
 		public string AccountNumber
@@ -1309,7 +838,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select a rating to indicate the value of the customer account.
+		/// Vælg en klassificering for at angive kundekontoens værdi.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("accountratingcode")]
 		public virtual account_accountratingcode? AccountRatingCode
@@ -1343,7 +872,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Unique identifier for address 1.
+		/// Entydigt id for adresse 1.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_addressid")]
 		public System.Nullable<System.Guid> Address1_AddressId
@@ -1361,7 +890,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select the primary address type.
+		/// Vælg den primære adressetype.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_addresstypecode")]
 		public virtual account_address1_addresstypecode? Address1_AddressTypeCode
@@ -1395,7 +924,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the city for the primary address.
+		/// Angiv byen for den primære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_city")]
 		public string Address1_City
@@ -1413,7 +942,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the complete primary address.
+		/// Viser den fulde primære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_composite")]
 		public string Address1_Composite
@@ -1425,7 +954,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the country or region for the primary address.
+		/// Angiv landet eller området for den primære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_country")]
 		public string Address1_Country
@@ -1443,7 +972,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the county for the primary address.
+		/// Angiv regionen for den primære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_county")]
 		public string Address1_County
@@ -1461,7 +990,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the fax number associated with the primary address.
+		/// Angiv det faxnummer, der er tilknyttet den primære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_fax")]
 		public string Address1_Fax
@@ -1479,7 +1008,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select the freight terms for the primary address to make sure shipping orders are processed correctly.
+		/// Vælg fragtbetingelser for den primære adresse for at sikre, at forsendelsesordrer behandles korrekt.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_freighttermscode")]
 		public virtual account_address1_freighttermscode? Address1_FreightTermsCode
@@ -1513,7 +1042,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the latitude value for the primary address for use in mapping and other applications.
+		/// Angiv værdien for breddegraden for den primære adresse til brug ved kortlægning og andre programmer.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_latitude")]
 		public System.Nullable<double> Address1_Latitude
@@ -1531,7 +1060,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the first line of the primary address.
+		/// Angiv den første linje i den primære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_line1")]
 		public string Address1_Line1
@@ -1549,7 +1078,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the second line of the primary address.
+		/// Angiv den anden linje i den primære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_line2")]
 		public string Address1_Line2
@@ -1567,7 +1096,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the third line of the primary address.
+		/// Angiv den tredje linje i den primære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_line3")]
 		public string Address1_Line3
@@ -1585,7 +1114,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the longitude value for the primary address for use in mapping and other applications.
+		/// Angiv værdien for længdegraden for den primære adresse til brug ved kortlægning og andre programmer.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_longitude")]
 		public System.Nullable<double> Address1_Longitude
@@ -1603,7 +1132,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type a descriptive name for the primary address, such as Corporate Headquarters.
+		/// Angiv et beskrivende navn til den primære adresse, f.eks. koncernhovedsæde.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_name")]
 		public string Address1_Name
@@ -1621,7 +1150,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the ZIP Code or postal code for the primary address.
+		/// Angiv postnummeret for den primære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_postalcode")]
 		public string Address1_PostalCode
@@ -1639,7 +1168,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the post office box number of the primary address.
+		/// Angiv postboksnummeret for den primære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_postofficebox")]
 		public string Address1_PostOfficeBox
@@ -1657,7 +1186,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the name of the main contact at the account's primary address.
+		/// Angiv navnet på hovedkontakten på firmaets primære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_primarycontactname")]
 		public string Address1_PrimaryContactName
@@ -1675,7 +1204,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select a shipping method for deliveries sent to this address.
+		/// Vælg en forsendelsesmetode til leverancer, der sendes til denne adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_shippingmethodcode")]
 		public virtual account_address1_shippingmethodcode? Address1_ShippingMethodCode
@@ -1709,7 +1238,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the state or province of the primary address.
+		/// Angiv staten eller området for den primære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_stateorprovince")]
 		public string Address1_StateOrProvince
@@ -1727,7 +1256,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the main phone number associated with the primary address.
+		/// Angiv det hovedtelefonnummer, der er tilknyttet den primære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_telephone1")]
 		public string Address1_Telephone1
@@ -1745,7 +1274,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type a second phone number associated with the primary address.
+		/// Angiv et andet telefonnummer, der er tilknyttet den primære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_telephone2")]
 		public string Address1_Telephone2
@@ -1763,7 +1292,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type a third phone number associated with the primary address.
+		/// Angiv et tredje telefonnummer, der er tilknyttet den primære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_telephone3")]
 		public string Address1_Telephone3
@@ -1781,7 +1310,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the UPS zone of the primary address to make sure shipping charges are calculated correctly and deliveries are made promptly, if shipped by UPS.
+		/// Angiv UPS-zonen for den primære adresse for at sikre, at forsendelsesgebyrer beregnes korrekt, og at leverancer foretages prompte, hvis forsendelse sker med UPS.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_upszone")]
 		public string Address1_UPSZone
@@ -1799,7 +1328,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select the time zone, or UTC offset, for this address so that other people can reference it when they contact someone at this address.
+		/// Vælg tidszonen, eller forskydningen fra GMT, for denne adresse, så andre kan referere til den, når de kontakter nogen på denne adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address1_utcoffset")]
 		public System.Nullable<int> Address1_UTCOffset
@@ -1817,7 +1346,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Unique identifier for address 2.
+		/// Entydigt id for adresse 2.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_addressid")]
 		public System.Nullable<System.Guid> Address2_AddressId
@@ -1835,7 +1364,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select the secondary address type.
+		/// Vælg den sekundære adressetype.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_addresstypecode")]
 		public virtual account_address2_addresstypecode? Address2_AddressTypeCode
@@ -1869,7 +1398,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the city for the secondary address.
+		/// Angiv byen for den sekundære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_city")]
 		public string Address2_City
@@ -1887,7 +1416,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the complete secondary address.
+		/// Viser den fulde sekundære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_composite")]
 		public string Address2_Composite
@@ -1899,7 +1428,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the country or region for the secondary address.
+		/// Angiv landet eller området for den sekundære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_country")]
 		public string Address2_Country
@@ -1917,7 +1446,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the county for the secondary address.
+		/// Angiv regionen for den sekundære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_county")]
 		public string Address2_County
@@ -1935,7 +1464,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the fax number associated with the secondary address.
+		/// Angiv det faxnummer, der er tilknyttet den sekundære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_fax")]
 		public string Address2_Fax
@@ -1953,7 +1482,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select the freight terms for the secondary address to make sure shipping orders are processed correctly.
+		/// Vælg fragtbetingelser for den sekundære adresse for at sikre, at forsendelsesordrer behandles korrekt.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_freighttermscode")]
 		public virtual account_address2_freighttermscode? Address2_FreightTermsCode
@@ -1987,7 +1516,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the latitude value for the secondary address for use in mapping and other applications.
+		/// Angiv værdien for breddegraden for den sekundære adresse til brug ved kortlægning og andre programmer.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_latitude")]
 		public System.Nullable<double> Address2_Latitude
@@ -2005,7 +1534,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the first line of the secondary address.
+		/// Angiv den første linje i den sekundære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_line1")]
 		public string Address2_Line1
@@ -2023,7 +1552,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the second line of the secondary address.
+		/// Angiv den anden linje i den sekundære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_line2")]
 		public string Address2_Line2
@@ -2041,7 +1570,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the third line of the secondary address.
+		/// Angiv den tredje linje i den sekundære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_line3")]
 		public string Address2_Line3
@@ -2059,7 +1588,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the longitude value for the secondary address for use in mapping and other applications.
+		/// Angiv værdien for længdegraden for den sekundære adresse til brug ved kortlægning og andre programmer.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_longitude")]
 		public System.Nullable<double> Address2_Longitude
@@ -2077,7 +1606,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type a descriptive name for the secondary address, such as Corporate Headquarters.
+		/// Angiv et beskrivende navn til den sekundære adresse, f.eks. koncernhovedsæde.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_name")]
 		public string Address2_Name
@@ -2095,7 +1624,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the ZIP Code or postal code for the secondary address.
+		/// Angiv postnummeret for den sekundære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_postalcode")]
 		public string Address2_PostalCode
@@ -2113,7 +1642,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the post office box number of the secondary address.
+		/// Angiv postboksnummeret for den sekundære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_postofficebox")]
 		public string Address2_PostOfficeBox
@@ -2131,7 +1660,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the name of the main contact at the account's secondary address.
+		/// Angiv navnet på hovedkontakten på firmaets sekundære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_primarycontactname")]
 		public string Address2_PrimaryContactName
@@ -2149,7 +1678,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select a shipping method for deliveries sent to this address.
+		/// Vælg en forsendelsesmetode til leverancer, der sendes til denne adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_shippingmethodcode")]
 		public virtual account_address2_shippingmethodcode? Address2_ShippingMethodCode
@@ -2183,7 +1712,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the state or province of the secondary address.
+		/// Angiv staten eller området for den sekundære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_stateorprovince")]
 		public string Address2_StateOrProvince
@@ -2201,7 +1730,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the main phone number associated with the secondary address.
+		/// Angiv det hovedtelefonnummer, der er tilknyttet den sekundære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_telephone1")]
 		public string Address2_Telephone1
@@ -2219,7 +1748,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type a second phone number associated with the secondary address.
+		/// Angiv et andet telefonnummer, der er tilknyttet den sekundære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_telephone2")]
 		public string Address2_Telephone2
@@ -2237,7 +1766,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type a third phone number associated with the secondary address.
+		/// Angiv et tredje telefonnummer, der er tilknyttet den sekundære adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_telephone3")]
 		public string Address2_Telephone3
@@ -2255,7 +1784,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the UPS zone of the secondary address to make sure shipping charges are calculated correctly and deliveries are made promptly, if shipped by UPS.
+		/// Angiv UPS-zonen for den sekundære adresse for at sikre, at forsendelsesgebyrer beregnes korrekt, og at leverancer foretages prompte, hvis forsendelse sker med UPS.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_upszone")]
 		public string Address2_UPSZone
@@ -2273,7 +1802,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select the time zone, or UTC offset, for this address so that other people can reference it when they contact someone at this address.
+		/// Vælg tidszonen, eller forskydningen fra GMT, for denne adresse, så andre kan referere til den, når de kontakter nogen på denne adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("address2_utcoffset")]
 		public System.Nullable<int> Address2_UTCOffset
@@ -2351,7 +1880,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// For system use only.
+		/// Kun til systembrug.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("aging30")]
 		public Microsoft.Xrm.Sdk.Money Aging30
@@ -2363,7 +1892,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// The base currency equivalent of the aging 30 field.
+		/// Feltet Aldersfordeling 30 angivet i grundvaluta.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("aging30_base")]
 		public Microsoft.Xrm.Sdk.Money Aging30_Base
@@ -2375,7 +1904,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// For system use only.
+		/// Kun til systembrug.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("aging60")]
 		public Microsoft.Xrm.Sdk.Money Aging60
@@ -2387,7 +1916,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// The base currency equivalent of the aging 60 field.
+		/// Feltet Aldersfordeling 60 angivet i grundvaluta.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("aging60_base")]
 		public Microsoft.Xrm.Sdk.Money Aging60_Base
@@ -2399,7 +1928,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// For system use only.
+		/// Kun til systembrug.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("aging90")]
 		public Microsoft.Xrm.Sdk.Money Aging90
@@ -2411,7 +1940,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// The base currency equivalent of the aging 90 field.
+		/// Feltet Aldersfordeling 90 angivet i grundvaluta.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("aging90_base")]
 		public Microsoft.Xrm.Sdk.Money Aging90_Base
@@ -2423,2794 +1952,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Unique identifier for country for the second address on account
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_address2countryid")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_Address2CountryId
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_address2countryid");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Address2CountryId");
-				this.SetAttributeValue("arbo_address2countryid", value);
-				this.OnPropertyChanged("arbo_Address2CountryId");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_address2countryidname")]
-		public string arbo_Address2CountryIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_address2countryid"))
-				{
-					return this.FormattedValues["arbo_address2countryid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_allowpalletregulation")]
-		public System.Nullable<bool> arbo_allowpalletregulation
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_allowpalletregulation");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_allowpalletregulation");
-				this.SetAttributeValue("arbo_allowpalletregulation", value);
-				this.OnPropertyChanged("arbo_allowpalletregulation");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_allowpalletregulationname")]
-		public string arbo_allowpalletregulationName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_allowpalletregulation"))
-				{
-					return this.FormattedValues["arbo_allowpalletregulation"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_allowpurchasebeforeorder")]
-		public System.Nullable<bool> arbo_allowpurchasebeforeorder
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_allowpurchasebeforeorder");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_allowpurchasebeforeorder");
-				this.SetAttributeValue("arbo_allowpurchasebeforeorder", value);
-				this.OnPropertyChanged("arbo_allowpurchasebeforeorder");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_allowpurchasebeforeordername")]
-		public string arbo_allowpurchasebeforeorderName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_allowpurchasebeforeorder"))
-				{
-					return this.FormattedValues["arbo_allowpurchasebeforeorder"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_approles")]
-		public virtual System.Collections.Generic.IEnumerable<arbo_account_arbo_approles> arbo_approles
-		{
-			get
-			{
-				return EntityOptionSetEnum.GetMultiEnum<arbo_account_arbo_approles>(this, "arbo_approles");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_approles");
-				this.SetAttributeValue("arbo_approles", EntityOptionSetEnum.GetMultiEnum(this, "arbo_approles", value));
-				this.OnPropertyChanged("arbo_approles");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_approlesname")]
-		public string arbo_approlesName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_approles"))
-				{
-					return this.FormattedValues["arbo_approles"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_arbodaniaidatcustomer")]
-		public string arbo_ArbodaniaIDatCustomer
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_arbodaniaidatcustomer");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_ArbodaniaIDatCustomer");
-				this.SetAttributeValue("arbo_arbodaniaidatcustomer", value);
-				this.OnPropertyChanged("arbo_ArbodaniaIDatCustomer");
-			}
-		}
-		
-		/// <summary>
-		/// Determines if invoices generated from claims should be set to the state billed automaticly
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_autobillclaims")]
-		public System.Nullable<bool> arbo_AutoBillClaims
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_autobillclaims");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_AutoBillClaims");
-				this.SetAttributeValue("arbo_autobillclaims", value);
-				this.OnPropertyChanged("arbo_AutoBillClaims");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_autobillclaimsname")]
-		public string arbo_autobillclaimsName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_autobillclaims"))
-				{
-					return this.FormattedValues["arbo_autobillclaims"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Determines if invoices should be set to the state billed automaticly
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_autobillinvoice")]
-		public System.Nullable<bool> arbo_AutoBillInvoice
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_autobillinvoice");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_AutoBillInvoice");
-				this.SetAttributeValue("arbo_autobillinvoice", value);
-				this.OnPropertyChanged("arbo_AutoBillInvoice");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_autobillinvoicename")]
-		public string arbo_autobillinvoiceName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_autobillinvoice"))
-				{
-					return this.FormattedValues["arbo_autobillinvoice"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_autoinvoicelevel")]
-		public virtual arbo_account_arbo_autoinvoicelevel? arbo_AutoInvoiceLevel
-		{
-			get
-			{
-				return ((arbo_account_arbo_autoinvoicelevel?)(EntityOptionSetEnum.GetEnum(this, "arbo_autoinvoicelevel")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_AutoInvoiceLevel");
-				this.SetAttributeValue("arbo_autoinvoicelevel", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_AutoInvoiceLevel");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_autoinvoicelevelname")]
-		public string arbo_autoinvoicelevelName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_autoinvoicelevel"))
-				{
-					return this.FormattedValues["arbo_autoinvoicelevel"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_bankaccountnumber")]
-		public string arbo_Bankaccountnumber
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_bankaccountnumber");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Bankaccountnumber");
-				this.SetAttributeValue("arbo_bankaccountnumber", value);
-				this.OnPropertyChanged("arbo_Bankaccountnumber");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_banknameandaddress")]
-		public string arbo_Banknameandaddress
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_banknameandaddress");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Banknameandaddress");
-				this.SetAttributeValue("arbo_banknameandaddress", value);
-				this.OnPropertyChanged("arbo_Banknameandaddress");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_bankphone")]
-		public string arbo_Bankphone
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_bankphone");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Bankphone");
-				this.SetAttributeValue("arbo_bankphone", value);
-				this.OnPropertyChanged("arbo_Bankphone");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_bankreg")]
-		public string arbo_bankreg
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_bankreg");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_bankreg");
-				this.SetAttributeValue("arbo_bankreg", value);
-				this.OnPropertyChanged("arbo_bankreg");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_bcintegration")]
-		public virtual arbo_account_arbo_bcintegration? arbo_bcintegration
-		{
-			get
-			{
-				return ((arbo_account_arbo_bcintegration?)(EntityOptionSetEnum.GetEnum(this, "arbo_bcintegration")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_bcintegration");
-				this.SetAttributeValue("arbo_bcintegration", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_bcintegration");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_bcintegrationname")]
-		public string arbo_bcintegrationName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_bcintegration"))
-				{
-					return this.FormattedValues["arbo_bcintegration"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_billto")]
-		public string arbo_BillTo
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_billto");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_BillTo");
-				this.SetAttributeValue("arbo_billto", value);
-				this.OnPropertyChanged("arbo_BillTo");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_billtoaddresscity")]
-		public string arbo_BillToAddressCity
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_billtoaddresscity");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_BillToAddressCity");
-				this.SetAttributeValue("arbo_billtoaddresscity", value);
-				this.OnPropertyChanged("arbo_BillToAddressCity");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_billtoaddresscountry")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_BillToAddressCountry
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_billtoaddresscountry");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_BillToAddressCountry");
-				this.SetAttributeValue("arbo_billtoaddresscountry", value);
-				this.OnPropertyChanged("arbo_BillToAddressCountry");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_billtoaddresscountryname")]
-		public string arbo_BillToAddressCountryName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_billtoaddresscountry"))
-				{
-					return this.FormattedValues["arbo_billtoaddresscountry"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// If the bill to address is filled out, it will be used on the invoice
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_billtoaddressline1")]
-		public string arbo_BillToAddressLine1
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_billtoaddressline1");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_BillToAddressLine1");
-				this.SetAttributeValue("arbo_billtoaddressline1", value);
-				this.OnPropertyChanged("arbo_BillToAddressLine1");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_billtoaddressline2")]
-		public string arbo_BillToAddressLine2
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_billtoaddressline2");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_BillToAddressLine2");
-				this.SetAttributeValue("arbo_billtoaddressline2", value);
-				this.OnPropertyChanged("arbo_BillToAddressLine2");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_billtoaddressstateorprovince")]
-		public string arbo_BillToAddressStateOrProvince
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_billtoaddressstateorprovince");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_BillToAddressStateOrProvince");
-				this.SetAttributeValue("arbo_billtoaddressstateorprovince", value);
-				this.OnPropertyChanged("arbo_BillToAddressStateOrProvince");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_billtogln")]
-		public string arbo_BillToGLN
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_billtogln");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_BillToGLN");
-				this.SetAttributeValue("arbo_billtogln", value);
-				this.OnPropertyChanged("arbo_BillToGLN");
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Brand Group associated with Account.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_brandgroupid")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_BrandGroupId
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_brandgroupid");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_BrandGroupId");
-				this.SetAttributeValue("arbo_brandgroupid", value);
-				this.OnPropertyChanged("arbo_BrandGroupId");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_brandgroupidname")]
-		public string arbo_BrandGroupIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_brandgroupid"))
-				{
-					return this.FormattedValues["arbo_brandgroupid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_candownloadloadzip")]
-		public System.Nullable<bool> arbo_candownloadloadzip
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_candownloadloadzip");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_candownloadloadzip");
-				this.SetAttributeValue("arbo_candownloadloadzip", value);
-				this.OnPropertyChanged("arbo_candownloadloadzip");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_candownloadloadzipname")]
-		public string arbo_candownloadloadzipName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_candownloadloadzip"))
-				{
-					return this.FormattedValues["arbo_candownloadloadzip"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_certificatrequests")]
-		public virtual System.Collections.Generic.IEnumerable<arbo_certificatrequest> arbo_certificatrequests
-		{
-			get
-			{
-				return EntityOptionSetEnum.GetMultiEnum<arbo_certificatrequest>(this, "arbo_certificatrequests");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_certificatrequests");
-				this.SetAttributeValue("arbo_certificatrequests", EntityOptionSetEnum.GetMultiEnum(this, "arbo_certificatrequests", value));
-				this.OnPropertyChanged("arbo_certificatrequests");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_certificatrequestsname")]
-		public string arbo_certificatrequestsName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_certificatrequests"))
-				{
-					return this.FormattedValues["arbo_certificatrequests"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Contact associated with Account.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_chainresponsibleid")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_chainresponsibleid
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_chainresponsibleid");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_chainresponsibleid");
-				this.SetAttributeValue("arbo_chainresponsibleid", value);
-				this.OnPropertyChanged("arbo_chainresponsibleid");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_chainresponsibleidname")]
-		public string arbo_chainresponsibleidName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_chainresponsibleid"))
-				{
-					return this.FormattedValues["arbo_chainresponsibleid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_chainresponsibleidyominame")]
-		public string arbo_chainresponsibleidYomiName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_chainresponsibleid"))
-				{
-					return this.FormattedValues["arbo_chainresponsibleid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_claiminvoicenotifications")]
-		public string arbo_ClaimInvoicenotifications
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_claiminvoicenotifications");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_ClaimInvoicenotifications");
-				this.SetAttributeValue("arbo_claiminvoicenotifications", value);
-				this.OnPropertyChanged("arbo_ClaimInvoicenotifications");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_claimnotification")]
-		public string arbo_Claimnotification
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_claimnotification");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Claimnotification");
-				this.SetAttributeValue("arbo_claimnotification", value);
-				this.OnPropertyChanged("arbo_Claimnotification");
-			}
-		}
-		
-		/// <summary>
-		/// Set to true, if claims that are invoice to 0 should still apear in year total as per price, because claims is reducted on the customer side, and invoice as 0
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_claimsinyeartotal")]
-		public System.Nullable<bool> arbo_claimsinyeartotal
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_claimsinyeartotal");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_claimsinyeartotal");
-				this.SetAttributeValue("arbo_claimsinyeartotal", value);
-				this.OnPropertyChanged("arbo_claimsinyeartotal");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_claimsinyeartotalname")]
-		public string arbo_claimsinyeartotalName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_claimsinyeartotal"))
-				{
-					return this.FormattedValues["arbo_claimsinyeartotal"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Contact associated with Account.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_contractresponsibleid")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_ContractresponsibleId
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_contractresponsibleid");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_ContractresponsibleId");
-				this.SetAttributeValue("arbo_contractresponsibleid", value);
-				this.OnPropertyChanged("arbo_ContractresponsibleId");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_contractresponsibleidname")]
-		public string arbo_ContractresponsibleIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_contractresponsibleid"))
-				{
-					return this.FormattedValues["arbo_contractresponsibleid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_contractresponsibleidyominame")]
-		public string arbo_ContractresponsibleIdYomiName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_contractresponsibleid"))
-				{
-					return this.FormattedValues["arbo_contractresponsibleid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_contracttype")]
-		public virtual arbo_account_arbo_contracttype? arbo_Contracttype
-		{
-			get
-			{
-				return ((arbo_account_arbo_contracttype?)(EntityOptionSetEnum.GetEnum(this, "arbo_contracttype")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Contracttype");
-				this.SetAttributeValue("arbo_contracttype", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_Contracttype");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_contracttypename")]
-		public string arbo_contracttypeName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_contracttype"))
-				{
-					return this.FormattedValues["arbo_contracttype"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for country on account
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_countryid")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_CountryId
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_countryid");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_CountryId");
-				this.SetAttributeValue("arbo_countryid", value);
-				this.OnPropertyChanged("arbo_CountryId");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_countryidname")]
-		public string arbo_CountryIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_countryid"))
-				{
-					return this.FormattedValues["arbo_countryid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_creditensuranceexpiredate")]
-		public System.Nullable<System.DateTime> arbo_creditensuranceexpiredate
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("arbo_creditensuranceexpiredate");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_creditensuranceexpiredate");
-				this.SetAttributeValue("arbo_creditensuranceexpiredate", value);
-				this.OnPropertyChanged("arbo_creditensuranceexpiredate");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_creditinsurance")]
-		public System.Nullable<System.DateTime> arbo_Creditinsurance
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("arbo_creditinsurance");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Creditinsurance");
-				this.SetAttributeValue("arbo_creditinsurance", value);
-				this.OnPropertyChanged("arbo_Creditinsurance");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_creditinsuranceamount")]
-		public Microsoft.Xrm.Sdk.Money arbo_Creditinsuranceamount
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_creditinsuranceamount");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Creditinsuranceamount");
-				this.SetAttributeValue("arbo_creditinsuranceamount", value);
-				this.OnPropertyChanged("arbo_Creditinsuranceamount");
-			}
-		}
-		
-		/// <summary>
-		/// Value of the Credit insurance amount in base currency.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_creditinsuranceamount_base")]
-		public Microsoft.Xrm.Sdk.Money arbo_creditinsuranceamount_Base
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_creditinsuranceamount_base");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_creditnotesendtodefault")]
-		public string arbo_creditnotesendtodefault
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_creditnotesendtodefault");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_creditnotesendtodefault");
-				this.SetAttributeValue("arbo_creditnotesendtodefault", value);
-				this.OnPropertyChanged("arbo_creditnotesendtodefault");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_datamatrixonloadplan")]
-		public System.Nullable<bool> arbo_datamatrixonloadplan
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_datamatrixonloadplan");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_datamatrixonloadplan");
-				this.SetAttributeValue("arbo_datamatrixonloadplan", value);
-				this.OnPropertyChanged("arbo_datamatrixonloadplan");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_datamatrixonloadplanname")]
-		public string arbo_datamatrixonloadplanName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_datamatrixonloadplan"))
-				{
-					return this.FormattedValues["arbo_datamatrixonloadplan"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_dayorderforautoload")]
-		public string arbo_dayorderforautoload
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_dayorderforautoload");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_dayorderforautoload");
-				this.SetAttributeValue("arbo_dayorderforautoload", value);
-				this.OnPropertyChanged("arbo_dayorderforautoload");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_defaultinvoicecustomeronclaim")]
-		public System.Nullable<bool> arbo_defaultinvoicecustomeronclaim
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_defaultinvoicecustomeronclaim");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_defaultinvoicecustomeronclaim");
-				this.SetAttributeValue("arbo_defaultinvoicecustomeronclaim", value);
-				this.OnPropertyChanged("arbo_defaultinvoicecustomeronclaim");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_defaultinvoicecustomeronclaimname")]
-		public string arbo_defaultinvoicecustomeronclaimName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_defaultinvoicecustomeronclaim"))
-				{
-					return this.FormattedValues["arbo_defaultinvoicecustomeronclaim"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Naming scheme for account dropoffs, '#' inserted where dropoff No appears.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_dropoffnonamingscheme")]
-		public string arbo_dropoffnonamingscheme
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_dropoffnonamingscheme");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_dropoffnonamingscheme");
-				this.SetAttributeValue("arbo_dropoffnonamingscheme", value);
-				this.OnPropertyChanged("arbo_dropoffnonamingscheme");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_enableoioinvoice")]
-		public System.Nullable<bool> arbo_enableoioinvoice
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_enableoioinvoice");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_enableoioinvoice");
-				this.SetAttributeValue("arbo_enableoioinvoice", value);
-				this.OnPropertyChanged("arbo_enableoioinvoice");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_enableoioinvoicename")]
-		public string arbo_enableoioinvoiceName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_enableoioinvoice"))
-				{
-					return this.FormattedValues["arbo_enableoioinvoice"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Contact associated with Account.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_financeresponsibleid")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_FinanceresponsibleId
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_financeresponsibleid");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_FinanceresponsibleId");
-				this.SetAttributeValue("arbo_financeresponsibleid", value);
-				this.OnPropertyChanged("arbo_FinanceresponsibleId");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_financeresponsibleidname")]
-		public string arbo_FinanceresponsibleIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_financeresponsibleid"))
-				{
-					return this.FormattedValues["arbo_financeresponsibleid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_financeresponsibleidyominame")]
-		public string arbo_FinanceresponsibleIdYomiName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_financeresponsibleid"))
-				{
-					return this.FormattedValues["arbo_financeresponsibleid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_freight")]
-		public Microsoft.Xrm.Sdk.Money arbo_Freight
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_freight");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Freight");
-				this.SetAttributeValue("arbo_freight", value);
-				this.OnPropertyChanged("arbo_Freight");
-			}
-		}
-		
-		/// <summary>
-		/// Value of the Freight in base currency.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_freight_base")]
-		public Microsoft.Xrm.Sdk.Money arbo_freight_Base
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_freight_base");
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Freightterm associated with Account.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_freighttermid")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_FreighttermId
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_freighttermid");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_FreighttermId");
-				this.SetAttributeValue("arbo_freighttermid", value);
-				this.OnPropertyChanged("arbo_FreighttermId");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_freighttermidname")]
-		public string arbo_FreighttermIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_freighttermid"))
-				{
-					return this.FormattedValues["arbo_freighttermid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_friendlyname")]
-		public string arbo_friendlyname
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_friendlyname");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_friendlyname");
-				this.SetAttributeValue("arbo_friendlyname", value);
-				this.OnPropertyChanged("arbo_friendlyname");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_gapid")]
-		public string arbo_gapid
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_gapid");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_gapid");
-				this.SetAttributeValue("arbo_gapid", value);
-				this.OnPropertyChanged("arbo_gapid");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_gln")]
-		public string arbo_GLN
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_gln");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_GLN");
-				this.SetAttributeValue("arbo_gln", value);
-				this.OnPropertyChanged("arbo_GLN");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_heighttype")]
-		public virtual arbo_heighttype? arbo_heighttype
-		{
-			get
-			{
-				return ((arbo_heighttype?)(EntityOptionSetEnum.GetEnum(this, "arbo_heighttype")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_heighttype");
-				this.SetAttributeValue("arbo_heighttype", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_heighttype");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_heighttypename")]
-		public string arbo_heighttypeName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_heighttype"))
-				{
-					return this.FormattedValues["arbo_heighttype"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_hidearbodaniabrandonlabels")]
-		public System.Nullable<bool> arbo_hidearbodaniabrandonlabels
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_hidearbodaniabrandonlabels");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_hidearbodaniabrandonlabels");
-				this.SetAttributeValue("arbo_hidearbodaniabrandonlabels", value);
-				this.OnPropertyChanged("arbo_hidearbodaniabrandonlabels");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_hidearbodaniabrandonlabelsname")]
-		public string arbo_hidearbodaniabrandonlabelsName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_hidearbodaniabrandonlabels"))
-				{
-					return this.FormattedValues["arbo_hidearbodaniabrandonlabels"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_inforcedeliverytolerances")]
-		public System.Nullable<bool> arbo_inforcedeliverytolerances
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_inforcedeliverytolerances");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_inforcedeliverytolerances");
-				this.SetAttributeValue("arbo_inforcedeliverytolerances", value);
-				this.OnPropertyChanged("arbo_inforcedeliverytolerances");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_inforcedeliverytolerancesname")]
-		public string arbo_inforcedeliverytolerancesName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_inforcedeliverytolerances"))
-				{
-					return this.FormattedValues["arbo_inforcedeliverytolerances"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_invoicingmethod")]
-		public virtual arbo_invoicemodel? arbo_Invoicingmethod
-		{
-			get
-			{
-				return ((arbo_invoicemodel?)(EntityOptionSetEnum.GetEnum(this, "arbo_invoicingmethod")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Invoicingmethod");
-				this.SetAttributeValue("arbo_invoicingmethod", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_Invoicingmethod");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_invoicingmethodname")]
-		public string arbo_invoicingmethodName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_invoicingmethod"))
-				{
-					return this.FormattedValues["arbo_invoicingmethod"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_labellayout")]
-		public virtual arbo_account_arbo_labellayout? arbo_LABELLAYOUT
-		{
-			get
-			{
-				return ((arbo_account_arbo_labellayout?)(EntityOptionSetEnum.GetEnum(this, "arbo_labellayout")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_LABELLAYOUT");
-				this.SetAttributeValue("arbo_labellayout", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_LABELLAYOUT");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_labellayoutname")]
-		public string arbo_labellayoutName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_labellayout"))
-				{
-					return this.FormattedValues["arbo_labellayout"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_labelresponsible")]
-		public virtual arbo_labelingresponsible? arbo_Labelresponsible
-		{
-			get
-			{
-				return ((arbo_labelingresponsible?)(EntityOptionSetEnum.GetEnum(this, "arbo_labelresponsible")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Labelresponsible");
-				this.SetAttributeValue("arbo_labelresponsible", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_Labelresponsible");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_labelresponsiblename")]
-		public string arbo_labelresponsibleName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_labelresponsible"))
-				{
-					return this.FormattedValues["arbo_labelresponsible"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_language")]
-		public virtual pw_portallanguage? arbo_Language
-		{
-			get
-			{
-				return ((pw_portallanguage?)(EntityOptionSetEnum.GetEnum(this, "arbo_language")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Language");
-				this.SetAttributeValue("arbo_language", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_Language");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_languagename")]
-		public string arbo_languageName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_language"))
-				{
-					return this.FormattedValues["arbo_language"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_lastconfirmedgapcertificationdate")]
-		public System.Nullable<System.DateTime> arbo_lastconfirmedgapcertificationdate
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("arbo_lastconfirmedgapcertificationdate");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_lastconfirmedgapcertificationdate");
-				this.SetAttributeValue("arbo_lastconfirmedgapcertificationdate", value);
-				this.OnPropertyChanged("arbo_lastconfirmedgapcertificationdate");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadarchive")]
-		public virtual arbo_loadarchive? arbo_loadarchive
-		{
-			get
-			{
-				return ((arbo_loadarchive?)(EntityOptionSetEnum.GetEnum(this, "arbo_loadarchive")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_loadarchive");
-				this.SetAttributeValue("arbo_loadarchive", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_loadarchive");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadarchivename")]
-		public string arbo_loadarchiveName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_loadarchive"))
-				{
-					return this.FormattedValues["arbo_loadarchive"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// This will load pallets according to loadmethod, but will keep the pallet in it sidewise loading when loading and putting pallets on truck.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadconversely")]
-		public System.Nullable<bool> arbo_loadconversely
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_loadconversely");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_loadconversely");
-				this.SetAttributeValue("arbo_loadconversely", value);
-				this.OnPropertyChanged("arbo_loadconversely");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadconverselyname")]
-		public string arbo_loadconverselyName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_loadconversely"))
-				{
-					return this.FormattedValues["arbo_loadconversely"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostcrossstoreblt")]
-		public Microsoft.Xrm.Sdk.Money arbo_loadcostcrossstoreblt
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostcrossstoreblt");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_loadcostcrossstoreblt");
-				this.SetAttributeValue("arbo_loadcostcrossstoreblt", value);
-				this.OnPropertyChanged("arbo_loadcostcrossstoreblt");
-			}
-		}
-		
-		/// <summary>
-		/// Value of the Load cost - cross storebælt in base currency.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostcrossstoreblt_base")]
-		public Microsoft.Xrm.Sdk.Money arbo_loadcostcrossstoreblt_Base
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostcrossstoreblt_base");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostextradropoffde")]
-		public Microsoft.Xrm.Sdk.Money arbo_LoadcostextradropoffDE
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostextradropoffde");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_LoadcostextradropoffDE");
-				this.SetAttributeValue("arbo_loadcostextradropoffde", value);
-				this.OnPropertyChanged("arbo_LoadcostextradropoffDE");
-			}
-		}
-		
-		/// <summary>
-		/// Value of the Load cost - extra dropoff DE in base currency.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostextradropoffde_base")]
-		public Microsoft.Xrm.Sdk.Money arbo_loadcostextradropoffde_Base
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostextradropoffde_base");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostextradropoffother")]
-		public Microsoft.Xrm.Sdk.Money arbo_Loadcostextradropoffother
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostextradropoffother");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Loadcostextradropoffother");
-				this.SetAttributeValue("arbo_loadcostextradropoffother", value);
-				this.OnPropertyChanged("arbo_Loadcostextradropoffother");
-			}
-		}
-		
-		/// <summary>
-		/// Value of the Load cost - extra dropoff other in base currency.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostextradropoffother_base")]
-		public Microsoft.Xrm.Sdk.Money arbo_loadcostextradropoffother_Base
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostextradropoffother_base");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostextrapickuponrelocation")]
-		public Microsoft.Xrm.Sdk.Money arbo_loadcostextrapickuponrelocation
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostextrapickuponrelocation");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_loadcostextrapickuponrelocation");
-				this.SetAttributeValue("arbo_loadcostextrapickuponrelocation", value);
-				this.OnPropertyChanged("arbo_loadcostextrapickuponrelocation");
-			}
-		}
-		
-		/// <summary>
-		/// Value of the Load cost - extra pickup on relocation in base currency.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostextrapickuponrelocation_base")]
-		public Microsoft.Xrm.Sdk.Money arbo_loadcostextrapickuponrelocation_Base
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostextrapickuponrelocation_base");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostloadsaturdaysunday")]
-		public Microsoft.Xrm.Sdk.Money arbo_Loadcostloadsaturdaysunday
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostloadsaturdaysunday");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Loadcostloadsaturdaysunday");
-				this.SetAttributeValue("arbo_loadcostloadsaturdaysunday", value);
-				this.OnPropertyChanged("arbo_Loadcostloadsaturdaysunday");
-			}
-		}
-		
-		/// <summary>
-		/// Value of the Load cost - load saturday/sunday in base currency.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostloadsaturdaysunday_base")]
-		public Microsoft.Xrm.Sdk.Money arbo_loadcostloadsaturdaysunday_Base
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostloadsaturdaysunday_base");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostloosetrees")]
-		public Microsoft.Xrm.Sdk.Money arbo_loadcostloosetrees
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostloosetrees");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_loadcostloosetrees");
-				this.SetAttributeValue("arbo_loadcostloosetrees", value);
-				this.OnPropertyChanged("arbo_loadcostloosetrees");
-			}
-		}
-		
-		/// <summary>
-		/// Value of the Load cost loose trees in base currency.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostloosetrees_base")]
-		public Microsoft.Xrm.Sdk.Money arbo_loadcostloosetrees_Base
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostloosetrees_base");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostpaperrussia")]
-		public Microsoft.Xrm.Sdk.Money arbo_loadcostpaperrussia
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostpaperrussia");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_loadcostpaperrussia");
-				this.SetAttributeValue("arbo_loadcostpaperrussia", value);
-				this.OnPropertyChanged("arbo_loadcostpaperrussia");
-			}
-		}
-		
-		/// <summary>
-		/// Value of the Load cost - paper russia in base currency.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostpaperrussia_base")]
-		public Microsoft.Xrm.Sdk.Money arbo_loadcostpaperrussia_Base
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostpaperrussia_base");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostpaperukrania")]
-		public Microsoft.Xrm.Sdk.Money arbo_Loadcostpaperukrania
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostpaperukrania");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Loadcostpaperukrania");
-				this.SetAttributeValue("arbo_loadcostpaperukrania", value);
-				this.OnPropertyChanged("arbo_Loadcostpaperukrania");
-			}
-		}
-		
-		/// <summary>
-		/// Value of the Load cost - paper ukrania in base currency.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadcostpaperukrania_base")]
-		public Microsoft.Xrm.Sdk.Money arbo_loadcostpaperukrania_Base
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("arbo_loadcostpaperukrania_base");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadmethod")]
-		public virtual arbo_loadingmethod? arbo_loadmethod
-		{
-			get
-			{
-				return ((arbo_loadingmethod?)(EntityOptionSetEnum.GetEnum(this, "arbo_loadmethod")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_loadmethod");
-				this.SetAttributeValue("arbo_loadmethod", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_loadmethod");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadmethodname")]
-		public string arbo_loadmethodName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_loadmethod"))
-				{
-					return this.FormattedValues["arbo_loadmethod"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_loadserie")]
-		public string arbo_loadserie
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_loadserie");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_loadserie");
-				this.SetAttributeValue("arbo_loadserie", value);
-				this.OnPropertyChanged("arbo_loadserie");
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Contact associated with Account.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_logisticresponsibleid")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_LogisticresponsibleId
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_logisticresponsibleid");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_LogisticresponsibleId");
-				this.SetAttributeValue("arbo_logisticresponsibleid", value);
-				this.OnPropertyChanged("arbo_LogisticresponsibleId");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_logisticresponsibleidname")]
-		public string arbo_LogisticresponsibleIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_logisticresponsibleid"))
-				{
-					return this.FormattedValues["arbo_logisticresponsibleid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_logisticresponsibleidyominame")]
-		public string arbo_LogisticresponsibleIdYomiName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_logisticresponsibleid"))
-				{
-					return this.FormattedValues["arbo_logisticresponsibleid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_marketingfeekickbackbonus")]
-		public System.Nullable<decimal> arbo_Marketingfeekickbackbonus
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<decimal>>("arbo_marketingfeekickbackbonus");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Marketingfeekickbackbonus");
-				this.SetAttributeValue("arbo_marketingfeekickbackbonus", value);
-				this.OnPropertyChanged("arbo_Marketingfeekickbackbonus");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_maxloadperday")]
-		public System.Nullable<int> arbo_maxloadperday
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<int>>("arbo_maxloadperday");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_maxloadperday");
-				this.SetAttributeValue("arbo_maxloadperday", value);
-				this.OnPropertyChanged("arbo_maxloadperday");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_nationalidentificationno")]
-		public string arbo_NationalIdentificationNo
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_nationalidentificationno");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_NationalIdentificationNo");
-				this.SetAttributeValue("arbo_nationalidentificationno", value);
-				this.OnPropertyChanged("arbo_NationalIdentificationNo");
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Product Ledger Group associated with Account.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_oioproductledgergroupid")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_oioproductledgergroupid
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_oioproductledgergroupid");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_oioproductledgergroupid");
-				this.SetAttributeValue("arbo_oioproductledgergroupid", value);
-				this.OnPropertyChanged("arbo_oioproductledgergroupid");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_oioproductledgergroupidname")]
-		public string arbo_oioproductledgergroupidName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_oioproductledgergroupid"))
-				{
-					return this.FormattedValues["arbo_oioproductledgergroupid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Product Ledger Group associated with Account.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_oioproductledgergroupumomsid")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_oioproductledgergroupumomsid
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_oioproductledgergroupumomsid");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_oioproductledgergroupumomsid");
-				this.SetAttributeValue("arbo_oioproductledgergroupumomsid", value);
-				this.OnPropertyChanged("arbo_oioproductledgergroupumomsid");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_oioproductledgergroupumomsidname")]
-		public string arbo_oioproductledgergroupumomsidName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_oioproductledgergroupumomsid"))
-				{
-					return this.FormattedValues["arbo_oioproductledgergroupumomsid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_oioproductnumber")]
-		public string arbo_oioproductnumber
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_oioproductnumber");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_oioproductnumber");
-				this.SetAttributeValue("arbo_oioproductnumber", value);
-				this.OnPropertyChanged("arbo_oioproductnumber");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_oioproductnumberumoms")]
-		public string arbo_oioproductnumberumoms
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_oioproductnumberumoms");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_oioproductnumberumoms");
-				this.SetAttributeValue("arbo_oioproductnumberumoms", value);
-				this.OnPropertyChanged("arbo_oioproductnumberumoms");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_palletlabelsize")]
-		public virtual arbo_palletlabelsize? arbo_palletlabelsize
-		{
-			get
-			{
-				return ((arbo_palletlabelsize?)(EntityOptionSetEnum.GetEnum(this, "arbo_palletlabelsize")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_palletlabelsize");
-				this.SetAttributeValue("arbo_palletlabelsize", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_palletlabelsize");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_palletlabelsizename")]
-		public string arbo_palletlabelsizeName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_palletlabelsize"))
-				{
-					return this.FormattedValues["arbo_palletlabelsize"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_palletstobeweighed")]
-		public System.Nullable<bool> arbo_palletstobeweighed
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_palletstobeweighed");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_palletstobeweighed");
-				this.SetAttributeValue("arbo_palletstobeweighed", value);
-				this.OnPropertyChanged("arbo_palletstobeweighed");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_palletstobeweighedname")]
-		public string arbo_palletstobeweighedName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_palletstobeweighed"))
-				{
-					return this.FormattedValues["arbo_palletstobeweighed"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_payfreight")]
-		public System.Nullable<bool> arbo_Payfreight
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_payfreight");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Payfreight");
-				this.SetAttributeValue("arbo_payfreight", value);
-				this.OnPropertyChanged("arbo_Payfreight");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_payfreightname")]
-		public string arbo_payfreightName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_payfreight"))
-				{
-					return this.FormattedValues["arbo_payfreight"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Payment term associated with Account.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_paymenttermid")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_PaymenttermId
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_paymenttermid");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_PaymenttermId");
-				this.SetAttributeValue("arbo_paymenttermid", value);
-				this.OnPropertyChanged("arbo_PaymenttermId");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_paymenttermidname")]
-		public string arbo_PaymenttermIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_paymenttermid"))
-				{
-					return this.FormattedValues["arbo_paymenttermid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_pendingpalletindication")]
-		public virtual arbo_account_arbo_pendingpalletindication? arbo_pendingpalletindication
-		{
-			get
-			{
-				return ((arbo_account_arbo_pendingpalletindication?)(EntityOptionSetEnum.GetEnum(this, "arbo_pendingpalletindication")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_pendingpalletindication");
-				this.SetAttributeValue("arbo_pendingpalletindication", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_pendingpalletindication");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_pendingpalletindicationname")]
-		public string arbo_pendingpalletindicationName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_pendingpalletindication"))
-				{
-					return this.FormattedValues["arbo_pendingpalletindication"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_phoneholders")]
-		public string arbo_phoneholders
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_phoneholders");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_phoneholders");
-				this.SetAttributeValue("arbo_phoneholders", value);
-				this.OnPropertyChanged("arbo_phoneholders");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_pickupname")]
-		public string arbo_pickupname
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_pickupname");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_pickupname");
-				this.SetAttributeValue("arbo_pickupname", value);
-				this.OnPropertyChanged("arbo_pickupname");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_primaryrelationtype")]
-		public virtual arbo_relationtype? arbo_PrimaryRelationType
-		{
-			get
-			{
-				return ((arbo_relationtype?)(EntityOptionSetEnum.GetEnum(this, "arbo_primaryrelationtype")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_PrimaryRelationType");
-				this.SetAttributeValue("arbo_primaryrelationtype", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_PrimaryRelationType");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_primaryrelationtypename")]
-		public string arbo_primaryrelationtypeName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_primaryrelationtype"))
-				{
-					return this.FormattedValues["arbo_primaryrelationtype"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_printdeliveryaddressoninvoice")]
-		public System.Nullable<bool> arbo_printdeliveryaddressoninvoice
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_printdeliveryaddressoninvoice");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_printdeliveryaddressoninvoice");
-				this.SetAttributeValue("arbo_printdeliveryaddressoninvoice", value);
-				this.OnPropertyChanged("arbo_printdeliveryaddressoninvoice");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_printdeliveryaddressoninvoicename")]
-		public string arbo_printdeliveryaddressoninvoiceName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_printdeliveryaddressoninvoice"))
-				{
-					return this.FormattedValues["arbo_printdeliveryaddressoninvoice"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_printlabelsatstation")]
-		public virtual arbo_account_arbo_printlabelsatstation? arbo_printlabelsatstation
-		{
-			get
-			{
-				return ((arbo_account_arbo_printlabelsatstation?)(EntityOptionSetEnum.GetEnum(this, "arbo_printlabelsatstation")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_printlabelsatstation");
-				this.SetAttributeValue("arbo_printlabelsatstation", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_printlabelsatstation");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_printlabelsatstationname")]
-		public string arbo_printlabelsatstationName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_printlabelsatstation"))
-				{
-					return this.FormattedValues["arbo_printlabelsatstation"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_priority")]
-		public System.Nullable<int> arbo_Priority
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<int>>("arbo_priority");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Priority");
-				this.SetAttributeValue("arbo_priority", value);
-				this.OnPropertyChanged("arbo_Priority");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_priority2")]
-		public System.Nullable<int> arbo_priority2
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<int>>("arbo_priority2");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_priority2");
-				this.SetAttributeValue("arbo_priority2", value);
-				this.OnPropertyChanged("arbo_priority2");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_proformatagging")]
-		public System.Nullable<bool> arbo_proformatagging
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_proformatagging");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_proformatagging");
-				this.SetAttributeValue("arbo_proformatagging", value);
-				this.OnPropertyChanged("arbo_proformatagging");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_proformataggingname")]
-		public string arbo_proformataggingName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_proformatagging"))
-				{
-					return this.FormattedValues["arbo_proformatagging"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_reportrequest")]
-		public virtual arbo_account_arbo_reportrequest? arbo_reportrequest
-		{
-			get
-			{
-				return ((arbo_account_arbo_reportrequest?)(EntityOptionSetEnum.GetEnum(this, "arbo_reportrequest")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_reportrequest");
-				this.SetAttributeValue("arbo_reportrequest", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_reportrequest");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_reportrequestname")]
-		public string arbo_reportrequestName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_reportrequest"))
-				{
-					return this.FormattedValues["arbo_reportrequest"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_requirebafromcustomer")]
-		public System.Nullable<bool> arbo_requirebafromcustomer
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_requirebafromcustomer");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_requirebafromcustomer");
-				this.SetAttributeValue("arbo_requirebafromcustomer", value);
-				this.OnPropertyChanged("arbo_requirebafromcustomer");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_requirebafromcustomername")]
-		public string arbo_requirebafromcustomerName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_requirebafromcustomer"))
-				{
-					return this.FormattedValues["arbo_requirebafromcustomer"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_requireordersbyedi")]
-		public System.Nullable<bool> arbo_requireordersbyedi
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_requireordersbyedi");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_requireordersbyedi");
-				this.SetAttributeValue("arbo_requireordersbyedi", value);
-				this.OnPropertyChanged("arbo_requireordersbyedi");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_requireordersbyediname")]
-		public string arbo_requireordersbyediName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_requireordersbyedi"))
-				{
-					return this.FormattedValues["arbo_requireordersbyedi"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_requireproductionpallets")]
-		public System.Nullable<bool> arbo_requireproductionpallets
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_requireproductionpallets");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_requireproductionpallets");
-				this.SetAttributeValue("arbo_requireproductionpallets", value);
-				this.OnPropertyChanged("arbo_requireproductionpallets");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_requireproductionpalletsname")]
-		public string arbo_requireproductionpalletsName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_requireproductionpallets"))
-				{
-					return this.FormattedValues["arbo_requireproductionpallets"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Contact associated with Account.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_salesresponsibleid")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_salesresponsibleid
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_salesresponsibleid");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_salesresponsibleid");
-				this.SetAttributeValue("arbo_salesresponsibleid", value);
-				this.OnPropertyChanged("arbo_salesresponsibleid");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_salesresponsibleidname")]
-		public string arbo_salesresponsibleidName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_salesresponsibleid"))
-				{
-					return this.FormattedValues["arbo_salesresponsibleid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_salesresponsibleidyominame")]
-		public string arbo_salesresponsibleidYomiName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_salesresponsibleid"))
-				{
-					return this.FormattedValues["arbo_salesresponsibleid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_samegroupcompany")]
-		public System.Nullable<bool> arbo_samegroupcompany
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_samegroupcompany");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_samegroupcompany");
-				this.SetAttributeValue("arbo_samegroupcompany", value);
-				this.OnPropertyChanged("arbo_samegroupcompany");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_samegroupcompanyname")]
-		public string arbo_samegroupcompanyName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_samegroupcompany"))
-				{
-					return this.FormattedValues["arbo_samegroupcompany"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_scanpallettolaneorder")]
-		public virtual arbo_account_arbo_scanpallettolaneorder? arbo_scanpallettolaneorder
-		{
-			get
-			{
-				return ((arbo_account_arbo_scanpallettolaneorder?)(EntityOptionSetEnum.GetEnum(this, "arbo_scanpallettolaneorder")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_scanpallettolaneorder");
-				this.SetAttributeValue("arbo_scanpallettolaneorder", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_scanpallettolaneorder");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_scanpallettolaneordername")]
-		public string arbo_scanpallettolaneorderName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_scanpallettolaneorder"))
-				{
-					return this.FormattedValues["arbo_scanpallettolaneorder"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_secondaryaccountname")]
-		public string arbo_SecondaryAccountName
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_secondaryaccountname");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_SecondaryAccountName");
-				this.SetAttributeValue("arbo_secondaryaccountname", value);
-				this.OnPropertyChanged("arbo_SecondaryAccountName");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_selfbilling")]
-		public virtual arbo_account_arbo_selfbilling? arbo_selfbilling
-		{
-			get
-			{
-				return ((arbo_account_arbo_selfbilling?)(EntityOptionSetEnum.GetEnum(this, "arbo_selfbilling")));
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_selfbilling");
-				this.SetAttributeValue("arbo_selfbilling", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("arbo_selfbilling");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_selfbillingname")]
-		public string arbo_selfbillingName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_selfbilling"))
-				{
-					return this.FormattedValues["arbo_selfbilling"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_sendproformatinvoiceto")]
-		public string arbo_sendproformatinvoiceto
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_sendproformatinvoiceto");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_sendproformatinvoiceto");
-				this.SetAttributeValue("arbo_sendproformatinvoiceto", value);
-				this.OnPropertyChanged("arbo_sendproformatinvoiceto");
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Contact associated with Account.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_superior1id")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_Superior1id
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_superior1id");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Superior1id");
-				this.SetAttributeValue("arbo_superior1id", value);
-				this.OnPropertyChanged("arbo_Superior1id");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_superior1idname")]
-		public string arbo_Superior1idName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_superior1id"))
-				{
-					return this.FormattedValues["arbo_superior1id"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_superior1idyominame")]
-		public string arbo_Superior1idYomiName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_superior1id"))
-				{
-					return this.FormattedValues["arbo_superior1id"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Contact associated with Account.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_superior2id")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_superior2id
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_superior2id");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_superior2id");
-				this.SetAttributeValue("arbo_superior2id", value);
-				this.OnPropertyChanged("arbo_superior2id");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_superior2idname")]
-		public string arbo_superior2idName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_superior2id"))
-				{
-					return this.FormattedValues["arbo_superior2id"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_superior2idyominame")]
-		public string arbo_superior2idYomiName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_superior2id"))
-				{
-					return this.FormattedValues["arbo_superior2id"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Contact associated with Account.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_suppliersupportid")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_suppliersupportid
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_suppliersupportid");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_suppliersupportid");
-				this.SetAttributeValue("arbo_suppliersupportid", value);
-				this.OnPropertyChanged("arbo_suppliersupportid");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_suppliersupportidname")]
-		public string arbo_suppliersupportidName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_suppliersupportid"))
-				{
-					return this.FormattedValues["arbo_suppliersupportid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_suppliersupportidyominame")]
-		public string arbo_suppliersupportidYomiName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_suppliersupportid"))
-				{
-					return this.FormattedValues["arbo_suppliersupportid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Tax associated with Account.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_taxid")]
-		public Microsoft.Xrm.Sdk.EntityReference arbo_TaxId
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("arbo_taxid");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_TaxId");
-				this.SetAttributeValue("arbo_taxid", value);
-				this.OnPropertyChanged("arbo_TaxId");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_taxidname")]
-		public string arbo_TaxIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_taxid"))
-				{
-					return this.FormattedValues["arbo_taxid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_transportationorderchecklist")]
-		public virtual System.Collections.Generic.IEnumerable<arbo_account_arbo_transportationorderchecklist> arbo_transportationorderchecklist
-		{
-			get
-			{
-				return EntityOptionSetEnum.GetMultiEnum<arbo_account_arbo_transportationorderchecklist>(this, "arbo_transportationorderchecklist");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_transportationorderchecklist");
-				this.SetAttributeValue("arbo_transportationorderchecklist", EntityOptionSetEnum.GetMultiEnum(this, "arbo_transportationorderchecklist", value));
-				this.OnPropertyChanged("arbo_transportationorderchecklist");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_transportationorderchecklistname")]
-		public string arbo_transportationorderchecklistName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_transportationorderchecklist"))
-				{
-					return this.FormattedValues["arbo_transportationorderchecklist"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_vatno")]
-		public string arbo_Vatno
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("arbo_vatno");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_Vatno");
-				this.SetAttributeValue("arbo_vatno", value);
-				this.OnPropertyChanged("arbo_Vatno");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_vatvalidated")]
-		public System.Nullable<bool> arbo_vatvalidated
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("arbo_vatvalidated");
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_vatvalidated");
-				this.SetAttributeValue("arbo_vatvalidated", value);
-				this.OnPropertyChanged("arbo_vatvalidated");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_vatvalidatedname")]
-		public string arbo_vatvalidatedName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("arbo_vatvalidated"))
-				{
-					return this.FormattedValues["arbo_vatvalidated"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Select the legal designation or other business type of the account for contracts or reporting purposes.
+		/// Vælg den juridiske angivelse eller en anden forretningstype for firmaet i forbindelse med kontrakter eller rapportering.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("businesstypecode")]
 		public virtual account_businesstypecode? BusinessTypeCode
@@ -5244,7 +1986,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows who created the record.
+		/// Viser, hvem der har oprettet posten.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdby")]
 		public Microsoft.Xrm.Sdk.EntityReference CreatedBy
@@ -5256,7 +1998,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the external party who created the record.
+		/// Viser den eksterne part, der oprettede posten.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdbyexternalparty")]
 		public Microsoft.Xrm.Sdk.EntityReference CreatedByExternalParty
@@ -5332,7 +2074,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the date and time when the record was created. The date and time are displayed in the time zone selected in Microsoft Dynamics 365 options.
+		/// Viser dato og klokkeslæt for oprettelse af posten. Datoen og klokkeslættet vises i den tidszone, der er valgt i indstillingerne i Microsoft Dynamics 365.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdon")]
 		public System.Nullable<System.DateTime> CreatedOn
@@ -5344,7 +2086,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows who created the record on behalf of another user.
+		/// Viser, hvem der oprettede posten på vegne af en anden bruger.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdonbehalfby")]
 		public Microsoft.Xrm.Sdk.EntityReference CreatedOnBehalfBy
@@ -5388,7 +2130,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the credit limit of the account. This is a useful reference when you address invoice and accounting issues with the customer.
+		/// Angiv kreditgrænsen for firmaet. Dette er en nyttig reference, når du håndterer faktura- og regnskabsproblemer over for kunden.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("creditlimit")]
 		public Microsoft.Xrm.Sdk.Money CreditLimit
@@ -5406,7 +2148,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the credit limit converted to the system's default base currency for reporting purposes.
+		/// Viser kreditgrænsen konverteret til systemets standardgrundvaluta i forbindelse med rapportering.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("creditlimit_base")]
 		public Microsoft.Xrm.Sdk.Money CreditLimit_Base
@@ -5418,7 +2160,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select whether the credit for the account is on hold. This is a useful reference while addressing the invoice and accounting issues with the customer.
+		/// Vælg, om firmaets kredit er sat i venteposition. Dette er en nyttig reference ved håndtering af faktura- og regnskabsproblemer over for kunden.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("creditonhold")]
 		public System.Nullable<bool> CreditOnHold
@@ -5452,7 +2194,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select the size category or range of the account for segmentation and reporting purposes.
+		/// Vælg firmaets størrelseskategori eller størrelsesinterval i forbindelse med segmentering og rapportering.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("customersizecode")]
 		public virtual account_customersizecode? CustomerSizeCode
@@ -5486,7 +2228,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select the category that best describes the relationship between the account and your organization.
+		/// Vælg den kategori, der bedst beskriver relationen mellem firmaet og din organisation.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("customertypecode")]
 		public virtual account_customertypecode? CustomerTypeCode
@@ -5520,41 +2262,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// price_level_accounts
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("defaultpricelevelid")]
-		public Microsoft.Xrm.Sdk.EntityReference DefaultPriceLevelId
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("defaultpricelevelid");
-			}
-			set
-			{
-				this.OnPropertyChanging("DefaultPriceLevelId");
-				this.SetAttributeValue("defaultpricelevelid", value);
-				this.OnPropertyChanged("DefaultPriceLevelId");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("defaultpricelevelidname")]
-		public string DefaultPriceLevelIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("defaultpricelevelid"))
-				{
-					return this.FormattedValues["defaultpricelevelid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Type additional information to describe the account, such as an excerpt from the company's website.
+		/// Angiv flere oplysninger for at beskrive firmaet, f.eks. et uddrag fra firmaets websted.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("description")]
 		public string Description
@@ -5572,7 +2280,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select whether the account allows bulk email sent through campaigns. If Do Not Allow is selected, the account can be added to marketing lists, but is excluded from email.
+		/// Vælg, om firmaet tillader masseforsendelser af e-mails via kampagner. Hvis Tillad ikke er valgt, kan firmaet tilføjes på marketinglister, men er udelukket fra e-mail.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotbulkemail")]
 		public System.Nullable<bool> DoNotBulkEMail
@@ -5606,7 +2314,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select whether the account allows bulk postal mail sent through marketing campaigns or quick campaigns. If Do Not Allow is selected, the account can be added to marketing lists, but will be excluded from the postal mail.
+		/// Vælg, om firmaet tillader masseforsendelser af almindelig post via marketingkampagner eller lynkampagner. Hvis Tillad ikke er valgt, kan firmaet tilføjes på marketinglisten, men er udelukket fra almindelig post.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotbulkpostalmail")]
 		public System.Nullable<bool> DoNotBulkPostalMail
@@ -5640,7 +2348,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select whether the account allows direct email sent from Microsoft Dynamics 365.
+		/// Vælg, om firmaet tillader, at der sendes direct mail fra Microsoft Dynamics 365.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotemail")]
 		public System.Nullable<bool> DoNotEMail
@@ -5674,7 +2382,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select whether the account allows faxes. If Do Not Allow is selected, the account will be excluded from fax activities distributed in marketing campaigns.
+		/// Vælg, om firmaet tillader faxer. Hvis Tillad ikke er valgt, udelukkes firmaet fra faxaktiviteter, der distribueres i marketingkampagner.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotfax")]
 		public System.Nullable<bool> DoNotFax
@@ -5708,7 +2416,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select whether the account allows phone calls. If Do Not Allow is selected, the account will be excluded from phone call activities distributed in marketing campaigns.
+		/// Vælg, om firmaet tillader telefonopkald. Hvis Tillad ikke er valgt, udelukkes firmaet fra telefonopkaldsaktiviteter, der distribueres i marketingkampagner.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotphone")]
 		public System.Nullable<bool> DoNotPhone
@@ -5742,7 +2450,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select whether the account allows direct mail. If Do Not Allow is selected, the account will be excluded from letter activities distributed in marketing campaigns.
+		/// Vælg, om firmaet tillader direct mail. Hvis Tillad ikke er valgt, udelukkes firmaet fra brevaktiviteter, der distribueres i marketingkampagner.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotpostalmail")]
 		public System.Nullable<bool> DoNotPostalMail
@@ -5792,7 +2500,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select whether the account accepts marketing materials, such as brochures or catalogs.
+		/// Vælg, om firmaet accepterer marketingmateriale som f.eks. brochurer eller kataloger.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("donotsendmm")]
 		public System.Nullable<bool> DoNotSendMM
@@ -5810,7 +2518,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the primary email address for the account.
+		/// Angiv firmaets primære e-mail-adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("emailaddress1")]
 		public string EMailAddress1
@@ -5828,7 +2536,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the secondary email address for the account.
+		/// Angiv firmaets sekundære e-mail-adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("emailaddress2")]
 		public string EMailAddress2
@@ -5846,7 +2554,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type an alternate email address for the account.
+		/// Angiv firmaets alternative e-mail-adresse.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("emailaddress3")]
 		public string EMailAddress3
@@ -5864,7 +2572,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the default image for the record.
+		/// Viser postens standardbillede.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("entityimage")]
 		public byte[] EntityImage
@@ -5900,7 +2608,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// For internal use only.
+		/// Kun til intern brug.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("entityimageid")]
 		public System.Nullable<System.Guid> EntityImageId
@@ -5912,7 +2620,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the conversion rate of the record's currency. The exchange rate is used to convert all money fields in the record from the local currency to the system's default currency.
+		/// Viser omregningskursen for postens valuta. Valutakursen bruges til at konvertere alle pengefelter i posten fra den lokale valuta til systemets standardvaluta.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("exchangerate")]
 		public System.Nullable<decimal> ExchangeRate
@@ -5924,7 +2632,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the fax number for the account.
+		/// Angiv firmaets faxnummer.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("fax")]
 		public string Fax
@@ -5942,7 +2650,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Information about whether to allow following email activity like opens, attachment views and link clicks for emails sent to the account.
+		/// Oplysninger om, hvorvidt følgende mailaktivitet som åbninger, visning af vedhæftede filer og klik på links skal tillades for mails, der sendes til firmaet.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("followemail")]
 		public System.Nullable<bool> FollowEmail
@@ -5976,7 +2684,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the URL for the account's FTP site to enable users to access data and share documents.
+		/// Angiv URL-adressen til firmaets FTP-websted, for at brugerne kan få adgang til data og dele dokumenter.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("ftpsiteurl")]
 		public string FtpSiteURL
@@ -5994,7 +2702,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Unique identifier of the data import or data migration that created this record.
+		/// Entydigt id for den dataimport eller dataoverførsel, der oprettede denne post.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("importsequencenumber")]
 		public System.Nullable<int> ImportSequenceNumber
@@ -6012,7 +2720,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select the account's primary industry for use in marketing segmentation and demographic analysis.
+		/// Vælg firmaets primære branche til brug ved marketingsegmentering og demografiske analyser.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("industrycode")]
 		public virtual account_industrycode? IndustryCode
@@ -6062,7 +2770,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Contains the date and time stamp of the last on hold time.
+		/// Indeholder dato- og klokkeslætsstemplet for den seneste tid for I venteposition.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("lastonholdtime")]
 		public System.Nullable<System.DateTime> LastOnHoldTime
@@ -6080,7 +2788,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the date when the account was last included in a marketing campaign or quick campaign.
+		/// Viser den dato, hvor firmaet sidst var inkluderet i en marketingkampagne eller lynkampagne.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("lastusedincampaign")]
 		public System.Nullable<System.DateTime> LastUsedInCampaign
@@ -6098,7 +2806,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the market capitalization of the account to identify the company's equity, used as an indicator in financial performance analysis.
+		/// Angiv firmaets markedskapitalisering for at identificere firmaets egenkapital. Bruges som indikator i analyser af det økonomiske resultat.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("marketcap")]
 		public Microsoft.Xrm.Sdk.Money MarketCap
@@ -6116,7 +2824,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the market capitalization converted to the system's default base currency.
+		/// Viser markedskapitaliseringen konverteret til systemets standardgrundvaluta.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("marketcap_base")]
 		public Microsoft.Xrm.Sdk.Money MarketCap_Base
@@ -6128,7 +2836,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Whether is only for marketing
+		/// Angiver, om det kun er til marketingbrug
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("marketingonly")]
 		public System.Nullable<bool> MarketingOnly
@@ -6194,7 +2902,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the master account that the account was merged with.
+		/// Viser det hovedfirma, som firmaet er blevet flettet med.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("masterid")]
 		public Microsoft.Xrm.Sdk.EntityReference MasterId
@@ -6206,7 +2914,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows whether the account has been merged with another account.
+		/// Viser, om firmaet er blevet flettet med et andet firma.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("merged")]
 		public System.Nullable<bool> Merged
@@ -6234,7 +2942,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows who last updated the record.
+		/// Viser, hvem der sidst har opdateret posten.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedby")]
 		public Microsoft.Xrm.Sdk.EntityReference ModifiedBy
@@ -6246,7 +2954,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the external party who modified the record.
+		/// Viser den eksterne part, der ændrede posten.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedbyexternalparty")]
 		public Microsoft.Xrm.Sdk.EntityReference ModifiedByExternalParty
@@ -6322,7 +3030,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the date and time when the record was last updated. The date and time are displayed in the time zone selected in Microsoft Dynamics 365 options.
+		/// Viser dato og klokkeslæt for den seneste opdatering af posten. Datoen og klokkeslættet vises i den tidszone, der er valgt i indstillingerne i Microsoft Dynamics 365.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedon")]
 		public System.Nullable<System.DateTime> ModifiedOn
@@ -6334,7 +3042,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows who created the record on behalf of another user.
+		/// Viser, hvem der oprettede posten på vegne af en anden bruger.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedonbehalfby")]
 		public Microsoft.Xrm.Sdk.EntityReference ModifiedOnBehalfBy
@@ -6427,159 +3135,8 @@ namespace Boruto.Plugin.Entities
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_accountkpiid")]
-		public Microsoft.Xrm.Sdk.EntityReference msdyn_accountkpiid
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("msdyn_accountkpiid");
-			}
-			set
-			{
-				this.OnPropertyChanging("msdyn_accountkpiid");
-				this.SetAttributeValue("msdyn_accountkpiid", value);
-				this.OnPropertyChanged("msdyn_accountkpiid");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_accountkpiidname")]
-		public string msdyn_accountkpiidName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("msdyn_accountkpiid"))
-				{
-					return this.FormattedValues["msdyn_accountkpiid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
 		/// <summary>
-		/// Describes whether account is opted out or not
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_gdproptout")]
-		public System.Nullable<bool> msdyn_gdproptout
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("msdyn_gdproptout");
-			}
-			set
-			{
-				this.OnPropertyChanging("msdyn_gdproptout");
-				this.SetAttributeValue("msdyn_gdproptout", value);
-				this.OnPropertyChanged("msdyn_gdproptout");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_gdproptoutname")]
-		public string msdyn_gdproptoutName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("msdyn_gdproptout"))
-				{
-					return this.FormattedValues["msdyn_gdproptout"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Indicates the primary time zone that the client works on.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_primarytimezone")]
-		public System.Nullable<int> msdyn_PrimaryTimeZone
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<int>>("msdyn_primarytimezone");
-			}
-			set
-			{
-				this.OnPropertyChanging("msdyn_PrimaryTimeZone");
-				this.SetAttributeValue("msdyn_primarytimezone", value);
-				this.OnPropertyChanged("msdyn_PrimaryTimeZone");
-			}
-		}
-		
-		/// <summary>
-		/// Sales Acceleration Insights ID
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_salesaccelerationinsightid")]
-		public Microsoft.Xrm.Sdk.EntityReference msdyn_salesaccelerationinsightid
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("msdyn_salesaccelerationinsightid");
-			}
-			set
-			{
-				this.OnPropertyChanging("msdyn_salesaccelerationinsightid");
-				this.SetAttributeValue("msdyn_salesaccelerationinsightid", value);
-				this.OnPropertyChanged("msdyn_salesaccelerationinsightid");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_salesaccelerationinsightidname")]
-		public string msdyn_salesaccelerationinsightidName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("msdyn_salesaccelerationinsightid"))
-				{
-					return this.FormattedValues["msdyn_salesaccelerationinsightid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Segment associated with account.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_segmentid")]
-		public Microsoft.Xrm.Sdk.EntityReference msdyn_segmentid
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("msdyn_segmentid");
-			}
-			set
-			{
-				this.OnPropertyChanging("msdyn_segmentid");
-				this.SetAttributeValue("msdyn_segmentid", value);
-				this.OnPropertyChanged("msdyn_segmentid");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("msdyn_segmentidname")]
-		public string msdyn_segmentidName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("msdyn_segmentid"))
-				{
-					return this.FormattedValues["msdyn_segmentid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Type the company or business name.
+		/// Angiv firma- eller forretningsnavnet.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("name")]
 		public string Name
@@ -6597,41 +3154,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// To determine of a pdf receipt has been send to the supplier
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("new_pdfreceiptsend")]
-		public System.Nullable<bool> new_PDFReceiptSend
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<bool>>("new_pdfreceiptsend");
-			}
-			set
-			{
-				this.OnPropertyChanging("new_PDFReceiptSend");
-				this.SetAttributeValue("new_pdfreceiptsend", value);
-				this.OnPropertyChanged("new_PDFReceiptSend");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("new_pdfreceiptsendname")]
-		public string new_pdfreceiptsendName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("new_pdfreceiptsend"))
-				{
-					return this.FormattedValues["new_pdfreceiptsend"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Type the number of employees that work at the account for use in marketing segmentation and demographic analysis.
+		/// Angiv antallet af medarbejdere, der arbejder i firmaet, til brug ved marketingsegmentering og demografiske analyser.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("numberofemployees")]
 		public System.Nullable<int> NumberOfEmployees
@@ -6649,7 +3172,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows how long, in minutes, that the record was on hold.
+		/// Viser, hvor længe posten var i venteposition i minutter.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("onholdtime")]
 		public System.Nullable<int> OnHoldTime
@@ -6661,141 +3184,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Number of open opportunities against an account and its child accounts.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("opendeals")]
-		public System.Nullable<int> OpenDeals
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<int>>("opendeals");
-			}
-		}
-		
-		/// <summary>
-		/// The date time for Open Deals.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("opendeals_date")]
-		public System.Nullable<System.DateTime> OpenDeals_Date
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("opendeals_date");
-			}
-		}
-		
-		/// <summary>
-		/// State of Open Deals.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("opendeals_state")]
-		public System.Nullable<int> OpenDeals_State
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<int>>("opendeals_state");
-			}
-		}
-		
-		/// <summary>
-		/// Sum of open revenue against an account and its child accounts.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("openrevenue")]
-		public Microsoft.Xrm.Sdk.Money OpenRevenue
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("openrevenue");
-			}
-		}
-		
-		/// <summary>
-		/// Sum of open revenue against an account and its child accounts.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("openrevenue_base")]
-		public Microsoft.Xrm.Sdk.Money OpenRevenue_Base
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.Money>("openrevenue_base");
-			}
-		}
-		
-		/// <summary>
-		/// The date time for Open Revenue.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("openrevenue_date")]
-		public System.Nullable<System.DateTime> OpenRevenue_Date
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("openrevenue_date");
-			}
-		}
-		
-		/// <summary>
-		/// State of Open Revenue.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("openrevenue_state")]
-		public System.Nullable<int> OpenRevenue_State
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<int>>("openrevenue_state");
-			}
-		}
-		
-		/// <summary>
-		/// account_originating_lead
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("originatingleadid")]
-		public Microsoft.Xrm.Sdk.EntityReference OriginatingLeadId
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("originatingleadid");
-			}
-			set
-			{
-				this.OnPropertyChanging("OriginatingLeadId");
-				this.SetAttributeValue("originatingleadid", value);
-				this.OnPropertyChanged("OriginatingLeadId");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("originatingleadidname")]
-		public string OriginatingLeadIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("originatingleadid"))
-				{
-					return this.FormattedValues["originatingleadid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("originatingleadidyominame")]
-		public string OriginatingLeadIdYomiName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("originatingleadid"))
-				{
-					return this.FormattedValues["originatingleadid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Date and time that the record was migrated.
+		/// Dato og klokkeslæt for overførsel af posten.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("overriddencreatedon")]
 		public System.Nullable<System.DateTime> OverriddenCreatedOn
@@ -6813,7 +3202,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Enter the user or team who is assigned to manage the record. This field is updated every time the record is assigned to a different user.
+		/// Angiv den bruger eller det team, der er tildelt til at administrere posten. Dette felt opdateres, hver gang posten tildeles en ny bruger.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("ownerid")]
 		public Microsoft.Xrm.Sdk.EntityReference OwnerId
@@ -6863,7 +3252,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select the account's ownership structure, such as public or private.
+		/// Vælg firmaets ejerskabsstruktur, f.eks. offentlig eller privat.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("ownershipcode")]
 		public virtual account_ownershipcode? OwnershipCode
@@ -6897,7 +3286,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the business unit that the record owner belongs to.
+		/// Viser den afdeling, som postejeren tilhører.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningbusinessunit")]
 		public Microsoft.Xrm.Sdk.EntityReference OwningBusinessUnit
@@ -6925,7 +3314,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Unique identifier of the team who owns the account.
+		/// Entydigt id for det team, der ejer firmaet.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningteam")]
 		public Microsoft.Xrm.Sdk.EntityReference OwningTeam
@@ -6937,7 +3326,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Unique identifier of the user who owns the account.
+		/// Entydigt id for den bruger, der ejer firmaet.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owninguser")]
 		public Microsoft.Xrm.Sdk.EntityReference OwningUser
@@ -6949,7 +3338,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Choose the parent account associated with this account to show parent and child businesses in reporting and analytics.
+		/// Vælg det overordnede firma, der er tilknyttet dette firma, for at vise overordnede og underordnede forretninger i rapportering og analyser.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("parentaccountid")]
 		public Microsoft.Xrm.Sdk.EntityReference ParentAccountId
@@ -6999,7 +3388,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// For system use only. Legacy Microsoft Dynamics CRM 3.0 workflow data.
+		/// Kun til systembrug. Ældre Microsoft Dynamics CRM 3.0-arbejdsprocesdata.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("participatesinworkflow")]
 		public System.Nullable<bool> ParticipatesInWorkflow
@@ -7033,7 +3422,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select the payment terms to indicate when the customer needs to pay the total amount.
+		/// Vælg betalingsbetingelserne for at angive, hvornår kunden skal betale det samlede beløb.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("paymenttermscode")]
 		public virtual account_paymenttermscode? PaymentTermsCode
@@ -7067,7 +3456,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select the preferred day of the week for service appointments.
+		/// Vælg den foretrukne ugedag til serviceaftaler.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredappointmentdaycode")]
 		public virtual account_preferredappointmentdaycode? PreferredAppointmentDayCode
@@ -7101,7 +3490,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select the preferred time of day for service appointments.
+		/// Vælg det foretrukne tidspunkt til serviceaftaler.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredappointmenttimecode")]
 		public virtual account_preferredappointmenttimecode? PreferredAppointmentTimeCode
@@ -7135,7 +3524,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select the preferred method of contact.
+		/// Vælg den foretrukne kontaktmetode.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredcontactmethodcode")]
 		public virtual account_preferredcontactmethodcode? PreferredContactMethodCode
@@ -7169,75 +3558,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// equipment_accounts
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredequipmentid")]
-		public Microsoft.Xrm.Sdk.EntityReference PreferredEquipmentId
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("preferredequipmentid");
-			}
-			set
-			{
-				this.OnPropertyChanging("PreferredEquipmentId");
-				this.SetAttributeValue("preferredequipmentid", value);
-				this.OnPropertyChanged("PreferredEquipmentId");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredequipmentidname")]
-		public string PreferredEquipmentIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("preferredequipmentid"))
-				{
-					return this.FormattedValues["preferredequipmentid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// service_accounts
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredserviceid")]
-		public Microsoft.Xrm.Sdk.EntityReference PreferredServiceId
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("preferredserviceid");
-			}
-			set
-			{
-				this.OnPropertyChanging("PreferredServiceId");
-				this.SetAttributeValue("preferredserviceid", value);
-				this.OnPropertyChanged("PreferredServiceId");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredserviceidname")]
-		public string PreferredServiceIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("preferredserviceid"))
-				{
-					return this.FormattedValues["preferredserviceid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Choose the preferred service representative for reference when you schedule service activities for the account.
+		/// Vælg den foretrukne serviceremedarbejder som reference, når du planlægger serviceaktiviteter for firmaet.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("preferredsystemuserid")]
 		public Microsoft.Xrm.Sdk.EntityReference PreferredSystemUserId
@@ -7287,7 +3608,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Choose the primary contact for the account to provide quick access to contact details.
+		/// Vælg firmaets primære kontakt for at sikre hurtig adgang til kontaktoplysninger.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("primarycontactid")]
 		public Microsoft.Xrm.Sdk.EntityReference PrimaryContactId
@@ -7337,7 +3658,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Primary Satori ID for Account
+		/// Primært Satori-id for firma
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("primarysatoriid")]
 		public string PrimarySatoriId
@@ -7355,7 +3676,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Primary Twitter ID for Account
+		/// Primært Twitter-id for firma
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("primarytwitterid")]
 		public string PrimaryTwitterId
@@ -7373,7 +3694,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the ID of the process.
+		/// Viser processens id.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("processid")]
 		public System.Nullable<System.Guid> ProcessId
@@ -7391,7 +3712,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the annual revenue for the account, used as an indicator in financial performance analysis.
+		/// Angiv firmaets årsomsætning, der bruges som indikator i analyser af det økonomiske resultat.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("revenue")]
 		public Microsoft.Xrm.Sdk.Money Revenue
@@ -7409,7 +3730,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the annual revenue converted to the system's default base currency. The calculations use the exchange rate specified in the Currencies area.
+		/// Viser årsomsætningen konverteret til systemets standardgrundvaluta. I beregningerne bruges den valutakurs, der er angivet i området Valutaer.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("revenue_base")]
 		public Microsoft.Xrm.Sdk.Money Revenue_Base
@@ -7421,7 +3742,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the number of shares available to the public for the account. This number is used as an indicator in financial performance analysis.
+		/// Angiv antallet af aktier, der er tilgængelige for offentligheden, for firmaet. Dette tal bruges som indikator i analyser af det økonomiske resultat.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("sharesoutstanding")]
 		public System.Nullable<int> SharesOutstanding
@@ -7439,7 +3760,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select a shipping method for deliveries sent to the account's address to designate the preferred carrier or other delivery option.
+		/// Vælg en forsendelsesmetode til leverancer, der sendes til firmaets adresse, for at angive den foretrukne transportør eller en anden leveringsindstilling.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("shippingmethodcode")]
 		public virtual account_shippingmethodcode? ShippingMethodCode
@@ -7473,7 +3794,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the Standard Industrial Classification (SIC) code that indicates the account's primary industry of business, for use in marketing segmentation and demographic analysis.
+		/// Angiv SIC-koden (Standard Industrial Classification), der angiver firmaets primære branche, til brug ved marketingsegmentering og demografiske analyser.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("sic")]
 		public string SIC
@@ -7491,7 +3812,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Choose the service level agreement (SLA) that you want to apply to the Account record.
+		/// Vælg den serviceaftale (SLA), du vil anvende på firmaposten.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("slaid")]
 		public Microsoft.Xrm.Sdk.EntityReference SLAId
@@ -7509,7 +3830,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Last SLA that was applied to this case. This field is for internal use only.
+		/// Sidste SLA, der blev anvendt til denne sag. Dette felt er kun beregnet til intern brug.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("slainvokedid")]
 		public Microsoft.Xrm.Sdk.EntityReference SLAInvokedId
@@ -7553,7 +3874,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows the ID of the stage.
+		/// Viser fasens id.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("stageid")]
 		public System.Nullable<System.Guid> StageId
@@ -7571,7 +3892,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Shows whether the account is active or inactive. Inactive accounts are read-only and can't be edited unless they are reactivated.
+		/// Viser, om firmaet er aktivt eller inaktivt. Inaktive firmaer er skrivebeskyttede og kan ikke redigeres, medmindre de genaktiveres.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("statecode")]
 		public virtual account_statecode? StateCode
@@ -7605,7 +3926,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select the account's status.
+		/// Vælg firmaets status.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("statuscode")]
 		public virtual account_statuscode? StatusCode
@@ -7639,7 +3960,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the stock exchange at which the account is listed to track their stock and financial performance of the company.
+		/// Angiv den børs, firmaet er noteret på, for at spore selskabets aktier og økonomiske resultater.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("stockexchange")]
 		public string StockExchange
@@ -7657,25 +3978,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Number of users or conversations followed the record
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("teamsfollowed")]
-		public System.Nullable<int> TeamsFollowed
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<int>>("teamsfollowed");
-			}
-			set
-			{
-				this.OnPropertyChanging("TeamsFollowed");
-				this.SetAttributeValue("teamsfollowed", value);
-				this.OnPropertyChanged("TeamsFollowed");
-			}
-		}
-		
-		/// <summary>
-		/// Type the main phone number for this account.
+		/// Angiv hovedtelefonnummeret for dette firma.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("telephone1")]
 		public string Telephone1
@@ -7693,7 +3996,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type a second phone number for this account.
+		/// Angiv et andet telefonnummer for dette firma.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("telephone2")]
 		public string Telephone2
@@ -7711,7 +4014,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type a third phone number for this account.
+		/// Angiv et tredje telefonnummer for dette firma.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("telephone3")]
 		public string Telephone3
@@ -7729,7 +4032,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Select a region or territory for the account for use in segmentation and analysis.
+		/// Vælg et område eller distrikt for firmaet til brug ved segmentering og analyser.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("territorycode")]
 		public virtual account_territorycode? TerritoryCode
@@ -7763,41 +4066,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// territory_accounts
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("territoryid")]
-		public Microsoft.Xrm.Sdk.EntityReference TerritoryId
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("territoryid");
-			}
-			set
-			{
-				this.OnPropertyChanging("TerritoryId");
-				this.SetAttributeValue("territoryid", value);
-				this.OnPropertyChanged("TerritoryId");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("territoryidname")]
-		public string TerritoryIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("territoryid"))
-				{
-					return this.FormattedValues["territoryid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Type the stock exchange symbol for the account to track financial performance of the company. You can click the code entered in this field to access the latest trading information from MSN Money.
+		/// Angiv firmaets aktiesymbol for at spore selskabets økonomiske resultater. Du kan klikke på den kode, der er angivet i dette felt, for at få adgang til de seneste handelsoplysninger fra MSN Money.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("tickersymbol")]
 		public string TickerSymbol
@@ -7815,7 +4084,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Total time spent for emails (read and write) and meetings by me in relation to account record.
+		/// Samlet tid jeg har brugt på mails (læsning og skrivning) samt møder i relation til firmapost.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("timespentbymeonemailandmeetings")]
 		public string TimeSpentByMeOnEmailAndMeetings
@@ -7827,7 +4096,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// For internal use only.
+		/// Kun til intern brug.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("timezoneruleversionnumber")]
 		public System.Nullable<int> TimeZoneRuleVersionNumber
@@ -7845,7 +4114,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Choose the local currency for the record to make sure budgets are reported in the correct currency.
+		/// Vælg den lokale valuta til posten for at sikre, at budgetter rapporteres i den korrekte valuta.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("transactioncurrencyid")]
 		public Microsoft.Xrm.Sdk.EntityReference TransactionCurrencyId
@@ -7879,7 +4148,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// For internal use only.
+		/// Kun til intern brug.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("traversedpath")]
 		public string TraversedPath
@@ -7897,7 +4166,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Time zone code that was in use when the record was created.
+		/// Den tidszonekode, der var i brug ved oprettelse af posten.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("utcconversiontimezonecode")]
 		public System.Nullable<int> UTCConversionTimeZoneCode
@@ -7915,7 +4184,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Version number of the account.
+		/// Versionsnummeret for firmaet.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("versionnumber")]
 		public System.Nullable<long> VersionNumber
@@ -7927,7 +4196,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the account's website URL to get quick details about the company profile.
+		/// Angiv URL-adressen til firmaets websted for at få hurtige oplysninger om firmaprofilen.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("websiteurl")]
 		public string WebSiteURL
@@ -7945,7 +4214,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Type the phonetic spelling of the company name, if specified in Japanese, to make sure the name is pronounced correctly in phone calls and other communications.
+		/// Angiv den fonestiske stavemåde for firmanavnet, hvis det er angivet på japansk, for at sikre, at navnet udtales korrekt i telefonopkald og anden kommunikation.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("yominame")]
 		public string YomiName
@@ -8017,42 +4286,6 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// 1:N lead_customer_accounts
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lead_customer_accounts")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> lead_customer_accounts
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_customer_accounts", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lead_customer_accounts");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_customer_accounts", null, value);
-				this.OnPropertyChanged("lead_customer_accounts");
-			}
-		}
-		
-		/// <summary>
-		/// 1:N lead_parent_account
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lead_parent_account")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> lead_parent_account
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_parent_account", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("lead_parent_account");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("lead_parent_account", null, value);
-				this.OnPropertyChanged("lead_parent_account");
-			}
-		}
-		
-		/// <summary>
 		/// 1:N msa_account_managingpartner
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("msa_account_managingpartner", Microsoft.Xrm.Sdk.EntityRole.Referenced)]
@@ -8089,42 +4322,6 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// N:N accountleads_association
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("accountleads_association")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Lead> accountleads_association
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Lead>("accountleads_association", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("accountleads_association");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Lead>("accountleads_association", null, value);
-				this.OnPropertyChanged("accountleads_association");
-			}
-		}
-		
-		/// <summary>
-		/// N:N arbo_contactallowportalaccountaccess
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_contactallowportalaccountaccess")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.Contact> arbo_contactallowportalaccountaccess
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.Contact>("arbo_contactallowportalaccountaccess", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_contactallowportalaccountaccess");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.Contact>("arbo_contactallowportalaccountaccess", null, value);
-				this.OnPropertyChanged("arbo_contactallowportalaccountaccess");
-			}
-		}
-		
-		/// <summary>
 		/// N:1 account_master_account
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("masterid")]
@@ -8134,25 +4331,6 @@ namespace Boruto.Plugin.Entities
 			get
 			{
 				return this.GetRelatedEntity<Boruto.Plugin.Entities.Account>("account_master_account", Microsoft.Xrm.Sdk.EntityRole.Referencing);
-			}
-		}
-		
-		/// <summary>
-		/// N:1 account_originating_lead
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("originatingleadid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("account_originating_lead")]
-		public Boruto.Plugin.Entities.Lead account_originating_lead
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.Lead>("account_originating_lead", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("account_originating_lead");
-				this.SetRelatedEntity<Boruto.Plugin.Entities.Lead>("account_originating_lead", null, value);
-				this.OnPropertyChanged("account_originating_lead");
 			}
 		}
 		
@@ -8191,158 +4369,6 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("account_primary_contact");
 				this.SetRelatedEntity<Boruto.Plugin.Entities.Contact>("account_primary_contact", null, value);
 				this.OnPropertyChanged("account_primary_contact");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 arbo_chainresponsible_contact_account
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_chainresponsibleid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_chainresponsible_contact_account")]
-		public Boruto.Plugin.Entities.Contact arbo_chainresponsible_contact_account
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_chainresponsible_contact_account", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_chainresponsible_contact_account");
-				this.SetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_chainresponsible_contact_account", null, value);
-				this.OnPropertyChanged("arbo_chainresponsible_contact_account");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 arbo_contact_account_contract
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_contractresponsibleid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_contact_account_contract")]
-		public Boruto.Plugin.Entities.Contact arbo_contact_account_contract
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_contact_account_contract", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_contact_account_contract");
-				this.SetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_contact_account_contract", null, value);
-				this.OnPropertyChanged("arbo_contact_account_contract");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 arbo_contact_account_finance
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_financeresponsibleid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_contact_account_finance")]
-		public Boruto.Plugin.Entities.Contact arbo_contact_account_finance
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_contact_account_finance", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_contact_account_finance");
-				this.SetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_contact_account_finance", null, value);
-				this.OnPropertyChanged("arbo_contact_account_finance");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 arbo_contact_account_logistic
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_logisticresponsibleid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_contact_account_logistic")]
-		public Boruto.Plugin.Entities.Contact arbo_contact_account_logistic
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_contact_account_logistic", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_contact_account_logistic");
-				this.SetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_contact_account_logistic", null, value);
-				this.OnPropertyChanged("arbo_contact_account_logistic");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 arbo_salesresponsiblecontact_account
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_salesresponsibleid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_salesresponsiblecontact_account")]
-		public Boruto.Plugin.Entities.Contact arbo_salesresponsiblecontact_account
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_salesresponsiblecontact_account", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_salesresponsiblecontact_account");
-				this.SetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_salesresponsiblecontact_account", null, value);
-				this.OnPropertyChanged("arbo_salesresponsiblecontact_account");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 arbo_superior1_contact_account
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_superior1id")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_superior1_contact_account")]
-		public Boruto.Plugin.Entities.Contact arbo_superior1_contact_account
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_superior1_contact_account", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_superior1_contact_account");
-				this.SetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_superior1_contact_account", null, value);
-				this.OnPropertyChanged("arbo_superior1_contact_account");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 arbo_superior2_contact_account
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_superior2id")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_superior2_contact_account")]
-		public Boruto.Plugin.Entities.Contact arbo_superior2_contact_account
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_superior2_contact_account", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_superior2_contact_account");
-				this.SetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_superior2_contact_account", null, value);
-				this.OnPropertyChanged("arbo_superior2_contact_account");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 arbo_suppliersupport_contact_account
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("arbo_suppliersupportid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("arbo_suppliersupport_contact_account")]
-		public Boruto.Plugin.Entities.Contact arbo_suppliersupport_contact_account
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_suppliersupport_contact_account", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("arbo_suppliersupport_contact_account");
-				this.SetRelatedEntity<Boruto.Plugin.Entities.Contact>("arbo_suppliersupport_contact_account", null, value);
-				this.OnPropertyChanged("arbo_suppliersupport_contact_account");
 			}
 		}
 		

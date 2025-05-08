@@ -75,17 +75,6 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.Lead"/> entities.
-		/// </summary>
-		public System.Linq.IQueryable<Boruto.Plugin.Entities.Lead> LeadSet
-		{
-			get
-			{
-				return this.CreateQuery<Boruto.Plugin.Entities.Lead>();
-			}
-		}
-		
-		/// <summary>
 		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.SystemUser"/> entities.
 		/// </summary>
 		public System.Linq.IQueryable<Boruto.Plugin.Entities.SystemUser> SystemUserSet

@@ -14,7 +14,7 @@ namespace Boruto.Plugin.Entities
 	
 	
 	/// <summary>
-	/// Status of the plugindemo
+	/// Status for plugindemo
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -29,7 +29,7 @@ namespace Boruto.Plugin.Entities
 	}
 	
 	/// <summary>
-	/// Reason for the status of the plugindemo
+	/// Årsag til statussen for plugindemo
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -537,7 +537,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Name of the owner
+		/// Navnet på ejeren
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owneridname")]
 		public string OwnerIdName
@@ -556,7 +556,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Yomi name of the owner
+		/// Yomi-navnet på ejeren
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owneridyominame")]
 		public string OwnerIdYomiName
@@ -731,7 +731,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Version Number
+		/// Versionsnummer
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("versionnumber")]
 		public System.Nullable<long> VersionNumber
