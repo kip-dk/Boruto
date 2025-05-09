@@ -27,6 +27,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solutions", "Solutions", "{FDA8B385-A421-453F-A708-BC15072A7A4F}"
 	ProjectSection(SolutionItems) = preProject
 		Solutions\Boruto_1_0_0_0.zip = Solutions\Boruto_1_0_0_0.zip
+		Solutions\Boruto_1_0_0_1.zip = Solutions\Boruto_1_0_0_1.zip
 	EndProjectSection
 EndProject
 Global
