@@ -5,7 +5,6 @@ using Boruto.Extensions.QueryExpression;
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Services
 {
-    [Export(typeof(ServiceAPI.ISdkMessageProcessingStepService))]
     internal class SdkMessageProcessingStepService : ServiceAPI.ISdkMessageProcessingStepService
     {
         private ServiceAPI.IMessageService messageService;
@@ -21,7 +19,6 @@ namespace Boruto.Deployment.Services
         private readonly IOrganizationService orgService;
         private const string IMAGE_NAME = "BorutoImage";
 
-        [ImportingConstructor]
         public SdkMessageProcessingStepService(
             ServiceAPI.IMessageService messageService, 
             ServiceAPI.ISolutionService solutionService,

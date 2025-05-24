@@ -1,7 +1,6 @@
 ﻿using Boruto.Deployment.ServiceAPI;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -10,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Services
 {
-    [Export(typeof(ServiceAPI.IDeployService))]
     internal class DeployService : ServiceAPI.IDeployService
     {
         private readonly IPluginDeploymentService pluginDeployService;
@@ -24,7 +22,6 @@ namespace Boruto.Deployment.Services
         private readonly Boruto.Deployment.Models.Config config;
 
 
-        [ImportingConstructor]
         public DeployService(
             ServiceAPI.IPluginDeploymentService pluginDeployService,
             ServiceAPI.IPluginAssemblyService pluginAssmService,

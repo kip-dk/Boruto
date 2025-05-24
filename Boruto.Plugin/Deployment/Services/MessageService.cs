@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Services
 {
-    [Export(typeof(ServiceAPI.IMessageService))]
     internal class MessageService : ServiceAPI.IMessageService
     {
-        [ImportingConstructor]
         public MessageService()
         {
         }

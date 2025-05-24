@@ -2,7 +2,6 @@
 using Boruto.Deployment.ServiceAPI;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +12,6 @@ using Boruto.Extensions.QueryExpression;
 
 namespace Boruto.Deployment.Services
 {
-    [Export(typeof(ServiceAPI.IPluginAssemblyService))]
     internal class PluginAssemblyService : ServiceAPI.IPluginAssemblyService
     {
         private readonly IOrganizationService orgService;
@@ -26,7 +24,6 @@ namespace Boruto.Deployment.Services
         private byte[] code;
         private bool isNew = true;
 
-        [ImportingConstructor]
         public PluginAssemblyService(
             Microsoft.Xrm.Sdk.IOrganizationService orgService,
             ServiceAPI.IMessageService messageService,

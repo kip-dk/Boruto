@@ -2,13 +2,11 @@
 using Boruto.Extensions.Reflection;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Reflection;
 
 namespace Boruto.Deployment.Services
 {
-    [Export(typeof(ServiceAPI.IPluginDeploymentService))]
     internal class PluginDeploymentService : ServiceAPI.IPluginDeploymentService
     {
         private readonly ServiceAPI.IMessageService messageService;
@@ -17,7 +15,6 @@ namespace Boruto.Deployment.Services
 
         private static readonly Type BORUTO_PLUGIN = typeof(Boruto.BasePlugin);
 
-        [ImportingConstructor]
         public PluginDeploymentService(ServiceAPI.IMessageService messageService)
         {
             this.messageService = messageService;

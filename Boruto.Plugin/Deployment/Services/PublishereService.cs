@@ -3,7 +3,6 @@ using Boruto.Extensions.QueryExpression;
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,13 +10,11 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Services
 {
-    [Export(typeof(ServiceAPI.IPublishereService))]
     internal class PublishereService : ServiceAPI.IPublishereService
     {
         private readonly IOrganizationService orgService;
         private string _componentString;
 
-        [ImportingConstructor]
         public PublishereService(Microsoft.Xrm.Sdk.IOrganizationService orgService)
         {
             this.orgService = orgService;

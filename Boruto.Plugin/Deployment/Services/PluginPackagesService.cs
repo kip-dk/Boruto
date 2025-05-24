@@ -2,7 +2,6 @@
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,12 +10,10 @@ using Boruto.Extensions.QueryExpression;
 
 namespace Boruto.Deployment.Services
 {
-    [Export(typeof(ServiceAPI.IPluginPackagesService))]
     internal class PluginPackagesService : ServiceAPI.IPluginPackagesService
     {
         private readonly IOrganizationService orgService;
 
-        [ImportingConstructor]
         public PluginPackagesService(Microsoft.Xrm.Sdk.IOrganizationService orgService)
         {
             this.orgService = orgService;

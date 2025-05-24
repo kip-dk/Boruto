@@ -6,7 +6,6 @@ using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,7 +13,6 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Services
 {
-    [Export(typeof(ISolutionService))]
     internal class SolutionService : ISolutionService
     {
         private readonly IOrganizationService orgService;
@@ -24,7 +22,6 @@ namespace Boruto.Deployment.Services
 
         private const string NO_SOLUTION_MESSAGE = "Unable to add components to solution. Add /solution:[solutionname] as parameter to the command tool to get components attached to a specific solution.";
 
-        [ImportingConstructor]
         public SolutionService(Microsoft.Xrm.Sdk.IOrganizationService orgService, IMessageService messageService)
         {
             this.orgService = orgService;

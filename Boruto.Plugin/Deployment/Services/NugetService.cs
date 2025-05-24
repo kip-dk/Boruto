@@ -1,7 +1,6 @@
 ﻿using Boruto.Deployment.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Drawing;
 using System.IO.Compression;
 using System.Linq;
@@ -10,14 +9,12 @@ using System.Threading.Tasks;
 
 namespace Boruto.Deployment.Services
 {
-    [Export(typeof(ServiceAPI.INugetService))]
     internal class NugetService : ServiceAPI.INugetService
     {
         private Models.Config config;
         private Models.NugetSpec spec;
         private DLLCode[] dlls;
 
-        [ImportingConstructor]
         public NugetService()
         {
             this.config = Models.Config.Instance;

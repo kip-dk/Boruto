@@ -6,7 +6,6 @@ using Microsoft.Win32;
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,13 +13,11 @@ using System.Web.UI.WebControls;
 
 namespace Boruto.Deployment.Services
 {
-    [Export(typeof(ServiceAPI.IPluginTypeService))]
     internal class PluginTypeService : ServiceAPI.IPluginTypeService
     {
         private readonly IOrganizationService orgService;
         private ServiceAPI.IMessageService messageService;
 
-        [ImportingConstructor]
         public PluginTypeService(Microsoft.Xrm.Sdk.IOrganizationService orgService, ServiceAPI.IMessageService messageService)
         {
             this.orgService = orgService;
