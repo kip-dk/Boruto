@@ -1,6 +1,7 @@
 ﻿using Boruto.Deployment.Services;
 using Microsoft.Crm.Sdk.Messages;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -65,6 +66,49 @@ namespace Boruto.Extensions.Reflection
         public static bool IsQueryable(this Type type)
         {
             return type.IsInterface && type.IsGenericType && type.FullName.StartsWith("System.Linq.IQueryable") && type.GetGenericArguments().First().IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity));
+        }
+
+        private static Dictionary<Type, string> typeToLogicalNameMap = new Dictionary<Type, string>();
+        public static string ToIQueryableLogicalName(this Type type)
+        {
+            if (typeToLogicalNameMap.TryGetValue(type, out string s))
+            {
+                return s;
+            }
+
+            if (type.IsQueryable())
+            {
+                return type.GetGenericArguments().First().ToEntityLogicalName();
+            }
+
+            if (type.IsRepository())
+            {
+
+            }
+
+            throw new Exceptions.TypeNotEntityType(type, true);
+        }
+
+        public static string ToEntityLogicalName(this Type type)
+        {
+            if (!type.IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity)))
+            {
+                throw new Exceptions.TypeNotEntityType(type, true);
+            }
+
+            if (typeToLogicalNameMap.TryGetValue(type, out string s))
+            {
+                return s;
+            }
+
+            while (type.BaseType != typeof(Microsoft.Xrm.Sdk.Entity))
+            {
+                type = type.BaseType;
+            }
+
+            var ent = (Microsoft.Xrm.Sdk.Entity)System.Activator.CreateInstance(type);
+            typeToLogicalNameMap[type] = ent.LogicalName;
+            return typeToLogicalNameMap[type];
         }
 
         private static Dictionary<string, Type> resolvedEntityTypes = new Dictionary<string, Type>();

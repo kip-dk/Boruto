@@ -153,8 +153,6 @@ namespace Boruto.Reflection
                 return o;
             }
 
-
-
             #region resolve standard services
             if (fromType == (typeof(Microsoft.Xrm.Sdk.ITracingService)))
             {
@@ -238,8 +236,8 @@ namespace Boruto.Reflection
             {
                 var repo = this.ResolveRepository(fromType.GenericTypeArguments[0], admin);
                 var queryMethd = repo.GetType().GetMethod("GetQuery", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-                resolved[fromType] = queryMethd.Invoke(repo, null);
-                return resolved[fromType];
+                // do not cache iqueryable,  each injection should have its own instance
+                return queryMethd.Invoke(repo, null);
             }
             #endregion
 

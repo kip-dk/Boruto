@@ -11,5 +11,9 @@ namespace Boruto.Exceptions
         public UnresolveableTypeException(Type type) : base($"{ type.FullName } could not be resolved. No implementation with at least one public constructor was found")
         {
         }
+
+        public UnresolveableTypeException(string export, Type type) : base($"Export: {export }, Type: {type.FullName} could not be resolved. No implementation with at least one public constructor was found")
+        {
+        }
     }
 }

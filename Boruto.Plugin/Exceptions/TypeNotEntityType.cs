@@ -11,5 +11,9 @@ namespace Boruto.Exceptions
         public TypeNotEntityType(Type type) : base($"Type: { type.FullName } does not extens Microsoft.Xrm.Sdk.Entity")
         {
         }
+
+        public TypeNotEntityType(Type type, bool isGeneric) : base($"Type: {type.GetGenericArguments().First()} does not extens Microsoft.Xrm.Sdk.Entity")
+        {
+        }
     }
 }
