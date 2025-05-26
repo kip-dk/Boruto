@@ -163,29 +163,43 @@ namespace Boruto
         {
             get
             {
-                if (this._preimage == null)
+                return this.GetPreImage(true);
+            }
+        }
+
+        private Microsoft.Xrm.Sdk.Entity GetPreImage(bool errorIfNotFound)
+        {
+            if (this._preimage == null)
+            {
+                this._preimage = new Entity();
+                this._preimage.LogicalName = this.PrimaryLogicalName;
+                this._preimage.Id = this.PrimaryEntityId;
+                this.ResolveInfoFromDeleteMessage(_preimage);
+
+                var key = Boruto.Deployment.Services.SdkMessageProcessingStepService.ImageName(1);
+
+                if (this.PluginExecutionContext.PreEntityImages != null && this.PluginExecutionContext.PreEntityImages.ContainsKey(key))
                 {
-                    this._preimage = new Entity();
-                    this._preimage.LogicalName = this.PrimaryLogicalName;
-                    this._preimage.Id = this.PrimaryEntityId;
-                    this.ResolveInfoFromDeleteMessage(_preimage);
-
-                    var key = Boruto.Deployment.Services.SdkMessageProcessingStepService.ImageName(1);
-
-                    if (this.PluginExecutionContext.PreEntityImages != null && this.PluginExecutionContext.PreEntityImages.ContainsKey(key))
+                    var pe = this.PluginExecutionContext.PreEntityImages[key];
+                    foreach (var att in pe.Attributes)
                     {
-                        var pe = this.PluginExecutionContext.PreEntityImages[key];
-                        foreach (var att in pe.Attributes)
-                        {
-                            this._preimage[att.Key] = att.Value;
-                        }
-                    } else
-                    {
-                        Boruto.Trace.Error($"{ key } was expected, but not found in pre entity images");
+                        this._preimage[att.Key] = att.Value;
                     }
                 }
-                return this._preimage;
+                else
+                {
+                    if (errorIfNotFound)
+                    {
+                        Boruto.Trace.Error($"[{this.methodPattern}]:[{key}] was expected, but not found in pre entity images");
+                    } else
+                    {
+                        this._preimage = null;
+                        return null;
+                    }
+                }
             }
+            return this._preimage;
+
         }
 
         private Microsoft.Xrm.Sdk.Entity _postimage;
@@ -193,29 +207,42 @@ namespace Boruto
         {
             get
             {
-                if (this._postimage == null)
+                return this.GetPostImage(true);
+            }
+        }
+
+        private Microsoft.Xrm.Sdk.Entity GetPostImage(bool throwIfNotFound)
+        {
+            if (this._postimage == null)
+            {
+                this._postimage = new Entity();
+                this._postimage.LogicalName = this.PrimaryLogicalName;
+                this._postimage.Id = this.PrimaryEntityId;
+                this.ResolveInfoFromDeleteMessage(_postimage);
+
+                var key = Boruto.Deployment.Services.SdkMessageProcessingStepService.ImageName(2);
+
+                if (this.PluginExecutionContext.PostEntityImages != null && this.PluginExecutionContext.PostEntityImages.ContainsKey(key))
                 {
-                    this._postimage = new Entity();
-                    this._postimage.LogicalName = this.PrimaryLogicalName;
-                    this._postimage.Id = this.PrimaryEntityId;
-                    this.ResolveInfoFromDeleteMessage(_postimage);
-
-                    var key = Boruto.Deployment.Services.SdkMessageProcessingStepService.ImageName(2);
-
-                    if (this.PluginExecutionContext.PostEntityImages != null && this.PluginExecutionContext.PostEntityImages.ContainsKey(key))
+                    var pe = this.PluginExecutionContext.PostEntityImages[key];
+                    foreach (var att in pe.Attributes)
                     {
-                        var pe = this.PluginExecutionContext.PostEntityImages[key];
-                        foreach (var att in pe.Attributes)
-                        {
-                            this._postimage[att.Key] = att.Value;
-                        }
-                    } else
-                    {
-                        Boruto.Trace.Error($"{ key } was expected, but not found as post image");
+                        this._postimage[att.Key] = att.Value;
                     }
                 }
-                return this._postimage;
+                else
+                {
+                    if (throwIfNotFound)
+                    {
+                        Boruto.Trace.Error($"{key} was expected, but not found as post image");
+                    } else
+                    {
+                        this._postimage = null;
+                        return null;
+                    }
+                }
             }
+            return this._postimage;
         }
 
         private Microsoft.Xrm.Sdk.Entity _merged;
@@ -223,23 +250,37 @@ namespace Boruto
         {
             get
             {
-                if (this.Message == "Delete")
+                return this.GetMerged(true);
+            }
+        }
+
+        private Microsoft.Xrm.Sdk.Entity GetMerged(bool errorOnNoImage)
+        {
+            if (this.Message == "Delete")
+            {
+                return this.GetPreImage(errorOnNoImage);
+            }
+
+            if (this.Message != "Update")
+            {
+                return this.Target;
+            }
+
+            if (_merged == null)
+            {
+                var pre = this.GetPreImage(errorOnNoImage);
+
+                if (pre == null && !errorOnNoImage)
                 {
-                    return this.PreImage;
+                    return null;
                 }
 
-                if (this.Message != "Update")
-                {
-                    return this.Target;
-                }
+                this._merged = new Entity();
+                this._merged.LogicalName = this.PrimaryLogicalName;
+                this._merged.Id = this.PrimaryEntityId;
 
-                if (_merged == null)
+                if (pre != null)
                 {
-                    this._merged = new Entity();
-                    this._merged.LogicalName = this.PrimaryLogicalName;
-                    this._merged.Id = this.PrimaryEntityId;
-
-                    var pre = this.PreImage;
                     foreach (var att in pre.Attributes)
                     {
                         this._merged[att.Key] = att.Value;
@@ -253,8 +294,8 @@ namespace Boruto
                         this._merged[att.Key] = att.Value;
                     }
                 }
-                return _merged;
             }
+            return _merged;
         }
 
         private Microsoft.Xrm.Sdk.EntityReference _targetReference;
@@ -662,30 +703,31 @@ namespace Boruto
 
         T IServiceContext.Preimage<T>()
         {
-            var p = this.PreImage;
-            if (this.PreImage != null)
+            var p = this.GetPreImage(false);
+
+            if (p != null)
             {
-                return this.PreImage.ToEntity<T>();
+                return p.ToEntity<T>();
             }
             return default(T);
         }
 
         T IServiceContext.PostImage<T>()
         {
-            var p = this.PostImage;
-            if (this.PostImage != null)
+            var p = this.GetPostImage(false);
+            if (p != null)
             {
-                return this.PostImage.ToEntity<T>();
+                return p.ToEntity<T>();
             }
             return default(T);
         }
 
         T IServiceContext.MergedImage<T>()
         {
-            var p = this.PostImage;
-            if (this.PostImage != null)
+            var p = this.GetMerged(false);
+            if (p != null)
             {
-                return this.PostImage.ToEntity<T>();
+                return p.ToEntity<T>();
             }
             return default(T);
         }
