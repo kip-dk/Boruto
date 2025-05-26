@@ -128,7 +128,7 @@ namespace Boruto.Reflection
             {
                 if (result is Microsoft.Xrm.Sdk.Entity ent)
                 {
-                    ent.Attributes = this.ctx.PreImage.Attributes;
+                    ent.Attributes = this.ctx.PostImage.Attributes;
                     ent.LogicalName = this.ctx.TargetLogicalName;
                     ent.Id = this.ctx.TargetId;
                     return result;
@@ -136,7 +136,7 @@ namespace Boruto.Reflection
 
                 if (result is IPreImage postimage)
                 {
-                    postimage.Attributes = this.ctx.PreImage.Attributes;
+                    postimage.Attributes = this.ctx.PostImage.Attributes;
                 }
 
                 return result;
