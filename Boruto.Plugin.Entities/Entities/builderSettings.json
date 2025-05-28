@@ -7,16 +7,19 @@
   "generateSdkMessages": true,
   "generateGlobalOptionSets": false,
   "emitFieldsClasses": true,
-  "entityTypesFolder": ".\\Entities\\ProxyClasses",
-  "messagesTypesFolder": ".\\Entities\\ProxyClasses",
-  "optionSetsTypesFolder": ".\\Entities\\ProxyClasses",
+  "entityTypesFolder": ".\\ProxyClasses",
+  "messagesTypesFolder": ".\\ProxyClasses",
+  "optionSetsTypesFolder": ".\\ProxyClasses",
+  "omitEntityPrefix": [
+    "bor_"
+  ],
   "entityNamesFilter": [
-    "account",
-    "lead",
+    "Account",
+    "Lead",
     "bor_plugindemo",
     "bor_demoviews",
-    "systemuser",
-    "contact"
+    "SystemUser",
+    "Contact"
 
   ],
   "messageNamesFilter": [

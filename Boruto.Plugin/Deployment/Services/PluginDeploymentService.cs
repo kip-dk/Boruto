@@ -11,7 +11,6 @@ namespace Boruto.Deployment.Services
     {
         private readonly ServiceAPI.IMessageService messageService;
         private int[] stages = new int[] { 10, 20, 40 };
-        private string[] entityLogicalNames;
 
         private static readonly Type BORUTO_PLUGIN = typeof(Boruto.BasePlugin);
 
@@ -169,7 +168,6 @@ namespace Boruto.Deployment.Services
 
         public static string[] ToLogicalName(this MethodInfo method, Assembly[] assms)
         {
-#warning HER
             var entityTypeAttrs = method.GetCustomAttributes<Boruto.Attributes.EntityTypeAttribute>()?.ToArray();
             if (entityTypeAttrs != null && entityTypeAttrs.Length > 0)
             {

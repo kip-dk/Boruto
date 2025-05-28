@@ -39,6 +39,17 @@ namespace Bor
                             }
                             break;
                         }
+                    case "model":
+                        {
+                            var configString = System.Configuration.ConfigurationManager.ConnectionStrings["CRM"].ConnectionString;
+                            var connectionString = Bor.XrmOrganization.ConnectionString.ResolveConnectionStringFromStorage(configString);
+                            using (var instance = new Microsoft.PowerPlatform.Dataverse.Client.ServiceClient(connectionString))
+                            {
+                                var deployer = new Boruto.Tools.Tool(instance);
+                                deployer.GenerateIUnitOfWork();
+                            }
+                            break;
+                        }
                     default:
                         {
                             ICmd cmd = null;

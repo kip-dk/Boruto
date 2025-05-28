@@ -32,7 +32,6 @@ namespace Boruto.Deployment.Services
             return this.dlls;
         }
 
-        private string _packageFile;
         private string PackageFile()
         {
             var dirInfo = new System.IO.DirectoryInfo(this.config.Plugin.Path);

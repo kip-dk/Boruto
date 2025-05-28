@@ -308,7 +308,7 @@ namespace Boruto.Plugin.Entities
 	}
 	
 	/// <summary>
-	/// The type of user
+	/// Typen af bruger
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
@@ -316,10 +316,10 @@ namespace Boruto.Plugin.Entities
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		EntraUser = 0,
+		Entrabruger = 0,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		C2User = 1,
+		C2bruger = 1,
 	}
 	
 	/// <summary>
@@ -3073,7 +3073,7 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// The type of user
+		/// Typen af bruger
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("systemmanagedusertype")]
 		public virtual systemuser_systemmanagedusertype? SystemManagedUserType

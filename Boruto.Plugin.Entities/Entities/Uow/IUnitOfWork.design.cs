@@ -1,14 +1,12 @@
-﻿using Microsoft.Crm.Sdk;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Boruto.Plugin.Entities
 {
-    public partial interface IUnitOfWork
-    {
-        IRepository<Account> Accounts { get; }
-    }
+	public partial interface IUnitOfWork
+	{
+		IRepository<Account> Accounts { get; }
+		IRepository<Lead> Leads { get; }
+		IRepository<bor_plugindemo> Plugindemos { get; }
+		IRepository<bor_demoviews> Demoviewss { get; }
+		IRepository<SystemUser> SystemUsers { get; }
+		IRepository<Contact> Contacts { get; }
+	}
 }
