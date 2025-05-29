@@ -14,12 +14,11 @@
     "bor_"
   ],
   "entityNamesFilter": [
-    "Account",
-    "Lead",
+    "account",
     "bor_plugindemo",
     "bor_demoviews",
-    "SystemUser",
-    "Contact"
+    "systemuser",
+    "contact"
 
   ],
   "messageNamesFilter": [

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -12,13 +13,7 @@ namespace Boruto.Tools
     public class Tool
     {
         private readonly IOrganizationService orgService;
-
         private const string BUILDER_FILENAME = "builderSettings.json";
-
-        private static readonly JsonSerializerOptions jsonOptions = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        };
 
         public Tool(Microsoft.Xrm.Sdk.IOrganizationService orgService)
         {
@@ -34,48 +29,65 @@ namespace Boruto.Tools
                 return;
             }
 
-            using (var fil = new System.IO.FileStream(BUILDER_FILENAME, System.IO.FileMode.Open))
+            using (var fac = new ServiceFactory(this.orgService, null, typeof(Tool).Assembly))
             {
-                var builderSettings = System.Text.Json.JsonSerializer.Deserialize<BuilderSettings>(fil, jsonOptions);
+                var meta = fac.Create<ServiceAPI.IMetadataService>();
 
-                using (var file = new System.IO.StreamWriter($@"Uow\IUnitOfWork.design.cs"))
+                using (var fil = new System.IO.FileStream(BUILDER_FILENAME, System.IO.FileMode.Open))
                 {
-                    file.WriteLine($"namespace { builderSettings.Namespace }");
-                    file.WriteLine("{");
+                    var ser = new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(BuilderSettings));
+                    var builderSettings = (BuilderSettings)ser.ReadObject(fil);
 
-                    file.WriteLine($"\tpublic partial interface IUnitOfWork");
-                    file.WriteLine("\t{");
-                    foreach (var entity in builderSettings.EntityNamesFilter)
+                    var map = new Dictionary<string, string>();
+
+                    using (var file = new System.IO.StreamWriter($@"Uow\IUnitOfWork.design.cs"))
                     {
-                        file.WriteLine($"\t\tIRepository<{entity}> {entity.ServiceNameOf(builderSettings.OmitEntityPrefix)} {{ get; }}");
+                        file.WriteLine($"namespace {builderSettings.Namespace}");
+                        file.WriteLine("{");
+
+                        file.WriteLine($"\tpublic partial interface IUnitOfWork");
+                        file.WriteLine("\t{");
+                        foreach (var entity in builderSettings.EntityNamesFilter)
+                        {
+                            var ent = meta.ForEntity(entity);
+                            map[entity] = ent.SchemaName;
+                            file.WriteLine($"\t\tIRepository<{ent.SchemaName}> {ent.SchemaName.ServiceNameOf(builderSettings.OmitEntityPrefix)} {{ get; }}");
+                        }
+                        file.WriteLine("\t}");
+
+                        file.WriteLine("}");
                     }
-                    file.WriteLine("\t}");
 
-                    file.WriteLine("}");
-                }
-
-                using (var file = new System.IO.StreamWriter($@"Uow\CrmUnitOfWork.design.cs"))
-                {
-                    file.WriteLine($"namespace {builderSettings.Namespace}");
-                    file.WriteLine("{");
-
-                    file.WriteLine($"\tpublic partial class CrmUnitOfWork");
-                    file.WriteLine("\t{");
-                    foreach (var entity in builderSettings.EntityNamesFilter)
+                    using (var file = new System.IO.StreamWriter($@"Uow\CrmUnitOfWork.design.cs"))
                     {
-                        file.WriteLine($"\t\tpublic IRepository<{entity}> {entity.ServiceNameOf(builderSettings.OmitEntityPrefix)} => GetRepository<{entity}>();");
-                    }
-                    file.WriteLine("\t}");
+                        file.WriteLine($"namespace {builderSettings.Namespace}");
+                        file.WriteLine("{");
 
-                    file.WriteLine("}");
+                        file.WriteLine($"\tpublic partial class CrmUnitOfWork");
+                        file.WriteLine("\t{");
+                        foreach (var entity in builderSettings.EntityNamesFilter)
+                        {
+                            var sn = map[entity];
+                            file.WriteLine($"\t\tpublic IRepository<{sn}> {sn.ServiceNameOf(builderSettings.OmitEntityPrefix)} => GetRepository<{sn}>();");
+                        }
+                        file.WriteLine("\t}");
+
+                        file.WriteLine("}");
+                    }
                 }
             }
         }
 
+        [DataContract]
         internal class BuilderSettings
         {
+            [DataMember(Name = "namespace")]
             public string Namespace { get; set; }
+
+            [DataMember(Name = "entityNamesFilter")]
             public string[] EntityNamesFilter { get; set; }
+
+            [DataMember(Name = "omitEntityPrefix")]
             public string[] OmitEntityPrefix { get; set; }
         }
     }
