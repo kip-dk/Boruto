@@ -34,6 +34,8 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No boruto specific code generation
 
 ## Changelog
+### 1.0.2.4 2025-05-29: Added tool to generate IUnitOfWork
+
 ### 1.0.2.3 2025-05-26: Fixed to many image mising logs in tracelog
 
 ### 1.0.2.1 2025-05-24: Deployer tool is now using the boruto service for dependency injection and dependency on System.ComponentModel has been removed
