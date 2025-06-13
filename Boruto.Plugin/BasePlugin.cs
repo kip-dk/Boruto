@@ -46,6 +46,7 @@ namespace Boruto
                     {
                         throw;
                     }
+                    Boruto.Trace.Error(ex.GetType().FullName);
                     Boruto.Trace.Error(ex.Message);
                     Boruto.Trace.Error(ex.StackTrace);
                     var inner = ex.InnerException;
@@ -55,7 +56,18 @@ namespace Boruto
                         Boruto.Trace.Error($"   {inner.StackTrace}");
                         inner = inner.InnerException;
                     }
-                    throw new InvalidPluginExecutionException($"Unexpected exception: {ex.Message}");
+
+                    var tobethrown = ex.InnerException;
+                    while (tobethrown != null)
+                    {
+                        if (tobethrown is Microsoft.Xrm.Sdk.InvalidPluginExecutionException)
+                        {
+                            throw tobethrown;
+                        }
+                        tobethrown = tobethrown.InnerException;
+                    }
+
+                    throw new InvalidPluginExecutionException($"Unexpected exception: { ex.GetType().FullName }: {ex.Message}");
                 }
                 finally
                 {
