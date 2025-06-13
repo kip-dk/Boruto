@@ -524,7 +524,24 @@ namespace Boruto
                         #endregion
 
                         #region invoke
-                        var result = method.method.Invoke(this.plugin, args);
+                        object result = null;
+
+                        try
+                        {
+                            result = method.method.Invoke(this.plugin, args);
+                        } catch (System.Reflection.TargetInvocationException te)
+                        {
+                            var inner = te.InnerException;
+                            while (inner != null)
+                            {
+                                if (inner is Microsoft.Xrm.Sdk.InvalidPluginExecutionException ip)
+                                {
+                                    throw ip;
+                                }
+                                inner = inner.InnerException;
+                            }
+                            throw te;
+                        }
 
                         fac.UnregistrePM();
 
