@@ -528,7 +528,21 @@ namespace Boruto
 
                         try
                         {
+                            if (this.CustomServiceProvider is IPipeline pePre)
+                            {
+                                pePre.PreInvokeMethod();
+                            }
+
                             result = method.method.Invoke(this.plugin, args);
+
+                            this._AdminServiceContext.Clear();
+                            this._UserServiceContext.Clear();
+
+                            if (this.CustomServiceProvider is IPipeline pePost)
+                            {
+                                pePost.PostInvokeMethod();
+                            }
+
                         } catch (System.Reflection.TargetInvocationException te)
                         {
                             var inner = te.InnerException;

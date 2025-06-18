@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
+using System.Drawing;
+using System.Linq;
 using System.Web;
 
 namespace Boruto.Extensions.SDK
@@ -230,6 +232,21 @@ namespace Boruto.Extensions.SDK
                 }
             }
             throw new InvalidPluginExecutionException($"Unable to convert value of type {value.GetType().FullName} to {typeof(T).FullName}");
+        }
+
+        public static void Clear(this Microsoft.Xrm.Sdk.Client.OrganizationServiceContext ctx)
+        {
+            if (ctx != null)
+            {
+                var ats = ctx.GetAttachedEntities().ToArray();
+                if (ats.Length > 0)
+                {
+                    foreach (var at in ats)
+                    {
+                        ctx.Detach(at);
+                    }
+                }
+            }
         }
     }
 }
