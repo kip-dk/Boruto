@@ -1,4 +1,5 @@
 ﻿using Boruto.Attributes;
+using Boruto.Extensions.QueryExpression;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,6 +79,12 @@ namespace Boruto.Plugin.Example.Plugins.bor_plugindemo
                     demoRepo.Update(clean);
                 }
             }
+        }
+
+        [Boruto.Attributes.EntityType(typeof(Boruto.Plugin.Entities.bor_plugindemo))]
+        public void OnPreRetrieveMultiple(Microsoft.Xrm.Sdk.Query.QueryExpression query)
+        {
+            var link = query.ParentLink(Boruto.Plugin.Entities.bor_tab2.EntityLogicalName, out Guid? id);
         }
     }
 }

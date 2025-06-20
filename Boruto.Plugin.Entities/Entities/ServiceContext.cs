@@ -64,6 +64,17 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.bor_tab2"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Boruto.Plugin.Entities.bor_tab2> bor_tab2Set
+		{
+			get
+			{
+				return this.CreateQuery<Boruto.Plugin.Entities.bor_tab2>();
+			}
+		}
+		
+		/// <summary>
 		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.Contact"/> entities.
 		/// </summary>
 		public System.Linq.IQueryable<Boruto.Plugin.Entities.Contact> ContactSet

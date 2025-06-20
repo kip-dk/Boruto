@@ -518,6 +518,10 @@ namespace Boruto.Plugin.Entities
 			public const string lk_bor_plugindemo_createdonbehalfby = "lk_bor_plugindemo_createdonbehalfby";
 			public const string lk_bor_plugindemo_modifiedby = "lk_bor_plugindemo_modifiedby";
 			public const string lk_bor_plugindemo_modifiedonbehalfby = "lk_bor_plugindemo_modifiedonbehalfby";
+			public const string lk_bor_tab2_createdby = "lk_bor_tab2_createdby";
+			public const string lk_bor_tab2_createdonbehalfby = "lk_bor_tab2_createdonbehalfby";
+			public const string lk_bor_tab2_modifiedby = "lk_bor_tab2_modifiedby";
+			public const string lk_bor_tab2_modifiedonbehalfby = "lk_bor_tab2_modifiedonbehalfby";
 			public const string lk_contact_createdonbehalfby = "lk_contact_createdonbehalfby";
 			public const string lk_contact_modifiedonbehalfby = "lk_contact_modifiedonbehalfby";
 			public const string lk_contactbase_createdby = "lk_contactbase_createdby";
@@ -530,6 +534,7 @@ namespace Boruto.Plugin.Entities
 			public const string system_user_contacts = "system_user_contacts";
 			public const string user_accounts = "user_accounts";
 			public const string user_bor_plugindemo = "user_bor_plugindemo";
+			public const string user_bor_tab2 = "user_bor_tab2";
 			public const string Referenceduser_parent_user = "Referenceduser_parent_user";
 			public const string Referencinglk_systemuser_createdonbehalfby = "lk_systemuser_createdonbehalfby";
 			public const string Referencinglk_systemuser_modifiedonbehalfby = "lk_systemuser_modifiedonbehalfby";
@@ -3610,6 +3615,78 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// 1:N lk_bor_tab2_createdby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_tab2_createdby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.bor_tab2> lk_bor_tab2_createdby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.bor_tab2>("lk_bor_tab2_createdby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_bor_tab2_createdby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.bor_tab2>("lk_bor_tab2_createdby", null, value);
+				this.OnPropertyChanged("lk_bor_tab2_createdby");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lk_bor_tab2_createdonbehalfby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_tab2_createdonbehalfby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.bor_tab2> lk_bor_tab2_createdonbehalfby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.bor_tab2>("lk_bor_tab2_createdonbehalfby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_bor_tab2_createdonbehalfby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.bor_tab2>("lk_bor_tab2_createdonbehalfby", null, value);
+				this.OnPropertyChanged("lk_bor_tab2_createdonbehalfby");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lk_bor_tab2_modifiedby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_tab2_modifiedby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.bor_tab2> lk_bor_tab2_modifiedby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.bor_tab2>("lk_bor_tab2_modifiedby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_bor_tab2_modifiedby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.bor_tab2>("lk_bor_tab2_modifiedby", null, value);
+				this.OnPropertyChanged("lk_bor_tab2_modifiedby");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N lk_bor_tab2_modifiedonbehalfby
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_tab2_modifiedonbehalfby")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.bor_tab2> lk_bor_tab2_modifiedonbehalfby
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.bor_tab2>("lk_bor_tab2_modifiedonbehalfby", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("lk_bor_tab2_modifiedonbehalfby");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.bor_tab2>("lk_bor_tab2_modifiedonbehalfby", null, value);
+				this.OnPropertyChanged("lk_bor_tab2_modifiedonbehalfby");
+			}
+		}
+		
+		/// <summary>
 		/// 1:N lk_contact_createdonbehalfby
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_contact_createdonbehalfby")]
@@ -3822,6 +3899,24 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("user_bor_plugindemo");
 				this.SetRelatedEntities<Boruto.Plugin.Entities.bor_plugindemo>("user_bor_plugindemo", null, value);
 				this.OnPropertyChanged("user_bor_plugindemo");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N user_bor_tab2
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("user_bor_tab2")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.bor_tab2> user_bor_tab2
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.bor_tab2>("user_bor_tab2", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("user_bor_tab2");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.bor_tab2>("user_bor_tab2", null, value);
+				this.OnPropertyChanged("user_bor_tab2");
 			}
 		}
 		

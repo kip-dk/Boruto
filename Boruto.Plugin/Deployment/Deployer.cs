@@ -20,6 +20,9 @@ namespace Boruto.Deployment
             using (var fac = new Boruto.ServiceFactory(this.orgService, null, typeof(Boruto.BasePlugin).Assembly))
             {
                 Console.WriteLine($"Boruto Plugin Deployment tools: { this.GetType().Assembly.GetName().Version }");
+
+                // Console.WriteLine($"Attach ddebugger now.");
+                // Console.ReadLine();
                 var dpService = fac.Create<ServiceAPI.IDeployService>();
                 dpService.Deploy();
             }

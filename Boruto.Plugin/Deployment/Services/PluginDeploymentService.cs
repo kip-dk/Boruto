@@ -88,7 +88,7 @@ namespace Boruto.Deployment.Services
                                     Stage = stage
                                 };
 
-                                if (message == "Create" || message == "Delete" || step.TargetFilterAttributes != null || step.PostImage != null || step.PreImage != null)
+                                if (message == "Create" || message == "Delete" || message == "Retrieve" || message == "RetrieveMultiple" || step.TargetFilterAttributes != null || step.PostImage != null || step.PreImage != null)
                                 {
                                     allLogicalSteps.Add(step);
                                 }

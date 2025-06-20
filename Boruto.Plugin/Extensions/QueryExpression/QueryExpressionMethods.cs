@@ -662,6 +662,39 @@ namespace Boruto.Extensions.QueryExpression
             }
         }
 
+        public static Microsoft.Xrm.Sdk.Query.LinkEntity ParentLink(this Microsoft.Xrm.Sdk.Query.QueryExpression query, string linkedEntityLogicalName, out Guid? id)
+        {
+            id = null;
+            if (query.LinkEntities != null)
+            {
+                var links = query.LinkEntities.ToArray();
+                foreach (var link in links)
+                {
+                    if (link.LinkToEntityName == linkedEntityLogicalName && link.LinkToAttributeName == $"{ linkedEntityLogicalName.ToLower() }id")
+                    {
+                        if (link.LinkCriteria != null && link.LinkCriteria.Conditions != null)
+                        {
+                            var attName = $"{link.LinkToEntityName.ToLower()}id";
+
+                            var condition = (from c in link.LinkCriteria.Conditions
+                                             where c.Operator == ConditionOperator.Equal
+                                               && c.AttributeName == attName
+                                               && c.Values != null
+                                               && c.Values.Count == 1
+                                             select c.Values.First()).SingleOrDefault();
+
+                            if (condition != null)
+                            {
+                                id = new Guid(condition.ToString());
+                                return link;
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
         public static bool CompareString(this Microsoft.Xrm.Sdk.Query.ConditionOperator opr, string filterValue, string entityObjectValue)
         {
             if (string.IsNullOrEmpty(filterValue) || string.IsNullOrEmpty(entityObjectValue))
