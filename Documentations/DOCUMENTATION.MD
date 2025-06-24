@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2025-06-20 15:50
+## updated: 2025-06-24 13:20
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -34,6 +34,8 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No boruto specific code generation
 
 ## Changelog
+### 1.0.2.9 2025-06-24: Added extension method to validate if a setup of attributes is only part of target payload (IsOnlyPayload from Kipon.Solid.Plugin)
+
 ### 1.0.2.8 2025-06-20: QueryExpression extention method to find and extract a ParentLink and corresponding id of the parent.
 
 ### 1.0.2.7 2025-06-18: Microsoft.Xrm.Sdk.Client.OrganizationServiceContext all attached entities are detached between each method invocation to avoid unpredictable caching. Boruto.IPipeline can be impl. by the custom service provider,  to add similar behavior in custom impl. 

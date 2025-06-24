@@ -248,5 +248,40 @@ namespace Boruto.Extensions.SDK
                 }
             }
         }
+
+        public static bool IsOnlyTargetPayload(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, params string[] expectedAttributes)
+        {
+            if (ctx.InputParameters.TryGetValue<Microsoft.Xrm.Sdk.Entity>("Target", out Microsoft.Xrm.Sdk.Entity e))
+            {
+                expectedAttributes = expectedAttributes.Select(r => r.ToLower()).Distinct().ToArray();
+
+                foreach (var key in e.Attributes.Keys)
+                {
+                    switch (key)
+                    {
+                        case "createdon":
+                        case "createdby":
+                        case "createdonbehalfby":
+                        case "modifiedon":
+                        case "modifiedby":
+                        case "modifiedonbehalfby":
+                            continue;
+                        default:
+                            {
+                                var v = e[key];
+                                if (v is Guid && key == "activityid" || key == $"{e.LogicalName}id") continue;
+
+                                if (expectedAttributes.Contains(key))
+                                {
+                                    continue;
+                                }
+                                return false;
+                            }
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
     }
 }
