@@ -283,5 +283,14 @@ namespace Boruto.Extensions.SDK
             }
             return false;
         }
+
+        public static Microsoft.Xrm.Sdk.Entity TargetEntity(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx)
+        {
+            if (ctx.InputParameters.TryGetValue<Microsoft.Xrm.Sdk.Entity>("Target", out Microsoft.Xrm.Sdk.Entity e))
+            {
+                return e;
+            }
+            return null;
+        }
     }
 }
