@@ -32,6 +32,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No support for workflows (the nuget deployment model do not support it)
 1. Less restrictive in terms of always using interfaces for injection. 
 1. No boruto specific code generation
+1. No tools in the nuget package, guides for setting up a automated deployment and step registration process will soon be added to the documentation page. (2025-07-05)
 
 ## Changelog
 ### 1.0.2.11 2025-07-05 Added parent process look via plugin context from kipon solid plugin. Use with care.Due to design on the plugin pipeline, these method do not give a 100% consistent result
