@@ -292,5 +292,189 @@ namespace Boruto.Extensions.SDK
             }
             return null;
         }
+
+        /// <summary>
+        /// Return the target of the parent event. We can only find target for Create and Update parent events.
+        /// *** This message might not give the correct answer, if create is triggered by and Action .. use with care and as little as possible ***
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ctx"></param>
+        /// <param name="message"></param>
+        /// <param name="id"></param>
+        /// <returns></returns
+        [System.Diagnostics.DebuggerNonUserCode()]
+
+        public static T ParentTarget<T>(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string message, Guid id) where T : Microsoft.Xrm.Sdk.Entity, new()
+        {
+            if (message != "Create" && message != "Update")
+            {
+                throw new Exceptions.BaseException("ParentTarget method only support search for Create and Update request");
+            }
+
+            var parent = ctx.ParentContext;
+            if (parent == null)
+            {
+                return null;
+            }
+
+            var proto = new T();
+
+            if (parent.MessageName == message && parent.PrimaryEntityName == proto.LogicalName && parent.PrimaryEntityId == id)
+            {
+                var result = (Microsoft.Xrm.Sdk.Entity)parent.InputParameters["Target"];
+                return result.ToEntity<T>();
+            }
+
+            if (ctx.MessageName == "ExecuteTransaction")
+            {
+                if (ctx.InputParameters.Contains("Requests"))
+                {
+                    var requests = ctx.InputParameters["Requests"] as Microsoft.Xrm.Sdk.OrganizationRequestCollection;
+                    if (requests != null)
+                    {
+                        foreach (var r in requests)
+                        {
+                            switch (message)
+                            {
+                                case "Create":
+                                    {
+                                        if (r is Microsoft.Xrm.Sdk.Messages.CreateRequest c)
+                                        {
+                                            if (c.Target.LogicalName == proto.LogicalName && c.Target.Id == id)
+                                            {
+                                                return c.Target.ToEntity<T>();
+                                            }
+                                        }
+                                        break;
+                                    }
+                                case "Update":
+                                    {
+                                        if (r is Microsoft.Xrm.Sdk.Messages.UpdateRequest c)
+                                        {
+                                            if (c.Target.LogicalName == proto.LogicalName && c.Target.Id == id)
+                                            {
+                                                return c.Target.ToEntity<T>();
+                                            }
+                                        }
+                                        break;
+                                    }
+                            }
+                        }
+                    }
+                }
+            }
+            return parent.ParentTarget<T>(message, id);
+        }
+
+        /// <summary>
+        /// Find out if the ctx is OR has a parent contect that match the filter
+        /// *** This message might not give the correct answer, if it is triggered by and Action .. use with care and as little as possible ***
+        /// </summary>
+        /// <param name="ctx">The context</param>
+        /// <param name="message">The message, ex Create, Update ..., required</param>
+        /// <param name="entityLogicalName">The logical name of the key, if null any, optional</param>
+        /// <param name="id">The id of the entity expected to be a parent event, if null any, optional</param>
+        /// <returns></returns>
+        [System.Diagnostics.DebuggerNonUserCode()]
+
+        public static bool IsChildOf(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string message, string entityLogicalName = null, Guid? id = null)
+        {
+            if (ctx == null)
+            {
+                return false;
+            }
+
+            if (ctx.MessageName == message && (entityLogicalName == null || ctx.PrimaryEntityName == entityLogicalName) && (id == null || ctx.PrimaryEntityId == id))
+            {
+                return true;
+            }
+
+            if (ctx.MessageName == "ExecuteTransaction")
+            {
+                if (ctx.InputParameters.Contains("Requests"))
+                {
+                    try
+                    {
+                        var requests = ctx.InputParameters["Requests"] as Microsoft.Xrm.Sdk.DataCollection<Microsoft.Xrm.Sdk.OrganizationRequest>;
+                        if (requests != null)
+                        {
+                            foreach (var r in requests)
+                            {
+                                try
+                                {
+                                    switch (message)
+                                    {
+                                        case "Create":
+                                            {
+                                                if (r is Microsoft.Xrm.Sdk.Messages.CreateRequest c)
+                                                {
+                                                    if ((entityLogicalName == null || c.Target.LogicalName == entityLogicalName) && (id == null || id == c.Target.Id)) return true;
+                                                }
+                                                break;
+                                            }
+                                        case "Update":
+                                            {
+                                                if (r is Microsoft.Xrm.Sdk.Messages.UpdateRequest c)
+                                                {
+                                                    if ((entityLogicalName == null || c.Target.LogicalName == entityLogicalName) && (id == null || id == c.Target.Id)) return true;
+                                                }
+                                                break;
+                                            }
+                                        case "Delete":
+                                            {
+                                                if (r is Microsoft.Xrm.Sdk.Messages.DeleteRequest c)
+                                                {
+                                                    if ((entityLogicalName == null || c.Target.LogicalName == entityLogicalName) && (id == null || id == c.Target.Id)) return true;
+                                                }
+                                                break;
+                                            }
+                                    }
+
+                                    if (r.RequestName == message)
+                                    {
+                                        if (entityLogicalName == null && id == null)
+                                        {
+                                            return true;
+                                        }
+
+                                        if (r.Parameters.ContainsKey("Target") && r.Parameters["Target"] is Microsoft.Xrm.Sdk.EntityReference targetid)
+                                        {
+                                            if (targetid.LogicalName == entityLogicalName && (id == null || id == targetid.Id))
+                                            {
+                                                return true;
+                                            }
+                                        }
+
+                                        if (r.Parameters.ContainsKey("Target") && r.Parameters["Target"] is Microsoft.Xrm.Sdk.Entity target)
+                                        {
+                                            if (target.LogicalName == entityLogicalName && (id == null || id == target.Id))
+                                            {
+                                                return true;
+                                            }
+                                        }
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    if (ex.Message == null || !ex.Message.Contains("contains data from a type that maps to the name"))
+                                    {
+                                        throw;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message == null || !ex.Message.Contains("contains data from a type that maps to the name"))
+                        {
+                            throw;
+                        }
+                    }
+                }
+            }
+            return ctx.ParentContext.IsChildOf(message, entityLogicalName, id);
+        }
+
     }
 }
