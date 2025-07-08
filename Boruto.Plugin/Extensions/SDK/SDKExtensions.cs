@@ -537,5 +537,32 @@ namespace Boruto.Extensions.SDK
             }
             return default(T);
         }
+
+        /// <summary>
+        /// Extension method to prevent a field is set to null
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="target"></param>
+        /// <param name="field"></param>
+        /// <exception cref="InvalidPluginExecutionException"></exception>
+        public static void Required(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, Microsoft.Xrm.Sdk.Entity target, string field)
+        {
+            field = field.ToLower();
+
+            if (ctx.MessageName == "Create" && !target.Attributes.Contains(field))
+            {
+                throw new InvalidPluginExecutionException($"{field} on {target.LogicalName} is mandatory");
+            }
+
+            if (ctx.MessageName == "Create" && target[field] == null)
+            {
+                throw new InvalidPluginExecutionException($"{field} on {target.LogicalName} is mandatory");
+            }
+
+            if (ctx.MessageName == "Update" && ctx.IsTargetAttribute(field) && target[field] == null)
+            {
+                throw new InvalidPluginExecutionException($"{field} cannot be set to null");
+            }
+        }
     }
 }
