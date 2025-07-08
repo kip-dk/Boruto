@@ -564,5 +564,27 @@ namespace Boruto.Extensions.SDK
                 throw new InvalidPluginExecutionException($"{field} cannot be set to null");
             }
         }
+
+        /// <summary>
+        /// Will look through all fields on the entity and if not mentioned in attributes and typeof EntityReference, and id is empty guid, the value will be replaced with null
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="attributes"></param>
+        public static Microsoft.Xrm.Sdk.Entity ReplaceEmptyReferenceWithNull(this Microsoft.Xrm.Sdk.Entity target, params string[] attributes)
+        {
+            foreach (var value in target.Attributes.ToArray())
+            {
+                if (attributes != null && attributes.Length > 0 && !attributes.Contains(value.Key))
+                {
+                    continue;
+                }
+
+                if (value.Value is Microsoft.Xrm.Sdk.EntityReference r && r.Id == Guid.Empty)
+                {
+                    target.Attributes[value.Key] = null;
+                }
+            }
+            return target;
+        }
     }
 }
