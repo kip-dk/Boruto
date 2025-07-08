@@ -5,8 +5,8 @@
     <PowerAppsTargetsPath>$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\PowerApps</PowerAppsTargetsPath>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Boruto.Plugin.snk</AssemblyOriginatorKeyFile>
-    <AssemblyVersion>1.0.2.11</AssemblyVersion>
-    <FileVersion>1.0.2.11</FileVersion>
+    <AssemblyVersion>1.0.2.12</AssemblyVersion>
+    <FileVersion>1.0.2.12</FileVersion>
     <ProjectTypeGuids>{4C25E9B5-9FA6-436c-8E19-B395D2A65FAF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
 
@@ -29,7 +29,7 @@
     <RepositoryUrl>https://github.com/kip-dk/Boruto.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>dynamics 365;dataverse;plugin;solid;</PackageTags>
-    <PackageReleaseNotes>Added parent process look via plugin context from kipon solid plugin. Use with care.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added extension method to extract target payload of parent context</PackageReleaseNotes>
     <PackAsTool>False</PackAsTool>
     <ToolCommandName>boruto.plugin</ToolCommandName>
     <PackageReadmeFile>DOCUMENTATION.MD</PackageReadmeFile>

@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2025-07-05 17:10
+## updated: 2025-07-08 09:45
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -35,6 +35,8 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package, guides for setting up a automated deployment and step registration process will soon be added to the documentation page. (2025-07-05)
 
 ## Changelog
+### 1.0.2.12 2025-07-08 Added extension method to extract target payload of parent context
+
 ### 1.0.2.11 2025-07-05 Added parent process look via plugin context from kipon solid plugin. Use with care.Due to design on the plugin pipeline, these method do not give a 100% consistent result
 
 ### 1.0.2.10 2025-06-24: extension method to direct access to the target entity of a plugin

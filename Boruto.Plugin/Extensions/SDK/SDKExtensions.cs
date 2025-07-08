@@ -476,5 +476,66 @@ namespace Boruto.Extensions.SDK
             return ctx.ParentContext.IsChildOf(message, entityLogicalName, id);
         }
 
+        public static Microsoft.Xrm.Sdk.IPluginExecutionContext ParentContext(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string logicalName, string message)
+        {
+            if (ctx.ParentContext != null)
+            {
+                if (ctx.ParentContext.PrimaryEntityName == logicalName && ctx.ParentContext.MessageName == message)
+                {
+                    return ctx.ParentContext;
+                }
+
+                if (logicalName == null && ctx.ParentContext.PrimaryEntityName == null && ctx.ParentContext.MessageName == message)
+                {
+                    return ctx.ParentContext;
+                }
+
+                return ctx.ParentContext.ParentContext(logicalName, message);
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Find the Target object in the parent context
+        /// *** This message might not give the correct answer, if it is triggered by and Action .. use with care and as little as possible ***
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ctx"></param>
+        /// <param name="logicalName"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static T ParentTarget<T>(this IPluginExecutionContext ctx, string logicalName, string message)
+        {
+            var parent = ctx.ParentContext(logicalName, message);
+            if (parent != null && parent.InputParameters.TryGetValue("Target", out object targetValue) && targetValue != null)
+            {
+                var returnType = typeof(T);
+                if (returnType.IsAssignableFrom(targetValue.GetType()))
+                {
+                    return (T)targetValue;
+                }
+
+                if (returnType.BaseType == typeof(Microsoft.Xrm.Sdk.Entity))
+                {
+                    if (targetValue is Microsoft.Xrm.Sdk.Entity e)
+                    {
+                        var result = System.Activator.CreateInstance(returnType) as Microsoft.Xrm.Sdk.Entity;
+                        result.Attributes = e.Attributes;
+                        return (T)(object)result;
+                    }
+                }
+
+                if (returnType.BaseType == typeof(Microsoft.Xrm.Sdk.OrganizationRequest))
+                {
+                    if (targetValue is Microsoft.Xrm.Sdk.OrganizationRequest e)
+                    {
+                        var result = System.Activator.CreateInstance(returnType) as Microsoft.Xrm.Sdk.OrganizationRequest;
+                        result.Parameters = e.Parameters;
+                        return (T)(object)result;
+                    }
+                }
+            }
+            return default(T);
+        }
     }
 }
