@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
@@ -25,7 +26,7 @@ namespace Boruto.Tools
 
             if (!System.IO.File.Exists(BUILDER_FILENAME))
             {
-                Console.WriteLine($"No file  [{ BUILDER_FILENAME }] was found in this directory");
+                Console.WriteLine($"No file  [{BUILDER_FILENAME}] was found in this directory");
                 return;
             }
 
@@ -47,11 +48,12 @@ namespace Boruto.Tools
 
                         file.WriteLine($"\tpublic partial interface IUnitOfWork");
                         file.WriteLine("\t{");
+                        var dubs = builderSettings.Dubs();
                         foreach (var entity in builderSettings.EntityNamesFilter)
                         {
                             var ent = meta.ForEntity(entity);
                             map[entity] = ent.SchemaName;
-                            file.WriteLine($"\t\tIRepository<{ent.SchemaName}> {ent.SchemaName.ServiceNameOf(builderSettings.OmitEntityPrefix)} {{ get; }}");
+                            file.WriteLine($"\t\tIRepository<{ent.SchemaName}> {ent.SchemaName.ServiceNameOf(builderSettings.OmitEntityPrefix, dubs)} {{ get; }}");
                         }
                         file.WriteLine("\t}");
 
@@ -68,7 +70,7 @@ namespace Boruto.Tools
                         foreach (var entity in builderSettings.EntityNamesFilter)
                         {
                             var sn = map[entity];
-                            file.WriteLine($"\t\tpublic IRepository<{sn}> {sn.ServiceNameOf(builderSettings.OmitEntityPrefix)} => GetRepository<{sn}>();");
+                            file.WriteLine($"\t\tpublic IRepository<{sn}> {sn.ServiceNameOf(builderSettings.OmitEntityPrefix, null)} => GetRepository<{sn}>();");
                         }
                         file.WriteLine("\t}");
 
@@ -89,24 +91,47 @@ namespace Boruto.Tools
 
             [DataMember(Name = "omitEntityPrefix")]
             public string[] OmitEntityPrefix { get; set; }
+
+            internal string[] Dubs()
+            {
+                var all = (from s in EntityNamesFilter
+                           select s.ServiceNameOf(this.OmitEntityPrefix, null)).ToArray();
+
+                return (from a in all
+                        group a by a into grp
+                        select new
+                        {
+                            grp.Key,
+                            grp.ToArray().Length
+                        }).Where(r => r.Length > 1).Select(r => r.Key).ToArray();
+            }
         }
     }
 
     internal static class ToolsLocalExtensions
     {
-        internal static string ServiceNameOf(this string name, string[] ommitPrefix)
+        internal static string ServiceNameOf(this string name, string[] ommitPrefix, string[] dubs)
         {
-            if (ommitPrefix != null && ommitPrefix.Length > 0) 
+            var finalName = name;
+            if (ommitPrefix != null && ommitPrefix.Length > 0)
             {
                 foreach (var pre in ommitPrefix)
                 {
-                    if (name.StartsWith(pre))
+                    if (finalName.StartsWith(pre))
                     {
-                        name = name.Substring(pre.Length);
+                        finalName = finalName.Substring(pre.Length);
                     }
                 }
             }
-            return name.Substring(0, 1).ToUpper() + name.Substring(1) + "s";
+
+            var result = finalName.Substring(0, 1).ToUpper() + finalName.Substring(1) + "s";
+
+            if (dubs != null && dubs.Contains(result))
+            {
+                return name.Substring(0, 1).ToUpper() + name.Substring(1) + "s";
+            }
+
+            return result;
         }
     }
 }

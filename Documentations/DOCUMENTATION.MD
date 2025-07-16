@@ -35,6 +35,8 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package, guides for setting up a automated deployment and step registration process will soon be added to the documentation page. (2025-07-05)
 
 ## Changelog
+### 1.0.2.17 2025-07-16 tools version only generate uow prevents dub names on servicesname generation
+
 ### 1.0.2.16 2025-07-09 added filter attributes from Kipon Solid
 
 ### 1.0.2.15 2025-07-08 extension method to set entityreference = EmptyGuid to null in entity payload
