@@ -67,10 +67,12 @@ namespace Boruto.Tools
 
                         file.WriteLine($"\tpublic partial class CrmUnitOfWork");
                         file.WriteLine("\t{");
+
+                        var dubs = builderSettings.Dubs();
                         foreach (var entity in builderSettings.EntityNamesFilter)
                         {
                             var sn = map[entity];
-                            file.WriteLine($"\t\tpublic IRepository<{sn}> {sn.ServiceNameOf(builderSettings.OmitEntityPrefix, null)} => GetRepository<{sn}>();");
+                            file.WriteLine($"\t\tpublic IRepository<{sn}> {sn.ServiceNameOf(builderSettings.OmitEntityPrefix, dubs)} => GetRepository<{sn}>();");
                         }
                         file.WriteLine("\t}");
 
