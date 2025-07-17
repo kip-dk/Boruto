@@ -32,7 +32,7 @@ namespace Boruto.Extensions.Ctx
         /// <param name="name"></param>
         /// <returns>return the target value or default(T) if attribut is not within the target payload</returns>
         [System.Diagnostics.DebuggerNonUserCode()]
-        public static T TargetValueOf<T>(string name)
+        public static T TargetValueOf<T>(this string name)
         {
             var ctx = ThrowIfNotInPluginExecutionContext();
             return ctx.TargetValueOf<T>(name);
@@ -45,7 +45,7 @@ namespace Boruto.Extensions.Ctx
         /// <param name="name"></param>
         /// <returns>Returns the prevalue or default(T) if attribute is not within the preimage payload</returns>
         [System.Diagnostics.DebuggerNonUserCode()]
-        public static T PreValueOf<T>(string name)
+        public static T PreValueOf<T>(this string name)
         {
             var ctx = ThrowIfNotInPluginExecutionContext();
             return ctx.PreValueOf<T>(name);
