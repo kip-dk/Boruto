@@ -35,7 +35,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package, guides for setting up a automated deployment and step registration process will soon be added to the documentation page. (2025-07-05)
 
 ## Changelog
-### 1.0.2.20 2025-07-17 new extension method namespace Ctx adding extension methods on the pluginexecutioncontext without having to inject it
+### 1.0.2.21 2025-07-17 new extension method namespace Ctx adding extension methods on the pluginexecutioncontext without having to inject it
 
 ### 1.0.2.19 2025-07-17 tools version only generate uow prevents dub names on servicesname generation
 
