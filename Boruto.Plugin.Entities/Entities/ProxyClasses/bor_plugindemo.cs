@@ -95,6 +95,7 @@ namespace Boruto.Plugin.Entities
 			public const string TimeZoneRuleVersionNumber = "timezoneruleversionnumber";
 			public const string UTCConversionTimeZoneCode = "utcconversiontimezonecode";
 			public const string VersionNumber = "versionnumber";
+			public const string bor_bor_plugindemo_bor_tab2 = "bor_bor_plugindemo_bor_tab2";
 			public const string bor_bor_tab2_bor_plugindemo = "bor_bor_tab2_bor_plugindemo";
 			public const string lk_bor_plugindemo_createdby = "lk_bor_plugindemo_createdby";
 			public const string lk_bor_plugindemo_createdonbehalfby = "lk_bor_plugindemo_createdonbehalfby";
@@ -776,6 +777,24 @@ namespace Boruto.Plugin.Entities
 			get
 			{
 				return this.GetAttributeValue<System.Nullable<long>>("versionnumber");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N bor_bor_plugindemo_bor_tab2
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("bor_bor_plugindemo_bor_tab2")]
+		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.bor_tab2> bor_bor_plugindemo_bor_tab2
+		{
+			get
+			{
+				return this.GetRelatedEntities<Boruto.Plugin.Entities.bor_tab2>("bor_bor_plugindemo_bor_tab2", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("bor_bor_plugindemo_bor_tab2");
+				this.SetRelatedEntities<Boruto.Plugin.Entities.bor_tab2>("bor_bor_plugindemo_bor_tab2", null, value);
+				this.OnPropertyChanged("bor_bor_plugindemo_bor_tab2");
 			}
 		}
 		

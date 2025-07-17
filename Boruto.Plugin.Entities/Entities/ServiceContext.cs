@@ -64,6 +64,17 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.bor_role"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Boruto.Plugin.Entities.bor_role> bor_roleSet
+		{
+			get
+			{
+				return this.CreateQuery<Boruto.Plugin.Entities.bor_role>();
+			}
+		}
+		
+		/// <summary>
 		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.bor_tab2"/> entities.
 		/// </summary>
 		public System.Linq.IQueryable<Boruto.Plugin.Entities.bor_tab2> bor_tab2Set
@@ -82,6 +93,17 @@ namespace Boruto.Plugin.Entities
 			get
 			{
 				return this.CreateQuery<Boruto.Plugin.Entities.Contact>();
+			}
+		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="Boruto.Plugin.Entities.Role"/> entities.
+		/// </summary>
+		public System.Linq.IQueryable<Boruto.Plugin.Entities.Role> RoleSet
+		{
+			get
+			{
+				return this.CreateQuery<Boruto.Plugin.Entities.Role>();
 			}
 		}
 		

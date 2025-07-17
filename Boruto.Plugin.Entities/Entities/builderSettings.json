@@ -17,9 +17,11 @@
     "account",
     "bor_plugindemo",
     "bor_demoviews",
+    "bor_role",
     "bor_tab2",
     "systemuser",
-    "contact"
+    "contact",
+    "role"
 
   ],
   "messageNamesFilter": [

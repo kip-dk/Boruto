@@ -1,2 +1,3 @@
 @echo off
-pac modelbuilder build --settingsTemplateFile builderSettings.json --outdirectory .
+call pac modelbuilder build --settingsTemplateFile builderSettings.json --outdirectory .
+call ..\..\Bor\Bin\Debug\Bor.exe model

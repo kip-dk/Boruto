@@ -14,11 +14,11 @@ namespace Boruto.Plugin.Entities
 	
 	
 	/// <summary>
-	/// Status for tab2
+	/// Status for Role
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum bor_tab2_statecode
+	public enum bor_role_statecode
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -29,11 +29,11 @@ namespace Boruto.Plugin.Entities
 	}
 	
 	/// <summary>
-	/// Årsag til statussen for tab2
+	/// Årsag til statussen for Role
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public enum bor_tab2_statuscode
+	public enum bor_role_statuscode
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -44,21 +44,19 @@ namespace Boruto.Plugin.Entities
 	}
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("bor_tab2")]
+	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("bor_role")]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
-	public partial class bor_tab2 : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	public partial class bor_role : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	{
 		
 		/// <summary>
-		/// Available fields, a the time of codegen, for the bor_tab2 entity
+		/// Available fields, a the time of codegen, for the bor_role entity
 		/// </summary>
 		public partial class Fields
 		{
 			public const string bor_name = "bor_name";
-			public const string bor_pluginindemoid = "bor_pluginindemoid";
-			public const string bor_pluginindemoidName = "bor_pluginindemoidname";
-			public const string bor_tab2Id = "bor_tab2id";
-			public const string Id = "bor_tab2id";
+			public const string bor_roleId = "bor_roleid";
+			public const string Id = "bor_roleid";
 			public const string CreatedBy = "createdby";
 			public const string CreatedByName = "createdbyname";
 			public const string CreatedByYomiName = "createdbyyominame";
@@ -74,14 +72,9 @@ namespace Boruto.Plugin.Entities
 			public const string ModifiedOnBehalfBy = "modifiedonbehalfby";
 			public const string ModifiedOnBehalfByName = "modifiedonbehalfbyname";
 			public const string ModifiedOnBehalfByYomiName = "modifiedonbehalfbyyominame";
+			public const string OrganizationId = "organizationid";
+			public const string OrganizationIdName = "organizationidname";
 			public const string OverriddenCreatedOn = "overriddencreatedon";
-			public const string OwnerId = "ownerid";
-			public const string OwnerIdName = "owneridname";
-			public const string OwnerIdYomiName = "owneridyominame";
-			public const string OwningBusinessUnit = "owningbusinessunit";
-			public const string OwningBusinessUnitName = "owningbusinessunitname";
-			public const string OwningTeam = "owningteam";
-			public const string OwningUser = "owninguser";
 			public const string statecode = "statecode";
 			public const string statecodeName = "statecodename";
 			public const string statuscode = "statuscode";
@@ -89,28 +82,25 @@ namespace Boruto.Plugin.Entities
 			public const string TimeZoneRuleVersionNumber = "timezoneruleversionnumber";
 			public const string UTCConversionTimeZoneCode = "utcconversiontimezonecode";
 			public const string VersionNumber = "versionnumber";
-			public const string bor_bor_tab2_bor_plugindemo = "bor_bor_tab2_bor_plugindemo";
-			public const string bor_bor_plugindemo_bor_tab2 = "bor_bor_plugindemo_bor_tab2";
-			public const string lk_bor_tab2_createdby = "lk_bor_tab2_createdby";
-			public const string lk_bor_tab2_createdonbehalfby = "lk_bor_tab2_createdonbehalfby";
-			public const string lk_bor_tab2_modifiedby = "lk_bor_tab2_modifiedby";
-			public const string lk_bor_tab2_modifiedonbehalfby = "lk_bor_tab2_modifiedonbehalfby";
-			public const string user_bor_tab2 = "user_bor_tab2";
+			public const string lk_bor_role_createdby = "lk_bor_role_createdby";
+			public const string lk_bor_role_createdonbehalfby = "lk_bor_role_createdonbehalfby";
+			public const string lk_bor_role_modifiedby = "lk_bor_role_modifiedby";
+			public const string lk_bor_role_modifiedonbehalfby = "lk_bor_role_modifiedonbehalfby";
 		}
 		
 		/// <summary>
 		/// Default Constructor.
 		/// </summary>
-		public bor_tab2() : 
+		public bor_role() : 
 				base(EntityLogicalName)
 		{
 		}
 		
-		public const string EntityLogicalName = "bor_tab2";
+		public const string EntityLogicalName = "bor_role";
 		
-		public const string EntityLogicalCollectionName = "bor_tab2s";
+		public const string EntityLogicalCollectionName = "bor_roles";
 		
-		public const string EntitySetName = "bor_tab2s";
+		public const string EntitySetName = "bor_roles";
 		
 		public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 		
@@ -151,53 +141,19 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Entydigt id for plugindemo tilknyttet tab2.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_pluginindemoid")]
-		public Microsoft.Xrm.Sdk.EntityReference bor_pluginindemoid
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("bor_pluginindemoid");
-			}
-			set
-			{
-				this.OnPropertyChanging("bor_pluginindemoid");
-				this.SetAttributeValue("bor_pluginindemoid", value);
-				this.OnPropertyChanged("bor_pluginindemoid");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_pluginindemoidname")]
-		public string bor_pluginindemoidName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("bor_pluginindemoid"))
-				{
-					return this.FormattedValues["bor_pluginindemoid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
 		/// Entydigt id for objektforekomster
 		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_tab2id")]
-		public System.Nullable<System.Guid> bor_tab2Id
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_roleid")]
+		public System.Nullable<System.Guid> bor_roleId
 		{
 			get
 			{
-				return this.GetAttributeValue<System.Nullable<System.Guid>>("bor_tab2id");
+				return this.GetAttributeValue<System.Nullable<System.Guid>>("bor_roleid");
 			}
 			set
 			{
-				this.OnPropertyChanging("bor_tab2Id");
-				this.SetAttributeValue("bor_tab2id", value);
+				this.OnPropertyChanging("bor_roleId");
+				this.SetAttributeValue("bor_roleid", value);
 				if (value.HasValue)
 				{
 					base.Id = value.Value;
@@ -206,11 +162,11 @@ namespace Boruto.Plugin.Entities
 				{
 					base.Id = System.Guid.Empty;
 				}
-				this.OnPropertyChanged("bor_tab2Id");
+				this.OnPropertyChanged("bor_roleId");
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_tab2id")]
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_roleid")]
 		public override System.Guid Id
 		{
 			get
@@ -219,7 +175,7 @@ namespace Boruto.Plugin.Entities
 			}
 			set
 			{
-				this.bor_tab2Id = value;
+				this.bor_roleId = value;
 			}
 		}
 		
@@ -442,6 +398,34 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
+		/// Entydigt id for organisationen
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("organizationid")]
+		public Microsoft.Xrm.Sdk.EntityReference OrganizationId
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("organizationid");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("organizationidname")]
+		public string OrganizationIdName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("organizationid"))
+				{
+					return this.FormattedValues["organizationid"];
+				}
+				else
+				{
+					return default(string);
+				}
+			}
+		}
+		
+		/// <summary>
 		/// Dato og klokkeslæt for overførsel af posten.
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("overriddencreatedon")]
@@ -460,122 +444,14 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Ejer-id
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("ownerid")]
-		public Microsoft.Xrm.Sdk.EntityReference OwnerId
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("ownerid");
-			}
-			set
-			{
-				this.OnPropertyChanging("OwnerId");
-				this.SetAttributeValue("ownerid", value);
-				this.OnPropertyChanged("OwnerId");
-			}
-		}
-		
-		/// <summary>
-		/// Navnet på ejeren
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owneridname")]
-		public string OwnerIdName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("ownerid"))
-				{
-					return this.FormattedValues["ownerid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Yomi-navnet på ejeren
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owneridyominame")]
-		public string OwnerIdYomiName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("ownerid"))
-				{
-					return this.FormattedValues["ownerid"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Entydigt id for den afdeling, der ejer posten
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningbusinessunit")]
-		public Microsoft.Xrm.Sdk.EntityReference OwningBusinessUnit
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("owningbusinessunit");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningbusinessunitname")]
-		public string OwningBusinessUnitName
-		{
-			get
-			{
-				if (this.FormattedValues.Contains("owningbusinessunit"))
-				{
-					return this.FormattedValues["owningbusinessunit"];
-				}
-				else
-				{
-					return default(string);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// Entydigt id for det team, der ejer posten.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owningteam")]
-		public Microsoft.Xrm.Sdk.EntityReference OwningTeam
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("owningteam");
-			}
-		}
-		
-		/// <summary>
-		/// Entydigt id for den bruger, der ejer posten.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owninguser")]
-		public Microsoft.Xrm.Sdk.EntityReference OwningUser
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("owninguser");
-			}
-		}
-		
-		/// <summary>
-		/// Status for tab2
+		/// Status for Role
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("statecode")]
-		public virtual bor_tab2_statecode? statecode
+		public virtual bor_role_statecode? statecode
 		{
 			get
 			{
-				return ((bor_tab2_statecode?)(EntityOptionSetEnum.GetEnum(this, "statecode")));
+				return ((bor_role_statecode?)(EntityOptionSetEnum.GetEnum(this, "statecode")));
 			}
 			set
 			{
@@ -602,14 +478,14 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// Årsag til statussen for tab2
+		/// Årsag til statussen for Role
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("statuscode")]
-		public virtual bor_tab2_statuscode? statuscode
+		public virtual bor_role_statuscode? statuscode
 		{
 			get
 			{
-				return ((bor_tab2_statuscode?)(EntityOptionSetEnum.GetEnum(this, "statuscode")));
+				return ((bor_role_statuscode?)(EntityOptionSetEnum.GetEnum(this, "statuscode")));
 			}
 			set
 			{
@@ -684,104 +560,54 @@ namespace Boruto.Plugin.Entities
 		}
 		
 		/// <summary>
-		/// 1:N bor_bor_tab2_bor_plugindemo
-		/// </summary>
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("bor_bor_tab2_bor_plugindemo")]
-		public System.Collections.Generic.IEnumerable<Boruto.Plugin.Entities.bor_plugindemo> bor_bor_tab2_bor_plugindemo
-		{
-			get
-			{
-				return this.GetRelatedEntities<Boruto.Plugin.Entities.bor_plugindemo>("bor_bor_tab2_bor_plugindemo", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("bor_bor_tab2_bor_plugindemo");
-				this.SetRelatedEntities<Boruto.Plugin.Entities.bor_plugindemo>("bor_bor_tab2_bor_plugindemo", null, value);
-				this.OnPropertyChanged("bor_bor_tab2_bor_plugindemo");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 bor_bor_plugindemo_bor_tab2
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_pluginindemoid")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("bor_bor_plugindemo_bor_tab2")]
-		public Boruto.Plugin.Entities.bor_plugindemo bor_bor_plugindemo_bor_tab2
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.bor_plugindemo>("bor_bor_plugindemo_bor_tab2", null);
-			}
-			set
-			{
-				this.OnPropertyChanging("bor_bor_plugindemo_bor_tab2");
-				this.SetRelatedEntity<Boruto.Plugin.Entities.bor_plugindemo>("bor_bor_plugindemo_bor_tab2", null, value);
-				this.OnPropertyChanged("bor_bor_plugindemo_bor_tab2");
-			}
-		}
-		
-		/// <summary>
-		/// N:1 lk_bor_tab2_createdby
+		/// N:1 lk_bor_role_createdby
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdby")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_tab2_createdby")]
-		public Boruto.Plugin.Entities.SystemUser lk_bor_tab2_createdby
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_role_createdby")]
+		public Boruto.Plugin.Entities.SystemUser lk_bor_role_createdby
 		{
 			get
 			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("lk_bor_tab2_createdby", null);
+				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("lk_bor_role_createdby", null);
 			}
 		}
 		
 		/// <summary>
-		/// N:1 lk_bor_tab2_createdonbehalfby
+		/// N:1 lk_bor_role_createdonbehalfby
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("createdonbehalfby")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_tab2_createdonbehalfby")]
-		public Boruto.Plugin.Entities.SystemUser lk_bor_tab2_createdonbehalfby
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_role_createdonbehalfby")]
+		public Boruto.Plugin.Entities.SystemUser lk_bor_role_createdonbehalfby
 		{
 			get
 			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("lk_bor_tab2_createdonbehalfby", null);
+				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("lk_bor_role_createdonbehalfby", null);
 			}
 		}
 		
 		/// <summary>
-		/// N:1 lk_bor_tab2_modifiedby
+		/// N:1 lk_bor_role_modifiedby
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedby")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_tab2_modifiedby")]
-		public Boruto.Plugin.Entities.SystemUser lk_bor_tab2_modifiedby
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_role_modifiedby")]
+		public Boruto.Plugin.Entities.SystemUser lk_bor_role_modifiedby
 		{
 			get
 			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("lk_bor_tab2_modifiedby", null);
+				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("lk_bor_role_modifiedby", null);
 			}
 		}
 		
 		/// <summary>
-		/// N:1 lk_bor_tab2_modifiedonbehalfby
+		/// N:1 lk_bor_role_modifiedonbehalfby
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("modifiedonbehalfby")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_tab2_modifiedonbehalfby")]
-		public Boruto.Plugin.Entities.SystemUser lk_bor_tab2_modifiedonbehalfby
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("lk_bor_role_modifiedonbehalfby")]
+		public Boruto.Plugin.Entities.SystemUser lk_bor_role_modifiedonbehalfby
 		{
 			get
 			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("lk_bor_tab2_modifiedonbehalfby", null);
-			}
-		}
-		
-		/// <summary>
-		/// N:1 user_bor_tab2
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("owninguser")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("user_bor_tab2")]
-		public Boruto.Plugin.Entities.SystemUser user_bor_tab2
-		{
-			get
-			{
-				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("user_bor_tab2", null);
+				return this.GetRelatedEntity<Boruto.Plugin.Entities.SystemUser>("lk_bor_role_modifiedonbehalfby", null);
 			}
 		}
 	}
