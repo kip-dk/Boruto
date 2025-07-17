@@ -1,4 +1,5 @@
 ﻿using Boruto.Extensions.SDK;
+using Boruto.Extensions.TypeConverters;
 using Microsoft.Xrm.Sdk;
 
 namespace Boruto.Extensions.Ctx
@@ -11,6 +12,11 @@ namespace Boruto.Extensions.Ctx
     /// </summary>
     public static class CtxExtensions
     {
+        public const string CreateMessage = "Create";
+        public const string UpdateMessage = "Update";
+        public const string DeleteMessage = "Delete";
+
+
         /// <summary>
         /// Determin if an attribute is part of the target payload
         /// </summary>
@@ -49,6 +55,76 @@ namespace Boruto.Extensions.Ctx
         {
             var ctx = ThrowIfNotInPluginExecutionContext();
             return ctx.PreValueOf<T>(name);
+        }
+
+        /// <summary>
+        /// Returns true if the message parsed match the message name of the current plugin context
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        [System.Diagnostics.DebuggerNonUserCode()]
+        public static bool IsCurrentMessage(this string message)
+        {
+            var ctx = ThrowIfNotInPluginExecutionContext();
+            return ctx.MessageName == message;
+        }
+
+        /// <summary>
+        /// Returns true if the attribute parsed was changed
+        /// If the attribute is not part of the target payload, it will return false
+        /// If the attribute is part of the target payload, and is also part of the preimage payload, false will be returned if the values are the same
+        /// Otherwise true will be returned
+        /// </summary>
+        /// <param name="attrName"></param>
+        /// <returns></returns>
+        [System.Diagnostics.DebuggerNonUserCode()]
+        public static bool AttributeChanged(this string attrName)
+        {
+            var ctx = ThrowIfNotInPluginExecutionContext();
+
+            if (attrName.IsTargetAttribute())
+            {
+                if (ctx.MessageName != UpdateMessage)
+                {
+                    return true;
+                }
+                var targetValue = ctx.TargetValueOf<object>(attrName);
+                var preValue = ctx.PreValueOf<object>(attrName);
+
+                return !targetValue.IsSame(preValue);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Returns true if at least one of the parsed attributes has changed value.
+        /// </summary>
+        /// <param name="attrName"></param>
+        /// <param name="others"></param>
+        /// <returns></returns>
+        [System.Diagnostics.DebuggerNonUserCode()]
+        public static bool AttributesHasChanges(this string attrName, params string[] others)
+        {
+            var ctx = ThrowIfNotInPluginExecutionContext();
+
+            var first = attrName.AttributeChanged();
+            if (first)
+            {
+                return true;
+            }
+
+            if (others != null && others.Length > 0)
+            {
+                foreach (var other in others)
+                {
+                    var next = other.AttributeChanged(); 
+                    if (next)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private static Microsoft.Xrm.Sdk.IPluginExecutionContext ThrowIfNotInPluginExecutionContext()
