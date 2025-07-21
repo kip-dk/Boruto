@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="Consts.cs" />
     <Compile Include="Extensions\Reflection\ReflectionMethodsTest.cs" />
+    <Compile Include="Extensions\TypeConverters\TypeConvertersTest.cs" />
     <Compile Include="Fakes\OrganizationService.cs" />
     <Compile Include="Fakes\OrganizationServiceFactory.cs" />
     <Compile Include="Fakes\PluginExecutionContext.cs" />

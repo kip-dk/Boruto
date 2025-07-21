@@ -238,5 +238,73 @@ namespace Boruto.Extensions.TypeConverters
             }
             return result.ToArray();
         }
+
+        public static T ToEnum<T>(this object value)
+        {
+            if (value == null)
+            {
+                return default;
+            }
+
+            var type = typeof(T);
+
+            if (type.IsGenericType)
+            {
+                type = type.GetGenericArguments()[0];
+            }
+
+            if (value is Microsoft.Xrm.Sdk.OptionSetValue v)
+            {
+                return (T)Enum.ToObject(type, v.Value);
+            }
+
+
+
+            if (value is int i)
+            {
+                return (T)Enum.ToObject(type, i);
+            }
+
+            if (value is string s)
+            {
+                return (T)Enum.Parse(type, s);
+            }
+
+
+            if (type.IsEnum)
+            {
+                var intValue = (int)value;
+                return (T)Enum.ToObject(type, intValue);
+            }
+
+            throw new InvalidPluginExecutionException($"Type { type.FullName } cannot be transformed into enum value");
+        }
+
+        public static Microsoft.Xrm.Sdk.OptionSetValue ToOptionSetValue(this object o)
+        {
+            if (o == null)
+            {
+                return null;
+            }
+
+            if (o is int intValue)
+            {
+                return new OptionSetValue(intValue);
+            }
+
+            var type = o.GetType();
+            if (type.IsGenericType)
+            {
+                type = type.GetGenericArguments()[0];
+            }
+
+            if (type.IsEnum)
+            {
+                int v = (int)o;
+                return new OptionSetValue(v);
+            }
+
+            throw new InvalidPluginExecutionException($"Value: [{o}] cannot be converted to OptionSetValue");
+        }
     }
 }

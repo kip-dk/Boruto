@@ -35,6 +35,8 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package, guides for setting up a automated deployment and step registration process will soon be added to the documentation page. (2025-07-05)
 
 ## Changelog
+### 1.0.2.24 2025-07-21 Extensionmethods to handle easy convert of enum types and optionsetvalues
+
 ### 1.0.2.23 2025-07-21 Extensionmethods to easy set active/inactive state with default statuscode
 
 ### 1.0.2.22 2025-07-17 new extension method namespace Ctx adding extension methods on the pluginexecutioncontext without having to inject it
