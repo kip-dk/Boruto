@@ -476,6 +476,7 @@ namespace Boruto.Extensions.SDK
             return ctx.ParentContext.IsChildOf(message, entityLogicalName, id);
         }
 
+        [System.Diagnostics.DebuggerNonUserCode()]
         public static Microsoft.Xrm.Sdk.IPluginExecutionContext ParentContext(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string logicalName, string message)
         {
             if (ctx.ParentContext != null)
@@ -504,6 +505,7 @@ namespace Boruto.Extensions.SDK
         /// <param name="logicalName"></param>
         /// <param name="message"></param>
         /// <returns></returns>
+        [System.Diagnostics.DebuggerNonUserCode()]
         public static T ParentTarget<T>(this IPluginExecutionContext ctx, string logicalName, string message)
         {
             var parent = ctx.ParentContext(logicalName, message);
@@ -545,6 +547,7 @@ namespace Boruto.Extensions.SDK
         /// <param name="target"></param>
         /// <param name="field"></param>
         /// <exception cref="InvalidPluginExecutionException"></exception>
+        [System.Diagnostics.DebuggerNonUserCode()]
         public static void Required(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, Microsoft.Xrm.Sdk.Entity target, string field)
         {
             field = field.ToLower();
@@ -570,6 +573,7 @@ namespace Boruto.Extensions.SDK
         /// </summary>
         /// <param name="target"></param>
         /// <param name="attributes"></param>
+        [System.Diagnostics.DebuggerNonUserCode()]
         public static Microsoft.Xrm.Sdk.Entity ReplaceEmptyReferenceWithNull(this Microsoft.Xrm.Sdk.Entity target, params string[] attributes)
         {
             foreach (var value in target.Attributes.ToArray())
@@ -585,6 +589,23 @@ namespace Boruto.Extensions.SDK
                 }
             }
             return target;
+        }
+
+        public static void SetDefaultActivateState(this Microsoft.Xrm.Sdk.Entity entity)
+        {
+            entity["statecode"] = new Microsoft.Xrm.Sdk.OptionSetValue(0);
+            entity.SetDefaultStatusCode();
+        }
+
+        public static void SetDefaultInactivateState(this Microsoft.Xrm.Sdk.Entity entity)
+        {
+            entity["statecode"] = new Microsoft.Xrm.Sdk.OptionSetValue(1);
+            entity.SetDefaultStatusCode();
+        }
+
+        public static void SetDefaultStatusCode(this Microsoft.Xrm.Sdk.Entity entity)
+        {
+            entity["statuscode"] = new Microsoft.Xrm.Sdk.OptionSetValue(-1);
         }
     }
 }
