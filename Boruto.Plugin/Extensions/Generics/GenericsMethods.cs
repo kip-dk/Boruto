@@ -17,6 +17,13 @@ namespace Boruto.Extensions.Generics
             return null;
         }
 
+        public static V GetSafe<K, V>(this Dictionary<K, V> index, K k)
+        {
+            if (index.ContainsKey(k)) return index[k];
+            return default(V);
+        }
+
+
         public static IEnumerable<T[]> Pages<T>(this IEnumerable<T> input, int pageSize)
         {
             var result = new List<T[]>();
