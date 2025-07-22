@@ -607,5 +607,14 @@ namespace Boruto.Extensions.SDK
         {
             entity["statuscode"] = new Microsoft.Xrm.Sdk.OptionSetValue(-1);
         }
+
+        public static T ValueOf<T>(this Microsoft.Xrm.Sdk.OrganizationRequest request, string parameterName)
+        {
+            if (request.Parameters.ContainsKey(parameterName)) 
+            {
+                return (T)request[parameterName];
+            }
+            return default(T);
+        }
     }
 }
