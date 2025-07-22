@@ -616,5 +616,43 @@ namespace Boruto.Extensions.SDK
             }
             return default(T);
         }
+
+        public static bool DirectChildOf(this Microsoft.Xrm.Sdk.IPluginExecutionContext _ctx, string message, string entityLogicalName)
+        {
+            var ctx = _ctx.ParentContext;
+
+            if (ctx != null)
+            {
+                if (ctx.MessageName == message && ctx.PrimaryEntityName == entityLogicalName)
+                {
+                    return true;
+                }
+
+                if (ctx.ParentContext != null)
+                {
+                    return ctx.ParentContext.DirectChildOf(message, entityLogicalName);
+                }
+            }
+            return false;
+        }
+
+        public static Microsoft.Xrm.Sdk.EntityReference ParentEntityId(this Microsoft.Xrm.Sdk.IPluginExecutionContext _ctx, string message, string entitylogicalname)
+        {
+            var ctx = _ctx.ParentContext;
+
+            if (ctx != null)
+            {
+                if (ctx.MessageName == message && ctx.PrimaryEntityName == entitylogicalname)
+                {
+                    return new EntityReference(ctx.PrimaryEntityName, ctx.PrimaryEntityId);
+                }
+
+                if (ctx.ParentContext != null)
+                {
+                    return ctx.ParentContext.ParentEntityId(message, entitylogicalname);
+                }
+            }
+            return null;
+        }
     }
 }
