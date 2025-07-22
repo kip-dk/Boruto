@@ -306,5 +306,35 @@ namespace Boruto.Extensions.TypeConverters
 
             throw new InvalidPluginExecutionException($"Value: [{o}] cannot be converted to OptionSetValue");
         }
+
+        public static int? ZeroAsNull(this int value)
+        {
+            if (value == 0) return null;
+            return value;
+        }
+
+        public static long? ZeroAsNull(this long value)
+        {
+            if (value == 0) return null;
+            return value;
+        }
+
+        public static float? ZeroAsNull(this float value)
+        {
+            if (value == 0f) return null;
+            return value;
+        }
+
+        public static decimal? ZeroAsNull(this decimal value)
+        {
+            if (value == 0M) return null;
+            return value;
+        }
+
+        public static Microsoft.Xrm.Sdk.Money ZeroAsNull(this Microsoft.Xrm.Sdk.Money value)
+        {
+            if (value == null || value.Value == 0M) return null;
+            return value;
+        }
     }
 }
