@@ -87,15 +87,35 @@ namespace Boruto.Extensions.SDK
 
         /// <summary>
         /// Returns true if the attrName is part of the Target entity payload (assigned in the process), otherwise false
+        /// If others has values, and at least one of the names is within the target Attributes, true will be returned as well.
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="attrName"></param>
-        /// <returns></returns>
-        public static bool IsTargetAttribute(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string attrName)
+        /// <param name="others"></param>
+        /// <returns>true if attrName or at least on of the names in others is part of Target Attributes</returns>
+        public static bool IsTargetAttribute(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string attrName, params string[] others)
         {
-            if (!string.IsNullOrEmpty(attrName) && ctx.InputParameters != null && ctx.InputParameters.ContainsKey("Target") && ctx.InputParameters["Target"] is Microsoft.Xrm.Sdk.Entity target)
+            if (ctx.InputParameters != null && ctx.InputParameters.ContainsKey("Target") && ctx.InputParameters["Target"] is Microsoft.Xrm.Sdk.Entity target)
             {
-                return target.Attributes.ContainsKey(attrName.ToLower());
+                if (!string.IsNullOrEmpty(attrName))
+                {
+                    var res = target.Attributes.ContainsKey(attrName.ToLower());
+                    if (res == true)
+                    {
+                        return true;
+                    }
+                }
+
+                if (others != null && others.Length > 0) 
+                {
+                    foreach (var oth in others.Select(r => r.ToLower())) 
+                    { 
+                        if (target.Attributes.ContainsKey(oth))
+                        {
+                            return true;
+                        }
+                    }
+                }
             }
             return false;
         }

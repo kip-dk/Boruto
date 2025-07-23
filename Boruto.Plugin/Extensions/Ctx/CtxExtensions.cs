@@ -19,15 +19,16 @@ namespace Boruto.Extensions.Ctx
 
         /// <summary>
         /// Determin if an attribute is part of the target payload
+        /// If others has values, true will be returned if at attrName OR at least one of the attributes in others is part of target payload
         /// </summary>
-        /// <param name="attrName"></param>
+        /// <param name="attrName">primary attribute name</param>
+        /// <param name="others">other attributes</param>
         /// <returns>returns true if the attribute is part of the target payload</returns>
         [System.Diagnostics.DebuggerNonUserCode()]
-
-        public static bool IsTargetAttribute(this string attrName)
+        public static bool IsTargetAttribute(this string attrName, params string[] others)
         {
             var ctx = ThrowIfNotInPluginExecutionContext();
-            return ctx.IsTargetAttribute(attrName);
+            return ctx.IsTargetAttribute(attrName, others);
         }
 
 
