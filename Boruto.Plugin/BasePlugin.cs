@@ -39,7 +39,7 @@ namespace Boruto
             {
                 try
                 {
-                    ctx.Execute();
+                    ctx.Execute(this.FilterTargetOnCreate);
                 } catch (Exception ex)
                 {
                     if (ex is Microsoft.Xrm.Sdk.InvalidPluginExecutionException)
@@ -92,6 +92,9 @@ namespace Boruto
             return null;
         }
 
+
         protected abstract Assembly[] ServiceAssemblies { get; }
+
+        protected virtual bool FilterTargetOnCreate => true;
     }
 }

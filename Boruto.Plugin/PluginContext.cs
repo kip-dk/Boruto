@@ -482,7 +482,7 @@ namespace Boruto
         #endregion
 
         #region run plugin
-        internal void Execute()
+        internal void Execute(bool filterTargetOnCreate)
         {
             using (var fac = new Reflection.ServiceFactory(this))
             {
@@ -494,7 +494,7 @@ namespace Boruto
                 if (methods != null && methods.Length > 0) {
                     foreach (var method in methods)
                     {
-                        if ((this.Message == "Create" || this.Message == "Update") && !method.AllTargetFilter)
+                        if (((this.Message == "Create" && filterTargetOnCreate) || this.Message == "Update") && !method.AllTargetFilter)
                         {
                             if (!this.Target.Attributes.Keys.Where(r => method.TargetFilter.Contains(r)).Any())
                             {
