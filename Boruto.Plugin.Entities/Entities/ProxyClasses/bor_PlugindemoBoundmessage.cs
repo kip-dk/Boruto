@@ -15,7 +15,7 @@ namespace Boruto.Plugin.Entities
 	
 	[System.Runtime.Serialization.DataContractAttribute(Namespace="http://schemas.microsoft.com/xrm/2011/bor/")]
 	[Microsoft.Xrm.Sdk.Client.RequestProxyAttribute("bor_PlugindemoBoundmessage")]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public partial class bor_PlugindemoBoundmessageRequest : Microsoft.Xrm.Sdk.OrganizationRequest
 	{
 		
@@ -67,7 +67,7 @@ namespace Boruto.Plugin.Entities
 	
 	[System.Runtime.Serialization.DataContractAttribute(Namespace="http://schemas.microsoft.com/xrm/2011/bor/")]
 	[Microsoft.Xrm.Sdk.Client.ResponseProxyAttribute("bor_PlugindemoBoundmessage")]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public partial class bor_PlugindemoBoundmessageResponse : Microsoft.Xrm.Sdk.OrganizationResponse
 	{
 		
@@ -87,6 +87,10 @@ namespace Boruto.Plugin.Entities
 				{
 					return default(string);
 				}
+			}
+			set
+			{
+				this.Results["Output"] = value;
 			}
 		}
 	}

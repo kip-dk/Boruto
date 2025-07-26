@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2025-07-23 12:15
+## updated: 2025-07-26 20:50
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -36,8 +36,10 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 
 ## Changelog
 
+### 1.0.2.31 2025-07-26 Tools to generate OptionSetValue _[SchemaName] properties, to make migration of old projects easier
+
 ### 1.0.2.30 2025-07-23 Boruto.BasePlugin.FilterTargetOnCreate, override this setting on your plugin if you wish to supress filtering on attributes for create message
-                        default is true, and will inforce filtering on target attributes, even for Create message, while false, target attributes filtering will only be applied for update message
+default is true, and will inforce filtering on target attributes, even for Create message, while false, target attributes filtering will only be applied for update message
 
 
 ### 1.0.2.29 2025-07-23 ctx.IsTargetAttribute allow parsing additional fields for the check

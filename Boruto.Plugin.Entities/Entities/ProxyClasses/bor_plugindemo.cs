@@ -17,7 +17,7 @@ namespace Boruto.Plugin.Entities
 	/// Status for plugindemo
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum bor_plugindemo_statecode
 	{
 		
@@ -32,7 +32,7 @@ namespace Boruto.Plugin.Entities
 	/// Årsag til statussen for plugindemo
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum bor_plugindemo_statuscode
 	{
 		
@@ -45,7 +45,7 @@ namespace Boruto.Plugin.Entities
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("bor_plugindemo")]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public partial class bor_plugindemo : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	{
 		
@@ -56,6 +56,8 @@ namespace Boruto.Plugin.Entities
 		{
 			public const string bor_changelog = "bor_changelog";
 			public const string bor_empty = "bor_empty";
+			public const string bor_group = "bor_group";
+			public const string bor_groupName = "bor_groupname";
 			public const string bor_name = "bor_name";
 			public const string bor_number = "bor_number";
 			public const string bor_plugindemoId = "bor_plugindemoid";
@@ -165,6 +167,37 @@ namespace Boruto.Plugin.Entities
 				this.OnPropertyChanging("bor_empty");
 				this.SetAttributeValue("bor_empty", value);
 				this.OnPropertyChanged("bor_empty");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_group")]
+		public virtual System.Collections.Generic.IEnumerable<bor_grouping> bor_group
+		{
+			get
+			{
+				return EntityOptionSetEnum.GetMultiEnum<bor_grouping>(this, "bor_group");
+			}
+			set
+			{
+				this.OnPropertyChanging("bor_group");
+				this.SetAttributeValue("bor_group", EntityOptionSetEnum.GetMultiEnum(this, "bor_group", value));
+				this.OnPropertyChanged("bor_group");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("bor_groupname")]
+		public string bor_groupName
+		{
+			get
+			{
+				if (this.FormattedValues.Contains("bor_group"))
+				{
+					return this.FormattedValues["bor_group"];
+				}
+				else
+				{
+					return default(string);
+				}
 			}
 		}
 		

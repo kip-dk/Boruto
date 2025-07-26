@@ -15,20 +15,17 @@ namespace Boruto.Plugin.Entities
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
-	public enum pw_portallanguage
+	public enum bor_grouping
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		English = 266890000,
+		Agroup = 100000000,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		Danish = 266890001,
+		Bgroup = 100000001,
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
-		German = 266890002,
-		
-		[System.Runtime.Serialization.EnumMemberAttribute()]
-		French = 266890003,
+		Cgroup = 100000002,
 	}
 }
 #pragma warning restore CS1591

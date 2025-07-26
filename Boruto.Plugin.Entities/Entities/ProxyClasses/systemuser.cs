@@ -17,7 +17,7 @@ namespace Boruto.Plugin.Entities
 	/// Brugertype.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_accessmode
 	{
 		
@@ -44,7 +44,7 @@ namespace Boruto.Plugin.Entities
 	/// Adressetypen for adresse 1, f.eks. faktureringsadresse, forsendelsesadresse eller primær adresse.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_address1_addresstypecode
 	{
 		
@@ -56,7 +56,7 @@ namespace Boruto.Plugin.Entities
 	/// Forsendelsesmåde for adresse 1.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_address1_shippingmethodcode
 	{
 		
@@ -68,7 +68,7 @@ namespace Boruto.Plugin.Entities
 	/// Adressetypen for adresse 2, f.eks. faktureringsadresse, forsendelsesadresse eller primær adresse.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_address2_addresstypecode
 	{
 		
@@ -80,7 +80,7 @@ namespace Boruto.Plugin.Entities
 	/// Forsendelsesmåde for adresse 2.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_address2_shippingmethodcode
 	{
 		
@@ -92,7 +92,7 @@ namespace Boruto.Plugin.Entities
 	/// Azure-tilstand for bruger.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_azurestate
 	{
 		
@@ -110,7 +110,7 @@ namespace Boruto.Plugin.Entities
 	/// Brugerens licenstype. Dette bruges kun i versionen i det lokale miljø af produktet. Onlinelicenser administreres via Microsoft 365 Office Portal.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_caltype
 	{
 		
@@ -158,7 +158,7 @@ namespace Boruto.Plugin.Entities
 	/// Slet brugertilstand.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_deletestate
 	{
 		
@@ -173,7 +173,7 @@ namespace Boruto.Plugin.Entities
 	/// Angiver godkendelsesindstillingerne for synkronisering på serversiden eller adgang til E-mail Router.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_emailrouteraccessapproval
 	{
 		
@@ -194,7 +194,7 @@ namespace Boruto.Plugin.Entities
 	/// Leveringsmetode for indgående e-mail for brugeren.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_incomingemaildeliverymethod
 	{
 		
@@ -215,7 +215,7 @@ namespace Boruto.Plugin.Entities
 	/// Status for brugerinvitation.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_invitestatuscode
 	{
 		
@@ -245,7 +245,7 @@ namespace Boruto.Plugin.Entities
 	/// Leveringsmetode for udgående e-mail for brugeren.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_outgoingemaildeliverymethod
 	{
 		
@@ -263,7 +263,7 @@ namespace Boruto.Plugin.Entities
 	/// Brugerens foretrukne adresse.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_preferredaddresscode
 	{
 		
@@ -278,7 +278,7 @@ namespace Boruto.Plugin.Entities
 	/// Brugerens foretrukne e-mail-adresse.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_preferredemailcode
 	{
 		
@@ -290,7 +290,7 @@ namespace Boruto.Plugin.Entities
 	/// Brugerens foretrukne telefonnummer.
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_preferredphonecode
 	{
 		
@@ -311,7 +311,7 @@ namespace Boruto.Plugin.Entities
 	/// Typen af bruger
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum systemuser_systemmanagedusertype
 	{
 		
@@ -330,7 +330,7 @@ namespace Boruto.Plugin.Entities
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("systemuser")]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public partial class SystemUser : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	{
 		

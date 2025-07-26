@@ -17,7 +17,7 @@ namespace Boruto.Plugin.Entities
 	/// Defines the the a truck can be loaded
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.11")]
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.15")]
 	public enum arbo_loadingmethod
 	{
 		
