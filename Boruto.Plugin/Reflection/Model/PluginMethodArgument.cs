@@ -25,14 +25,11 @@ namespace Boruto.Reflection.Model
             this.assemblies = assemblies;
             this.Resolve();
 
-            if (this.IsEntityMatch == null || this.IsEntityMatch == true)
-            {
-                var admin = method.GetCustomAttribute<Attributes.AdminAttribute>();
+            var admin = method.GetCustomAttribute<Attributes.AdminAttribute>();
 
-                if (admin != null)
-                {
-                    this.Admin = true;
-                }
+            if (admin != null)
+            {
+                this.Admin = true;
             }
         }
 
