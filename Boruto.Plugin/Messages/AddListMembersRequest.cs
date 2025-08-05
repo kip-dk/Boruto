@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Boruto.Messages
 {
-    public class RemoveListMembersRequest : Microsoft.Xrm.Sdk.OrganizationRequest
+    public class AddListMembersRequest : Microsoft.Xrm.Sdk.OrganizationRequest
     {
-        public RemoveListMembersRequest(): base ("RemoveListMembers")
+        public AddListMembersRequest(): base ("AddListMembers")
         {
 
         }
@@ -21,7 +21,7 @@ namespace Boruto.Messages
             }
             set
             {
-                this.Parameters[nameof(ListId)] = value;
+                this.Parameters[nameof(ListId)] = value;  
             }
         }
 
@@ -30,7 +30,8 @@ namespace Boruto.Messages
             get
             {
                 return (Guid[])this.Parameters[nameof(MemberIds)];
-            } set
+            }
+            set
             {
                 this.Parameters[nameof(MemberIds)] = value;
             }
