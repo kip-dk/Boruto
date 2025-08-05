@@ -3,6 +3,7 @@ using Boruto.Deployment.ServiceAPI;
 using Boruto.Extensions.FilterExpression;
 using Boruto.Extensions.QueryExpression;
 using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -89,7 +90,11 @@ namespace Boruto.Deployment.Services
 
                     if (crmStep == null)
                     {
-                        result.Add(this.Create(plugin, step, name));
+                        var next = this.Create(plugin, step, name);
+                        if (next != null)
+                        {
+                            result.Add(next);
+                        }
                     }
                     else
                     {
@@ -187,6 +192,13 @@ namespace Boruto.Deployment.Services
 
         private Entities.SdkMessageProcessingStep Create(Models.Plugin plugin, Models.Step step, string name)
         {
+            var message = this.GetSdkMessage(step.Message);
+
+            if (message == null) 
+            {
+                return null;
+            }
+
             var next = new Entities.SdkMessageProcessingStep
             {
                 SdkMessageProcessingStepId = Guid.NewGuid(),
@@ -196,8 +208,8 @@ namespace Boruto.Deployment.Services
                 Stage = (sdkmessageprocessingstep_stage)step.Stage,
                 SupportedDeployment = sdkmessageprocessingstep_supporteddeployment.ServerOnly,
                 EventHandler = new Microsoft.Xrm.Sdk.EntityReference(Entities.PluginType.EntityLogicalName, plugin.CurrentCrmInstance.PluginTypeId.Value),
-                SdkMessageId = this.GetSdkMessage(step.Message).ToEntityReference(),
-                SdkMessageFilterId = this.GetFilterFor(this.GetSdkMessage(step.Message), step.PrimaryEntityLogicalName)
+                SdkMessageId = message.ToEntityReference(),
+                SdkMessageFilterId = this.GetFilterFor(message, step.PrimaryEntityLogicalName)
             };
 
             if (next.Mode.Value == sdkmessageprocessingstep_mode.Asynchronous)
@@ -327,6 +339,21 @@ namespace Boruto.Deployment.Services
             {
                 var query = Entities.SdkMessage.EntityLogicalName.ToQueryExpression();
                 this.sdkmessages = this.orgService.RetrieveMultiple(query).Entities.Select(r => new SdkMessage(r)).ToDictionary(r => r.Name);
+            }
+
+            if (!sdkmessages.ContainsKey(message)) 
+            {
+                var query = Entities.SdkMessage.EntityLogicalName.ToQueryExpression();
+                query.Criteria.AddCondition("name", ConditionOperator.Equal, message);
+                var result = this.orgService.RetrieveMultiple(query).Entities.Select(r => new SdkMessage(r)).FirstOrDefault();
+                if (result != null)
+                {
+                    sdkmessages[message] = result;
+                } else
+                {
+                    messageService.Warning($"No message with name: { message } could be found");
+                    return null;
+                }
             }
             return this.sdkmessages[message];
         }

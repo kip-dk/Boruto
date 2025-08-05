@@ -276,7 +276,7 @@ namespace Boruto.Reflection
             #region custom service provider
             if (this.ctx.CustomServiceProvider != null)
             {
-                object result = this.ResolveCustomService(fromType);
+                object result = this.ResolveCustomService(fromType, admin);
 
                 if (result != null)
                 {
@@ -310,22 +310,33 @@ namespace Boruto.Reflection
         }
 
         private static Dictionary<Type, bool> customService = new Dictionary<Type, bool>();
-        private object ResolveCustomService(Type fromType)
+        private object ResolveCustomService(Type fromType, bool admin)
         {
-            if (customService.TryGetValue(fromType, out bool isCustom))
-            {
-                if (isCustom)
-                {
-                    return ctx.CustomServiceProvider.GetService(fromType);
-                } else
-                {
-                    return null;
-                }
-            }
+            var toBeReset = ctx._isAdmin;
 
-            var result = this.ctx.CustomServiceProvider.GetService(fromType);
-            customService[fromType] = result != null;
-            return result;
+            try
+            {
+                ctx._isAdmin = admin;
+
+                if (customService.TryGetValue(fromType, out bool isCustom))
+                {
+                    if (isCustom)
+                    {
+                        return ctx.CustomServiceProvider.GetService(fromType);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+
+                var result = this.ctx.CustomServiceProvider.GetService(fromType);
+                customService[fromType] = result != null;
+                return result;
+            } finally
+            {
+                ctx._isAdmin = toBeReset;
+            }
         }
 
         private Dictionary<string, object> repositoryTypes = new Dictionary<string, object>();

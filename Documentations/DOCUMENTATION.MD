@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2025-08-01 12:25
+## updated: 2025-08-05 13:55
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -36,7 +36,9 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 
 ## Changelog
 
-### 1.0.2.32 2025-08-01 [Admin] was not set correctly on all method parameter types
+### 1.0.2.34 2025-08-05 Resolve missing SdkMessage by fetching one at a time if needed. Report missing message, and ignore step registration, instead of fail with fatal error
+
+### 1.0.2.32-33 2025-08-01 [Admin] was not set correctly on all method parameter and service constructor injection types
 
 ### 1.0.2.31 2025-07-26 Tools to generate OptionSetValue _[SchemaName] properties, to make migration of old projects easier
 
