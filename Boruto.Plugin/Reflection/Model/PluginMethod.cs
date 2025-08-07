@@ -32,7 +32,7 @@ namespace Boruto.Reflection.Model
             this.Resolve();
             this.ResolveIf();
 
-            var isOrg = this.Arguments.Where(r => r.IsOrganizationRequest).FirstOrDefault();
+            var isOrg = this.arguments != null ? this.arguments.Where(r => r.IsOrganizationRequest).FirstOrDefault() : null;
 
             if (isOrg == null)
             {
