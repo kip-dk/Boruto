@@ -30,6 +30,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solutions", "Solutions", "{
 		Solutions\Boruto_1_0_0_1.zip = Solutions\Boruto_1_0_0_1.zip
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boruto.Web", "Boruto.Web\Boruto.Web.csproj", "{63DE9281-19B8-4A8C-A09E-702B45DFABBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{D11BD6FF-DC2B-4CFF-AA29-5970AF849A22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D11BD6FF-DC2B-4CFF-AA29-5970AF849A22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D11BD6FF-DC2B-4CFF-AA29-5970AF849A22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63DE9281-19B8-4A8C-A09E-702B45DFABBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63DE9281-19B8-4A8C-A09E-702B45DFABBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63DE9281-19B8-4A8C-A09E-702B45DFABBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63DE9281-19B8-4A8C-A09E-702B45DFABBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
