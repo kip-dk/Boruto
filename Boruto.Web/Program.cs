@@ -21,12 +21,6 @@ namespace Boruto.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddAuthentication().AddGoogle(googleOptions =>
-            {
-                googleOptions.ClientId = "605197690411-la6rlp353nakrv6bh6cf60oj8f59p283.apps.googleusercontent.com";
-                googleOptions.ClientSecret = "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";
-            });
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
