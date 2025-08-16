@@ -204,6 +204,11 @@ namespace Boruto.Reflection
             {
                 return this.FetchExpression;
             }
+
+            if (fromType == typeof(Microsoft.Xrm.Sdk.Query.ColumnSet))
+            {
+                return this.ColumnSet;
+            }
             #endregion
 
             #region resolve target reference
@@ -430,6 +435,34 @@ namespace Boruto.Reflection
                 return null;
             }
         }
+
+        private Microsoft.Xrm.Sdk.Query.ColumnSet _columnSet;
+
+        private Microsoft.Xrm.Sdk.Query.ColumnSet ColumnSet
+        {
+            get
+            {
+                if (this._columnSet != null)
+                {
+                    return this._columnSet;
+                }
+
+                if (this.ctx.PluginExecutionContext.InputParameters.ContainsKey("ColumnSet")) 
+                { 
+                    this._columnSet = this.ctx.PluginExecutionContext.InputParameters["ColumnSet"] as Microsoft.Xrm.Sdk.Query.ColumnSet;
+                    return this._columnSet;
+                }
+
+                var qe = this.QueryExpression;
+                if (qe != null)
+                {
+                    return qe.ColumnSet;
+                }
+
+                return null;
+            }
+        }
+
         #endregion
         #region service constructor
         private List<Type> resolving = new List<Type>();
