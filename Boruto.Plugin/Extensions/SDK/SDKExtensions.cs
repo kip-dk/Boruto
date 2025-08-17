@@ -58,6 +58,16 @@ namespace Boruto.Extensions.SDK
             }
         }
 
+        public static Microsoft.Xrm.Sdk.Entity ToEntityBase(this Microsoft.Xrm.Sdk.Entity entity)
+        {
+            if (entity.GetType() == typeof(Microsoft.Xrm.Sdk.Entity)) 
+            {
+                return entity;
+            }
+            var result = new Microsoft.Xrm.Sdk.Entity(entity.LogicalName, entity.Id);
+            result.Attributes = entity.Attributes;
+            return result;
+        }
 
         /// <summary>
         /// return the strongly type value of an attribut by its name or default if not in the attributes collection, or null

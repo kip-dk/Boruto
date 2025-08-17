@@ -565,7 +565,25 @@ namespace Boruto
                             {
                                 foreach (var p in re.Results)
                                 {
-                                    this.PluginExecutionContext.OutputParameters[p.Key] = p.Value;
+                                    var value = p.Value;
+                                    var done = false;
+                                    if (value != null && value is Microsoft.Xrm.Sdk.EntityCollection ec && ec.Entities.Count > 0)
+                                    {
+                                        this.PluginExecutionContext.OutputParameters[p.Key] = new Microsoft.Xrm.Sdk.EntityCollection(ec.Entities.Select(r => r.ToEntityBase()).ToList());
+                                        done = true;
+                                    }
+
+                                    if (value != null && value is Microsoft.Xrm.Sdk.Entity et)
+                                    {
+                                        this.PluginExecutionContext.OutputParameters[p.Key] = et.ToEntityBase();
+                                        done = true;
+                                    }
+
+                                    if (!done)
+                                    {
+                                        this.PluginExecutionContext.OutputParameters[p.Key] = value;
+                                        done = true;
+                                    }
                                 }
                             }
 
@@ -576,7 +594,7 @@ namespace Boruto
 
                             if (this.Stage == 30 && this.Message == "Retrieve" && result is Microsoft.Xrm.Sdk.Entity ent)
                             {
-                                this.PluginExecutionContext.OutputParameters["BusinessEntity"] = ent.ToPlainEntity();
+                                this.PluginExecutionContext.OutputParameters["BusinessEntity"] = ent.ToEntityBase();
                             }
 
                             if (this.Stage == 30 && this.Message == "RetrieveMultiple" && result is Microsoft.Xrm.Sdk.EntityCollection col)
@@ -593,7 +611,7 @@ namespace Boruto
 
                                 foreach (var e in col.Entities)
                                 {
-                                    pub.Entities.Add(e.ToPlainEntity());
+                                    pub.Entities.Add(e.ToEntityBase());
                                 }
 
                                 this.PluginExecutionContext.OutputParameters["BusinessEntityCollection"] = pub;
@@ -772,23 +790,5 @@ namespace Boruto
             return result;
         }
         #endregion
-    }
-
-    internal static class PluginContextLocalExtensions
-    {
-        public static Microsoft.Xrm.Sdk.Entity ToPlainEntity(this Microsoft.Xrm.Sdk.Entity instance)
-        {
-            if (instance.GetType() == typeof(Microsoft.Xrm.Sdk.Entity))
-            {
-                return instance;
-            }
-            var result = new Microsoft.Xrm.Sdk.Entity
-            {
-                Id = instance.Id,
-                LogicalName = instance.LogicalName,
-                Attributes = instance.Attributes
-            };
-            return result;
-        }
     }
 }

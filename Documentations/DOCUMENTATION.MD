@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2025-08-16 09:45
+## updated: 2025-08-17 11:15
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -35,6 +35,8 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package, guides for setting up a automated deployment and step registration process will soon be added to the documentation page. (2025-07-05)
 
 ## Changelog
+### 1.9.2.38 2025-08-17 OrganizationRequest output parameters of type Entity and EntityCollection are converted from stronly type entity to Microsoft.Xrm.Sdk.Entity to avoid serialization exception on strongly typed entity
+
 ### 1.9.2.37 2025-08-16 Inject Microsoft.Xrm.Sdk.Query.ColumnSet into plugin method, to allow only fetch relevant columns on virtual entities providers
 
 ### 1.9.2.36 2025-08-07 Handle no arguments in method
