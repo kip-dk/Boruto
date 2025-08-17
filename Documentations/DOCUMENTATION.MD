@@ -35,6 +35,8 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package, guides for setting up a automated deployment and step registration process will soon be added to the documentation page. (2025-07-05)
 
 ## Changelog
+### 1.9.2.39 2025-08-17 Extension method to reduce an entity for update to only contain fields that was actually changed, according to a full image of same record (ReduceToUnchanged)
+
 ### 1.9.2.38 2025-08-17 OrganizationRequest output parameters of type Entity and EntityCollection are converted from stronly type entity to Microsoft.Xrm.Sdk.Entity to avoid serialization exception on strongly typed entity
 
 ### 1.9.2.37 2025-08-16 Inject Microsoft.Xrm.Sdk.Query.ColumnSet into plugin method, to allow only fetch relevant columns on virtual entities providers

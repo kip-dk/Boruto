@@ -1,4 +1,5 @@
-﻿using Microsoft.Xrm.Sdk;
+﻿using Boruto.Extensions.TypeConverters;
+using Microsoft.Xrm.Sdk;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -683,6 +684,29 @@ namespace Boruto.Extensions.SDK
                 }
             }
             return null;
+        }
+
+        public static Microsoft.Xrm.Sdk.Entity ReduceToUnchanged(this Microsoft.Xrm.Sdk.Entity clean, Microsoft.Xrm.Sdk.Entity full, out bool allRemoved)
+        {
+            allRemoved = true;
+            var result = new Microsoft.Xrm.Sdk.Entity(clean.LogicalName, clean.Id);
+
+            foreach (var key in clean.Attributes.Keys.ToArray())
+            {
+                if (key == $"{clean.LogicalName}id") continue;
+                if (key == $"activityid") continue;
+
+                var cleanValue = clean.Attributes[key];
+                var fullValue = full.Attributes.ContainsKey(key) ? full.Attributes[key] : null;
+
+                if (!cleanValue.IsSame(fullValue))
+                {
+                    allRemoved = false;
+                    result[key] = cleanValue;
+                }
+            }
+
+            return result;
         }
     }
 }

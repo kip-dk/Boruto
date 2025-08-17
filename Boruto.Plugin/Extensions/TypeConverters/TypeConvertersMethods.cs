@@ -82,6 +82,13 @@ namespace Boruto.Extensions.TypeConverters
             }
 
             {
+                if (from is OptionSetValueCollection fc && other is OptionSetValueCollection oc)
+                {
+                    return fc.Select(r => r.Value).OrderBy(r => r).SequenceEqual(oc.Select(r => r.Value).OrderBy(r => r));
+                }
+            }
+
+            {
                 if (from is Microsoft.Xrm.Sdk.EntityReference f && other is Microsoft.Xrm.Sdk.EntityReference t)
                 {
                     return f.LogicalName == t.LogicalName && f.Id == t.Id;
