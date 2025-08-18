@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2025-08-17 11:15
+## updated: 2025-08-18 07:25
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -35,6 +35,8 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package, guides for setting up a automated deployment and step registration process will soon be added to the documentation page. (2025-07-05)
 
 ## Changelog
+### 1.9.3.1 2025-08-18 Extension method IsSame is adjusted so string compare consider empty string same as null. Version bump du to change in IsSame api behavior
+
 ### 1.9.2.39 2025-08-17 Extension method to reduce an entity for update to only contain fields that was actually changed, according to a full image of same record (ReduceToUnchanged)
 
 ### 1.9.2.38 2025-08-17 OrganizationRequest output parameters of type Entity and EntityCollection are converted from stronly type entity to Microsoft.Xrm.Sdk.Entity to avoid serialization exception on strongly typed entity

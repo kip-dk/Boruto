@@ -35,6 +35,16 @@ namespace Boruto.Extensions.TypeConverters
         [System.Diagnostics.DebuggerNonUserCode()]
         public static bool IsSame(this object from, object other)
         {
+            if (from is string s && string.IsNullOrEmpty(s))
+            {
+                from = null;
+            }
+
+            if (other is string o && string.IsNullOrEmpty(o))
+            {
+                other = null;   
+            }
+
             if (from == null && other == null) return true;
             if (from != null && other == null) return false;
             if (from == null && other != null) return false;
