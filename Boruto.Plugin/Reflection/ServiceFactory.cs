@@ -13,7 +13,7 @@ namespace Boruto.Reflection
     {
         private readonly PluginContext ctx;
 
-        private Dictionary<Type, object> resolved = new Dictionary<Type, object>();
+        private Dictionary<string, object> resolved = new Dictionary<string, object>();
 
         internal ServiceFactory(PluginContext ctx)
         {
@@ -148,7 +148,7 @@ namespace Boruto.Reflection
         #region private helpers
         private object DoResolve(Type fromType, bool isTargetReference, bool isOrgRequest ,bool admin, Type toType)
         {
-            if (resolved.TryGetValue(fromType, out object o))
+            if (resolved.TryGetValue(fromType.ToKey(admin), out object o))
             {
                 return o;
             }
@@ -220,7 +220,7 @@ namespace Boruto.Reflection
                 }
 
                 var re = System.Activator.CreateInstance(toType, this.ctx.TargetReference);
-                resolved[fromType] = re;
+                resolved[fromType.ToKey(admin)] = re;
                 return re;
             }
             #endregion
@@ -231,7 +231,7 @@ namespace Boruto.Reflection
                 var orgR = System.Activator.CreateInstance(fromType) as Microsoft.Xrm.Sdk.OrganizationRequest;
                 orgR.RequestName = this.ctx.PluginExecutionContext.MessageName;
                 orgR.Parameters = this.ctx.PluginExecutionContext.InputParameters;
-                resolved[fromType] = orgR;
+                resolved[fromType.ToKey(admin)] = orgR;
                 return orgR;
             }
             #endregion
@@ -249,23 +249,23 @@ namespace Boruto.Reflection
             #region resolve irepository
             if (fromType.IsRepository())
             {
-                resolved[fromType] = this.ResolveRepository(fromType.GenericTypeArguments[0], admin);
-                return resolved[fromType];
+                resolved[fromType.ToKey(admin)] = this.ResolveRepository(fromType.GenericTypeArguments[0], admin);
+                return resolved[fromType.ToKey(admin)];
             }
             #endregion
 
             #region resolve boruto services
             if (fromType == typeof(Boruto.ServiceAPI.IMetadataService))
             {
-                resolved[fromType] = new Implementations.Services.MetadataService(this.ctx.PluginAdminService);
-                return resolved[fromType];
+                resolved[fromType.ToKey(admin)] = new Implementations.Services.MetadataService(this.ctx.PluginAdminService);
+                return resolved[fromType.ToKey(admin)];
             }
 
             if (fromType == typeof(Boruto.ServiceAPI.INamingService))
             {
                 var metaService = (Boruto.ServiceAPI.IMetadataService)DoResolve(typeof(Boruto.ServiceAPI.IMetadataService), false, false, false, null);
-                resolved[fromType] = new Implementations.Services.NamingService(metaService, this.ctx.PluginAdminService);
-                return resolved[fromType];
+                resolved[fromType.ToKey(admin)] = new Implementations.Services.NamingService(metaService, this.ctx.PluginAdminService);
+                return resolved[fromType.ToKey(admin)];
             }
             #endregion
 
@@ -273,8 +273,8 @@ namespace Boruto.Reflection
             #region resolve types already mapped
             if (toType != null)
             {
-                resolved[fromType] = this.CreateServiceInstance(toType);
-                return resolved[fromType];
+                resolved[fromType.ToKey(admin)] = this.CreateServiceInstance(toType);
+                return resolved[fromType.ToKey(admin)];
             }
             #endregion
 
@@ -285,7 +285,7 @@ namespace Boruto.Reflection
 
                 if (result != null)
                 {
-                    resolved[fromType] = result;
+                    resolved[fromType.ToKey(admin)] = result;
                     return result;
                 }
             }
@@ -297,8 +297,8 @@ namespace Boruto.Reflection
                 var resolveToType = fromType.ResolveImplementingType(this.ctx.ServiceAssemblies);
                 if (resolveToType != null)
                 {
-                    resolved[fromType] = this.CreateServiceInstance(resolveToType);
-                    return resolved[fromType];
+                    resolved[fromType.ToKey(admin)] = this.CreateServiceInstance(resolveToType);
+                    return resolved[fromType.ToKey(admin)];
                 }
             }
             #endregion
@@ -306,8 +306,8 @@ namespace Boruto.Reflection
             #region resolve simply by it self
             if (!fromType.IsInterface && !fromType.IsAbstract && fromType.HasPublicConstructor())
             {
-                resolved[fromType] = this.CreateServiceInstance(fromType);
-                return resolved[fromType];
+                resolved[fromType.ToKey(admin)] = this.CreateServiceInstance(fromType);
+                return resolved[fromType.ToKey(admin)];
             }
             #endregion
 
@@ -535,6 +535,13 @@ namespace Boruto.Reflection
             }
         }
         #endregion
+    }
 
+    internal static class ServiceFactoryLocalExtension
+    {
+        public static string ToKey(this Type type, bool admin)
+        {
+            return $"{ type.FullName }:{ admin }";
+        }
     }
 }

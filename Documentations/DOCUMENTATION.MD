@@ -35,6 +35,9 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package, guides for setting up a automated deployment and step registration process will soon be added to the documentation page. (2025-07-05)
 
 ## Changelog
+
+### 1.9.3.2 2025-08-19 Admin flag not always respected when custom service provider should create object service instance
+
 ### 1.9.3.1 2025-08-18 Extension method IsSame is adjusted so string compare consider empty string same as null. Version bump du to change in IsSame api behavior
 
 ### 1.9.2.39 2025-08-17 Extension method to reduce an entity for update to only contain fields that was actually changed, according to a full image of same record (ReduceToUnchanged)
