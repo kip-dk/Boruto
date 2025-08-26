@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,21 @@ namespace Boruto
 {
     public static class Trace
     {
+        public static bool TRACE_CONDITIONAL = false;
+
+
+        /// <summary>
+        /// Set TRACE_CONDITIONAL to true, before calling this, so allow trace to only be committed to server when true.
+        /// </summary>
+        /// <param name="message"></param>
+        public static void Conditional(string message)
+        {
+            if (TRACE_CONDITIONAL)
+            {
+                Info(message);
+            }
+        }
+
         public static void Info(string message)
         {
             var cur = PluginContext.Current;

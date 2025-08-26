@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2025-08-25 12:50
+## updated: 2025-08-26 10:45
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -36,9 +36,12 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 
 ## Changelog
 
-### 1.9.3.2 2025-08-19 Admin flag not always respected when custom service provider should create object service instance
 
-### 1.9.3.1 2025-08-18 Extension method IsSame is adjusted so string compare consider empty string same as null. Version bump du to change in IsSame api behavior
+### 1.0.3.3 2025-08-19 Admin flag still not repsected on inject of custom provider created service directly on plugin method. Fixed.
+
+### 1.0.3.2 2025-08-19 Admin flag not always respected when custom service provider should create object service instance
+
+### 1.0.3.1 2025-08-18 Extension method IsSame is adjusted so string compare consider empty string same as null. Version bump du to change in IsSame api behavior
 
 ### 1.9.2.39 2025-08-17 Extension method to reduce an entity for update to only contain fields that was actually changed, according to a full image of same record (ReduceToUnchanged)
 

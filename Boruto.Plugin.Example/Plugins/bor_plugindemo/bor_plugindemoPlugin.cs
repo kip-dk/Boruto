@@ -11,6 +11,18 @@ namespace Boruto.Plugin.Example.Plugins.bor_plugindemo
     public class bor_plugindemoPlugin : BasePlugin
     {
         [Sort(1)]
+        public void OnPreCreate(Boruto.Plugin.Entities.bor_plugindemo target)
+        {
+            Boruto.Trace.TRACE_CONDITIONAL = true;
+        }
+
+        [Sort(2)]
+        public void OnPreCreate(Boruto.Plugin.Entities.bor_plugindemo target, [Admin]Boruto.Plugin.Entities.IUnitOfWork uow)
+        {
+            Boruto.Trace.TRACE_CONDITIONAL = false;
+        }
+
+        [Sort(2)]
         public void OnPreCreate(
             Entities.bor_plugindemos.NameChanged.INameChanged target, 
             ServiceAPI.IPluginDemoService service)
@@ -18,7 +30,7 @@ namespace Boruto.Plugin.Example.Plugins.bor_plugindemo
             service.OnCreate(target);
         }
 
-        [Sort(2)]
+        [Sort(3)]
         public void OnPreCreate(Entities.bor_plugindemos.NumberChanged.INumberChanged target)
         {
             target.DoStuff();

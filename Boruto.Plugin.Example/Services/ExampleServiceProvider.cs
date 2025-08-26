@@ -17,17 +17,34 @@ namespace Boruto.Plugin.Example.Services
             this.ctx = ctx;
         }
 
+        public static void log(string message)
+        {
+            Boruto.Trace.Conditional(message);
+        }
+
         public object GetService(Type serviceType)
         {
             if (serviceType == typeof(Boruto.Plugin.Entities.IUnitOfWork))
             {
-                if (this.ctx.IsAdmin) return this.AdminUnitOfWork;
+                if (this.ctx.IsAdmin)
+                {
+                    log("Admin UOW");
+                    return this.AdminUnitOfWork;
+                }
+
+                log("UOW");
                 return this.UnitOfWork;
             }
 
             if (this.IsRepository(serviceType)) 
             {
-                if (ctx.IsAdmin) return this.AdminUnitOfWork.GetRepoByType(serviceType);
+                if (ctx.IsAdmin)
+                {
+                    log("Admin REPO");
+                    return this.AdminUnitOfWork.GetRepoByType(serviceType.GetGenericArguments().First());
+                }
+
+                log("REPO");
                 return this.UnitOfWork.GetRepoByType(serviceType.GetGenericArguments().First());
             }
             return null;

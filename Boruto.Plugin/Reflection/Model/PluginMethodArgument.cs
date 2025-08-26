@@ -25,12 +25,14 @@ namespace Boruto.Reflection.Model
             this.assemblies = assemblies;
             this.Resolve();
 
-            var admin = method.GetCustomAttribute<Attributes.AdminAttribute>();
+            var admin = parameterinfo.GetCustomAttribute<Attributes.AdminAttribute>();
 
             if (admin != null)
             {
                 this.Admin = true;
             }
+
+            Boruto.Trace.Conditional($"{ method.Name }, { parameterinfo.Name } { parameterinfo.ParameterType.FullName } [{ this.Admin }]");
         }
 
         internal bool IsTarget { get; private set; }
