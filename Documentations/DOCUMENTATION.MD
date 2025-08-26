@@ -10,7 +10,7 @@ For documentation:
 
 
 ## DISCLAIMER
-We are still in process of stabalizing the concept and improving documentation. We will make an expicit RELEASED note when the concept is ready for adoption.
+We are still in process of stabilize the concept and improving documentation. We will make an expicit RELEASED note when the concept is ready for adoption.
 
 This software is provided as-is, and is used on your own risk. Kipon ApS does not take any responsibility of damages directly or indirectly caused by the
 use of this software.
