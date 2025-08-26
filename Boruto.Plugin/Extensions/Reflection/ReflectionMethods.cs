@@ -164,7 +164,7 @@ namespace Boruto.Extensions.Reflection
         }
 
         private static readonly Dictionary<System.Reflection.MethodInfo, Type[]> METHOD_ENTITY_TYPES = new Dictionary<MethodInfo, Type[]>();
-        public static Type[] ResolveEntityTypes(this System.Reflection.MethodInfo method, Assembly[] assms)
+        internal static Type[] ResolveEntityTypes(this System.Reflection.MethodInfo method, Assembly[] assms)
         {
             if (METHOD_ENTITY_TYPES.TryGetValue(method, out Type[] t))
             {
@@ -206,41 +206,53 @@ namespace Boruto.Extensions.Reflection
             if (!resolved)
             {
                 var pms = method.GetParameters();
-                foreach (var pm in pms)
+                if (pms != null && pms.Length > 0)
                 {
-                    var types = pm.ParameterType.ResolveEntityTypes(assms);
-                    if (types != null && types.Length > 0)
+                    foreach (var pm in pms)
                     {
-                        result.AddRange(types);
-                        resolved = true;
-                        break;
+                        var types = pm.ParameterType.ResolveEntityTypes(assms);
+                        if (types != null && types.Length > 0)
+                        {
+                            result.AddRange(types);
+                            resolved = true;
+                            break;
+                        }
                     }
                 }
             }
 
-            METHOD_ENTITY_TYPES[method] = result.ToArray();
-            return METHOD_ENTITY_TYPES[method];
-        }
-
-        public static Type ResolveEntityType(this System.Reflection.MethodInfo method, string logicalName, Assembly[] assms)
-        {
-            var types = method.ResolveEntityTypes(assms);
-            if (types != null && types.Length > 0)
+            if (resolved && result.Count > 0)
             {
-                foreach (var type in types)
-                {
-                    var ln = type.ToEarlyBoundEntityType(assms).GetEntity().LogicalName;
-                    if (ln == logicalName)
-                    {
-                        return type;
-                    }
-                }
+                METHOD_ENTITY_TYPES[method] = result.ToArray();
+                return METHOD_ENTITY_TYPES[method];
             }
+
             return null;
         }
 
+        private static readonly object locker = new object();
+        public static Type ResolveEntityType(this System.Reflection.MethodInfo method, string logicalName, Assembly[] assms)
+        {
+            lock (locker)
+            {
+                var types = method.ResolveEntityTypes(assms);
+                if (types != null && types.Length > 0)
+                {
+                    foreach (var type in types)
+                    {
+                        var ln = type.ToEarlyBoundEntityType(assms).GetEntity().LogicalName;
+                        if (ln == logicalName)
+                        {
+                            return type;
+                        }
+                    }
+                }
+                return null;
+            }
+        }
+
         private static readonly Dictionary<Type, Type[]> TYPE_TO_ENTITYTYPE = new Dictionary<Type, Type[]>();
-        public static Type[] ResolveEntityTypes(this Type type, Assembly[] assms)
+        private static Type[] ResolveEntityTypes(this Type type, Assembly[] assms)
         {
             if (!type.IsEntityType())
             {

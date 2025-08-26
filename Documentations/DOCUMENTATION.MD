@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2025-08-26 10:45
+## updated: 2025-08-26 13:50
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -36,6 +36,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 
 ## Changelog
 
+### 1.0.3.4 2025-08-19 Fix en entitytype resolver
 
 ### 1.0.3.3 2025-08-19 Admin flag still not repsected on inject of custom provider created service directly on plugin method. Fixed.
 

@@ -11,13 +11,13 @@ namespace Boruto.Plugin.Example.Plugins.bor_plugindemo
     public class bor_plugindemoPlugin : BasePlugin
     {
         [Sort(1)]
-        public void OnPreCreate(Boruto.Plugin.Entities.bor_plugindemo target)
+        public void OnPreCreate(Boruto.Plugin.Example.Payloads.bor_plugindemo.bor_plugindemo target)
         {
             Boruto.Trace.TRACE_CONDITIONAL = true;
         }
 
         [Sort(2)]
-        public void OnPreCreate(Boruto.Plugin.Entities.bor_plugindemo target, [Admin]Boruto.Plugin.Entities.IUnitOfWork uow)
+        public void OnPreCreate(Boruto.Plugin.Example.Payloads.bor_plugindemo.bor_plugindemo target, [Admin]Boruto.Plugin.Entities.IUnitOfWork uow)
         {
             Boruto.Trace.TRACE_CONDITIONAL = false;
         }
