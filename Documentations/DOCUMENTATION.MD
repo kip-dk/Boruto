@@ -36,7 +36,9 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 
 ## Changelog
 
-### 1.0.3.4 2025-08-19 Fix en entitytype resolver
+### 1.0.3.5 2025-09-04 IsSame added DateTime compare based wil fall back to string compare on format ("yyyyMMddHHmmmss") unless d1 and d2 are same in a date compare.
+
+### 1.0.3.4 2025-08-19 Fix entitytype resolver
 
 ### 1.0.3.3 2025-08-19 Admin flag still not repsected on inject of custom provider created service directly on plugin method. Fixed.
 

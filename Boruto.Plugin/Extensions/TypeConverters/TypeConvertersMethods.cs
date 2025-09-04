@@ -170,6 +170,15 @@ namespace Boruto.Extensions.TypeConverters
                 }
             }
 
+            {
+                if (from is DateTime d1 && other is DateTime d2)
+                {
+                    if (d1 == d2) return true;
+                    if (d1.ToString("yyyyMMddHHmmss") == d2.ToString("yyyyMMddHHmmss")) return true;
+                    return d1 == d2;
+                }
+            }
+
             return from.Equals(other);
         }
 
