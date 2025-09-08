@@ -33,6 +33,11 @@ namespace Boruto.Reflection
 
         private Model.PluginMethod[] ResolveMethods(string pattern, string primaryLogicalName)
         {
+            if (string.IsNullOrEmpty(pattern))
+            {
+                return new Model.PluginMethod[0];
+            }
+
             var result = new List<Model.PluginMethod>();
 
             var methods = this.pluginType.GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).Where(r => r.Name == pattern).ToArray();
@@ -47,9 +52,14 @@ namespace Boruto.Reflection
                 }
             }
 
-            var key = this.Key(pattern, primaryLogicalName);
-            this.methodIndex[key] = result.OrderBy(r => r.Sort).ToArray();
-            return this.methodIndex[key];
+            if (result.Count > 0)
+            {
+                var key = this.Key(pattern, primaryLogicalName);
+                this.methodIndex[key] = result.OrderBy(r => r.Sort).ToArray();
+                return this.methodIndex[key];
+            }
+
+            return new Model.PluginMethod[0];
         }
 
         private string Key(string pattern, string primaryLogicalName)
