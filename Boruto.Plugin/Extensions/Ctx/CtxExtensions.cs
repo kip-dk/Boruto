@@ -136,5 +136,10 @@ namespace Boruto.Extensions.Ctx
             }
             return Boruto.PluginContext.Current.PluginExecutionContext;
         }
+
+        public static Microsoft.Xrm.Sdk.IPluginExecutionContext CurrentPluginExecutionContext(this Boruto.BasePlugin plugin)
+        {
+            return ThrowIfNotInPluginExecutionContext();
+        }
     }
 }

@@ -42,6 +42,7 @@ namespace Boruto
                     ctx.Execute(this.FilterTargetOnCreate);
                 } catch (Exception ex)
                 {
+                    ctx.FlushError();
                     if (ex is Microsoft.Xrm.Sdk.InvalidPluginExecutionException)
                     {
                         throw;

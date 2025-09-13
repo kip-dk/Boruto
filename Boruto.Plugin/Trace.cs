@@ -36,6 +36,15 @@ namespace Boruto
             }
         }
 
+        public static void OnError(string message)
+        {
+            var cur = PluginContext.Current;
+            if (cur != null)
+            {
+                cur.Log($"INFO Utc : {System.DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")}: {message}");
+            }
+        }
+
         public static void Warning(string message)
         {
             var cur = PluginContext.Current;

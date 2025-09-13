@@ -41,7 +41,7 @@ namespace Boruto
 
         private BasePlugin plugin;
         private string methodPattern;
-        private List<string> logs = new List<string>();
+        private List<string> onErrorLogs = new List<string>();
 
         internal PluginContext(BasePlugin plugin, IServiceProvider standardServiceProvider, Assembly[] assemblies, string unsecure, string secure)
         {
@@ -80,6 +80,22 @@ namespace Boruto
         {
             this.CustomServiceProvider = customServiceProvider;
         } 
+
+        internal void Log(string message)
+        {
+            this.onErrorLogs.Add(message);
+        }
+
+        internal void FlushError()
+        {
+            if (this.onErrorLogs != null && this.onErrorLogs.Count > 0)
+            {
+                foreach (var l in onErrorLogs)
+                {
+                    this.TracingService.Trace(l);
+                }
+            }
+        }
 
         #region constructor properties
         internal Type Type { get; }
