@@ -137,9 +137,14 @@ namespace Boruto.Extensions.Ctx
             return Boruto.PluginContext.Current.PluginExecutionContext;
         }
 
-        public static Microsoft.Xrm.Sdk.IPluginExecutionContext CurrentPluginExecutionContext(this Boruto.BasePlugin plugin)
+        public static Boruto.ServiceAPI.IServiceContext CurrentSericeContext(this Boruto.BasePlugin plugin)
         {
-            return ThrowIfNotInPluginExecutionContext();
+            if (Boruto.PluginContext.Current == null)
+            {
+                throw new InvalidPluginExecutionException("This extension method can only be called within a plugin execution context");
+            }
+
+            return Boruto.PluginContext.Current;
         }
     }
 }
