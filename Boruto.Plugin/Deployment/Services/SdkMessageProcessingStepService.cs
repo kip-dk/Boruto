@@ -6,6 +6,7 @@ using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -180,10 +181,18 @@ namespace Boruto.Deployment.Services
                 updated = true;
             }
 
+            var order = step.ExecutionOrder <= 0 ? 1 : step.ExecutionOrder;
+
+            if (order != crmStep.Rank)
+            {
+                clean.Rank = order;
+                updated = true;
+            }
+
             if (updated)
             {
                 this.orgService.Update(clean.ToEntity());
-                this.messageService.Inform($"Updated step {crmStep.Name.Split('.').Last()} on {crmStep.LogicalName}.");
+                this.messageService.Inform($"Updated step {crmStep.Name.Split('.').Last()} on {crmStep.LogicalName}, {crmStep.Rank}>{order}.");
             }
 
             this.UpdateImage(crmStep, 1, step.Stage, step.IsAsync, step.Message, step.PreImage);
