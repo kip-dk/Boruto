@@ -18,19 +18,22 @@ namespace Boruto.Implementations
 
         private static IMethodCondition Get(Attributes.IfAttribute type)
         {
-            if (conditions.TryGetValue(type, out IMethodCondition me))
+            lock (conditions)
             {
-                return me;
-            }
+                if (conditions.TryGetValue(type, out IMethodCondition me))
+                {
+                    return me;
+                }
 
-            try
-            {
-                conditions[type] = (IMethodCondition)System.Activator.CreateInstance(type.Type);
-                return conditions[type];
-            }
-            catch (Exception)
-            {
-                throw new Exceptions.MissingDefaultConstructorException(type.Type);
+                try
+                {
+                    conditions[type] = (IMethodCondition)System.Activator.CreateInstance(type.Type);
+                    return conditions[type];
+                }
+                catch (Exception)
+                {
+                    throw new Exceptions.MissingDefaultConstructorException(type.Type);
+                }
             }
         }
     }

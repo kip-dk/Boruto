@@ -14,162 +14,168 @@ namespace Boruto.Extensions.Entities
 
         public static Microsoft.Xrm.Sdk.Entity ToEntity(this Dictionary<string, string> row, Microsoft.Xrm.Sdk.Metadata.EntityMetadata meta, Func<string, Guid> resolveId, Func<string, string, object> resolveValue)
         {
-            var key = meta.Attributes.Where(r => r.IsPrimaryId == true).Single();
-            var val = string.Empty;
+            lock (row)
+            {
+                var key = meta.Attributes.Where(r => r.IsPrimaryId == true).Single();
+                var val = string.Empty;
 
-            if (!string.IsNullOrEmpty(key.ExternalName) && row.ContainsKey(key.ExternalName))
-            {
-                val = row[key.ExternalName];
-            }
-            else
-            {
-                if (row.ContainsKey("id"))
+                if (!string.IsNullOrEmpty(key.ExternalName) && row.ContainsKey(key.ExternalName))
                 {
-                    val = row["id"];
+                    val = row[key.ExternalName];
                 }
-            }
-
-            if (string.IsNullOrEmpty(val))
-            {
-                var values = row.Values.Where(e => row != null).ToArray();
-                throw new InvalidPluginExecutionException($"Unable to resolve an id for the input data: {key.ExternalName}: Keys: [{string.Join(",", row.Keys)}], Values: [{string.Join(",", values)}]");
-            }
-
-            var id = resolveId(val);
-            var next = new Entity(meta.LogicalName);
-            next[key.LogicalName] = id;
-            next.Id = id;
-
-            foreach (var column in row.Keys)
-            {
-                var attrs = meta.Attributes.Where(r => r.IsPrimaryId != true && r.ExternalName == column).ToArray();
-
-                if (attrs.Length == 0)
+                else
                 {
-                    // unable to resolve attrib name from external name,  lets try the attrib, logical name
-                    attrs = meta.Attributes.Where(r => r.IsPrimaryId != true && r.LogicalName == column).ToArray();
-                }
-
-                if (attrs.Length > 0)
-                {
-                    var value = row[column];
-                    if (value != null && !string.IsNullOrEmpty(value))
+                    if (row.ContainsKey("id"))
                     {
-                        var raw = value;
-                        foreach (var att in attrs)
-                        {
-                            var resolved = resolveValue(att.ExternalName, value);
-                            if (resolved != null)
-                            {
-                                next[att.LogicalName] = resolved;
-                                continue;
-                            }
+                        val = row["id"];
+                    }
+                }
 
-                            switch (att.AttributeType)
+                if (string.IsNullOrEmpty(val))
+                {
+                    var values = row.Values.Where(e => row != null).ToArray();
+                    throw new InvalidPluginExecutionException($"Unable to resolve an id for the input data: {key.ExternalName}: Keys: [{string.Join(",", row.Keys)}], Values: [{string.Join(",", values)}]");
+                }
+
+                var id = resolveId(val);
+                var next = new Entity(meta.LogicalName);
+                next[key.LogicalName] = id;
+                next.Id = id;
+
+                foreach (var column in row.Keys)
+                {
+                    var attrs = meta.Attributes.Where(r => r.IsPrimaryId != true && r.ExternalName == column).ToArray();
+
+                    if (attrs.Length == 0)
+                    {
+                        // unable to resolve attrib name from external name,  lets try the attrib, logical name
+                        attrs = meta.Attributes.Where(r => r.IsPrimaryId != true && r.LogicalName == column).ToArray();
+                    }
+
+                    if (attrs.Length > 0)
+                    {
+                        var value = row[column];
+                        if (value != null && !string.IsNullOrEmpty(value))
+                        {
+                            var raw = value;
+                            foreach (var att in attrs)
                             {
-                                case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Boolean:
-                                    {
-                                        var lower = raw.ToLower();
-                                        next[att.LogicalName] = lower == "true" || lower == "on" || lower == "yes" || lower == "ja" || lower == "ok" || lower == "1";
-                                        continue;
-                                    }
-                                case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.BigInt:
-                                    {
-                                        next[att.LogicalName] = long.Parse(raw);
-                                        continue;
-                                    }
-                                case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.DateTime:
-                                    {
-                                        next[att.LogicalName] = DateTime.Parse(value);
-                                        continue;
-                                    }
-                                case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.String:
-                                case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Memo:
-                                    {
-                                        next[att.LogicalName] = value;
-                                        break;
-                                    }
-                                case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Decimal:
-                                    {
-                                        next[att.LogicalName] = decimal.Parse(value.Replace(",", "."), CI);
-                                        break;
-                                    }
-                                case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Double:
-                                    {
-                                        next[att.LogicalName] = double.Parse(value.Replace(",", "."), CI);
-                                        break;
-                                    }
-                                case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Integer:
-                                    {
-                                        next[att.LogicalName] = int.Parse(value);
-                                        break;
-                                    }
-                                case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Picklist:
-                                    {
-                                        if (att is MultiSelectPicklistAttributeMetadata ms)
+                                var resolved = resolveValue(att.ExternalName, value);
+                                if (resolved != null)
+                                {
+                                    next[att.LogicalName] = resolved;
+                                    continue;
+                                }
+
+                                switch (att.AttributeType)
+                                {
+                                    case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Boolean:
                                         {
-                                            var col = new OptionSetValueCollection(value.Split(',').Select(r => new OptionSetValue(int.Parse(r.Trim()))).ToArray());
-                                            next[att.LogicalName] = col;
+                                            var lower = raw.ToLower();
+                                            next[att.LogicalName] = lower == "true" || lower == "on" || lower == "yes" || lower == "ja" || lower == "ok" || lower == "1";
+                                            continue;
                                         }
-                                        else
+                                    case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.BigInt:
+                                        {
+                                            next[att.LogicalName] = long.Parse(raw);
+                                            continue;
+                                        }
+                                    case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.DateTime:
+                                        {
+                                            next[att.LogicalName] = DateTime.Parse(value);
+                                            continue;
+                                        }
+                                    case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.String:
+                                    case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Memo:
+                                        {
+                                            next[att.LogicalName] = value;
+                                            break;
+                                        }
+                                    case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Decimal:
+                                        {
+                                            next[att.LogicalName] = decimal.Parse(value.Replace(",", "."), CI);
+                                            break;
+                                        }
+                                    case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Double:
+                                        {
+                                            next[att.LogicalName] = double.Parse(value.Replace(",", "."), CI);
+                                            break;
+                                        }
+                                    case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Integer:
+                                        {
+                                            next[att.LogicalName] = int.Parse(value);
+                                            break;
+                                        }
+                                    case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Picklist:
+                                        {
+                                            if (att is MultiSelectPicklistAttributeMetadata ms)
+                                            {
+                                                var col = new OptionSetValueCollection(value.Split(',').Select(r => new OptionSetValue(int.Parse(r.Trim()))).ToArray());
+                                                next[att.LogicalName] = col;
+                                            }
+                                            else
+                                            {
+                                                next[att.LogicalName] = new OptionSetValue(int.Parse(value));
+                                            }
+                                            break;
+                                        }
+                                    case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Money:
+                                        {
+                                            next[att.LogicalName] = new Money(decimal.Parse(value));
+                                            break;
+                                        }
+                                    case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.State:
                                         {
                                             next[att.LogicalName] = new OptionSetValue(int.Parse(value));
+                                            break;
                                         }
-                                        break;
-                                    }
-                                case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Money:
-                                    {
-                                        next[att.LogicalName] = new Money(decimal.Parse(value));
-                                        break;
-                                    }
-                                case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.State:
-                                    {
-                                        next[att.LogicalName] = new OptionSetValue(int.Parse(value));
-                                        break;
-                                    }
-                                case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Lookup:
-                                    {
-                                        var spl = value.Split(':');
-                                        if (spl.Length >= 2)
+                                    case Microsoft.Xrm.Sdk.Metadata.AttributeTypeCode.Lookup:
                                         {
-                                            var lookup = new Microsoft.Xrm.Sdk.EntityReference(spl[0], new Guid(spl[1]));
-                                            if (spl.Length > 2)
+                                            var spl = value.Split(':');
+                                            if (spl.Length >= 2)
                                             {
-                                                var totLen = spl[0].Length + spl[1].Length + 2;
-                                                if (value.Length > totLen)
+                                                var lookup = new Microsoft.Xrm.Sdk.EntityReference(spl[0], new Guid(spl[1]));
+                                                if (spl.Length > 2)
                                                 {
-                                                    var last = value.Substring(totLen).Trim();
-                                                    if (!string.IsNullOrEmpty(last))
+                                                    var totLen = spl[0].Length + spl[1].Length + 2;
+                                                    if (value.Length > totLen)
                                                     {
-                                                        lookup.Name = last;
+                                                        var last = value.Substring(totLen).Trim();
+                                                        if (!string.IsNullOrEmpty(last))
+                                                        {
+                                                            lookup.Name = last;
+                                                        }
                                                     }
                                                 }
+                                                next[att.LogicalName] = lookup;
                                             }
-                                            next[att.LogicalName] = lookup;
+                                            break;
                                         }
-                                        break;
-                                    }
-                                default:
-                                    {
-                                        break;
-                                    }
+                                    default:
+                                        {
+                                            break;
+                                        }
+                                }
                             }
                         }
                     }
                 }
+                return next;
             }
-            return next;
         }
 
         public static Microsoft.Xrm.Sdk.Entity[] ToEntities(this Dictionary<string, string>[] inputs, Microsoft.Xrm.Sdk.Metadata.EntityMetadata meta, Func<string, Guid> resolveId, Func<string, string, object> resolveValue)
         {
-            var result = new List<Microsoft.Xrm.Sdk.Entity>();
-
-            foreach (var input in inputs)
+            lock (inputs)
             {
-                result.Add(input.ToEntity(meta, resolveId, resolveValue));
+                var result = new List<Microsoft.Xrm.Sdk.Entity>();
+
+                foreach (var input in inputs)
+                {
+                    result.Add(input.ToEntity(meta, resolveId, resolveValue));
+                }
+                return result.ToArray();
             }
-            return result.ToArray();
         }
 
         public static Dictionary<string, string> ToDictionary(this Microsoft.Xrm.Sdk.Entity entity)

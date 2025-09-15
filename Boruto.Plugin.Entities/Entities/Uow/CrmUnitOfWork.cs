@@ -163,14 +163,18 @@ namespace Boruto.Plugin.Entities
 
         private IRepository<T> GetRepository<T>() where T : Microsoft.Xrm.Sdk.Entity, new()
         {
-            var type = typeof(T);
-            if (repros.TryGetValue(type, out object o))
+            lock (repros)
             {
-                return (IRepository<T>)o;
+                var type = typeof(T);
+                if (repros.TryGetValue(type, out object o))
+                {
+                    return (IRepository<T>)o;
+                }
+
+                var r = new CrmRepository<T>(this.context);
+                repros[type] = r;
+                return r;
             }
-            var r = new CrmRepository<T>(this.context);
-            repros[type] = r;
-            return r;
         }
 
         public object GetRepoByType(Type type)

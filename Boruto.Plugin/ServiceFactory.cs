@@ -171,23 +171,26 @@ namespace Boruto
 
         private object Create(Type type, bool shared)
         {
-            if (resolvedTypes.TryGetValue(type, out Type t))
+            lock (resolvedTypes)
             {
-                return this.DoCreate(t);
-            }
-
-            foreach (var assm in this.assms)
-            {
-                foreach (var can in assm.GetTypes())
+                if (resolvedTypes.TryGetValue(type, out Type t))
                 {
-                    if (!can.IsAbstract && !can.IsInterface && can.HasPublicConstructor() && type.IsAssignableFrom(can))
+                    return this.DoCreate(t);
+                }
+
+                foreach (var assm in this.assms)
+                {
+                    foreach (var can in assm.GetTypes())
                     {
-                        resolvedTypes[type] = can;
-                        return DoCreate(resolvedTypes[type]);
+                        if (!can.IsAbstract && !can.IsInterface && can.HasPublicConstructor() && type.IsAssignableFrom(can))
+                        {
+                            resolvedTypes[type] = can;
+                            return DoCreate(resolvedTypes[type]);
+                        }
                     }
                 }
+                throw new Exceptions.UnresolveableTypeException(type);
             }
-            throw new Exceptions.UnresolveableTypeException(type);
         }
 
         private List<Type> resolvingTypes = new List<Type>();

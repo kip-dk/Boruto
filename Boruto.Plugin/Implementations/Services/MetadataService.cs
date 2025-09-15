@@ -22,27 +22,30 @@ namespace Boruto.Implementations.Services
 
         public EntityMetadata ForEntity(string logicalName)
         {
-            if (entities.TryGetValue(logicalName, out MetaContainer m))
+            lock (entities)
             {
-                if (m.timeout < System.DateTime.UtcNow)
+                if (entities.TryGetValue(logicalName, out MetaContainer m))
                 {
-                    return m.meta;
+                    if (m.timeout < System.DateTime.UtcNow)
+                    {
+                        return m.meta;
+                    }
                 }
-            }
 
-            var req = new RetrieveEntityRequest
-            {
-                EntityFilters = EntityFilters.All,
-                LogicalName = logicalName
-            };
-            var res = (RetrieveEntityResponse)this.orgService.Execute(req);
-            var con = new MetaContainer
-            {
-                meta = res.EntityMetadata,
-                timeout = System.DateTime.UtcNow.AddMinutes(15)
-            };
-            entities[logicalName] = con;
-            return con.meta;
+                var req = new RetrieveEntityRequest
+                {
+                    EntityFilters = EntityFilters.All,
+                    LogicalName = logicalName
+                };
+                var res = (RetrieveEntityResponse)this.orgService.Execute(req);
+                var con = new MetaContainer
+                {
+                    meta = res.EntityMetadata,
+                    timeout = System.DateTime.UtcNow.AddMinutes(15)
+                };
+                entities[logicalName] = con;
+                return con.meta;
+            }
         }
 
         public string PrimaryKey(string logicalName)

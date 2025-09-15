@@ -459,26 +459,29 @@ namespace Boruto.Deployment.Services
         private static readonly Dictionary<Type, Type[]> ENTITY_TYPE_IMPL = new Dictionary<Type, Type[]>();
         public static Type[] GetEntityTypeImplementations(this Type interfaceType, Assembly[] assms)
         {
-            if (ENTITY_TYPE_IMPL.TryGetValue(interfaceType, out Type[] types))
+            lock (ENTITY_TYPE_IMPL)
             {
-                return types;
-            }
-            var result = new List<Type>();
-
-            foreach (var asm in assms)
-            {
-                foreach (var type in asm.GetTypes())
+                if (ENTITY_TYPE_IMPL.TryGetValue(interfaceType, out Type[] types))
                 {
-                    type.IsEntityType();
-                    if (!type.IsAbstract && !type.IsInterface && type.IsEntityType() && interfaceType.IsAssignableFrom(type) && type.HasPublicConstructor())
+                    return types;
+                }
+                var result = new List<Type>();
+
+                foreach (var asm in assms)
+                {
+                    foreach (var type in asm.GetTypes())
                     {
-                        result.Add(type);
+                        type.IsEntityType();
+                        if (!type.IsAbstract && !type.IsInterface && type.IsEntityType() && interfaceType.IsAssignableFrom(type) && type.HasPublicConstructor())
+                        {
+                            result.Add(type);
+                        }
                     }
                 }
-            }
 
-            ENTITY_TYPE_IMPL[interfaceType] = result.ToArray();
-            return ENTITY_TYPE_IMPL[interfaceType];
+                ENTITY_TYPE_IMPL[interfaceType] = result.ToArray();
+                return ENTITY_TYPE_IMPL[interfaceType];
+            }
         }
 
 

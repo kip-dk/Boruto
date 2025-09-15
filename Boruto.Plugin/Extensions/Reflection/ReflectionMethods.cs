@@ -71,22 +71,25 @@ namespace Boruto.Extensions.Reflection
         private static Dictionary<Type, string> typeToLogicalNameMap = new Dictionary<Type, string>();
         public static string ToIQueryableLogicalName(this Type type)
         {
-            if (typeToLogicalNameMap.TryGetValue(type, out string s))
+            lock (typeToLogicalNameMap)
             {
-                return s;
+                if (typeToLogicalNameMap.TryGetValue(type, out string s))
+                {
+                    return s;
+                }
+
+                if (type.IsQueryable())
+                {
+                    return type.GetGenericArguments().First().ToEntityLogicalName();
+                }
+
+                if (type.IsRepository())
+                {
+                    return type.GetGenericArguments().First().ToEntityLogicalName();
+                }
+
+                throw new Exceptions.TypeNotEntityType(type, true);
             }
-
-            if (type.IsQueryable())
-            {
-                return type.GetGenericArguments().First().ToEntityLogicalName();
-            }
-
-            if (type.IsRepository())
-            {
-
-            }
-
-            throw new Exceptions.TypeNotEntityType(type, true);
         }
 
         public static string ToEntityLogicalName(this Type type)
@@ -115,119 +118,125 @@ namespace Boruto.Extensions.Reflection
 
         public static Type ResolveEntityType(this Type fromType, string logicalName, Assembly[] assms)
         {
-            var key = $"{fromType.FullName}:{logicalName}";
+            lock (resolvedEntityTypes)
             {
-                if (resolvedEntityTypes.TryGetValue(key, out Type type))
+                var key = $"{fromType.FullName}:{logicalName}";
                 {
-                    return type;
-                }
-            }
-
-            if (fromType == typeof(Microsoft.Xrm.Sdk.Entity))
-            {
-                resolvedEntityTypes[key] = fromType;
-                return fromType;
-            }
-
-
-            var types = fromType.ResolveEntityTypes(assms);
-
-            if (types != null && types.Length > 0)
-            {
-                foreach (var type in types)
-                {
-                    var ebType = type.ToEarlyBoundEntityType(assms);
-                    var ln = ebType.GetEntity().LogicalName;
-
-                    if (ln == logicalName)
+                    if (resolvedEntityTypes.TryGetValue(key, out Type type))
                     {
-                        resolvedEntityTypes[key] = type;
+                        return type;
+                    }
+                }
+
+                if (fromType == typeof(Microsoft.Xrm.Sdk.Entity))
+                {
+                    resolvedEntityTypes[key] = fromType;
+                    return fromType;
+                }
+
+
+                var types = fromType.ResolveEntityTypes(assms);
+
+                if (types != null && types.Length > 0)
+                {
+                    foreach (var type in types)
+                    {
+                        var ebType = type.ToEarlyBoundEntityType(assms);
+                        var ln = ebType.GetEntity().LogicalName;
+
+                        if (ln == logicalName)
+                        {
+                            resolvedEntityTypes[key] = type;
+                            return resolvedEntityTypes[key];
+                        }
+                    }
+                }
+
+                if (!fromType.IsInterface && !fromType.IsAbstract && fromType.HasPublicConstructor())
+                {
+                    if (
+                        typeof(ITarget).IsAssignableFrom(fromType)
+                        || typeof(IPreImage).IsAssignableFrom(fromType)
+                        || typeof(IMerged).IsAssignableFrom(fromType)
+                        || typeof(IPostImage).IsAssignableFrom(fromType))
+                    {
+                        resolvedEntityTypes[key] = fromType;
                         return resolvedEntityTypes[key];
                     }
                 }
+                resolvedEntityTypes[key] = null;
+                return null;
             }
-
-            if (!fromType.IsInterface && !fromType.IsAbstract && fromType.HasPublicConstructor())
-            {
-                if (
-                    typeof(ITarget).IsAssignableFrom(fromType) 
-                    || typeof(IPreImage).IsAssignableFrom(fromType) 
-                    || typeof(IMerged).IsAssignableFrom(fromType)
-                    || typeof(IPostImage).IsAssignableFrom(fromType))
-                {
-                    resolvedEntityTypes[key] = fromType;
-                    return resolvedEntityTypes[key];
-                }
-            }
-            resolvedEntityTypes[key] = null;
-            return null;
         }
 
         private static readonly Dictionary<System.Reflection.MethodInfo, Type[]> METHOD_ENTITY_TYPES = new Dictionary<MethodInfo, Type[]>();
         internal static Type[] ResolveEntityTypes(this System.Reflection.MethodInfo method, Assembly[] assms)
         {
-            if (METHOD_ENTITY_TYPES.TryGetValue(method, out Type[] t))
+            lock (METHOD_ENTITY_TYPES)
             {
-                return t;
-            }
-
-            var result = new List<Type>();
-
-            var resolved = false;
-            // resolve entity type from return parameter single entity
-            if (method.ReturnType != null && method.ReturnType.BaseType == typeof(Microsoft.Xrm.Sdk.Entity))
-            {
-                result.Add(method.ReturnType);
-                resolved = true;
-            }
-
-            if (!resolved)
-            {
-                // resolve entity type from return parameter. collection
-                if (method.ReturnType.IsGenericType && method.ReturnType.GetGenericTypeDefinition() == typeof(Boruto.EntityCollection<>))
+                if (METHOD_ENTITY_TYPES.TryGetValue(method, out Type[] t))
                 {
-                    var gType = method.ReturnType.GetGenericArguments().First();
-                    result.Add(gType);
+                    return t;
+                }
+
+                var result = new List<Type>();
+
+                var resolved = false;
+                // resolve entity type from return parameter single entity
+                if (method.ReturnType != null && method.ReturnType.BaseType == typeof(Microsoft.Xrm.Sdk.Entity))
+                {
+                    result.Add(method.ReturnType);
                     resolved = true;
                 }
-            }
 
-            if (!resolved)
-            {
-                // resolve entity type from entity type decorations
-                var entityTypeAttrs = method.GetCustomAttributes<Boruto.Attributes.EntityTypeAttribute>()?.ToArray();
-                if (entityTypeAttrs != null && entityTypeAttrs.Length > 0)
+                if (!resolved)
                 {
-                    result.AddRange(entityTypeAttrs.Select(r => r.Type));
-                    resolved = true;
-                }
-            }
-
-            if (!resolved)
-            {
-                var pms = method.GetParameters();
-                if (pms != null && pms.Length > 0)
-                {
-                    foreach (var pm in pms)
+                    // resolve entity type from return parameter. collection
+                    if (method.ReturnType.IsGenericType && method.ReturnType.GetGenericTypeDefinition() == typeof(Boruto.EntityCollection<>))
                     {
-                        var types = pm.ParameterType.ResolveEntityTypes(assms);
-                        if (types != null && types.Length > 0)
+                        var gType = method.ReturnType.GetGenericArguments().First();
+                        result.Add(gType);
+                        resolved = true;
+                    }
+                }
+
+                if (!resolved)
+                {
+                    // resolve entity type from entity type decorations
+                    var entityTypeAttrs = method.GetCustomAttributes<Boruto.Attributes.EntityTypeAttribute>()?.ToArray();
+                    if (entityTypeAttrs != null && entityTypeAttrs.Length > 0)
+                    {
+                        result.AddRange(entityTypeAttrs.Select(r => r.Type));
+                        resolved = true;
+                    }
+                }
+
+                if (!resolved)
+                {
+                    var pms = method.GetParameters();
+                    if (pms != null && pms.Length > 0)
+                    {
+                        foreach (var pm in pms)
                         {
-                            result.AddRange(types);
-                            resolved = true;
-                            break;
+                            var types = pm.ParameterType.ResolveEntityTypes(assms);
+                            if (types != null && types.Length > 0)
+                            {
+                                result.AddRange(types);
+                                resolved = true;
+                                break;
+                            }
                         }
                     }
                 }
-            }
 
-            if (resolved && result.Count > 0)
-            {
-                METHOD_ENTITY_TYPES[method] = result.ToArray();
-                return METHOD_ENTITY_TYPES[method];
-            }
+                if (resolved && result.Count > 0)
+                {
+                    METHOD_ENTITY_TYPES[method] = result.ToArray();
+                    return METHOD_ENTITY_TYPES[method];
+                }
 
-            return null;
+                return null;
+            }
         }
 
         private static readonly object locker = new object();
@@ -254,40 +263,43 @@ namespace Boruto.Extensions.Reflection
         private static readonly Dictionary<Type, Type[]> TYPE_TO_ENTITYTYPE = new Dictionary<Type, Type[]>();
         private static Type[] ResolveEntityTypes(this Type type, Assembly[] assms)
         {
-            if (!type.IsEntityType())
+            lock (TYPE_TO_ENTITYTYPE)
             {
-                return null; 
-            }
-
-            if (TYPE_TO_ENTITYTYPE.TryGetValue(type, out Type[] ts))
-            {
-                return ts;
-            }
-
-            var result = new List<Type>();
-            var resolved = false;
-
-            if (type.IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity)))
-            {
-                result.Add(type);
-                resolved = true;
-            }
-
-            if (!resolved)
-            {
-                if (type.IsInterface)
+                if (!type.IsEntityType())
                 {
-                    var types = type.GetEntityTypeImplementations(assms);
-                    if (types != null && types.Length > 0)
+                    return null;
+                }
+
+                if (TYPE_TO_ENTITYTYPE.TryGetValue(type, out Type[] ts))
+                {
+                    return ts;
+                }
+
+                var result = new List<Type>();
+                var resolved = false;
+
+                if (type.IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity)))
+                {
+                    result.Add(type);
+                    resolved = true;
+                }
+
+                if (!resolved)
+                {
+                    if (type.IsInterface)
                     {
-                        result.AddRange(types);
-                        resolved = true;
+                        var types = type.GetEntityTypeImplementations(assms);
+                        if (types != null && types.Length > 0)
+                        {
+                            result.AddRange(types);
+                            resolved = true;
+                        }
                     }
                 }
-            }
 
-            TYPE_TO_ENTITYTYPE[type] = result.ToArray();
-            return TYPE_TO_ENTITYTYPE[type];
+                TYPE_TO_ENTITYTYPE[type] = result.ToArray();
+                return TYPE_TO_ENTITYTYPE[type];
+            }
         }
 
         public static Type ResolveImplementingType(this Type source, Assembly[] assemblies)
@@ -344,23 +356,26 @@ namespace Boruto.Extensions.Reflection
         private static readonly Dictionary<string, Type> EBT = new Dictionary<string, Type>();
         public static Type GetRootBoundEntityType(this string logicalname, Assembly[] assms)
         {
-            if (EBT.TryGetValue(logicalname, out Type t))
+            lock (EBT)
             {
-                return t;
-            }
-
-            foreach (var assm in assms)
-            {
-                foreach (var type in assm.GetTypes())
+                if (EBT.TryGetValue(logicalname, out Type t))
                 {
-                    if (type.BaseType == typeof(Microsoft.Xrm.Sdk.Entity))
+                    return t;
+                }
+
+                foreach (var assm in assms)
+                {
+                    foreach (var type in assm.GetTypes())
                     {
-                        EBT[logicalname] = type;
-                        return EBT[logicalname];
+                        if (type.BaseType == typeof(Microsoft.Xrm.Sdk.Entity))
+                        {
+                            EBT[logicalname] = type;
+                            return EBT[logicalname];
+                        }
                     }
                 }
+                throw new Exceptions.UnresolveableEntityTypeException(logicalname);
             }
-            throw new Exceptions.UnresolveableEntityTypeException(logicalname);
         }
 
         public static T CreateInstance<T>(this Type type)

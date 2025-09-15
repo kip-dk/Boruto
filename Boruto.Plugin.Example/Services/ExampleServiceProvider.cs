@@ -79,14 +79,17 @@ namespace Boruto.Plugin.Example.Services
         private static readonly Dictionary<Type, bool> isrepo = new Dictionary<Type, bool>();
         private bool IsRepository(Type type)
         {
-            if (isrepo.TryGetValue(type, out bool v))
+            lock (isrepo)
             {
-                return v;
-            }
+                if (isrepo.TryGetValue(type, out bool v))
+                {
+                    return v;
+                }
 
-            var isRepo =  type.IsInterface && type.IsGenericType && type.FullName.StartsWith("Boruto.Plugin.Entities.IRepository") && type.GetGenericArguments().First().IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity));
-            isrepo[type] = isRepo;
-            return isRepo;
+                var isRepo = type.IsInterface && type.IsGenericType && type.FullName.StartsWith("Boruto.Plugin.Entities.IRepository") && type.GetGenericArguments().First().IsSubclassOf(typeof(Microsoft.Xrm.Sdk.Entity));
+                isrepo[type] = isRepo;
+                return isRepo;
+            }
         }
     }
 }

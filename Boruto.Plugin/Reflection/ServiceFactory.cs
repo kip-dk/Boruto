@@ -317,30 +317,34 @@ namespace Boruto.Reflection
         private static Dictionary<Type, bool> customService = new Dictionary<Type, bool>();
         private object ResolveCustomService(Type fromType, bool admin)
         {
-            var toBeReset = ctx._isAdmin;
-
-            try
+            lock (customService)
             {
-                ctx._isAdmin = admin;
+                var toBeReset = ctx._isAdmin;
 
-                if (customService.TryGetValue(fromType, out bool isCustom))
+                try
                 {
-                    if (isCustom)
-                    {
-                        return ctx.CustomServiceProvider.GetService(fromType);
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
+                    ctx._isAdmin = admin;
 
-                var result = this.ctx.CustomServiceProvider.GetService(fromType);
-                customService[fromType] = result != null;
-                return result;
-            } finally
-            {
-                ctx._isAdmin = toBeReset;
+                    if (customService.TryGetValue(fromType, out bool isCustom))
+                    {
+                        if (isCustom)
+                        {
+                            return ctx.CustomServiceProvider.GetService(fromType);
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+
+                    var result = this.ctx.CustomServiceProvider.GetService(fromType);
+                    customService[fromType] = result != null;
+                    return result;
+                }
+                finally
+                {
+                    ctx._isAdmin = toBeReset;
+                }
             }
         }
 

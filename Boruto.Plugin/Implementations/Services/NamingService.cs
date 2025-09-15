@@ -24,39 +24,43 @@ namespace Boruto.Implementations.Services
 
         public string NameOf(EntityReference re)
         {
-            if (re == null)
+            lock (knownPrimaryNames)
             {
-                return null;
-            }
+                if (re == null)
+                {
+                    return null;
+                }
 
-            if (!string.IsNullOrEmpty(re.Name))
-            {
+                if (!string.IsNullOrEmpty(re.Name))
+                {
+                    return re.Name;
+                }
+
+                string primaryCol = null;
+
+                if (knownPrimaryNames.TryGetValue(re.LogicalName, out primaryCol)) { }
+                ;
+
+                if (primaryCol == null)
+                {
+                    var meta = this.metaService.ForEntity(re.LogicalName);
+                    primaryCol = meta.Attributes.Where(r => r.IsPrimaryName == true).Select(r => r.LogicalName).SingleOrDefault();
+                    if (!string.IsNullOrEmpty(primaryCol))
+                    {
+                        knownPrimaryNames[re.LogicalName] = primaryCol;
+                    }
+                }
+
+                if (primaryCol != null)
+                {
+                    var ent = this.orgService.Retrieve(re.LogicalName, re.Id, new ColumnSet(primaryCol));
+                    if (ent.Attributes.ContainsKey(primaryCol))
+                    {
+                        re.Name = (string)ent[primaryCol];
+                    }
+                }
                 return re.Name;
             }
-
-            string primaryCol = null;
-
-            if (knownPrimaryNames.TryGetValue(re.LogicalName, out primaryCol)) { };
-
-            if (primaryCol == null)
-            {
-                var meta = this.metaService.ForEntity(re.LogicalName);
-                primaryCol = meta.Attributes.Where(r => r.IsPrimaryName == true).Select(r => r.LogicalName).SingleOrDefault();
-                if (!string.IsNullOrEmpty(primaryCol))
-                {
-                    knownPrimaryNames[re.LogicalName] = primaryCol;
-                }
-            }
-
-            if (primaryCol != null)
-            {
-                var ent = this.orgService.Retrieve(re.LogicalName, re.Id, new ColumnSet(primaryCol));
-                if (ent.Attributes.ContainsKey(primaryCol))
-                {
-                    re.Name = (string)ent[primaryCol];
-                }
-            }
-            return re.Name;
         }
 
         public Microsoft.Xrm.Sdk.EntityReference[] NameReferencesOff(string entityLogicalName, params Guid[] ids)
