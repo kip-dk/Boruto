@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Boruto.Implementations;
 using Boruto.Extensions.TypeConverters;
 using Boruto.Extensions.DateTimes;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Boruto.Extensions.QueryExpression
 {
@@ -201,18 +202,60 @@ namespace Boruto.Extensions.QueryExpression
         [System.Diagnostics.DebuggerNonUserCode()]
         public static Microsoft.Xrm.Sdk.Query.QueryExpression Trace(this Microsoft.Xrm.Sdk.Query.QueryExpression query, Microsoft.Xrm.Sdk.ITracingService tracingService)
         {
-            if (query.Criteria == null)
+            tracingService.Trace($"Query for: {query.EntityName}");
+            if (query.ColumnSet != null && query.ColumnSet.AllColumns != true)
             {
-                tracingService.Trace($"Query for: {query.EntityName} did not have any conditions");
-                return query;
+                foreach (var col in query.ColumnSet.Columns)
+                {
+                    tracingService.Trace($"Column: { col }");
+                }
+            } else
+            {
+                tracingService.Trace($"All columns");
             }
 
+            if (query.Orders != null && query.Orders.Count > 0)
+            {
+                foreach (var ord in query.Orders)
+                {
+                    tracingService.Trace($"Sort: {ord.EntityName}/{ord.Alias}.{ord.AttributeName}  {ord.OrderType}");
+                } 
+            } else
+            {
+                tracingService.Trace($"No order by");
+            }
             if (query.Criteria != null)
             {
                 query.Criteria.Trace(tracingService, 1);
+            } else
+            {
+                tracingService.Trace("No criteria");
             }
 
-            return query;
+            if (query.LinkEntities != null && query.LinkEntities.Count > 0)
+            {
+                foreach (var link in query.LinkEntities)
+                {
+                    tracingService.Trace($"Link [{ link.EntityAlias }]: {link.LinkFromEntityName}.{link.LinkFromEntityName}  = {link.LinkToEntityName}.{link.LinkToAttributeName}");
+                    if (link.Columns != null && link.Columns.AllColumns != true)
+                    {
+                        foreach (var col in link.Columns.Columns)
+                        {
+                            tracingService.Trace($"Link column: { col }");
+                        }
+                    }
+
+                    if (link.LinkCriteria != null)
+                    {
+                        tracingService.Trace($"Filter for link:");
+                        link.LinkCriteria.Trace(tracingService, 1);
+                    }
+                }
+            } else
+            {
+                tracingService.Trace($"No linked Entities");
+            }
+                return query;
         }
 
         [System.Diagnostics.DebuggerNonUserCode()]
@@ -233,7 +276,7 @@ namespace Boruto.Extensions.QueryExpression
                     {
                         foreach (var val in con.Values)
                         {
-                            tracingService.Trace($"{indentString}  {val.GetType().FullName} {val.ToString()}");
+                            tracingService.Trace($"{indentString} - {val.GetType().FullName} {val.ToString()}");
                         }
                     }
                 }
