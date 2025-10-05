@@ -35,7 +35,7 @@ namespace Boruto.Reflection.Model
 
             this.IsOrg = this.arguments != null ? this.arguments.Where(r => r.IsOrganizationRequest).Any() : false;
 
-            if (this.IsOrg)
+            if (this.IsOrg == false)
             {
                 if (this.IsMatch == true && !this.WasMatched && !string.IsNullOrEmpty(primaryLogicalName))
                 {

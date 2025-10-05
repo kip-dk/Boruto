@@ -178,7 +178,13 @@ namespace Boruto.Reflection.Model
                 }
             }
 
-            if (typeof(Microsoft.Xrm.Sdk.OrganizationRequest).IsAssignableFrom(this.FromType))
+            if (this.FromType == typeof(Microsoft.Xrm.Sdk.OrganizationRequest))
+            {
+                this.IsOrganizationRequest = true;
+                return;
+            }
+
+            if (this.FromType.IsSubclassOf(typeof(Microsoft.Xrm.Sdk.OrganizationRequest)))
             {
                 this.IsOrganizationRequest = true;
                 return;
