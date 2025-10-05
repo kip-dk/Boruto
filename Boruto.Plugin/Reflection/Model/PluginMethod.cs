@@ -17,6 +17,7 @@ namespace Boruto.Reflection.Model
         private PluginMethodArgument[] arguments;
 
         internal bool IsMatch { get; private set; }
+        internal bool IsOrg { get; private set; }
         private bool WasMatched { get; set; }
         private Attributes.IfAttribute[] ifTypes;
 
@@ -32,9 +33,9 @@ namespace Boruto.Reflection.Model
             this.Resolve();
             this.ResolveIf();
 
-            var isOrg = this.arguments != null ? this.arguments.Where(r => r.IsOrganizationRequest).FirstOrDefault() : null;
+            this.IsOrg = this.arguments != null ? this.arguments.Where(r => r.IsOrganizationRequest).Any() : false;
 
-            if (isOrg == null)
+            if (this.IsOrg)
             {
                 if (this.IsMatch == true && !this.WasMatched && !string.IsNullOrEmpty(primaryLogicalName))
                 {

@@ -21,17 +21,17 @@ namespace Boruto.Reflection
             this.assemblies = assemblies;
         }
 
-        internal Model.PluginMethod[] GetMethods(string pattern, string primaryLogicalName)
+        internal Model.PluginMethod[] GetMethods(string pattern, string primaryLogicalName, string message)
         {
-            var key = this.Key(pattern, primaryLogicalName);
+            var key = this.Key(pattern, primaryLogicalName, message);
             if (this.methodIndex.TryGetValue(key, out Model.PluginMethod[] ms))
             {
                 return ms;
             }
-            return this.ResolveMethods(pattern, primaryLogicalName);
+            return this.ResolveMethods(pattern, primaryLogicalName, message);
         }
 
-        private Model.PluginMethod[] ResolveMethods(string pattern, string primaryLogicalName)
+        private Model.PluginMethod[] ResolveMethods(string pattern, string primaryLogicalName, string message)
         {
             if (string.IsNullOrEmpty(pattern))
             {
@@ -46,6 +46,17 @@ namespace Boruto.Reflection
             {
                 var next = new Model.PluginMethod(this.pluginType, method, primaryLogicalName, this.assemblies);
 
+                if (next.IsOrg)
+                {
+                    var arg = next.Arguments.Where(r => r.IsOrganizationRequest).First();
+                    var req = (Microsoft.Xrm.Sdk.OrganizationRequest)System.Activator.CreateInstance(arg.FromType);
+                    if (req.RequestName == message)
+                    {
+                        result.Add(next);
+                    }
+                    continue;
+                }
+
                 if (next.IsMatch)
                 {
                     result.Add(next);
@@ -54,7 +65,7 @@ namespace Boruto.Reflection
 
             if (result.Count > 0)
             {
-                var key = this.Key(pattern, primaryLogicalName);
+                var key = this.Key(pattern, primaryLogicalName, message);
                 this.methodIndex[key] = result.OrderBy(r => r.Sort).ToArray();
                 return this.methodIndex[key];
             }
@@ -62,13 +73,13 @@ namespace Boruto.Reflection
             return new Model.PluginMethod[0];
         }
 
-        private string Key(string pattern, string primaryLogicalName)
+        private string Key(string pattern, string primaryLogicalName, string message)
         {
             if (string.IsNullOrEmpty(primaryLogicalName))
             {
-                return pattern;
+                return $"{pattern}::{message}";
             }
-            return $"{pattern}:{primaryLogicalName}";
+            return $"{pattern}:{primaryLogicalName}:{message}";
         }
 
         private void Trace(string message)

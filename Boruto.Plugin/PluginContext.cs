@@ -505,26 +505,7 @@ namespace Boruto
                 this._serviceFactory = fac; 
                 var resolver = this.GetPluginServiceResolver();
 
-                var methods = resolver.GetMethods(this.methodPattern, this.PrimaryLogicalName).ToList();
-
-                #region remove methods that does not match the organization request
-                foreach (var method in methods.ToArray())
-                {
-                    if (method.Arguments != null)
-                    {
-                        var orgArg = method.Arguments.Where(r => r.IsOrganizationRequest).FirstOrDefault();
-                        if (orgArg != null)
-                        {
-                            var arg = (Microsoft.Xrm.Sdk.OrganizationRequest)fac.Resolve(orgArg);
-                            if (arg.RequestName != this.Message)
-                            {
-                                methods.Remove(method);
-                                continue;
-                            }
-                        }
-                    }
-                }
-                #endregion
+                var methods = resolver.GetMethods(this.methodPattern, this.PrimaryLogicalName, this.Message).ToList();
 
                 if (methods != null && methods.Count > 0) {
                     foreach (var method in methods)
