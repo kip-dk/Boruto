@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2025-09-15 21:00
+## updated: 2025-10-05 16:50
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -35,6 +35,8 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package, guides for setting up a automated deployment and step registration process will soon be added to the documentation page. (2025-07-05)
 
 ## Changelog
+
+### 1.4.3.14 2025-10-05 Single Plugin listenting to multi Organization Request in same stage was wrongly called for any of the request. Fix has been made so only method having organiztaionrequest input that match current message.
 
 ### 1.0.3.11 2025-09-15 Lock around static Dictionary operations to avoid index-out-of-bound on multi threads accessing same dic.
 
