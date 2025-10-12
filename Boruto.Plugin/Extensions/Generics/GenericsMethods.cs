@@ -48,8 +48,6 @@ namespace Boruto.Extensions.Generics
             var visited = new HashSet<T>();
             var result = new List<T>();
 
-            var parentIds = nodes.Select(r => parent(r)).ToArray();
-
             void Visit(T n)
             {
                 if (!visited.Add(n))

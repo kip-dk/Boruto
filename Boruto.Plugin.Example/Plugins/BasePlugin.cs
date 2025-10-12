@@ -1,10 +1,6 @@
 ﻿using Boruto.Plugin.Example.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Boruto.Plugin.Example.Plugins
 {
@@ -30,5 +26,6 @@ namespace Boruto.Plugin.Example.Plugins
         }
 
         protected override Assembly[] ServiceAssemblies => assms;
+
     }
 }
