@@ -36,6 +36,8 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 
 ## Changelog
 
+### 1.4.3.19 2025-10-12 Generic extension method to sort hiracy data with children on top of the list
+
 ### 1.4.3.18 2025-10-05 Single Plugin listenting to multi Organization Request in same stage was wrongly called for any of the request. Fix has been made so only method having organiztaionrequest input that match current message.
 
 ### 1.0.3.11 2025-09-15 Lock around static Dictionary operations to avoid index-out-of-bound on multi threads accessing same dic.
