@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Boruto.Extensions.TypeConverters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Boruto.Extensions.Generics
 {
@@ -38,6 +40,42 @@ namespace Boruto.Extensions.Generics
                 next = arr.Take(pageSize).ToArray();
             }
             return result;
+        }
+
+        public static T[] OrderChildrenFirst<T>(this IEnumerable<T> nodes, Func<T, object> key, Func<T, object> parent)
+        {
+            var dict = nodes.ToDictionary(n => key.Invoke(n));
+            var visited = new HashSet<T>();
+            var result = new List<T>();
+
+            var parentIds = nodes.Select(r => parent(r)).ToArray();
+
+            void Visit(T n)
+            {
+                if (!visited.Add(n))
+                {
+                    return;
+                }
+
+                var nKey = key(n);
+
+                // find children
+                var children = nodes.Where(c => parent(c).IsSame(nKey)).ToArray();
+                foreach (var child in children)
+                {
+                    Visit(child);
+                }
+
+                // add parent after children
+                result.Add(n);
+            }
+
+            foreach (var node in nodes)
+            {
+                Visit(node);
+            }
+
+            return result.ToArray();
         }
     }
 }
