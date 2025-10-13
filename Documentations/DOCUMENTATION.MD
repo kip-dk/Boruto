@@ -65,22 +65,22 @@ Registre steps in this stage for validation only. This stage is running in its o
 These operation will NOT be rolledback. So be carefull. On top, validatestep is not always called as expected. Ex. if you registre a plugin on delete event in validate stage, the code will NOT be executed, if the delete is caused by a delete cascade operation.
 
 ##### Pre
-Registre steps in this stage to manipute the target  before it hits the database, ex. calculated fields or similar, that cannot be accomplised with Fx or Aggrigation fields. This step is executed BEFORE the operation hits the database. This allow you to put more info into the
+Registre steps in this stage to manipulte the target before it hits the database, ex. calculated fields or similar, that cannot be accomplised with Fx or Aggrigation fields. This step is executed BEFORE the operation hits the database. This allow you to put more info into the
 target payload. Pre stage is running as part of the primary dataverse transaction, and if anything failes everything fails. 
 
 ##### Post
-Registre steps in this stage to perform transactional derivative efforts. You will typically use this stage to perform operations on related entities, that needes to be done whenever something is happening on the target record. Again
+Registre steps in this stage to perform transactional derivative efforts. You will typically use this stage to perform operations on related entities, that needes to be done whenever something is happening on the target record.
 
 ##### Post Async
 Registre steps in stage Post Async than does not need to be done transactional. This will give the user a better experience, because they do not have to sit an wait for things to be done, that can be done in background.  Before you put things into Async you should carefully confirm that
-your derivative efforts does not need to be transactional, you you should carefully consider how you hanle errors. An Async plugin is executed in its own transaction. The main transaction, triggering the code is commited, but if the Async operation fails, whatever that plugin needed to do
-might not be done at all, because the async operation fail. You can monitor Async operation in the Dataverse System job list, but it is not always possible to restart an async operation. Also be ware, that event the async plugins are running under the 2-minutes limit. 
+your derivative efforts does not need to be transactional, and you should carefully consider how you hanle errors. An Async plugin is executed in its own transaction. The main transaction, triggering the code is commited, but if the Async operation fails, whatever that plugin needed to do
+might not be done at all, because the async operation failed. You can monitor Async operation in the Dataverse System job list, but it is not always possible to restart an async operation. Also be aware, that even the async plugins are running under the 2-minutes limit. 
 
 ### The Boruto Design Pattern
-This section will describe the import design patterns that should be used, to ensure a SOLID approach for software development, and allow automation of the deployment process.
+This section will describe the import design patterns that should be used, to ensure a SOLID approach for plugin development, and allow automation of the deployment process.
 
 ##### Payload
-In most cases a payload is an enttiy represented by an instance of Microsoft.Xrm.Sdk.Entity. This goes for Target in Create/Update operations as well as Pre/Post in Create/Update/Delete operations. You can access information in such instance using the property logical name on form
+In most cases a payload is an enttiy represented by an instance of Microsoft.Xrm.Sdk.Entity. This goes for Target in Create/Update operations as well as Pre/Post images in Create/Update/Delete operations. You can access information in such instance using the property logical name on form
 
 ```C#
 entity["fieldname"] = "a new value for fieldname";
@@ -100,17 +100,17 @@ You can use whatever tool you like, to generate early bound entities, but we str
 
 [Microsoft pac model builder](https://learn.microsoft.com/en-us/power-platform/developer/cli/reference/modelbuilder)
 
-The early bound entity tool generator must decorate entity properties with the [Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute] to work with the Boruto solution. Pac model build does so, and crmsvcutil.exe also makes this decoration. We strongly recomend that you do NOT use the later (crmsvcutil.exe)
+The early bound entity tool generator must decorate entity properties with the [Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute] to work with the Boruto solution. Pac model build does so, and crmsvcutil.exe also makes this decoration. We strongly recomend that you do NOT use the later (crmsvcutil.exe).
 
 The library hosting your datamodel does not need to be the same as the library where you write your plugin code. If you choose to separate the libraries, remember to bootstrap both the entity library and your final plugin library, using the pac plugin init tool. This ensure
 compatibility with the Dataverse Nuget package deployment model where you create a dependency from your plugin library to your entity library. You can also choose to keep both in same library.
 
 ##### Early bound entities as payload.
-You can use the early bound entities as the payload in your plugin methods directly, simply by using a naming convention. You should however be aware that it is considered bad pratcise to listen on all properties on a target entity for the Update event, and it is also considered bad
+You can use the early bound entities as the payload in your plugin methods directly, simply by using a naming convention on the parameter. You should however be aware that it is considered bad pratcise to listen on all properties on a target entity for the Update event, and it is also considered bad
 pratcise to request all properties in a Pre og Post images for any event. It is supported, both by the boruto patterns and by the underlying Dataverse plugin infrastructure by Microsoft, but it is a bad idear that might cause bad performance.
 
 #### Define payloads as interfaces
-The Boruto platform allow you to describe payloads by interfaces. You create an interface, extending one of the four payload interfaces of boruto, and then you make sure that each entity that should support your operation, implement that interface.
+The Boruto platform allow you to describe payloads by interfaces. You create an interface, extending one of the four payload interfaces of boruto, and then you make sure that each early bound entity that should support your operation, implement that interface.
 
 Boruto define four basic payload interfaces:
 * Boruto.ITarget
@@ -155,20 +155,20 @@ public class AccountPlugin : BasePlugin
 
 The above example demonstrate the basic use of payloads in a plugin. 
 
-* First of all, you define an interface that describes the "situation",  INameChanged. This interface has a single property Name, and it expose the getter method of the property. What we are waiting for is basically in this case that someone change the name of an account.
+* First of all, you define an interface that describes the "situation",  INameChanged. This interface has a single property Name, and it expose the getter method of the property. What we are waiting for is basically in this case that someone change the name property of the implementing entity.
 * Secondly we let our early bound entity for account implement the interface. This is simple, just state that account is implementing, because the code generator already created a property "Name" for the account.
 * Finally we can write a plugin, that listen for an event (Pre Update), and in the parameters, ask for the payload interface.
 
 The above example is a "cut-to-the-bone" example of what the Boruto dataverse design pattern is about. 
 
 * Describe the event you need to handle by an inteface
-* Implement that interface for one or more relevant early bound entities, that can trigger the situation
+* Implement that interface for one or more relevant early bound entities, that can trigger the situation.
 * Inject the payload into a plugin method, that captures the payload, and perform whatever is needed to be done.
 
 
 #### BasePlugin
-the boruto platform provides a base plugin (Boruto.BasePlugin). It is defined abstract, and your plugins must be an extension of this plugin. You should hoever not extend it directly. Instead, within your own plugin library, you should create you own BasePlugin that extends the Boruto.BasePlugin, and implements the very basic
-abstract methods:
+the boruto platform provides a base plugin (Boruto.BasePlugin). It is defined abstract, and your plugins must be an extension of this plugin. You should however not extend it directly in each of your plugins. Instead, within your own plugin library, you should create you own BasePlugin that extends the Boruto.BasePlugin, and implements the very basic
+abstract methods of that class:
 
 ```C#
 using System;
@@ -208,7 +208,7 @@ The above example is a base plugin.
 * **Constructors**, you only need to add thouse that you need. If you do not plan to use plugin settings, you can ommit the constructor taking unsecure and secure string
 * **ServiceProvider**. If you have classed that cannot be resolved by the Boruto class resolver mechanism, you can return a service provider that can be used to resolve such type
 * **ServiceAssemblies**. You must return an array of assemblies, where the boruto plugin should look for service implementations. 
-* **FilterTargetOnCreate** this setting is default true. This means that if you inject a target interface on a create event, and non of the properties in the interface is within a create target payload, such method will not be called. Setting this property to false, filtering on target attributes on created event is ignored.
+* **FilterTargetOnCreate** this setting is default true. This means that if you inject a target interface on a create event, and none of the properties in the interface is within a create target payload, such method will not be called. Setting this property to false, filtering on target attributes on created event is ignored.
 
 #### Plugin
 ```C#
@@ -307,7 +307,12 @@ namespace My.Plugins.Services
         {
             public void doNamingStuff(INameService target)
             {
-                var other = (from a in accountQuery where a.Name == target.Name && a.AccountId != target.AccountId select a.AccountId).FirstOrDefault();
+                if (string.IsNullOrEmpty(target.Name)) 
+                {
+                    throw new InvalidPluginExecutionException($"Name must have a valu");
+                }
+
+                var other = (from a in accountQuery where a.Name == target.Name && a.AccountId != target.Id select a.AccountId).FirstOrDefault();
                 if (other != null) 
                 {
                     throw new InvalidPluginExecutionException($"We already have an account named { target.Name }");
