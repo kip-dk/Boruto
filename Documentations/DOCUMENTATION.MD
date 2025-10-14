@@ -353,7 +353,6 @@ for this operation (The pluginregistration tool), but you do not need this tool 
 * Add a deployment json configuration file to the root of you plugin project
 
 deploy.json
-
 ```json
 {
   "solution": "MySolution",
@@ -369,7 +368,7 @@ deploy.json
 }
 ```
 
-* Finaly add this snipper of code to your new C# command line tool
+* Finaly add this snipper of code to your new C# main command method line tool
 
 ```C#
 var configString = System.Configuration.ConfigurationManager.ConnectionStrings["XRM"].ConnectionString;
@@ -395,11 +394,11 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No support for workflows (the nuget deployment model do not support it)
 1. Less restrictive in terms of always using interfaces for injection. 
 1. No boruto specific code generation
-1. No tools in the nuget package, guides for setting up a automated deployment and step registration process will soon be added to the documentation page. (2025-07-05)
+1. No tools in the nuget package
 
 ## Changelog
 
-### 1.4.3.20 RLEASED
+### 1.4.4.1 RLEASED
 
 ## Copyright
 (c) Boruto.Dataverse.Plugin: Copyright Kipon ApS 2022-2025
