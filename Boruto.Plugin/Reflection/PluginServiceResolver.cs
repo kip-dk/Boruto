@@ -65,9 +65,12 @@ namespace Boruto.Reflection
 
             if (result.Count > 0)
             {
-                var key = this.Key(pattern, primaryLogicalName, message);
-                this.methodIndex[key] = result.OrderBy(r => r.Sort).ToArray();
-                return this.methodIndex[key];
+                lock (methodIndex)
+                {
+                    var key = this.Key(pattern, primaryLogicalName, message);
+                    this.methodIndex[key] = result.OrderBy(r => r.Sort).ToArray();
+                    return this.methodIndex[key];
+                }
             }
 
             return new Model.PluginMethod[0];
