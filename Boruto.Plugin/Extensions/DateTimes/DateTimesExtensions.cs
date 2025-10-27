@@ -9,14 +9,28 @@ namespace Boruto.Extensions.DateTimes
 {
     public static class DateTimesExtensions
     {
+        public static DayOfWeek FIRST_DAY_OF_WEEK = DayOfWeek.Monday;
+        public static DayOfWeek LAST_DAY_OF_WEEK = DayOfWeek.Sunday;
+
         public static DateTime StartOfDay(this DateTime value)
         {
             return new DateTime(value.Year, value.Month, value.Day, 0, 0, 0, value.Kind);
         }
 
+        public static DateTime EndOfDay(this DateTime value)
+        {
+            return new DateTime(value.Year, value.Month, value.Day, 23, 59, 59, 999, value.Kind);
+        }
+
+
         public static DateTime StartOfMonth(this DateTime value)
         {
             return new DateTime(value.Year, value.Month, 1, 0, 0, 0, value.Kind);
+        }
+
+        public static DateTime EndOfMonth(this DateTime value)
+        {
+            return new DateTime(value.Year, value.Month, 1, 0, 0, 0, value.Kind).AddMonths(1).AddMilliseconds(-1);
         }
 
         public static DateTime StartOfYear(this DateTime value)
@@ -24,9 +38,29 @@ namespace Boruto.Extensions.DateTimes
             return new DateTime(value.Year, 1, 1, 0, 0, 0, value.Kind);
         }
 
-        public static DateTime EndOfDay(this DateTime value)
+        public static DateTime EndOfYear(this DateTime value)
         {
-            return new DateTime(value.Year, value.Month, value.Day, 23, 59, 59, 999, value.Kind);
+            return new DateTime(value.Year, 12, 31, 23, 59, 59, 999, value.Kind);
+        }
+
+        public static DateTime StartOfWeek(this DateTime value)
+        {
+            var result = value;
+            while (result.DayOfWeek != FIRST_DAY_OF_WEEK)
+            {
+                result = result.AddDays(-1);
+            }
+            return result.StartOfDay();
+        }
+
+        public static DateTime EndOfWeek(this DateTime value)
+        {
+            var result = value;
+            while (result.DayOfWeek != LAST_DAY_OF_WEEK)
+            {
+                result = result.AddDays(1);
+            }
+            return result.EndOfDay();
         }
 
         public static DateTime[] Week(this DateTime value)
@@ -59,7 +93,7 @@ namespace Boruto.Extensions.DateTimes
         public static DateTime FirstDayThisWeek(this DateTime value)
         {
             var result = value;
-            while (result.DayOfWeek != Models.Calendar.Current.FirstDayOfWeek)
+            while (result.DayOfWeek != FIRST_DAY_OF_WEEK)
             {
                 result = result.AddDays(-1);
             }
@@ -69,7 +103,7 @@ namespace Boruto.Extensions.DateTimes
         public static DateTime LastDayThisWeek(this DateTime value)
         {
             var result = value;
-            while (result.DayOfWeek != Models.Calendar.Current.LastDayOfWeek)
+            while (result.DayOfWeek != LAST_DAY_OF_WEEK)
             {
                 result = result.AddDays(1);
             }
