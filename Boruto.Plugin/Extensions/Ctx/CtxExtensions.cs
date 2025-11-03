@@ -157,9 +157,9 @@ namespace Boruto.Extensions.Ctx
 
             var ctx = ThrowIfNotInPluginExecutionContext();
 
-            foreach (var log in logicalnames)
+            foreach (var logicalname in logicalnames)
             {
-                var r = ctx.IsChildOf(message, log);
+                var r = ctx.IsChildOf(message, logicalname);
                 if (r == true) return true;
             }
             return false;
