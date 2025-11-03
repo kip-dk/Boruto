@@ -16,6 +16,15 @@ namespace Boruto.Extensions.QueryExpression
 {
     public static class QueryExpressionMethods
     {
+        public static bool DETAILED_LOGGING = false;
+
+        private static void Log(string message)
+        {
+            if (DETAILED_LOGGING)
+            {
+                Boruto.Trace.Info(message);
+            }
+        }
         [System.Diagnostics.DebuggerNonUserCode()]
         public static Microsoft.Xrm.Sdk.EntityCollection Query<T>(this ICollection<T> collection, Microsoft.Xrm.Sdk.Query.QueryExpression expression, params string[] quickFindFields) where T : Microsoft.Xrm.Sdk.Entity
         {
@@ -236,7 +245,7 @@ namespace Boruto.Extensions.QueryExpression
             {
                 foreach (var link in query.LinkEntities)
                 {
-                    tracingService.Trace($"Link [{ link.EntityAlias }]: {link.LinkFromEntityName}.{link.LinkFromEntityName}  = {link.LinkToEntityName}.{link.LinkToAttributeName}");
+                    tracingService.Trace($"Link [{ link.EntityAlias }]: {link.LinkFromEntityName}.{link.LinkFromAttributeName}  = {link.LinkToEntityName}.{link.LinkToAttributeName}");
                     if (link.Columns != null && link.Columns.AllColumns != true)
                     {
                         foreach (var col in link.Columns.Columns)

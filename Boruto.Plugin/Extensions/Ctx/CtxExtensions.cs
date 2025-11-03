@@ -1,6 +1,7 @@
 ﻿using Boruto.Extensions.SDK;
 using Boruto.Extensions.TypeConverters;
 using Microsoft.Xrm.Sdk;
+using System.Web.UI.WebControls;
 
 namespace Boruto.Extensions.Ctx
 {
@@ -145,6 +146,23 @@ namespace Boruto.Extensions.Ctx
             }
 
             return Boruto.PluginContext.Current;
+        }
+
+        public static bool IsParentMessage(this string message, params string[] logicalnames)
+        {
+            if (logicalnames == null || logicalnames.Length == 0)
+            {
+                return false;
+            }
+
+            var ctx = ThrowIfNotInPluginExecutionContext();
+
+            foreach (var log in logicalnames)
+            {
+                var r = ctx.IsChildOf(message, log);
+                if (r == true) return true;
+            }
+            return false;
         }
     }
 }

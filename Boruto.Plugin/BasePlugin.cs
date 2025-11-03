@@ -39,7 +39,10 @@ namespace Boruto
             {
                 try
                 {
-                    ctx.Execute(this.FilterTargetOnCreate);
+                    if (!this.Suppress(ctx))
+                    {
+                        ctx.Execute(this.FilterTargetOnCreate);
+                    }
                 } catch (Exception ex)
                 {
                     ctx.FlushError();
@@ -97,5 +100,10 @@ namespace Boruto
         protected abstract Assembly[] ServiceAssemblies { get; }
 
         protected virtual bool FilterTargetOnCreate => true;
+
+        protected virtual bool Suppress(ServiceAPI.IServiceContext ServiceContext)
+        {
+            return false;
+        }
     }
 }
