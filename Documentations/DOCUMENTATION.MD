@@ -397,7 +397,8 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package
 
 ## Changelog
-
+### 1.0.4.6 added protected virtual bool TraceCalls => false;, let your plugin return true from this if you need detail on call stack on ignored call reasons
+### 1.0.4.5
 ### 1.0.4.4 Added datetime extension helpers
 ### 1.0.4.3 Solved rare null pointer en plugin method resolver
 ### 1.0.4.2 RLEASED
