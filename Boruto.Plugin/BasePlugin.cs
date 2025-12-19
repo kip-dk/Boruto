@@ -39,12 +39,18 @@ namespace Boruto
             {
                 try
                 {
-                    if (!this.Suppress(ctx))
+                    var suppress = this.Suppress(ctx);
+                    this.Log($"Execute: Message: { ctx.Message } Stage: { ctx.Stage } Async: { ctx.IsAsync  }, Suppress: { suppress }");
+
+                    if (!suppress)
                     {
-                        ctx.Execute(this.FilterTargetOnCreate);
+                        this.Log($"Before call");
+                        ctx.Execute(this.FilterTargetOnCreate, this.TraceCalls);
+                        this.Log($"After call");
                     }
                 } catch (Exception ex)
                 {
+                    this.Log($"Exception: {ex.Message}");
                     ctx.FlushError();
                     if (ex is Microsoft.Xrm.Sdk.InvalidPluginExecutionException)
                     {
@@ -83,10 +89,17 @@ namespace Boruto
             }
         }
 
+        internal void Log(string message)
+        {
+            if (this.TraceCalls)
+            {
+                Boruto.Trace.Info(message);
+            }
+        }
 
         internal PluginContext GetContext(IServiceProvider platformServiceProvider)
         {
-            var res =  new PluginContext(this, platformServiceProvider, this.ServiceAssemblies, unsecure, secureString);
+            var res =  new PluginContext(this, platformServiceProvider, this.ServiceAssemblies, unsecure, secureString, this.TraceCalls);
             res.SetCustomServiceProvider(this.ServiceProvider(res));
             return res;
         }
@@ -105,5 +118,7 @@ namespace Boruto
         {
             return false;
         }
+
+        protected virtual bool TraceCalls => false;
     }
 }

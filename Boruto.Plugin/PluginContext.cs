@@ -43,7 +43,7 @@ namespace Boruto
         private string methodPattern;
         private List<string> onErrorLogs = new List<string>();
 
-        internal PluginContext(BasePlugin plugin, IServiceProvider standardServiceProvider, Assembly[] assemblies, string unsecure, string secure)
+        internal PluginContext(BasePlugin plugin, IServiceProvider standardServiceProvider, Assembly[] assemblies, string unsecure, string secure, bool trace)
         {
             if (assemblies == null || assemblies.Length == 0)
             {
@@ -62,6 +62,7 @@ namespace Boruto
             this.IsAsync = this.PluginExecutionContext.Mode > 0;
             this.PrimaryLogicalName = this.PluginExecutionContext.PrimaryEntityName;
             this.PrimaryEntityId = this.PluginExecutionContext.PrimaryEntityId;
+            this._trace = trace;
 
             this.methodPattern = this.Stage.ToMethodName(this.Message, this.PluginExecutionContext.Mode);
 
@@ -111,6 +112,7 @@ namespace Boruto
         internal Guid PrimaryEntityId { get; }
 
         internal bool _isAdmin;
+        internal bool _trace;
 
         #endregion
 
@@ -498,7 +500,7 @@ namespace Boruto
         #endregion
 
         #region run plugin
-        internal void Execute(bool filterTargetOnCreate)
+        internal void Execute(bool filterTargetOnCreate, bool trace)
         {
             using (var fac = new Reflection.ServiceFactory(this))
             {
@@ -507,6 +509,8 @@ namespace Boruto
 
                 var methods = resolver.GetMethods(this.methodPattern, this.PrimaryLogicalName, this.Message).ToList();
 
+                this.Trace($"Number of methods: {methods.Count}");
+
                 if (methods != null && methods.Count > 0) {
                     foreach (var method in methods)
                     {
@@ -514,12 +518,16 @@ namespace Boruto
                         {
                             if (!this.Target.Attributes.Keys.Where(r => method.TargetFilter.Contains(r)).Any())
                             {
+                                this.Trace($"1: { method.method.Name } ignored");
+                                this.Trace($"Target attributes: { string.Join(",", this.Target.Attributes.Keys) }");
+                                this.Trace($"Filter attributes: { string.Join(",", method.TargetFilter) }");
                                 continue;
                             }
                         }
 
                         if (!method.IsRelevant(this.PluginExecutionContext))
                         {
+                            this.Trace($"2: {method.method.Name} ignored. !relevant");
                             continue;
                         }
 
@@ -549,7 +557,9 @@ namespace Boruto
                                 pePre.PreInvokeMethod();
                             }
 
+                            this.Trace($"Before: { method.method.Name }");
                             result = method.method.Invoke(this.plugin, args);
+                            this.Trace($"After : {method.method.Name}");
 
                             this._AdminServiceContext.Clear();
                             this._UserServiceContext.Clear();
@@ -804,6 +814,16 @@ namespace Boruto
             result.RequestName = orgR.RequestName;
             result.Parameters = orgR.Parameters;
             return result;
+        }
+        #endregion
+
+        #region private helpers
+        private void Trace(string message)
+        {
+            if (this._trace)
+            {
+                Boruto.Trace.Info(message);
+            }
         }
         #endregion
     }
