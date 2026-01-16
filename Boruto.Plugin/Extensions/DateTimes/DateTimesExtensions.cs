@@ -19,7 +19,7 @@ namespace Boruto.Extensions.DateTimes
 
         public static DateTime EndOfDay(this DateTime value)
         {
-            return new DateTime(value.Year, value.Month, value.Day, 23, 59, 59, 999, value.Kind);
+            return new DateTime(value.Year, value.Month, value.Day, 23, 59, 59, 0, value.Kind);
         }
 
 
@@ -40,7 +40,7 @@ namespace Boruto.Extensions.DateTimes
 
         public static DateTime EndOfYear(this DateTime value)
         {
-            return new DateTime(value.Year, 12, 31, 23, 59, 59, 999, value.Kind);
+            return new DateTime(value.Year, 12, 31, 23, 59, 59, 0, value.Kind);
         }
 
         public static DateTime StartOfWeek(this DateTime value)

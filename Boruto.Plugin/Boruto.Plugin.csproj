@@ -5,8 +5,8 @@
     <PowerAppsTargetsPath>$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\PowerApps</PowerAppsTargetsPath>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Boruto.Plugin.snk</AssemblyOriginatorKeyFile>
-    <AssemblyVersion>1.0.4.6</AssemblyVersion>
-    <FileVersion>1.0.4.6</FileVersion>
+    <AssemblyVersion>1.0.4.7</AssemblyVersion>
+    <FileVersion>1.0.4.7</FileVersion>
     <ProjectTypeGuids>{4C25E9B5-9FA6-436c-8E19-B395D2A65FAF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
 
@@ -24,13 +24,12 @@
     <Description>This is a base library for building Dataverse plugin using the software princip for SOLID, it is a "reinvention" of the Kipon Solid Plguin framework, but it only target online solutions and has been simplified to use standard tools such as pac as much as possible. </Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <RootNamespace>Boruto</RootNamespace>
-    <Copyright>Kipon ApS, 2025</Copyright>
+    <Copyright>Kipon ApS, 2026</Copyright>
     <Title>Boruto Dataverse plugin - building plugins as SOLID</Title>
     <RepositoryUrl>https://github.com/kip-dk/Boruto.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>dynamics 365;dataverse;plugin;solid;</PackageTags>
-    <PackageReleaseNotes>added ability to set   protected virtual bool TraceCalls =&gt; false;  on plugin to enable detail call logging on plugin
-</PackageReleaseNotes>
+    <PackageReleaseNotes>endofday and endofyear date extensions added 999 as milliseconds, causing dataverse to round up to next day</PackageReleaseNotes>
     <PackAsTool>False</PackAsTool>
     <ToolCommandName>boruto.plugin</ToolCommandName>
     <PackageReadmeFile>DOCUMENTATION.MD</PackageReadmeFile>
