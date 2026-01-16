@@ -1,4 +1,4 @@
-﻿# Boruto.Dataverse.Plugin - License 2025
+﻿# Boruto.Dataverse.Plugin - License 2026
 
 ## LICENSE
 The software is licensed under MIT, and can be used and distributed for free. It is prohibited to sell the software as "standalone" under any circumstances. 
