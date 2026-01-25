@@ -1,0 +1,15 @@
+{
+  "name": "boruto-xrmservice",
+  "version": "2.21.1",
+  "peerDependencies": {
+    "@angular/common": "^21.1.0",
+    "@angular/core": "^21.1.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "devDependencies": {
+    "@types/xrm": "^9.0.88"
+  }
+}
