@@ -1,0 +1,6 @@
+HOW To upgrade angular version to newest
+
+1) in F:\Projects\OpenSource\Boruto\boruto-angular>FOLLOW upgrade guide from angular
+2) in F:\Projects\OpenSource\Boruto\boruto-angular> ng build xrm
+3) in F:\Projects\OpenSource\Boruto\boruto-angular\dist\xrm> npm login
+4) in F:\Projects\OpenSource\Boruto\boruto-angular\dist\xrm> npm release

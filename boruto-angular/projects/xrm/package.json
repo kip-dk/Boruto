@@ -1,6 +1,5 @@
 {
-  "name": "boruto-xrmservice",
-  "version": "2.1.0",
+  "name": "boruto-xrmservi.0",
   "description": "Dynamics 365 CE web api wrapper for angular, making life easier when building angular based web resources, angular 19 port of kipon-xrmservice. This version only support online environments (version 9.2 of the dataverse rest api)",
   "homepage": "https://github.com/kip-dk/boruto-xrmservice",
   "keywords": [
@@ -15,7 +14,6 @@
     "@angular/core": "^20.3.4",
     "@types/xrm": "^9.0.83"
   },
-
   "dependencies": {
     "tslib": "^2.3.0"
   },
@@ -25,5 +23,8 @@
     "email": "kip@kipon.dk",
     "url": "https://kipon.dk"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "devDependencies": {
+    "baseline-browser-mapping": "^2.9.18"
+  }
 }
