@@ -1,5 +1,6 @@
 ﻿using Boruto.Extensions.TypeConverters;
 using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Messages;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -411,64 +412,51 @@ namespace Boruto.Extensions.SDK
         /// <returns></returns>
         [System.Diagnostics.DebuggerNonUserCode()]
 
-        public static bool IsChildOf(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, string message, string entityLogicalName = null, Guid? id = null)
+        public static bool IsChildOf(
+            this IPluginExecutionContext ctx,
+            string message,
+            string entityLogicalName = null,
+            Guid? id = null)
         {
-            if (ctx == null)
-            {
-                return false;
-            }
+            var current = ctx;
 
-            if (ctx.MessageName == message && (entityLogicalName == null || ctx.PrimaryEntityName == entityLogicalName) && (id == null || ctx.PrimaryEntityId == id))
+            while (current != null)
             {
-                return true;
-            }
-
-            if (ctx.MessageName == "ExecuteTransaction")
-            {
-                if (ctx.InputParameters.Contains("Requests"))
+                // 1️⃣ Direct match on current context
+                if (IsMatch(current.MessageName,
+                            current.PrimaryEntityName,
+                            current.PrimaryEntityId,
+                            message,
+                            entityLogicalName,
+                            id))
                 {
-                    var requests = (OrganizationRequestCollection)ctx.InputParameters["Requests"];
-                    if (requests != null)
+                    return true;
+                }
+
+                // 2️⃣ Handle ExecuteTransaction safely
+                if (current.MessageName == "ExecuteTransaction" &&
+                    current.InputParameters.Contains("Requests"))
+                {
+                    if (current.InputParameters["Requests"] is OrganizationRequestCollection requests)
                     {
                         foreach (var r in requests)
                         {
-                            switch (message)
-                            {
-                                case "Create":
-                                    {
-                                        if (r is Microsoft.Xrm.Sdk.Messages.CreateRequest c)
-                                        {
-                                            if ((entityLogicalName == null || c.Target.LogicalName == entityLogicalName) && (id == null || id == c.Target.Id)) return true;
-                                        }
-                                        break;
-                                    }
-                                case "Update":
-                                    {
-                                        if (r is Microsoft.Xrm.Sdk.Messages.UpdateRequest c)
-                                        {
-                                            if ((entityLogicalName == null || c.Target.LogicalName == entityLogicalName) && (id == null || id == c.Target.Id)) return true;
-                                        }
-                                        break;
-                                    }
-                                case "Delete":
-                                    {
-                                        if (r is Microsoft.Xrm.Sdk.Messages.DeleteRequest c)
-                                        {
-                                            if ((entityLogicalName == null || c.Target.LogicalName == entityLogicalName) && (id == null || id == c.Target.Id)) return true;
-                                        }
-                                        break;
-                                    }
-                            }
-
-                            if (r.RequestName == message)
-                            {
+                            if (MatchesRequest(r, message, entityLogicalName, id))
                                 return true;
-                            }
                         }
                     }
                 }
+
+                // 3️⃣ SAFE parent traversal
+                // Stop if parent is null
+                // Stop if depth guard exceeded
+                if (current.ParentContext == null)
+                    break;
+
+                current = current.ParentContext;
             }
-            return ctx.ParentContext.IsChildOf(message, entityLogicalName, id);
+
+            return false;
         }
 
         [System.Diagnostics.DebuggerNonUserCode()]
@@ -692,5 +680,74 @@ namespace Boruto.Extensions.SDK
             var meta = organizationService.MetadataServiceFor();
             return new Implementations.Services.NamingService(meta, organizationService);
         }
+
+        #region private context match algoritm
+        private static bool IsMatch(
+            string currentMessage,
+            string currentEntity,
+            Guid currentId,
+            string targetMessage,
+            string targetEntity,
+            Guid? targetId)
+        {
+            if (!string.Equals(currentMessage, targetMessage, StringComparison.OrdinalIgnoreCase))
+                return false;
+
+            if (targetEntity != null &&
+                !string.Equals(currentEntity, targetEntity, StringComparison.OrdinalIgnoreCase))
+                return false;
+
+            if (targetId != null && currentId != targetId.Value)
+                return false;
+
+            return true;
+        }
+
+        private static bool MatchesRequest(
+            OrganizationRequest r,
+            string message,
+            string entityLogicalName,
+            Guid? id)
+        {
+            switch (r)
+            {
+                case CreateRequest c when message.Equals("Create", StringComparison.OrdinalIgnoreCase):
+                    return EntityMatches(c.Target, entityLogicalName, id);
+
+                case UpdateRequest u when message.Equals("Update", StringComparison.OrdinalIgnoreCase):
+                    return EntityMatches(u.Target, entityLogicalName, id);
+
+                case DeleteRequest d when message.Equals("Delete", StringComparison.OrdinalIgnoreCase):
+                    return EntityRefMatches(d.Target, entityLogicalName, id);
+
+                default:
+                    return false;
+            }
+        }
+
+        private static bool EntityMatches(Entity e, string entityLogicalName, Guid? id)
+        {
+            if (entityLogicalName != null &&
+                !string.Equals(e.LogicalName, entityLogicalName, StringComparison.OrdinalIgnoreCase))
+                return false;
+
+            if (id != null && e.Id != id.Value)
+                return false;
+
+            return true;
+        }
+
+        private static bool EntityRefMatches(EntityReference er, string entityLogicalName, Guid? id)
+        {
+            if (entityLogicalName != null &&
+                !string.Equals(er.LogicalName, entityLogicalName, StringComparison.OrdinalIgnoreCase))
+                return false;
+
+            if (id != null && er.Id != id.Value)
+                return false;
+
+            return true;
+        }
+        #endregion
     }
 }

@@ -397,6 +397,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package
 
 ## Changelog
+### 1.0.4.10 Made IsChildOf context extension more robust
 ### 1.0.4.8 IOrganizationService extension to allow boruto services to be created outside the boruto dependency injection pipeline
 ### 1.0.4.7 DateTimeExtension EndOfDay andEndOfYear, removed 999 milliseconds, to avoid dataverse rounding up
 ### 1.0.4.6 added protected virtual bool TraceCalls => false;, let your plugin return true from this if you need detail on call stack on ignored call reasons
