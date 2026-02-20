@@ -18,7 +18,10 @@
       "xrm": [
         "./dist/xrm"
       ]
-    }
+    },
+    "types": [
+      "xrm"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

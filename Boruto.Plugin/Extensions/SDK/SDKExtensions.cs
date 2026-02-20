@@ -3,6 +3,8 @@ using Microsoft.Xrm.Sdk;
 using System;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Contexts;
 using System.Web;
 
 namespace Boruto.Extensions.SDK
@@ -53,7 +55,8 @@ namespace Boruto.Extensions.SDK
                 var t = (Microsoft.Xrm.Sdk.Entity)System.Activator.CreateInstance(type);
                 t.Attributes = t.Attributes;
                 return t;
-            } else
+            }
+            else
             {
                 throw new Exceptions.TypeNotEntityType(type);
             }
@@ -61,7 +64,7 @@ namespace Boruto.Extensions.SDK
 
         public static Microsoft.Xrm.Sdk.Entity ToEntityBase(this Microsoft.Xrm.Sdk.Entity entity)
         {
-            if (entity.GetType() == typeof(Microsoft.Xrm.Sdk.Entity)) 
+            if (entity.GetType() == typeof(Microsoft.Xrm.Sdk.Entity))
             {
                 return entity;
             }
@@ -117,10 +120,10 @@ namespace Boruto.Extensions.SDK
                     }
                 }
 
-                if (others != null && others.Length > 0) 
+                if (others != null && others.Length > 0)
                 {
-                    foreach (var oth in others.Select(r => r.ToLower())) 
-                    { 
+                    foreach (var oth in others.Select(r => r.ToLower()))
+                    {
                         if (target.Attributes.ContainsKey(oth))
                         {
                             return true;
@@ -424,82 +427,43 @@ namespace Boruto.Extensions.SDK
             {
                 if (ctx.InputParameters.Contains("Requests"))
                 {
-                    try
+                    var requests = (OrganizationRequestCollection)ctx.InputParameters["Requests"];
+                    if (requests != null)
                     {
-                        var requests = ctx.InputParameters["Requests"] as Microsoft.Xrm.Sdk.DataCollection<Microsoft.Xrm.Sdk.OrganizationRequest>;
-                        if (requests != null)
+                        foreach (var r in requests)
                         {
-                            foreach (var r in requests)
+                            switch (message)
                             {
-                                try
-                                {
-                                    switch (message)
+                                case "Create":
                                     {
-                                        case "Create":
-                                            {
-                                                if (r is Microsoft.Xrm.Sdk.Messages.CreateRequest c)
-                                                {
-                                                    if ((entityLogicalName == null || c.Target.LogicalName == entityLogicalName) && (id == null || id == c.Target.Id)) return true;
-                                                }
-                                                break;
-                                            }
-                                        case "Update":
-                                            {
-                                                if (r is Microsoft.Xrm.Sdk.Messages.UpdateRequest c)
-                                                {
-                                                    if ((entityLogicalName == null || c.Target.LogicalName == entityLogicalName) && (id == null || id == c.Target.Id)) return true;
-                                                }
-                                                break;
-                                            }
-                                        case "Delete":
-                                            {
-                                                if (r is Microsoft.Xrm.Sdk.Messages.DeleteRequest c)
-                                                {
-                                                    if ((entityLogicalName == null || c.Target.LogicalName == entityLogicalName) && (id == null || id == c.Target.Id)) return true;
-                                                }
-                                                break;
-                                            }
+                                        if (r is Microsoft.Xrm.Sdk.Messages.CreateRequest c)
+                                        {
+                                            if ((entityLogicalName == null || c.Target.LogicalName == entityLogicalName) && (id == null || id == c.Target.Id)) return true;
+                                        }
+                                        break;
                                     }
-
-                                    if (r.RequestName == message)
+                                case "Update":
                                     {
-                                        if (entityLogicalName == null && id == null)
+                                        if (r is Microsoft.Xrm.Sdk.Messages.UpdateRequest c)
                                         {
-                                            return true;
+                                            if ((entityLogicalName == null || c.Target.LogicalName == entityLogicalName) && (id == null || id == c.Target.Id)) return true;
                                         }
-
-                                        if (r.Parameters.ContainsKey("Target") && r.Parameters["Target"] is Microsoft.Xrm.Sdk.EntityReference targetid)
-                                        {
-                                            if (targetid.LogicalName == entityLogicalName && (id == null || id == targetid.Id))
-                                            {
-                                                return true;
-                                            }
-                                        }
-
-                                        if (r.Parameters.ContainsKey("Target") && r.Parameters["Target"] is Microsoft.Xrm.Sdk.Entity target)
-                                        {
-                                            if (target.LogicalName == entityLogicalName && (id == null || id == target.Id))
-                                            {
-                                                return true;
-                                            }
-                                        }
+                                        break;
                                     }
-                                }
-                                catch (Exception ex)
-                                {
-                                    if (ex.Message == null || !ex.Message.Contains("contains data from a type that maps to the name"))
+                                case "Delete":
                                     {
-                                        throw;
+                                        if (r is Microsoft.Xrm.Sdk.Messages.DeleteRequest c)
+                                        {
+                                            if ((entityLogicalName == null || c.Target.LogicalName == entityLogicalName) && (id == null || id == c.Target.Id)) return true;
+                                        }
+                                        break;
                                     }
-                                }
                             }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        if (ex.Message == null || !ex.Message.Contains("contains data from a type that maps to the name"))
-                        {
-                            throw;
+
+                            if (r.RequestName == message)
+                            {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -641,7 +605,7 @@ namespace Boruto.Extensions.SDK
 
         public static T ValueOf<T>(this Microsoft.Xrm.Sdk.OrganizationRequest request, string parameterName)
         {
-            if (request.Parameters.ContainsKey(parameterName)) 
+            if (request.Parameters.ContainsKey(parameterName))
             {
                 return (T)request[parameterName];
             }
@@ -707,6 +671,26 @@ namespace Boruto.Extensions.SDK
             }
 
             return result;
+        }
+
+        private static Boruto.ServiceAPI.IMetadataService metaService;
+        private static DateTime? metaServiceTimeout;
+        public static Boruto.ServiceAPI.IMetadataService MetadataServiceFor(this Microsoft.Xrm.Sdk.IOrganizationService orgService)
+        {
+            if (metaService != null && metaServiceTimeout.Value > System.DateTime.UtcNow)
+            {
+                return metaService;
+            }
+
+            metaService = new Implementations.Services.MetadataService(orgService);
+            metaServiceTimeout = System.DateTime.UtcNow.AddMinutes(30);
+            return metaService;
+        }
+
+        public static Boruto.ServiceAPI.INamingService NamingServiceFor(this Microsoft.Xrm.Sdk.IOrganizationService organizationService)
+        {
+            var meta = organizationService.MetadataServiceFor();
+            return new Implementations.Services.NamingService(meta, organizationService);
         }
     }
 }
