@@ -433,20 +433,6 @@ namespace Boruto.Extensions.SDK
                     return true;
                 }
 
-                // 2️⃣ Handle ExecuteTransaction safely
-                if (current.MessageName == "ExecuteTransaction" &&
-                    current.InputParameters.Contains("Requests"))
-                {
-                    if (current.InputParameters["Requests"] is OrganizationRequestCollection requests)
-                    {
-                        foreach (var r in requests)
-                        {
-                            if (MatchesRequest(r, message, entityLogicalName, id))
-                                return true;
-                        }
-                    }
-                }
-
                 // 3️⃣ SAFE parent traversal
                 // Stop if parent is null
                 // Stop if depth guard exceeded
@@ -698,52 +684,6 @@ namespace Boruto.Extensions.SDK
                 return false;
 
             if (targetId != null && currentId != targetId.Value)
-                return false;
-
-            return true;
-        }
-
-        private static bool MatchesRequest(
-            OrganizationRequest r,
-            string message,
-            string entityLogicalName,
-            Guid? id)
-        {
-            switch (r)
-            {
-                case CreateRequest c when message.Equals("Create", StringComparison.OrdinalIgnoreCase):
-                    return EntityMatches(c.Target, entityLogicalName, id);
-
-                case UpdateRequest u when message.Equals("Update", StringComparison.OrdinalIgnoreCase):
-                    return EntityMatches(u.Target, entityLogicalName, id);
-
-                case DeleteRequest d when message.Equals("Delete", StringComparison.OrdinalIgnoreCase):
-                    return EntityRefMatches(d.Target, entityLogicalName, id);
-
-                default:
-                    return false;
-            }
-        }
-
-        private static bool EntityMatches(Entity e, string entityLogicalName, Guid? id)
-        {
-            if (entityLogicalName != null &&
-                !string.Equals(e.LogicalName, entityLogicalName, StringComparison.OrdinalIgnoreCase))
-                return false;
-
-            if (id != null && e.Id != id.Value)
-                return false;
-
-            return true;
-        }
-
-        private static bool EntityRefMatches(EntityReference er, string entityLogicalName, Guid? id)
-        {
-            if (entityLogicalName != null &&
-                !string.Equals(er.LogicalName, entityLogicalName, StringComparison.OrdinalIgnoreCase))
-                return false;
-
-            if (id != null && er.Id != id.Value)
                 return false;
 
             return true;

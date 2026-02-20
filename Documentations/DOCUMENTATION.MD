@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2026-02-01 18:10
+## updated: 2026-02-20 12:20
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -397,6 +397,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package
 
 ## Changelog
+### 1.0.5.1  IsChildOf no longer tries to find parent Operation in ExecuteTransaction. It was unstable on unrelyable, so we have given up on support of it
 ### 1.0.4.10 Made IsChildOf context extension more robust
 ### 1.0.4.8 IOrganizationService extension to allow boruto services to be created outside the boruto dependency injection pipeline
 ### 1.0.4.7 DateTimeExtension EndOfDay andEndOfYear, removed 999 milliseconds, to avoid dataverse rounding up
