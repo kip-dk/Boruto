@@ -144,7 +144,11 @@ namespace Boruto.Extensions.QueryExpression
             var vs = query.FilterValues<Guid>(attribName, Microsoft.Xrm.Sdk.Query.ConditionOperator.Equal);
             if (vs != null && vs.Length > 0)
             {
-                return vs.First();
+                var temp = vs.First();
+                if (temp != Guid.Empty)
+                {
+                    return temp;
+                }
             }
             return null;
         }

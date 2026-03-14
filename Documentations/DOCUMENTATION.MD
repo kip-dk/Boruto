@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2026-02-20 12:20
+## updated: 2026-03-14 09:50
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -397,15 +397,16 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package
 
 ## Changelog
+### 1.0.5.2  EntityReferenceIdEqualFilter, do not return EmptyGuid if that is what it resolves to. Instead return null. It is proberly a query comming from the make UI designer. Records in modern datavere cannot have value empty guid
 ### 1.0.5.1  IsChildOf no longer tries to find parent Operation in ExecuteTransaction. It was unstable on unrelyable, so we have given up on support of it
 ### 1.0.4.10 Made IsChildOf context extension more robust
-### 1.0.4.8 IOrganizationService extension to allow boruto services to be created outside the boruto dependency injection pipeline
-### 1.0.4.7 DateTimeExtension EndOfDay andEndOfYear, removed 999 milliseconds, to avoid dataverse rounding up
-### 1.0.4.6 added protected virtual bool TraceCalls => false;, let your plugin return true from this if you need detail on call stack on ignored call reasons
+### 1.0.4.8  IOrganizationService extension to allow boruto services to be created outside the boruto dependency injection pipeline
+### 1.0.4.7  DateTimeExtension EndOfDay andEndOfYear, removed 999 milliseconds, to avoid dataverse rounding up
+### 1.0.4.6  added protected virtual bool TraceCalls => false;, let your plugin return true from this if you need detail on call stack on ignored call reasons
 ### 1.0.4.5
-### 1.0.4.4 Added datetime extension helpers
-### 1.0.4.3 Solved rare null pointer en plugin method resolver
-### 1.0.4.2 RLEASED
+### 1.0.4.4  Added datetime extension helpers
+### 1.0.4.3  Solved rare null pointer en plugin method resolver
+### 1.0.4.2  RLEASED
 
 ## Copyright
 (c) Boruto.Dataverse.Plugin: Copyright Kipon ApS 2022-2026
