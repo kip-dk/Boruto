@@ -37,6 +37,8 @@ namespace Boruto
 
             using (var ctx = this.GetContext(platformServiceProvider))
             {
+                Boruto.Tools.Tool.SetIsPlguin();
+
                 try
                 {
                     var suppress = this.Suppress(ctx);

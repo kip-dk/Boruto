@@ -397,6 +397,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package
 
 ## Changelog
+### 1.0.5.3  Boruto.Tools.Tool.IsPlugin will return true if the code has been initialized from a plugin context, otherwise false 
 ### 1.0.5.2  EntityReferenceIdEqualFilter, do not return EmptyGuid if that is what it resolves to. Instead return null. It is proberly a query comming from the make UI designer. Records in modern datavere cannot have value empty guid
 ### 1.0.5.1  IsChildOf no longer tries to find parent Operation in ExecuteTransaction. It was unstable on unrelyable, so we have given up on support of it
 ### 1.0.4.10 Made IsChildOf context extension more robust

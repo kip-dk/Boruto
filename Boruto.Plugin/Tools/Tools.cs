@@ -10,10 +10,18 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
+
 namespace Boruto.Tools
 {
     public class Tool
     {
+        public static bool IsPlugin { get; private set; } = false;
+
+        internal static void SetIsPlguin()
+        {
+            IsPlugin = true;
+        }
+
         private readonly IOrganizationService orgService;
         private const string BUILDER_FILENAME = "builderSettings.json";
 
