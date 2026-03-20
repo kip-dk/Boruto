@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2026-03-14 09:50
+## updated: 2026-03-20 11:15
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
