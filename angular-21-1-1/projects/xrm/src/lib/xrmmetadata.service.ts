@@ -13,7 +13,7 @@ import { LookupAttribute } from "./models/lookupattribute.interface";
 import { AttributeOptionsetMeta } from "./models/attributeoptionsetmeta.model";
 import { IAttributeOptionsetMetaResult } from "./models/iattributoptionsetmetaresult.interface";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class XrmMetadataService {
   private searchEntityMetaPrototype = new EntityMeta();
   private getEntityMetaPrototype = new EntityMeta().meta();

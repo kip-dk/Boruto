@@ -9,7 +9,7 @@ const BorutoXrmLOCAL_getFormType = "BorutoXrmServiceLOCAL_getFormType";
 const BorutoXrmLOCAL_formentityr = "BorutoXrmServiceLOCAL_formentityr";
 const BorutoXrmLOCAL_context = "BorutoXrmServiceLOCAL_context";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class XrmFormService {
 
   private _window: IndexedObject = window as IndexedObject;

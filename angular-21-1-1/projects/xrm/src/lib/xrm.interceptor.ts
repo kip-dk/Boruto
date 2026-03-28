@@ -7,7 +7,7 @@ import { map, catchError } from 'rxjs/operators'
 import { XrmStateService } from './xrmstate.service';
 
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class XrmInterceptor implements HttpInterceptor {
   private nextNumber: number = 0;
   constructor(private xrmState: XrmStateService) { }

@@ -10,7 +10,7 @@ import { XrmQueryResult } from "./models/xrmqueryresult.interface";
 import { XrmFormService } from "./xrmform.service";
 
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class XrmService {
   private defaultApiUrl: string = "/api/data/v9.2/";
   private contextFallback?: XrmContext;

@@ -23,7 +23,7 @@ import { ColumnBuilder } from "./models/columnbuilder.model";
 const XRMCONTEXTSERVICE_EMPTY_GUID = "00000000-0000-0000-0000-000000000000";
 const isNum = (num:any) => num != null && typeof num !== 'object' && (!Number.isNaN(+(String((String(num) || '').replace(/[^0-9\.\-e]/, '') !== String(num) || num === '' ? NaN : num))));
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class XrmContextService {
   private context: any = {};
   private changemanager: any = {};

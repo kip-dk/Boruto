@@ -14,14 +14,12 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve",
+    "baseUrl": ".",
     "paths": {
-      "xrm": [
-        "./dist/xrm"
-      ]
+      "xrm": ["projects/xrm/src/public-api.ts"],
+      "xrmui": ["projects/xrmui/src/public-api.ts"]
     },
-    "types": [
-      "xrm"
-    ]
+    "types": ["xrm"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -36,6 +34,18 @@
     },
     {
       "path": "./projects/xrm/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/xrmui/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/xrmui/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/boruto-test-app/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/boruto-test-app/tsconfig.spec.json"
     }
   ]
 }
