@@ -1,14 +1,14 @@
-@for(item of items: track item) {
+@for(item of items(); track item) {
 <div
      (click)="setCurrent(item)"
      class="ko-left-menu-item"
-     [ngClass]="{ current: item.id == current, disabled: item.disabled == true && item.id != '##divider##', over: item == over, divider: item.id == '##divider##' }"
+     [ngClass]="{ current: item.id == current(), disabled: item.disabled == true && item.id != '##divider##', over: item == over(), divider: item.id == '##divider##' }"
      (mouseover)="overItem(item)"
      (mouseleave)="outItem()"
-     [style.height]="itemheight"
+     [style.height]="itemheight(item)"
      >
   @if (item.title != null && item.title != '' && item.id != '##divider##' && item.cssClass == null && item.imgUrl == null){<span>{{ item.title }}</span>}
-  @if (item.cssClass != null && item.cssClass != ''" [ngClass]="item.cssClass" [title]="item.title) {<span></span>}
+  @if (item.cssClass != null && item.cssClass != ''){ <span class="byclass" [ngClass]="item.cssClass" [title]="item.title"></span> }
   @if (item.imgUrl != null){<img [src]="item.imgUrl" [alt]="item.title" />}
 </div>
 }

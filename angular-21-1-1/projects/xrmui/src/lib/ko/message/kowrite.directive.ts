@@ -1,18 +1,22 @@
-import { Directive, ElementRef, HostListener, input, AfterViewInit } from '@angular/core';
+import { Directive, ElementRef, HostListener, input, AfterViewInit, inject, effect } from '@angular/core';
 
 @Directive({ selector: '[ko-write]' })
-export class KoWriteDirective implements AfterViewInit {
-  constructor(private hostElement: ElementRef) { }
+export class KoWriteDirective {
 
-  direction = input<string>('up');
+  direction = input<string>('up', { alias: 'ko-write' });
+  private hostElement: ElementRef = inject(ElementRef);
 
-
-  @HostListener('window:resize', [])
-  onResize() {
-    this.ngAfterViewInit();
+  constructor() { 
+    effect(() => {
+      const dir = this.direction();
+      this.render();
+    });
   }
 
-  ngAfterViewInit(): void {
+
+
+
+  private render(): void {
     var host = this.hostElement.nativeElement as HTMLElement;
     if (host.parentElement) {
       var parent = host.parentElement as HTMLElement;

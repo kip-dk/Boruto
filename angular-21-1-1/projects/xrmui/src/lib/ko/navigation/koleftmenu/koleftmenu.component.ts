@@ -1,49 +1,59 @@
-import { Component, Input, Output, EventEmitter, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, input, output, ElementRef, AfterViewInit, inject, ViewEncapsulation, signal } from '@angular/core';
 
-import { KoNavigation, KoNavigationByCssClass, KoNavigationByImageUrl } from '../../models/navigation.interface';
+import { KoDivider, KoNavigation, KoNavigationByCssClass, KoNavigationByImageUrl } from '../../models/navigation.interface';
 import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'ko-left-menu',
-  templateUrl: './koLeftMenu.component.html',
-  styleUrls: ['./koLeftMenu.component.scss'],
+  templateUrl: './koleftmenu.component.html',
+  styleUrls: ['./koleftmenu.component.scss'],
+  imports: [NgClass],
+  encapsulation: ViewEncapsulation.None
 })
 export class KoLeftMenuComponent implements AfterViewInit {
+  private er: ElementRef = inject(ElementRef);
 
-  @Input('items') items: (KoNavigation | KoNavigationByCssClass | KoNavigationByImageUrl)[] = [];
-  @Input('current') current!: string;
-  @Output('currentChange') currentChange: EventEmitter<string> = new EventEmitter<string>();
+  items = input<(KoNavigation)[]>([]);
+  current = input<string | null>(null);
+  currentChange = output<string | null>();
 
-  itemheight!: string;
-  over!: KoNavigation | null;
+  private itemheight$ = signal<string>('');
+  over = signal<KoNavigation | null>(null);
 
-  constructor(private er: ElementRef) {
+  constructor() {
+  }
+
+
+  itemheight(v: KoNavigation) {
+    if (v.id == "##divider##") {
+      return '2px';
+    }
+    return this.itemheight$();
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.itemheight = (this.er.nativeElement.offsetWidth - 40).toString() + "px";
+      this.itemheight$.set( (this.er.nativeElement.offsetWidth - 40).toString() + "px");
     }, 1);
   }
 
   setCurrent(item: KoNavigation): void {
     if (!item.disabled) {
       if (item.click == null) {
-        this.current = item.id;
-        this.currentChange.emit(this.current);
+        this.currentChange.emit(item.id);
       } else {
         item.click();
       }
     }
   }
 
-  overItem(v: KoNavigation): void {
-    if (!v.disabled) {
-      this.over = v;
+  overItem(v: KoNavigation | null): void {
+    if (v != null && !v.disabled) {
+      this.over.set(v);
     }
   }
 
   outItem(): void {
-    this.over = null;
+    this.over.set(null);
   }
 }

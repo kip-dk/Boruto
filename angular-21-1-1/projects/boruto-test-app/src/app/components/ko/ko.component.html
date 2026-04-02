@@ -12,10 +12,19 @@
     </ko-button-group>
 </div>
 
+<div style="position: absolute; top: 5px; left: 600px; width: 550px; height: 250px; border: solid">
+    <div ko-write="down">Tekst down</div>
+    <div ko-write="up">Tekst up</div>
+</div>
+
 <div style="position: absolute; top: 550px; width: 550px; height: 250px; border: solid">
     <ko-alert align="center" class="warning">Her kommer der så en besked</ko-alert>
 </div>
 
 <div style="position: absolute; top: 550px; left: 600px; width: 550px; height: 250px; border: solid">
     <ko-header align="center" class="warning">Det er så en ko header besked</ko-header>
+</div>
+
+<div style="position: absolute; top: 550px; left: 1200px; width: 70px; height: 250px; border: solid">
+    <ko-left-menu [items]="menus"></ko-left-menu>
 </div>
