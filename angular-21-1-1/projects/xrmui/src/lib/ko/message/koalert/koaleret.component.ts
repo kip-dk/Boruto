@@ -1,11 +1,12 @@
 import { NgClass } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'ko-alert',
     templateUrl: './koAlert.component.html',
     styleUrls: ['./koAlert.component.scss'],
-    imports:[NgClass]
+    imports:[NgClass],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class KoAlertComponent {

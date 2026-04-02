@@ -1,4 +1,4 @@
-:host {
+ko-alert {
     position: absolute;
     left: 0;
     right: 0;
@@ -9,19 +9,19 @@
     border: none;
 }
 
-:host(.warning) {
+ko-alert.warning {
     background-color: #FFF19D;
     border: none;
 }
 
-:host(:before) {
+ko-alert:before {
     content: '';
     display: inline-block;
     vertical-align: middle;
     height: 100%;
 }
 
-:host > div {
+ko-alert > div {
   display: inline-block;
   vertical-align: middle;
   margin-left: 15px;
@@ -30,15 +30,15 @@
   width: calc(100% - 30px);
 }
 
-:host > div.left {
+ko-alert > div.left {
   text-align: left;
 }
 
-:host div.right {
+ko-alert div.right {
   text-align: right;
 }
 
-:host div.center {
+ko-alert div.center {
   text-align: center;
 }
 

@@ -1,12 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
 import { XrmContextService } from 'xrm';
-import { KoButtonGroupComponent, KoDecimalDirective, KoFocusDirective } from 'xrmui'
+import { KoAlertComponent, KoButtonGroupComponent, KoDecimalDirective, KoFocusDirective } from 'xrmui'
 
 @Component({
   selector: 'app-ko',
   templateUrl: './ko.component.html',
   styleUrl: './ko.component.scss',
-  imports: [KoButtonGroupComponent, KoDecimalDirective,KoFocusDirective]
+  imports: [KoButtonGroupComponent, KoDecimalDirective,KoFocusDirective,KoAlertComponent]
 })
 export class KoComponent {
   form: XrmContextService = inject(XrmContextService);
@@ -21,7 +21,6 @@ export class KoComponent {
   }
 
   setFocus() {
-    //console.log('set focus');
     this.infocus.set(true);
   }
 
