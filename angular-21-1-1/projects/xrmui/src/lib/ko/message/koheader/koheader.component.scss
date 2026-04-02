@@ -1,4 +1,4 @@
-:host {
+ko-header {
     position: absolute;
     left: 0;
     right: 0;
@@ -9,19 +9,19 @@
     border: none;
 }
 
-:host(.warning) {
+ko-header.warning {
     background-color: #FFF19D;
     border: none;
 }
 
-:host(:before) {
+ko-header:before {
     content: '';
     display: inline-block;
     vertical-align: middle;
     height: 100%;
 }
 
-:host > div {
+ko-header > div {
   display: inline-block;
   vertical-align: middle;
   margin-left: 15px;
@@ -30,15 +30,14 @@
   width: calc(100% - 30px);
 }
 
-:host > div.left {
+ko-header > div.left {
   text-align: left;
 }
 
-:host div.right {
+ko-header div.right {
   text-align: right;
 }
 
-:host div.center {
+ko-header div.center {
   text-align: center;
 }
-

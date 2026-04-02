@@ -3,8 +3,8 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'ko-alert',
-    templateUrl: './koAlert.component.html',
-    styleUrls: ['./koAlert.component.scss'],
+    templateUrl: './koalert.component.html',
+    styleUrls: ['./koalert.component.scss'],
     imports:[NgClass],
     encapsulation: ViewEncapsulation.None
 })
