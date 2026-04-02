@@ -1,0 +1,14 @@
+
+
+<div style="margin: 5px 5px 5px 5px; width: 500px; height: 500px; border: solid; border-width: 1px 1px 1px 1px;position: relative;">
+    <ko-button-group>
+        <button (click)="setLeft()">Set align left</button>
+        <br />
+        <button (click)="setFocus()">Giv input focus</button>
+
+        <br />
+        <br />
+        <input ko-decimal [(ko-value)]="mynumber" [align]="align()" [(ko-focus)]="infocus"/>
+    </ko-button-group>
+
+</div>

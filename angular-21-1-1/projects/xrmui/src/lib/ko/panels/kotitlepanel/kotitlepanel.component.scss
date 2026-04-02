@@ -1,0 +1,69 @@
+:host {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+:host .ko-container {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  top: 5px;
+  bottom: 5px;
+  border: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: rgba(0,0,0,.125);
+  border-radius: 4px;
+}
+
+:host(.raw) .ko-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border: none;
+  border-radius: unset;
+}
+
+:host .ko-container .ko-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 50px;
+  padding: 4px 4px 4px 4px;
+  background-color: rgba(0,0,0,.03);
+  border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+:host(.raw) .ko-container .ko-title {
+  padding: 0 0 0 0;
+  border: none;
+}
+
+:host(.no-padding) .ko-container .ko-title {
+  padding: 0 0 0 0;
+}
+
+:host .ko-container .ko-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50px;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 4px 4px 4px 4px;
+}
+
+:host(.raw) .ko-container .ko-body {
+    padding: 0 0 0 0;
+
+}
+
+:host(.no-padding) .ko-container .ko-body {
+  padding: 0 0 0 0;
+}

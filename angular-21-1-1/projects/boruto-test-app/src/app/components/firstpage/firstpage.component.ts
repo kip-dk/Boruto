@@ -1,11 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { XrmContextService } from 'xrm';
+import { Xrmui } from 'xrmui'
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-firstpage',
   templateUrl: './firstpage.component.html',
-  styleUrl: './firstpage.component.scss'
+  styleUrl: './firstpage.component.scss',
+  imports: [Xrmui]
 })
 export class FirstpageComponent {
-  private xrmContext: XrmContextService = inject(XrmContextService);
+  form: XrmContextService = inject(XrmContextService);
+
 }

@@ -1,0 +1,47 @@
+:host {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+:host div.ko-table {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+:host div.ko-table-header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 40px;
+    border: none;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+:host div.ko-table-body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    border: none;
+    overflow-x: auto;
+    overflow-y: scroll;
+}
+
+:host div.ko-table-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 40px;
+    border: none;
+    overflow: auto;
+    white-space: nowrap;
+}

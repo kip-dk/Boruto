@@ -1,0 +1,48 @@
+:host {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: black;
+    color: whitesmoke;
+    display: block;
+  }
+
+  :host > div.ko-left-menu-item {
+    background-color: #31353a;
+    color: #f7f4f2;
+    padding: 20px 20px 20px 20px;
+    cursor: pointer;
+    width: calc(100% - 40px);
+  }
+
+  :host > div.ko-left-menu-item.disabled {
+    color: #dee2e8;
+    cursor: not-allowed;
+  }
+
+
+  :host > div.ko-left-menu-item.current {
+    padding: 20px 16px 20px 20px;
+    border: solid;
+    border-width: 0 4px 0 0;
+    border-color: #ce5206;
+    color: white;
+  }
+
+  :host > div.ko-top-menu-item.over {
+    color: #ce5206;
+  }
+
+  :host > div.ko-top-menu-item.divider {
+    width: 2px;
+    cursor: none;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    width: calc(100% - 30px);
+    border: solid;
+    border-width: 0 15px 0 15px;
+    border-color: #31353a;
+    background-color: #dee2e8;
+  }
