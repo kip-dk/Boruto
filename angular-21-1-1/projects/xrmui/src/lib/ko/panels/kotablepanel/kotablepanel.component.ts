@@ -1,35 +1,43 @@
-import { Component, Input, ElementRef, ViewChild, ViewEncapsulation, OnChanges, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { NgStyle } from '@angular/common';
+import { Component, input, ElementRef, ViewChild, ViewEncapsulation, OnChanges, AfterViewInit, ChangeDetectorRef, inject, effect, signal } from '@angular/core';
 
 @Component({
   selector: 'ko-table-panel',
-  templateUrl: './koTablePanel.component.html',
-  styleUrls: ['./koTablePanel.component.css']
+  templateUrl: './kotablepanel.component.html',
+  styleUrls: ['./kotablepanel.component.scss'],
+  imports: [NgStyle],
+  encapsulation: ViewEncapsulation.None
+
 })
 
-export class KoTablePanelComponent implements OnChanges, AfterViewInit {
-
-  constructor(private cdRef: ChangeDetectorRef) {
-  }
+export class KoTablePanelComponent implements AfterViewInit {
 
   @ViewChild('tableheader') tableheader!: ElementRef;
   @ViewChild('tablebody') tablebody!: ElementRef;
   @ViewChild('tablefooter') tablefooter!: ElementRef;
 
-  @Input() height: string = '40px';
+  height = input<string>('40px');
 
-  topHeight!: string;
-  fotHeight!: string;
+  private cdRef: ChangeDetectorRef = inject(ChangeDetectorRef);
 
-  hasTop: boolean = true;
-  hasFot: boolean = true;
+  constructor() {
+    effect(() => {
+      const h = this.height();
+      this.doSetStyle();
 
-  topStyle: any = {};
-  bodStyle: any = {};
-  fotStyle: any = {};
-
-  ngOnChanges() {
-    this.doSetStyle();
+    });
   }
+
+
+  private topHeight!: string;
+  private fotHeight!: string;
+
+  private hasTop: boolean = true;
+  private hasFot: boolean = true;
+
+  topStyle = signal<any>({});
+  bodStyle = signal<any>({});
+  fotStyle = signal<any>({});
 
   ngAfterViewInit(): void {
     this.hasTop = this.tableheader.nativeElement != null && this.tableheader.nativeElement.children.length > 0;
@@ -58,11 +66,8 @@ export class KoTablePanelComponent implements OnChanges, AfterViewInit {
   }
 
   private setStyle(): void {
-    if (this.height == null) {
-      this.height = '40px';
-    }
 
-    var spl = this.height.split(' ');
+    var spl = this.height().split(' ');
     if (spl.length == 2) {
       this.topHeight = spl[0];
       this.fotHeight = spl[1];
@@ -75,72 +80,72 @@ export class KoTablePanelComponent implements OnChanges, AfterViewInit {
 
   private doSetStyle(): void {
     if (this.hasTop && this.hasFot) {
-      this.topStyle = {
+      this.topStyle.set({
         height: this.topHeight,
         display: 'block'
-      };
+      });
 
-      this.bodStyle = {
+      this.bodStyle.set({
         top: this.topHeight,
         bottom: this.fotHeight,
         "overflow-x": "hidden"
-      };
+      });
 
-      this.fotStyle = {
+      this.fotStyle.set({
         height: this.fotHeight,
         display:' block'
-      }
+      })
       return;
     }
 
     if (this.hasTop && !this.hasFot) {
-      this.topStyle = {
+      this.topStyle.set({
         height: this.topHeight,
         display: 'block'
-      };
+      });
 
-      this.bodStyle = {
+      this.bodStyle.set({
         top: this.topHeight,
         bottom: 0,
         "overflow-x" : "auto"
-      };
+      });
 
-      this.fotStyle = {
+      this.fotStyle.set({
         display: 'none'
-      }
+      });
       return;
     }
 
     if (!this.hasTop && this.hasFot) {
-      this.topStyle = {
+      this.topStyle.set({
         display: 'none'
-      };
+      });
 
-      this.bodStyle = {
+      this.bodStyle.set({
         top: 0,
         bottom: this.fotHeight
-      };
+      });
 
-      this.fotStyle = {
+      this.fotStyle.set({
         height: this.fotHeight,
         display: 'block'
-      }
+      });
       return;
     }
 
     if (!this.hasTop && !this.hasFot) {
-      this.topStyle = {
+      this.topStyle.set({
         display: 'none'
-      };
+      });
 
-      this.bodStyle = {
+      this.bodStyle.set({
         top: 0,
         bottom: 0
-      };
+      });
 
-      this.fotStyle = {
+      this.fotStyle.set({
         display: 'none'
-      }
+      })
     }
   }
 }

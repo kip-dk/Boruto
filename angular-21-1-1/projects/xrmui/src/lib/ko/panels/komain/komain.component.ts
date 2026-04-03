@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'ko-main',
-  templateUrl: './koMain.component.html',
-  styleUrls: ['./koMain.component.css']
+  templateUrl: './komain.component.html',
+  styleUrls: ['./komain.component.scss'],
+  imports: [],
+  encapsulation: ViewEncapsulation.None
+
 
 })
 export class KoMainComponent {

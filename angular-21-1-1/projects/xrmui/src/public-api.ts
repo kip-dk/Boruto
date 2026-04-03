@@ -21,4 +21,6 @@ export * from './lib/ko/navigation/koOver.directive';
 export * from './lib/ko/panels/koexpansionpanel/koexpansionpanel.component';
 export * from './lib/ko/panels/kohorizontalscroll/kohorizontalscroll.component';
 export * from './lib/ko/panels/kohorizontalsplit/kohorizontalsplit.component';
+export * from './lib/ko/panels/komain/komain.component';
+export * from './lib/ko/panels/kotablepanel/kotablepanel.component';
 

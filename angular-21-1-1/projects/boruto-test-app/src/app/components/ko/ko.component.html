@@ -1,56 +1,81 @@
-<div style="margin: 5px 5px 5px 5px; width: 500px; height: 500px; border: solid; border-width: 1px 1px 1px 1px;position: relative;">
-    <ko-button-group>
-        <button (click)="setLeft()">Set align left</button>
-        <br />
-        <button (click)="setFocus()">Giv input focus</button>
+<ko-main>
+    <div
+        style="margin: 5px 5px 5px 5px; width: 500px; height: 500px; border: solid; border-width: 1px 1px 1px 1px;position: relative;">
+        <ko-button-group>
+            <button (click)="setLeft()">Set align left</button>
+            <br />
+            <button (click)="setFocus()">Giv input focus</button>
 
-        <br />
-        <br />
-        <input ko-decimal [(ko-value)]="mynumber" [align]="align()" [(ko-focus)]="infocus"/>
-        <br />
+            <br />
+            <br />
+            <input ko-decimal [(ko-value)]="mynumber" [align]="align()" [(ko-focus)]="infocus" />
+            <br />
 
-        <ko-expansion-panel>
-            <div ko-title>This is the title of the panel 1</div>
-            <div ko-body>And this is the body of the panel 1</div>
-        </ko-expansion-panel>
+            <ko-expansion-panel>
+                <div ko-title>This is the title of the panel 1</div>
+                <div ko-body>And this is the body of the panel 1</div>
+            </ko-expansion-panel>
 
-        <ko-expansion-panel>
-            <div ko-title>This is the title of the panel 2</div>
-            <div ko-body>And this is the body of the panel 2</div>
-        </ko-expansion-panel>
-    </ko-button-group>
-</div>
+            <ko-expansion-panel>
+                <div ko-title>This is the title of the panel 2</div>
+                <div ko-body>And this is the body of the panel 2</div>
+            </ko-expansion-panel>
+        </ko-button-group>
+    </div>
 
-<div style="position: absolute; top: 5px; left: 600px; width: 550px; height: 250px; border: solid">
-    <div ko-write="down" [ko-over]="myoverthing" [ngClass]="{ red: myoverthing.over }">Tekst down</div>
-    <div ko-write="up">Tekst up</div>
-</div>
+    <div style="position: absolute; top: 5px; left: 600px; width: 550px; height: 250px; border: solid">
+        <div ko-write="down" [ko-over]="myoverthing" [ngClass]="{ red: myoverthing.over }">Tekst down</div>
+        <div ko-write="up">Tekst up</div>
+    </div>
 
-<div style="position: absolute; top: 550px; width: 550px; height: 250px; border: solid">
-    <ko-alert align="center" class="warning">Her kommer der så en besked</ko-alert>
-</div>
+    <div style="position: absolute; top: 550px; width: 550px; height: 250px; border: solid">
+        <ko-alert align="center" class="warning">Her kommer der så en besked</ko-alert>
+    </div>
 
-<div style="position: absolute; top: 550px; left: 600px; width: 550px; height: 250px; border: solid">
-    <ko-header align="center" class="warning">Det er så en ko header besked</ko-header>
-</div>
+    <div style="position: absolute; top: 550px; left: 600px; width: 550px; height: 250px; border: solid">
+        <ko-header align="center" class="warning">Det er så en ko header besked</ko-header>
+    </div>
 
-<div style="position: absolute; top: 550px; left: 1200px; width: 70px; height: 250px; border: solid">
-    <ko-left-menu [items]="menus"></ko-left-menu>
-</div>
+    <div style="position: absolute; top: 550px; left: 1200px; width: 70px; height: 250px; border: solid">
+        <ko-left-menu [items]="menus"></ko-left-menu>
+    </div>
 
-<div style="position: absolute; top: 5px; left: 1200px; width: 300px; height: 70px; border: solid">
-    <ko-top-menu [items]="menus"></ko-top-menu>
-</div>
+    <div style="position: absolute; top: 5px; left: 1200px; width: 300px; height: 70px; border: solid">
+        <ko-top-menu [items]="menus"></ko-top-menu>
+    </div>
 
-<div style="position: absolute; top: 5px; left: 1800px; width: 300px; height: 70px; border: solid">
-    <ko-horizontal-scroll>
-        <div style="white-space: nowrap;">og så noget indhold der bliver så langt at der skal scrolles horizontalt</div>
-    </ko-horizontal-scroll>
-</div>
+    <div style="position: absolute; top: 5px; left: 1800px; width: 300px; height: 70px; border: solid">
+        <ko-horizontal-scroll>
+            <div style="white-space: nowrap;">og så noget indhold der bliver så langt at der skal scrolles horizontalt
+            </div>
+        </ko-horizontal-scroll>
+    </div>
 
-<div style="position: absolute; top: 550px; left: 1800px; width: 300px; height: 300px; border: solid">
-    <ko-horizontal-split fixed="top" height="70px">
-        <div ko-top>her har vi så toppen</div>
-        <div ko-bottom>og dette skulle gerne være bund</div>
-    </ko-horizontal-split>
-</div>
+    <div style="position: absolute; top: 550px; left: 1800px; width: 300px; height: 300px; border: solid">
+        <ko-horizontal-split fixed="top" height="70px">
+            <div ko-top>her har vi så toppen</div>
+            <div ko-bottom>
+                <ko-table-panel>
+                    <table ko-table-header>
+                        <tr>
+                            <th class="name">Kolonne 1</th>
+                            <th class="name">kolonne 2</th>
+                            <th class="name">kolonne 3</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </table>
+                    <table ko-table-body>
+                        @for (i of numbers; track i) {
+                        <tr>
+                            <td class="name">række {{i}} kolonne 1</td>
+                            <td class="name">række {{i}} kolonne 2</td>
+                            <td class="name">række {{i}} kolonne 3</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        }
+                    </table>
+                </ko-table-panel>
+            </div>
+        </ko-horizontal-split>
+    </div>
+</ko-main>

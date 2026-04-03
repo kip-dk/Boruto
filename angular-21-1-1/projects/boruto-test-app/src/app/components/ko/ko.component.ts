@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { XrmContextService } from 'xrm';
-import { KoAlertComponent, KoButtonGroupComponent, KoDecimalDirective, KoFocusDirective, KoHeaderComponent, KoNavigationByCssClass, KoNavigationByImageUrl, KoWriteDirective, KoLeftMenuComponent, KoDivider, KoNavigation, KoTopMenuComponent, KoOverDirective, KoExpansionPanelComponent, KoHorizontalScrollComponent, KoHorizontalSplitComponent } from 'xrmui'
+import { KoAlertComponent, KoButtonGroupComponent, KoDecimalDirective, KoFocusDirective, KoHeaderComponent, KoNavigationByCssClass, KoNavigationByImageUrl, KoWriteDirective, KoLeftMenuComponent, KoDivider, KoNavigation, KoTopMenuComponent, KoOverDirective, KoExpansionPanelComponent, KoHorizontalScrollComponent, KoHorizontalSplitComponent, KoMainComponent, KoTablePanelComponent } from 'xrmui'
 
 @Component({
   selector: 'app-ko',
@@ -20,6 +20,8 @@ import { KoAlertComponent, KoButtonGroupComponent, KoDecimalDirective, KoFocusDi
     KoExpansionPanelComponent,
     KoHorizontalScrollComponent,
     KoHorizontalSplitComponent,
+    KoMainComponent,
+    KoTablePanelComponent,
     NgClass
 ]
 })
@@ -48,4 +50,5 @@ export class KoComponent {
     this.infocus.set(true);
   }
 
+  numbers = Array.from({ length: 120 }, (_, i) => i);
 }
