@@ -6,7 +6,6 @@ import { Component, effect, input, output, signal, ViewEncapsulation } from '@an
   styleUrls: ['./koexpansionpanel.component.scss'],
   imports: [],
   encapsulation: ViewEncapsulation.None
-
 })
 export class KoExpansionPanelComponent {
 

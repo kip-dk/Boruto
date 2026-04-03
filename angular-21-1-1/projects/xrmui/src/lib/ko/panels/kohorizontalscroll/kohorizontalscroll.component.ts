@@ -1,9 +1,12 @@
-﻿import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+﻿import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'ko-horizontal-scroll',
-    templateUrl: './koHorizontalScroll.component.html',
-    styleUrls: ['./koHorizontalScroll.component.css']
+    templateUrl: './kohorizontalscroll.component.html',
+    styleUrls: ['./kohorizontalscroll.component.scss'],
+    imports: [],
+    encapsulation: ViewEncapsulation.None
+  
 })
 
 export class KoHorizontalScrollComponent {

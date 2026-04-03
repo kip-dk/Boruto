@@ -1,4 +1,4 @@
-﻿:host {
+﻿ko-horizontal-scroll {
     position: absolute;
     top: 0;
     left: 0;
@@ -6,4 +6,5 @@
     bottom: 0;
     overflow-y: hidden;
     overflow-x: scroll;
+    display: block;
 }

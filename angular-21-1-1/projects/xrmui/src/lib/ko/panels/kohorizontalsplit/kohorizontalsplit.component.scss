@@ -1,12 +1,13 @@
-:host {
+ko-horizontal-split {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
+    display: block;
 }
 
-:host .ko-top {
+ko-horizontal-split .ko-top {
     position: absolute;
     top: 0;
     left: 0;
@@ -16,15 +17,15 @@
     border-color: lightgray;
 }
 
-:host.raw .ko-top,
-:host.raw .ko-bottom {
+ko-horizontal-split.raw .ko-top,
+ko-horizontal-split.raw .ko-bottom {
     border: none;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
 }
 
 
-:host .ko-bottom {
+ko-horizontal-split .ko-bottom {
     position: absolute;
     bottom: 0;
     left: 0;

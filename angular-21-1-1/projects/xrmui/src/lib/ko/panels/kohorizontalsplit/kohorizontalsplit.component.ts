@@ -1,59 +1,45 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { NgStyle } from '@angular/common';
+import { Component, effect, input, ViewEncapsulation } from '@angular/core';
 
 
 @Component({
   selector: 'ko-horizontal-split',
-  templateUrl: './koHorizontalSplit.component.html',
-  styleUrls: ['./koHorizontalSplit.component.css']
+  templateUrl: './kohorizontalsplit.component.html',
+  styleUrls: ['./kohorizontalsplit.component.scss'],
+  imports: [NgStyle],
+  encapsulation: ViewEncapsulation.None
 })
 
-export class KoHorizontalSplitComponent implements OnInit, OnChanges {
+export class KoHorizontalSplitComponent {
 
-  private thread: any;
+  height = input<string>("50%");
+  fixed = input<'top' | 'bottom'>('top');
+
   constructor() {
+    effect(() => {
+      const h = this.height();
+      const f = this.fixed();
+      this.init();
+    });
   }
-
-  @Input() height: string = '50%';
-  @Input() fixed: string = 'top';
-
 
   topStyle: any;
   bottomStyle: any;
 
-
-  ngOnInit() {
-    this.init();
-  }
-
-  ngOnChanges(): void {
-    if (this.thread != null) clearTimeout(this.thread);
-    this.thread = setTimeout(() => {
-      this.init();
-    }, 500);
-  }
-
   private init(): void {
-    if (this.height == null) {
-      this.height = '50%';
-    }
-
-    if (this.fixed == null) {
-      this.fixed = 'top';
-    }
-
-    if (this.fixed == 'top') {
+    if (this.fixed() == 'top') {
       this.topStyle = {
-        height: this.height
+        height: this.height()
       };
       this.bottomStyle = {
-        top: this.height
+        top: this.height()
       }
     } else {
       this.topStyle = {
-        bottom: this.height
+        bottom: this.height()
       }
       this.bottomStyle = {
-        height: this.height
+        height: this.height()
       }
     }
   }
