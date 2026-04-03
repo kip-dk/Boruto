@@ -1,33 +1,13 @@
 import { NgClass } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { XrmContextService } from 'xrm';
-import { KoAlertComponent, KoButtonGroupComponent, KoDecimalDirective, KoFocusDirective, KoHeaderComponent, KoNavigationByCssClass, KoNavigationByImageUrl, KoWriteDirective, KoLeftMenuComponent, KoDivider, KoNavigation, KoTopMenuComponent, KoOverDirective, KoExpansionPanelComponent, KoHorizontalScrollComponent, KoHorizontalSplitComponent, KoMainComponent, KoTablePanelComponent, KoTitlePanelComponent, KoVerticalScrollComponent, KoViewComponent, KoVerticalSplitComponent } from 'xrmui'
+import { KoNavigationByCssClass, KoDivider, KoNavigation, KiponUiModule } from 'xrmui'
 
 @Component({
   selector: 'app-ko',
   templateUrl: './ko.component.html',
   styleUrl: './ko.component.scss',
-  imports: [
-    KoButtonGroupComponent,
-    KoDecimalDirective,
-    KoFocusDirective,
-    KoAlertComponent,
-    KoHeaderComponent,
-    KoWriteDirective,
-    KoLeftMenuComponent,
-    KoTopMenuComponent,
-    KoOverDirective,
-    KoExpansionPanelComponent,
-    KoHorizontalScrollComponent,
-    KoHorizontalSplitComponent,
-    KoMainComponent,
-    KoTablePanelComponent,
-    KoTitlePanelComponent,
-    KoVerticalScrollComponent,
-    KoViewComponent,
-    NgClass,
-    KoVerticalSplitComponent
-]
+  imports: [KiponUiModule]
 })
 export class KoComponent {
   form: XrmContextService = inject(XrmContextService);

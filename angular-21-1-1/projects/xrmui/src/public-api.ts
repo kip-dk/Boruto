@@ -27,3 +27,5 @@ export * from './lib/ko/panels/kotitlepanel/kotitlepanel.component';
 export * from './lib/ko/panels/koverticalscroll/koverticalscroll.component';
 export * from './lib/ko/panels/koview/koview.component';
 export * from './lib/ko/panels/koverticalsplit/koverticalsplit.component';
+
+export * from './lib/ko/kipon-ui.module';
