@@ -1,12 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
 import { XrmContextService } from 'xrm';
-import { KoAlertComponent, KoButtonGroupComponent, KoDecimalDirective, KoFocusDirective, KoHeaderComponent, KoNavigationByCssClass, KoNavigationByImageUrl, KoWriteDirective, KoLeftMenuComponent, KoDivider, KoNavigation } from 'xrmui'
+import { KoAlertComponent, KoButtonGroupComponent, KoDecimalDirective, KoFocusDirective, KoHeaderComponent, KoNavigationByCssClass, KoNavigationByImageUrl, KoWriteDirective, KoLeftMenuComponent, KoDivider, KoNavigation, KoTopMenuComponent } from 'xrmui'
 
 @Component({
   selector: 'app-ko',
   templateUrl: './ko.component.html',
   styleUrl: './ko.component.scss',
-  imports: [KoButtonGroupComponent, KoDecimalDirective, KoFocusDirective, KoAlertComponent, KoHeaderComponent, KoWriteDirective, KoLeftMenuComponent]
+  imports: [KoButtonGroupComponent, KoDecimalDirective, KoFocusDirective, KoAlertComponent, KoHeaderComponent, KoWriteDirective, KoLeftMenuComponent,KoTopMenuComponent]
 })
 export class KoComponent {
   form: XrmContextService = inject(XrmContextService);

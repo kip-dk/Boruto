@@ -15,4 +15,5 @@ export * from './lib/ko/message/kowrite.directive';
 export * from './lib/ko/models/navigation.interface';
 
 export * from './lib/ko/navigation/koleftmenu/koleftmenu.component';
+export * from './lib/ko/navigation/kotopmenu/kotopmenu.component';
 
