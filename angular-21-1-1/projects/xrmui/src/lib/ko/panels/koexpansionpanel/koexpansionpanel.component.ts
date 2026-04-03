@@ -1,20 +1,28 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, effect, input, output, signal, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'ko-expansion-panel',
-  templateUrl: './koExpansionPanel.component.html',
-  styleUrls: ['./koExpansionPanel.component.css']
+  templateUrl: './koexpansionpanel.component.html',
+  styleUrls: ['./koexpansionpanel.component.scss'],
+  imports: [],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class KoExpansionPanelComponent {
 
-  @Input('expanded') expanded: boolean = false;
-  @Output('expandedChange') expandedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  expanded = input<boolean>(false);
+  expandedChange = output<boolean>();
+
+  isExpanded = signal<boolean>(false);
 
   constructor() {
+    effect(() => {
+      this.isExpanded.set(this.expanded());
+    });
   }
 
   toggle(): void {
-    this.expanded = !this.expanded;
-    this.expandedChange.emit(this.expanded);
+    this.isExpanded.set(!this.isExpanded());
+    this.expandedChange.emit(this.isExpanded());
   }
 }

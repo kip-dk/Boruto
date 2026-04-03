@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { XrmContextService } from 'xrm';
-import { KoAlertComponent, KoButtonGroupComponent, KoDecimalDirective, KoFocusDirective, KoHeaderComponent, KoNavigationByCssClass, KoNavigationByImageUrl, KoWriteDirective, KoLeftMenuComponent, KoDivider, KoNavigation, KoTopMenuComponent, KoOverDirective } from 'xrmui'
+import { KoAlertComponent, KoButtonGroupComponent, KoDecimalDirective, KoFocusDirective, KoHeaderComponent, KoNavigationByCssClass, KoNavigationByImageUrl, KoWriteDirective, KoLeftMenuComponent, KoDivider, KoNavigation, KoTopMenuComponent, KoOverDirective, KoExpansionPanelComponent } from 'xrmui'
 
 @Component({
   selector: 'app-ko',
@@ -17,6 +17,7 @@ import { KoAlertComponent, KoButtonGroupComponent, KoDecimalDirective, KoFocusDi
     KoLeftMenuComponent,
     KoTopMenuComponent,
     KoOverDirective,
+    KoExpansionPanelComponent,
     NgClass
 ]
 })

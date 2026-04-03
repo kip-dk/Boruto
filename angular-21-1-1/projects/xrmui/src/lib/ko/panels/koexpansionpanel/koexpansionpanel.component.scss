@@ -1,11 +1,9 @@
-:host {
-}
 
-:host .ko-container {
+ko-expansion-panel .ko-container {
   width: 100%;
 }
 
-:host .ko-container .ko-title {
+ko-expansion-panel .ko-container .ko-title {
   margin-left: 20px;
   margin-right: 20px;
   height: 40px;
@@ -16,7 +14,7 @@
   padding-left: 5px;
 }
 
-:host .ko-container .ko-body {
+ko-expansion-panel .ko-container .ko-body {
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 20px;
