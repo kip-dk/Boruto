@@ -1,9 +1,12 @@
-﻿import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+﻿import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'ko-title-panel',
-    templateUrl: './koTitlePanel.component.html',
-    styleUrls: ['./koTitlePanel.component.css']
+    templateUrl: './kotitlepanel.component.html',
+    styleUrls: ['./kotitlepanel.component.scss'],
+    imports: [],
+    encapsulation: ViewEncapsulation.None
+  
 })
 
 export class KoTitlePanelComponent {

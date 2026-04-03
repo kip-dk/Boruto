@@ -23,4 +23,5 @@ export * from './lib/ko/panels/kohorizontalscroll/kohorizontalscroll.component';
 export * from './lib/ko/panels/kohorizontalsplit/kohorizontalsplit.component';
 export * from './lib/ko/panels/komain/komain.component';
 export * from './lib/ko/panels/kotablepanel/kotablepanel.component';
+export * from './lib/ko/panels/kotitlepanel/kotitlepanel.component';
 

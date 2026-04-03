@@ -1,12 +1,13 @@
-:host {
+ko-title-panel {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
+  display: block;
 }
 
-:host .ko-container {
+ko-title-panel .ko-container {
   position: absolute;
   left: 5px;
   right: 5px;
@@ -18,7 +19,7 @@
   border-radius: 4px;
 }
 
-:host(.raw) .ko-container {
+ko-title-panel.raw .ko-container {
   position: absolute;
   left: 0;
   right: 0;
@@ -28,7 +29,7 @@
   border-radius: unset;
 }
 
-:host .ko-container .ko-title {
+ko-title-panel .ko-container .ko-title {
   position: absolute;
   left: 0;
   right: 0;
@@ -39,16 +40,16 @@
   border-bottom: 1px solid rgba(0,0,0,.125);
 }
 
-:host(.raw) .ko-container .ko-title {
+:ko-title-panel.raw .ko-container .ko-title {
   padding: 0 0 0 0;
   border: none;
 }
 
-:host(.no-padding) .ko-container .ko-title {
+ko-title-panel.no-padding .ko-container .ko-title {
   padding: 0 0 0 0;
 }
 
-:host .ko-container .ko-body {
+ko-title-panel .ko-container .ko-body {
   position: absolute;
   left: 0;
   right: 0;
@@ -59,11 +60,11 @@
   padding: 4px 4px 4px 4px;
 }
 
-:host(.raw) .ko-container .ko-body {
+ko-title-panel.raw .ko-container .ko-body {
     padding: 0 0 0 0;
 
 }
 
-:host(.no-padding) .ko-container .ko-body {
+ko-title-panel.no-padding .ko-container .ko-body {
   padding: 0 0 0 0;
 }
