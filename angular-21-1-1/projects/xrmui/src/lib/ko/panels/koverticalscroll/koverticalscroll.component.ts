@@ -1,9 +1,11 @@
-﻿import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+﻿import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'ko-vertical-scroll',
-    templateUrl: './koVerticalScroll.component.html',
-    styleUrls: ['./koVerticalScroll.component.css']
+    templateUrl: './koverticalscroll.component.html',
+    styleUrls: ['./koverticalscroll.component.scss'],
+    imports: [],
+    encapsulation: ViewEncapsulation.None
 })
 export class KoVerticalScrollComponent {
     constructor() {
