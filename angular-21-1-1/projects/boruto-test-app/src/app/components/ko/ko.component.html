@@ -13,7 +13,7 @@
 </div>
 
 <div style="position: absolute; top: 5px; left: 600px; width: 550px; height: 250px; border: solid">
-    <div ko-write="down">Tekst down</div>
+    <div ko-write="down" [ko-over]="myoverthing" [ngClass]="{ red: myoverthing.over }">Tekst down</div>
     <div ko-write="up">Tekst up</div>
 </div>
 

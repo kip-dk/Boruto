@@ -1,12 +1,24 @@
+import { NgClass } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { XrmContextService } from 'xrm';
-import { KoAlertComponent, KoButtonGroupComponent, KoDecimalDirective, KoFocusDirective, KoHeaderComponent, KoNavigationByCssClass, KoNavigationByImageUrl, KoWriteDirective, KoLeftMenuComponent, KoDivider, KoNavigation, KoTopMenuComponent } from 'xrmui'
+import { KoAlertComponent, KoButtonGroupComponent, KoDecimalDirective, KoFocusDirective, KoHeaderComponent, KoNavigationByCssClass, KoNavigationByImageUrl, KoWriteDirective, KoLeftMenuComponent, KoDivider, KoNavigation, KoTopMenuComponent, KoOverDirective } from 'xrmui'
 
 @Component({
   selector: 'app-ko',
   templateUrl: './ko.component.html',
   styleUrl: './ko.component.scss',
-  imports: [KoButtonGroupComponent, KoDecimalDirective, KoFocusDirective, KoAlertComponent, KoHeaderComponent, KoWriteDirective, KoLeftMenuComponent,KoTopMenuComponent]
+  imports: [
+    KoButtonGroupComponent,
+    KoDecimalDirective,
+    KoFocusDirective,
+    KoAlertComponent,
+    KoHeaderComponent,
+    KoWriteDirective,
+    KoLeftMenuComponent,
+    KoTopMenuComponent,
+    KoOverDirective,
+    NgClass
+]
 })
 export class KoComponent {
   form: XrmContextService = inject(XrmContextService);
@@ -15,6 +27,8 @@ export class KoComponent {
   align = signal<string>('right');
 
   infocus = signal<boolean>(false);
+
+  myoverthing: any = {};
 
   readonly menus: (KoNavigation)[] = [
     new KoNavigationByCssClass("1","red", false, "hallo red", function(){ alert('hello red clicked') }),

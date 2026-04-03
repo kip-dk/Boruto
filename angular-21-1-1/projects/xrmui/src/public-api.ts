@@ -16,4 +16,5 @@ export * from './lib/ko/models/navigation.interface';
 
 export * from './lib/ko/navigation/koleftmenu/koleftmenu.component';
 export * from './lib/ko/navigation/kotopmenu/kotopmenu.component';
+export * from './lib/ko/navigation/koOver.directive';
 
