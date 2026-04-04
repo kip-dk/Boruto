@@ -1,5 +1,5 @@
 /*
- * Public API Surface of xrmui
+ * Public API Surface of Old Kipon UI
  */
 
 export * from './lib/ko/forms/kobuttongroup/kobuttongroup.component';
@@ -27,3 +27,16 @@ export * from './lib/ko/panels/koview/koview.component';
 export * from './lib/ko/panels/koverticalsplit/koverticalsplit.component';
 
 export * from './lib/ko/kipon-ui.module';
+
+/*
+ * Public API Surface of Xrmui
+ */
+
+export * from './lib/bo/api/imenu.interface';
+export * from './lib/bo/api/iselectable.interface';
+export * from './lib/bo/api/optionsetvalue.interface';
+export * from './lib/bo/api/optionvalue.interface';
+
+export * from './lib/bo/info/info.xrmui';
+
+export * from './lib/bo/boruto-xrmui.module';

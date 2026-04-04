@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { KoAlertComponent, KoButtonGroupComponent, KoDecimalDirective, KoExpansionPanelComponent, KoFocusDirective, KoHeaderComponent, KoHorizontalScrollComponent, KoHorizontalSplitComponent, KoLeftMenuComponent, KoMainComponent, KoOverDirective, KoTablePanelComponent, KoTitlePanelComponent, KoTopMenuComponent, KoVerticalScrollComponent, KoVerticalSplitComponent, KoViewComponent, KoWriteDirective } from 'xrmui';
+import { KoAlertComponent, KoButtonGroupComponent, KoDecimalDirective, KoExpansionPanelComponent, KoFocusDirective, KoHeaderComponent, KoHorizontalScrollComponent, KoHorizontalSplitComponent, KoLeftMenuComponent, KoMainComponent, KoNavigationByCssClass, KoOverDirective, KoTablePanelComponent, KoTitlePanelComponent, KoTopMenuComponent, KoVerticalScrollComponent, KoVerticalSplitComponent, KoViewComponent, KoWriteDirective } from 'xrmui';
 
 @NgModule({
   imports: [

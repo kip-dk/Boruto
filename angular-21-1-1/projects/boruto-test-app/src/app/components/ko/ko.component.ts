@@ -7,7 +7,7 @@ import { KoNavigationByCssClass, KoDivider, KoNavigation, KiponUiModule } from '
   selector: 'app-ko',
   templateUrl: './ko.component.html',
   styleUrl: './ko.component.scss',
-  imports: [KiponUiModule]
+  imports: [KiponUiModule,NgClass]
 })
 export class KoComponent {
   form: XrmContextService = inject(XrmContextService);

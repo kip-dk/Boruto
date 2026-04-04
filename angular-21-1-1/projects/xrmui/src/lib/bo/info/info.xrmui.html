@@ -1,0 +1,30 @@
+@if (!onlyshowselected() || list.length > 0) {
+    <div class="line" (click)="onClick()">
+        @if (icon() != undefined){
+        <div class="ic">
+            @let bad = badget() ?? 0;
+            @if ( bad == 0) {<mat-icon fontSet="material-symbols-outlined">{{ icon() }}</mat-icon>}
+            @if (bad > 0) {<mat-icon fontSet="material-symbols-outlined" [matBadge]="badget()" aria-hidden="false">{{ icon()
+                }}</mat-icon>}
+        </div>}
+        @if (label() != undefined){<div class="lab">{{ label() }}</div>}
+        <div class="con">
+            <ng-content></ng-content>
+            @if (list.length > 0) {
+            @for(gr of grouped; track gr) {
+            @if (gr.group != undefined && gr.group != '') {
+            <div class="selected-item"><b>{{ gr.group }}</b></div>
+            }
+            @for(li of gr.items; track li) {
+            <div class="selected-item" (mouseover)="isover(li)" (mouseleave)="isout()">
+                <div class="selected-item-name">{{ li.name }}</div>
+                @if (over == li){<div class="selected-item-tool" title="Fjern fra valgt listen"
+                    (click)="remove($event, li)"><mat-icon fontSet="material-symbols-outlined"
+                        style="color: gray; font-size: small;  height: 16px">delete</mat-icon></div>}
+            </div>
+            }
+            }
+            }
+        </div>
+    </div>
+    }

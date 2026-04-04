@@ -1,0 +1,56 @@
+:host {
+    font-size: small;
+    cursor: pointer;
+    display: block;
+}
+
+:host div.line {
+    display: flex;
+}
+
+:host div.ic {
+    width: 40px;
+    min-width: 40px;
+    text-align: center;
+    padding: 3px 0 3px 0;
+    border: solid;
+    border-width: 0 1px 0 0;
+}
+
+:host div.lab {
+    width: 100px;
+    height: 24px;
+    line-height: 24px;
+    font-weight: bold;
+    padding-left: 3px;
+}
+
+:host div.con {
+    flex-grow: 1;
+    min-height: 24px;
+    line-height: 24px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+:host div.toggler {
+    height: 30px;
+    width: 20px;
+}
+
+:host div.selected-item {
+    flex-grow: 1;
+    display: flex;
+    position: relative;
+}
+
+:host div.selected-item-name {
+    flex-grow: 1;
+}
+
+:host div.selected-item-tool {
+    position: absolute;
+    z-index: 1000;
+    right: 10px;
+    top: 5px;
+}

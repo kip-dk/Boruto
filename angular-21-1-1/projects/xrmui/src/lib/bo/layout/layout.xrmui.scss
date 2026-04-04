@@ -1,0 +1,63 @@
+:host {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    overflow: hidden;
+    display: block;
+}
+
+:host div.horizontal {
+    position: absolute;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+}
+
+:host div.vertical {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+:host div.dynamic {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+:host div.vertical.resizer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 1;
+    cursor: ew-resize;
+}
+
+:host div.vertical.resizer:hover {
+    width: 3px;
+    background-color: darkgray;
+}
+
+:host div.horizontal.resizer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 1;
+    cursor: ns-resize;
+}
+
+:host div.horizontal.resizer:hover {
+    height: 3px;
+    background-color: darkgray;
+}

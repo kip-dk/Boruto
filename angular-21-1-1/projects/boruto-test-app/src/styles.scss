@@ -1,4 +1,44 @@
+@use "@angular/material" as mat;
 /* You can add global styles to this file, and also import other style files */
+
+@include mat.elevation-classes();
+@include mat.app-background();
+
+
+html {
+    color-scheme: light dark;
+    @include mat.theme((
+      color: mat.$azure-palette,
+      typography: Roboto,
+      density: 0
+    ));
+  }
+  
+  html {
+  --mat-form-field-filled-container-color: white;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .theme-a.adaptive {
+      background: #775533;
+      color: #ddccbb;
+      outline: 5px dashed black;
+    }
+  }
+  
+  body {
+    background-color: white;
+    color: black;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: black;
+      color: white;
+    }
+  }
+  
 
 .red {
     background-color: red;
