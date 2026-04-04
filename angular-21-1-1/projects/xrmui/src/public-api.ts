@@ -38,5 +38,8 @@ export * from './lib/bo/api/optionsetvalue.interface';
 export * from './lib/bo/api/optionvalue.interface';
 
 export * from './lib/bo/info/info.xrmui';
+export * from './lib/bo/layout/layout.xrmui';
+export * from './lib/bo/panel/panel.xrmui'; 
+export * from './lib/bo/icon/icon.xrmui';
 
 export * from './lib/bo/boruto-xrmui.module';

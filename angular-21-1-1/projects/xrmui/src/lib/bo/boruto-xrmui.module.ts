@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
-import { XrmuiInfo } from 'xrmui';
+import { XrmuiIcon, XrmuiInfo, XrmuiPanel } from 'xrmui';
 import { XrmuiLayout } from './layout/layout.xrmui';
 
 @NgModule({
   imports: [
     XrmuiInfo,
-    XrmuiLayout
+    XrmuiLayout,
+    XrmuiPanel,
+    XrmuiIcon
   ],
   exports: [
     XrmuiInfo,
-    XrmuiLayout
+    XrmuiLayout,
+    XrmuiPanel,
+    XrmuiIcon
   ]
 })
 export class BorutoXrmUIModule { }

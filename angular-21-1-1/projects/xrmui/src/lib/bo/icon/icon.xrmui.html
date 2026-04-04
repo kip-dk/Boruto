@@ -1,0 +1,9 @@
+<span style="display: none;"><ng-content></ng-content></span>
+@if (icon() != '') {
+@if (type() == 'mat') {
+    <mat-icon [ngClass]="classes()" fontSet="material-symbols-outlined">{{ icon() }}</mat-icon>
+}
+@if (type() == 'fa') {
+    <i [ngClass]="classes()"></i>
+}
+}
