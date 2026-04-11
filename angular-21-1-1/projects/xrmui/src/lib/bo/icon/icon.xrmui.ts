@@ -28,7 +28,7 @@ export class XrmuiIcon implements AfterContentInit {
     }
 
     if (d) {
-      return ['fa',i,d];
+      return ['fa',i,'disabled'];
     }
     return ['fa',i];
   });
