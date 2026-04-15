@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { XrmContextService } from 'xrm';
+import { XrmContextService } from 'boruto-xrmservice';
 
 @Component({
   selector: 'app-firstpage',

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
-import { XrmuiIcon, XrmuiInfo, XrmuiPanel } from 'xrmui';
+import { XrmuiInfo } from './info/info.xrmui';
+import { XrmuiPanel } from './panel/panel.xrmui'
 import { XrmuiLayout } from './layout/layout.xrmui';
+import { XrmuiIcon } from './icon/icon.xrmui';
 
 @NgModule({
   imports: [

@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { AfterContentInit, AfterViewInit, Component, computed, effect, ElementRef, inject, input, signal } from '@angular/core';
+import { AfterContentInit, Component, computed, effect, ElementRef, inject, input, signal } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({

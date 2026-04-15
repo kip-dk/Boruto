@@ -5,7 +5,7 @@ This project purpose is to make it easy to build angular ui, that works seamless
 The project also holds angular 21 migrated components complient with KiponUI module
 
 # Disclaimer
-Use of the module is on you own risk
+Use of the module is on your own risk
 
 
 ## Owner

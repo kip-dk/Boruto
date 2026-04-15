@@ -1,6 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component, effect, input, ViewEncapsulation } from '@angular/core';
-
+import { Component, effect, input, Signal, signal, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'ko-horizontal-split',
@@ -9,7 +8,6 @@ import { Component, effect, input, ViewEncapsulation } from '@angular/core';
   imports: [NgStyle],
   encapsulation: ViewEncapsulation.None
 })
-
 export class KoHorizontalSplitComponent {
 
   height = input<string>("50%");
@@ -23,24 +21,24 @@ export class KoHorizontalSplitComponent {
     });
   }
 
-  topStyle: any;
-  bottomStyle: any;
+  topStyle = signal<any>({});
+  bottomStyle = signal<any>({});
 
   private init(): void {
     if (this.fixed() == 'top') {
-      this.topStyle = {
+      this.topStyle.set({
         height: this.height()
-      };
-      this.bottomStyle = {
+      });
+      this.bottomStyle.set( {
         top: this.height()
-      }
+      });
     } else {
-      this.topStyle = {
+      this.topStyle.set({
         bottom: this.height()
-      }
-      this.bottomStyle = {
+      });
+      this.bottomStyle.set({
         height: this.height()
-      }
+      });
     }
   }
 }

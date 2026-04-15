@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { BorutoXrmUIModule } from 'xrmui';
+import { BorutoXrmUIModule } from 'boruto-xrmui';
 
 @Component({
   selector: 'app-bo',

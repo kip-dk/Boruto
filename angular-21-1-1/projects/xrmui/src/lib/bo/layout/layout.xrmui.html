@@ -1,6 +1,6 @@
 @if (panellist().length >= 1) {
     <div [style]="panellist()[0].style" [ngClass]="{ dynamics: panellist()[0].dyn, horizontal: orientation() == 'horizontal', vertical: orientation() == 'vertical'}">
-        <ng-content select="[C1]"></ng-content>
+        <ng-content select="[c1]"></ng-content>
     </div>
 
     @if (panellist().length > 1 && resizeable()) {
@@ -15,14 +15,14 @@
     }
 }
 @if (panellist().length >= 2) {
-    <div [style]="panellist()[1].style" [ngClass]="{ dynamics: panellist()[1].dyn, horizontal: orientation() == 'horizontal', vertical: orientation() == 'vertical'}"><ng-content select="[C2]"></ng-content></div>
+    <div [style]="panellist()[1].style" [ngClass]="{ dynamics: panellist()[1].dyn, horizontal: orientation() == 'horizontal', vertical: orientation() == 'vertical'}"><ng-content select="[c2]"></ng-content></div>
 }
 @if (panellist().length >= 3) {
-    <div [style]="panellist()[2].style" [ngClass]="{ dynamics: panellist()[2].dyn, horizontal: orientation() == 'horizontal', vertical: orientation() == 'vertical'}"><ng-content select="[C3]"></ng-content></div>
+    <div [style]="panellist()[2].style" [ngClass]="{ dynamics: panellist()[2].dyn, horizontal: orientation() == 'horizontal', vertical: orientation() == 'vertical'}"><ng-content select="[c3]"></ng-content></div>
 }
 @if (panellist().length >= 4) {
-    <div [style]="panellist()[3].style" [ngClass]="{ dynamics: panellist()[3].dyn, horizontal: orientation() == 'horizontal', vertical: orientation() == 'vertical'}"><ng-content select="[C4]"></ng-content></div>
+    <div [style]="panellist()[3].style" [ngClass]="{ dynamics: panellist()[3].dyn, horizontal: orientation() == 'horizontal', vertical: orientation() == 'vertical'}"><ng-content select="[c4]"></ng-content></div>
 }
 @if (panellist().length == 5) {
-    <div [style]="panellist()[4].style" [ngClass]="{ dynamics: panellist()[4].dyn, horizontal: orientation() == 'horizontal', vertical: orientation() == 'vertical'}"><ng-content select="[C5]"></ng-content></div>
+    <div [style]="panellist()[4].style" [ngClass]="{ dynamics: panellist()[4].dyn, horizontal: orientation() == 'horizontal', vertical: orientation() == 'vertical'}"><ng-content select="[c5]"></ng-content></div>
 }

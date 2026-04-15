@@ -16,8 +16,8 @@
     "module": "preserve",
     "baseUrl": ".",
     "paths": {
-      "xrm": ["projects/xrm/src/public-api.ts"],
-      "xrmui": ["projects/xrmui/src/public-api.ts"]
+      "boruto-xrmservice": ["projects/xrm/src/public-api.ts"],
+      "boruto-xrmui": ["projects/xrmui/src/public-api.ts"]
     },
     "types": ["xrm"]
   },

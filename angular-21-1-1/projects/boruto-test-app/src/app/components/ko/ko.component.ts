@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { XrmContextService } from 'xrm';
-import { KoNavigationByCssClass, KoDivider, KoNavigation, KiponUiModule } from 'xrmui'
+import { XrmContextService } from 'boruto-xrmservice';
+import { KoNavigationByCssClass, KoDivider, KoNavigation, KiponUiModule } from 'boruto-xrmui';
 
 @Component({
   selector: 'app-ko',
