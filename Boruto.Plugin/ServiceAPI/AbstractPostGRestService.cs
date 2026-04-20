@@ -37,17 +37,22 @@ namespace Boruto.ServiceAPI
 
         }
 
-        public Microsoft.Xrm.Sdk.Entity Get(string logicalName, Guid id)
+        public Microsoft.Xrm.Sdk.Entity Get(string logicalName, Guid id, string keyfieldname = null)
         {
             var meta = this.metaService.ForEntity(logicalName);
             var url = this.GetEntityUrl(logicalName, meta.ExternalName);
 
-            var key = meta.Attributes.Where(r => r.IsPrimaryId == true).Single();
+            var keyAttribName = keyfieldname;
+
+            if (string.IsNullOrEmpty(keyAttribName))
+            {
+                keyAttribName = meta.Attributes.Where(r => r.IsPrimaryId == true).Single().ExternalName;
+            }
             var val = this.FromId(id);
-            url.Append($"?{key.ExternalName}=eq.{val.ToString()}");
+            url.Append($"?{keyAttribName}=eq.{val.ToString()}");
 
             var entities = this.Fetch(meta, url.ToString());
-            return entities.First();
+            return entities.FirstOrDefault();
         }
 
         public Microsoft.Xrm.Sdk.EntityCollection Query(Microsoft.Xrm.Sdk.Query.QueryExpression query, params string[] quickfindfields)

@@ -31,15 +31,14 @@ namespace Boruto.Implementations.Services
                     return null;
                 }
 
-                if (!string.IsNullOrEmpty(re.Name))
+                if (!string.IsNullOrEmpty(re.Name.Trim()))
                 {
                     return re.Name;
                 }
 
                 string primaryCol = null;
 
-                if (knownPrimaryNames.TryGetValue(re.LogicalName, out primaryCol)) { }
-                ;
+                if (knownPrimaryNames.TryGetValue(re.LogicalName, out primaryCol)) { };
 
                 if (primaryCol == null)
                 {

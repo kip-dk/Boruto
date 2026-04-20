@@ -1,8 +1,14 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { NgClass } from '@angular/common';
-import { AfterViewInit, Component, effect, ElementRef, inject, input, OnDestroy, signal } from '@angular/core';
+import { AfterViewInit, Component, computed, effect, ElementRef, inject, input, OnDestroy, signal } from '@angular/core';
 import { XrmuiPanel } from '../models/xrmuipanel.model';
 import { IDistance } from '../api/idistance.interface';
+
+
+interface IStyle {
+    style: string;
+    dyn: boolean;
+}
 
 @Component({
     selector: 'xrmui-layout',
@@ -27,7 +33,26 @@ export class XrmuiLayout implements AfterViewInit, OnDestroy {
     private unit: 'px' | '%' = 'px';
 
     private panellist$ = signal<XrmuiPanel[]>([]);
+    private resized = signal<number>(0);
     panellist = this.panellist$.asReadonly();
+
+    style0 = computed(() => { return this.styleFor(0) });
+    style1 = computed(() => { return this.styleFor(1) });
+    style2 = computed(() => { return this.styleFor(2) });
+    style3 = computed(() => { return this.styleFor(3) });
+    style4 = computed(() => { return this.styleFor(4) });
+
+    private styleFor(i: number) : IStyle {
+        const panels = this.panellist();
+        const resize = this.resized();
+
+
+        if (panels.length > i) {
+            return { style: panels[i].style, dyn: panels[i].dyn }
+        }
+        return { style: "display: none;", dyn: false }
+    }
+
 
     private element: ElementRef = inject(ElementRef);
     
@@ -185,6 +210,9 @@ export class XrmuiLayout implements AfterViewInit, OnDestroy {
     if (panel.orientation == 'horizontal') {
         panel.moveTo(d.y, this.panellist$()[panel.index + 1]);
     }
+
+    const r = this.resized();
+    this.resized.set(r + 1);
   }
 
   drop(e: any, panel: XrmuiPanel) {
