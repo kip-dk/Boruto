@@ -31,7 +31,7 @@ namespace Boruto.Implementations.Services
                     return null;
                 }
 
-                if (!string.IsNullOrEmpty(re.Name.Trim()))
+                if (re != null && re.Name != null && !string.IsNullOrEmpty(re.Name.Trim()))
                 {
                     return re.Name;
                 }

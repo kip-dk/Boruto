@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2026-03-20 11:15
+## updated: 2026-04-21 17:30
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -397,6 +397,8 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package
 
 ## Changelog
+### 1.0.5.5  Fixed null exception introduced in nameService.NameOf(ref)
+### 1.0.5.4  Allow PostGL Get to use other than primary column of virtual entity
 ### 1.0.5.3  Boruto.Tools.Tool.IsPlugin will return true if the code has been initialized from a plugin context, otherwise false 
 ### 1.0.5.2  EntityReferenceIdEqualFilter, do not return EmptyGuid if that is what it resolves to. Instead return null. It is proberly a query comming from the make UI designer. Records in modern datavere cannot have value empty guid
 ### 1.0.5.1  IsChildOf no longer tries to find parent Operation in ExecuteTransaction. It was unstable on unrelyable, so we have given up on support of it
