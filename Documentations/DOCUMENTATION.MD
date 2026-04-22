@@ -344,7 +344,7 @@ The example is provided only to show how to create an build a service and inject
 
 
 ### Deployment
-The boruto nuget package has all the code needed to deploy the code into Dataverse. It reflects on the code, and identify the patterns describe, and that way it knows witch steps should be registred on witch entities, and what target, pre, post images is needed. Microsoft has provided a manual tool
+The boruto nuget package has all the code needed to deploy the code into Dataverse. It reflects on the code, and identify the patterns described, and that way it knows witch steps should be registred on witch entities, and what target, pre, post images is needed. Microsoft has provided a manual tool
 for this operation (The pluginregistration tool), but you do not need this tool for deployment. Instead you can write a C# console app with a few lines of codes, and let that APP perform the deployment:
 
 * Create a console application. C#, ex .NET 4.8.
@@ -368,7 +368,7 @@ deploy.json
 }
 ```
 
-* Finaly add this snipper of code to your new C# main command method line tool
+* Finally add this snipper of code to your new C# main command method line tool
 
 ```C#
 var configString = System.Configuration.ConfigurationManager.ConnectionStrings["XRM"].ConnectionString;
@@ -404,7 +404,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 ### 1.0.5.1  IsChildOf no longer tries to find parent Operation in ExecuteTransaction. It was unstable on unrelyable, so we have given up on support of it
 ### 1.0.4.10 Made IsChildOf context extension more robust
 ### 1.0.4.8  IOrganizationService extension to allow boruto services to be created outside the boruto dependency injection pipeline
-### 1.0.4.7  DateTimeExtension EndOfDay andEndOfYear, removed 999 milliseconds, to avoid dataverse rounding up
+### 1.0.4.7  DateTimeExtension EndOfDay and EndOfYear, removed 999 milliseconds, to avoid dataverse rounding up
 ### 1.0.4.6  added protected virtual bool TraceCalls => false;, let your plugin return true from this if you need detail on call stack on ignored call reasons
 ### 1.0.4.5
 ### 1.0.4.4  Added datetime extension helpers
