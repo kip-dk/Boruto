@@ -13,6 +13,6 @@
         [ngClass]="{ horizontal: orientation() == 'horizontal', vertical: orientation() == 'vertical'}"></div>
 }
     <div [style]="style1().style" [ngClass]="{ dynamics: style1().dyn, horizontal: orientation() == 'horizontal', vertical: orientation() == 'vertical'}"><ng-content select="[c2]"></ng-content></div>
-    <div [style]="style2().style" [ngClass]="{ dynamics: style2().dyn}"><ng-content select="[c3]"></ng-content></div>
-    <div [style]="style3().style" [ngClass]="{ dynamics: style3().dyn}"><ng-content select="[c4]"></ng-content></div>
-    <div [style]="style4().style" [ngClass]="{ dynamics: style4().dyn}"><ng-content select="[c5]"></ng-content></div>
+    <div [style]="style2().style" [ngClass]="{ dynamics: style2().dyn, horizontal: orientation() == 'horizontal', vertical: orientation() == 'vertical'}"><ng-content select="[c3]"></ng-content></div>
+    <div [style]="style3().style" [ngClass]="{ dynamics: style3().dyn, horizontal: orientation() == 'horizontal', vertical: orientation() == 'vertical'}"><ng-content select="[c4]"></ng-content></div>
+    <div [style]="style4().style" [ngClass]="{ dynamics: style4().dyn, horizontal: orientation() == 'horizontal', vertical: orientation() == 'vertical'}"><ng-content select="[c5]"></ng-content></div>

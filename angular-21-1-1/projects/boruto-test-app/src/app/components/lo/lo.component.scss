@@ -1,0 +1,33 @@
+:host {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: block;
+}
+
+:host div.c {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: block;
+}
+
+:host div.c1 {
+    background-color: green;
+}
+
+:host div.c2 {
+    background-color: yellow;
+}
+
+:host div.c3 {
+    background-color: orange;
+}
+
+:host div.c4 {
+    background-color: red;
+}
