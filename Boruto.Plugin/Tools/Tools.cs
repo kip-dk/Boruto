@@ -3,11 +3,13 @@ using Microsoft.Xrm.Sdk.Metadata;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 
@@ -185,6 +187,48 @@ namespace Boruto.Tools
                         }
                         file.WriteLine("}");
                     }
+                }
+            }
+        }
+
+        public static void FixActionMessageResponseSetters(string proxyMessagesPath)
+        {
+            if (!Directory.Exists(proxyMessagesPath))
+            {
+                Console.WriteLine($"ProxyMessages folder not found: {proxyMessagesPath}");
+                return;
+            }
+
+            var files = Directory.GetFiles(proxyMessagesPath, "*.cs", SearchOption.AllDirectories);
+
+            foreach (var file in files)
+            {
+                var original = File.ReadAllText(file);
+
+                // Only touch response classes
+                // Replace:
+                // this.Parameters["X"] = value;
+                //
+                // with:
+                // this.Results["X"] = value;
+                //
+                // BUT ONLY inside classes inheriting OrganizationResponse
+
+                var updated = Regex.Replace(
+                    original,
+                    pattern:
+                        @"(class\s+\w+Response\s*:\s*Microsoft\.Xrm\.Sdk\.OrganizationResponse[\s\S]*?)this\.Parameters\[",
+                    match =>
+                    {
+                        var value = match.Value;
+                        return value.Replace("this.Parameters[", "this.Results[");
+                    },
+                    RegexOptions.Multiline);
+
+                if (original != updated)
+                {
+                    File.WriteAllText(file, updated);
+                    Console.WriteLine($"Fixed: {Path.GetFileName(file)}");
                 }
             }
         }

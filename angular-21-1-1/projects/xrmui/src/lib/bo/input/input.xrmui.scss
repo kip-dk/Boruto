@@ -1,0 +1,135 @@
+:host {
+    position: relative;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+:host div.autocomplete {
+    position: absolute;
+    z-index: 100;
+    top: 37px;
+    left: 215px;
+    right: 0;
+    background-color: red;
+    min-height: 40px;
+    background-color: white;
+    color: black;
+    border: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: lightgray;
+    border-radius: 4px;
+    padding: 5px 5px 5px 5px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :host div.autocomplete {
+        background-color: black;
+        color: white;
+    }
+}
+
+:host div.autocomplete div.element {
+    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+    display: flex;
+    border: solid; 
+    border-width: 0 0 1px 0;
+    border-color: lightgray;
+    font-size: 14px;
+    color: gray;
+}
+
+:host div.autocomplete div.element.current {
+    border-color: #0f6cbd;
+    color: black;
+}
+
+:host div.autocomplete div.element div.item {
+    flex-grow: 1;
+}
+
+:host div.label {
+    width: 180px;
+    min-width: 180px;
+    max-height: 180px;
+    height: 32px;
+    line-height: 32px;
+}
+
+:host div.label.short {
+    width: 90px;
+    min-width: 90px;
+}
+
+:host div.locked {
+    width: 30px;
+    min-width: 30px;
+    max-width: 30px;
+    height: 32px;
+    line-height: 32px;
+    text-align: right;
+    padding-right: 3px;
+}
+:host div.input {
+    flex-grow: 1;
+    height: 32px;
+    line-height: 32px;
+    background-color:   #e6e8e8;
+    border: none;
+    border-radius: 3px;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border: solid;
+    border-width: 0 0 3px 0;
+    border-color: transparent;
+}
+
+:host div.input.focus {
+    border-color: #0f6cbd;
+}
+
+:host div.input.error,
+:host div.input.focus.error {
+    border-color: red;
+    color: red;
+}
+
+:host input {
+    background-color: transparent;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border: none;
+    height: 29px;
+    padding-left: 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+    :host input {
+        color: black;
+    }
+
+    :host input:disabled {
+        color: #5f615f;
+    }
+}
+
+
+:host input.number {
+    text-align: right;
+    padding-right: 15px;
+    padding-left: 0;
+}
+
+:host *:focus {
+    outline: none;
+}
+
+:host mat-icon {
+    color: lightgray;
+    font-size: 12px;
+    position: relative;
+    top: 5px;
+    width: 12px;
+}

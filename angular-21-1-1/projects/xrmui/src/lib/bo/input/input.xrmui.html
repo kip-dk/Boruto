@@ -1,0 +1,50 @@
+@if (showitems) {
+    <div class="autocomplete">
+        @if (items?.length == 0) {
+        <div class="element"><div class="item">Ingen fundet</div>div></div>
+        }
+        @for (elm of items; track elm) {
+        <div class="element" [ngClass]="{ current: current == elm }">
+            <div class="item">{{ elm.name }}</div>
+        </div>
+        }
+    </div>
+}
+@if (label != '') {
+<div class="label" [ngClass]="{ short: shortLabel }" (click)="focusMe($event)">{{ label }}</div>
+}
+@if (label != '' || type == 'number') {
+<div class="locked">
+    @if (required) {
+    <div style="display: inline-block;height: 10px;color: red; position:  relative; top: -8px; right: 0">*</div>
+    }
+    @if (disabled && showlock) {
+    <mat-icon>lock</mat-icon>
+    }
+</div>
+}
+<div class="input" [ngClass]="{ focus: hasfocus, error: error }" (click)="focusMe($event)">
+    <input 
+        #inputfield 
+        [ngClass]="type"
+        [type]="type != 'password'? 'text' : 'password'"
+        [disabled]="disabled" 
+        [placeholder]="placeholder" 
+        [(ngModel)]="shadowValue" 
+        (ngModelChange)="onValueChanged()" 
+        (focus)="onFocus()" 
+        (blur)="onBlur()"
+        (keydown.arrowdown)="ondown($event)"
+        (keydown.arrowup)="onup($event)"
+        (keydown.enter)="onenter($event)"
+        (keydown.esc)="onesc($event)"
+        (keydown)="onkeydown($event)"/>
+</div>
+
+@if (label == '' && type != 'number') {
+    <div class="locked" style="text-align: left;">
+        @if (disabled && showlock) {
+            <mat-icon>lock</mat-icon>
+        }
+    </div>
+}

@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { BorutoXrmUIModule } from 'boruto-xrmui';
 
 @Component({
@@ -9,4 +9,17 @@ import { BorutoXrmUIModule } from 'boruto-xrmui';
   imports:[BorutoXrmUIModule]
 })
 export class LoComponent {
+
+  myInput = signal<string>('');;
+
+  constructor() {
+    effect(() => {
+      const mi = this.myInput();
+      console.log(mi);
+    });
+  }
+
+  forcevalue() {
+    this.myInput.set("something totally different");
+  }
 }

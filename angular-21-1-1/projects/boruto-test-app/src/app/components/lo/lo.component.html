@@ -1,6 +1,11 @@
 <xrmui-layout panels="25%,25%,25%,?" orientation="vertical">
     <xrmui-layout panels="33%,33%,?" orientation="horizontal" c1>
-        <div class="c c1" c1>C1 container</div>
+        <div class="c" c1>
+            <xrmui-input label="Some label" [(value)]="myInput"></xrmui-input>
+            <br />
+            <br />
+            <button (click)="forcevalue()">Force new value</button>
+        </div>
         <div class="c c2" c2>C2 container</div>
         <div class="c c3" c3>C3 container</div>
     </xrmui-layout>
