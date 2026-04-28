@@ -191,6 +191,7 @@ namespace Boruto.Tools
             }
         }
 
+
         public static void FixActionMessageResponseSetters(string proxyMessagesPath)
         {
             if (!Directory.Exists(proxyMessagesPath))
@@ -203,31 +204,46 @@ namespace Boruto.Tools
 
             foreach (var file in files)
             {
-                var original = File.ReadAllText(file);
+                var lines = File.ReadAllLines(file);
 
-                // Only touch response classes
-                // Replace:
-                // this.Parameters["X"] = value;
-                //
-                // with:
-                // this.Results["X"] = value;
-                //
-                // BUT ONLY inside classes inheriting OrganizationResponse
+                var insideResponseClass = false;
+                var braceDepth = 0;
+                var updated = false;
 
-                var updated = Regex.Replace(
-                    original,
-                    pattern:
-                        @"(class\s+\w+Response\s*:\s*Microsoft\.Xrm\.Sdk\.OrganizationResponse[\s\S]*?)this\.Parameters\[",
-                    match =>
-                    {
-                        var value = match.Value;
-                        return value.Replace("this.Parameters[", "this.Results[");
-                    },
-                    RegexOptions.Multiline);
-
-                if (original != updated)
+                for (int i = 0; i < lines.Length; i++)
                 {
-                    File.WriteAllText(file, updated);
+                    var line = lines[i];
+
+                    // detect class start
+                    if (line.Contains("class") &&
+                        line.Contains("OrganizationResponse"))
+                    {
+                        insideResponseClass = true;
+                        braceDepth = 0;
+                        continue;
+                    }
+
+                    if (insideResponseClass)
+                    {
+                        if (line.Contains("{")) braceDepth++;
+                        if (line.Contains("}")) braceDepth--;
+
+                        if (line.Contains("this.Parameters["))
+                        {
+                            lines[i] = line.Replace("this.Parameters[", "this.Results[");
+                            updated = true;
+                        }
+
+                        if (braceDepth <= 0)
+                        {
+                            insideResponseClass = false;
+                        }
+                    }
+                }
+
+                if (updated)
+                {
+                    File.WriteAllLines(file, lines, Encoding.UTF8);
                     Console.WriteLine($"Fixed: {Path.GetFileName(file)}");
                 }
             }
