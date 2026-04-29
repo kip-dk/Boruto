@@ -14,6 +14,19 @@ ko-alert.warning {
     border: none;
 }
 
+ko-alert.success {
+  background-color: #247D2D;
+  color: white;
+  border: none;
+}
+
+ko-alert.danger {
+  background-color: #D12806;
+  color: white;
+  border: none;
+}
+
+
 ko-alert:before {
     content: '';
     display: inline-block;
@@ -26,8 +39,11 @@ ko-alert > div {
   vertical-align: middle;
   margin-left: 15px;
   margin-right: 15px;
-  font-size: large;
   width: calc(100% - 30px);
+}
+
+ko-alert.large > div {
+  font-size: large;
 }
 
 ko-alert > div.left {
