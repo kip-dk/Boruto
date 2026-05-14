@@ -21,7 +21,7 @@ export class FetchEntity {
   linkedentities?: Link[];
   parent?: FetchEntity;
 
-  link(prototype: Entity, property: string, condition: Condition, attributes?: string[]): FetchEntity {
+  link(prototype: Entity, property: string, condition?: Condition, attributes?: string[]): FetchEntity {
     var res = new FetchEntity(prototype._logicalName, prototype, attributes, condition);
     res.entityPrototype = prototype;
     res.name = prototype._logicalName;
