@@ -58,6 +58,7 @@ export class Entity {
         if (this.ignoreColumn(prop)) continue;
   
         let v = this[prop];
+        
         if (typeof v !== 'undefined' && v != null) {
           if (Array.isArray(v)) {
             continue;
@@ -67,7 +68,7 @@ export class Entity {
           }
         }
   
-        if (this.hasOwnProperty(prop)) {
+        if (v !== undefined && this.hasOwnProperty(prop)) {
           if (webapi && this[prop] instanceof EntityReference) {
             result.push("_" + prop + "_value");
           } else {
