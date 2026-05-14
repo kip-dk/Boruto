@@ -1,0 +1,31 @@
+@if (menu == undefined || menu.length == 0 || disabled) {
+<button [disabled]="disabled" (click)="onClick($event)" [ngClass]="{ selected: selected }">
+    @if (working) {
+        <div class="spin">
+            <xrmui-spinner [diameter]="20"></xrmui-spinner>
+        </div>
+        }
+        @if (icon != ''){<mat-icon fontSet="material-symbols-outlined">{{ icon }}</mat-icon>}
+        @if (label != ''){ {{ label }} }
+    </button>
+}
+@if (menu != null && menu.length > 0 && !disabled) {
+    <button [matMenuTriggerFor]="menupopup" [ngClass]="{ selected: isCurrent || selected }" (click)="ignore($event)">
+        @if (!isCurrent) {
+            @if (icon != '') {<mat-icon fontSet="material-symbols-outlined">{{ icon }}</mat-icon>}
+            @if (label != '') { {{ label }} }
+        }
+        @if (current != undefined && isCurrent) {
+            @if (current.icon != undefined && current.icon != '') {<mat-icon fontSet="material-symbols-outlined">{{ current.icon }}</mat-icon>}
+            @if (current.label != undefined && current.label != '') { {{ current.label }} }
+        }
+    </button>
+    <mat-menu #menupopup>
+        @for (m of menu; track m.label) {
+        <button mat-menu-item (click)="onClick($event, m)">
+            @if (m.icon != undefined && m.icon != '') {<mat-icon fontSet="material-symbols-outlined">{{ m.icon }}</mat-icon>}
+            @if (m.label != undefined && m.label != '') { {{ m.label }} }
+        </button>
+        }
+    </mat-menu>
+}
