@@ -38,7 +38,7 @@ export class FetchEntity {
     return res;
   }
 
-  innerjoin(prototype: Entity, alias: string, from: string, property: string, condition: Condition, attributes?: string[]): FetchEntity {
+  innerjoin(prototype: Entity, alias: string, from: string, property: string, condition?: Condition, attributes?: string[]): FetchEntity {
     var res = new FetchEntity(prototype._logicalName, prototype, attributes, condition);
     res.parent = this;
 
@@ -51,7 +51,7 @@ export class FetchEntity {
     return res;
   }
 
-  outerjoin(prototype: Entity, alias: string, from: string, property: string, condition: Condition, attributes?: string[]): FetchEntity {
+  outerjoin(prototype: Entity, alias: string, from: string, property: string, condition?: Condition, attributes?: string[]): FetchEntity {
     var res = new FetchEntity(prototype._logicalName, prototype, attributes, condition);
     res.parent = this;
 
