@@ -1,6 +1,6 @@
 
 export interface IMenu {
-    id: number;
+    id: string | number;
     label?: string;
     icon?: string;
     disabled?: boolean;
