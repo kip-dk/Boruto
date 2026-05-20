@@ -587,7 +587,7 @@ namespace Boruto
 
                         if (result != null)
                         {
-                            if (this.Stage == 40 && this.IsAsync == false && result is Microsoft.Xrm.Sdk.OrganizationResponse re && re.Results != null)
+                            if ((this.Stage == 30 || this.Stage == 40) && this.IsAsync == false && result is Microsoft.Xrm.Sdk.OrganizationResponse re && re.Results != null)
                             {
                                 foreach (var p in re.Results)
                                 {
