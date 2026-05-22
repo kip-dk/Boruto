@@ -193,6 +193,52 @@ namespace Boruto.Extensions.Entities
             return result;
         }
 
+        public static T CleanupVirtualEntity<T>(this T entity) where T: Entity
+        {
+            var refids = new Dictionary<Guid, List<string>>();
+            bool used(Guid id, string logicalname)
+            {
+                if (refids.TryGetValue(id, out var list))
+                {
+                    var result = list[0] != logicalname;
+
+                    if (result)
+                    {
+                        Boruto.Trace.Warning($"ID: { id.ToString() } has same value for both{ logicalname } and {list[0] }. Only value for {list[0]} will get to the client");
+                    }
+                    return result;
+                }
+
+                var next = new List<string>
+                {
+                    logicalname
+                };
+                refids.Add(id, next);
+                return false;
+            }
+
+            foreach (var attr in entity.Attributes.Keys.ToArray())
+            {
+                var val = entity[attr];
+                if (val == null)
+                {
+                    entity.Attributes.Remove(attr);
+                    continue;
+                }
+
+                if (val is Microsoft.Xrm.Sdk.EntityReference re)
+                {
+                    if (used(re.Id, re.LogicalName))
+                    {
+                        entity.Attributes.Remove(attr);
+                        continue;
+                    }
+                }
+            }
+
+            return entity;
+        }
+
         public static Dictionary<string, string>[] ToDictionaryList(this Microsoft.Xrm.Sdk.EntityCollection entityCollection)
         {
             var result = new List<Dictionary<string, string>>();

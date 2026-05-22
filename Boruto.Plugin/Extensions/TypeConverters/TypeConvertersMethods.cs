@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web.UI.WebControls;
 
 
@@ -24,6 +25,42 @@ namespace Boruto.Extensions.TypeConverters
             result += "-" + others != null && others.Length == 4 ? others[3].ToString().PadLeft(12, '0') : "000000000000";
 
             return new Guid(result);
+        }
+
+        /// <summary>
+        /// This method is usefull for generate dataverse safe ids, ex. for datamigration, where a key in old system is
+        /// mapped to a guid in the dataverse system.
+        /// To ensure eniqueness cross entities .. .(hence there no risk to entities of different type get same value guid)
+        /// </summary>
+        /// <param name="v1">The first</param>
+        /// <param name="objecttypecode">dataverse object type code, must be different from 0</param>
+        /// <param name="others">up til 3 other option ints  min value 0, max value 9999</param>
+        /// <returns>A guid</returns>
+        /// <exception cref="ArgumentException"></exception>
+        [System.Diagnostics.DebuggerNonUserCode()]
+        public static Guid ToDataverseGuid(this int v1, int objecttypecode, params int[] others)
+        {
+            if (objecttypecode == 0)
+            {
+                throw new ArgumentException($"Object type code cannot be 0 for boruto generated unique dataver guids");
+            }
+
+            if (others != null && others.Length > 3)
+            {
+                throw new ArgumentException("Only Guid position 1,2,3,4 can be assigned, position 5 is reserved for dataverse entity type");
+            }
+
+            var naa = new List<int>();
+            if (others != null && others.Length > 0)
+            {
+                naa.AddRange(others);
+                while (naa.Count < 3)
+                {
+                    naa.Add(0);
+                }
+                naa.Add(objecttypecode);
+            }
+            return v1.ToGuid(naa.ToArray());
         }
 
         [System.Diagnostics.DebuggerNonUserCode()]
