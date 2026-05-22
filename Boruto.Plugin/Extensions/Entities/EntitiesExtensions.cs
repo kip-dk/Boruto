@@ -195,25 +195,21 @@ namespace Boruto.Extensions.Entities
 
         public static T CleanupVirtualEntity<T>(this T entity) where T: Entity
         {
-            var refids = new Dictionary<Guid, List<string>>();
+            var refids = new Dictionary<Guid, string>();
             bool used(Guid id, string logicalname)
             {
-                if (refids.TryGetValue(id, out var list))
+                if (refids.TryGetValue(id, out var first))
                 {
-                    var result = list[0] != logicalname;
+                    var result = first != logicalname;
 
                     if (result)
                     {
-                        Boruto.Trace.Warning($"ID: { id.ToString() } has same value for both{ logicalname } and {list[0] }. Only value for {list[0]} will get to the client");
+                        Boruto.Trace.Warning($"ID: { id.ToString() } has same value for both { logicalname } and {first }. Only value for {first} will get to the client");
                     }
                     return result;
                 }
 
-                var next = new List<string>
-                {
-                    logicalname
-                };
-                refids.Add(id, next);
+                refids.Add(id, logicalname);
                 return false;
             }
 

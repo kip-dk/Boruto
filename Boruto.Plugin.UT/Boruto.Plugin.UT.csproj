@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="Consts.cs" />
     <Compile Include="Extensions\DateTimes\DateTimeTests.cs" />
+    <Compile Include="Extensions\Entitiesextensions\EntitiesExtensionTests.cs" />
     <Compile Include="Extensions\Generics\GenericsMethodsTest.cs" />
     <Compile Include="Extensions\Reflection\ReflectionMethodsTest.cs" />
     <Compile Include="Extensions\TypeConverters\TypeConvertersTest.cs" />
