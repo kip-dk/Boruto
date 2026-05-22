@@ -235,7 +235,6 @@ namespace Boruto.Extensions.Entities
                     }
                 }
             }
-
             return entity;
         }
 

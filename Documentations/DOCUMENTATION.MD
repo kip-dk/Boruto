@@ -444,6 +444,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package
 
 ## Changelog
+### 1.0.5.10 Extension to generate dataverse safe guids for datamigration. Save guid id on different entities can cause problems if reffered on the same virtual entity
 ### 1.0.5.9  Document how to create Custom API implementations
 ### 1.0.5.8  Custom API plugins listening for method On()  (Stage=30) did not transform result from plugin into organizationresponse
 ### 1.0.5.7  same as 6, but now all setters of a response should be fixed
