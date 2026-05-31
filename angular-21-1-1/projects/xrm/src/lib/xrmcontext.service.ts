@@ -670,9 +670,11 @@ export class XrmContextService {
     let _instance = instance as IndexedObject;
 
     for (let prop in prototype) {
-      if (prototype.hasOwnProperty(prop) && typeof _prototype[prop] != 'function' && _prototype[prop] != undefined) {
+      if (prototype.hasOwnProperty(prop) && typeof _prototype[prop] != 'function' && _prototype[prop] !== undefined) {
         if (prototype.ignoreColumn(prop)) continue;
         let prevValue = cm[prop];
+
+        
         let newValue = _instance[prop];
 
         if ((prevValue === 'undefined' || prevValue === null) && (newValue === 'undefined' || newValue === null)) continue;
@@ -986,7 +988,7 @@ export class XrmContextService {
     let _instance = instance as IndexedObject;
 
     for (let prop in prototype) {
-      if (prototype.hasOwnProperty(prop) && typeof _prototype[prop] !== 'function'  && _prototype[prop] != undefined) {
+      if (prototype.hasOwnProperty(prop) && typeof _prototype[prop] !== 'function') {
         if (prototype.ignoreColumn(prop)) continue;
 
         let value = _instance[prop];
@@ -1282,7 +1284,7 @@ export class XrmContextService {
     for (let prop in prototype) {
       if (prototype.ignoreColumn(prop)) continue;
 
-      if (prototype.hasOwnProperty(prop) && typeof prototype[prop] != 'function' && prototype[prop] != undefined) {
+      if (prototype.hasOwnProperty(prop) && typeof prototype[prop] != 'function') {
         let done = false;
         if (prototype[prop] instanceof EntityReference) {
           let ref = new EntityReference();
@@ -1419,7 +1421,7 @@ export class XrmContextService {
 
     for (let prop in prototype) {
       if (prototype.ignoreColumn(prop)) continue;
-      if (prototype.hasOwnProperty(prop) && typeof prototype[prop] != 'function' && prototype[prop] != undefined) {
+      if (prototype.hasOwnProperty(prop) && typeof prototype[prop] != 'function') {
         let v = instance[prop];
         if (v == null) continue;
 
