@@ -25,7 +25,7 @@ const isNum = (num:any) => num != null && typeof num !== 'object' && (!Number.is
 
 @Injectable({providedIn: 'root'})
 export class XrmContextService {
-  private context: any = {};
+  private context: Map<string, Entity> = new Map<string, Entity>();
   private changemanager: any = {};
   private tick: number = new Date().valueOf();
   private includeOriginalPayload$: boolean = false;
@@ -279,7 +279,7 @@ export class XrmContextService {
             }
           }
 
-          this.context[key] = instance;
+          this.context.set(key, instance);
           this.updateCM(prototype, instance);
 
           return instance;
@@ -379,7 +379,7 @@ export class XrmContextService {
     return this.xrmService.delete(t._pluralName, t.id).pipe(map(r => {
       let key = t._pluralName + ":" + t.id;
       if (me.context.hasOwnProperty(key)) {
-        delete me.context[key];
+        me.context.delete(key);
       }
       return null;
     }));
@@ -536,7 +536,7 @@ export class XrmContextService {
 
           if (r.type == 'delete') {
             let key = r.instance._pluralName + ':' + r.instance.id;
-            delete this.context[key];
+            this.context.delete(key);
             delete this.changemanager[key];
           }
         });
@@ -554,7 +554,7 @@ export class XrmContextService {
               let id = l.split('OData-EntityId:')[1].split('/' + opr.prototype._pluralName + '(')[1].replace(')', '').trim();
               opr.instance.id = id;
               let key = opr.prototype._pluralName + ':' + opr.instance.id;
-              this.context[key] = opr.instance;
+              this.context.set(key, opr.instance);
               opr.instance._updateable = true;
               this.updateCM(opr.prototype, opr.instance);
             }
@@ -1246,29 +1246,30 @@ export class XrmContextService {
     instance["_pluralName"] = prototype._pluralName;
     instance["_logicalName"] = prototype._logicalName;
     instance["_keyName"] = prototype._keyName;
-    this.context[key] = instance;
+    this.context.set(key, instance);
   }
 
   private resolve<T extends Entity>(prototype: T, instance: any, updateable: boolean, alias?: string[]): T {
     let me = this;
 
     let _prototype = prototype as IndexedObject;
-    let _instance = instance as IndexedObject;
 
     this.xrmService.log(instance);
 
     let key = prototype._pluralName + ':' + instance[prototype._keyName];
     let result = {} as any;
 
-    if (this.context.hasOwnProperty(key)) {
-      result = this.context[key];
+    if (this.context.has(key)) {
+      result = this.context.get(key);
+      console.log(key + ' taken from cache');
     } else {
-      this.context[key] = result;
+      console.log(key + ' created new instance');
       result["id"] = instance[prototype._keyName];
       result["_pluralName"] = prototype._pluralName;
       result["_logicalName"] = prototype._logicalName;
       result["_keyName"] = prototype._keyName;
       delete result[prototype._keyName];
+      this.context.set(key, result);
     }
 
     if (this.includeOriginalPayload$) {
