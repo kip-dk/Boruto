@@ -1261,9 +1261,7 @@ export class XrmContextService {
 
     if (this.context.has(key)) {
       result = this.context.get(key);
-      console.log(key + ' taken from cache');
     } else {
-      console.log(key + ' created new instance');
       result["id"] = instance[prototype._keyName];
       result["_pluralName"] = prototype._pluralName;
       result["_logicalName"] = prototype._logicalName;
@@ -1284,6 +1282,7 @@ export class XrmContextService {
 
     for (let prop in prototype) {
       if (prototype.ignoreColumn(prop)) continue;
+      if (prototype[prop] === undefined) continue;
 
       if (prototype.hasOwnProperty(prop) && typeof prototype[prop] != 'function') {
         let done = false;
