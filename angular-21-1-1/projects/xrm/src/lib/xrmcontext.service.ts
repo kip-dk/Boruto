@@ -997,7 +997,7 @@ export class XrmContextService {
     for (let prop in prototype) {
       const isfunc = typeof _prototype[prop] === "function" && !isWritableSignal(_prototype[prop]);
 
-      if (prototype.hasOwnProperty(prop) && isfunc) {
+      if (prototype.hasOwnProperty(prop) && !isfunc) {
         if (_prototype[prop] === undefined) continue;
         if (_instance[prop] === undefined) continue;
         if (prototype.ignoreColumn(prop)) continue;
@@ -1312,7 +1312,7 @@ export class XrmContextService {
 
       const isfunc = typeof instance[prop] === "function" && !isWritableSignal(instance[prop]);
 
-      if (prototype.hasOwnProperty(prop) && isfunc) {
+      if (prototype.hasOwnProperty(prop) && !isfunc) {
         let done = false;
         if (prototype[prop] instanceof EntityReference) {
           let ref = new EntityReference();
