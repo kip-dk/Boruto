@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, isSignal, isWritableSignal, signal } from "@angular/core";
 import { XrmService } from "./xrm.service";
 import { XrmContext } from "./models/xrmcontext.interface";
 import { XrmEntityKey } from "./models/xrmentitykey.model";
@@ -776,6 +776,11 @@ export class XrmContextService {
             }
           }
 
+          if (isWritableSignal(newValue)) {
+            // for now we ignore signals in the update
+            continue;
+          }
+
           if (prevValue != newValue) {
             upd[prop.toString()] = newValue;
             countFields++;
@@ -989,6 +994,8 @@ export class XrmContextService {
 
     for (let prop in prototype) {
       if (prototype.hasOwnProperty(prop) && typeof _prototype[prop] !== 'function') {
+        if (_prototype[prop] === undefined) continue;
+        if (_instance[prop] === undefined) continue;
         if (prototype.ignoreColumn(prop)) continue;
 
         let value = _instance[prop];
@@ -1039,6 +1046,11 @@ export class XrmContextService {
               }
             }
             newr[prop.toString()] = value;
+            continue;
+          }
+
+          if (isWritableSignal(value)) {
+            // writable signales need to be impl. in the CM process before being part of the create process
             continue;
           }
 
@@ -1246,7 +1258,14 @@ export class XrmContextService {
     instance["_pluralName"] = prototype._pluralName;
     instance["_logicalName"] = prototype._logicalName;
     instance["_keyName"] = prototype._keyName;
-    this.context.set(key, instance);
+
+    const entity = new (prototype.constructor as new () => T)();
+    entity.id = instance["id"];
+    entity._pluralName = prototype._pluralName;
+    entity._logicalName = prototype._logicalName;
+    entity._keyName = prototype._keyName;
+
+    this.context.set(key, entity);
   }
 
   private resolve<T extends Entity>(prototype: T, instance: any, updateable: boolean, alias?: string[]): T {
@@ -1257,24 +1276,25 @@ export class XrmContextService {
     this.xrmService.log(instance);
 
     let key = prototype._pluralName + ':' + instance[prototype._keyName];
-    let result = {} as any;
+    let result = new (prototype.constructor as new () => T)();
 
     if (this.context.has(key)) {
-      result = this.context.get(key);
+      result = this.context.get(key) as T;
     } else {
-      result["id"] = instance[prototype._keyName];
-      result["_pluralName"] = prototype._pluralName;
-      result["_logicalName"] = prototype._logicalName;
-      result["_keyName"] = prototype._keyName;
-      delete result[prototype._keyName];
+      result.id = instance[prototype._keyName];
+      result._pluralName = prototype._pluralName;
+      result._logicalName = prototype._logicalName;
+      result._keyName = prototype._keyName;
       this.context.set(key, result);
     }
 
+    const _result = result as any;
+
     if (this.includeOriginalPayload$) {
-      result["_original$"] = instance;
+      _result["_original$"] = instance;
     } else {
       if (result.hasOwnProperty("_original$")) {
-        delete result["_original$"];
+        delete _result["_original$"];
       }
     }
 
@@ -1291,7 +1311,7 @@ export class XrmContextService {
           let id = instance["_" + prop + "_value"] as string;
           if (id != null && id != 'undefined') {
             ref.id = id.toLowerCase();
-            delete result["_" + prop + "_value"];
+            delete _result["_" + prop + "_value"];
 
             ref.logicalname = instance["_" + prop + "_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
             delete instance["_" + prop + "_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
@@ -1302,7 +1322,7 @@ export class XrmContextService {
             ref.associatednavigationproperty = instance["_" + prop + "_value@Microsoft.Dynamics.CRM.associatednavigationproperty"];
             delete instance["_" + prop + "_value@Microsoft.Dynamics.CRM.associatednavigationproperty"];
           }
-          result[prop] = ref;
+          _result[prop] = ref;
           done = true;
         }
 
@@ -1310,18 +1330,23 @@ export class XrmContextService {
           let opt = new OptionSetValue();
           opt.value = instance[prop];
           opt.name = instance[prop + '@OData.Community.Display.V1.FormattedValue'];
-          result[prop] = opt;
+          _result[prop] = opt;
           done = true;
         }
 
         if (!done && prototype[prop] instanceof Date) {
           let v = instance[prop];
           if (v != null && v != '') {
-            result[prop] = new Date(Date.parse(v));
+            _result[prop] = new Date(Date.parse(v));
           } else {
-            result[prop] = null;
+            _result[prop] = null;
           }
 
+          done = true;
+        }
+
+        if (!done &&  isWritableSignal(prototype[prop])) {
+          _result[prop]["set"](instance[prop] ?? null);
           done = true;
         }
 
@@ -1331,13 +1356,6 @@ export class XrmContextService {
         }
       }
     }
-
-    var names = Object.getOwnPropertyNames(Object.getPrototypeOf(prototype));
-    names.forEach(r => {
-      if (r != 'constructor' && typeof _prototype[r] === 'function') {
-        result[r] = _prototype[r];
-      }
-    });
 
     let eps = this.getExpandProperties(prototype);
 
@@ -1352,7 +1370,7 @@ export class XrmContextService {
               _v.forEach(_r => {
                 _tmp.push(me.resolve(ep.entity, _r, false, alias));
               });
-              result[ep.name] = _tmp;
+              _result[ep.name] = _tmp;
               var _xtemp = _tmp as IndexedObject;
               if (ep.value instanceof Entities) {
                 _xtemp["add"] = ep.value["add"];
@@ -1368,10 +1386,10 @@ export class XrmContextService {
           } else {
             let _v = instance[ep.name];
             if (_v != null) {
-              result[ep.name] = this.resolve(ep.entity, _v, false, alias);
-              result[ep.name]['_keyName'] = ep.entity._keyName;
-              result[ep.name]['_pluralName'] = ep.entity._pluralName;
-              result[ep.name]['_logicalName'] = ep.entity._logicalName;
+              _result[ep.name] = this.resolve(ep.entity, _v, false, alias);
+              _result[ep.name]['_keyName'] = ep.entity._keyName;
+              _result[ep.name]['_pluralName'] = ep.entity._pluralName;
+              _result[ep.name]['_logicalName'] = ep.entity._logicalName;
             }
           }
         }
@@ -1385,20 +1403,20 @@ export class XrmContextService {
             delete result[p];
           }
         }
-        for (var p in instance) {
-          if (p.startsWith(a + '.')) {
-            result[p] = instance[p];
+        for (var r in instance) {
+          if (r.startsWith(a + '.')) {
+            _result[r] = instance[r];
           }
         }
       })
     }
 
-    if (result['onFetch'] !== 'undefined' && result["onFetch"] != null && typeof result["onFetch"] === 'function') {
-      result['onFetch']();
+    if (_result['onFetch'] !== 'undefined' && _result["onFetch"] != null && typeof _result["onFetch"] === 'function') {
+      _result['onFetch']();
     }
 
     if (prototype.hasOwnProperty('access') && !_prototype['access']['lazy']) {
-      if (!result.hasOwnProperty('access') || result.access.resolved == null) {
+      if (!result.hasOwnProperty('access') || _result.access.resolved == null) {
         this.resolveAccess(prototype, result);
       }
     }
