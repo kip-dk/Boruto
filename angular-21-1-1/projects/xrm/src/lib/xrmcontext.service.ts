@@ -1372,6 +1372,7 @@ export class XrmContextService {
             let writable = _result[name] as WritableSignal<any>;
             if (!writable) {
               writable = signal<any>(instance[prop]);
+              _result[name] = writable;
               _result[prop] = writable.asReadonly();
             } else {
               writable.set(instance[prop]);
