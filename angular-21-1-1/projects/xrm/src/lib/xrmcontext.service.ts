@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable, isSignal, isWritableSignal, signal } from "@angular/core";
+import { Injectable, isSignal, isWritableSignal, signal, WritableSignal } from "@angular/core";
 import { XrmService } from "./xrm.service";
 import { XrmContext } from "./models/xrmcontext.interface";
 import { XrmEntityKey } from "./models/xrmentitykey.model";
@@ -667,7 +667,7 @@ export class XrmContextService {
     }
 
     let _prototype = prototype as IndexedObject;
-    let _instance = instance as IndexedObject;
+    let _instance$ = instance as IndexedObject;
 
     for (let prop in prototype) {
       const isfunc = typeof _prototype[prop] === "function" && !isWritableSignal(_prototype[prop]);
@@ -677,12 +677,15 @@ export class XrmContextService {
         let prevValue = cm[prop];
 
         
-        let newValue = _instance[prop];
+        let newValue = _instance$[prop];
+        if (isWritableSignal(newValue)) {
+          newValue = newValue();
+        }
 
         if ((prevValue === 'undefined' || prevValue === null) && (newValue === 'undefined' || newValue === null)) continue;
 
-        if (_instance[prop] instanceof EntityReference) {
-          if (_instance[prop].associatednavigationproperty != null && _instance[prop].associatednavigationproperty != '' && _instance[prop]['pluralName'] != null && _instance[prop]['pluralName'] != '') {
+        if (newValue instanceof EntityReference) {
+          if (newValue.associatednavigationproperty != null && newValue.associatednavigationproperty != '' && newValue['pluralName'] != null && newValue['pluralName'] != '') {
             if (!EntityReference.same(prevValue, newValue)) {
               if (deletedReferenceAsEmptyGuid && newValue != null && (newValue["id"] == null || newValue["id"] == '')) {
                 newValue["id"] = XRMCONTEXTSERVICE_EMPTY_GUID;
@@ -691,10 +694,10 @@ export class XrmContextService {
               if (newValue != null && newValue["id"] != null && newValue["id"] != '') {
                 let x = newValue["id"] as string;
                 x = x.replace('{', '').replace('}', '');
-                upd[_instance[prop]['associatednavigationpropertyname']()] = '/' + _instance[prop]['pluralName'] + '(' + x + ')';
+                upd[newValue['associatednavigationpropertyname']()] = '/' + newValue['pluralName'] + '(' + x + ')';
               } else {
                 // this does not work, navigation properties can only be removed with SDK deleted method
-                upd["_" + _instance[prop]['logicalname'].toLowerCase() + "_value"] = null;
+                upd["_" + newValue['logicalname'].toLowerCase() + "_value"] = null;
               }
               countFields++;
             }
@@ -713,7 +716,7 @@ export class XrmContextService {
               x = x.replace('{', '').replace('}', '');
               upd[_prototype[prop]['associatednavigationpropertyname']()] = '/' + _prototype[prop]['pluralName'] + '(' + x + ')';
             } else {
-              upd["_" + _instance[prop]['logicalname'].toLowerCase() + "_value"] = null;
+              upd["_" + newValue['logicalname'].toLowerCase() + "_value"] = null;
             }
             countFields++;
           }
@@ -805,7 +808,7 @@ export class XrmContextService {
           this.xrmService.log('new-value-update:' + prop);
           this.xrmService.log(newValue);
 
-          upd[prop.toString()] = _instance[prop];
+          upd[prop.toString()] = newValue;
           countFields++;
         }
       }
@@ -992,31 +995,36 @@ export class XrmContextService {
     let newr = new IndexedObject();
 
     let _prototype = prototype as IndexedObject;
-    let _instance = instance as IndexedObject;
+    let _instance$ = instance as IndexedObject;
 
     for (let prop in prototype) {
       const isfunc = typeof _prototype[prop] === "function" && !isWritableSignal(_prototype[prop]);
 
       if (prototype.hasOwnProperty(prop) && !isfunc) {
         if (_prototype[prop] === undefined) continue;
-        if (_instance[prop] === undefined) continue;
+        if (_instance$[prop] === undefined) continue;
         if (prototype.ignoreColumn(prop)) continue;
 
-        let value = _instance[prop];
-        if (value !== 'undefined' && value !== null) {
+        let value = _instance$[prop];
 
-          if (_instance[prop] instanceof EntityReference) {
-            if (_instance[prop].associatednavigationproperty != null && _instance[prop].associatednavigationproperty != '' && _instance[prop]['pluralName'] != null && _instance[prop]['pluralName'] != '') {
-              let ref = _instance[prop] as EntityReference;
+        if (isWritableSignal(value)) {
+          value = value();
+        }
+
+        if (value !== undefined && value !== 'undefined' && value !== null) {
+
+          if (value instanceof EntityReference) {
+            if (value.associatednavigationproperty != null && value.associatednavigationproperty != '' && value['pluralName'] != null && value['pluralName'] != '') {
+              let ref = value as EntityReference;
               if (ref != null && ref.id != null && ref.id != '') {
-                newr[_instance[prop]['associatednavigationpropertyname']()] = '/' + _instance[prop]['pluralName'] + '(' + ref.id.replace('{', '').replace('}', '') + ')';
+                newr[value['associatednavigationpropertyname']()] = '/' + value['pluralName'] + '(' + ref.id.replace('{', '').replace('}', '') + ')';
               }
               continue;
             }
           }
 
           if (_prototype[prop] instanceof EntityReference) {
-            let ref = _instance[prop] as EntityReference;
+            let ref = value as EntityReference;
             if (ref != null && ref.id != null && ref.id != '') {
               newr[_prototype[prop]['associatednavigationpropertyname']()] = '/' + _prototype[prop]['pluralName'] + '(' + ref.id.replace('{', '').replace('}', '') + ')';
             }
@@ -1024,7 +1032,7 @@ export class XrmContextService {
           }
 
           if (_prototype[prop] instanceof OptionSetValue) {
-            let o = _instance[prop] as OptionSetValue;
+            let o = value as OptionSetValue;
             if (o != null && o.value != null) {
               newr[prop.toString()] = o.value;
             }
@@ -1060,7 +1068,7 @@ export class XrmContextService {
             continue;
           }
 
-          newr[prop.toString()] = _instance[prop];
+          newr[prop.toString()] = value;
         }
       }
     }
@@ -1355,6 +1363,20 @@ export class XrmContextService {
 
         if (!done &&  isWritableSignal(prototype[prop])) {
           _result[prop]["set"](instance[prop] ?? null);
+          done = true;
+        }
+
+        if (!done && isSignal(prototype[prop])) {
+          if (!prototype.calculatedProperties?.find(r => prop)) {
+            const name = '__' + prop + '$';
+            let writable = _result[name] as WritableSignal<any>;
+            if (!writable) {
+              writable = signal<any>(instance[prop]);
+              _result[prop] = writable.asReadonly();
+            } else {
+              writable.set(instance[prop]);
+            }
+          }
           done = true;
         }
 

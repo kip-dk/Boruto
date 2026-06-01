@@ -6,12 +6,14 @@ export class Entity {
     _updateable: boolean = false;
     _logicalName: string;
     id: string;
-    constructor(pluralName: string, keyName: string, updateable?: boolean, logicalname?: string) {
+    calculatedProperties?: string[];
+    constructor(pluralName: string, keyName: string, updateable?: boolean, logicalname?: string, calculatedProperties?: string[]) {
       this._pluralName = pluralName;
       this._keyName = keyName;
       this._updateable = updateable ?? false;
       this._logicalName = "";
       this.id = "";
+      this.calculatedProperties = calculatedProperties;
   
       if (logicalname != null && logicalname != '') {
         this._logicalName = logicalname;
@@ -56,6 +58,7 @@ export class Entity {
       for (var prop in this) {
         if (prop == this._keyName) continue;
         if (this.ignoreColumn(prop)) continue;
+        if (this.calculatedProperties?.find(r => prop)) continue;
   
         let v = this[prop];
         
