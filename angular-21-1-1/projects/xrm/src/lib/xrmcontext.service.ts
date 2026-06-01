@@ -670,7 +670,9 @@ export class XrmContextService {
     let _instance = instance as IndexedObject;
 
     for (let prop in prototype) {
-      if (prototype.hasOwnProperty(prop) && typeof _prototype[prop] != 'function' && _prototype[prop] !== undefined) {
+      const isfunc = typeof _prototype[prop] === "function" && !isWritableSignal(_prototype[prop]);
+
+      if (prototype.hasOwnProperty(prop) && !isfunc && _prototype[prop] !== undefined) {
         if (prototype.ignoreColumn(prop)) continue;
         let prevValue = cm[prop];
 
@@ -993,7 +995,9 @@ export class XrmContextService {
     let _instance = instance as IndexedObject;
 
     for (let prop in prototype) {
-      if (prototype.hasOwnProperty(prop) && typeof _prototype[prop] !== 'function') {
+      const isfunc = typeof _prototype[prop] === "function" && !isWritableSignal(_prototype[prop]);
+
+      if (prototype.hasOwnProperty(prop) && isfunc) {
         if (_prototype[prop] === undefined) continue;
         if (_instance[prop] === undefined) continue;
         if (prototype.ignoreColumn(prop)) continue;
@@ -1051,6 +1055,8 @@ export class XrmContextService {
 
           if (isWritableSignal(value)) {
             // writable signales need to be impl. in the CM process before being part of the create process
+            // but impl. is required to know if the property is readonly, because in that case it should not
+            // be pushed to backend ... for now only plain signal are impl.
             continue;
           }
 
@@ -1304,7 +1310,9 @@ export class XrmContextService {
       if (prototype.ignoreColumn(prop)) continue;
       if (prototype[prop] === undefined) continue;
 
-      if (prototype.hasOwnProperty(prop) && typeof prototype[prop] != 'function') {
+      const isfunc = typeof instance[prop] === "function" && !isWritableSignal(instance[prop]);
+
+      if (prototype.hasOwnProperty(prop) && isfunc) {
         let done = false;
         if (prototype[prop] instanceof EntityReference) {
           let ref = new EntityReference();
