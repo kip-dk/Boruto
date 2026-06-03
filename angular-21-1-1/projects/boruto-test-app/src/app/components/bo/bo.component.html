@@ -15,6 +15,10 @@
             &nbsp;
             <xrmui-icon type="fa" [disabled]="true">fa-regular fa-airplay</xrmui-icon>
             så skriver vi da også noget efter iconet
+
+            <div style="max-width: 200px;">
+                <xrmui-input placeholder="Start type to search" [(value)]="search" [autocomplete]="searchService" (onselect)="select($event)"></xrmui-input>
+            </div>
         </xrmui-panel>
     </xrmui-layout>
 </xrmui-layout>

@@ -150,11 +150,12 @@ export class XrmuiInput implements OnChanges {
     e.stopPropagation();
     e.preventDefault();
 
+
     if (this.onEnter.observed)  {
       this.onEnter.emit();
       return;
     }
-    
+
     if (this.showitems == false) {
       this.searchbyname();
       return;
