@@ -25,6 +25,10 @@
     left: 0;
 }
 
+:host div.autocomplete div.element.selectable {
+    cursor: pointer
+}
+
 @media (prefers-color-scheme: dark) {
     :host div.autocomplete {
         background-color: black;

@@ -128,9 +128,11 @@ export class XrmuiInput implements OnChanges {
   }
 
   onBlur() {
+    setTimeout(() => {
     this.hasfocus = false;
     this.showitems = false;
     this.onblurEvent.emit();
+    },100);
   }
 
   ondown(e: Event) {
@@ -203,6 +205,14 @@ export class XrmuiInput implements OnChanges {
         }
       }
     }
+  }
+
+
+  select(e: Event, v: ISelectable) {
+    e.stopImmediatePropagation();
+    e.stopPropagation();
+    this.value = v.name ?? '';
+    this.onselect.emit(v);
   }
 
   private next(e: number) {

@@ -4,7 +4,7 @@
         <div class="element"><div class="item">Ingen fundet</div>div></div>
         }
         @for (elm of items; track elm) {
-        <div class="element" [ngClass]="{ current: current == elm }">
+        <div class="element" [ngClass]="{ current: current == elm, selectable: !elm.disabled }" (click)="select($event, elm)">
             <div class="item">{{ elm.name }}</div>
         </div>
         }
