@@ -169,7 +169,7 @@ export class XrmuiInput {
     }
 
     this.onblurEvent.emit();
-    },100);
+    },200);
   }
 
   ondown(e: Event) {
@@ -240,7 +240,6 @@ export class XrmuiInput {
       }
     }
   }
-
 
   select(e: Event, v: ISelectable) {
     e.stopImmediatePropagation();
