@@ -25,6 +25,10 @@
     left: 0;
 }
 
+:host div.autocomplete.shortLabel {
+    left: 124px;
+}
+
 :host div.autocomplete div.element.selectable {
     cursor: pointer
 }
@@ -128,6 +132,10 @@
     padding-left: 15px;
     width: 100%;
     box-sizing: border-box;
+}
+
+:host input.datepicker {
+     width: calc(100% - 35px);
 }
 
 @media (prefers-color-scheme: dark) {

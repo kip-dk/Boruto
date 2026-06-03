@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { BorutoXrmUIModule, ISearchService, ISelectable } from 'boruto-xrmui';
 
@@ -6,16 +6,19 @@ import { BorutoXrmUIModule, ISearchService, ISelectable } from 'boruto-xrmui';
   selector: 'app-bo',
   templateUrl: './bo.component.html',
   styleUrl: './bo.component.scss',
-  imports:[BorutoXrmUIModule]
+  imports:[BorutoXrmUIModule,DatePipe]
 })
 export class BoComponent {
 
   description = signal<string>('');
 
   search = signal<string>('');
+  dato = signal<Date | null>(null);
+
+
   searchService = new SearchService();
 
-  select(c: ISelectable) {
+  select(c: ISelectable | undefined) {
     this.search.set(c?.name ?? '');
   }
 }

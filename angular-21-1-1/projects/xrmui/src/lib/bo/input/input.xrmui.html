@@ -1,5 +1,5 @@
 @if (showitems()) {
-    <div class="autocomplete" [ngClass]="{ nolabel: (!label || label.length == 0) }">
+    <div class="autocomplete" [ngClass]="{ nolabel: (!label() || label().length == 0), shortLabel: shortLabel() }">
         @if (itemlist().length == 0) {
         <div class="element"><div class="item">Ingen fundet</div>div></div>
         }
@@ -10,27 +10,27 @@
         }
     </div>
 }
-@if (label != '') {
-<div class="label" [ngClass]="{ short: shortLabel }" (click)="focusMe($event)">{{ label }}</div>
+@if (label() != '' && label().length > 0) {
+<div class="label" [ngClass]="{ short: shortLabel() }" (click)="focusMe($event)">{{ label() }}</div>
 }
-@if (label != '' || type == 'number') {
+@if (label() != '' || type() == 'number') {
 <div class="locked">
-    @if (required) {
+    @if (required()) {
     <div style="display: inline-block;height: 10px;color: red; position:  relative; top: -8px; right: 0">*</div>
     }
-    @if (disabled && showlock) {
+    @if (disabled() && showlock()) {
     <mat-icon>lock</mat-icon>
     }
 </div>
 }
-<div class="input" [ngClass]="{ focus: hasfocus(), error: error, textarea: numberoflines() > 1 }" (click)="focusMe($event)">
-    @if (numberoflines() == 1) {
+<div class="input" [ngClass]="{ focus: hasfocus(), error: error(), textarea: numberoflines() > 1 }" (click)="focusMe($event)">
+    @if (numberoflines() == 1 && validate() != 'date') {
     <input 
         #inputfield 
-        [ngClass]="type"
-        [type]="type != 'password'? 'text' : 'password'"
-        [disabled]="disabled" 
-        [placeholder]="placeholder" 
+        [ngClass]="type()"
+        [type]="type() != 'password'? 'text' : 'password'"
+        [disabled]="disabled()" 
+        [placeholder]="placeholder()" 
         [(ngModel)]="shadowValue" 
         (ngModelChange)="onValueChanged()" 
         (focus)="onFocus()" 
@@ -42,13 +42,28 @@
         (keydown)="onkeydown($event)"
         [maxlength]="maxlength()"/>
     }
+    @if (numberoflines() == 1 && validate() == 'date') {
+        <input
+        class="datepicker"
+         [matDatepicker]="picker"
+         [value]="shadowDate"
+         (dateChange)="pickDate($event)"
+        (focus)="onFocus()"
+        (blur)="onBlur()"
+        #datefield/>
+        <mat-icon 
+        class="calendar-icon" 
+        (click)="picker.open()" 
+        style="font-size: 25px; width: 25px; height: 25px; color: darkgray">calendar_month</mat-icon>
+        <mat-datepicker #picker></mat-datepicker>
+    }
     @if (numberoflines() > 1) {
         <textarea
             #textareafield
             [maxlength]="maxlength()"
             [rows]="numberoflines()"
-            [disabled]="disabled" 
-            [placeholder]="placeholder" 
+            [disabled]="disabled()" 
+            [placeholder]="placeholder()" 
             [(ngModel)]="shadowValue" 
             (ngModelChange)="onValueChanged()" 
             (focus)="onFocus()" 
@@ -61,9 +76,9 @@
     }
 </div>
 
-@if (label == '' && type != 'number') {
+@if (label() == '' && type() != 'number') {
     <div class="locked" style="text-align: left;">
-        @if (disabled && showlock) {
+        @if (disabled() && showlock()) {
             <mat-icon>lock</mat-icon>
         }
     </div>

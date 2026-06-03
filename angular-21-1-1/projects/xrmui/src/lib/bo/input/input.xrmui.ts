@@ -1,10 +1,11 @@
 import { NgClass } from '@angular/common';
-import { Component, ElementRef, EventEmitter, input, Input, OnChanges, Output, signal, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, effect, ElementRef, EventEmitter, input, Input, model, OnChanges, output, Output, signal, SimpleChanges, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { ISelectable } from '../api/iselectable.interface';
 import { ISearchService } from '../api/isearchservice.interface';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/datepicker';
 
 export const NAVIGATIONKEYS = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape','Tab','Enter','Backspace','Delete','End','Home','Shift','CapsLock','Insert','PageUp','PageDown','PageDown','PageDown'];
 export const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
@@ -15,33 +16,33 @@ export const CTRL_KEYS = ['c','C','v','V','x','X'];
     selector: 'xrmui-input',
     templateUrl: './input.xrmui.html',
     styleUrl: './input.xrmui.scss',
-    imports: [FormsModule, NgClass, MatIcon,TextFieldModule]
+    imports: [FormsModule, NgClass, MatIcon,TextFieldModule,MatDatepickerModule]
 })
-export class XrmuiInput implements OnChanges {
+export class XrmuiInput {
     @ViewChild('inputfield') searchElement?: ElementRef;
     @ViewChild('textareafield') textareaElement?: ElementRef;
-    @Input('label') label: string = '';
-    @Input('short-label') shortLabel: boolean = false;
-    @Input('placeholder') placeholder: string = '';
-    @Input('value') value: string | number | null = null;
-    @Output('valueChange') valueChange: EventEmitter<string | number | null> = new EventEmitter<string | number |null>();
-    @Input('disabled') disabled: boolean = false;
-    @Input('showlock') showlock: boolean = true;
-    @Input('required') required: boolean = false;
-    @Input('type') type: 'text' | 'number' | 'password' = 'text';
-    @Input('setfocus') setfocus: boolean = false;
-    @Output('setfocusChange') setfocusChange: EventEmitter<boolean> = new EventEmitter<boolean>(); 
-    @Input('autocomplete') autocomplete: ISearchService | null = null;
-    @Input('selected') selected: ISelectable | undefined = undefined;
-    @Output('onselect') onselect: EventEmitter<ISelectable> = new EventEmitter<ISelectable>(); 
-    @Input('error') error: boolean = false;
-    @Input('message') message: string = '';
-    @Input('validate') validate: 'number' | 'decimal' | null = null;
-    @Output('focus') onfocusEvent: EventEmitter<void> = new EventEmitter();
-    @Output('blur') onblurEvent: EventEmitter<void> = new EventEmitter();
-    @Output('click') click: EventEmitter<void> = new EventEmitter();
-    @Output('decimalsUsed') decimalsUsed: EventEmitter<number> = new EventEmitter();
-    @Output('onEnter') onEnter: EventEmitter<number> = new EventEmitter();
+    @ViewChild('datefield') datefieldElement?: ElementRef;
+
+    label = input<string>('');
+    shortLabel = input<boolean>(false, {alias: 'short-label'});
+    placeholder = input<string>('');
+
+    value = model<string | number | Date | null>(null);
+    disabled = input<boolean>(false);
+    showlock = input<boolean>(true);
+    required = input<boolean>(false);
+    type = input<'text' | 'number' | 'password'>('text');
+    setfocus = model<boolean>(false);
+    autocomplete = input<ISearchService | null>( null);
+    selected = model<ISelectable | undefined>(undefined);
+    onselect = output<ISelectable | undefined>();
+    error = input<boolean>(false);
+    validate = model<'number' | 'decimal' | 'date' | null>(null);
+    onfocusEvent = output<void>({ alias:'focus' });
+    onblurEvent = output<void>({alias: 'blur'});
+    click = output<void>();
+    decimalsUsed = output<number>();
+    onEnter = output<void>();
 
     numberoflines = input(1);
     maxlength = input<number | null>(null);
@@ -58,34 +59,55 @@ export class XrmuiInput implements OnChanges {
     current?: ISelectable;
     currentindex: number = -1;
 
-    shadowValue: string = '';
+    shadowValue = signal<string>('');
+    shadowDate = signal<Date | null>(null);
 
   constructor() {
+    effect(() => {
+      const sf = this.setfocus();
+      if (sf == true) {
+        this.focusMe(undefined);
+        setTimeout(() => {
+          this.setfocus.set(false);
+        },10);
+      }
+    });
+
+    effect(() => {
+      const type = this.type();
+      const validate = this.validate();
+      if (type == 'number' && validate == null) {
+        this.validate.set('decimal');
+      }
+    });
+
+    effect(() => {
+      const value = this.value();
+      if (value == null) {
+        this.shadowValue.set('');
+        this.shadowDate.set(null);
+        return;
+      }
+
+      if (this.validate() == 'decimal') {
+        this.shadowValue.set(value.toString().replace('.',','));
+        return;
+      }
+
+      if (this.validate() == 'date') {
+        this.shadowDate.set(value as Date);
+        return;
+      }
+
+      this.shadowValue.set(value.toString());
+
+    });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.setfocus == true) {
-      this.setfocus = false;
-      this.focusMe(undefined);
 
-      setTimeout(() => {
-        this.setfocusChange.emit(false);
-      }, 10);
-    }
-
-    if (this.type == 'number' && this.validate == null) {
-      this.validate = 'decimal';
-    }
-
-    if (this.value == null) {
-      this.shadowValue = '';
-    } else {
-      if (this.validate == 'decimal') {
-        this.shadowValue = this.value.toString().replace('.',',');
-      } else {
-        this.shadowValue = this.value.toString();
-      }
-    }
+  pickDate(d: MatDatepickerInputEvent<any,any>) {
+    this.shadowDate.set(d.value);
+    this.value.set(d.value);
   }
 
   formatNumber(n: number): string {
@@ -98,31 +120,31 @@ export class XrmuiInput implements OnChanges {
   }
 
   onValueChanged() {
-    if (this.shadowValue == '') {
-      this.valueChange.emit(null);
+    const sv = this.shadowValue();
+    if (sv == '') {
+      this.value.set(null);
     } else {
-      const next = this.shadowValue.replace(',','.');
-      switch (this.validate) {
+      const next = sv.replace(',','.');
+      switch (this.validate()) {
         case 'number': {
-          this.value = Number(this.shadowValue);
+          this.value.set(Number(this.shadowValue));
           break;
         }
         case 'decimal': {
-          this.value = Number(next);
+          this.value.set(Number(next));
           break;
         }
         default:
-          this.value = this.shadowValue;
+          this.value.set(sv);
 
       }
-      this.valueChange.emit(this.value)
 
-      if (this.decimalsUsed.observed) {
+      if (this.type() == 'number' && this.validate() == 'decimal') {
         var spl = next.split('.');
         if (spl.length <= 1) {
-          this.decimalsUsed.next(0);
+          this.decimalsUsed.emit(0);
         } else {
-          this.decimalsUsed.next(spl[1].length);
+          this.decimalsUsed.emit(spl[1].length);
         }
       }
     }
@@ -139,10 +161,11 @@ export class XrmuiInput implements OnChanges {
     this.hasfocus.set(false);
     this.showitems.set(false);
 
-    if (this.selected && this.selected.name != this.shadowValue) {
-      this.selected = undefined;
+    const sel = this.selected();
+    if (sel && sel.name != this.shadowValue()) {
+      this.selected.set(undefined);
       this.onselect.emit(undefined); 
-      this.shadowValue = '';
+      this.shadowValue.set('');
     }
 
     this.onblurEvent.emit();
@@ -166,11 +189,7 @@ export class XrmuiInput implements OnChanges {
     e.stopPropagation();
     e.preventDefault();
 
-
-    if (this.onEnter.observed)  {
-      this.onEnter.emit();
-      return;
-    }
+    this.onEnter.emit();
 
     if (this.showitems() == false) {
       this.searchbyname();
@@ -178,8 +197,8 @@ export class XrmuiInput implements OnChanges {
     }
 
     if (this.current != null) {
-      this.value = this.current.name ?? '';
-      this.selected = this.current;
+      this.value.set(this.current.name ?? '');
+      this.selected.set(this.current);
       this.onselect.emit(this.current);
       this.showitems.set(false);
     }
@@ -195,7 +214,7 @@ export class XrmuiInput implements OnChanges {
 
   onkeydown(e: Event) {
     const k = e as KeyboardEvent;
-    if (this.validate != null) {
+    if (this.validate() != null) {
       if (NAVIGATIONKEYS.indexOf(k.key) >= 0) {
         return;
       }
@@ -206,14 +225,14 @@ export class XrmuiInput implements OnChanges {
         }
       }
 
-      if (this.validate == 'number') {
+      if (this.validate() == 'number') {
         if (NUMBERS.indexOf(k.key) < 0) {
           e.preventDefault();
           e.stopPropagation(); 
         }
       }
 
-      if (this.validate == 'decimal') {
+      if (this.validate() == 'decimal') {
         if (DECIMALS.indexOf(k.key) < 0) {
           e.preventDefault();
           e.stopPropagation(); 
@@ -226,8 +245,8 @@ export class XrmuiInput implements OnChanges {
   select(e: Event, v: ISelectable) {
     e.stopImmediatePropagation();
     e.stopPropagation();
-    this.value = v.name ?? '';
-    this.selected = v;
+    this.value.set(v.name ?? '');
+    this.selected.set(v);
     this.onselect.emit(v);
   }
 
@@ -252,12 +271,16 @@ export class XrmuiInput implements OnChanges {
   focusMe(e?: Event) {
     e?.stopPropagation();
 
-    if (!this.disabled && this.searchElement != null) {
+    if (!this.disabled() && this.searchElement != null) {
       this.searchElement.nativeElement.focus();
     }
 
-    if (!this.disabled && this.textareaElement != null) {
+    if (!this.disabled() && this.textareaElement != null) {
       this.textareaElement.nativeElement.focus();
+    }
+
+    if (!this.disabled() && this.datefieldElement != null) {
+      this.datefieldElement.nativeElement.focus();
     }
 
     this.click.emit();
@@ -275,12 +298,13 @@ export class XrmuiInput implements OnChanges {
   }
 
   private async dosearchbyname() {
-    if (this.autocomplete != null) {
+    const ap = this.autocomplete();
+    if (ap != null) {
       this.currentindex = -1;
       this.current = undefined;
       this.searchnumber++;
       var next = this.searchnumber;
-      var nextlist = await this.autocomplete.search(this.value?.toString() ?? '');
+      var nextlist = await ap.search(this.value()?.toString() ?? '');
       if (this.searchnumber == next) {
         this.items = nextlist;
       }

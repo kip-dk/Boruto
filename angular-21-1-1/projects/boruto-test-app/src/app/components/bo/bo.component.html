@@ -4,7 +4,10 @@
         <div c1>
             <xrmui-info icon="save" label="Info test" [badget]="2">
                 og her kommer så indhold<br />
-                <xrmui-input [(value)]="description" [numberoflines]="15" [maxlength]="20" placeholder="Kom med noget tekst"/>
+                <xrmui-input [(value)]="description" [numberoflines]="5" [maxlength]="20" placeholder="Kom med noget tekst"/>
+                <xrmui-input [(value)]="dato" validate="date" />
+                <br />
+                {{ dato() | date:'dd-MM-yyyy' }}
             </xrmui-info>
         </div>
         <xrmui-panel c2>
@@ -17,8 +20,8 @@
             <xrmui-icon type="fa" [disabled]="true">fa-regular fa-airplay</xrmui-icon>
             så skriver vi da også noget efter iconet
 
-            <div style="max-width: 200px;">
-                <xrmui-input placeholder="Start type to search" [(value)]="search" [autocomplete]="searchService" (onselect)="select($event)"></xrmui-input>
+            <div style="max-width: 400px;">
+                <xrmui-input [short-label]="true" label="Labeltekst" placeholder="Start type to search" [(value)]="search" [autocomplete]="searchService" (onselect)="select($event)"></xrmui-input>
             </div>
         </xrmui-panel>
     </xrmui-layout>

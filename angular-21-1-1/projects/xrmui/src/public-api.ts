@@ -37,6 +37,7 @@ export * from './lib/bo/api/iselectable.interface';
 export * from './lib/bo/api/optionsetvalue.interface';
 export * from './lib/bo/api/optionvalue.interface';
 export * from './lib/bo/api/isearchservice.interface';
+export * from './lib/bo/models/dkcustomdateadapter.model';
 
 export * from './lib/bo/info/info.xrmui';
 export * from './lib/bo/layout/layout.xrmui';
