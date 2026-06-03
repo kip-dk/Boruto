@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, signal, SimpleChanges, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { ISelectable } from '../api/iselectable.interface';
@@ -30,6 +30,7 @@ export class XrmuiInput implements OnChanges {
     @Input('setfocus') setfocus: boolean = false;
     @Output('setfocusChange') setfocusChange: EventEmitter<boolean> = new EventEmitter<boolean>(); 
     @Input('autocomplete') autocomplete: ISearchService | null = null;
+    @Input('selected') selected: ISelectable | undefined = undefined;
     @Output('onselect') onselect: EventEmitter<ISelectable> = new EventEmitter<ISelectable>(); 
     @Input('error') error: boolean = false;
     @Input('message') message: string = '';
@@ -40,11 +41,12 @@ export class XrmuiInput implements OnChanges {
     @Output('decimalsUsed') decimalsUsed: EventEmitter<number> = new EventEmitter();
     @Output('onEnter') onEnter: EventEmitter<number> = new EventEmitter();
 
-    hasfocus: boolean = false;
+    hasfocus = signal(false);
     search: string = '';
 
-    items: ISelectable[] | null = null;
-    showitems: boolean = false;
+    private items: ISelectable[] | null = null;
+    itemlist = signal<ISelectable[]>([]);
+    showitems = signal(false);
     searchthread: any | null = null;
     searchnumber: number = 0;
 
@@ -123,14 +125,21 @@ export class XrmuiInput implements OnChanges {
   }
 
   onFocus() {
-    this.hasfocus = true;
+    this.hasfocus.set(true);
     this.onfocusEvent.emit();
   }
 
   onBlur() {
     setTimeout(() => {
-    this.hasfocus = false;
-    this.showitems = false;
+    this.hasfocus.set(false);
+    this.showitems.set(false);
+
+    if (this.selected && this.selected.name != this.shadowValue) {
+      this.selected = undefined;
+      this.onselect.emit(undefined); 
+      this.shadowValue = '';
+    }
+
     this.onblurEvent.emit();
     },100);
   }
@@ -158,20 +167,21 @@ export class XrmuiInput implements OnChanges {
       return;
     }
 
-    if (this.showitems == false) {
+    if (this.showitems() == false) {
       this.searchbyname();
       return;
     }
 
     if (this.current != null) {
       this.value = this.current.name ?? '';
+      this.selected = this.current;
       this.onselect.emit(this.current);
-      this.showitems = false;
+      this.showitems.set(false);
     }
   }
 
   onesc(e: Event) {
-    this.showitems = false;
+    this.showitems.set(false);
   }
 
   onClick()  {
@@ -212,6 +222,7 @@ export class XrmuiInput implements OnChanges {
     e.stopImmediatePropagation();
     e.stopPropagation();
     this.value = v.name ?? '';
+    this.selected = v;
     this.onselect.emit(v);
   }
 
@@ -266,7 +277,11 @@ export class XrmuiInput implements OnChanges {
       }
 
       if (this.items != null && this.items.length > 0) {
-        this.showitems = true;
+        this.itemlist.set(this.items);
+        this.showitems.set(true);
+      } else {
+        this.itemlist.set([]);
+        this.showitems.set(false);
       }
     }
   }

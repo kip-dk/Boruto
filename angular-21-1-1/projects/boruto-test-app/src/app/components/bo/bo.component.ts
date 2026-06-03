@@ -14,7 +14,7 @@ export class BoComponent {
   searchService = new SearchService();
 
   select(c: ISelectable) {
-    this.search.set(c.name ?? '');
+    this.search.set(c?.name ?? '');
   }
 }
 

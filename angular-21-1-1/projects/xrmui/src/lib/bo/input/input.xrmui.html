@@ -1,9 +1,9 @@
-@if (showitems) {
+@if (showitems()) {
     <div class="autocomplete" [ngClass]="{ nolabel: (!label || label.length == 0) }">
-        @if (items?.length == 0) {
+        @if (itemlist().length == 0) {
         <div class="element"><div class="item">Ingen fundet</div>div></div>
         }
-        @for (elm of items; track elm) {
+        @for (elm of itemlist(); track elm) {
         <div class="element" [ngClass]="{ current: current == elm, selectable: !elm.disabled }" (click)="select($event, elm)">
             <div class="item">{{ elm.name }}</div>
         </div>
@@ -23,7 +23,7 @@
     }
 </div>
 }
-<div class="input" [ngClass]="{ focus: hasfocus, error: error }" (click)="focusMe($event)">
+<div class="input" [ngClass]="{ focus: hasfocus(), error: error }" (click)="focusMe($event)">
     <input 
         #inputfield 
         [ngClass]="type"
