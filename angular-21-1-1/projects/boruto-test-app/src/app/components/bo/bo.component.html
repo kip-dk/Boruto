@@ -3,7 +3,8 @@
     <xrmui-layout panels="50%,?" c2 orientation="horizontal" [resizeable]="true">
         <div c1>
             <xrmui-info icon="save" label="Info test" [badget]="2">
-                og her kommer så indhold
+                og her kommer så indhold<br />
+                <xrmui-input [(value)]="description" [numberoflines]="15" [maxlength]="20" placeholder="Kom med noget tekst"/>
             </xrmui-info>
         </div>
         <xrmui-panel c2>

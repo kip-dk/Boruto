@@ -10,6 +10,8 @@ import { BorutoXrmUIModule, ISearchService, ISelectable } from 'boruto-xrmui';
 })
 export class BoComponent {
 
+  description = signal<string>('');
+
   search = signal<string>('');
   searchService = new SearchService();
 

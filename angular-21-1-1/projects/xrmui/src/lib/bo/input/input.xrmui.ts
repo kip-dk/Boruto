@@ -1,9 +1,10 @@
 import { NgClass } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, signal, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, input, Input, OnChanges, Output, signal, SimpleChanges, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { ISelectable } from '../api/iselectable.interface';
 import { ISearchService } from '../api/isearchservice.interface';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 export const NAVIGATIONKEYS = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape','Tab','Enter','Backspace','Delete','End','Home','Shift','CapsLock','Insert','PageUp','PageDown','PageDown','PageDown'];
 export const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
@@ -14,10 +15,11 @@ export const CTRL_KEYS = ['c','C','v','V','x','X'];
     selector: 'xrmui-input',
     templateUrl: './input.xrmui.html',
     styleUrl: './input.xrmui.scss',
-    imports: [FormsModule, NgClass, MatIcon]
+    imports: [FormsModule, NgClass, MatIcon,TextFieldModule]
 })
 export class XrmuiInput implements OnChanges {
     @ViewChild('inputfield') searchElement?: ElementRef;
+    @ViewChild('textareafield') textareaElement?: ElementRef;
     @Input('label') label: string = '';
     @Input('short-label') shortLabel: boolean = false;
     @Input('placeholder') placeholder: string = '';
@@ -40,6 +42,9 @@ export class XrmuiInput implements OnChanges {
     @Output('click') click: EventEmitter<void> = new EventEmitter();
     @Output('decimalsUsed') decimalsUsed: EventEmitter<number> = new EventEmitter();
     @Output('onEnter') onEnter: EventEmitter<number> = new EventEmitter();
+
+    numberoflines = input(1);
+    maxlength = input<number | null>(null);
 
     hasfocus = signal(false);
     search: string = '';
@@ -249,6 +254,10 @@ export class XrmuiInput implements OnChanges {
 
     if (!this.disabled && this.searchElement != null) {
       this.searchElement.nativeElement.focus();
+    }
+
+    if (!this.disabled && this.textareaElement != null) {
+      this.textareaElement.nativeElement.focus();
     }
 
     this.click.emit();

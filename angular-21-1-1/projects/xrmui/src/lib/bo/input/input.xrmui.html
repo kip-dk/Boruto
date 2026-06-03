@@ -23,7 +23,8 @@
     }
 </div>
 }
-<div class="input" [ngClass]="{ focus: hasfocus(), error: error }" (click)="focusMe($event)">
+<div class="input" [ngClass]="{ focus: hasfocus(), error: error, textarea: numberoflines() > 1 }" (click)="focusMe($event)">
+    @if (numberoflines() == 1) {
     <input 
         #inputfield 
         [ngClass]="type"
@@ -38,7 +39,26 @@
         (keydown.arrowup)="onup($event)"
         (keydown.enter)="onenter($event)"
         (keydown.esc)="onesc($event)"
-        (keydown)="onkeydown($event)"/>
+        (keydown)="onkeydown($event)"
+        [maxlength]="maxlength()"/>
+    }
+    @if (numberoflines() > 1) {
+        <textarea
+            #textareafield
+            [maxlength]="maxlength()"
+            [rows]="numberoflines()"
+            [disabled]="disabled" 
+            [placeholder]="placeholder" 
+            [(ngModel)]="shadowValue" 
+            (ngModelChange)="onValueChanged()" 
+            (focus)="onFocus()" 
+            (blur)="onBlur()"
+            (keydown.arrowdown)="ondown($event)"
+            (keydown.arrowup)="onup($event)"
+            (keydown.enter)="onenter($event)"
+            (keydown.esc)="onesc($event)"
+            (keydown)="onkeydown($event)"></textarea>
+    }
 </div>
 
 @if (label == '' && type != 'number') {
