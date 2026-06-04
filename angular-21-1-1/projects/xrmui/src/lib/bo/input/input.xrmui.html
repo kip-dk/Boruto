@@ -44,17 +44,22 @@
     }
     @if (numberoflines() == 1 && validate() == 'date') {
         <input
+        #datefield
         class="datepicker"
          [matDatepicker]="picker"
          [value]="shadowDate"
          (dateChange)="pickDate($event)"
+         [disabled]="disabled()" 
+         [placeholder]="placeholder()" 
+
         (focus)="onFocus()"
-        (blur)="onBlur()"
-        #datefield/>
+        (blur)="onBlur()"/>
+        @if (!disabled()) {
         <mat-icon 
-        class="calendar-icon" 
-        (click)="picker.open()" 
-        style="font-size: 25px; width: 25px; height: 25px; color: darkgray">calendar_month</mat-icon>
+            class="calendar-icon" 
+            (click)="picker.open()" 
+            style="font-size: 25px; width: 25px; height: 25px; color: darkgray">calendar_month</mat-icon>
+        }
         <mat-datepicker #picker></mat-datepicker>
     }
     @if (numberoflines() > 1) {

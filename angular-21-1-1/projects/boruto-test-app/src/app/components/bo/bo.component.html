@@ -5,7 +5,7 @@
             <xrmui-info icon="save" label="Info test" [badget]="2">
                 og her kommer så indhold<br />
                 <xrmui-input [(value)]="description" [numberoflines]="5" [maxlength]="20" placeholder="Kom med noget tekst"/>
-                <xrmui-input [(value)]="dato" validate="date" />
+                <xrmui-input [(value)]="dato" validate="date" placeholder="Choose a date"/>
                 <br />
                 {{ dato() | date:'dd-MM-yyyy' }}
             </xrmui-info>
