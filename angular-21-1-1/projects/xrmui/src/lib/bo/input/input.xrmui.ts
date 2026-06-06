@@ -127,7 +127,7 @@ export class XrmuiInput {
       const next = sv.replace(',','.');
       switch (this.validate()) {
         case 'number': {
-          this.value.set(Number(this.shadowValue));
+          this.value.set(Number(next));
           break;
         }
         case 'decimal': {
