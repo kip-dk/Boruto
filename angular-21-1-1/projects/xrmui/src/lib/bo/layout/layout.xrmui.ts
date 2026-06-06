@@ -36,6 +36,8 @@ export class XrmuiLayout implements AfterViewInit, OnDestroy {
     private resized = signal<number>(0);
     panellist = this.panellist$.asReadonly();
 
+    private viewInitialized: boolean = false;
+
     style0 = computed(() => { return this.styleFor(0) });
     style1 = computed(() => { return this.styleFor(1) });
     style2 = computed(() => { return this.styleFor(2) });
@@ -61,6 +63,10 @@ export class XrmuiLayout implements AfterViewInit, OnDestroy {
         this.panels.set(this._panels());
         this.orientation.set(this._orientation());
         this.resizeable.set(this._resizeable());
+
+        if (this.viewInitialized) {
+            this.render();
+        }
     })
   }
 
@@ -72,6 +78,7 @@ export class XrmuiLayout implements AfterViewInit, OnDestroy {
     
         if (width > 0) {
           this.render();
+          this.viewInitialized = true;
         }
       });
     
