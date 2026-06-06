@@ -43,9 +43,13 @@ export class Entity {
     }
   
     ignoreColumn(prop: string): boolean {
-      if (prop == "_pluralName" || prop == "_logicalName" || prop == "_keyName" || prop == "id" || prop == '_updateable' || prop == '$expand' || prop == 'access') {
+      if (prop == "_pluralName" || prop == "_logicalName" || prop == "_keyName" || prop == "id" || prop == '_updateable' || prop == '$expand' || prop == 'access' || prop == 'calculatedProperties') {
         return true;
       }
+      if (this.calculatedProperties && this.calculatedProperties.find(p => p == prop)) {
+        return true;
+      }
+      
       return false;
     }
   
