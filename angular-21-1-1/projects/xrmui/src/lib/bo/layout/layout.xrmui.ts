@@ -63,7 +63,7 @@ export class XrmuiLayout implements AfterViewInit, OnDestroy {
         this.panels.set(this._panels());
         this.orientation.set(this._orientation());
         this.resizeable.set(this._resizeable());
-
+        
         if (this.viewInitialized) {
             this.render();
         }
