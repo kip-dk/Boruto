@@ -70,6 +70,7 @@
             [disabled]="disabled()" 
             [placeholder]="placeholder()" 
             [(ngModel)]="shadowValue" 
+            [ngClass]="{ noresize: !resizeable() }"
             (ngModelChange)="onValueChanged()" 
             (focus)="onFocus()" 
             (blur)="onBlur()"

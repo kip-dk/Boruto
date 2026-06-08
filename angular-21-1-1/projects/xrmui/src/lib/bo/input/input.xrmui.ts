@@ -41,6 +41,7 @@ export class XrmuiInput {
     onfocusEvent = output<void>({ alias:'focus' });
     onblurEvent = output<void>({alias: 'blur'});
     click = output<void>();
+    resizeable = input<boolean>(true);
     decimalsUsed = output<number>();
     onEnter = output<void>();
 
