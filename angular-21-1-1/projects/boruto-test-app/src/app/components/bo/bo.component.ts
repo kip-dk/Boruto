@@ -26,9 +26,13 @@ export class BoComponent {
 
 export class SearchService implements ISearchService {
     data: ISelectable[] = [
-      { id: '1', name: 'Apple' },
-      { id: '2', name: 'Banana' },
-      { id: '3', name: 'Orange' }
+      { id: '1', name: 'Ananas' },
+      { id: '2', name: 'Apelsin' },
+      { id: '3', name: 'Banan' },
+      { id: '4', name: 'Citron' },
+      { id: '5', name: 'Kiwi' },
+      { id: '6', name: 'Pære' },
+      { id: '7', name: 'Æble' }
     ];
 
   search(v: string): Promise<ISelectable[]> {

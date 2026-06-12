@@ -19,6 +19,9 @@
     border-color: lightgray;
     border-radius: 4px;
     padding: 5px 5px 5px 5px;
+    max-height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 :host div.autocomplete.nolabel {
@@ -37,6 +40,13 @@
     :host div.autocomplete {
         background-color: black;
         color: white;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :host div.autocomplete.notdark {
+        background-color: white;
+        color: black;
     }
 }
 

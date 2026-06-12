@@ -21,7 +21,7 @@
             så skriver vi da også noget efter iconet
 
             <div style="max-width: 400px;">
-                <xrmui-input [short-label]="true" label="Labeltekst" placeholder="Start type to search" [(value)]="search" [autocomplete]="searchService" (onselect)="select($event)"></xrmui-input>
+                <xrmui-input [short-label]="true" label="Labeltekst" placeholder="Start type to search" [(value)]="search" [autocomplete]="searchService" (onselect)="select($event)" [autoopenonblank]="true"></xrmui-input>
             </div>
         </xrmui-panel>
     </xrmui-layout>

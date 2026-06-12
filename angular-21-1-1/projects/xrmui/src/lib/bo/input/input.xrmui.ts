@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, effect, ElementRef, EventEmitter, input, Input, model, OnChanges, output, Output, signal, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, effect, ElementRef, EventEmitter, input, Input, model, OnChanges, output, Output, QueryList, signal, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { ISelectable } from '../api/iselectable.interface';
@@ -22,6 +22,7 @@ export class XrmuiInput {
     @ViewChild('inputfield') searchElement?: ElementRef;
     @ViewChild('textareafield') textareaElement?: ElementRef;
     @ViewChild('datefield') datefieldElement?: ElementRef;
+    @ViewChildren('option') options!: QueryList<ElementRef<HTMLDivElement>>;
 
     label = input<string>('');
     shortLabel = input<boolean>(false, {alias: 'short-label'});
@@ -42,6 +43,8 @@ export class XrmuiInput {
     onblurEvent = output<void>({alias: 'blur'});
     click = output<void>();
     resizeable = input<boolean>(true);
+    notdark = input<boolean>(false);
+    autoopenonblank = input<boolean>(false);
     decimalsUsed = output<number>();
     onEnter = output<void>();
 
@@ -155,6 +158,13 @@ export class XrmuiInput {
   onFocus() {
     this.hasfocus.set(true);
     this.onfocusEvent.emit();
+
+    if (this.autoopenonblank() && this.autocomplete()) {
+      const cv = this.shadowValue() ?? '';
+      if (cv == '') {
+        this.searchbyname();
+      }
+    }
   }
 
   onBlur() {
@@ -266,7 +276,23 @@ export class XrmuiInput {
       }
       this.current = this.items[this.currentindex]
     }
+    this.ensureCurrentVisible();
   }
+
+  private ensureCurrentVisible(): void {
+
+    if (this.current != undefined) {
+    const index = this.itemlist().indexOf(this.current);
+    if (index < 0) {
+        return;
+    }
+
+    this.options.get(index)?.nativeElement.scrollIntoView({
+        block: 'nearest',
+        inline: 'nearest'
+    });
+  }
+}
 
   focusMe(e?: Event) {
     e?.stopPropagation();
@@ -294,7 +320,6 @@ export class XrmuiInput {
     this.searchthread = setTimeout(() => {
       this.dosearchbyname();
     }, 600)
-
   }
 
   private async dosearchbyname() {

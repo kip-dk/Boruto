@@ -1,10 +1,10 @@
 @if (showitems()) {
-    <div class="autocomplete" [ngClass]="{ nolabel: (!label() || label().length == 0), shortLabel: shortLabel() }">
+    <div class="autocomplete" [ngClass]="{ nolabel: (!label() || label().length == 0), shortLabel: shortLabel(), notdark: notdark() }">
         @if (itemlist().length == 0) {
         <div class="element"><div class="item">Ingen fundet</div>div></div>
         }
         @for (elm of itemlist(); track elm) {
-        <div class="element" [ngClass]="{ current: current == elm, selectable: !elm.disabled }" (click)="select($event, elm)">
+        <div #option class="element" [ngClass]="{ current: current == elm, selectable: !elm.disabled }" (click)="select($event, elm)">
             <div class="item">{{ elm.name }}</div>
         </div>
         }
