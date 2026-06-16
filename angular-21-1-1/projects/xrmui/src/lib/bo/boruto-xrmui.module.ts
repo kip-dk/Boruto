@@ -7,6 +7,7 @@ import { XrmuiInput } from './input/input.xrmui';
 import { XrmuiRibbon } from './ribbon/ribbon.xrmui';
 import { XrmuiSpinner } from './spinner/spinner.xrmui';
 import { XrmuiButton } from './button/button.xrmui';
+import { XrmuiDevider } from './devider/devider.xrmui';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { XrmuiButton } from './button/button.xrmui';
     XrmuiInput,
     XrmuiRibbon,
     XrmuiSpinner,
-    XrmuiButton
+    XrmuiButton,
+    XrmuiDevider
   ],
   exports: [
     XrmuiInfo,
@@ -27,7 +29,8 @@ import { XrmuiButton } from './button/button.xrmui';
     XrmuiInput,
     XrmuiRibbon,
     XrmuiSpinner,
-    XrmuiButton
+    XrmuiButton,
+    XrmuiDevider
   ]
 })
 export class BorutoXrmUIModule { }
