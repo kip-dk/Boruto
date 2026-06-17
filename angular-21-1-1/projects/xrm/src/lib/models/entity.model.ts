@@ -57,12 +57,11 @@ export class Entity {
     columns(webapi: boolean): string[];
     columns(webapi: boolean = false): string[] {
       let result = [] as string[];
-  
-      let columns: string = this._keyName;
+
       for (var prop in this) {
         if (prop == this._keyName) continue;
         if (this.ignoreColumn(prop)) continue;
-        if (this.calculatedProperties?.find(r => prop)) continue;
+        if (this.calculatedProperties?.find(r => r == prop)) continue;
   
         let v = this[prop];
         

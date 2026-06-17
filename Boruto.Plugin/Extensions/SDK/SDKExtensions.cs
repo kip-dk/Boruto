@@ -647,6 +647,21 @@ namespace Boruto.Extensions.SDK
             return result;
         }
 
+        public static T RemoveNulls<T>(this T source) where T: Microsoft.Xrm.Sdk.Entity
+        {
+            var keys = source.Attributes.Keys.ToArray();
+            foreach (var key in keys)
+            {
+                var v = source[key];
+                if (v == null)
+                {
+                    source.Attributes.Remove(key);
+                }
+            }
+
+            return source;
+        }
+
         private static Boruto.ServiceAPI.IMetadataService metaService;
         private static DateTime? metaServiceTimeout;
         public static Boruto.ServiceAPI.IMetadataService MetadataServiceFor(this Microsoft.Xrm.Sdk.IOrganizationService orgService)

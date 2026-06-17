@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2026-05-22 14:00
+## updated: 2026-06-17 11:45
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -444,6 +444,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package
 
 ## Changelog
+### 1.0.5.12 Extension to create EntityReference from Guid? (resolve to null) and Guid, and Extension method to remove all values that are null in Entity (helper for virtual entities)
 ### 1.0.5.11 Extension to generate dataverse safe guids for datamigration. Save guid id on different entities can cause problems if reffered on the same virtual entity
 ### 1.0.5.9  Document how to create Custom API implementations
 ### 1.0.5.8  Custom API plugins listening for method On()  (Stage=30) did not transform result from plugin into organizationresponse

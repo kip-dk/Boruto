@@ -302,6 +302,20 @@ namespace Boruto.Extensions.TypeConverters
             return result.ToArray();
         }
 
+        public static Microsoft.Xrm.Sdk.EntityReference ToEntityReference(this Guid? id, string logicalname)
+        {
+            if (id == null)
+            {
+                return null;
+            }
+            return id.Value.ToEntityReference(logicalname);
+        }
+
+        public static Microsoft.Xrm.Sdk.EntityReference ToEntityReference(this Guid id, string logicalname)
+        {
+            return new EntityReference(logicalname, id);
+        }
+
         public static T ToEnum<T>(this object value)
         {
             if (value == null)
