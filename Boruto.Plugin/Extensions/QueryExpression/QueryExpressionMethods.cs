@@ -1,16 +1,18 @@
-﻿using Microsoft.Xrm.Sdk.Query;
+﻿using Boruto.Extensions.DateTimes;
+using Boruto.Extensions.TypeConverters;
+using Boruto.Implementations;
 using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Query;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Boruto.Implementations;
-using Boruto.Extensions.TypeConverters;
-using Boruto.Extensions.DateTimes;
-using System.Diagnostics.Eventing.Reader;
 
 namespace Boruto.Extensions.QueryExpression
 {
@@ -201,12 +203,33 @@ namespace Boruto.Extensions.QueryExpression
         [System.Diagnostics.DebuggerNonUserCode()]
         public static Guid? GetIdFilter(this Microsoft.Xrm.Sdk.Query.QueryExpression query, string logicalName)
         {
-            if (!string.IsNullOrEmpty(logicalName) && query != null && query.Criteria != null && query.Criteria.Filters != null && query.Criteria.Filters.Count > 0)
+            return query.Criteria.GetIdFilter(logicalName);
+        }
+
+        public static Guid? GetIdFilter(this Microsoft.Xrm.Sdk.Query.FilterExpression filter, string logicalName)
+        {
+            if (!string.IsNullOrEmpty(logicalName) && filter != null && filter.Conditions != null && filter.Conditions != null && filter.Conditions.Count > 0)
             {
-                var idFilter = query.Criteria.Conditions.Where(r => r.AttributeName == $"{logicalName}id").FirstOrDefault();
+                var idFilter = filter.Conditions.Where(r => r.AttributeName == $"{logicalName}id").FirstOrDefault();
                 if (idFilter != null && idFilter.Values != null && idFilter.Values.Count == 1)
                 {
-                    return idFilter.Values.First().ConvertValueTo<Guid>(out bool resolved);
+                    var next = idFilter.Values.First().ConvertValueTo<Guid>(out bool resolved);
+                    if (resolved)
+                    {
+                        return next;
+                    }
+                }
+            }
+
+            if (!string.IsNullOrEmpty(logicalName) && filter != null && filter.Filters != null && filter.Filters.Count > 0)
+            {
+                foreach (var f in filter.Filters)
+                {
+                    var found = f.GetIdFilter(logicalName);
+                    if (found != null)
+                    {
+                        return found;
+                    }
                 }
             }
             return null;

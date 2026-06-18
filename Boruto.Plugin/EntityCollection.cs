@@ -23,6 +23,7 @@ namespace Boruto
         {
             this.EntityName = new T().LogicalName;
             this.MoreRecords = false;
+            this.Entities = new Microsoft.Xrm.Sdk.DataCollection<Microsoft.Xrm.Sdk.Entity>(0);
         }
 
         public EntityCollection(Microsoft.Xrm.Sdk.EntityCollection source) 
