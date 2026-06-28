@@ -49,6 +49,11 @@ ko-title-panel.no-padding .ko-container .ko-title {
   padding: 0 0 0 0;
 }
 
+ko-title-panel.raw .ko-container .ko-body {
+  top: 59px;
+  padding: 0 0 0 0;
+}
+
 ko-title-panel .ko-container .ko-body {
   position: absolute;
   left: 0;
@@ -58,11 +63,6 @@ ko-title-panel .ko-container .ko-body {
   overflow-x: hidden;
   overflow-y: auto;
   padding: 4px 4px 4px 4px;
-}
-
-ko-title-panel.raw .ko-container .ko-body {
-    padding: 0 0 0 0;
-
 }
 
 ko-title-panel.no-padding .ko-container .ko-body {

@@ -1,13 +1,13 @@
 import { NgClass } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { XrmContextService } from 'boruto-xrmservice';
-import { KoNavigationByCssClass, KoDivider, KoNavigation, KiponUiModule } from 'boruto-xrmui';
+import { KoNavigationByCssClass, KoDivider, KoNavigation, KiponUiModule, BorutoXrmUIModule } from 'boruto-xrmui';
 
 @Component({
   selector: 'app-ko',
   templateUrl: './ko.component.html',
   styleUrl: './ko.component.scss',
-  imports: [KiponUiModule,NgClass]
+  imports: [BorutoXrmUIModule, KiponUiModule,NgClass]
 })
 export class KoComponent {
   form: XrmContextService = inject(XrmContextService);
