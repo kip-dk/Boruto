@@ -15,11 +15,6 @@ namespace Boruto.Implementations
         {
             if (ifAttr is Attributes.Filter.NotChildOfAttribute coa)
             {
-                if (currentCtx.Depth == 1)
-                {
-                    return true;
-                }
-
                 if (currentCtx.ParentContext == null)
                 {
                     return true;
