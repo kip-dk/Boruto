@@ -444,6 +444,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package
 
 ## Changelog
+### 1.0.5.14 ChildOf check deeper than 1, might cause new problems when a transaction is the root of the plugin pipeline
 ### 1.0.5.13 Constructor on EntityCollection fixed to create the inner collection on default constructor,  and GetIdFilter(logicalname) made more robust
 ### 1.0.5.12 Extension to create EntityReference from Guid? (resolve to null) and Guid, and Extension method to remove all values that are null in Entity (helper for virtual entities)
 ### 1.0.5.11 Extension to generate dataverse safe guids for datamigration. Save guid id on different entities can cause problems if reffered on the same virtual entity
