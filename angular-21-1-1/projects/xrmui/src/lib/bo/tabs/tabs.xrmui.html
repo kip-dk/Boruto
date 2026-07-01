@@ -1,0 +1,23 @@
+<div class="xrmui-tabs">
+@for (tab of tabs(); track tab; let idx = $index) {
+    <div class="xrmui-tab" [ngClass]="{ 'current' : tab == current(), 'disabled': tab.disabled}" (click)="current.set(tab)">
+        @if (tab.badget != undefined && tab.badget > 0) {
+            <div [matBadge]="tab.badget" [matBadgeOverlap]="false">
+                @if (tab.icon != undefined && tab.icon != null && tab.icon != ''){<div class="icon"><mat-icon class="mat-icon-14">{{ tab.icon }}</mat-icon></div>}
+                <span>
+                @if (tab.label != undefined && tab.label != null && tab.label != '') { {{ tab.label }} }
+                @if (tab.label == undefined || tab.label == null || tab.label == '') { {{ tab.id }} }
+                </span>
+            </div>
+        }
+
+        @if (tab.badget == undefined || tab.badget == 0) {
+            @if (tab.icon != undefined && tab.icon != null && tab.icon != ''){<div class="icon"><mat-icon class="mat-icon-14">{{ tab.icon }}</mat-icon></div>}
+            <span>
+            @if (tab.label != undefined && tab.label != null && tab.label != '') { {{ tab.label }} }
+            @if (tab.label == undefined || tab.label == null || tab.label == '') { {{ tab.id }} }
+            </span>
+        }
+    </div>
+}
+</div>

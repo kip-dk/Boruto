@@ -1,6 +1,6 @@
 import { DatePipe, NgClass } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { BorutoXrmUIModule, ISearchService, ISelectable } from 'boruto-xrmui';
+import { BorutoXrmUIModule, IMenu, ISearchService, ISelectable } from 'boruto-xrmui';
 
 @Component({
   selector: 'app-bo',
@@ -14,6 +14,13 @@ export class BoComponent {
 
   search = signal<string>('');
   dato = signal<Date | null>(null);
+
+  tabs: IMenu[] = [
+      { id: 1, label: "tab 1", icon: "search" },
+      { id: 1, label: "tab 2", icon: "home" }
+  ];
+
+  selected = signal<IMenu>(this.tabs[0]);
 
 
   searchService = new SearchService();

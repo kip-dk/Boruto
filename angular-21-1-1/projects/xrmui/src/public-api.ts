@@ -48,5 +48,6 @@ export * from './lib/bo/ribbon/ribbon.xrmui';
 export * from './lib/bo/spinner/spinner.xrmui';
 export * from './lib/bo/button/button.xrmui';
 export * from './lib/bo/devider/devider.xrmui';
+export * from './lib/bo/tabs/tabs.xrmui';
 
 export * from './lib/bo/boruto-xrmui.module';

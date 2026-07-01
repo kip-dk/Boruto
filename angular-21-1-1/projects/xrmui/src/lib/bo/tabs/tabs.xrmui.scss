@@ -1,0 +1,57 @@
+:host div.xrmui-tabs {
+    display: flex;
+}
+
+:host div.xrmui-tab {
+    margin: 10px 5px 5px 5px;
+    padding: 10px 10px 8px 10px;
+    font-family: var(--mat-sys-body-medium-font);
+    border: solid;
+    border-width: 0 0 2px 0;
+    border-color: lightgray;
+    color: gray;
+    cursor: pointer;
+    font-size: small;
+}
+
+:host div.xrmui-tab.current {
+    border-color: #0f6cbd;
+    color: #0f6cbd;
+}
+
+:host div.xrmui-tab.disabled {
+    border-color: lightgrey;
+    color: lightgray;
+    cursor:auto;
+}
+:host div.xrmui-tab.space {
+    flex-grow: 1;
+    border-color: transparent;
+    cursor: default;
+}
+
+:host div.xrmui-burger {
+    padding-top: 15px;
+    width: 20px;
+    cursor: pointer;
+}
+
+:host button.xrmui-burger-button {
+    border: none;
+    background-color: transparent;
+    height: 25px;
+    overflow: hidden;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+:host div.icon {
+    float: left;
+    padding-right: 3px;
+}
+
+:host mat-icon.mat-icon-14 {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+}
