@@ -55,3 +55,43 @@
     width: 14px;
     height: 14px;
 }
+
+:host .error {
+  --color1: #FF6347;
+  --color2: #f7f7f7;
+  --duration: 3s;
+  background-color: var(--color1);
+  -webkit-animation-name: colorPulser;
+  -webkit-animation-duration: var(--duration);
+  animation-name: colorPulser;
+  animation-duration: var(--duration);
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes colorPulser {
+  0% {
+    background-color: var(--color1);
+  }
+
+  50% {
+    background-color: var(--color2);
+  }
+
+  100% {
+    background-color: var(--color1);
+  }
+}
+
+@keyframes colorPulser {
+  0% {
+    background-color: var(--color1);
+  }
+
+  50% {
+    background-color: var(--color2);
+  }
+
+  100% {
+    background-color: var(--color1);
+  }
+}
