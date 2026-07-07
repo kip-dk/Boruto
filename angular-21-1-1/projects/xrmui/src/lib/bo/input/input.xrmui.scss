@@ -196,3 +196,14 @@
 :host textarea.noresize {
      resize: none;
 }
+
+:host mat-icon.info {
+    font-size: 30px; 
+    width: 30px; 
+    height: 30px;
+    color: gray;
+}
+
+:host mat-icon.info:hover {
+    color: black;
+}
