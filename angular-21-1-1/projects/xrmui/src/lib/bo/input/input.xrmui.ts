@@ -1,11 +1,12 @@
 import { NgClass } from '@angular/common';
-import { Component, computed, effect, ElementRef, EventEmitter, input, Input, model, OnChanges, output, Output, QueryList, signal, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
+import { Component, computed, effect, ElementRef, EventEmitter, input, Input, isSignal, model, OnChanges, output, Output, QueryList, Signal, signal, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { ISelectable } from '../api/iselectable.interface';
 import { ISearchService } from '../api/isearchservice.interface';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/datepicker';
+import { OptionSetValue } from '../api/optionsetvalue.interface';
 
 export const NAVIGATIONKEYS = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape','Tab','Enter','Backspace','Delete','End','Home','Shift','CapsLock','Insert','PageUp','PageDown','PageDown','PageDown'];
 export const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
@@ -25,7 +26,7 @@ export class XrmuiInput {
     @ViewChildren('option') options!: QueryList<ElementRef<HTMLDivElement>>;
 
     label = input<string>('');
-    shortLabel = input<boolean>(false, {alias: 'short-label'});
+    shortLabel = input<boolean | 'above'>(false, {alias: 'short-label'});
     placeholder = input<string>('');
 
     value = model<string | number | Date | null | undefined>(null);
@@ -37,6 +38,7 @@ export class XrmuiInput {
     autocomplete = input<ISearchService | null>( null);
     selectable = input<ISelectable[] | null>(null);
     selected = model<ISelectable | undefined>(undefined);
+    optionsetvalue = input<OptionSetValue | null>(null);
     onselect = output<ISelectable | undefined>();
     error = input<boolean>(false);
     validate = model<'number' | 'decimal' | 'date' | null>(null);
@@ -120,6 +122,17 @@ export class XrmuiInput {
         this.shadowValue.set(sel.name ?? '');
       }
     });
+
+    effect(() => {
+      const osv = this.optionsetvalue();
+      const sels = this.selectable();
+      if (osv && osv.value != undefined && sels && sels.length > 0) {
+        const sel = sels.find(r => r.id == osv.value?.toString());
+        if (sel) {
+          this.selected.set(sel);
+        }
+      };
+    })
   }
 
 
@@ -273,10 +286,15 @@ export class XrmuiInput {
       const value = (v.target as HTMLSelectElement).value;
       const next = sel.find(r => r.id == value);
       if (next) {
-        this.selected.set(next);
+          const osv = this.optionsetvalue();
+          if (osv) {
+            osv.name = next.name ?? 'Unknown';
+            osv.value = Number(next.id);
+          }
+          this.selected.set(next);
       }
+    }
   }
-}
 
   select(e: Event, v: ISelectable) {
     e.stopImmediatePropagation();

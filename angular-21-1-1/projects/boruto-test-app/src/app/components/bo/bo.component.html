@@ -1,11 +1,11 @@
 <xrmui-layout panels="200px,?" orientation="vertical" [resizeable]="true">
     <div c1>Left side</div>
     <xrmui-layout panels="50%,?" c2 orientation="horizontal" [resizeable]="true">
-        <div c1>
+        <div c1 style="margin-right: 10px;">
             <xrmui-info icon="save" label="Info test" [badget]="2">
                 og her kommer så indhold<br />
-                <xrmui-input [(value)]="description" [numberoflines]="5" [maxlength]="20" placeholder="Kom med noget tekst"/>
-                <xrmui-input [(value)]="dato" validate="date" placeholder="Choose a date"/>
+                <xrmui-input label="Flere linjer" short-label="above" [(value)]="description" [numberoflines]="5" [maxlength]="20" placeholder="Kom med noget tekst"/>
+                <xrmui-input label="Pick a date" short-label="above" [(value)]="dato" validate="date"/>
                 <br />
                 {{ dato() | date:'dd-MM-yyyy' }}
             </xrmui-info>
@@ -21,11 +21,15 @@
             så skriver vi da også noget efter iconet
 
             <div style="max-width: 400px;">
-                <xrmui-input [short-label]="true" label="Labeltekst" placeholder="Start type to search" [(value)]="search" [autocomplete]="searchService" (onselect)="select($event)" [autoopenonblank]="true"></xrmui-input>
+                <xrmui-input short-label="above" label="Tekst label" placeholder="Start type to search" [(value)]="text"></xrmui-input>
             </div>
 
             <div style="max-width: 400px;">
-                <xrmui-input [short-label]="true" label="Choise" placeholder="Select item" [selectable]="choices" [(selected)]="choice" info="Please select the right one"></xrmui-input>
+                <xrmui-input short-label="above" label="Labeltekst" placeholder="Start type to search" [(value)]="search" [autocomplete]="searchService" (onselect)="select($event)" [autoopenonblank]="true" info="Please select the right one"></xrmui-input>
+            </div>
+
+            <div style="max-width: 400px;">
+                <xrmui-input short-label="above" label="Choise" [selectable]="choices" [(selected)]="choice"></xrmui-input>
                 <br />
                 {{ choiceName() }}
             </div>

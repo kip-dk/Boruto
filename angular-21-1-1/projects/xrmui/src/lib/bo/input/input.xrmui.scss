@@ -105,6 +105,25 @@
     border-color: transparent;
 }
 
+:host div.input.labelabove {
+    height: 45px;
+}
+
+:host div.input.labelabove div.label-above {
+    font-size: 12px;
+    line-height: 12px;
+    width: 100%;
+    padding-left: 15px;
+    padding-top: 5px;
+    font-weight: bold;
+    color: gray;
+}
+
+:host div.input.focus.labelabove div.label-above {
+    color: #0f6cbd;
+}
+
+
 :host div.input.textarea {
     height: inherit;
 }
@@ -206,4 +225,16 @@
 
 :host mat-icon.info:hover {
     color: black;
+}
+
+:host mat-icon.calendar-icon {
+    font-size: 25px; 
+    width: 25px; 
+    height: 25px; 
+    color: darkgray;
+}   
+
+:host div.input.labelabove mat-icon.calendar-icon {
+    position: relative;
+    top: -5px;
 }

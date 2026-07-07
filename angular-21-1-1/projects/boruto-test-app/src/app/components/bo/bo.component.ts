@@ -39,6 +39,8 @@ export class BoComponent {
   choice = signal<ISelectable>(this.choices[1]);
 
   choiceName = computed(() => this.choice().name);
+
+  text = signal<string>('');
 }
 
 
