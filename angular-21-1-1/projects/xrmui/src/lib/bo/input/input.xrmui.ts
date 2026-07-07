@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, effect, ElementRef, EventEmitter, input, Input, model, OnChanges, output, Output, QueryList, signal, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
+import { Component, computed, effect, ElementRef, EventEmitter, input, Input, model, OnChanges, output, Output, QueryList, signal, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { ISelectable } from '../api/iselectable.interface';
@@ -28,13 +28,14 @@ export class XrmuiInput {
     shortLabel = input<boolean>(false, {alias: 'short-label'});
     placeholder = input<string>('');
 
-    value = model<string | number | Date | null>(null);
+    value = model<string | number | Date | null | undefined>(null);
     disabled = input<boolean>(false);
     showlock = input<boolean>(true);
     required = input<boolean>(false);
     type = input<'text' | 'number' | 'password'>('text');
     setfocus = model<boolean>(false);
     autocomplete = input<ISearchService | null>( null);
+    selectable = input<ISelectable[] | null>(null);
     selected = model<ISelectable | undefined>(undefined);
     onselect = output<ISelectable | undefined>();
     error = input<boolean>(false);
@@ -43,6 +44,7 @@ export class XrmuiInput {
     onblurEvent = output<void>({alias: 'blur'});
     click = output<void>();
     resizeable = input<boolean>(true);
+    info = input<string | null>(null);
     notdark = input<boolean>(false);
     autoopenonblank = input<boolean>(false);
     decimalsUsed = output<number>();
@@ -65,6 +67,12 @@ export class XrmuiInput {
 
     shadowValue = signal<string>('');
     shadowDate = signal<Date | null>(null);
+
+    isselect = computed(() => {
+      const s = this.selectable();
+      if (s && s.length > 0) return true;
+      return false;
+    });
 
   constructor() {
     effect(() => {
@@ -104,7 +112,13 @@ export class XrmuiInput {
       }
 
       this.shadowValue.set(value.toString());
+    });
 
+    effect(()=> {
+      const sel = this.selected();
+      if (sel) {
+        this.shadowValue.set(sel.name ?? '');
+      }
     });
   }
 
@@ -251,6 +265,18 @@ export class XrmuiInput {
       }
     }
   }
+
+
+  setchoice(v: Event) {
+    const sel = this.selectable();
+    if (sel && sel.length > 0) {
+      const value = (v.target as HTMLSelectElement).value;
+      const next = sel.find(r => r.id == value);
+      if (next) {
+        this.selected.set(next);
+      }
+  }
+}
 
   select(e: Event, v: ISelectable) {
     e.stopImmediatePropagation();

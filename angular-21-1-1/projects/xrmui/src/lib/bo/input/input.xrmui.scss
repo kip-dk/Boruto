@@ -107,7 +107,10 @@
 
 :host div.input.textarea {
     height: inherit;
+}
 
+:host div.info {
+    width: 30px;
 }
 
 :host div textarea {
@@ -123,12 +126,14 @@
 }
 
 :host div.input.focus,
-:host div.textarea.focus {
+:host div.textarea.focus,
+:host div.select.focus {
     border-color: #0f6cbd;
 }
 
 :host div.input.error,
-:host div.input.focus.error {
+:host div.input.focus.error,
+:host div.select.focus.error {
     border-color: red;
     color: red;
 }
@@ -141,6 +146,17 @@
     height: 29px;
     padding-left: 15px;
     width: 100%;
+    box-sizing: border-box;
+}
+
+:host select {
+    background-color: transparent;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border: none;
+    height: 29px;
+    padding-left: 15px;
+     width: calc(100% - 10px);
     box-sizing: border-box;
 }
 

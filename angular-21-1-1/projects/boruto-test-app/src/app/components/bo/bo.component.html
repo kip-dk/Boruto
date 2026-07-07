@@ -25,6 +25,12 @@
             </div>
 
             <div style="max-width: 400px;">
+                <xrmui-input [short-label]="true" label="Choise" placeholder="Select item" [selectable]="choices" [(selected)]="choice"></xrmui-input>
+                <br />
+                {{ choiceName() }}
+            </div>
+
+            <div style="max-width: 400px;">
                 <xrmui-tabs [tabs]="tabs" [(current)]="selected"></xrmui-tabs>
             </div>
         </xrmui-panel>

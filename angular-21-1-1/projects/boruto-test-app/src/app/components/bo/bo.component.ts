@@ -1,5 +1,5 @@
 import { DatePipe, NgClass } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { BorutoXrmUIModule, IMenu, ISearchService, ISelectable } from 'boruto-xrmui';
 
 @Component({
@@ -28,6 +28,17 @@ export class BoComponent {
   select(c: ISelectable | undefined) {
     this.search.set(c?.name ?? '');
   }
+
+    choices: ISelectable[] = [
+      { id: '1', name: 'København' },
+      { id: '2', name: 'Århus' },
+      { id: '3', name: 'Aalborg' }
+  ];
+
+
+  choice = signal<ISelectable>(this.choices[1]);
+
+  choiceName = computed(() => this.choice().name);
 }
 
 
