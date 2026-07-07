@@ -13,12 +13,12 @@
 @if (label() != '' && label().length > 0 && shortLabel() != 'above') {
 <div class="label" [ngClass]="{ short: shortLabel() == true }" (click)="focusMe($event)">{{ label() }}</div>
 }
-@if (label() != '' || type() == 'number') {
+@if ((label() != '' || type() == 'number') && showlock()) {
 <div class="locked">
     @if (required() && shortLabel() != 'above') {
     <div style="display: inline-block;height: 10px;color: red; position:  relative; top: -8px; right: 0">*</div>
     }
-    @if (disabled() && showlock()) {
+    @if (disabled()) {
     <mat-icon fontSet="material-symbols-outlined">lock</mat-icon>
     }
 </div>
@@ -96,6 +96,9 @@
                 <option [value]="option.id" [selected]="option == selected()">{{ option.name }}</option>
             }
         </select>
+        @if (!disabled()) {
+            <mat-icon class="dropdown" fontSet="material-symbols-outlined">arrow_drop_down</mat-icon>
+        }
     }
     @let ti = toolIcon();
     @if (!disabled() && ti && ti.length > 0) {
@@ -103,9 +106,9 @@
     }
 </div>
 
-@if (label() == '' && type() != 'number') {
+@if (label() == '' && type() != 'number' && showlock()) {
     <div class="locked" style="text-align: left;">
-        @if (disabled() && showlock()) {
+        @if (disabled()) {
             <mat-icon fontSet="material-symbols-outlined">lock</mat-icon>
         }
     </div>
