@@ -19,11 +19,11 @@
     <div style="display: inline-block;height: 10px;color: red; position:  relative; top: -8px; right: 0">*</div>
     }
     @if (disabled() && showlock()) {
-    <mat-icon>lock</mat-icon>
+    <mat-icon fontSet="material-symbols-outlined">lock</mat-icon>
     }
 </div>
 }
-<div class="input" [ngClass]="{ focus: hasfocus(), error: error(), textarea: numberoflines() > 1, labelabove: shortLabel() == 'above' }" (click)="focusMe($event)">
+<div class="input" [ngClass]="{ focus: hasfocus(), error: error(), textarea: numberoflines() > 1, labelabove: shortLabel() == 'above', toolicon: toolIcon()?.length ?? 0 > 0}" (click)="focusMe($event)">
     @if (shortLabel() == 'above' && label() != '') {
         <div class="label-above">
             {{ label() }}
@@ -62,6 +62,7 @@
         @if (!disabled()) {
         <mat-icon 
             class="calendar-icon" 
+            fontSet="material-symbols-outlined"
             (click)="picker.open()">calendar_month</mat-icon>
         }
         <mat-datepicker #picker></mat-datepicker>
@@ -96,12 +97,16 @@
             }
         </select>
     }
+    @let ti = toolIcon();
+    @if (!disabled() && ti && ti.length > 0) {
+        <mat-icon class="toolicon" fontSet="material-symbols-outlined" (click)="toolClicked($event)">{{ ti }}</mat-icon>
+    }
 </div>
 
 @if (label() == '' && type() != 'number') {
     <div class="locked" style="text-align: left;">
         @if (disabled() && showlock()) {
-            <mat-icon>lock</mat-icon>
+            <mat-icon fontSet="material-symbols-outlined">lock</mat-icon>
         }
     </div>
 }

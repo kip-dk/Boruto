@@ -52,6 +52,9 @@ export class XrmuiInput {
     decimalsUsed = output<number>();
     onEnter = output<void>();
 
+    toolIcon = input<string | null>(null);
+    toolClick = output<void>();
+
     numberoflines = input(1);
     maxlength = input<number | null>(null);
 
@@ -354,6 +357,11 @@ export class XrmuiInput {
     }
 
     this.click.emit();
+  }
+
+  toolClicked(e: Event) {
+    e.stopPropagation();
+    this.toolClick.emit();
   }
 
   private searchbyname() {

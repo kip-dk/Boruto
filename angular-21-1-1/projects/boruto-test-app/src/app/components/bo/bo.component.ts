@@ -41,6 +41,10 @@ export class BoComponent {
   choiceName = computed(() => this.choice().name);
 
   text = signal<string>('');
+
+  toolClick() {
+    alert('hi from tool click');
+  }
 }
 
 

@@ -106,7 +106,7 @@
 }
 
 :host div.input.labelabove {
-    height: 45px;
+    height: 48px;
 }
 
 :host div.input.labelabove div.label-above {
@@ -183,6 +183,10 @@
      width: calc(100% - 35px);
 }
 
+:host div.input.toolicon input {
+    width: calc(100% - 35px);
+}
+
 @media (prefers-color-scheme: dark) {
     :host input {
         color: black;
@@ -234,6 +238,15 @@
     color: darkgray;
 }   
 
+:host mat-icon.toolicon {
+    cursor: pointer;
+    font-size: 25px; 
+    width: 25px; 
+    height: 25px;
+    color: gray;
+}
+
+:host div.input.labelabove mat-icon.toolicon,
 :host div.input.labelabove mat-icon.calendar-icon {
     position: relative;
     top: -5px;
