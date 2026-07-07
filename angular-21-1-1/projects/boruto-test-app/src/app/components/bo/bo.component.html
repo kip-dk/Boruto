@@ -4,7 +4,7 @@
         <div c1 style="margin-right: 10px;">
             <xrmui-info icon="save" label="Info test" [badget]="2">
                 og her kommer så indhold<br />
-                <xrmui-input label="Flere linjer" short-label="above" [(value)]="description" [numberoflines]="5" [maxlength]="20" placeholder="Kom med noget tekst"/>
+                <xrmui-input [required]="true" label="Flere linjer" short-label="above" [(value)]="description" [numberoflines]="5" [maxlength]="20" placeholder="Kom med noget tekst"/>
                 <xrmui-input label="Pick a date" short-label="above" [(value)]="dato" validate="date"/>
                 <br />
                 {{ dato() | date:'dd-MM-yyyy' }}
