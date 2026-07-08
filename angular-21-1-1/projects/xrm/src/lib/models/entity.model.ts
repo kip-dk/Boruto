@@ -1,12 +1,26 @@
+import { signal } from "@angular/core";
 import { EntityReference } from "./entityreference.model";
+import { ChangeManager } from "./changemanager.interface";
+import { ChangedNotifier } from "./changednotifier.interface";
 
-export class Entity {
+export class Entity implements ChangedNotifier {
     _pluralName: string;
     _keyName: string;
     _updateable: boolean = false;
     _logicalName: string;
     id: string;
     calculatedProperties?: string[];
+
+    private cm$?: ChangeManager;
+    prototype$?: Entity;
+
+    private changed$ = signal<boolean>(false);
+    changed = this.changed$.asReadonly();
+
+    private isnew$ = signal<boolean>(true);
+    isnew = this.isnew$.asReadonly();
+
+
     constructor(pluralName: string, keyName: string, updateable?: boolean, logicalname?: string, calculatedProperties?: string[]) {
       this._pluralName = pluralName;
       this._keyName = keyName;
@@ -38,13 +52,33 @@ export class Entity {
       }
     }
   
+    notifyOnChanged(): void {
+      if (this.cm$ && this.prototype$) {
+        const next = this.cm$.hasChanges(this.prototype$, this);
+        this.changed$.set(next);
+      }
+    }
+
     ToEntityReference(associatednavigationproperty: string): EntityReference {
       return new EntityReference(this.id ?? "", this._pluralName, associatednavigationproperty, this._logicalName ?? "");
     }
   
     ignoreColumn(prop: string): boolean {
-      if (prop == "_pluralName" || prop == "_logicalName" || prop == "_keyName" || prop == "id" || prop == '_updateable' || prop == '$expand' || prop == 'access' || prop == 'calculatedProperties') {
-        return true;
+      if (prop == "_pluralName" 
+        || prop == "_logicalName" 
+        || prop == "_keyName" 
+        || prop == "id" 
+        || prop == '_updateable' 
+        || prop == '$expand' 
+        || prop == 'access' 
+        || prop == 'calculatedProperties' 
+        || prop == 'changed$'
+        || prop == 'changed'
+        || prop == 'isnew$'
+        || prop == 'isnew'
+        || prop == 'prototype$'
+        || prop == 'cm$') {
+          return true; 
       }
       if (this.calculatedProperties && this.calculatedProperties.find(p => p == prop)) {
         return true;
@@ -52,6 +86,7 @@ export class Entity {
       
       return false;
     }
+
   
     columns(): string[];
     columns(webapi: boolean): string[];

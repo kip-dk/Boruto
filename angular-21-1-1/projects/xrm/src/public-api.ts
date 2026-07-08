@@ -46,3 +46,6 @@ export * from './lib/models/xrmformkey.model';
 export * from './lib/models/xrmqueryresult.interface';
 export * from './lib/models/xrmtransaction.model';
 export * from './lib/models/xrmtransactionitem.model';
+export * from './lib/models/changemanager.interface';
+export * from './lib/models/changednotifier.interface';
+

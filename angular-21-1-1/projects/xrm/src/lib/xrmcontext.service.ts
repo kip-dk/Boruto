@@ -18,13 +18,14 @@ import { XrmAccess } from "./models/xrmaccess.model";
 import { ExpandProperty } from "./models/expandproperty.model";
 import { Entities } from "./models/entities.model";
 import { ColumnBuilder } from "./models/columnbuilder.model";
+import { ChangeManager } from "./models/changemanager.interface";
 
 
 const XRMCONTEXTSERVICE_EMPTY_GUID = "00000000-0000-0000-0000-000000000000";
 const isNum = (num:any) => num != null && typeof num !== 'object' && (!Number.isNaN(+(String((String(num) || '').replace(/[^0-9\.\-e]/, '') !== String(num) || num === '' ? NaN : num))));
 
 @Injectable({providedIn: 'root'})
-export class XrmContextService {
+export class XrmContextService implements ChangeManager {
   private context: Map<string, Entity> = new Map<string, Entity>();
   private changemanager: any = {};
   private tick: number = new Date().valueOf();
@@ -653,6 +654,8 @@ export class XrmContextService {
 
     return this.mapAccess(prototype, instance);
   }
+
+
 
   private prepareUpdate(prototype: Entity, instance: Entity, deletedReferenceAsEmptyGuid: boolean): any {
     let me = this;
@@ -1456,6 +1459,10 @@ export class XrmContextService {
       this.updateCM(prototype, result);
     }
 
+    result["changed$"].set(false);
+    result["isnew$"].set(false);
+    result["cm$"] = this;
+    result["prototype$"] = prototype;
     return result as T;
   }
 
