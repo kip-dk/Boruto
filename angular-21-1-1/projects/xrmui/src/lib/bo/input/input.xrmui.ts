@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, computed, effect, ElementRef, EventEmitter, input, Input, isSignal, model, OnChanges, output, Output, QueryList, Signal, signal, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
+import { Component, computed, effect, ElementRef, EventEmitter, inject, input, Input, isSignal, model, OnChanges, output, Output, QueryList, Signal, signal, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { ISelectable } from '../api/iselectable.interface';
@@ -7,6 +7,8 @@ import { ISearchService } from '../api/isearchservice.interface';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/datepicker';
 import { OptionSetValue } from '../api/optionsetvalue.interface';
+import { ChangeScopeDirective } from '../changedscope/changedscope.directive';
+import { EntityReference } from '../api/entityreference.interface';
 
 export const NAVIGATIONKEYS = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape','Tab','Enter','Backspace','Delete','End','Home','Shift','CapsLock','Insert','PageUp','PageDown','PageDown','PageDown'];
 export const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
@@ -25,6 +27,8 @@ export class XrmuiInput {
     @ViewChild('datefield') datefieldElement?: ElementRef;
     @ViewChildren('option') options!: QueryList<ElementRef<HTMLDivElement>>;
 
+    private changeScope = inject(ChangeScopeDirective, {optional: true,host: true });
+
     label = input<string>('');
     shortLabel = input<boolean | 'above'>(false, {alias: 'short-label'});
     placeholder = input<string>('');
@@ -39,6 +43,7 @@ export class XrmuiInput {
     selectable = input<ISelectable[] | null>(null);
     selected = model<ISelectable | undefined>(undefined);
     optionsetvalue = input<OptionSetValue | null>(null);
+    entityreference = input<EntityReference | null>(null);
     onselect = output<ISelectable | undefined>();
     error = input<boolean>(false);
     validate = model<'number' | 'decimal' | 'date' | null>(null);
@@ -135,6 +140,13 @@ export class XrmuiInput {
           this.selected.set(sel);
         }
       };
+    });
+
+    effect(() => {
+      const re = this.entityreference();
+      if (re && re.name && re.name.length > 0) {
+        this.shadowValue.set(re.name);
+      }
     })
   }
 
@@ -142,6 +154,7 @@ export class XrmuiInput {
   pickDate(d: MatDatepickerInputEvent<any,any>) {
     this.shadowDate.set(d.value);
     this.value.set(d.value);
+    this.notifyOnChange();
   }
 
   formatNumber(n: number): string {
@@ -192,7 +205,7 @@ export class XrmuiInput {
     if (this.autoopenonblank() && this.autocomplete()) {
       const cv = this.shadowValue() ?? '';
       if (cv == '') {
-        this.searchbyname();
+        this.searchbyname(true);
       }
     }
   }
@@ -207,6 +220,13 @@ export class XrmuiInput {
       this.selected.set(undefined);
       this.onselect.emit(undefined); 
       this.shadowValue.set('');
+
+      const re = this.entityreference();
+      if (re) {
+        re.id = undefined;
+        re.name = '';
+      }
+      this.notifyOnChange();
     }
 
     this.onblurEvent.emit();
@@ -295,6 +315,7 @@ export class XrmuiInput {
             osv.value = Number(next.id);
           }
           this.selected.set(next);
+          this.notifyOnChange();
       }
     }
   }
@@ -305,6 +326,14 @@ export class XrmuiInput {
     this.value.set(v.name ?? '');
     this.selected.set(v);
     this.onselect.emit(v);
+
+    const re = this.entityreference();
+    if (re) {
+      re.id = v.id;
+      re.name = v.name;
+    }
+    
+    this.notifyOnChange();
   }
 
   private next(e: number) {
@@ -364,7 +393,7 @@ export class XrmuiInput {
     this.toolClick.emit();
   }
 
-  private searchbyname() {
+  private searchbyname(ommitcm?: boolean) {
     if (this.searchthread != null) {
       clearTimeout(this.searchthread);
     }
@@ -374,8 +403,13 @@ export class XrmuiInput {
     }, 600)
   }
 
-  private async dosearchbyname() {
+  private async dosearchbyname(ommitcm?: boolean) {
     const ap = this.autocomplete();
+
+    if (!ap && ommitcm != true) {
+      this.notifyOnChange();
+    } 
+
     if (ap != null) {
       this.currentindex = -1;
       this.current = undefined;
@@ -394,5 +428,9 @@ export class XrmuiInput {
         this.showitems.set(false);
       }
     }
+  }
+
+  private notifyOnChange() {
+    this.changeScope?.notifyChanged();
   }
 }

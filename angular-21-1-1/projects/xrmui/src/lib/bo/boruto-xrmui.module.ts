@@ -9,6 +9,7 @@ import { XrmuiSpinner } from './spinner/spinner.xrmui';
 import { XrmuiButton } from './button/button.xrmui';
 import { XrmuiDevider } from './devider/devider.xrmui';
 import { XrmuiTabs } from './tabs/tabs.xrmui';
+import { ChangeScopeDirective } from './changedscope/changedscope.directive';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { XrmuiTabs } from './tabs/tabs.xrmui';
     XrmuiSpinner,
     XrmuiButton,
     XrmuiDevider,
-    XrmuiTabs
+    XrmuiTabs,
+    ChangeScopeDirective
   ],
   exports: [
     XrmuiInfo,
@@ -33,7 +35,8 @@ import { XrmuiTabs } from './tabs/tabs.xrmui';
     XrmuiSpinner,
     XrmuiButton,
     XrmuiDevider,
-    XrmuiTabs
+    XrmuiTabs,
+    ChangeScopeDirective
   ]
 })
 export class BorutoXrmUIModule { }
