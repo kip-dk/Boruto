@@ -1,4 +1,6 @@
+import { WritableSignal } from "@angular/core";
+
 export interface EntityReference {
-    id?: string;
-    name?: string;
+    id$: WritableSignal<string |undefined>;
+    name$: WritableSignal<string | undefined>;
 }

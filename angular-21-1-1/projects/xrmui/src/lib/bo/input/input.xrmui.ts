@@ -186,19 +186,21 @@ export class XrmuiInput {
     effect(() => {
       const osv = this.optionsetvalue();
       const sels = this.selectable();
-      if (osv && osv.value != undefined && sels && sels.length > 0) {
-        const sel = sels.find(r => r.id == osv.value?.toString());
-        if (sel) {
-          this.selected.set(sel);
+      if (osv && sels && sels.length > 0) {
+        const v = osv.value$();
+        if (v != undefined) {
+          const sel = sels.find(r => r.id == v.toString());
+          if (sel) {
+            this.selected.set(sel);
+          }
         }
       };
     });
 
     effect(() => {
       const re = this.entityreference();
-      if (re && re.name && re.name.length > 0) {
-        this.shadowValue.set(re.name);
-      }
+      const name = re?.name$() ?? '';
+      this.shadowValue.set(name);
     })
   }
 
@@ -275,8 +277,8 @@ export class XrmuiInput {
 
       const re = this.entityreference();
       if (re) {
-        re.id = undefined;
-        re.name = '';
+        re.id$.set(undefined);
+        re.name$.set('');
       }
       this.notifyOnChange();
     }
@@ -363,8 +365,8 @@ export class XrmuiInput {
       if (next) {
           const osv = this.optionsetvalue();
           if (osv) {
-            osv.name = next.name ?? 'Unknown';
-            osv.value = Number(next.id);
+            osv.name$.set(next.name ?? 'Unknown');
+            osv.value$.set(Number(next.id));
           }
           this.selected.set(next);
           this.notifyOnChange();
@@ -379,8 +381,8 @@ export class XrmuiInput {
 
     const re = this.entityreference();
     if (re) {
-      re.id = v.id;
-      re.name = v.name;
+      re.id$.set(v.id);
+      re.id$.set(v.name);
     }
 
     this.selected.set(v);
