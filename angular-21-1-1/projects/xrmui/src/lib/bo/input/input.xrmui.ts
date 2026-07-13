@@ -324,15 +324,15 @@ export class XrmuiInput {
     e.stopImmediatePropagation();
     e.stopPropagation();
     this.value.set(v.name ?? '');
-    this.selected.set(v);
-    this.onselect.emit(v);
 
     const re = this.entityreference();
     if (re) {
       re.id = v.id;
       re.name = v.name;
     }
-    
+
+    this.selected.set(v);
+    this.onselect.emit(v);
     this.notifyOnChange();
   }
 
