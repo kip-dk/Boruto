@@ -10,6 +10,14 @@ export class ChangeScopeDirective {
     changeScope = input.required<ChangedNotifier>();
     
     notifyChanged(): void {
-        this.changeScope().notifyOnChanged();
+        const cp = this.changeScope();
+        if (cp) {
+            cp.notifyOnChanged.call(cp);
+            const oc = cp.onChanged;
+
+            if (oc) {
+                oc.call(cp);
+            }
+        }
     }
 }

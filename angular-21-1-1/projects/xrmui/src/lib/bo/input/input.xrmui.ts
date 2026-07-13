@@ -9,6 +9,7 @@ import { MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/
 import { OptionSetValue } from '../api/optionsetvalue.interface';
 import { ChangeScopeDirective } from '../changedscope/changedscope.directive';
 import { EntityReference } from '../api/entityreference.interface';
+import { FormScopeDirective } from '../form/formscope.directive';
 
 export const NAVIGATIONKEYS = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape','Tab','Enter','Backspace','Delete','End','Home','Shift','CapsLock','Insert','PageUp','PageDown','PageDown','PageDown'];
 export const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
@@ -28,14 +29,52 @@ export class XrmuiInput {
     @ViewChildren('option') options!: QueryList<ElementRef<HTMLDivElement>>;
 
     private changeScope = inject(ChangeScopeDirective, {optional: true,host: true });
+    private formScope = inject(FormScopeDirective, {optional: true,host: true });
 
     label = input<string>('');
-    shortLabel = input<boolean | 'above'>(false, {alias: 'short-label'});
+    _shortLabel = input<boolean | 'above' | undefined>(undefined, {alias: 'short-label'});
+
+    shortLabel = computed(() => {
+      const sl = this._shortLabel();
+      if (sl) return sl;
+      if (this.formScope) {
+        if (this.formScope.formScope().labeltype == "short") return true;
+        if (this.formScope.formScope().labeltype == "above") return "above";
+      }
+      return false;
+    });
+
     placeholder = input<string>('');
 
     value = model<string | number | Date | null | undefined>(null);
-    disabled = input<boolean>(false);
-    showlock = input<boolean>(true);
+    _disabled = input<boolean | undefined>(undefined, { alias: 'disabled'});
+    disabled = computed(() => {
+
+      const d = this._disabled();
+      if (d != undefined) {
+        return d;
+      }
+
+      if (this.formScope && this.formScope.formScope().disabled != undefined) {
+        return this.formScope.formScope().disabled ?? false;
+      }
+
+      return false;
+    });
+
+    _showlock = input<boolean | undefined>(undefined, {alias: 'showlock'});
+    showlock = computed(() => {
+      const sl = this._showlock();
+      if (sl != undefined) {
+        return sl;
+      }
+
+      if (this.formScope && this.formScope.formScope().showlock != undefined) {
+        return this.formScope.formScope().showlock ?? true;
+      }
+      return true;
+    });
+
     required = input<boolean>(false);
     type = input<'text' | 'number' | 'password'>('text');
     setfocus = model<boolean>(false);
@@ -53,7 +92,20 @@ export class XrmuiInput {
     resizeable = input<boolean>(true);
     info = input<string | null>(null);
     notdark = input<boolean>(false);
-    autoopenonblank = input<boolean>(false);
+    _autoopenonblank = input<boolean | undefined>(undefined, { alias: "autoopenonblank" });
+
+    autoopenonblank = computed(() => {
+      const au = this._autoopenonblank();
+      if (au != undefined) {
+        return au;
+      }
+
+      if (this.formScope && this.formScope.formScope().autoopenonblank != undefined) {
+        return this.formScope.formScope().autoopenonblank ?? false;
+      }
+      return false;
+    });
+
     decimalsUsed = output<number>();
     onEnter = output<void>();
 

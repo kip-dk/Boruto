@@ -1,3 +1,5 @@
+import { effect, signal } from "@angular/core";
+
 export class EntityReference {
 
   static ToEntityReference(a: any, f: string): EntityReference {
@@ -19,6 +21,14 @@ export class EntityReference {
     return result;
   }
 
+    id: string;
+    name: string;
+    logicalname: string;
+    associatednavigationproperty: string;
+    pluralName: string;
+
+    id$ = signal<string | undefined>(undefined);
+    name$ = signal<string | undefined>(undefined);
 
     constructor(id?: string, pluralName?: string, associatednavigationproperty?: string, logicalname?: string) {
       this.id = id ?? "";
@@ -40,13 +50,13 @@ export class EntityReference {
           }
         }
       }
+
+      this.id$.set(this.id);
+      this.name$.set(this.name);
+
+      effect(() => this.id = this.id$() ?? '');
+      effect(() => this.name = this.name$() ?? '');
     }
-  
-    id: string;
-    name: string;
-    logicalname: string;
-    associatednavigationproperty: string;
-    pluralName: string;
   
     replace(v1: string, v2: string) {
       this.id.replace(v1, v2);

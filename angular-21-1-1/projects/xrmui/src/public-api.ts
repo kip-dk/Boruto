@@ -39,6 +39,7 @@ export * from './lib/bo/api/optionvalue.interface';
 export * from './lib/bo/api/entityreference.interface';
 export * from './lib/bo/api/isearchservice.interface';
 export * from './lib/bo/api/changednotifier.interface';
+export * from './lib/bo/api/form.interface';
 export * from './lib/bo/models/dkcustomdateadapter.model';
 
 export * from './lib/bo/info/info.xrmui';
@@ -52,5 +53,6 @@ export * from './lib/bo/button/button.xrmui';
 export * from './lib/bo/devider/devider.xrmui';
 export * from './lib/bo/tabs/tabs.xrmui';
 export * from './lib/bo/changedscope/changedscope.directive';
+export * from './lib/bo/form/formscope.directive';
 
 export * from './lib/bo/boruto-xrmui.module';

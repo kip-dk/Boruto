@@ -1,3 +1,5 @@
+import { effect, signal } from "@angular/core";
+
 export class OptionSetValue {
 
   static toOptionSetValue(a: any, f: string): OptionSetValue {
@@ -14,18 +16,25 @@ export class OptionSetValue {
     delete a[f+""];
 
     return result;
-
   }
+
+    value?: number;
+    name?: string;
+    value$ = signal<number | undefined>(undefined);
+    name$ = signal<string |undefined>(undefined);
 
 
 
     constructor(value?: number, name?: string) {
       this.value = value;
       this.name = name;
+
+      this.value$.set(value);
+      this.name$.set(name);
+
+      effect(() => this.value = this.value$());
+      effect(() => this.name = this.name$());
     }
-  
-    value?: number;
-    name?: string;
   
     equals(o: OptionSetValue): boolean {
       if (this.value == null && (o == null || o.value == null)) return true;

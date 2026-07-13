@@ -10,6 +10,7 @@ import { XrmuiButton } from './button/button.xrmui';
 import { XrmuiDevider } from './devider/devider.xrmui';
 import { XrmuiTabs } from './tabs/tabs.xrmui';
 import { ChangeScopeDirective } from './changedscope/changedscope.directive';
+import { FormScopeDirective } from './form/formscope.directive';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { ChangeScopeDirective } from './changedscope/changedscope.directive';
     XrmuiButton,
     XrmuiDevider,
     XrmuiTabs,
-    ChangeScopeDirective
+    ChangeScopeDirective,
+    FormScopeDirective,
   ],
   exports: [
     XrmuiInfo,
@@ -36,7 +38,8 @@ import { ChangeScopeDirective } from './changedscope/changedscope.directive';
     XrmuiButton,
     XrmuiDevider,
     XrmuiTabs,
-    ChangeScopeDirective
+    ChangeScopeDirective,
+    FormScopeDirective
   ]
 })
 export class BorutoXrmUIModule { }

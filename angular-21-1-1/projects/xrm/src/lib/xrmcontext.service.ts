@@ -1330,12 +1330,14 @@ export class XrmContextService implements ChangeManager {
           let id = instance["_" + prop + "_value"] as string;
           if (id != null && id != 'undefined') {
             ref.id = id.toLowerCase();
+            ref.id$.set(id.toLowerCase());
             delete _result["_" + prop + "_value"];
 
             ref.logicalname = instance["_" + prop + "_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
             delete instance["_" + prop + "_value@Microsoft.Dynamics.CRM.lookuplogicalname"];
 
             ref.name = instance["_" + prop + "_value@OData.Community.Display.V1.FormattedValue"];
+            ref.name$.set(ref.name);
             delete instance["_" + prop + "_value@OData.Community.Display.V1.FormattedValue"];
 
             ref.associatednavigationproperty = instance["_" + prop + "_value@Microsoft.Dynamics.CRM.associatednavigationproperty"];
@@ -1348,7 +1350,10 @@ export class XrmContextService implements ChangeManager {
         if (!done && prototype[prop] instanceof OptionSetValue) {
           let opt = new OptionSetValue();
           opt.value = instance[prop];
+          opt.value$.set(opt.value);
           opt.name = instance[prop + '@OData.Community.Display.V1.FormattedValue'];
+          opt.name$.set(opt.name);
+          
           _result[prop] = opt;
           done = true;
         }
