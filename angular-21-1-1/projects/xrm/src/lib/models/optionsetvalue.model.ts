@@ -1,6 +1,13 @@
 import { effect, signal } from "@angular/core";
 
 export class OptionSetValue {
+    value?: number;
+    name?: string;
+    
+    private value$$ = signal<number | undefined>(undefined);
+    value$ = this.value$$.asReadonly();
+    private name$$ = signal<string |undefined>(undefined);
+    name$ = this.name$$.asReadonly();
 
   static toOptionSetValue(a: any, f: string): OptionSetValue {
     if (a[f] == undefined) {
@@ -9,31 +16,23 @@ export class OptionSetValue {
     var result = new OptionSetValue();
     result.value = a[f] as number;
     result.name = a[f+"@OData.Community.Display.V1.FormattedValue"];
-
     delete a[f];
     delete a[f+"@OData.Community.Display.V1.FormattedValue"];
     delete a[f+"@OData.Community.Display.V1.AttributeName"];
     delete a[f+""];
-
     return result;
   }
 
-    value?: number;
-    name?: string;
-    value$ = signal<number | undefined>(undefined);
-    name$ = signal<string |undefined>(undefined);
-
+  set(value:number | undefined, name: string | undefined) {
+    this.value$$.set(value);
+    this.name$$.set(name);
+    this.value = value;
+    this.name = name;
+  }
 
 
     constructor(value?: number, name?: string) {
-      this.value = value;
-      this.name = name;
-
-      this.value$.set(value);
-      this.name$.set(name);
-
-      effect(() => this.value = this.value$());
-      effect(() => this.name = this.name$());
+      this.set(this.value, this.name);
     }
   
     equals(o: OptionSetValue): boolean {

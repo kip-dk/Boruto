@@ -1,5 +1,5 @@
 import { DatePipe, NgClass } from '@angular/common';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, Signal, signal } from '@angular/core';
 import { BorutoXrmUIModule, IMenu, ISearchService, ISelectable } from 'boruto-xrmui';
 
 @Component({
@@ -49,7 +49,7 @@ export class BoComponent {
 
 
 export class SearchService implements ISearchService {
-    data: ISelectable[] = [
+    private data: ISelectable[] = [
       { id: '1', name: 'Ananas' },
       { id: '2', name: 'Apelsin' },
       { id: '3', name: 'Banan' },
@@ -59,11 +59,15 @@ export class SearchService implements ISearchService {
       { id: '7', name: 'Æble' }
     ];
 
-  search(v: string): Promise<ISelectable[]> {
-    return Promise.resolve(
-      this.data.filter(x =>
-        x.name != undefined && x.name.toLowerCase().includes(v.toLowerCase())
-      )
-    );
+    items = signal<ISelectable[]>(this.data);
+
+
+  search(v: string): Promise<void> {
+    if (!v || v.length == 0)  {
+      this.items.set(this.data);
+      Promise.resolve();
+    }
+    this.items.set(this.data.filter(r => r.name && r.name.toLocaleLowerCase().indexOf(v.toLocaleLowerCase()) >= 0));
+    return Promise.resolve();
   }
 }

@@ -1,6 +1,7 @@
-import { WritableSignal } from "@angular/core";
+import { Signal, WritableSignal } from "@angular/core";
 
 export interface OptionSetValue {
-    value$: WritableSignal<number | undefined>;
-    name$: WritableSignal<string>
+    value$: Signal<number | undefined>;
+    name$: Signal<string | undefined>
+    set(id: number |undefined, name: string| undefined): void;
 }

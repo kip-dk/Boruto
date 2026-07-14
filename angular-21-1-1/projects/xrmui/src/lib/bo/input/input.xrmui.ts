@@ -10,6 +10,7 @@ import { OptionSetValue } from '../api/optionsetvalue.interface';
 import { ChangeScopeDirective } from '../changedscope/changedscope.directive';
 import { EntityReference } from '../api/entityreference.interface';
 import { FormScopeDirective } from '../form/formscope.directive';
+import { first } from 'rxjs';
 
 export const NAVIGATIONKEYS = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape','Tab','Enter','Backspace','Delete','End','Home','Shift','CapsLock','Insert','PageUp','PageDown','PageDown','PageDown'];
 export const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
@@ -118,7 +119,7 @@ export class XrmuiInput {
     hasfocus = signal(false);
     search: string = '';
 
-    private items: ISelectable[] | null = null;
+    // private items: ISelectable[] | null = null;
     itemlist = signal<ISelectable[]>([]);
     showitems = signal(false);
     searchthread: any | null = null;
@@ -186,6 +187,11 @@ export class XrmuiInput {
     effect(() => {
       const osv = this.optionsetvalue();
       const sels = this.selectable();
+      if (osv) {
+        const n = osv.name$();
+        this.shadowValue.set(n ?? '');
+      }
+      
       if (osv && sels && sels.length > 0) {
         const v = osv.value$();
         if (v != undefined) {
@@ -199,9 +205,19 @@ export class XrmuiInput {
 
     effect(() => {
       const re = this.entityreference();
-      const name = re?.name$() ?? '';
-      this.shadowValue.set(name);
-    })
+      if (re) {
+        const name = re.name$() ?? '';
+        this.shadowValue.set(name);
+      }
+    });
+
+    effect(() => {
+      const ap = this.autocomplete();
+
+      if (ap) {
+        this.itemlist.set(ap.items());
+      }
+    });
   }
 
 
@@ -270,19 +286,22 @@ export class XrmuiInput {
     this.showitems.set(false);
 
     const sel = this.selected();
-    if (sel && sel.name != this.shadowValue()) {
+
+    const sv = this.shadowValue();
+    if (sel && sel.name != sv) {
       this.selected.set(undefined);
       this.onselect.emit(undefined); 
       this.shadowValue.set('');
-
-      const re = this.entityreference();
-      if (re) {
-        re.id$.set(undefined);
-        re.name$.set('');
-      }
       this.notifyOnChange();
     }
 
+      const re = this.entityreference();
+      if (re && re.name$() != sv) {
+        re.set(undefined, undefined);
+        this.onselect.emit(undefined);
+        this.shadowValue.set('');
+        this.notifyOnChange();
+      }
     this.onblurEvent.emit();
     },200);
   }
@@ -313,9 +332,16 @@ export class XrmuiInput {
 
     if (this.current != null) {
       this.value.set(this.current.name ?? '');
+
+      const re = this.entityreference();
+      if (re) {
+        re.set(this.current.id, this.current.name);
+      }
+
       this.selected.set(this.current);
       this.onselect.emit(this.current);
       this.showitems.set(false);
+      this.shadowValue.set(this.current.name ?? '');
     }
   }
 
@@ -365,8 +391,7 @@ export class XrmuiInput {
       if (next) {
           const osv = this.optionsetvalue();
           if (osv) {
-            osv.name$.set(next.name ?? 'Unknown');
-            osv.value$.set(Number(next.id));
+            osv.set(Number(next.id), next.name)
           }
           this.selected.set(next);
           this.notifyOnChange();
@@ -381,8 +406,7 @@ export class XrmuiInput {
 
     const re = this.entityreference();
     if (re) {
-      re.id$.set(v.id);
-      re.id$.set(v.name);
+      re.set(v.id, v.name);
     }
 
     this.selected.set(v);
@@ -391,20 +415,21 @@ export class XrmuiInput {
   }
 
   private next(e: number) {
-    if (this.items != null && this.items.length > 0) {
+    const items = this.itemlist();
+    if (items.length > 0) {
       this.currentindex = this.currentindex + e;
-      if (this.currentindex >= this.items.length) {
+      if (this.currentindex >= items.length) {
         this.currentindex = 0;
       }
 
       if (this.currentindex == -1) {
-        this.currentindex = this.items.length - 1;
+        this.currentindex = items.length - 1;
       }
 
       if (this.currentindex == -2) {
-        this.currentindex = this.items.length - 1;
+        this.currentindex = items.length - 1;
       }
-      this.current = this.items[this.currentindex]
+      this.current = items[this.currentindex]
     }
     this.ensureCurrentVisible();
   }
@@ -459,29 +484,16 @@ export class XrmuiInput {
 
   private async dosearchbyname(ommitcm?: boolean) {
     const ap = this.autocomplete();
+    if (ap) {
+      await ap.search(this.shadowValue());
+      this.currentindex = -1;
+      this.current = undefined;
+      this.showitems.set(true);
+    }
 
     if (!ap && ommitcm != true) {
       this.notifyOnChange();
     } 
-
-    if (ap != null) {
-      this.currentindex = -1;
-      this.current = undefined;
-      this.searchnumber++;
-      var next = this.searchnumber;
-      var nextlist = await ap.search(this.value()?.toString() ?? '');
-      if (this.searchnumber == next) {
-        this.items = nextlist;
-      }
-
-      if (this.items != null && this.items.length > 0) {
-        this.itemlist.set(this.items);
-        this.showitems.set(true);
-      } else {
-        this.itemlist.set([]);
-        this.showitems.set(false);
-      }
-    }
   }
 
   private notifyOnChange() {
