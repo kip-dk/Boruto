@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-     provideNativeDateAdapter(),
-     { provide: LOCALE_ID, useValue: 'da-DK' },
-     { provide: DateAdapter, useClass: DKCustomDateAdapter }  ]
+    provideNativeDateAdapter(),
+    { provide: LOCALE_ID, useValue: 'da-DK' },
+    { provide: DateAdapter, useClass: DKCustomDateAdapter }  ]
 };

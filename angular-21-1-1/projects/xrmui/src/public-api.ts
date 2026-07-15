@@ -41,6 +41,7 @@ export * from './lib/bo/api/isearchservice.interface';
 export * from './lib/bo/api/changednotifier.interface';
 export * from './lib/bo/api/form.interface';
 export * from './lib/bo/models/dkcustomdateadapter.model';
+export * from './lib/bo/models/nformat.model';
 
 export * from './lib/bo/info/info.xrmui';
 export * from './lib/bo/layout/layout.xrmui';

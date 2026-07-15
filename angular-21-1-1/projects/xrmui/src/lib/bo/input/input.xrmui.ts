@@ -10,7 +10,7 @@ import { OptionSetValue } from '../api/optionsetvalue.interface';
 import { ChangeScopeDirective } from '../changedscope/changedscope.directive';
 import { EntityReference } from '../api/entityreference.interface';
 import { FormScopeDirective } from '../form/formscope.directive';
-import { first } from 'rxjs';
+import { nFormater } from '../models/nformat.model';
 
 export const NAVIGATIONKEYS = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape','Tab','Enter','Backspace','Delete','End','Home','Shift','CapsLock','Insert','PageUp','PageDown','PageDown','PageDown'];
 export const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
@@ -87,6 +87,7 @@ export class XrmuiInput {
     onselect = output<ISelectable | undefined>();
     error = input<boolean>(false);
     validate = model<'number' | 'decimal' | 'date' | null>(null);
+    decimals = input<number | undefined>(undefined);
     onfocusEvent = output<void>({ alias:'focus' });
     onblurEvent = output<void>({alias: 'blur'});
     click = output<void>();
@@ -137,6 +138,13 @@ export class XrmuiInput {
       return false;
     });
 
+    isnumber = computed(() => this.validate() == 'decimal' || this.validate() == 'number');
+
+    inputclasses = computed(() => {
+      if (!this.isnumber()) return this.type();
+      return this.type() + ' ' + 'number';
+    }); 
+
   constructor() {
     effect(() => {
       const sf = this.setfocus();
@@ -164,8 +172,8 @@ export class XrmuiInput {
         return;
       }
 
-      if (this.validate() == 'decimal') {
-        this.shadowValue.set(value.toString().replace('.',','));
+      if (this.validate() == 'decimal' || this.validate() == 'number') {
+        this.setNumberValueString();
         return;
       }
 
@@ -241,30 +249,22 @@ export class XrmuiInput {
     if (sv == '') {
       this.value.set(null);
     } else {
-      const next = sv.replace(',','.');
+      const next = sv.replaceAll('.','').replace(',','.');
       switch (this.validate()) {
         case 'number': {
-          this.value.set(Number(next));
+          // sync value on blue ... this is to early
           break;
         }
         case 'decimal': {
-          this.value.set(Number(next));
+          // syncvalue on blur ... this is to early
           break;
         }
         default:
           this.value.set(sv);
 
       }
-
-      if (this.type() == 'number' && this.validate() == 'decimal') {
-        var spl = next.split('.');
-        if (spl.length <= 1) {
-          this.decimalsUsed.emit(0);
-        } else {
-          this.decimalsUsed.emit(spl[1].length);
-        }
-      }
     }
+
     this.searchbyname();
   }
 
@@ -281,6 +281,7 @@ export class XrmuiInput {
   }
 
   onBlur() {
+    this.handleNumber();
     setTimeout(() => {
     this.hasfocus.set(false);
     this.showitems.set(false);
@@ -288,11 +289,13 @@ export class XrmuiInput {
     const sel = this.selected();
 
     const sv = this.shadowValue();
+
     if (sel && sel.name != sv) {
       this.selected.set(undefined);
       this.onselect.emit(undefined); 
       this.shadowValue.set('');
       this.notifyOnChange();
+
     }
 
       const re = this.entityreference();
@@ -301,6 +304,11 @@ export class XrmuiInput {
         this.onselect.emit(undefined);
         this.shadowValue.set('');
         this.notifyOnChange();
+      }
+
+      const validate = this.validate();
+      if (validate == 'decimal' || validate == 'number') {
+        this.setNumberValueString();
       }
     this.onblurEvent.emit();
     },200);
@@ -498,5 +506,52 @@ export class XrmuiInput {
 
   private notifyOnChange() {
     this.changeScope?.notifyChanged();
+  }
+
+  private handleNumber() {
+    const sv = this.shadowValue();
+    if (sv == '') {
+      this.value.set(null);
+    } else {
+      const next = sv.replaceAll('.','').replace(',','.');
+      switch (this.validate()) {
+        case 'number': {
+          this.value.set(Number(next));
+          break;
+        }
+        case 'decimal': {
+          this.value.set(Number(next));
+          break;
+        }
+        default:
+          this.value.set(sv);
+
+      }
+
+      if (this.type() == 'number' && this.validate() == 'decimal') {
+        var spl = next.split('.');
+        if (spl.length <= 1) {
+          this.decimalsUsed.emit(0);
+        } else {
+          this.decimalsUsed.emit(spl[1].length);
+        }
+      }
+    }
+  }
+
+
+  private setNumberValueString() {
+    const v = Number(this.value());
+    let decimals = this.decimals();
+
+    if (decimals == undefined && this.validate() == 'number') {
+      decimals = 0;
+    }
+
+    if (decimals != undefined) {
+      this.shadowValue.set(nFormater.format(v, decimals))
+    } else {
+      this.shadowValue.set(nFormater.flex(v));
+    }
   }
 }

@@ -13,7 +13,7 @@ export class BoComponent {
   description = signal<string>('');
 
   search = signal<string>('');
-  dato = signal<Date | null>(null);
+  dato = signal<Date | null>(new Date());
 
   tabs: IMenu[] = [
       { id: 1, label: "tab 1", icon: "search" },
@@ -41,6 +41,8 @@ export class BoComponent {
   choiceName = computed(() => this.choice().name);
 
   text = signal<string>('');
+
+  mynumber = signal<number>(1200000.45);
 
   toolClick() {
     alert('hi from tool click');

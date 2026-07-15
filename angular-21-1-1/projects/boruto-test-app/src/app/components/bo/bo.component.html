@@ -21,6 +21,12 @@
             så skriver vi da også noget efter iconet
 
             <div style="max-width: 400px;">
+                <xrmui-input [showlock]="false" short-label="above" label="Number" [(value)]="mynumber" validate="decimal" [decimals]="2"></xrmui-input>
+                <br />
+                {{ choiceName() }}
+            </div>
+
+            <div style="max-width: 400px;">
                 <xrmui-input [showlock]="false" short-label="above" label="Tekst label" placeholder="Start type to search" [(value)]="text" toolIcon="construction" (toolClick)="toolClick()"></xrmui-input>
             </div>
 
@@ -33,7 +39,6 @@
                 <br />
                 {{ choiceName() }}
             </div>
-
             <div style="max-width: 400px;">
                 <xrmui-tabs [tabs]="tabs" [(current)]="selected"></xrmui-tabs>
             </div>

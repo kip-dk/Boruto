@@ -33,7 +33,7 @@
     @if (numberoflines() == 1 && validate() != 'date' && !isselect()) {
     <input 
         #inputfield 
-        [ngClass]="type()"
+        [ngClass]="inputclasses()"
         [type]="type() != 'password'? 'text' : 'password'"
         [disabled]="disabled()" 
         [placeholder]="placeholder()" 
@@ -53,7 +53,7 @@
         #datefield
         class="text datepicker"
          [matDatepicker]="picker"
-         [value]="shadowDate"
+         [value]="shadowDate()"
          (dateChange)="pickDate($event)"
          [disabled]="disabled()" 
          [placeholder]="placeholder()" 
