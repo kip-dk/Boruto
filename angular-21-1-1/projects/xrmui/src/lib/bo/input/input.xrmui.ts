@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, computed, effect, ElementRef, EventEmitter, inject, input, Input, isSignal, model, OnChanges, output, Output, QueryList, Signal, signal, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
+import { Component, computed, DestroyRef, effect, ElementRef, EventEmitter, inject, input, Input, isSignal, model, OnChanges, output, Output, QueryList, Signal, signal, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { ISelectable } from '../api/iselectable.interface';
@@ -31,6 +31,9 @@ export class XrmuiInput {
 
     private changeScope = inject(ChangeScopeDirective, {optional: true,host: true });
     private formScope = inject(FormScopeDirective, {optional: true,host: true });
+
+    private destroyRef = inject(DestroyRef);
+    private blurThead? : any;
 
     label = input<string>('');
     _shortLabel = input<boolean | 'above' | undefined>(undefined, {alias: 'short-label'});
@@ -146,6 +149,12 @@ export class XrmuiInput {
     }); 
 
   constructor() {
+    this.destroyRef.onDestroy(() => {
+      if (this.blurThead) {
+        clearTimeout(this.blurThead);
+      }
+    });
+
     effect(() => {
       const sf = this.setfocus();
       if (sf == true) {
@@ -282,35 +291,34 @@ export class XrmuiInput {
 
   onBlur() {
     this.handleNumber();
-    setTimeout(() => {
-    this.hasfocus.set(false);
-    this.showitems.set(false);
+    this.blurThead = setTimeout(() => {
+      this.hasfocus.set(false);
+      this.showitems.set(false);
 
-    const sel = this.selected();
+      const sel = this.selected();
 
-    const sv = this.shadowValue();
+      const sv = this.shadowValue();
 
-    if (sel && sel.name != sv) {
-      this.selected.set(undefined);
-      this.onselect.emit(undefined); 
-      this.shadowValue.set('');
-      this.notifyOnChange();
-
-    }
-
-      const re = this.entityreference();
-      if (re && re.name$() != sv) {
-        re.set(undefined, undefined);
-        this.onselect.emit(undefined);
+      if (sel && sel.name != sv) {
+        this.selected.set(undefined);
+        this.onselect.emit(undefined); 
         this.shadowValue.set('');
         this.notifyOnChange();
       }
 
-      const validate = this.validate();
-      if (validate == 'decimal' || validate == 'number') {
-        this.setNumberValueString();
-      }
-    this.onblurEvent.emit();
+        const re = this.entityreference();
+        if (re && re.name$() != sv) {
+          re.set(undefined, undefined);
+          this.onselect.emit(undefined);
+          this.shadowValue.set('');
+          this.notifyOnChange();
+        }
+
+        const validate = this.validate();
+        if (validate == 'decimal' || validate == 'number') {
+          this.setNumberValueString();
+        }
+        this.onblurEvent.emit();
     },200);
   }
 
