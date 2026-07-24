@@ -98,6 +98,7 @@ export class XrmuiInput {
     info = input<string | null>(null);
     notdark = input<boolean>(false);
     _autoopenonblank = input<boolean | undefined>(undefined, { alias: "autoopenonblank" });
+    nullable = input<boolean>(true);
 
     autoopenonblank = computed(() => {
       const au = this._autoopenonblank();
@@ -256,7 +257,11 @@ export class XrmuiInput {
   onValueChanged() {
     const sv = this.shadowValue();
     if (sv == '') {
-      this.value.set(null);
+      if (this.nullable() == true) {
+        this.value.set(null);
+      } else {
+        this.value.set('');
+      }
     } else {
       const next = sv.replaceAll('.','').replace(',','.');
       switch (this.validate()) {
