@@ -1326,7 +1326,10 @@ export class XrmContextService implements ChangeManager {
       if (prototype.hasOwnProperty(prop) && !isfunc) {
         let done = false;
         if (prototype[prop] instanceof EntityReference) {
-          let ref = new EntityReference();
+          let ref = _result[prop];
+          if (ref == undefined) {
+            ref = new EntityReference();
+          }
           let id = instance["_" + prop + "_value"] as string;
           if (id != null && id != 'undefined') {
             ref.id = id.toLowerCase();
@@ -1350,12 +1353,14 @@ export class XrmContextService implements ChangeManager {
         }
 
         if (!done && prototype[prop] instanceof OptionSetValue) {
-          let opt = new OptionSetValue();
+          let opt = _result[prop];
+          if (opt == undefined) {
+            opt = new OptionSetValue();
+          }
           opt.value = instance[prop];
           opt.name = instance[prop + '@OData.Community.Display.V1.FormattedValue'];
           opt.set(opt.value, opt.name);
 
-          
           _result[prop] = opt;
           done = true;
         }
@@ -1367,7 +1372,6 @@ export class XrmContextService implements ChangeManager {
           } else {
             _result[prop] = null;
           }
-
           done = true;
         }
 
