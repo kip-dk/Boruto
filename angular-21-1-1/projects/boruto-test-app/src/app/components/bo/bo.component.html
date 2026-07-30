@@ -8,6 +8,7 @@
                 <xrmui-input label="Pick a date" short-label="above" [(value)]="dato" validate="date"/>
                 <br />
                 {{ dato() | date:'dd-MM-yyyy' }}
+                <xrmui-input label="Yes no" type="checkbox" [(value)]="yesno" [short-label]="'above'"></xrmui-input>
             </xrmui-info>
         </div>
         <xrmui-panel c2>

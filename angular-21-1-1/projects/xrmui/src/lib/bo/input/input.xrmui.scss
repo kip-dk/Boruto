@@ -186,6 +186,21 @@
      width: calc(100% - 35px);
 }
 
+
+:host div.input > div.checkbox {
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+:host div.input.above > div.checkbox {
+    margin-top: 2px;
+}
+
+:host input.checkbox {
+    width: 15px;
+    height: 15px; 
+}
+
 :host div.input.toolicon input {
     width: calc(100% - 35px);
 }
@@ -276,3 +291,4 @@
     -webkit-appearance: none;
     -moz-appearance: none;
 }
+

@@ -11,6 +11,7 @@ import { ChangeScopeDirective } from '../changedscope/changedscope.directive';
 import { EntityReference } from '../api/entityreference.interface';
 import { FormScopeDirective } from '../form/formscope.directive';
 import { nFormater } from '../models/nformat.model';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 export const NAVIGATIONKEYS = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape','Tab','Enter','Backspace','Delete','End','Home','Shift','CapsLock','Insert','PageUp','PageDown','PageDown','PageDown'];
 export const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
@@ -21,7 +22,7 @@ export const CTRL_KEYS = ['c','C','v','V','x','X'];
     selector: 'xrmui-input',
     templateUrl: './input.xrmui.html',
     styleUrl: './input.xrmui.scss',
-    imports: [FormsModule, NgClass, MatIcon,TextFieldModule,MatDatepickerModule]
+    imports: [FormsModule, NgClass, MatIcon,TextFieldModule,MatDatepickerModule,MatCheckboxModule]
 })
 export class XrmuiInput {
     @ViewChild('inputfield') searchElement?: ElementRef;
@@ -50,7 +51,7 @@ export class XrmuiInput {
 
     placeholder = input<string>('');
 
-    value = model<string | number | Date | null | undefined>(null);
+    value = model<string | number | Date | boolean | null | undefined>(null);
     _disabled = input<boolean | undefined>(undefined, { alias: 'disabled'});
     disabled = computed(() => {
 
@@ -80,7 +81,7 @@ export class XrmuiInput {
     });
 
     required = input<boolean>(false);
-    type = input<'text' | 'number' | 'password'>('text');
+    type = input<'text' | 'number' | 'password' | 'checkbox'>('text');
     setfocus = model<boolean>(false);
     autocomplete = input<ISearchService | null>( null);
     selectable = input<ISelectable[] | null>(null);
@@ -89,7 +90,7 @@ export class XrmuiInput {
     entityreference = input<EntityReference | null>(null);
     onselect = output<ISelectable | undefined>();
     error = input<boolean>(false);
-    validate = model<'number' | 'decimal' | 'date' | null>(null);
+    validate = model<'number' | 'decimal' | 'date' | 'checkbox' | null>(null);
     decimals = input<number | undefined>(undefined);
     onfocusEvent = output<void>({ alias:'focus' });
     onblurEvent = output<void>({alias: 'blur'});
@@ -136,6 +137,8 @@ export class XrmuiInput {
     shadowValue = signal<string>('');
     shadowDate = signal<Date | null>(null);
 
+    shadowBool = signal<boolean>(false);
+
     isselect = computed(() => {
       const s = this.selectable();
       if (s && s.length > 0) return true;
@@ -172,6 +175,10 @@ export class XrmuiInput {
       if (type == 'number' && validate == null) {
         this.validate.set('decimal');
       }
+
+      if (type == 'checkbox' && validate != 'checkbox') {
+        this.validate.set('checkbox');
+      }
     });
 
     effect(() => {
@@ -179,6 +186,7 @@ export class XrmuiInput {
       if (value == null) {
         this.shadowValue.set('');
         this.shadowDate.set(null);
+        this.shadowBool.set(false);
         return;
       }
 
@@ -189,6 +197,11 @@ export class XrmuiInput {
 
       if (this.validate() == 'date') {
         this.shadowDate.set(value as Date);
+        return;
+      }
+
+      if (this.validate() == 'checkbox') {
+        this.shadowBool.set(value as boolean);
         return;
       }
 
@@ -278,8 +291,11 @@ export class XrmuiInput {
 
       }
     }
-
     this.searchbyname();
+  }
+
+  onCheckboxToggle() {
+    this.value.set(this.shadowBool());
   }
 
   onFocus() {
@@ -323,6 +339,20 @@ export class XrmuiInput {
         if (validate == 'decimal' || validate == 'number') {
           this.setNumberValueString();
         }
+        this.onblurEvent.emit();
+    },200);
+  }
+
+  onBlurCheckbox() {
+    setTimeout(() => {
+        this.hasfocus.set(false);
+        this.onblurEvent.emit();
+    },200);
+  }
+
+  onBlurDate() {
+    setTimeout(() => {
+        this.hasfocus.set(false);
         this.onblurEvent.emit();
     },200);
   }
@@ -522,7 +552,7 @@ export class XrmuiInput {
   }
 
   private handleNumber() {
-    const sv = this.shadowValue();
+    let sv = this.shadowValue();
     if (sv == '') {
       this.value.set(null);
     } else {

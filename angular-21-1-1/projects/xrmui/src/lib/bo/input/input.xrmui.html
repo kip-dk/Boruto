@@ -23,14 +23,14 @@
     }
 </div>
 }
-<div class="input" [ngClass]="{ focus: hasfocus(), error: error(), textarea: numberoflines() > 1, labelabove: shortLabel() == 'above', toolicon: toolIcon()?.length ?? 0 > 0}" (click)="focusMe($event)">
+<div class="input" [ngClass]="{ focus: hasfocus(), error: error(), textarea: numberoflines() > 1, labelabove: shortLabel() == 'above', toolicon: toolIcon()?.length ?? 0 > 0 }" (click)="focusMe($event)">
     @if (shortLabel() == 'above' && label() != '') {
         <div class="label-above">
             {{ label() }}
             @if (required()) {<span style="color: red">&nbsp;*</span>}
         </div>
     }
-    @if (numberoflines() == 1 && validate() != 'date' && !isselect()) {
+    @if (numberoflines() == 1 && validate() != 'date' && validate() != 'checkbox' && !isselect()) {
     <input 
         #inputfield 
         [ngClass]="inputclasses()"
@@ -48,6 +48,19 @@
         (keydown)="onkeydown($event)"
         [maxlength]="maxlength()"/>
     }
+    @if (validate() == 'checkbox') {
+        <div class="checkbox">
+        <input 
+            type="checkbox"
+            class="text checkbox"
+            [(ngModel)]="shadowBool"
+            [disabled]="disabled()"
+            (ngModelChange)="onCheckboxToggle()" 
+            (focus)="onFocus()" 
+            (blur)="onBlurCheckbox()"
+         />
+         </div>
+    }
     @if (numberoflines() == 1 && validate() == 'date' && !isselect()) {
         <input
         #datefield
@@ -58,7 +71,7 @@
          [disabled]="disabled()" 
          [placeholder]="placeholder()" 
         (focus)="onFocus()"
-        (blur)="onBlur()"/>
+        (blur)="onBlurDate()"/>
         @if (!disabled()) {
         <mat-icon 
             class="calendar-icon" 

@@ -22,6 +22,7 @@ export class BoComponent {
 
   selected = signal<IMenu>(this.tabs[0]);
 
+  yesno = signal<boolean>(true);
 
   searchService = new SearchService();
 
