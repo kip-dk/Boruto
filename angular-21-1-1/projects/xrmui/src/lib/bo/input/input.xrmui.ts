@@ -296,6 +296,7 @@ export class XrmuiInput {
 
   onCheckboxToggle() {
     this.value.set(this.shadowBool());
+    this.notifyOnChange();
   }
 
   onFocus() {
