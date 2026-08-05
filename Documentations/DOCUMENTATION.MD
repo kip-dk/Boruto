@@ -431,7 +431,7 @@ Compile the program, and run it from a prompt where you are in the root folder o
 
 
 ## History:  Boruto <- Kipon.Solid.Plugin
-This library is a migration of the Kipon.Solid.Plugin framework, however thie Boruto framework has been simplified and streamlined to use Microsoft standard development tools where applicable.
+This library is a migration of the Kipon.Solid.Plugin framework, however the Boruto framework has been simplified and streamlined to use Microsoft standard development tools where applicable.
 
 The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities, however also have important differences in the following areas:
 
