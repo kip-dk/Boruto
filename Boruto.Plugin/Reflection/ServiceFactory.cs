@@ -269,15 +269,6 @@ namespace Boruto.Reflection
             }
             #endregion
 
-
-            #region resolve types already mapped
-            if (toType != null)
-            {
-                resolved[fromType.ToKey(admin)] = this.CreateServiceInstance(toType);
-                return resolved[fromType.ToKey(admin)];
-            }
-            #endregion
-
             #region custom service provider
             if (this.ctx.CustomServiceProvider != null)
             {
@@ -288,6 +279,14 @@ namespace Boruto.Reflection
                     resolved[fromType.ToKey(admin)] = result;
                     return result;
                 }
+            }
+            #endregion
+
+            #region resolve types already mapped
+            if (toType != null)
+            {
+                resolved[fromType.ToKey(admin)] = this.CreateServiceInstance(toType);
+                return resolved[fromType.ToKey(admin)];
             }
             #endregion
 
