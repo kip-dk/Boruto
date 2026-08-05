@@ -966,5 +966,235 @@ namespace Boruto.Extensions.QueryExpression
             }
             return result;
         }
+
+        #region ADDED
+        public static string GetAndRemoveStringValueEqualFilter(this Microsoft.Xrm.Sdk.Query.QueryExpression query, string attributeName)
+        {
+            var result = query.Criteria.GetAndRemoveStringValueEqualFilter(attributeName);
+            return result;
+        }
+
+        public static string GetAndRemoveStringValueEqualFilter(this Microsoft.Xrm.Sdk.Query.FilterExpression filter, string attributeName)
+        {
+            if (filter.Conditions != null && filter.Conditions.Count > 0)
+            {
+                var found = filter.Conditions.Where(c => c.AttributeName == attributeName && c.Operator == ConditionOperator.Equal).FirstOrDefault();
+                if (found != null && found.Values != null && found.Values.Count > 0)
+                {
+                    filter.Conditions.Remove(found);
+                    return found.Values.First().ToString();
+                }
+            }
+
+            if (filter.Filters != null && filter.Filters.Count > 0)
+            {
+                foreach (var sub in filter.Filters)
+                {
+                    var result = sub.GetAndRemoveStringValueEqualFilter(attributeName);
+                    if (!string.IsNullOrEmpty(result))
+                    {
+                        return result;
+                    }
+                    ;
+                }
+            }
+            return null;
+        }
+
+        public static Guid? GetAndRemoveEntityReferenceFilter(this Microsoft.Xrm.Sdk.Query.QueryExpression query, string entityLogicalName, string attributName = null)
+        {
+            if (string.IsNullOrEmpty(entityLogicalName))
+            {
+                return null;
+            }
+
+            if (attributName == null)
+            {
+                attributName = $"{entityLogicalName}id";
+            }
+
+            #region relevant filter found on root criteria
+            if (query.Criteria != null && query.Criteria.Conditions != null && query.Criteria.Conditions.Count > 0)
+            {
+                var crit = query.Criteria.Conditions.Where(r => r.AttributeName == attributName && r.Operator == Microsoft.Xrm.Sdk.Query.ConditionOperator.Equal).FirstOrDefault();
+                if (crit != null && crit.Values != null && crit.Values.Count == 1)
+                {
+                    var result = crit.Values.First().ConvertValueTo<Guid?>(out bool resolved);
+                    if (result != null && resolved)
+                    {
+                        query.Criteria.Conditions.Remove(crit);
+                        return result;
+                    }
+                }
+            }
+            #endregion
+
+            #region relevant filter found on sub filter
+            if (query.Criteria != null && query.Criteria.Filters != null && query.Criteria.Filters.Count > 0)
+            {
+                foreach (var filter in query.Criteria.Filters)
+                {
+                    var next = filter.GetAndRemoveEntityReferenceFilter(attributName);
+                    if (next != null)
+                    {
+                        return next;
+                    }
+                }
+            }
+            #endregion
+
+            #region relevant filter found as entity logical name link
+            if (query.LinkEntities != null && query.LinkEntities.Count > 0)
+            {
+                var candidates = query.LinkEntities.Where(r => r.LinkToEntityName == entityLogicalName).ToArray();
+                foreach (var can in candidates)
+                {
+                    var next = can.LinkCriteria.GetAndRemoveEntityReferenceFilter($"{entityLogicalName}id");
+                    if (next != null)
+                    {
+                        query.LinkEntities.Remove(can);
+                        return next;
+                    }
+                }
+            }
+            #endregion
+            return null;
+        }
+
+        public static Guid? GetAndRemoveEntityReferenceFilter(this Microsoft.Xrm.Sdk.Query.FilterExpression filter, string attributName)
+        {
+            if (filter == null)
+            {
+                return null;
+            }
+
+            if (filter.Conditions != null && filter.Conditions.Count > 0)
+            {
+                var crit = filter.Conditions.Where(r => r.AttributeName == attributName && r.Operator == Microsoft.Xrm.Sdk.Query.ConditionOperator.Equal).FirstOrDefault();
+                if (crit != null && crit.Values != null && crit.Values.Count == 1)
+                {
+                    var result = crit.Values.First().ConvertValueTo<Guid?>(out bool resolved);
+                    if (result != null && resolved)
+                    {
+                        filter.Conditions.Remove(crit);
+                        return result;
+                    }
+                }
+            }
+
+            if (filter.Filters != null && filter.Filters.Count > 0)
+            {
+                foreach (var sub in filter.Filters)
+                {
+                    var next = sub.GetAndRemoveEntityReferenceFilter(attributName);
+                    if (next != null)
+                    {
+                        return next;
+                    }
+                }
+            }
+            return null;
+        }
+
+        public static void AddOptionSetEqualCondition(this Microsoft.Xrm.Sdk.Query.FilterExpression filter, string alias, string attributeName, int[] options)
+        {
+            if (options != null && options.Length > 0)
+            {
+                if (options.Length == 1)
+                {
+                    filter.Conditions.Add(new Microsoft.Xrm.Sdk.Query.ConditionExpression(alias, attributeName, Microsoft.Xrm.Sdk.Query.ConditionOperator.Equal, options[0]));
+                }
+                else
+                {
+                    filter.Conditions.Add(new Microsoft.Xrm.Sdk.Query.ConditionExpression(alias, attributeName, Microsoft.Xrm.Sdk.Query.ConditionOperator.In, options));
+                }
+            }
+        }
+
+        public static void AddOptionSetEqualCondition(this Microsoft.Xrm.Sdk.Query.FilterExpression filter, string attributeName, int[] options)
+        {
+            if (options != null && options.Length > 0)
+            {
+                if (options.Length == 1)
+                {
+                    filter.Conditions.Add(new Microsoft.Xrm.Sdk.Query.ConditionExpression(attributeName, Microsoft.Xrm.Sdk.Query.ConditionOperator.Equal, options));
+                }
+                else
+                {
+                    filter.Conditions.Add(new Microsoft.Xrm.Sdk.Query.ConditionExpression(attributeName, Microsoft.Xrm.Sdk.Query.ConditionOperator.In, options));
+                }
+            }
+        }
+
+        #region relation equal
+        public static void AddRelationEqualCondition(this Microsoft.Xrm.Sdk.Query.FilterExpression filter, string attributeName, Guid[] ids, Guid? asnull = null)
+        {
+            if (ids != null && ids.Length > 0)
+            {
+                if (ids.Length == 1 && asnull == null)
+                {
+                    filter.Conditions.Add(new Microsoft.Xrm.Sdk.Query.ConditionExpression(attributeName, Microsoft.Xrm.Sdk.Query.ConditionOperator.Equal, ids));
+                }
+                else
+                {
+                    if (asnull == null || !ids.Contains(asnull.Value))
+                    {
+                        filter.Conditions.Add(new Microsoft.Xrm.Sdk.Query.ConditionExpression(attributeName, Microsoft.Xrm.Sdk.Query.ConditionOperator.In, ids));
+                    }
+                    else
+                    {
+                        var sub = new Microsoft.Xrm.Sdk.Query.FilterExpression(LogicalOperator.Or);
+                        sub.Conditions.Add(new Microsoft.Xrm.Sdk.Query.ConditionExpression(attributeName, Microsoft.Xrm.Sdk.Query.ConditionOperator.In, ids));
+                        sub.Conditions.Add(new Microsoft.Xrm.Sdk.Query.ConditionExpression(attributeName, Microsoft.Xrm.Sdk.Query.ConditionOperator.Null));
+                        filter.AddFilter(sub);
+                    }
+                }
+            }
+        }
+
+        public static void AddRelationEqualCondition(this Microsoft.Xrm.Sdk.Query.FilterExpression filter, string alias, string attributeName, Guid[] ids)
+        {
+            if (ids != null && ids.Length > 0)
+            {
+                if (ids.Length == 1)
+                {
+                    var next = new Microsoft.Xrm.Sdk.Query.ConditionExpression(alias, attributeName, Microsoft.Xrm.Sdk.Query.ConditionOperator.Equal, ids[0]);
+                    filter.Conditions.Add(next);
+                }
+                else
+                {
+                    var sub = new Microsoft.Xrm.Sdk.Query.FilterExpression(LogicalOperator.Or);
+                    foreach (var v in ids)
+                    {
+                        var next = new Microsoft.Xrm.Sdk.Query.ConditionExpression(alias, attributeName, Microsoft.Xrm.Sdk.Query.ConditionOperator.Equal, v);
+                        sub.AddCondition(next);
+                    }
+                    filter.AddFilter(sub);
+                }
+            }
+        }
+        #endregion
+
+        public static void AddWholeNumberEqualCondition(this Microsoft.Xrm.Sdk.Query.FilterExpression filter, string alias, string attributeName, int[] values)
+        {
+            if (values != null && values.Length == 1)
+            {
+                var next = new Microsoft.Xrm.Sdk.Query.ConditionExpression(alias, attributeName, Microsoft.Xrm.Sdk.Query.ConditionOperator.Equal, values[0]);
+                filter.Conditions.Add(next);
+            }
+
+            if (values != null && values.Length > 1)
+            {
+                var sub = new Microsoft.Xrm.Sdk.Query.FilterExpression(Microsoft.Xrm.Sdk.Query.LogicalOperator.Or);
+                foreach (var v in values)
+                {
+                    var next = new Microsoft.Xrm.Sdk.Query.ConditionExpression(alias, attributeName, Microsoft.Xrm.Sdk.Query.ConditionOperator.Equal, v);
+                    sub.Conditions.Add(next);
+                }
+                filter.Filters.Add(sub);
+            }
+        }
+
+        #endregion
     }
 }
