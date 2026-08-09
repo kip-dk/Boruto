@@ -1,11 +1,12 @@
 import { NgClass } from '@angular/common';
-import { AfterContentInit, Component, computed, effect, ElementRef, inject, input, signal } from '@angular/core';
+import { AfterContentInit, Component, computed, effect, ElementRef, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
     selector: 'xrmui-icon',
     templateUrl: './icon.xrmui.html',
     styleUrl: './icon.xrmui.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [NgClass,MatIcon]
 })
 export class XrmuiIcon implements AfterContentInit {

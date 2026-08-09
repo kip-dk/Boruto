@@ -1,10 +1,11 @@
-import { Component, effect, input, output, signal, ViewEncapsulation } from '@angular/core';
+import { Component, effect, input, output, signal, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'ko-expansion-panel',
   templateUrl: './koexpansionpanel.component.html',
   styleUrls: ['./koexpansionpanel.component.scss'],
   imports: [],
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None
 })
 export class KoExpansionPanelComponent {

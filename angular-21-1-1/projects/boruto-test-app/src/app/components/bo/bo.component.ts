@@ -1,11 +1,12 @@
 import { DatePipe, NgClass } from '@angular/common';
-import { Component, computed, inject, Signal, signal } from '@angular/core';
+import { Component, computed, inject, Signal, signal, ChangeDetectionStrategy } from '@angular/core';
 import { BorutoXrmUIModule, IMenu, ISearchService, ISelectable } from 'boruto-xrmui';
 
 @Component({
   selector: 'app-bo',
   templateUrl: './bo.component.html',
   styleUrl: './bo.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports:[BorutoXrmUIModule,DatePipe]
 })
 export class BoComponent {

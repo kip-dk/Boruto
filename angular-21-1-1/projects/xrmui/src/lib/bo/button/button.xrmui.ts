@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { IMenu } from '../api/imenu.interface';
@@ -9,6 +9,7 @@ import { XrmuiSpinner } from '../spinner/spinner.xrmui';
     selector: 'xrmui-button',
     templateUrl: './button.xrmui.html',
     styleUrl: './button.xrmui.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [MatMenuModule, NgClass, MatIcon, XrmuiSpinner]
 })
 export class XrmuiButton implements OnChanges {

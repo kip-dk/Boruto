@@ -1,11 +1,12 @@
 import { NgStyle } from '@angular/common';
-import { Component, effect, input, Signal, signal, ViewEncapsulation } from '@angular/core';
+import { Component, effect, input, Signal, signal, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'ko-horizontal-split',
   templateUrl: './kohorizontalsplit.component.html',
   styleUrls: ['./kohorizontalsplit.component.scss'],
   imports: [NgStyle],
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None
 })
 export class KoHorizontalSplitComponent {

@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, input, output, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, input, output, OnInit, OnDestroy, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { Subscription } from 'rxjs';
 import { MatBadge } from '@angular/material/badge';
@@ -16,6 +16,7 @@ export interface IGroupedSelectable {
     selector: 'xrmui-info',
     templateUrl: './info.xrmui.html',
     styleUrl: './info.xrmui.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [MatIcon,MatBadge]
 })
 export class XrmuiInfo implements OnInit, OnDestroy  {

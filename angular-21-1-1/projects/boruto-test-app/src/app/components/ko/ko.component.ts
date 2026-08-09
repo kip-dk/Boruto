@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { XrmContextService } from 'boruto-xrmservice';
 import { KoNavigationByCssClass, KoDivider, KoNavigation, KiponUiModule, BorutoXrmUIModule } from 'boruto-xrmui';
 
@@ -7,6 +7,7 @@ import { KoNavigationByCssClass, KoDivider, KoNavigation, KiponUiModule, BorutoX
   selector: 'app-ko',
   templateUrl: './ko.component.html',
   styleUrl: './ko.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [BorutoXrmUIModule, KiponUiModule,NgClass]
 })
 export class KoComponent {

@@ -1,11 +1,12 @@
 import { NgStyle } from '@angular/common';
-import { Component, effect, input, signal, ViewEncapsulation } from '@angular/core';
+import { Component, effect, input, signal, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'ko-vertical-split',
   templateUrl: './koverticalsplit.component.html',
   styleUrls: ['./koverticalsplit.component.scss'],
   imports: [NgStyle],
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None
 
 })

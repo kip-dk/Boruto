@@ -1,11 +1,12 @@
 import { NgStyle } from '@angular/common';
-import { Component, input, ElementRef, ViewChild, ViewEncapsulation, OnChanges, AfterViewInit, ChangeDetectorRef, inject, effect, signal } from '@angular/core';
+import { Component, input, ElementRef, ViewChild, ViewEncapsulation, OnChanges, AfterViewInit, ChangeDetectorRef, inject, effect, signal, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'ko-table-panel',
   templateUrl: './kotablepanel.component.html',
   styleUrls: ['./kotablepanel.component.scss'],
   imports: [NgStyle],
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None
 
 })

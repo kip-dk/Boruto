@@ -1,6 +1,6 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { NgClass } from '@angular/common';
-import { AfterViewInit, Component, computed, effect, ElementRef, inject, input, OnDestroy, signal } from '@angular/core';
+import { AfterViewInit, Component, computed, effect, ElementRef, inject, input, OnDestroy, signal, ChangeDetectionStrategy } from '@angular/core';
 import { XrmuiPanel } from '../models/xrmuipanel.model';
 import { IDistance } from '../api/idistance.interface';
 
@@ -14,6 +14,7 @@ interface IStyle {
     selector: 'xrmui-layout',
     templateUrl: './layout.xrmui.html',
     styleUrl: './layout.xrmui.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [CdkDrag,NgClass]
 })
 export class XrmuiLayout implements AfterViewInit, OnDestroy {

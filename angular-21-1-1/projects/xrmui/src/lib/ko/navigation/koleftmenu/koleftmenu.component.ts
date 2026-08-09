@@ -1,4 +1,4 @@
-import { Component, input, output, ElementRef, AfterViewInit, inject, ViewEncapsulation, signal } from '@angular/core';
+import { Component, input, output, ElementRef, AfterViewInit, inject, ViewEncapsulation, signal, ChangeDetectionStrategy } from '@angular/core';
 
 import { KoDivider, KoNavigation, KoNavigationByCssClass, KoNavigationByImageUrl } from '../../models/navigation.interface';
 import { NgClass } from '@angular/common';
@@ -8,6 +8,7 @@ import { NgClass } from '@angular/common';
   templateUrl: './koleftmenu.component.html',
   styleUrls: ['./koleftmenu.component.scss'],
   imports: [NgClass],
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None
 })
 export class KoLeftMenuComponent implements AfterViewInit {

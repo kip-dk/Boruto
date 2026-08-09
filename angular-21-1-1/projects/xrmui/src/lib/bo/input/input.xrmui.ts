@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, computed, DestroyRef, effect, ElementRef, EventEmitter, inject, input, Input, isSignal, model, OnChanges, output, Output, QueryList, Signal, signal, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
+import { Component, computed, DestroyRef, effect, ElementRef, EventEmitter, inject, input, Input, isSignal, model, OnChanges, output, Output, QueryList, Signal, signal, SimpleChanges, ViewChild, ViewChildren, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { ISelectable } from '../api/iselectable.interface';
@@ -22,6 +22,7 @@ export const CTRL_KEYS = ['c','C','v','V','x','X'];
     selector: 'xrmui-input',
     templateUrl: './input.xrmui.html',
     styleUrl: './input.xrmui.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [FormsModule, NgClass, MatIcon,TextFieldModule,MatDatepickerModule,MatCheckboxModule]
 })
 export class XrmuiInput {

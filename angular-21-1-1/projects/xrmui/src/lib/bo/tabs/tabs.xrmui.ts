@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, input,  model } from '@angular/core';
+import { Component, input, model, ChangeDetectionStrategy } from '@angular/core';
 import { IMenu } from '../api/imenu.interface';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatBadge } from '@angular/material/badge';
@@ -11,6 +11,7 @@ import { MatMenuModule } from '@angular/material/menu';
     templateUrl: './tabs.xrmui.html',
     styleUrl: './tabs.xrmui.scss',
     imports: [NgClass,MatIcon,MatBadge,MatButtonModule, MatMenuModule, MatIconModule],
+    changeDetection: ChangeDetectionStrategy.Eager,
     providers: []
 })
 export class XrmuiTabs {

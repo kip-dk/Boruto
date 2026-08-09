@@ -1,11 +1,12 @@
 import { NgClass } from '@angular/common';
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
     selector: 'xrmui-spinner',
     templateUrl: './spinner.xrmui.html',
     styleUrl: './spinner.xrmui.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [MatProgressSpinnerModule]
 })
 export class XrmuiSpinner implements OnInit  {

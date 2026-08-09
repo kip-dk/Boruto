@@ -1,4 +1,4 @@
-import { Component, input, output, signal, inject, ElementRef, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, input, output, signal, inject, ElementRef, AfterViewInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 
 import { KoNavigation } from '../../models/navigation.interface';
 import { NgClass } from '@angular/common';
@@ -8,6 +8,7 @@ import { NgClass } from '@angular/common';
   templateUrl: './kotopmenu.component.html',
   styleUrls: ['./kotopmenu.component.scss'],
   imports: [NgClass],
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None
 })
 export class KoTopMenuComponent implements AfterViewInit {
