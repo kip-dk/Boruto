@@ -15,6 +15,7 @@
     "target": "ES2022",
     "module": "preserve",
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "paths": {
       "boruto-xrmservice": ["projects/xrm/src/public-api.ts"],
       "boruto-xrmui": ["projects/xrmui/src/public-api.ts"]

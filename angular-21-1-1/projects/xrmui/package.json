@@ -1,11 +1,11 @@
 {
   "name": "boruto-xrmui",
-  "version": "1.0.57",
+  "version": "1.22.1",
   "peerDependencies": {
-    "@angular/common": "^21.1.0",
-    "@angular/core": "^21.1.0",
-     "@angular/material": "^21.1.0",
-    "@angular/cdk": "^21.1.0"
+    "@angular/common": "^22.1.0",
+    "@angular/core": "^22.1.0",
+     "@angular/material": "^22.1.0",
+    "@angular/cdk": "^22.1.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
