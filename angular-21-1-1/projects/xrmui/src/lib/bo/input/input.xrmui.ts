@@ -268,6 +268,7 @@ export class XrmuiInput {
 
     this.lastBind = values;
     this.itemlist.set(values);
+    this.expandedItems = new Map<ISelectable,ISelectable[]>();
   }
 
 

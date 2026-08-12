@@ -12,7 +12,7 @@
                     {{ elm.name }}
                 }
             </div>
-            @if (elm.expandable == true && !this.isexpanded(elm)) {
+            @if (elm.expandable == true) {
             <div class="icon" (click)="expand($event, elm)">
                 <xrmui-icon icon="arrow_drop_down"></xrmui-icon>
             </div>
