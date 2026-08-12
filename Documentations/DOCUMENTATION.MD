@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2026-08-05 18:35
+## updated: 2026-08-12 13:30
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -444,6 +444,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package
 
 ## Changelog
+### 1.0.5.17 FilterValues in query extension did not search deep in Filters, if root Condition was empty
 ### 1.0.5.16 custom service provider sometimes was involved to late in the game, causing the boruto service provider trying to resolve services that should be resolved by the custom service provider
 ### 1.0.5.15 QueryExpression extension method to help manipulate expression
 ### 1.0.5.14 ChildOf check deeper than 1, might cause new problems when a transaction is the root of the plugin pipeline

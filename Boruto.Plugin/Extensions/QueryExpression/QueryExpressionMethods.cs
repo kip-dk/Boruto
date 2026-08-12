@@ -184,16 +184,16 @@ namespace Boruto.Extensions.QueryExpression
                 {
                     return con.Values.Select(r => (T)r).ToArray();
                 }
+            }
 
-                if (filter.Filters != null)
+            if (filter != null && filter.Filters != null)
+            {
+                foreach (var sub in filter.Filters)
                 {
-                    foreach (var sub in filter.Filters)
+                    var next = sub.FilterValues<T>(attribName, opr);
+                    if (next != null)
                     {
-                        var next = sub.FilterValues<T>(attribName, opr);
-                        if (next != null)
-                        {
-                            return next;
-                        }
+                        return next;
                     }
                 }
             }

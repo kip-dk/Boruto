@@ -91,6 +91,18 @@ export class XrmFormService {
     return null;
   }
 
+  getForm<T>() : T | undefined {
+
+    const ctx = this.getFormContext();
+    if (ctx) {
+      const _ctx = ctx as any;
+      if (_ctx["borutoAngularForm"]) {
+        return _ctx["borutoAngularForm"]() as T;
+      }
+    }
+    return undefined;
+  }
+
   // "Xrm", "Page", "ui", "getFormType"
 
 
