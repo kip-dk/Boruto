@@ -5,7 +5,18 @@
         }
         @for (elm of itemlist(); track elm) {
         <div #option class="element" [ngClass]="{ current: current == elm, selectable: !elm.disabled }" (click)="select($event, elm)">
-            <div class="item">{{ elm.name }}</div>
+            <div class="item">
+                @if (itemTemplate(); as template) {
+                    <ng-container *ngTemplateOutlet="template; context: { $implicit: elm }"></ng-container>
+                } @else {
+                    {{ elm.name }}
+                }
+            </div>
+            @if (elm.expandable == true && !this.isexpanded(elm)) {
+            <div class="icon" (click)="expand($event, elm)">
+                <xrmui-icon icon="arrow_drop_down"></xrmui-icon>
+            </div>
+            }
         </div>
         }
     </div>

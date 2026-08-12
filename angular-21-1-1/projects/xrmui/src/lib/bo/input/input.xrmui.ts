@@ -1,5 +1,5 @@
-import { NgClass } from '@angular/common';
-import { Component, computed, DestroyRef, effect, ElementRef, EventEmitter, inject, input, Input, isSignal, model, OnChanges, output, Output, QueryList, Signal, signal, SimpleChanges, ViewChild, ViewChildren, ChangeDetectionStrategy } from '@angular/core';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { Component, computed, DestroyRef, effect, ElementRef, EventEmitter, inject, input, Input, isSignal, model, OnChanges, output, Output, QueryList, Signal, signal, SimpleChanges, ViewChild, ViewChildren, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { ISelectable } from '../api/iselectable.interface';
@@ -12,6 +12,7 @@ import { EntityReference } from '../api/entityreference.interface';
 import { FormScopeDirective } from '../form/formscope.directive';
 import { nFormater } from '../models/nformat.model';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { XrmuiIcon } from "../icon/icon.xrmui";
 
 export const NAVIGATIONKEYS = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape','Tab','Enter','Backspace','Delete','End','Home','Shift','CapsLock','Insert','PageUp','PageDown','PageDown','PageDown'];
 export const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
@@ -23,7 +24,7 @@ export const CTRL_KEYS = ['c','C','v','V','x','X'];
     templateUrl: './input.xrmui.html',
     styleUrl: './input.xrmui.scss',
     changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [FormsModule, NgClass, MatIcon,TextFieldModule,MatDatepickerModule,MatCheckboxModule]
+    imports: [FormsModule, NgClass, MatIcon,TextFieldModule,MatDatepickerModule,MatCheckboxModule,XrmuiIcon,NgTemplateOutlet]
 })
 export class XrmuiInput {
     @ViewChild('inputfield') searchElement?: ElementRef;
@@ -113,6 +114,8 @@ export class XrmuiInput {
       }
       return false;
     });
+
+    itemTemplate = input<TemplateRef<{ $implicit: ISelectable }> | undefined>();
 
     decimalsUsed = output<number>();
     onEnter = output<void>();
@@ -247,9 +250,24 @@ export class XrmuiInput {
       const ap = this.autocomplete();
 
       if (ap) {
-        this.itemlist.set(ap.items());
+        console.log('her');
+        this.bindItems(ap.items());
       }
     });
+  }
+
+  private lastBind = [] as ISelectable[];
+
+  private bindItems(values: ISelectable[]) {
+    const same = values.length === this.lastBind.length &&
+              values.every(v => this.lastBind.includes(v));
+
+    if (same) {
+      return;
+    }
+
+    this.lastBind = values;
+    this.itemlist.set(values);
   }
 
 
@@ -315,6 +333,12 @@ export class XrmuiInput {
   onBlur() {
     this.handleNumber();
     this.blurThead = setTimeout(() => {
+      if (this.expanding) {
+        this.expanding = false;
+        this.focusMe(undefined, false);
+        return;
+      }
+
       this.hasfocus.set(false);
       this.showitems.set(false);
 
@@ -375,6 +399,11 @@ export class XrmuiInput {
   onenter(e: Event) {
     e.stopPropagation();
     e.preventDefault();
+
+    if (this.current && this.current.expandable == true && !this.isexpanded(this.current)) {
+      this.expand(e, this.current);
+      return;
+    }
 
     this.onEnter.emit();
 
@@ -502,7 +531,7 @@ export class XrmuiInput {
   }
 }
 
-  focusMe(e?: Event) {
+  focusMe(e?: Event, clicked = true) {
     e?.stopPropagation();
 
     if (!this.disabled() && this.searchElement != null) {
@@ -517,7 +546,9 @@ export class XrmuiInput {
       this.datefieldElement.nativeElement.focus();
     }
 
-    this.click.emit();
+    if (clicked) {
+      this.click.emit();
+    }
   }
 
   toolClicked(e: Event) {
@@ -585,9 +616,13 @@ export class XrmuiInput {
   }
 
     private expandedItems = new Map<ISelectable, ISelectable[]>();
-    
+    private expanding = false;
+
     async expand(ev: Event, e: ISelectable) {
-      ev.stopPropagation();
+      console.log('expand');
+      this.expanding = true;
+      ev.stopImmediatePropagation();
+
       if (this.expandedItems.get(e)) {
         return;
       }
@@ -598,7 +633,18 @@ export class XrmuiInput {
           e.expandable = false;
           return;
         }
+
+        const nextlist = [] as ISelectable[];
+
+        for (const n of this.itemlist()) {
+          nextlist.push(n);
+          if (n == e) {
+            children.forEach(c => nextlist.push(c));
+          }
+        }
         this.expandedItems.set(e, children);
+
+        this.itemlist.set(nextlist);
       }
     }
 

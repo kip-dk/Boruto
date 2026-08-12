@@ -32,7 +32,17 @@
             </div>
 
             <div style="max-width: 400px;">
-                <xrmui-input [showlock]="false" short-label="above" label="Labeltekst" placeholder="Start type to search" [(value)]="search" [autocomplete]="searchService" (onselect)="select($event)" [autoopenonblank]="true" info="Please select the right one"></xrmui-input>
+                <xrmui-input 
+                    [showlock]="false" 
+                    short-label="above" 
+                    label="Labeltekst" 
+                    placeholder="Start type to search" 
+                    [(value)]="search" 
+                    [autocomplete]="searchService" 
+                    [itemTemplate]="item"
+                    (onselect)="select($event)" 
+                    [autoopenonblank]="true" info="Please select the right one">
+                </xrmui-input>
             </div>
 
             <div style="max-width: 400px;">
@@ -46,5 +56,11 @@
         </xrmui-panel>
     </xrmui-layout>
 </xrmui-layout>
+
+<ng-template #item let-elm>
+  <div class="item">
+    <b>{{ elm.name }}</b><br />{{ elm.id }}
+  </div>
+</ng-template>
 
 
