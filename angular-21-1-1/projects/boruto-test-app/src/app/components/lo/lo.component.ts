@@ -16,7 +16,6 @@ export class LoComponent {
   constructor() {
     effect(() => {
       const mi = this.myInput();
-      console.log(mi);
     });
   }
 

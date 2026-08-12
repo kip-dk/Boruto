@@ -250,7 +250,6 @@ export class XrmuiInput {
       const ap = this.autocomplete();
 
       if (ap) {
-        console.log('her');
         this.bindItems(ap.items());
       }
     });
@@ -620,7 +619,6 @@ export class XrmuiInput {
     private expanding = false;
 
     async expand(ev: Event, e: ISelectable) {
-      console.log('expand');
       this.expanding = true;
       ev.stopImmediatePropagation();
 
