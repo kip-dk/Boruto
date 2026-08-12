@@ -584,6 +584,31 @@ export class XrmuiInput {
     }
   }
 
+    private expandedItems = new Map<ISelectable, ISelectable[]>();
+    
+    async expand(ev: Event, e: ISelectable) {
+      ev.stopPropagation();
+      if (this.expandedItems.get(e)) {
+        return;
+      }
+
+      if (e.expand) {
+        const children = await e.expand();
+        if (!children || children.length == 0) {
+          e.expandable = false;
+          return;
+        }
+        this.expandedItems.set(e, children);
+      }
+    }
+
+  isexpanded(e:ISelectable): boolean {
+    return this.expandedItems.get(e) != undefined;
+  }
+  expandedvalues(e: ISelectable): ISelectable[] | null {
+    return this.expandedItems.get(e) ?? null;
+  }
+
 
   private setNumberValueString() {
     const v = Number(this.value());
