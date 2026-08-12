@@ -53,8 +53,13 @@ export class BoComponent {
 
 
 export class SearchService implements ISearchService {
+
     private data: ISelectable[] = [
-      { id: '1', name: 'Ananas' },
+      { id: '1', name: 'Ananas', expandable: true, expand: async () => [
+        { id: '1.1', name: 'Ananas 1' },
+        { id: '1.2', name: 'Ananas 2' },
+        { id: '1.3', name: 'Ananas 3' }
+      ] },
       { id: '2', name: 'Apelsin' },
       { id: '3', name: 'Banan' },
       { id: '4', name: 'Citron' },

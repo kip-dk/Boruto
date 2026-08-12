@@ -13,6 +13,9 @@ export interface ISelectable {
   latitude?: number;
   longitude?: number;
   coorcolor?: string;
+  expandable?: boolean;
+  expand?(): Promise<ISelectable[]>;
+
 }
 
 
