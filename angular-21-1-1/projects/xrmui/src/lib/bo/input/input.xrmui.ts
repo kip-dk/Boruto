@@ -1,5 +1,8 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, computed, DestroyRef, effect, ElementRef, EventEmitter, inject, input, Input, isSignal, model, OnChanges, output, Output, QueryList, Signal, signal, SimpleChanges, ViewChild, ViewChildren, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
+import { Component, computed, DestroyRef, effect, ElementRef, EventEmitter, inject, input, Input, isSignal, model, OnChanges, output, Output, QueryList, Signal, signal, SimpleChanges, ViewChild, ViewChildren, ChangeDetectionStrategy, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { ViewContainerRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { ISelectable } from '../api/iselectable.interface';
@@ -24,6 +27,7 @@ export const CTRL_KEYS = ['c','C','v','V','x','X'];
     templateUrl: './input.xrmui.html',
     styleUrl: './input.xrmui.scss',
     changeDetection: ChangeDetectionStrategy.Eager,
+    encapsulation: ViewEncapsulation.None,
     imports: [FormsModule, NgClass, MatIcon,TextFieldModule,MatDatepickerModule,MatCheckboxModule,XrmuiIcon,NgTemplateOutlet]
 })
 export class XrmuiInput {
@@ -31,6 +35,11 @@ export class XrmuiInput {
     @ViewChild('textareafield') textareaElement?: ElementRef;
     @ViewChild('datefield') datefieldElement?: ElementRef;
     @ViewChildren('option') options!: QueryList<ElementRef<HTMLDivElement>>;
+    @ViewChild('suggestionsTemplate') suggestionsTemplate!: TemplateRef<unknown>;
+
+    private overlay = inject(Overlay);
+    private viewContainerRef = inject(ViewContainerRef);
+    private overlayRef?: OverlayRef;
 
     private changeScope = inject(ChangeScopeDirective, {optional: true,host: true });
     private formScope = inject(FormScopeDirective, {optional: true,host: true });
@@ -251,6 +260,15 @@ export class XrmuiInput {
 
       if (ap) {
         this.bindItems(ap.items());
+      }
+    });
+
+    effect(() => {
+      const si = this.showitems();
+      if (si) {
+        this.showSuggestions();
+      } else {
+        this.hideSuggestions();
       }
     });
   }
@@ -668,5 +686,49 @@ export class XrmuiInput {
     } else {
       this.shadowValue.set(nFormater.flex(v));
     }
+  }
+
+  private showSuggestions(): void {
+    if (!this.overlayRef && this.searchElement) {
+
+      const positionStrategy = this.overlay
+            .position()
+            .flexibleConnectedTo(this.searchElement.nativeElement)
+            .withPositions([
+                {
+                    originX: 'start',
+                    originY: 'bottom',
+                    overlayX: 'start',
+                    overlayY: 'top'
+                }
+            ]);
+
+        this.overlayRef = this.overlay.create({
+            positionStrategy,
+            width: this.searchElement.nativeElement.offsetWidth,
+            maxHeight: '200px',
+            scrollStrategy: this.overlay.scrollStrategies.reposition()
+        });
+    }
+
+    if (this.searchElement && this.overlayRef && !this.overlayRef.hasAttached()) {
+        const portal = new TemplatePortal(
+            this.suggestionsTemplate,
+            this.viewContainerRef
+        );
+        this.overlayRef.attach(portal);
+
+        const autocomplete = this.overlayRef.overlayElement
+            .querySelector('.autocomplete') as HTMLElement;
+
+        if (autocomplete) {
+            autocomplete.style.width =
+                `${this.searchElement.nativeElement.offsetWidth}px`;
+        }
+    }
+  }
+
+  private hideSuggestions(): void {
+    this.overlayRef?.detach();
   }
 }

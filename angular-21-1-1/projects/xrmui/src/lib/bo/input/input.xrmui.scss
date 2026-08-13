@@ -1,17 +1,11 @@
-:host {
-    position: relative;
+.boruto-ui {
     display: flex;
     margin-bottom: 10px;
 }
 
-:host div.autocomplete {
-    position: absolute;
-    z-index: 100;
-    top: 37px;
-    left: 215px;
-    right: 0;
-    background-color: red;
-    min-height: 40px;
+.boruto-ui div.autocomplete {
+    display: block;
+    box-sizing: border-box;
     background-color: white;
     color: black;
     border: solid;
@@ -24,33 +18,33 @@
     overflow-y: auto;
 }
 
-:host div.autocomplete.nolabel {
+.boruto-ui  div.autocomplete.nolabel {
     left: 0;
 }
 
-:host div.autocomplete.shortLabel {
+.boruto-ui  div.autocomplete.shortLabel {
     left: 124px;
 }
 
-:host div.autocomplete div.element.selectable {
+.boruto-ui  div.autocomplete div.element.selectable {
     cursor: pointer
 }
 
 @media (prefers-color-scheme: dark) {
-    :host div.autocomplete {
+    .boruto-ui div.autocomplete {
         background-color: black;
         color: white;
     }
 }
 
 @media (prefers-color-scheme: dark) {
-    :host div.autocomplete.notdark {
+    .boruto-ui div.autocomplete.notdark {
         background-color: white;
         color: black;
     }
 }
 
-:host div.autocomplete div.element {
+.boruto-ui div.autocomplete div.element {
     margin: 5px 5px 5px 5px;
     padding: 5px 5px 5px 5px;
     display: flex;
@@ -61,16 +55,16 @@
     color: gray;
 }
 
-:host div.autocomplete div.element.current {
+.boruto-ui div.autocomplete div.element.current {
     border-color: #0f6cbd;
     color: black;
 }
 
-:host div.autocomplete div.element div.item {
+.boruto-ui div.autocomplete div.element div.item {
     flex-grow: 1;
 }
 
-:host div.label {
+.boruto-ui div.label {
     width: 180px;
     min-width: 180px;
     max-height: 180px;
@@ -78,12 +72,12 @@
     line-height: 32px;
 }
 
-:host div.label.short {
+.boruto-ui div.label.short {
     width: 90px;
     min-width: 90px;
 }
 
-:host div.locked {
+.boruto-ui div.locked {
     width: 30px;
     min-width: 30px;
     max-width: 30px;
@@ -92,7 +86,7 @@
     text-align: right;
     padding-right: 3px;
 }
-:host div.input {
+.boruto-ui div.input {
     flex-grow: 1;
     height: 32px;
     line-height: 32px;
@@ -105,11 +99,11 @@
     border-color: transparent;
 }
 
-:host div.input.labelabove {
+.boruto-ui div.input.labelabove {
     height: 48px;
 }
 
-:host div.input.labelabove div.label-above {
+.boruto-ui div.input.labelabove div.label-above {
     font-size: 12px;
     line-height: 12px;
     width: 100%;
@@ -118,20 +112,20 @@
     color: gray;
 }
 
-:host div.input.focus.labelabove div.label-above {
+.boruto-ui div.input.focus.labelabove div.label-above {
     color: #0f6cbd;
 }
 
 
-:host div.input.textarea {
+.boruto-ui div.input.textarea {
     height: inherit;
 }
 
-:host div.info {
+.boruto-ui div.info {
     width: 30px;
 }
 
-:host div textarea {
+.boruto-ui div textarea {
     background-color:   #e6e8e8;
     border-radius: 3px;
     margin: 0 0 0 0;
@@ -143,20 +137,20 @@
      box-sizing: border-box;
 }
 
-:host div.input.focus,
-:host div.textarea.focus,
-:host div.select.focus {
+.boruto-ui div.input.focus,
+.boruto-ui div.textarea.focus,
+.boruto-ui div.select.focus {
     border-color: #0f6cbd;
 }
 
-:host div.input.error,
-:host div.input.focus.error,
-:host div.select.focus.error {
+.boruto-ui div.input.error,
+.boruto-ui div.input.focus.error,
+.boruto-ui div.select.focus.error {
     border-color: red;
     color: red;
 }
 
-:host input {
+.boruto-ui input {
     background-color: transparent;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
@@ -167,11 +161,11 @@
     box-sizing: border-box;
 }
 
-:host input.number {
+.boruto-ui input.number {
     text-align: right;
 }
 
-:host select {
+.boruto-ui select {
     background-color: transparent;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
@@ -182,51 +176,51 @@
     box-sizing: border-box;
 }
 
-:host input.datepicker {
+.boruto-ui input.datepicker {
      width: calc(100% - 35px);
 }
 
 
-:host div.input > div.checkbox {
+.boruto-ui div.input > div.checkbox {
     margin-left: 15px;
     margin-top: 5px;
 }
 
-:host div.input.above > div.checkbox {
+.boruto-ui div.input.above > div.checkbox {
     margin-top: 2px;
 }
 
-:host input.checkbox {
+.boruto-ui input.checkbox {
     width: 15px;
     height: 15px; 
 }
 
-:host div.input.toolicon input {
+.boruto-ui div.input.toolicon input {
     width: calc(100% - 35px);
 }
 
 @media (prefers-color-scheme: dark) {
-    :host input {
+    .boruto-ui input {
         color: black;
     }
 
-    :host input:disabled {
+    .boruto-ui input:disabled {
         color: #5f615f;
     }
 }
 
 
-:host input.number {
+.boruto-ui input.number {
     text-align: right;
     padding-right: 15px;
     padding-left: 0;
 }
 
-:host *:focus {
+.boruto-ui *:focus {
     outline: none;
 }
 
-:host mat-icon {
+.boruto-ui mat-icon {
     color: lightgray;
     font-size: 12px;
     position: relative;
@@ -234,29 +228,33 @@
     width: 12px;
 }
 
-:host textarea.noresize {
+.boruto-ui .expand mat-icon {
+    width: 24px;
+}
+
+.boruto-ui textarea.noresize {
      resize: none;
 }
 
-:host mat-icon.info {
+.boruto-ui mat-icon.info {
     font-size: 30px; 
     width: 30px; 
     height: 30px;
     color: gray;
 }
 
-:host mat-icon.info:hover {
+.boruto-ui mat-icon.info:hover {
     color: black;
 }
 
-:host mat-icon.calendar-icon {
+.boruto-ui mat-icon.calendar-icon {
     font-size: 25px; 
     width: 25px; 
     height: 25px; 
     color: darkgray;
 }   
 
-:host mat-icon.toolicon {
+.boruto-ui mat-icon.toolicon {
     cursor: pointer;
     font-size: 25px; 
     width: 25px; 
@@ -264,7 +262,7 @@
     color: gray;
 }
 
-:host mat-icon.dropdown {
+.boruto-ui mat-icon.dropdown {
     position: absolute;
     right: 10px;
     top: 4px;
@@ -275,18 +273,18 @@
     pointer-events: none;
 }
 
-:host div.input.labelabove mat-icon.dropdown {
+.boruto-ui div.input.labelabove mat-icon.dropdown {
     top: 12px;
 }
 
-:host div.input.labelabove mat-icon.toolicon,
-:host div.input.labelabove mat-icon.calendar-icon {
+.boruto-ui div.input.labelabove mat-icon.toolicon,
+.boruto-ui div.input.labelabove mat-icon.calendar-icon {
     position: relative;
     top: -5px;
 }
 
 
-:host select {
+.boruto-ui select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;

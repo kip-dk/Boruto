@@ -1,26 +1,4 @@
-@if (showitems()) {
-    <div class="autocomplete" [ngClass]="{ nolabel: (!label() || label().length == 0 || shortLabel() == 'above'), shortLabel: shortLabel() == true, notdark: notdark() }">
-        @if (itemlist().length == 0) {
-        <div class="element"><div class="item">Ingen fundet</div>div></div>
-        }
-        @for (elm of itemlist(); track elm) {
-        <div #option class="element" [ngClass]="{ current: current == elm, selectable: !elm.disabled }" (click)="select($event, elm)">
-            <div class="item">
-                @if (itemTemplate(); as template) {
-                    <ng-container *ngTemplateOutlet="template; context: { $implicit: elm }"></ng-container>
-                } @else {
-                    {{ elm.name }}
-                }
-            </div>
-            @if (elm.expandable == true) {
-            <div class="icon" (click)="expand($event, elm)">
-                <xrmui-icon icon="arrow_drop_down"></xrmui-icon>
-            </div>
-            }
-        </div>
-        }
-    </div>
-}
+<div class="boruto-ui">
 @if (label() != '' && label().length > 0 && shortLabel() != 'above') {
 <div class="label" [ngClass]="{ short: shortLabel() == true }" (click)="focusMe($event)">{{ label() }}</div>
 }
@@ -139,3 +117,30 @@
 }
 
 @if (info()) {<div class="info" [title]="info()"><mat-icon class="info">info</mat-icon></div>}
+</div>
+
+<ng-template #suggestionsTemplate>
+    <div class="boruto-ui">
+        <div class="autocomplete" [ngClass]="{ nolabel: (!label() || label().length == 0 || shortLabel() == 'above'), shortLabel: shortLabel() == true, notdark: notdark() }">
+            @if (itemlist().length == 0) {
+            <div class="element"><div class="item">Ingen fundet</div>div></div>
+            }
+            @for (elm of itemlist(); track elm) {
+            <div #option class="element" [ngClass]="{ current: current == elm, selectable: !elm.disabled }" (click)="select($event, elm)">
+                <div class="item">
+                    @if (itemTemplate(); as template) {
+                        <ng-container *ngTemplateOutlet="template; context: { $implicit: elm }"></ng-container>
+                    } @else {
+                        {{ elm.name }}
+                    }
+                </div>
+                @if (elm.expandable == true) {
+                <div class="icon expand" (click)="expand($event, elm)">
+                    <xrmui-icon icon="arrow_drop_down" size="24"></xrmui-icon>
+                </div>
+                }
+            </div>
+            }
+        </div>
+    </div>
+</ng-template>

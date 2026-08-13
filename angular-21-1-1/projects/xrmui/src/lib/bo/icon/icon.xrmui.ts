@@ -15,6 +15,7 @@ export class XrmuiIcon implements AfterContentInit {
     _icon = input<string>('', { alias: 'icon' });
   disabled = input<boolean>(false);
   type = input<'mat' | 'fa'>('mat');
+  size = input<'12'|'24'|'36'|'48' | undefined>();
 
   icon = signal<string>('');
 
@@ -22,16 +23,25 @@ export class XrmuiIcon implements AfterContentInit {
     const i = this.icon();
     const d = this.disabled();
     const t = this.type();
+    const f = this.size();
 
-    if (t == 'mat') {
-      if (d) return ["disabled"];
-      return [];
+    const res = [] as string[];
+
+    if (f) {
+      res.push('f'+f);
     }
 
     if (d) {
-      return ['fa',i,'disabled'];
+      res.push('disabled')
     }
-    return ['fa',i];
+
+    if (t == 'mat') {
+      return res;
+    }
+
+    res.push('fa');
+    res.push(i);
+    return res;
   });
 
   constructor() {
