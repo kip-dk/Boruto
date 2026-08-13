@@ -123,7 +123,7 @@
     <div class="boruto-ui">
         <div class="autocomplete" [ngClass]="{ nolabel: (!label() || label().length == 0 || shortLabel() == 'above'), shortLabel: shortLabel() == true, notdark: notdark() }">
             @if (itemlist().length == 0) {
-            <div class="element"><div class="item">Ingen fundet</div>div></div>
+            <div class="element"><div class="item">Ingen fundet</div></div>
             }
             @for (elm of itemlist(); track elm) {
             <div #option class="element" [ngClass]="{ current: current == elm, selectable: !elm.disabled }" (click)="select($event, elm)">
