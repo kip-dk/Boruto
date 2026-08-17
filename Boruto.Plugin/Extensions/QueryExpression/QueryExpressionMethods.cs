@@ -140,6 +140,48 @@ namespace Boruto.Extensions.QueryExpression
             return null;
         }
 
+        public static T GetAndRemoveAttributeEqualFilter<T>(this Microsoft.Xrm.Sdk.Query.QueryExpression query, string attributeName)
+        {
+            if (query.Criteria != null)
+            {
+                return query.Criteria.GetAndRemoveAttributeEqualFilter<T>(attributeName);
+            }
+            return default(T);
+        }
+
+        public static T GetAndRemoveAttributeEqualFilter<T>(this Microsoft.Xrm.Sdk.Query.FilterExpression filter, string attributeName)
+        {
+            if (filter.Conditions != null)
+            {
+                foreach (var f in filter.Conditions.ToArray())
+                {
+                    if (f.AttributeName == attributeName && f.Operator == ConditionOperator.Equal)
+                    {
+                        var value = f.Values.FirstOrDefault();
+                        if (value != null && value is T)
+                        {
+                            filter.Conditions.Remove(f);
+                            return (T)value;
+                        }
+                    }
+                }
+            }
+
+            if (filter.Filters != null && filter.Filters.Count > 0)
+            {
+                foreach (var sub in filter.Filters)
+                {
+                    var next = sub.GetAndRemoveAttributeEqualFilter<T>(attributeName);
+                    if (next != null)
+                    {
+                        return next;
+                    }
+                }
+            }
+
+            return default(T);
+        }
+
         [System.Diagnostics.DebuggerNonUserCode()]
         public static Guid? EntityReferenceIdEqualFilter(this Microsoft.Xrm.Sdk.Query.QueryExpression query, string attribName)
         {

@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2026-08-12 13:30
+## updated: 2026-08-17 09:20
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -444,6 +444,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package
 
 ## Changelog
+### 1.0.5.18 added query extension method GetAndRemoveAttributeEqualFilter do allow easy way of finding a single property equal filter within the query, and remove that, so the consumer can add other filter based on the value
 ### 1.0.5.17 FilterValues in query extension did not search deep in Filters, if root Condition was empty
 ### 1.0.5.16 custom service provider sometimes was involved to late in the game, causing the boruto service provider trying to resolve services that should be resolved by the custom service provider
 ### 1.0.5.15 QueryExpression extension method to help manipulate expression
