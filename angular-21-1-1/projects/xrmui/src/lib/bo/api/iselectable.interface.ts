@@ -14,6 +14,7 @@ export interface ISelectable {
   longitude?: number;
   coorcolor?: string;
   expandable?: boolean;
+  completeOnly?: boolean;
   expand?(): Promise<ISelectable[]>;
 
 }

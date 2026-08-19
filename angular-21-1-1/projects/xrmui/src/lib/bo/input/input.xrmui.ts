@@ -423,6 +423,11 @@ export class XrmuiInput {
       return;
     }
 
+    if (this.current && this.current.completeOnly == true) {
+      this.complete(e, this.current);
+      return;
+    }
+
     this.onEnter.emit();
 
     if (this.showitems() == false) {
@@ -663,6 +668,13 @@ export class XrmuiInput {
 
         this.itemlist.set(nextlist);
       }
+    }
+
+    async complete(ev: Event, e: ISelectable) {
+      ev.stopImmediatePropagation();
+      this.shadowValue.set(e.name ?? '');
+      this.onValueChanged();
+      this.setfocus.set(true);
     }
 
   isexpanded(e:ISelectable): boolean {

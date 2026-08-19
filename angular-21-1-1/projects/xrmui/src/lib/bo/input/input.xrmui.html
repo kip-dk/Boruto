@@ -139,6 +139,11 @@
                     <xrmui-icon icon="arrow_drop_down" size="24"></xrmui-icon>
                 </div>
                 }
+                @if (elm.completeOnly == true) {
+                <div class="icon complete" (click)="complete($event, elm)">
+                    <xrmui-icon icon="search" size="24"></xrmui-icon>
+                </div>
+                }
             </div>
             }
         </div>
