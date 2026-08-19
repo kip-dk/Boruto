@@ -349,7 +349,7 @@ namespace Boruto.Extensions.QueryExpression
             {
                 foreach (var con in filter.Conditions)
                 {
-                    tracingService.Trace($"{indentString} {con.EntityName}.{con.AttributeName} {con.Operator}");
+                    tracingService.Trace($"{indentString} {con.EntityName}.{con.AttributeName} {con.Operator} Value count: [{(con.Values?.Count ?? 0)}]");
                     if (con.Values != null && con.Values.Count > 0)
                     {
                         foreach (var val in con.Values)
