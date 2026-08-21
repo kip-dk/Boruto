@@ -46,6 +46,10 @@ export class BoComponent {
 
   mynumber = signal<number>(1200000.45);
 
+  taReleased() {
+    console.log(`${new Date()}: ${this.description()}`)
+  }
+
   toolClick() {
     alert('hi from tool click');
   }

@@ -1,6 +1,6 @@
 {
   "name": "boruto-xrmservice",
-  "version": "2.22.2",
+  "version": "2.22.3",
   "peerDependencies": {
     "@angular/common": "^22.1.0",
     "@angular/core": "^22.1.0",

@@ -112,6 +112,9 @@ export class XrmuiInput {
     _autoopenonblank = input<boolean | undefined>(undefined, { alias: "autoopenonblank" });
     nullable = input<boolean>(true);
 
+    release = input<number | null>(null);
+    released = output<void>();
+
     autoopenonblank = computed(() => {
       const au = this._autoopenonblank();
       if (au != undefined) {
@@ -605,6 +608,21 @@ export class XrmuiInput {
 
   private notifyOnChange() {
     this.changeScope?.notifyChanged();
+    this.releaseOnChanged();
+  }
+
+  private releaseThread?: number;
+  private releaseOnChanged() {
+    if (this.releaseThread) {
+      clearTimeout(this.releaseThread);
+    }
+
+    const mSec = this.release();
+    if (mSec && mSec > 0) {
+      this.releaseThread = setTimeout(() => {
+        this.released.emit();
+      }, mSec);
+    }
   }
 
   private handleNumber() {
