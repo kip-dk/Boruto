@@ -59,7 +59,7 @@ export class FetchEntity {
       this.linkedentities = [];
     }
 
-    var next = new Link(this.name, alias, "outer", property, res);
+    var next = new Link(from, alias, "outer", property, res);
 
     this.linkedentities.push(next);
     return res;
