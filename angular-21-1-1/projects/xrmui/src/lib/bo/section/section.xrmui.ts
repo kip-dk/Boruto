@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, input, Input, OnChanges, output, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 
@@ -30,6 +30,10 @@ export class XrmuiSection implements OnChanges {
   @Output('enter') enter: EventEmitter<void> = new EventEmitter();
   @Output('esc') esc: EventEmitter<void> = new EventEmitter();
 
+  private release$ = 0;
+  searchReleaseAfter = input<number | null>(null);
+  searchReleased = output<void>();
+
   constructor() {
   }
 
@@ -44,6 +48,7 @@ export class XrmuiSection implements OnChanges {
 
   searchChanged() {
     this.searchChange.emit(this.search);
+    this.doRelease();
   }
 
   check() {
@@ -93,6 +98,19 @@ export class XrmuiSection implements OnChanges {
   private focusSearch() {
     if (this.searchElement != null) {
       this.searchElement.nativeElement.focus();
+    }
+  }
+
+  private doRelease() {
+    const re = this.searchReleaseAfter();
+    if (re && re > 0) {
+      if (this.release$ > 0) {
+        clearTimeout(this.release$);
+      }
+
+      this.release$ = setTimeout(() => {
+        this.searchReleased.emit();
+      }, re);
     }
   }
 }
