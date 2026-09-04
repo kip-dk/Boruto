@@ -1,0 +1,20 @@
+@if (topTitle != '') {<div class="toptitle-container">
+    <div class="toptitle">{{ topTitle }}</div>
+</div>}
+@if(title != '' && !searchable) {<div class="header">{{ title }}</div>}
+@if (searchable) {
+<div class="search">
+        @if (checkable) {
+        <div class="chexkbox">
+            @if (checked){<mat-icon title="Fravælg alle" (click)="uncheck()">check_box</mat-icon>}
+            @if(!checked) {<mat-icon title="Vælg alle" (click)="check()">check_box_outline_blank</mat-icon>}
+        </div>
+        }
+    <input #searchelement [(ngModel)]="search" (ngModelChange)="searchChanged()" [placeholder]="title"
+        (keydown.esc)="onkeyesc($event)" (keydown.arrowdown)="onkeydown($event)" (keydown.arrowup)="onkeyup($event)"
+        (keydown.enter)="onkeyenter($event)" 
+        [placeholder]="placeholder" />
+    <div class="therest"></div>
+</div>
+}
+<div class="xrmui-section-content" [ngClass]="{'nosearchortitle': searchable == false && title == ''}"><ng-content></ng-content></div>

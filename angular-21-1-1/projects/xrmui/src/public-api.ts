@@ -55,5 +55,6 @@ export * from './lib/bo/devider/devider.xrmui';
 export * from './lib/bo/tabs/tabs.xrmui';
 export * from './lib/bo/changedscope/changedscope.directive';
 export * from './lib/bo/form/formscope.directive';
+export * from './lib/bo/section/section.xrmui';
 
 export * from './lib/bo/boruto-xrmui.module';

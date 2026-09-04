@@ -11,6 +11,7 @@ import { XrmuiDevider } from './devider/devider.xrmui';
 import { XrmuiTabs } from './tabs/tabs.xrmui';
 import { ChangeScopeDirective } from './changedscope/changedscope.directive';
 import { FormScopeDirective } from './form/formscope.directive';
+import { XrmuiSection } from './section/section.xrmui';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { FormScopeDirective } from './form/formscope.directive';
     XrmuiButton,
     XrmuiDevider,
     XrmuiTabs,
+    XrmuiSection,
     ChangeScopeDirective,
     FormScopeDirective,
   ],
@@ -38,6 +40,7 @@ import { FormScopeDirective } from './form/formscope.directive';
     XrmuiButton,
     XrmuiDevider,
     XrmuiTabs,
+    XrmuiSection,
     ChangeScopeDirective,
     FormScopeDirective
   ]

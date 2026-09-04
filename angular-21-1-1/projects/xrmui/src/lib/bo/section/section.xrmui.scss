@@ -1,0 +1,140 @@
+:host.all {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+:host.all div.xrmui-section-content {
+    position: absolute; 
+    left: 1px; 
+    right: 1px; 
+    bottom: 1px; 
+    top: 50px; 
+    overflow-y: auto;
+}
+
+:host.all div.xrmui-section-content.nosearchortitle {
+    top: 1px; 
+}
+
+:host {
+    border: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: lightgray;
+    border-style: solid;
+    border-radius: 5px 5px 5px 5px;
+    display: block;
+    margin: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
+    box-shadow: 1px 1px lightgray;
+}
+
+:host.nopadding {
+    padding: 0 0 0 0;
+}
+
+:host.noborder {
+    border: none;
+    border-radius: 0 0 0 0;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+:host.global {
+    border-color: #4f8a4e;
+}
+
+:host.nomargin {
+    margin: 0 0 0 0;
+}
+
+:host div.toptitle-container {
+    position: relative;
+    width: 100%;
+}
+
+:host div.toptitle {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: gray;
+    color: white;
+    padding: 1px 20px 1px 20px;
+    max-width: fit-content;
+    display: table;
+    z-index: 2;
+    border-radius: 15px 15px 15px 15px;
+    border: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: gray;
+}
+
+:host div.toptitle {
+    top: -19px;
+}
+
+:host div.header {
+    border-width: 0 0 1px 0;
+    border-color: lightgray;
+    border-style: solid;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+:host div.search {
+    border-width: 0 0 1px 0;
+    border-color: lightgray;
+    border-style: solid;
+    margin-bottom: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+}
+
+:host div.therest {
+    flex-grow: 1;
+}
+
+:host div.chexkbox {
+    width: 25px;
+    min-width: 25px;
+    max-width: 25px;
+}
+
+:host input {
+    background-color: transparent;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border: none;
+    height: 29px;
+    padding-left: 15px;
+}
+
+:host input[type="number"]:focus,
+:host input[type="number"]:hover {
+    pointer-events: none;
+    cursor: text;
+}
+
+:host *:focus {
+    outline: none;
+}
+
+:host input:focus {
+    outline: none;
+    border: solid;
+    border-width: 0 0 2px 0;
+    border-color: #0f6cbd;
+}
+
+:host mat-icon {
+    color: gray;
+}
+
