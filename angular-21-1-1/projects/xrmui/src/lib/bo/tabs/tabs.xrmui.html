@@ -13,7 +13,7 @@
         }
 
         @if (tab.badget == undefined || tab.badget == 0) {
-            @if (tab.icon != undefined && tab.icon != null && tab.icon != ''){<div class="icon"><mat-icon class="mat-icon-14">{{ tab.icon }}</mat-icon></div>}
+            @if (tab.icon != undefined && tab.icon != null && tab.icon != ''){<div class="icon"><mat-icon fontSet="material-symbols-outlined" class="mat-icon-14">{{ tab.icon }}</mat-icon></div>}
             <span>
             @if (tab.label != undefined && tab.label != null && tab.label != '') { {{ tab.label }} }
             @if (tab.label == undefined || tab.label == null || tab.label == '') { {{ tab.id }} }

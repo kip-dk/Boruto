@@ -1,0 +1,57 @@
+.columns {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    flex-direction: row;
+    .column {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .overflow {
+        overflow: auto;
+    }
+
+    .overflow-y {
+        overflow-y: auto;
+    }
+
+    .overflow-x {
+        overflow-x: auto;
+    }
+
+    .fixed {
+        flex: 0 0 var(--fixed-size);
+    }
+}
+
+.rows {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+
+    .row {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .overflow {
+        overflow: auto;
+    }
+
+    .overflow-y {
+        overflow-y: auto;
+    }
+
+    .overflow-x {
+        overflow-x: auto;
+    }
+
+    .fixed {
+        flex: 0 0 var(--fixed-size);
+    }
+}
