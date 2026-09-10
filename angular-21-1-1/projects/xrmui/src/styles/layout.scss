@@ -1,0 +1,83 @@
+.bo-columns {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    flex-direction: row;
+    .bo-column {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .bo-overflow {
+        overflow: auto;
+    }
+
+    .bo-overflow-y {
+        overflow-y: auto;
+    }
+
+    .bo-overflow-x {
+        overflow-x: auto;
+    }
+
+    .bo-fixed {
+        flex: 0 0 var(--bo-fixed-size);
+    }
+
+    .bo-fixed-25 {flex: 0 0 25px;} 
+    .bo-fixed-50 {flex: 0 0 50px;} 
+    .bo-fixed-75 {flex: 0 0 75px;} 
+    .bo-fixed-100 {flex: 0 0 100px;} 
+    .bo-fixed-125 {flex: 0 0 125px;} 
+    .bo-fixed-150 {flex: 0 0 150px;} 
+    .bo-fixed-175 {flex: 0 0 175px;} 
+    .bo-fixed-200 {flex: 0 0 200px;} 
+    .bo-fixed-225 {flex: 0 0 225px;} 
+    .bo-fixed-250 {flex: 0 0 250px;} 
+    .bo-fixed-275 {flex: 0 0 275px;} 
+    .bo-fixed-300 {flex: 0 0 300px;} 
+}
+
+.bo-rows {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+
+    .bo-row {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .bo-overflow {
+        overflow: auto;
+    }
+
+    .bo-overflow-y {
+        overflow-y: auto;
+    }
+
+    .bo-overflow-x {
+        overflow-x: auto;
+    }
+
+    .bo-fixed {
+        flex: 0 0 var(--bo-fixed-size);
+    }
+
+    .bo-fixed-25 {flex: 0 0 25px;} 
+    .bo-fixed-50 {flex: 0 0 50px;} 
+    .bo-fixed-75 {flex: 0 0 75px;} 
+    .bo-fixed-100 {flex: 0 0 100px;} 
+    .bo-fixed-125 {flex: 0 0 125px;} 
+    .bo-fixed-150 {flex: 0 0 150px;} 
+    .bo-fixed-175 {flex: 0 0 175px;} 
+    .bo-fixed-200 {flex: 0 0 200px;} 
+    .bo-fixed-225 {flex: 0 0 225px;} 
+    .bo-fixed-250 {flex: 0 0 250px;} 
+    .bo-fixed-275 {flex: 0 0 275px;} 
+    .bo-fixed-300 {flex: 0 0 300px;} 
+}
