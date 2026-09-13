@@ -1,6 +1,9 @@
+:host{
+    height: 100%;
+}
 .columns {
     display: flex;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     flex-direction: row;
     .column {
@@ -29,7 +32,7 @@
 
 .rows {
     display: flex;
-    height: 100vh;
+    height: 100%;
     flex-direction: column;
 
     .row {

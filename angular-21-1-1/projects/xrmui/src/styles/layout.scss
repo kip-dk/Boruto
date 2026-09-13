@@ -1,6 +1,6 @@
 .bo-columns {
     display: flex;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     flex-direction: row;
     .bo-column {
@@ -42,7 +42,7 @@
 
 .bo-rows {
     display: flex;
-    height: 100vh;
+    height: 100%;
     flex-direction: column;
 
     .bo-row {
