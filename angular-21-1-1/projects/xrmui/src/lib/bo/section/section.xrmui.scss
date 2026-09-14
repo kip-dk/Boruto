@@ -31,6 +31,12 @@
     box-shadow: 1px 1px lightgray;
 }
 
+:host-context(.bo-narrow-section) {
+    margin: 10px 2px 2px 2px 2px;
+    padding: 10px 2px 2px 2px 2px;
+    box-shadow: none;
+}
+
 :host.nopadding {
     padding: 0 0 0 0;
 }
