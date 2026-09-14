@@ -131,12 +131,14 @@ export class XrmContextService implements ChangeManager {
           } else {
             obs.next(0);
           }
+          obs.complete();
         })
         .catch(e => {
           if (e["error"] && e["error"]["error"] && e["error"]["error"]["code"]) {
             var val = e["error"]["error"]["code"];
             if (val != null && val.toString() == "0x8004e023") {
               obs.next(50000);
+              obs.complete();
               return;
             }
           }
