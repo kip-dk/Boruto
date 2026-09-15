@@ -510,6 +510,17 @@ export class XrmuiInput {
   select(e: Event, v: ISelectable) {
     e.stopImmediatePropagation();
     e.stopPropagation();
+
+    if (v.expandable == true && !this.isexpanded(v)) {
+      this.expand(e, v);
+      return;
+    }
+
+    if (v.completeOnly == true) {
+      this.complete(e, v);
+      return;
+    }
+
     this.value.set(v.name ?? '');
 
     const re = this.entityreference();
