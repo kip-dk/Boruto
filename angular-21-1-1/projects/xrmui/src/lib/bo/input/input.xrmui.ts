@@ -512,11 +512,13 @@ export class XrmuiInput {
     e.stopPropagation();
 
     if (v.expandable == true && !this.isexpanded(v)) {
+      this.expanding = true;
       this.expand(e, v);
       return;
     }
 
     if (v.completeOnly == true) {
+      this.expanding = true;
       this.complete(e, v);
       return;
     }
