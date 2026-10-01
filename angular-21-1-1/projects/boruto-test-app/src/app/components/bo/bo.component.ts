@@ -1,6 +1,7 @@
 import { DatePipe, NgClass } from '@angular/common';
 import { Component, computed, inject, Signal, signal, ChangeDetectionStrategy } from '@angular/core';
 import { BorutoXrmUIModule, IMenu, ISearchService, ISelectable } from 'boruto-xrmui';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-bo',
@@ -10,6 +11,8 @@ import { BorutoXrmUIModule, IMenu, ISearchService, ISelectable } from 'boruto-xr
   imports:[BorutoXrmUIModule,DatePipe]
 })
 export class BoComponent {
+
+  accountSearch = inject(AccountService).accountSearch;
 
   description = signal<string>('');
 

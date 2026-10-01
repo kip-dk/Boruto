@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, computed, DestroyRef, effect, ElementRef, EventEmitter, inject, input, Input, isSignal, model, OnChanges, output, Output, QueryList, Signal, signal, SimpleChanges, ViewChild, ViewChildren, ChangeDetectionStrategy, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, computed, DestroyRef, effect, ElementRef, EventEmitter, inject, input, Input, isSignal, model, OnChanges, output, Output, QueryList, Signal, signal, SimpleChanges, ViewChild, ViewChildren, ChangeDetectionStrategy, TemplateRef, ViewEncapsulation, untracked } from '@angular/core';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { ViewContainerRef } from '@angular/core';
@@ -142,13 +142,13 @@ export class XrmuiInput {
     search: string = '';
 
     // private items: ISelectable[] | null = null;
-    itemlist = signal<ISelectable[]>([]);
+    itemlist = computed(() => this.autocomplete()?.items() ?? []);;
     showitems = signal(false);
     searchthread: any | null = null;
     searchnumber: number = 0;
 
     current?: ISelectable;
-    currentindex: number = -1;
+    currentindex = signal<number>(-1);
 
     shadowValue = signal<string>('');
     shadowDate = signal<Date | null>(null);
@@ -259,14 +259,6 @@ export class XrmuiInput {
     });
 
     effect(() => {
-      const ap = this.autocomplete();
-
-      if (ap) {
-        this.bindItems(ap.items());
-      }
-    });
-
-    effect(() => {
       const si = this.showitems();
       if (si) {
         this.showSuggestions();
@@ -287,7 +279,6 @@ export class XrmuiInput {
     }
 
     this.lastBind = values;
-    this.itemlist.set(values);
     this.expandedItems = new Map<ISelectable,ISelectable[]>();
   }
 
@@ -538,19 +529,19 @@ export class XrmuiInput {
   private next(e: number) {
     const items = this.itemlist();
     if (items.length > 0) {
-      this.currentindex = this.currentindex + e;
-      if (this.currentindex >= items.length) {
-        this.currentindex = 0;
+      this.currentindex.set(this.currentindex() + e);
+      if (this.currentindex() >= items.length) {
+        this.currentindex.set(0)
       }
 
-      if (this.currentindex == -1) {
-        this.currentindex = items.length - 1;
+      if (this.currentindex() == -1) {
+        this.currentindex.set(items.length - 1);
       }
 
-      if (this.currentindex == -2) {
-        this.currentindex = items.length - 1;
+      if (this.currentindex() == -2) {
+        this.currentindex.set(items.length - 1);
       }
-      this.current = items[this.currentindex]
+      this.current = items[this.currentindex()]
     }
     this.ensureCurrentVisible();
   }
@@ -609,7 +600,7 @@ export class XrmuiInput {
     const ap = this.autocomplete();
     if (ap) {
       await ap.search(this.shadowValue());
-      this.currentindex = -1;
+      this.currentindex.set(-1);
       this.current = undefined;
       this.showitems.set(true);
     }
@@ -696,8 +687,6 @@ export class XrmuiInput {
           }
         }
         this.expandedItems.set(e, children);
-
-        this.itemlist.set(nextlist);
       }
     }
 

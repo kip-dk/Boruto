@@ -8,6 +8,8 @@ import da from '@angular/common/locales/da';
 import { registerLocaleData } from '@angular/common';
 import { DKCustomDateAdapter } from 'boruto-xrmui';
 
+import { AccountService } from './services/account.service';
+
 registerLocaleData(da);
 
 export const appConfig: ApplicationConfig = {
@@ -16,5 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideNativeDateAdapter(),
     { provide: LOCALE_ID, useValue: 'da-DK' },
-    { provide: DateAdapter, useClass: DKCustomDateAdapter }  ]
+    { provide: DateAdapter, useClass: DKCustomDateAdapter },
+    AccountService
+  ],
 };
