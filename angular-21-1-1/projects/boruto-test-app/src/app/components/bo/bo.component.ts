@@ -35,9 +35,9 @@ export class BoComponent {
   }
 
     choices: ISelectable[] = [
-      { id: '1', name: 'København' },
-      { id: '2', name: 'Århus' },
-      { id: '3', name: 'Aalborg' }
+      { id: '1', name: 'København', icon:'storage' },
+      { id: '2', name: 'Århus', icon: 'save' },
+      { id: '3', name: 'Aalborg', icon: 'close' }
   ];
 
 

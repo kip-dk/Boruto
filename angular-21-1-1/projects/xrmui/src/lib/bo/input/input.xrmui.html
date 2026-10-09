@@ -89,18 +89,23 @@
     }
     @let options = selectable();
     @if (options && options.length > 0) {
-        <select 
-            (change)="setchoice($event)"
-            (focus)="onFocus()"
-            (blur)="onBlur()"
-            [disabled]="disabled()">
-            @for (option of options; track option) {
-                <option [value]="option.id" [selected]="option == selected()">{{ option.name }}</option>
+        <button 
+        [matMenuTriggerFor]="menu"
+        (click)="onFocus()"
+        (focus)="onFocus()"
+        (blur)="onBlurSelect()"
+        [disabled]="disabled()"
+        (menuOpened)="onFocus()"
+        (menuClosed)="onBlur()"
+        class="optionsetbutton">{{ selected()?.name }}</button>
+        <mat-menu #menu="matMenu">
+            @for(option of options; track option.id) {
+                <button mat-menu-item (click)="setMenuChoice(option)">
+                    @if (option.icon) { <mat-icon fontSet="material-symbols-outlined">{{ option.icon }}</mat-icon>}
+                    <span>{{ option.name }}</span>
+                </button>
             }
-        </select>
-        @if (!disabled()) {
-            <mat-icon class="dropdown" fontSet="material-symbols-outlined">arrow_drop_down</mat-icon>
-        }
+        </mat-menu>
     }
     @let ti = toolIcon();
     @if (!disabled() && ti && ti.length > 0) {

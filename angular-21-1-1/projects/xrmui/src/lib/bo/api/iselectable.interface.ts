@@ -15,6 +15,7 @@ export interface ISelectable {
   coorcolor?: string;
   expandable?: boolean;
   completeOnly?: boolean;
+  icon?: string;
   expand?(): Promise<ISelectable[]>;
 
 }

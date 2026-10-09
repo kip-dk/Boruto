@@ -16,6 +16,7 @@ import { FormScopeDirective } from '../form/formscope.directive';
 import { nFormater } from '../models/nformat.model';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { XrmuiIcon } from "../icon/icon.xrmui";
+import { MatMenuModule } from '@angular/material/menu';
 
 export const NAVIGATIONKEYS = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape','Tab','Enter','Backspace','Delete','End','Home','Shift','CapsLock','Insert','PageUp','PageDown','PageDown','PageDown'];
 export const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
@@ -28,7 +29,7 @@ export const CTRL_KEYS = ['c','C','v','V','x','X'];
     styleUrl: './input.xrmui.scss',
     changeDetection: ChangeDetectionStrategy.Eager,
     encapsulation: ViewEncapsulation.None,
-    imports: [FormsModule, NgClass, MatIcon,TextFieldModule,MatDatepickerModule,MatCheckboxModule,XrmuiIcon,NgTemplateOutlet]
+    imports: [FormsModule, NgClass, MatIcon,TextFieldModule,MatDatepickerModule,MatCheckboxModule,XrmuiIcon,NgTemplateOutlet,MatMenuModule]
 })
 export class XrmuiInput {
     @ViewChild('inputfield') searchElement?: ElementRef;
@@ -142,7 +143,7 @@ export class XrmuiInput {
     search: string = '';
 
     // private items: ISelectable[] | null = null;
-    itemlist = computed(() => this.autocomplete()?.items() ?? []);;
+    itemlist = signal<ISelectable[]>([]);
     showitems = signal(false);
     searchthread: any | null = null;
     searchnumber: number = 0;
@@ -259,6 +260,14 @@ export class XrmuiInput {
     });
 
     effect(() => {
+      const ap = this.autocomplete();
+      if (ap) {
+        const next = ap.items();
+        this.bindItems(next);
+      }
+    });
+
+    effect(() => {
       const si = this.showitems();
       if (si) {
         this.showSuggestions();
@@ -279,6 +288,7 @@ export class XrmuiInput {
     }
 
     this.lastBind = values;
+    this.itemlist.set(values);
     this.expandedItems = new Map<ISelectable,ISelectable[]>();
   }
 
@@ -395,6 +405,13 @@ export class XrmuiInput {
     },200);
   }
 
+    onBlurSelect() {
+    setTimeout(() => {
+        this.hasfocus.set(false);
+        this.onblurEvent.emit();
+    },200);
+  }
+
   ondown(e: Event) {
     e.stopPropagation();
     e.preventDefault();
@@ -496,6 +513,15 @@ export class XrmuiInput {
           this.notifyOnChange();
       }
     }
+  }
+
+  setMenuChoice(v: ISelectable) {
+          const osv = this.optionsetvalue();
+          if (osv) {
+            osv.set(Number(v.id), v.name);
+          }
+          this.selected.set(v);
+          this.notifyOnChange();
   }
 
   select(e: Event, v: ISelectable) {
@@ -687,6 +713,8 @@ export class XrmuiInput {
           }
         }
         this.expandedItems.set(e, children);
+
+        this.itemlist.set(nextlist);
       }
     }
 

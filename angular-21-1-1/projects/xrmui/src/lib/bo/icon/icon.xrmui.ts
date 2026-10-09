@@ -13,8 +13,10 @@ export class XrmuiIcon implements AfterContentInit {
 
   private host: ElementRef = inject(ElementRef);
     _icon = input<string>('', { alias: 'icon' });
+    fontClass = input<string>('material-symbols-outlined');
+    inlineStyle = input<string>('');
   disabled = input<boolean>(false);
-  type = input<'mat' | 'fa'>('mat');
+  type = input<'mat' | 'fa' | 'font'>('mat');
   size = input<'12'|'24'|'36'|'48' | undefined>();
 
   icon = signal<string>('');
