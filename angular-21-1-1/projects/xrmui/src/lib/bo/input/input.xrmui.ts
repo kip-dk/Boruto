@@ -16,7 +16,6 @@ import { FormScopeDirective } from '../form/formscope.directive';
 import { nFormater } from '../models/nformat.model';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { XrmuiIcon } from "../icon/icon.xrmui";
-import { MatMenuModule } from '@angular/material/menu';
 
 export const NAVIGATIONKEYS = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape','Tab','Enter','Backspace','Delete','End','Home','Shift','CapsLock','Insert','PageUp','PageDown','PageDown','PageDown'];
 export const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
@@ -44,7 +43,7 @@ const bo_nextId = function() {
     styleUrl: './input.xrmui.scss',
     changeDetection: ChangeDetectionStrategy.Eager,
     encapsulation: ViewEncapsulation.None,
-    imports: [FormsModule, NgClass, MatIcon,TextFieldModule,MatDatepickerModule,MatCheckboxModule,XrmuiIcon,NgTemplateOutlet,MatMenuModule]
+    imports: [FormsModule, NgClass, MatIcon,TextFieldModule,MatDatepickerModule,MatCheckboxModule,XrmuiIcon,NgTemplateOutlet]
 })
 export class XrmuiInput {
     @ViewChild('inputfield') searchElement?: ElementRef;
@@ -55,7 +54,7 @@ export class XrmuiInput {
 
     private overlay = inject(Overlay);
     private viewContainerRef = inject(ViewContainerRef);
-    private autocompleteOverlayRef?: OverlayRef;
+    private overlayRef?: OverlayRef;
 
     private changeScope = inject(ChangeScopeDirective, {optional: true,host: true });
     private formScope = inject(FormScopeDirective, {optional: true,host: true });
@@ -133,7 +132,7 @@ export class XrmuiInput {
     release = input<number | null>(null);
     released = output<void>();
 
-    isautocomplete = computed(() => this.autocomplete != null);
+    isautocomplete = computed(() => this.autocomplete() != null);
     isselectable = computed(() => !this.isautocomplete() && this.selectable() != null);
 
     autoopenonblank = computed(() => {
@@ -245,13 +244,6 @@ export class XrmuiInput {
       this.shadowValue.set(value.toString());
     });
 
-    effect(()=> {
-      const sel = this.selected();
-      if (sel) {
-        this.shadowValue.set(sel.name ?? '');
-      }
-    });
-
     effect(() => {
       const osv = this.optionsetvalue();
       const sels = this.selectable();
@@ -284,6 +276,22 @@ export class XrmuiInput {
       if (ap) {
         const next = ap.items();
         this.bindItems(next);
+      }
+    });
+
+    effect(() => {
+      const sels = this.selectable();
+      if (sels && sels.length > 0) {
+        this.bindItems(sels);
+        const sel = this.selected();
+        if (sel) {
+          this.shadowValue.set(sel.name ?? '');
+          this.current = sel;
+          const ci = sels.findIndex(s => s.id == sel.id);
+          if (ci >= 0) {
+            this.currentindex.set(ci);
+          }
+        }
       }
     });
 
@@ -425,23 +433,6 @@ export class XrmuiInput {
     },200);
   }
 
-
-  private isMenuOpen = false;
-
-  onBlurSelect() {
-    if (!this.isMenuOpen) {
-      setTimeout(() => {
-          this.hasfocus.set(false);
-          this.onblurEvent.emit();
-      }, 200);
-    }
-    this.isMenuOpen = false;
-  }
-
-  selectMenuOpen() {
-    this.isMenuOpen = true;
-  }
-
   ondown(e: Event) {
     e.stopPropagation();
     e.preventDefault();
@@ -455,9 +446,15 @@ export class XrmuiInput {
     this.next(-1);
   }
 
+
+  openSelect() {
+    this.showitems.set(true);
+  }
+
   onenter(e: Event) {
     e.stopPropagation();
     e.preventDefault();
+
 
     if (this.current && this.current.expandable == true && !this.isexpanded(this.current)) {
       this.expand(e, this.current);
@@ -469,7 +466,27 @@ export class XrmuiInput {
       return;
     }
 
-    this.onEnter.emit();
+    if (this.isselectable()) {
+      const showitemisopen = untracked(() => this.showitems());
+      if (!showitemisopen) {
+        this.openSelect();
+        return;
+      }
+
+      if (this.current != null) {
+        this.selected.set(this.current);
+
+        const os = this.optionsetvalue();
+        if (os) {
+          os.set(Number(this.current.id), this.current.name)
+        }
+        this.showitems.set(false);
+        this.shadowValue.set(this.current.name ?? '');
+      }
+
+      this.onEnter.emit();
+      return;
+    }
 
     if (this.showitems() == false) {
       this.searchbyname();
@@ -779,7 +796,7 @@ export class XrmuiInput {
   }
 
   private showAutocompleteSuggestions(): void {
-    if (!this.autocompleteOverlayRef && this.searchElement) {
+    if (!this.overlayRef && this.searchElement) {
 
       const positionStrategy = this.overlay
             .position()
@@ -793,7 +810,7 @@ export class XrmuiInput {
                 }
             ]);
 
-        this.autocompleteOverlayRef = this.overlay.create({
+        this.overlayRef = this.overlay.create({
             positionStrategy,
             width: this.searchElement.nativeElement.offsetWidth,
             maxHeight: '200px',
@@ -801,14 +818,14 @@ export class XrmuiInput {
         });
     }
 
-    if (this.searchElement && this.autocompleteOverlayRef && !this.autocompleteOverlayRef.hasAttached()) {
+    if (this.searchElement && this.overlayRef && !this.overlayRef.hasAttached()) {
         const portal = new TemplatePortal(
             this.suggestionsTemplate,
             this.viewContainerRef
         );
-        this.autocompleteOverlayRef.attach(portal);
+        this.overlayRef.attach(portal);
 
-        const autocomplete = this.autocompleteOverlayRef.overlayElement
+        const autocomplete = this.overlayRef.overlayElement
             .querySelector('.autocomplete') as HTMLElement;
 
         if (autocomplete) {
@@ -819,6 +836,6 @@ export class XrmuiInput {
   }
 
   private hideAutocompleteSuggestions(): void {
-    this.autocompleteOverlayRef?.detach();
+    this.overlayRef?.detach();
   }
 }
