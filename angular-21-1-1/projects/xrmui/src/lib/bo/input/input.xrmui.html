@@ -145,6 +145,13 @@
             }
             @for (elm of itemlist(); track elm) {
             <div #option class="element" [ngClass]="{ current: current == elm, selectable: !elm.disabled }" (click)="select($event, elm)">
+                @if (isselectable()) {
+                    <div class="icon" style="min-width: 24px;">
+                        @if (current == elm && elm != setdefaultitem) {
+                            <xrmui-icon type="font" icon="check" inlineStyle="font-size: small"></xrmui-icon>
+                        }
+                    </div>
+                }
                 <div class="item">
                     @if (itemTemplate(); as template) {
                         <ng-container *ngTemplateOutlet="template; context: { $implicit: elm }"></ng-container>

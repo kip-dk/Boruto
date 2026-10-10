@@ -119,6 +119,8 @@ export class XrmuiInput {
   autocomplete = input<ISearchService | null>(null);
   selectable = input<ISelectable[] | null>(null);
   selected = model<ISelectable | undefined>(undefined);
+  multiselected = model<ISelectable[] | undefined>(undefined);
+  
   optionsetvalue = input<OptionSetValue | null>(null);
   entityreference = input<EntityReference | null>(null);
   onselect = output<ISelectable | undefined>();
@@ -139,6 +141,7 @@ export class XrmuiInput {
 
   isautocomplete = computed(() => this.autocomplete() != null);
   isselectable = computed(() => !this.isautocomplete() && this.selectable() != null);
+  ismultible = computed(() => this.multiselected() != undefined);
 
   autoopenonblank = computed(() => {
     const au = this._autoopenonblank();
