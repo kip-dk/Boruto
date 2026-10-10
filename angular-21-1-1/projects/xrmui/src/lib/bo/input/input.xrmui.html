@@ -20,7 +20,9 @@
         </div>
     }
     @if (numberoflines() == 1 && validate() != 'date' && validate() != 'checkbox' && !isselect()) {
-    <input 
+    <input
+        [id]="inputid()"
+        [name]="name()"
         #inputfield 
         [ngClass]="inputclasses()"
         [type]="type() != 'password'? 'text' : 'password'"
@@ -39,7 +41,9 @@
     }
     @if (validate() == 'checkbox') {
         <div class="checkbox">
-        <input 
+        <input
+            [id]="inputid()"
+            [name]="name()"
             type="checkbox"
             class="text checkbox"
             [(ngModel)]="shadowBool"
@@ -52,6 +56,8 @@
     }
     @if (numberoflines() == 1 && validate() == 'date' && !isselect()) {
         <input
+        [id]="inputid()"
+        [name]="name()"
         #datefield
         class="text datepicker"
          [matDatepicker]="picker"
@@ -71,6 +77,8 @@
     }
     @if (numberoflines() > 1 && !isselect()) {
         <textarea
+            [id]="inputid()"
+            [name]="name()"
             #textareafield
             [maxlength]="maxlength()"
             [rows]="numberoflines()"
@@ -90,12 +98,14 @@
     @let options = selectable();
     @if (options && options.length > 0) {
         <button 
+        [id]="inputid()"
+        [name]="name()"
         [matMenuTriggerFor]="menu"
         (click)="onFocus()"
         (focus)="onFocus()"
         (blur)="onBlurSelect()"
         [disabled]="disabled()"
-        (menuOpened)="onFocus()"
+        (menuOpened)="selectMenuOpen()"
         (menuClosed)="onBlur()"
         class="optionsetbutton">{{ selected()?.name }}</button>
         <mat-menu #menu="matMenu">
@@ -154,3 +164,5 @@
         </div>
     </div>
 </ng-template>
+
+

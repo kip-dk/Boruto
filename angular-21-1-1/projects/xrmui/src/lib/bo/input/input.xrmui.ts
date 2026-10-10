@@ -23,6 +23,21 @@ export const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
 export const DECIMALS = ['0','1','2','3','4','5','6','7','8','9',','];
 export const CTRL_KEYS = ['c','C','v','V','x','X'];
 
+const bo_counter = {
+  lastName: 0,
+  lastId: 0
+}
+const bo_nextName = function() {
+  bo_counter.lastName++;
+  return `bo_name_${bo_counter.lastName}`
+}
+
+
+const bo_nextId = function() {
+  bo_counter.lastId++;
+  return `bo_id_${bo_counter.lastId}`;
+}
+
 @Component({
     selector: 'xrmui-input',
     templateUrl: './input.xrmui.html',
@@ -40,7 +55,7 @@ export class XrmuiInput {
 
     private overlay = inject(Overlay);
     private viewContainerRef = inject(ViewContainerRef);
-    private overlayRef?: OverlayRef;
+    private autocompleteOverlayRef?: OverlayRef;
 
     private changeScope = inject(ChangeScopeDirective, {optional: true,host: true });
     private formScope = inject(FormScopeDirective, {optional: true,host: true });
@@ -94,6 +109,8 @@ export class XrmuiInput {
 
     required = input<boolean>(false);
     type = input<'text' | 'number' | 'password' | 'checkbox'>('text');
+    name = input<string>(bo_nextName());
+    inputid = input<string>(bo_nextId())
     setfocus = model<boolean>(false);
     autocomplete = input<ISearchService | null>( null);
     selectable = input<ISelectable[] | null>(null);
@@ -115,6 +132,9 @@ export class XrmuiInput {
 
     release = input<number | null>(null);
     released = output<void>();
+
+    isautocomplete = computed(() => this.autocomplete != null);
+    isselectable = computed(() => !this.isautocomplete() && this.selectable() != null);
 
     autoopenonblank = computed(() => {
       const au = this._autoopenonblank();
@@ -270,9 +290,9 @@ export class XrmuiInput {
     effect(() => {
       const si = this.showitems();
       if (si) {
-        this.showSuggestions();
+        this.showAutocompleteSuggestions();
       } else {
-        this.hideSuggestions();
+        this.hideAutocompleteSuggestions();
       }
     });
   }
@@ -405,11 +425,21 @@ export class XrmuiInput {
     },200);
   }
 
-    onBlurSelect() {
-    setTimeout(() => {
-        this.hasfocus.set(false);
-        this.onblurEvent.emit();
-    },200);
+
+  private isMenuOpen = false;
+
+  onBlurSelect() {
+    if (!this.isMenuOpen) {
+      setTimeout(() => {
+          this.hasfocus.set(false);
+          this.onblurEvent.emit();
+      }, 200);
+    }
+    this.isMenuOpen = false;
+  }
+
+  selectMenuOpen() {
+    this.isMenuOpen = true;
   }
 
   ondown(e: Event) {
@@ -748,8 +778,8 @@ export class XrmuiInput {
     }
   }
 
-  private showSuggestions(): void {
-    if (!this.overlayRef && this.searchElement) {
+  private showAutocompleteSuggestions(): void {
+    if (!this.autocompleteOverlayRef && this.searchElement) {
 
       const positionStrategy = this.overlay
             .position()
@@ -763,7 +793,7 @@ export class XrmuiInput {
                 }
             ]);
 
-        this.overlayRef = this.overlay.create({
+        this.autocompleteOverlayRef = this.overlay.create({
             positionStrategy,
             width: this.searchElement.nativeElement.offsetWidth,
             maxHeight: '200px',
@@ -771,14 +801,14 @@ export class XrmuiInput {
         });
     }
 
-    if (this.searchElement && this.overlayRef && !this.overlayRef.hasAttached()) {
+    if (this.searchElement && this.autocompleteOverlayRef && !this.autocompleteOverlayRef.hasAttached()) {
         const portal = new TemplatePortal(
             this.suggestionsTemplate,
             this.viewContainerRef
         );
-        this.overlayRef.attach(portal);
+        this.autocompleteOverlayRef.attach(portal);
 
-        const autocomplete = this.overlayRef.overlayElement
+        const autocomplete = this.autocompleteOverlayRef.overlayElement
             .querySelector('.autocomplete') as HTMLElement;
 
         if (autocomplete) {
@@ -788,7 +818,7 @@ export class XrmuiInput {
     }
   }
 
-  private hideSuggestions(): void {
-    this.overlayRef?.detach();
+  private hideAutocompleteSuggestions(): void {
+    this.autocompleteOverlayRef?.detach();
   }
 }
