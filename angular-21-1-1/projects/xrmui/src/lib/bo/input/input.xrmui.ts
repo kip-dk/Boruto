@@ -17,176 +17,181 @@ import { nFormater } from '../models/nformat.model';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { XrmuiIcon } from "../icon/icon.xrmui";
 
-export const NAVIGATIONKEYS = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape','Tab','Enter','Backspace','Delete','End','Home','Shift','CapsLock','Insert','PageUp','PageDown','PageDown','PageDown'];
-export const NUMBERS = ['0','1','2','3','4','5','6','7','8','9'];
-export const DECIMALS = ['0','1','2','3','4','5','6','7','8','9',','];
-export const CTRL_KEYS = ['c','C','v','V','x','X'];
+export const NAVIGATIONKEYS = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Escape', 'Tab', 'Enter', 'Backspace', 'Delete', 'End', 'Home', 'Shift', 'CapsLock', 'Insert', 'PageUp', 'PageDown', 'PageDown', 'PageDown'];
+export const NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+export const DECIMALS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ','];
+export const CTRL_KEYS = ['c', 'C', 'v', 'V', 'x', 'X'];
 
 const bo_counter = {
   lastName: 0,
   lastId: 0
 }
-const bo_nextName = function() {
+const bo_nextName = function () {
   bo_counter.lastName++;
   return `bo_name_${bo_counter.lastName}`
 }
 
 
-const bo_nextId = function() {
+const bo_nextId = function () {
   bo_counter.lastId++;
   return `bo_id_${bo_counter.lastId}`;
 }
 
 @Component({
-    selector: 'xrmui-input',
-    templateUrl: './input.xrmui.html',
-    styleUrl: './input.xrmui.scss',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    encapsulation: ViewEncapsulation.None,
-    imports: [FormsModule, NgClass, MatIcon,TextFieldModule,MatDatepickerModule,MatCheckboxModule,XrmuiIcon,NgTemplateOutlet]
+  selector: 'xrmui-input',
+  templateUrl: './input.xrmui.html',
+  styleUrl: './input.xrmui.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  encapsulation: ViewEncapsulation.None,
+  imports: [FormsModule, NgClass, MatIcon, TextFieldModule, MatDatepickerModule, MatCheckboxModule, XrmuiIcon, NgTemplateOutlet]
 })
 export class XrmuiInput {
-    @ViewChild('inputfield') searchElement?: ElementRef;
-    @ViewChild('textareafield') textareaElement?: ElementRef;
-    @ViewChild('datefield') datefieldElement?: ElementRef;
-    @ViewChildren('option') options!: QueryList<ElementRef<HTMLDivElement>>;
-    @ViewChild('suggestionsTemplate') suggestionsTemplate!: TemplateRef<unknown>;
+  @ViewChild('inputfield') searchElement?: ElementRef;
+  @ViewChild('textareafield') textareaElement?: ElementRef;
+  @ViewChild('datefield') datefieldElement?: ElementRef;
+  @ViewChildren('option') options!: QueryList<ElementRef<HTMLDivElement>>;
+  @ViewChild('suggestionsTemplate') suggestionsTemplate!: TemplateRef<unknown>;
 
-    private overlay = inject(Overlay);
-    private viewContainerRef = inject(ViewContainerRef);
-    private overlayRef?: OverlayRef;
+  private overlay = inject(Overlay);
+  private viewContainerRef = inject(ViewContainerRef);
+  private overlayRef?: OverlayRef;
 
-    private changeScope = inject(ChangeScopeDirective, {optional: true,host: true });
-    private formScope = inject(FormScopeDirective, {optional: true,host: true });
+  private changeScope = inject(ChangeScopeDirective, { optional: true, host: true });
+  private formScope = inject(FormScopeDirective, { optional: true, host: true });
 
-    private destroyRef = inject(DestroyRef);
-    private blurThead? : any;
+  private destroyRef = inject(DestroyRef);
+  private blurThead?: any;
 
-    label = input<string>('');
-    _shortLabel = input<boolean | 'above' | undefined>(undefined, {alias: 'short-label'});
+  readonly setdefaultitem: ISelectable = {
+    id: "-999999",
+    name: "--select--"
+  }
 
-    shortLabel = computed(() => {
-      const sl = this._shortLabel();
-      if (sl) return sl;
-      if (this.formScope) {
-        if (this.formScope.formScope().labeltype == "short") return true;
-        if (this.formScope.formScope().labeltype == "above") return "above";
-      }
-      return false;
-    });
+  label = input<string>('');
+  _shortLabel = input<boolean | 'above' | undefined>(undefined, { alias: 'short-label' });
 
-    placeholder = input<string>('');
+  shortLabel = computed(() => {
+    const sl = this._shortLabel();
+    if (sl) return sl;
+    if (this.formScope) {
+      if (this.formScope.formScope().labeltype == "short") return true;
+      if (this.formScope.formScope().labeltype == "above") return "above";
+    }
+    return false;
+  });
 
-    value = model<string | number | Date | boolean | null | undefined>(null);
-    _disabled = input<boolean | undefined>(undefined, { alias: 'disabled'});
-    disabled = computed(() => {
+  placeholder = input<string>('');
 
-      const d = this._disabled();
-      if (d != undefined) {
-        return d;
-      }
+  value = model<string | number | Date | boolean | null | undefined>(null);
+  _disabled = input<boolean | undefined>(undefined, { alias: 'disabled' });
+  disabled = computed(() => {
 
-      if (this.formScope && this.formScope.formScope().disabled != undefined) {
-        return this.formScope.formScope().disabled ?? false;
-      }
+    const d = this._disabled();
+    if (d != undefined) {
+      return d;
+    }
 
-      return false;
-    });
+    if (this.formScope && this.formScope.formScope().disabled != undefined) {
+      return this.formScope.formScope().disabled ?? false;
+    }
 
-    _showlock = input<boolean | undefined>(undefined, {alias: 'showlock'});
-    showlock = computed(() => {
-      const sl = this._showlock();
-      if (sl != undefined) {
-        return sl;
-      }
+    return false;
+  });
 
-      if (this.formScope && this.formScope.formScope().showlock != undefined) {
-        return this.formScope.formScope().showlock ?? true;
-      }
-      return true;
-    });
+  _showlock = input<boolean | undefined>(undefined, { alias: 'showlock' });
+  showlock = computed(() => {
+    const sl = this._showlock();
+    if (sl != undefined) {
+      return sl;
+    }
 
-    required = input<boolean>(false);
-    type = input<'text' | 'number' | 'password' | 'checkbox'>('text');
-    name = input<string>(bo_nextName());
-    inputid = input<string>(bo_nextId())
-    setfocus = model<boolean>(false);
-    autocomplete = input<ISearchService | null>( null);
-    selectable = input<ISelectable[] | null>(null);
-    selected = model<ISelectable | undefined>(undefined);
-    optionsetvalue = input<OptionSetValue | null>(null);
-    entityreference = input<EntityReference | null>(null);
-    onselect = output<ISelectable | undefined>();
-    error = input<boolean>(false);
-    validate = model<'number' | 'decimal' | 'date' | 'checkbox' | null>(null);
-    decimals = input<number | undefined>(undefined);
-    onfocusEvent = output<void>({ alias:'focus' });
-    onblurEvent = output<void>({alias: 'blur'});
-    click = output<void>();
-    resizeable = input<boolean>(true);
-    info = input<string | null>(null);
-    notdark = input<boolean>(false);
-    _autoopenonblank = input<boolean | undefined>(undefined, { alias: "autoopenonblank" });
-    nullable = input<boolean>(true);
+    if (this.formScope && this.formScope.formScope().showlock != undefined) {
+      return this.formScope.formScope().showlock ?? true;
+    }
+    return true;
+  });
 
-    release = input<number | null>(null);
-    released = output<void>();
+  required = input<boolean>(false);
+  type = input<'text' | 'number' | 'password' | 'checkbox'>('text');
+  name = input<string>(bo_nextName());
+  inputid = input<string>(bo_nextId())
+  setfocus = model<boolean>(false);
+  autocomplete = input<ISearchService | null>(null);
+  selectable = input<ISelectable[] | null>(null);
+  selected = model<ISelectable | undefined>(undefined);
+  optionsetvalue = input<OptionSetValue | null>(null);
+  entityreference = input<EntityReference | null>(null);
+  onselect = output<ISelectable | undefined>();
+  error = input<boolean>(false);
+  validate = model<'number' | 'decimal' | 'date' | 'checkbox' | null>(null);
+  decimals = input<number | undefined>(undefined);
+  onfocusEvent = output<void>({ alias: 'focus' });
+  onblurEvent = output<void>({ alias: 'blur' });
+  click = output<void>();
+  resizeable = input<boolean>(true);
+  info = input<string | null>(null);
+  notdark = input<boolean>(false);
+  _autoopenonblank = input<boolean | undefined>(undefined, { alias: "autoopenonblank" });
+  nullable = input<boolean>(true);
 
-    isautocomplete = computed(() => this.autocomplete() != null);
-    isselectable = computed(() => !this.isautocomplete() && this.selectable() != null);
+  release = input<number | null>(null);
+  released = output<void>();
 
-    autoopenonblank = computed(() => {
-      const au = this._autoopenonblank();
-      if (au != undefined) {
-        return au;
-      }
+  isautocomplete = computed(() => this.autocomplete() != null);
+  isselectable = computed(() => !this.isautocomplete() && this.selectable() != null);
 
-      if (this.formScope && this.formScope.formScope().autoopenonblank != undefined) {
-        return this.formScope.formScope().autoopenonblank ?? false;
-      }
-      return false;
-    });
+  autoopenonblank = computed(() => {
+    const au = this._autoopenonblank();
+    if (au != undefined) {
+      return au;
+    }
 
-    itemTemplate = input<TemplateRef<{ $implicit: ISelectable }> | undefined>();
+    if (this.formScope && this.formScope.formScope().autoopenonblank != undefined) {
+      return this.formScope.formScope().autoopenonblank ?? false;
+    }
+    return false;
+  });
 
-    decimalsUsed = output<number>();
-    onEnter = output<void>();
+  itemTemplate = input<TemplateRef<{ $implicit: ISelectable }> | undefined>();
 
-    toolIcon = input<string | null>(null);
-    toolClick = output<void>();
+  decimalsUsed = output<number>();
+  onEnter = output<void>();
 
-    numberoflines = input(1);
-    maxlength = input<number | null>(null);
+  toolIcon = input<string | null>(null);
+  toolClick = output<void>();
 
-    hasfocus = signal(false);
-    search: string = '';
+  numberoflines = input(1);
+  maxlength = input<number | null>(null);
 
-    // private items: ISelectable[] | null = null;
-    itemlist = signal<ISelectable[]>([]);
-    showitems = signal(false);
-    searchthread: any | null = null;
-    searchnumber: number = 0;
+  hasfocus = signal(false);
+  search: string = '';
 
-    current?: ISelectable;
-    currentindex = signal<number>(-1);
+  // private items: ISelectable[] | null = null;
+  itemlist = signal<ISelectable[]>([]);
+  showitems = signal(false);
+  searchthread: any | null = null;
+  searchnumber: number = 0;
 
-    shadowValue = signal<string>('');
-    shadowDate = signal<Date | null>(null);
+  current?: ISelectable;
+  currentindex = signal<number>(-1);
 
-    shadowBool = signal<boolean>(false);
+  shadowValue = signal<string>('');
+  shadowDate = signal<Date | null>(null);
 
-    isselect = computed(() => {
-      const s = this.selectable();
-      if (s && s.length > 0) return true;
-      return false;
-    });
+  shadowBool = signal<boolean>(false);
 
-    isnumber = computed(() => this.validate() == 'decimal' || this.validate() == 'number');
+  isselect = computed(() => {
+    const s = this.selectable();
+    if (s && s.length > 0) return true;
+    return false;
+  });
 
-    inputclasses = computed(() => {
-      if (!this.isnumber()) return this.type();
-      return this.type() + ' ' + 'number';
-    }); 
+  isnumber = computed(() => this.validate() == 'decimal' || this.validate() == 'number');
+
+  inputclasses = computed(() => {
+    if (!this.isnumber()) return this.type();
+    return this.type() + ' ' + 'number';
+  });
 
   constructor() {
     this.destroyRef.onDestroy(() => {
@@ -201,7 +206,7 @@ export class XrmuiInput {
         this.focusMe(undefined);
         setTimeout(() => {
           this.setfocus.set(false);
-        },10);
+        }, 10);
       }
     });
 
@@ -251,7 +256,7 @@ export class XrmuiInput {
         const n = osv.name$();
         this.shadowValue.set(n ?? '');
       }
-      
+
       if (osv && sels && sels.length > 0) {
         const v = osv.value$();
         if (v != undefined) {
@@ -282,6 +287,10 @@ export class XrmuiInput {
     effect(() => {
       const sels = this.selectable();
       if (sels && sels.length > 0) {
+        if (this.nullable() && sels[0] != this.setdefaultitem) {
+          sels.unshift(this.setdefaultitem);
+        }
+
         this.bindItems(sels);
         const sel = this.selected();
         if (sel) {
@@ -291,6 +300,9 @@ export class XrmuiInput {
           if (ci >= 0) {
             this.currentindex.set(ci);
           }
+        } else {
+          this.shadowValue.set(this.setdefaultitem.name ?? '');
+          this.currentindex.set(0);
         }
       }
     });
@@ -309,7 +321,7 @@ export class XrmuiInput {
 
   private bindItems(values: ISelectable[]) {
     const same = values.length === this.lastBind.length &&
-              values.every(v => this.lastBind.includes(v));
+      values.every(v => this.lastBind.includes(v));
 
     if (same) {
       return;
@@ -317,11 +329,11 @@ export class XrmuiInput {
 
     this.lastBind = values;
     this.itemlist.set(values);
-    this.expandedItems = new Map<ISelectable,ISelectable[]>();
+    this.expandedItems = new Map<ISelectable, ISelectable[]>();
   }
 
 
-  pickDate(d: MatDatepickerInputEvent<any,any>) {
+  pickDate(d: MatDatepickerInputEvent<any, any>) {
     this.shadowDate.set(d.value);
     this.value.set(d.value);
     this.notifyOnChange();
@@ -345,7 +357,7 @@ export class XrmuiInput {
         this.value.set('');
       }
     } else {
-      const next = sv.replaceAll('.','').replace(',','.');
+      const next = sv.replaceAll('.', '').replace(',', '.');
       switch (this.validate()) {
         case 'number': {
           // sync value on blue ... this is to early
@@ -398,39 +410,39 @@ export class XrmuiInput {
 
       if (sel && sel.name != sv) {
         this.selected.set(undefined);
-        this.onselect.emit(undefined); 
+        this.onselect.emit(undefined);
         this.shadowValue.set('');
         this.notifyOnChange();
       }
 
-        const re = this.entityreference();
-        if (re && re.name$() != sv) {
-          re.set(undefined, undefined);
-          this.onselect.emit(undefined);
-          this.shadowValue.set('');
-          this.notifyOnChange();
-        }
+      const re = this.entityreference();
+      if (re && re.name$() != sv) {
+        re.set(undefined, undefined);
+        this.onselect.emit(undefined);
+        this.shadowValue.set('');
+        this.notifyOnChange();
+      }
 
-        const validate = this.validate();
-        if (validate == 'decimal' || validate == 'number') {
-          this.setNumberValueString();
-        }
-        this.onblurEvent.emit();
-    },200);
+      const validate = this.validate();
+      if (validate == 'decimal' || validate == 'number') {
+        this.setNumberValueString();
+      }
+      this.onblurEvent.emit();
+    }, 200);
   }
 
   onBlurCheckbox() {
     setTimeout(() => {
-        this.hasfocus.set(false);
-        this.onblurEvent.emit();
-    },200);
+      this.hasfocus.set(false);
+      this.onblurEvent.emit();
+    }, 200);
   }
 
   onBlurDate() {
     setTimeout(() => {
-        this.hasfocus.set(false);
-        this.onblurEvent.emit();
-    },200);
+      this.hasfocus.set(false);
+      this.onblurEvent.emit();
+    }, 200);
   }
 
   ondown(e: Event) {
@@ -474,16 +486,10 @@ export class XrmuiInput {
       }
 
       if (this.current != null) {
-        this.selected.set(this.current);
-
-        const os = this.optionsetvalue();
-        if (os) {
-          os.set(Number(this.current.id), this.current.name)
-        }
-        this.showitems.set(false);
-        this.shadowValue.set(this.current.name ?? '');
+        this.SetSelectedItem(this.current);
       }
 
+      this.showitems.set(false);
       this.onEnter.emit();
       return;
     }
@@ -512,7 +518,7 @@ export class XrmuiInput {
     this.showitems.set(false);
   }
 
-  onClick()  {
+  onClick() {
     this.click.emit();
   }
 
@@ -532,48 +538,27 @@ export class XrmuiInput {
       if (this.validate() == 'number') {
         if (NUMBERS.indexOf(k.key) < 0) {
           e.preventDefault();
-          e.stopPropagation(); 
+          e.stopPropagation();
         }
       }
 
       if (this.validate() == 'decimal') {
         if (DECIMALS.indexOf(k.key) < 0) {
           e.preventDefault();
-          e.stopPropagation(); 
+          e.stopPropagation();
         }
       }
     }
   }
 
-
-  setchoice(v: Event) {
-    const sel = this.selectable();
-    if (sel && sel.length > 0) {
-      const value = (v.target as HTMLSelectElement).value;
-      const next = sel.find(r => r.id == value);
-      if (next) {
-          const osv = this.optionsetvalue();
-          if (osv) {
-            osv.set(Number(next.id), next.name)
-          }
-          this.selected.set(next);
-          this.notifyOnChange();
-      }
-    }
-  }
-
-  setMenuChoice(v: ISelectable) {
-          const osv = this.optionsetvalue();
-          if (osv) {
-            osv.set(Number(v.id), v.name);
-          }
-          this.selected.set(v);
-          this.notifyOnChange();
-  }
-
   select(e: Event, v: ISelectable) {
     e.stopImmediatePropagation();
     e.stopPropagation();
+
+    if (this.isselectable()) {
+      this.SetSelectedItem(v);
+      return;
+    }
 
     if (v.expandable == true && !this.isexpanded(v)) {
       this.expanding = true;
@@ -599,6 +584,30 @@ export class XrmuiInput {
     this.notifyOnChange();
   }
 
+  private SetSelectedItem(v: ISelectable | undefined) {
+    const os = this.optionsetvalue();
+    if (v == undefined || v == this.setdefaultitem) {
+      this.selected.set(undefined);
+      if (os) {
+        os.set(undefined, undefined);
+      }
+      this.shadowValue.set(this.setdefaultitem.name ?? '');
+    } else {
+      this.selected.set(v);
+      if (os) {
+        os.set(Number(v.id), v.name);
+      }
+      this.shadowValue.set(v.name ?? '');
+    }
+    this.current = v != null && v != this.setdefaultitem ? v : undefined;
+    const sels = untracked(() => this.selectable())!;
+    this.currentindex.set(v == undefined || v == this.setdefaultitem ? -1 : sels.indexOf(v));
+
+    this.onselect.emit(v);
+    this.notifyOnChange();
+  }
+
+
   private next(e: number) {
     const items = this.itemlist();
     if (items.length > 0) {
@@ -622,17 +631,17 @@ export class XrmuiInput {
   private ensureCurrentVisible(): void {
 
     if (this.current != undefined) {
-    const index = this.itemlist().indexOf(this.current);
-    if (index < 0) {
+      const index = this.itemlist().indexOf(this.current);
+      if (index < 0) {
         return;
-    }
+      }
 
-    this.options.get(index)?.nativeElement.scrollIntoView({
+      this.options.get(index)?.nativeElement.scrollIntoView({
         block: 'nearest',
         inline: 'nearest'
-    });
+      });
+    }
   }
-}
 
   focusMe(e?: Event, clicked = true) {
     e?.stopPropagation();
@@ -680,7 +689,7 @@ export class XrmuiInput {
 
     if (!ap && ommitcm != true) {
       this.notifyOnChange();
-    } 
+    }
   }
 
   private notifyOnChange() {
@@ -707,7 +716,7 @@ export class XrmuiInput {
     if (sv == '') {
       this.value.set(null);
     } else {
-      const next = sv.replaceAll('.','').replace(',','.');
+      const next = sv.replaceAll('.', '').replace(',', '.');
       switch (this.validate()) {
         case 'number': {
           this.value.set(Number(next));
@@ -733,46 +742,46 @@ export class XrmuiInput {
     }
   }
 
-    private expandedItems = new Map<ISelectable, ISelectable[]>();
-    private expanding = false;
+  private expandedItems = new Map<ISelectable, ISelectable[]>();
+  private expanding = false;
 
-    async expand(ev: Event, e: ISelectable) {
-      this.expanding = true;
-      ev.stopImmediatePropagation();
+  async expand(ev: Event, e: ISelectable) {
+    this.expanding = true;
+    ev.stopImmediatePropagation();
 
-      if (this.expandedItems.get(e)) {
+    if (this.expandedItems.get(e)) {
+      return;
+    }
+
+    if (e.expand) {
+      const children = await e.expand();
+      if (!children || children.length == 0) {
+        e.expandable = false;
         return;
       }
 
-      if (e.expand) {
-        const children = await e.expand();
-        if (!children || children.length == 0) {
-          e.expandable = false;
-          return;
+      const nextlist = [] as ISelectable[];
+
+      for (const n of this.itemlist()) {
+        nextlist.push(n);
+        if (n == e) {
+          children.forEach(c => nextlist.push(c));
         }
-
-        const nextlist = [] as ISelectable[];
-
-        for (const n of this.itemlist()) {
-          nextlist.push(n);
-          if (n == e) {
-            children.forEach(c => nextlist.push(c));
-          }
-        }
-        this.expandedItems.set(e, children);
-
-        this.itemlist.set(nextlist);
       }
-    }
+      this.expandedItems.set(e, children);
 
-    async complete(ev: Event, e: ISelectable) {
-      ev.stopImmediatePropagation();
-      this.shadowValue.set(e.name ?? '');
-      this.onValueChanged();
-      this.setfocus.set(true);
+      this.itemlist.set(nextlist);
     }
+  }
 
-  isexpanded(e:ISelectable): boolean {
+  async complete(ev: Event, e: ISelectable) {
+    ev.stopImmediatePropagation();
+    this.shadowValue.set(e.name ?? '');
+    this.onValueChanged();
+    this.setfocus.set(true);
+  }
+
+  isexpanded(e: ISelectable): boolean {
     return this.expandedItems.get(e) != undefined;
   }
   expandedvalues(e: ISelectable): ISelectable[] | null {
@@ -799,39 +808,39 @@ export class XrmuiInput {
     if (!this.overlayRef && this.searchElement) {
 
       const positionStrategy = this.overlay
-            .position()
-            .flexibleConnectedTo(this.searchElement.nativeElement)
-            .withPositions([
-                {
-                    originX: 'start',
-                    originY: 'bottom',
-                    overlayX: 'start',
-                    overlayY: 'top'
-                }
-            ]);
+        .position()
+        .flexibleConnectedTo(this.searchElement.nativeElement)
+        .withPositions([
+          {
+            originX: 'start',
+            originY: 'bottom',
+            overlayX: 'start',
+            overlayY: 'top'
+          }
+        ]);
 
-        this.overlayRef = this.overlay.create({
-            positionStrategy,
-            width: this.searchElement.nativeElement.offsetWidth,
-            maxHeight: '200px',
-            scrollStrategy: this.overlay.scrollStrategies.reposition()
-        });
+      this.overlayRef = this.overlay.create({
+        positionStrategy,
+        width: this.searchElement.nativeElement.offsetWidth,
+        maxHeight: '200px',
+        scrollStrategy: this.overlay.scrollStrategies.reposition()
+      });
     }
 
     if (this.searchElement && this.overlayRef && !this.overlayRef.hasAttached()) {
-        const portal = new TemplatePortal(
-            this.suggestionsTemplate,
-            this.viewContainerRef
-        );
-        this.overlayRef.attach(portal);
+      const portal = new TemplatePortal(
+        this.suggestionsTemplate,
+        this.viewContainerRef
+      );
+      this.overlayRef.attach(portal);
 
-        const autocomplete = this.overlayRef.overlayElement
-            .querySelector('.autocomplete') as HTMLElement;
+      const autocomplete = this.overlayRef.overlayElement
+        .querySelector('.autocomplete') as HTMLElement;
 
-        if (autocomplete) {
-            autocomplete.style.width =
-                `${this.searchElement.nativeElement.offsetWidth}px`;
-        }
+      if (autocomplete) {
+        autocomplete.style.width =
+          `${this.searchElement.nativeElement.offsetWidth}px`;
+      }
     }
   }
 

@@ -102,11 +102,23 @@
         (blur)="onBlur()"
         [disabled]="disabled()"
         class="optionsetbutton"
+        [ngClass]="{ grayed: selected() === undefined }"
         (keydown.arrowdown)="ondown($event)"
         (keydown.arrowup)="onup($event)"
         (keydown.enter)="onenter($event)"
         (keydown.esc)="onesc($event)"
-        (keydown)="onkeydown($event)">{{ selected()?.name }}</button>
+        (keydown)="onkeydown($event)">
+        <div class="bo-grid-rows">
+            <div class="bo-row">
+                <div class=bo-grid-columns>
+                    <div class="bo-column">{{ selected()?.name ?? setdefaultitem.name }}</div>
+                    <div class="bo-column bo-fixed" style="--bo-fixed-size: 25  px; margin-top: -10px;position: relative;">
+                        <xrmui-icon icon="keyboard_arrow_down" type="font" style="color: black"></xrmui-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </button>
     }
     @let ti = toolIcon();
     @if (!disabled() && ti && ti.length > 0) {
