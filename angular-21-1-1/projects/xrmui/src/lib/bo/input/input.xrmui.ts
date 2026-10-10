@@ -288,9 +288,10 @@ export class XrmuiInput {
     });
 
     effect(() => {
-      const sels = this.selectable();
-      if (sels && sels.length > 0) {
-        if (this.nullable() && sels[0] != this.setdefaultitem) {
+      const _sels = this.selectable();
+      if (_sels && _sels.length > 0) {
+        const sels = [..._sels];
+        if (this.nullable() && !this.multiselected() && sels[0] != this.setdefaultitem) {
           sels.unshift(this.setdefaultitem);
         }
 

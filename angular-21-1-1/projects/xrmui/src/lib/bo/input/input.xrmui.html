@@ -92,7 +92,7 @@
             (blur)="onBlur()"></textarea>
     }
     @let options = selectable();
-    @if (options && options.length > 0) {
+    @if (options && options.length > 0 && !ismultible()) {
         <button 
         #inputfield 
         [id]="inputid()"
@@ -120,6 +120,9 @@
         </div>
         </button>
     }
+    @if (options && options.length > 0 && ismultible()) {
+        <div>Draw the multi select control here</div>
+    }
     @let ti = toolIcon();
     @if (!disabled() && ti && ti.length > 0) {
         <mat-icon class="toolicon" fontSet="material-symbols-outlined" (click)="toolClicked($event)">{{ ti }}</mat-icon>
@@ -145,11 +148,9 @@
             }
             @for (elm of itemlist(); track elm) {
             <div #option class="element" [ngClass]="{ current: current == elm, selectable: !elm.disabled }" (click)="select($event, elm)">
-                @if (isselectable()) {
-                    <div class="icon" style="min-width: 24px;">
-                        @if (current == elm && elm != setdefaultitem) {
-                            <xrmui-icon type="font" icon="check" inlineStyle="font-size: small"></xrmui-icon>
-                        }
+                @if (elm.icon && elm.icon.length > 0) {
+                    <div class="icon" style="min-width: 28px;">
+                        <xrmui-icon type="font" [icon]="elm.icon"></xrmui-icon>
                     </div>
                 }
                 <div class="item">
@@ -159,6 +160,13 @@
                         {{ elm.name }}
                     }
                 </div>
+                @if (isselectable()) {
+                    <div class="icon" style="min-width: 24px;">
+                        @if (current == elm && elm != setdefaultitem) {
+                            <xrmui-icon type="font" icon="check" inlineStyle="font-size: small"></xrmui-icon>
+                        }
+                    </div>
+                }
                 @if (elm.expandable == true) {
                 <div class="icon expand" (click)="expand($event, elm)">
                     <xrmui-icon icon="arrow_drop_down" size="24"></xrmui-icon>

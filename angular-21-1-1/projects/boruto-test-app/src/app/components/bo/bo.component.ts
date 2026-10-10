@@ -34,16 +34,20 @@ export class BoComponent {
     this.search.set(c?.name ?? '');
   }
 
-    choices: ISelectable[] = [
-      { id: '1', name: 'København', icon:'storage' },
-      { id: '2', name: 'Århus', icon: 'save' },
-      { id: '3', name: 'Aalborg', icon: 'close' }
+  choices: ISelectable[] = [
+      { id: '1', name: 'Esbjerg', icon:'set_meal' },
+      { id: '2', name: 'København', icon:'storage' },
+      { id: '3', name: 'Odense', icon:'book_3' },
+      { id: '4', name: 'Århus', icon: 'save' },
+      { id: '5', name: 'Aalborg', icon: 'close' }
   ];
 
 
   choice = signal<ISelectable | undefined>(this.choices[1]);
 
   choiceName = computed(() => this.choice()?.name);
+
+  multi = signal<ISelectable[]>([]);
 
   text = signal<string>('');
 
