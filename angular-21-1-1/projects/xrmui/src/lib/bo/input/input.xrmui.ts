@@ -67,6 +67,11 @@ export class XrmuiInput {
     name: "--select--"
   }
 
+    readonly selectall: ISelectable = {
+    id: "-999999",
+    name: "Select all"
+  }
+
   label = input<string>('');
   _shortLabel = input<boolean | 'above' | undefined>(undefined, { alias: 'short-label' });
 
@@ -196,6 +201,9 @@ export class XrmuiInput {
     return this.type() + ' ' + 'number';
   });
 
+
+  isover = signal<boolean>(false);
+
   constructor() {
     this.destroyRef.onDestroy(() => {
       if (this.blurThead) {
@@ -289,10 +297,15 @@ export class XrmuiInput {
 
     effect(() => {
       const _sels = this.selectable();
+      const isnullable = untracked(() => this.nullable());
+      const multi = untracked(() => this.ismultible());
       if (_sels && _sels.length > 0) {
         const sels = [..._sels];
-        if (this.nullable() && !this.multiselected() && sels[0] != this.setdefaultitem) {
+        if (this.nullable() && !multi && sels[0] != this.setdefaultitem) {
           sels.unshift(this.setdefaultitem);
+        }
+        if (multi && sels[0] != this.selectall) {
+          sels.unshift(this.selectall);
         }
 
         this.bindItems(sels);
@@ -306,7 +319,7 @@ export class XrmuiInput {
           }
         } else {
           this.shadowValue.set(this.setdefaultitem.name ?? '');
-          this.currentindex.set(0);
+          this.currentindex.set(-1);
         }
       }
     });
@@ -322,6 +335,9 @@ export class XrmuiInput {
   }
 
   private lastBind = [] as ISelectable[];
+
+  allIsSelected = computed(() => this.ismultible() && this.selectable()?.length == this.multiselected()?.length);
+
 
   private bindItems(values: ISelectable[]) {
     const same = values.length === this.lastBind.length &&
@@ -395,6 +411,14 @@ export class XrmuiInput {
       }
     }
   }
+
+  private autoRefocus() {
+    if (this.blurThead) {
+      clearTimeout(this.blurThead);
+    }
+    this.focusMe(undefined, false);
+  }
+
 
   onBlur() {
     this.handleNumber();
@@ -493,7 +517,9 @@ export class XrmuiInput {
         this.SetSelectedItem(this.current);
       }
 
-      this.showitems.set(false);
+      if (!this.ismultible()) {
+        this.showitems.set(false);
+      }
       this.onEnter.emit();
       return;
     }
@@ -513,6 +539,7 @@ export class XrmuiInput {
 
       this.selected.set(this.current);
       this.onselect.emit(this.current);
+
       this.showitems.set(false);
       this.shadowValue.set(this.current.name ?? '');
     }
@@ -520,6 +547,19 @@ export class XrmuiInput {
 
   onesc(e: Event) {
     this.showitems.set(false);
+  }
+
+  onbackspace(e: Event) {
+    const ms = untracked(() => this.multiselected());
+    if (ms && ms.length > 0) {
+      this.multiselected.set(ms.slice(0, -1));
+      this.notifyOnChange();
+      setTimeout(() => {
+        if (this.overlayRef) {
+          this.overlayRef.updatePosition();
+        }
+      },100);
+    }
   }
 
   onClick() {
@@ -589,35 +629,84 @@ export class XrmuiInput {
   }
 
   private SetSelectedItem(v: ISelectable | undefined) {
-    const os = this.optionsetvalue();
-    if (v == undefined || v == this.setdefaultitem) {
-      this.selected.set(undefined);
-      if (os) {
-        os.set(undefined, undefined);
-      }
-      this.shadowValue.set(this.setdefaultitem.name ?? '');
-    } else {
-      this.selected.set(v);
-      if (os) {
-        os.set(Number(v.id), v.name);
-      }
-      this.shadowValue.set(v.name ?? '');
-    }
-    this.current = v != null && v != this.setdefaultitem ? v : undefined;
-    const sels = untracked(() => this.selectable())!;
-    this.currentindex.set(v == undefined || v == this.setdefaultitem ? -1 : sels.indexOf(v));
+    if (this.ismultible()) {
+      if (v != undefined) {
+        const issel = this.isSelected(v);
+        if (v == this.selectall) {
+          const allSelected = untracked(() => this.allIsSelected());
 
-    this.onselect.emit(v);
-    this.notifyOnChange();
+          if (allSelected) {
+            this.multiselected.set([]);
+          } else {
+            this.multiselected.set([...this.selectable()!])
+          }
+          this.notifyOnChange();
+          this.autoRefocus();
+          setTimeout(() => {
+            if (this.overlayRef) {
+              this.overlayRef.updatePosition();
+            }
+          },100);
+          return;
+        }
+        if (issel) {
+          const next = this.multiselected()!.filter(r => r.id != v.id);
+          this.multiselected.set(next);
+          this.notifyOnChange();
+        } else {
+          const next = [...this.multiselected()!, v];
+          this.multiselected.set(next);
+        }
+        this.current = v;
+        this.currentindex.set(this.itemlist()!.indexOf(v));
+        this.notifyOnChange();
+        this.autoRefocus();
+        setTimeout(() => {
+          if (this.overlayRef) {
+            this.overlayRef.updatePosition();
+          }
+        },100);
+      }
+      return;
+    } else {
+      const os = this.optionsetvalue();
+      if (v == undefined || v == this.setdefaultitem) {
+        this.selected.set(undefined);
+        if (os) {
+          os.set(undefined, undefined);
+        }
+        this.shadowValue.set(this.setdefaultitem.name ?? '');
+      } else {
+        this.selected.set(v);
+        if (os) {
+          os.set(Number(v.id), v.name);
+        }
+        this.shadowValue.set(v.name ?? '');
+      }
+      this.current = v;
+      if (v) {
+        const sels = untracked(() => this.itemlist())!;
+        this.currentindex.set(sels.indexOf(v));
+      } else {
+        this.currentindex.set(-1);
+      }
+
+      this.onselect.emit(v);
+      this.notifyOnChange();
+    }
   }
 
 
   private next(e: number) {
+    if (!this.showitems()) {
+      return;
+    }
+
     const items = this.itemlist();
     if (items.length > 0) {
       this.currentindex.set(this.currentindex() + e);
       if (this.currentindex() >= items.length) {
-        this.currentindex.set(0)
+        this.currentindex.set(0);
       }
 
       if (this.currentindex() == -1) {
@@ -662,6 +751,20 @@ export class XrmuiInput {
       this.datefieldElement.nativeElement.focus();
     }
 
+    if (!this.disabled() && this.ismultible()) {
+      const si = untracked(() => this.showitems());
+      if (si && clicked) {
+        this.showitems.set(false);
+      } else {
+        this.showitems.set(true);
+      }
+    }
+
+    if (this.blurThead) {
+      clearTimeout(this.blurThead);
+    }
+
+
     if (clicked) {
       this.click.emit();
     }
@@ -680,6 +783,11 @@ export class XrmuiInput {
     this.searchthread = setTimeout(() => {
       this.dosearchbyname();
     }, 600)
+  }
+
+  isSelected(s: ISelectable): boolean {
+    const mus = this.multiselected()!;
+    return mus.find(m => m.id == s.id) != undefined;
   }
 
   private async dosearchbyname(ommitcm?: boolean) {
@@ -792,6 +900,12 @@ export class XrmuiInput {
     return this.expandedItems.get(e) ?? null;
   }
 
+  removeMultiSelected(e: Event,v: ISelectable) {
+    e.stopPropagation();
+    const nextMS = this.multiselected()!.filter(r => r.id != v.id);
+    this.multiselected.set(nextMS);
+    this.notifyOnChange();
+  }
 
   private setNumberValueString() {
     const v = Number(this.value());

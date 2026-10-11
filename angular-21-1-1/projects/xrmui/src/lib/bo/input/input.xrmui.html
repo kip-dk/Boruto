@@ -12,7 +12,11 @@
     }
 </div>
 }
-<div class="input" [ngClass]="{ focus: hasfocus(), error: error(), textarea: numberoflines() > 1, labelabove: shortLabel() == 'above', toolicon: toolIcon()?.length ?? 0 > 0 }" (click)="focusMe($event)">
+<div class="input" 
+    [ngClass]="{ focus: hasfocus(), multi: ismultible(), error: error(), textarea: numberoflines() > 1, labelabove: shortLabel() == 'above', toolicon: toolIcon()?.length ?? 0 > 0 }" 
+    (mouseover)="isover.set(true)"
+    (mouseleave)="isover.set(false)"
+    (click)="focusMe($event, true)">
     @if (shortLabel() == 'above' && label() != '') {
         <div class="label-above">
             {{ label() }}
@@ -121,7 +125,40 @@
         </button>
     }
     @if (options && options.length > 0 && ismultible()) {
-        <div>Draw the multi select control here</div>
+        <div class="multi-select">
+        @let optionsselected = multiselected()!;
+        @for (ms of optionsselected; track ms.id; let ix = $index) {
+            <div class="multi-select-item" [ngClass]="{ over: isover() && !showitems() }">@if(ix>0 && (!isover() || showitems())) {, }
+                <button tabindex="-1" (click)="removeMultiSelected($event, ms)">
+                @if (ms.icon && ms.icon.length > 0) {
+                    <span class="material-symbols-outlined" style="font-size: small; position: relative; top: 3px">{{ ms.icon }}</span>
+                }
+                 {{ ms.name }}
+                @if (isover() && !showitems()) {
+                    <span class="material-symbols-outlined" style="font-size: small; position: relative; top: 3px">close_small</span>
+                }
+                </button>
+            </div>
+        }
+        </div>
+        <div style="height: 2px" class="multi-select-input">
+            <input 
+                #inputfield 
+                readonly
+                [id]="inputid()"
+                [name]="name()"
+                (click)="openSelect()"
+                (focus)="onFocus()"
+                (blur)="onBlur()"
+                [disabled]="disabled()"
+                (keydown.arrowdown)="ondown($event)"
+                (keydown.arrowup)="onup($event)"
+                (keydown.enter)="onenter($event)"
+                (keydown.esc)="onesc($event)"
+                (keydown.backspace)="onbackspace($event)"
+                (keydown)="onkeydown($event)"
+                />
+        </div>
     }
     @let ti = toolIcon();
     @if (!disabled() && ti && ti.length > 0) {
@@ -157,13 +194,31 @@
                     @if (itemTemplate(); as template) {
                         <ng-container *ngTemplateOutlet="template; context: { $implicit: elm }"></ng-container>
                     } @else {
-                        {{ elm.name }}
+                        @if (elm == selectall) {
+                            @if (allIsSelected()) {
+                                Remove all
+                            } @else {
+                                Select all
+                            }
+                        } @else {
+                            {{ elm.name }}
+                        }
                     }
                 </div>
-                @if (isselectable()) {
+                @if (isselectable() && !multiselected()) {
                     <div class="icon" style="min-width: 24px;">
                         @if (current == elm && elm != setdefaultitem) {
                             <xrmui-icon type="font" icon="check" inlineStyle="font-size: small"></xrmui-icon>
+                        }
+                    </div>
+                }
+                @if (isselectable() && multiselected() && elm != selectall) {
+                    <div class="icon" style="min-width: 24px;">
+                        @if (isSelected(elm)) {
+                            <xrmui-icon type="font" icon="check_box"></xrmui-icon>
+                        }
+                        @if (!isSelected(elm)) {
+                            <xrmui-icon type="font" icon="check_box_outline_blank"></xrmui-icon>
                         }
                     </div>
                 }

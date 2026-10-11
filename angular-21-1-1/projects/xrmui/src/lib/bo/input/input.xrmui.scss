@@ -97,10 +97,20 @@
     border: solid;
     border-width: 0 0 3px 0;
     border-color: transparent;
+    &.multi {
+        height: auto;
+        min-height: 32px;
+        line-height: normal;
+    }
 }
 
 .boruto-ui div.input.labelabove {
     height: 48px;
+    &.multi {
+        height: auto;
+        min-height: 48px;
+        line-height: normal;
+    }
 }
 
 .boruto-ui div.input.labelabove div.label-above {
@@ -304,3 +314,50 @@
         color: gray;
     }
 }
+
+.boruto-ui div.multi-select {
+    padding-left: 15px;
+    font-size: small;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: 27px
+}
+
+.boruto-ui div.multi-select div.multi-select-item {
+    line-height: 1.2;
+    margin-right: 2px;
+    margin-top: 5px;
+    white-space: nowrap;
+    &.over {
+        padding: 4px 4px 4px 4px;
+        margin-right: 4px;
+        background-color: rgb(216, 216, 216);
+        cursor: pointer;
+    }
+
+    button {
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+        border: none;
+        background-color: transparent;
+        height: 100%;
+        cursor: pointer;
+    }
+}
+
+.boruto-ui div.multi-select-input {
+    position: relative;
+    height: 6px;
+}
+
+.boruto-ui div.multi-select-input input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 11px;
+    padding: 0;
+    border: 0;
+}
+
+

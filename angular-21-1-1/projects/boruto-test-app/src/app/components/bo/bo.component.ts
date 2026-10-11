@@ -39,7 +39,9 @@ export class BoComponent {
       { id: '2', name: 'København', icon:'storage' },
       { id: '3', name: 'Odense', icon:'book_3' },
       { id: '4', name: 'Århus', icon: 'save' },
-      { id: '5', name: 'Aalborg', icon: 'close' }
+      { id: '5', name: 'Aalborg', icon: 'nightlife' },
+      { id: '6', name: 'Helsingør', icon: 'favorite' },
+      { id: '7', name: 'Slagelse', icon: 'dataset' }
   ];
 
 
@@ -47,7 +49,7 @@ export class BoComponent {
 
   choiceName = computed(() => this.choice()?.name);
 
-  multi = signal<ISelectable[]>([]);
+  multi = signal<ISelectable[]>([this.choices[2],this.choices[4]]);
 
   text = signal<string>('');
 
