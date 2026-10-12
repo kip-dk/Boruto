@@ -30,20 +30,6 @@
     cursor: pointer
 }
 
-@media (prefers-color-scheme: dark) {
-    .boruto-ui div.autocomplete {
-        background-color: black;
-        color: white;
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    .boruto-ui div.autocomplete.notdark {
-        background-color: white;
-        color: black;
-    }
-}
-
 .boruto-ui div.autocomplete div.element {
     margin: 5px 5px 5px 5px;
     padding: 5px 5px 5px 5px;
