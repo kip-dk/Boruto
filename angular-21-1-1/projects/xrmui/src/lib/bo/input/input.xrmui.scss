@@ -47,7 +47,9 @@
 }
 
 .boruto-ui div.autocomplete div.element div.item {
+    display: flex;
     flex-grow: 1;
+    align-items: center;
 }
 
 .boruto-ui div.label {
