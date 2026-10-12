@@ -35,7 +35,7 @@ export function enumToSelectable<T extends string | number>(
     .filter(([key]) => isNaN(Number(key)))
     .map(([name, id]) => ({
       id: String(id),
-      name: name.replace(/(\p{Lu})(\p{Lu}\p{Ll})/gu, '$1 $2').replace(/(\p{Ll}|\p{N})(\p{Lu})/gu, '$1 $2'),
+      name: name.replace(/(\p{Lu})(\p{Lu}\p{Ll})/gu, '$1 $2').replace(/(\p{Ll}|\p{N})(\p{Lu})/gu, '$1 $2').replace(/__/g, '-').replace(/_/g, ' '),
       icon: icons?.[id as T]
     }));
 }
