@@ -1,6 +1,7 @@
 ﻿using Boruto.Extensions.SDK;
 using Boruto.Extensions.TypeConverters;
 using Microsoft.Xrm.Sdk;
+using System.Linq;
 using System.Web.UI.WebControls;
 
 namespace Boruto.Extensions.Ctx
@@ -164,5 +165,50 @@ namespace Boruto.Extensions.Ctx
             }
             return false;
         }
+
+        /// <summary>
+        /// Find a value in the current ctx payload entity, postimage, preimage, matching at least one of the attributeNames parsed. First match win
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ctx"></param>
+        /// <param name="attributeNames"></param>
+        /// <returns>value of attribute</returns>
+        public static T FindValueOf<T>(this Microsoft.Xrm.Sdk.IPluginExecutionContext ctx, params string[] attributeNames)
+        {
+            foreach (var attributeName in attributeNames.Where(r => !string.IsNullOrEmpty(r)).Select(r => r.ToLower()))
+            {
+                if (ctx.InputParameters.ContainsKey("Target") && ctx.InputParameters["Target"] is Microsoft.Xrm.Sdk.Entity ent)
+                {
+                    if (ent.Attributes.ContainsKey(attributeName) && ent[attributeName] != null)
+                    {
+                        if (ent[attributeName] is T v) return v;
+                    }
+                }
+
+                if (ctx.PostEntityImages != null)
+                {
+                    foreach (var pi in ctx.PostEntityImages.Values)
+                    {
+                        if (pi.Attributes.ContainsKey(attributeName) && pi[attributeName] != null)
+                        {
+                            if (pi[attributeName] is T v) return v;
+                        }
+                    }
+                }
+
+                if (ctx.PreEntityImages != null)
+                {
+                    foreach (var pi in ctx.PreEntityImages.Values)
+                    {
+                        if (pi.Attributes.ContainsKey(attributeName) && pi[attributeName] != null)
+                        {
+                            if (pi[attributeName] is T v) return v;
+                        }
+                    }
+                }
+            }
+            return default(T);
+        }
+
     }
 }
