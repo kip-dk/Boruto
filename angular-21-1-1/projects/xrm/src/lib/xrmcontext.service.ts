@@ -312,7 +312,7 @@ export class XrmContextService implements ChangeManager {
   update<T extends Entity>(prototype: T, instance: T, deleteReferenceAsEmptyGuid: boolean): Observable<T>
   update<T extends Entity>(prototype: T, instance: T, deleteReferenceAsEmptyGuid: boolean = false): Observable<T> {
     let me = this;
-    let upd = this.prepareUpdate(prototype, instance, deleteReferenceAsEmptyGuid);
+    let upd = this.prepareUpdate(prototype, instance, deleteReferenceAsEmptyGuid, []);
 
     if (upd == null) {
       upd = {};
@@ -497,7 +497,7 @@ export class XrmContextService implements ChangeManager {
         }
 
         if (r.type == "update") {
-          let nextU = this.prepareUpdate(r.prototype, r.instance, false);
+          let nextU = this.prepareUpdate(r.prototype, r.instance, false, []);
           if (nextU != null) {
             let fields = "?$select=" + this.columnBuilder(r.prototype).columns;
 
@@ -659,11 +659,9 @@ export class XrmContextService implements ChangeManager {
 
 
 
-  private prepareUpdate(prototype: Entity, instance: Entity, deletedReferenceAsEmptyGuid: boolean): any {
+  private prepareUpdate(prototype: Entity, instance: Entity, deletedReferenceAsEmptyGuid: boolean, changedFields: string[]): any {
     let me = this;
     let upd = new IndexedObject();
-
-    let countFields = 0;
 
     let key = instance._pluralName + ':' + instance.id;
     let cm = this.changemanager[key];
@@ -711,7 +709,7 @@ export class XrmContextService implements ChangeManager {
                 // this does not work, navigation properties can only be removed with SDK deleted method
                 upd["_" + newValue['logicalname'].toLowerCase() + "_value"] = null;
               }
-              countFields++;
+              changedFields.push(prop);
             }
             continue;
           }
@@ -730,7 +728,7 @@ export class XrmContextService implements ChangeManager {
             } else {
               upd["_" + newValue['logicalname'].toLowerCase() + "_value"] = null;
             }
-            countFields++;
+            changedFields.push(prop);
           }
           continue;
         }
@@ -743,7 +741,7 @@ export class XrmContextService implements ChangeManager {
             } else {
               upd[prop.toString()] = o.value;
             }
-            countFields++;
+            changedFields.push(prop);
           }
           continue;
         }
@@ -775,7 +773,7 @@ export class XrmContextService implements ChangeManager {
                 upd[prop.toString()] = newValue;
               }
             }
-            countFields++;
+            changedFields.push(prop);
           }
           continue;
         }
@@ -800,7 +798,7 @@ export class XrmContextService implements ChangeManager {
 
           if (prevValue != newValue) {
             upd[prop.toString()] = newValue;
-            countFields++;
+            changedFields.push(prop);
           }
           continue;
         }
@@ -821,12 +819,12 @@ export class XrmContextService implements ChangeManager {
           this.xrmService.log(newValue);
 
           upd[prop.toString()] = newValue;
-          countFields++;
+          changedFields.push(prop);
         }
       }
     }
 
-    if (countFields > 0) {
+    if (changedFields.length > 0) {
       return upd;
     }
     return null;
@@ -848,7 +846,7 @@ export class XrmContextService implements ChangeManager {
   getUpdatePayload(prototype: Entity, instance: Entity): any
   getUpdatePayload(prototype: Entity, instance: Entity, deletedReferenceAsEmptyGuid: boolean): any
   getUpdatePayload(prototype: Entity, instance: Entity, deletedReferenceAsEmptyGuid: boolean = false): any {
-    var next = this.prepareUpdate(prototype, instance, deletedReferenceAsEmptyGuid);
+    var next = this.prepareUpdate(prototype, instance, deletedReferenceAsEmptyGuid,[]);
 
     if (next != null) {
       next[prototype._keyName] = instance.id;
@@ -861,7 +859,10 @@ export class XrmContextService implements ChangeManager {
   hasChanges(prototype: Entity, instance: Entity): boolean
   hasChanges(prototype: Entity, instance: Entity, deletedReferenceAsEmptyGuid: boolean): boolean
   hasChanges(prototype: Entity, instance: Entity, deletedReferenceAsEmptyGuid: boolean = false): boolean {
-    return this.prepareUpdate(prototype, instance, deletedReferenceAsEmptyGuid) != null;
+    const fields:string[] = [];
+    var res = this.prepareUpdate(prototype, instance, deletedReferenceAsEmptyGuid, fields);
+    instance.changes.set(fields);
+    return fields.length > 0;
   }
 
   getEntityCollectionPayload(prototype: Entity, instances: Entity[]): any[] {
@@ -1480,6 +1481,7 @@ export class XrmContextService implements ChangeManager {
     }
 
     result["changed$"].set(false);
+    result["changes"].set([]);
     result["isnew$"].set(false);
     result["cm$"] = this;
     result["prototype$"] = prototype;

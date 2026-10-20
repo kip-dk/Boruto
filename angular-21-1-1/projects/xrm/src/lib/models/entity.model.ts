@@ -63,6 +63,7 @@ export class Entity implements ChangedNotifier {
     }
 
     OnChanged?(): void;
+    changes = signal<string[]>([]);
 
     ToEntityReference(associatednavigationproperty: string): EntityReference {
       return new EntityReference(this.id ?? "", this._pluralName, associatednavigationproperty, this._logicalName ?? "");
@@ -82,7 +83,10 @@ export class Entity implements ChangedNotifier {
         || prop == 'isnew$'
         || prop == 'isnew'
         || prop == 'prototype$'
-        || prop == 'cm$') {
+        || prop == 'cm$'
+        || prop == 'notifyOnChanged'
+        || prop == 'OnChanged'
+        || prop == 'changes') {
           return true; 
       }
       if (this.calculatedProperties && this.calculatedProperties.find(p => p == prop)) {
