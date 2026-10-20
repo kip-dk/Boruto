@@ -1499,8 +1499,14 @@ export class XrmContextService implements ChangeManager {
 
     for (let prop in prototype) {
       if (prototype.ignoreColumn(prop)) continue;
-      if (prototype.hasOwnProperty(prop) && typeof prototype[prop] != 'function') {
+      if (prototype.calculatedProperties && prototype.calculatedProperties.includes(prop)) continue;
+
         let v = instance[prop];
+        if (isWritableSignal(v)) {
+          v = v();
+        }
+
+      if (prototype.hasOwnProperty(prop) && typeof v != 'function') {
         if (v == null) continue;
 
         let done = false;
