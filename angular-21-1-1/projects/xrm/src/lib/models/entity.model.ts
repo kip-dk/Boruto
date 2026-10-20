@@ -56,8 +56,13 @@ export class Entity implements ChangedNotifier {
       if (this.cm$ && this.prototype$) {
         const next = this.cm$.hasChanges(this.prototype$, this);
         this.changed$.set(next);
+        if (next) {
+          this.OnChanged?.();
+        }
       }
     }
+
+    OnChanged?(): void;
 
     ToEntityReference(associatednavigationproperty: string): EntityReference {
       return new EntityReference(this.id ?? "", this._pluralName, associatednavigationproperty, this._logicalName ?? "");
@@ -96,7 +101,7 @@ export class Entity implements ChangedNotifier {
       for (var prop in this) {
         if (prop == this._keyName) continue;
         if (this.ignoreColumn(prop)) continue;
-        if (this.calculatedProperties?.find(r => r == prop)) continue;
+        if (this.calculatedProperties?.includes(prop)) continue;
   
         let v = this[prop];
         
