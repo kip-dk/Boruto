@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, inject, signal } from '@angular/cor
 import { BorutoXrmUIModule } from 'boruto-xrmui';
 import { AccountService } from '../../services/account.service';
 import { Account } from '../../entities/account.entity';
+import { OwnershipcodeOptions } from '../../models/ownership.enum';
 
 @Component({
   selector: 'app-accounts',
@@ -11,10 +12,12 @@ import { Account } from '../../entities/account.entity';
   imports:[BorutoXrmUIModule]
 })
 export class AccountsComponent {
-    private readonly accountService = inject(AccountService);
+    readonly accountService = inject(AccountService);
 
     accounts = signal<Account[]>([]);
     account = signal<Account | null>(null);
+
+    ownershipOptions = OwnershipcodeOptions;
 
     constructor() {
         this.init();
@@ -28,4 +31,7 @@ export class AccountsComponent {
         }
     }
 
+    async save(a: Account) {
+        await this.accountService.update(a);
+    }
 }

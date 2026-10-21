@@ -267,8 +267,8 @@ export class XrmuiInput {
       const osv = this.optionsetvalue();
       const sels = this.selectable();
       if (osv) {
-        const n = osv.name$();
-        this.shadowValue.set(n ?? '');
+        const n = osv.name$() ?? '';
+        this.shadowValue.set(n);
       }
 
       if (osv && sels && sels.length > 0) {
@@ -277,7 +277,9 @@ export class XrmuiInput {
           const sel = sels.find(r => r.id == v.toString());
           if (sel) {
             this.selected.set(sel);
-          }
+          } 
+        } else {
+            this.selected.set(undefined);
         }
       };
     });
@@ -545,6 +547,7 @@ export class XrmuiInput {
 
       this.showitems.set(false);
       this.shadowValue.set(this.current.name ?? '');
+      this.notifyOnChange();
     }
   }
 

@@ -12,10 +12,17 @@
             <div [changeScope]="acc" style="margin: 15px 15px 15px 15px">
                 <xrmui-input label="Name" [(value)]="acc.name"></xrmui-input>
                 <xrmui-input label="Empl. numbers" [(value)]="acc.numberofemployees" validate="number" [decimals]="0" [nullable]="true"></xrmui-input>
+                <xrmui-input label="Parent" [autocomplete]="accountService.accountSearch" [entityreference]="acc.parentaccountid"></xrmui-input>
+                <xrmui-input label="Dato" [(value)]="acc.createdon" validate="date" [disabled]="true"></xrmui-input>
+                <xrmui-input label="Last on hold" [(value)]="acc.lastonholdtime" validate="date"></xrmui-input>
+                <xrmui-input label="Type" [selectable]="ownershipOptions" [optionsetvalue]="acc.ownershipcode"></xrmui-input>
                 <br />
                 <br />
                 Number of of changed fields: {{ acc.numberOfChangedFields() }}<br />
                 Changed is: {{ acc.changed() }}
+                <br />
+                <br />
+                <button [disabled]="acc.numberOfChangedFields() == 0" (click)="save(acc)">Save</button>
             </div>
         } @else {
             <div>Select an account from list</div>

@@ -33,6 +33,13 @@ export class EntityReference {
     private name$$ = signal<string | undefined>(undefined);
     name$ = this.name$$.asReadonly();
 
+    set(id: string | undefined, name: string | undefined) {
+      this.id$$.set(id);
+      this.name$$.set(name);
+      this.id = id ?? '';
+      this.name = name ?? '';
+    }
+
 
     constructor(id?: string, pluralName?: string, associatednavigationproperty?: string, logicalname?: string) {
       this.id = id ?? "";
@@ -55,13 +62,6 @@ export class EntityReference {
         }
       }
       this.set(this.id, this.name);
-    }
-
-    set(id: string | undefined, name: string | undefined) {
-      this.id$$.set(id);
-      this.name$$.set(name);
-      this.id = id ?? '';
-      this.name = name ?? '';
     }
 
     replace(v1: string, v2: string) {

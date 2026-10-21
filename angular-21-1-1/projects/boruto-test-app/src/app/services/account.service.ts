@@ -21,6 +21,11 @@ export class AccountService {
     return lastValueFrom(this.xrmService.query(this.localPrototype, new Condition().isActive(), "name").pipe(map(r => r.value)));
   }
 
+
+  update(a: Account): Promise<Account> {
+    return lastValueFrom(this.xrmService.update(this.localPrototype, a));
+  }
+
   private getAccountSearch(): ISearchService {
     return {
       items: this.accountSearch$.asReadonly(),

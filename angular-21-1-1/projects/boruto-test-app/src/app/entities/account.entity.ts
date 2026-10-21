@@ -1,5 +1,5 @@
 import { computed, signal } from "@angular/core";
-import { Entity } from "boruto-xrmservice";
+import { Entity, EntityReference, OptionSetValue } from "boruto-xrmservice";
 import { ISelectable } from "boruto-xrmui";
 
 export class Account extends Entity implements ISelectable {
@@ -18,10 +18,22 @@ export class Account extends Entity implements ISelectable {
     name: string = '';
 
     numberofemployees = signal<number>(0);
+    parentaccountid: EntityReference = new EntityReference().meta("accounts","parentaccountid");
+    createdon: Date = new Date();
+    lastonholdtime: Date | null = null;
+    ownershipcode: OptionSetValue = new OptionSetValue();
+
+
+    override OnChanged(): void {
+        console.log('her');
+    }
+
 
     numberOfChangedFields = computed(() => this.changes().length);
 
+
     meta(): Account {
+        this.lastonholdtime = new Date();
         return this;
     }
 }
