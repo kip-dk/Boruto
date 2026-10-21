@@ -1,0 +1,24 @@
+<xrmui-layout orientation="vertical" panels="300px,?">
+    <xrmui-panel c1>
+        @for (acc of accounts(); track acc.id) {
+            <div>
+                <button (click)="account.set(acc)">{{ acc.name }}</button>
+            </div>
+        }
+    </xrmui-panel>
+    <xrmui-panel c2>
+        @let acc = account();
+        @if (acc) {
+            <div [changeScope]="acc" style="margin: 15px 15px 15px 15px">
+                <xrmui-input label="Name" [(value)]="acc.name"></xrmui-input>
+                <xrmui-input label="Empl. numbers" [(value)]="acc.numberofemployees" validate="number" [decimals]="0" [nullable]="true"></xrmui-input>
+                <br />
+                <br />
+                Number of of changed fields: {{ acc.numberOfChangedFields() }}<br />
+                Changed is: {{ acc.changed() }}
+            </div>
+        } @else {
+            <div>Select an account from list</div>
+        }
+    </xrmui-panel>
+</xrmui-layout>

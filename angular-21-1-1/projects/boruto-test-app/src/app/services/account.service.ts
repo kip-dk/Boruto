@@ -2,7 +2,7 @@ import { inject, Injectable, signal } from "@angular/core";
 import { Account } from "../entities/account.entity";
 import { ISearchService, ISelectable } from "boruto-xrmui";
 import { Comparator, Condition, XrmContextService } from "boruto-xrmservice";
-import { lastValueFrom } from "rxjs";
+import { lastValueFrom, map } from "rxjs";
 
 
 @Injectable({ providedIn: "root" })
@@ -15,6 +15,10 @@ export class AccountService {
 
   constructor() {
     this.accountSearch = this.getAccountSearch();
+  }
+
+  active(): Promise<Account[]> {
+    return lastValueFrom(this.xrmService.query(this.localPrototype, new Condition().isActive(), "name").pipe(map(r => r.value)));
   }
 
   private getAccountSearch(): ISearchService {

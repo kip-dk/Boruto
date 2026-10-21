@@ -4,6 +4,7 @@ import { KoComponent } from './components/ko/ko.component';
 import { BoComponent } from './components/bo/bo.component';
 import { LoComponent } from './components/lo/lo.component';
 import { PocComponent } from './components/poc/poc.component';
+import { AccountsComponent } from './components/accounts/accounts.component';
 
 export const routes: Routes = [
     { path: '', component: BoComponent },
@@ -11,5 +12,6 @@ export const routes: Routes = [
     { path: 'bo', component: BoComponent },
     { path: 'lo', component: LoComponent },
     { path: 'firstpage', component: FirstpageComponent },
-    { path: 'poc', component: PocComponent }
+    { path: 'poc', component: PocComponent },
+    { path: 'accounts', component: AccountsComponent }
 ];

@@ -88,6 +88,7 @@ export class XrmuiInput {
   placeholder = input<string>('');
 
   value = model<string | number | Date | boolean | null | undefined>(null);
+  private _initialValue = signal<string | number | Date | boolean | null | undefined>(undefined);
   _disabled = input<boolean | undefined>(undefined, { alias: 'disabled' });
   disabled = computed(() => {
 
@@ -210,6 +211,8 @@ export class XrmuiInput {
         clearTimeout(this.blurThead);
       }
     });
+
+    effect(() => this._initialValue.set(this.value()));
 
     effect(() => {
       const sf = this.setfocus();
@@ -369,30 +372,30 @@ export class XrmuiInput {
   }
 
   onValueChanged() {
+    const _i = untracked(() => this._initialValue());
     const sv = this.shadowValue();
-    if (sv == '') {
+    if (sv == '' || sv == null || sv == undefined) {
       if (this.nullable() == true) {
         this.value.set(null);
       } else {
         this.value.set('');
       }
+      this.notifyIfNeeded(_i);
     } else {
-      const next = sv.replaceAll('.', '').replace(',', '.');
       switch (this.validate()) {
         case 'number': {
           // sync value on blue ... this is to early
-          break;
+          return;
         }
         case 'decimal': {
           // syncvalue on blur ... this is to early
-          break;
+          return;
         }
         default:
           this.value.set(sv);
-
+          this.searchbyname();
       }
     }
-    this.searchbyname();
   }
 
   onCheckboxToggle() {
@@ -823,15 +826,32 @@ export class XrmuiInput {
     }
   }
 
+  private notifyIfNeeded(_i: string | number | Date | boolean | null | undefined) {
+    const _v = untracked(() => this.value());
+
+    if ((_v == undefined || _v == null) && (_i == undefined || _i == null)) {
+      return;
+    }
+
+    if (_v != _i) {
+      this.notifyOnChange();
+      this._initialValue.set(_v);
+    }
+  }
+
   private handleNumber() {
+    const _i = untracked(() => this._initialValue());
+    
     let sv = this.shadowValue();
     if (sv == '') {
       this.value.set(null);
+      this.notifyIfNeeded(_i);
     } else {
       const next = sv.replaceAll('.', '').replace(',', '.');
       switch (this.validate()) {
         case 'number': {
           this.value.set(Number(next));
+
           break;
         }
         case 'decimal': {
@@ -840,7 +860,6 @@ export class XrmuiInput {
         }
         default:
           this.value.set(sv);
-
       }
 
       if (this.type() == 'number' && this.validate() == 'decimal') {
@@ -851,6 +870,7 @@ export class XrmuiInput {
           this.decimalsUsed.emit(spl[1].length);
         }
       }
+      this.notifyIfNeeded(_i);
     }
   }
 
@@ -908,7 +928,14 @@ export class XrmuiInput {
   }
 
   private setNumberValueString() {
-    const v = Number(this.value());
+    const _v = untracked(() => this.value());
+    
+    if (this.nullable() && (_v == undefined || _v == null || _v == '')) {
+      this.shadowValue.set('');
+      return;
+    }
+
+    const v = Number(_v);
     let decimals = this.decimals();
 
     if (decimals == undefined && this.validate() == 'number') {

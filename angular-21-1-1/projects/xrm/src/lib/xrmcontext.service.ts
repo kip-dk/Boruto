@@ -757,7 +757,6 @@ export class XrmContextService implements ChangeManager {
           }
 
           if (prevValue != newValue) {
-
             this.xrmService.log('pre-value-update-date:[' + prevValue + ']/[' + newValue + ']');
             if (newValue == null) {
               upd[prop.toString()] = null;
@@ -774,7 +773,7 @@ export class XrmContextService implements ChangeManager {
               }
             }
             changedFields.push(prop);
-          }
+          } 
           continue;
         }
 
