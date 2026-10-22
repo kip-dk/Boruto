@@ -32,7 +32,7 @@ export class OptionSetValue {
 
 
     constructor(value?: number, name?: string) {
-      this.set(this.value, this.name);
+      this.set(value, name);
     }
   
     equals(o: OptionSetValue): boolean {

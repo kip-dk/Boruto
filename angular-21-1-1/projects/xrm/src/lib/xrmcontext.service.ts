@@ -19,6 +19,7 @@ import { ExpandProperty } from "./models/expandproperty.model";
 import { Entities } from "./models/entities.model";
 import { ColumnBuilder } from "./models/columnbuilder.model";
 import { ChangeManager } from "./models/changemanager.interface";
+import { MultiOptionSetValue } from "./models/multioptionsetvalue.model";
 
 
 const XRMCONTEXTSERVICE_EMPTY_GUID = "00000000-0000-0000-0000-000000000000";
@@ -706,8 +707,7 @@ export class XrmContextService implements ChangeManager {
                 x = x.replace('{', '').replace('}', '');
                 upd[newValue['associatednavigationpropertyname']()] = '/' + newValue['pluralName'] + '(' + x + ')';
               } else {
-                // this does not work, navigation properties can only be removed with SDK deleted method
-                upd["_" + newValue['logicalname'].toLowerCase() + "_value"] = null;
+                upd[`${prop}@odata.bind`] = null;
               }
               changedFields.push(prop);
             }
@@ -746,6 +746,15 @@ export class XrmContextService implements ChangeManager {
           continue;
         }
 
+        if (_prototype[prop] instanceof MultiOptionSetValue) {
+          const mo = newValue as MultiOptionSetValue;
+          if (mo && mo.changed()) {
+            upd[prop.toString()] = mo.toJsonProperty();
+            changedFields.push(prop);
+          }
+          continue;
+        }
+
         if (_prototype[prop] instanceof Date) {
           if (prevValue instanceof Date && newValue instanceof Date) {
             var d1 = (prevValue as Date).toISOString();
@@ -757,7 +766,6 @@ export class XrmContextService implements ChangeManager {
           }
 
           if (prevValue != newValue) {
-            this.xrmService.log('pre-value-update-date:[' + prevValue + ']/[' + newValue + ']');
             if (newValue == null) {
               upd[prop.toString()] = null;
             } else {
@@ -1036,7 +1044,7 @@ export class XrmContextService implements ChangeManager {
           }
 
           if (_prototype[prop] instanceof EntityReference) {
-            let ref = value as EntityReference;
+            const ref = value as EntityReference;
             if (ref != null && ref.id != null && ref.id != '') {
               newr[_prototype[prop]['associatednavigationpropertyname']()] = '/' + _prototype[prop]['pluralName'] + '(' + ref.id.replace('{', '').replace('}', '') + ')';
             }
@@ -1044,15 +1052,26 @@ export class XrmContextService implements ChangeManager {
           }
 
           if (_prototype[prop] instanceof OptionSetValue) {
-            let o = value as OptionSetValue;
+            const o = value as OptionSetValue;
             if (o != null && o.value != null) {
               newr[prop.toString()] = o.value;
             }
             continue;
           }
 
+          if (_prototype[prop] instanceof MultiOptionSetValue) {
+            const m = value as MultiOptionSetValue;
+            if (m != null) {
+              const values = m.toJsonProperty();
+              if (values && values.length > 0) {
+                newr[prop.toString()] = values;
+              }
+            }
+            continue;
+          }
+
           if (_prototype[prop] instanceof Date) {
-            let d = value as Date;
+            const d = value as Date;
             if (d != null) {
               newr[prop.toString()] = d.toISOString();
             }
@@ -1365,12 +1384,24 @@ export class XrmContextService implements ChangeManager {
           let opt = _result[prop];
           if (opt == undefined) {
             opt = new OptionSetValue();
+          _result[prop] = opt;
           }
+          
           opt.value = instance[prop];
           opt.name = instance[prop + '@OData.Community.Display.V1.FormattedValue'];
           opt.set(opt.value, opt.name);
 
-          _result[prop] = opt;
+          done = true;
+        }
+
+        if (!done && prototype[prop] instanceof MultiOptionSetValue) {
+          let mos = _result[prop] as MultiOptionSetValue;
+          if (!mos) {
+            mos = new MultiOptionSetValue();
+            _result[prop] = mos;
+          }
+
+          mos.fromPayload(instance, prop);
           done = true;
         }
 
