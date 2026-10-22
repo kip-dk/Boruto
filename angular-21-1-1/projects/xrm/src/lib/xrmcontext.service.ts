@@ -726,7 +726,7 @@ export class XrmContextService implements ChangeManager {
               x = x.replace('{', '').replace('}', '');
               upd[_prototype[prop]['associatednavigationpropertyname']()] = '/' + _prototype[prop]['pluralName'] + '(' + x + ')';
             } else {
-              upd["_" + newValue['logicalname'].toLowerCase() + "_value"] = null;
+              upd[`${prop}@odata.bind`] = null;
             }
             changedFields.push(prop);
           }
