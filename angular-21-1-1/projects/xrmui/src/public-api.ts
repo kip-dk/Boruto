@@ -35,6 +35,7 @@ export * from './lib/ko/kipon-ui.module';
 export * from './lib/bo/api/imenu.interface';
 export * from './lib/bo/api/iselectable.interface';
 export * from './lib/bo/api/optionsetvalue.interface';
+export * from './lib/bo/api/multioptionsetvalue.interface';
 export * from './lib/bo/api/optionvalue.interface';
 export * from './lib/bo/api/entityreference.interface';
 export * from './lib/bo/api/isearchservice.interface';

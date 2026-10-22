@@ -37,6 +37,7 @@ export * from './lib/models/optionsetlabelmeta.model';
 export * from './lib/models/optionsetmeta.model';
 export * from './lib/models/optionsetmetavalue.model';
 export * from './lib/models/optionsetvalue.model';
+export * from './lib/models/multioptionsetvalue.model';
 export * from './lib/models/tofunctionalpropertyvalue.interface';
 export * from './lib/models/xrmaccess.model';
 export * from './lib/models/xrmcontext.interface';
