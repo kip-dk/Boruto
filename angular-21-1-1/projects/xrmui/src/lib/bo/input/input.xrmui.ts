@@ -10,6 +10,7 @@ import { ISearchService } from '../api/isearchservice.interface';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/datepicker';
 import { OptionSetValue } from '../api/optionsetvalue.interface';
+import { MultiOptionSetValue } from '../api/multioptionsetvalue.interface';
 import { ChangeScopeDirective } from '../changedscope/changedscope.directive';
 import { EntityReference } from '../api/entityreference.interface';
 import { FormScopeDirective } from '../form/formscope.directive';
@@ -67,7 +68,7 @@ export class XrmuiInput {
     name: "--select--"
   }
 
-    readonly selectall: ISelectable = {
+  readonly selectall: ISelectable = {
     id: "-999999",
     name: "Select all"
   }
@@ -126,8 +127,8 @@ export class XrmuiInput {
   selectable = input<ISelectable[] | null>(null);
   selected = model<ISelectable | undefined>(undefined);
   multiselected = model<ISelectable[] | undefined>(undefined);
-  
   optionsetvalue = input<OptionSetValue | null>(null);
+  multioptionsetvalue = input<MultiOptionSetValue | null>(null);
   entityreference = input<EntityReference | null>(null);
   onselect = output<ISelectable | undefined>();
   error = input<boolean>(false);
@@ -277,12 +278,36 @@ export class XrmuiInput {
           const sel = sels.find(r => r.id == v.toString());
           if (sel) {
             this.selected.set(sel);
-          } 
+          }
         } else {
-            this.selected.set(undefined);
+          this.selected.set(undefined);
         }
       };
     });
+
+    effect(() => {
+      const mus = this.multioptionsetvalue();
+      if (mus) {
+        const selectable = this.selectable();
+        if (selectable && selectable.length > 0) {
+          const values = mus.values();
+          if (values.length == 0) {
+            this.multiselected.set([]);
+          } else {
+            const next: ISelectable[] = [];
+            values.forEach(v => {
+              const id = (untracked(() => v.value$()) ?? -1).toString();
+              const s = selectable.find(s => s.id == id);
+              if (s) {
+                next.push(s);
+              }
+            });
+            this.multiselected.set(next);
+          }
+        }
+      }
+    });
+
 
     effect(() => {
       const re = this.entityreference();
@@ -564,7 +589,7 @@ export class XrmuiInput {
         if (this.overlayRef) {
           this.overlayRef.updatePosition();
         }
-      },100);
+      }, 100);
     }
   }
 
@@ -652,7 +677,7 @@ export class XrmuiInput {
             if (this.overlayRef) {
               this.overlayRef.updatePosition();
             }
-          },100);
+          }, 100);
           return;
         }
         if (issel) {
@@ -671,7 +696,7 @@ export class XrmuiInput {
           if (this.overlayRef) {
             this.overlayRef.updatePosition();
           }
-        },100);
+        }, 100);
       }
       return;
     } else {
@@ -844,7 +869,7 @@ export class XrmuiInput {
 
   private handleNumber() {
     const _i = untracked(() => this._initialValue());
-    
+
     let sv = this.shadowValue();
     if (sv == '') {
       this.value.set(null);
@@ -923,7 +948,7 @@ export class XrmuiInput {
     return this.expandedItems.get(e) ?? null;
   }
 
-  removeMultiSelected(e: Event,v: ISelectable) {
+  removeMultiSelected(e: Event, v: ISelectable) {
     e.stopPropagation();
     const nextMS = this.multiselected()!.filter(r => r.id != v.id);
     this.multiselected.set(nextMS);
@@ -932,7 +957,7 @@ export class XrmuiInput {
 
   private setNumberValueString() {
     const _v = untracked(() => this.value());
-    
+
     if (this.nullable() && (_v == undefined || _v == null || _v == '')) {
       this.shadowValue.set('');
       return;
