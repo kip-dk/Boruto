@@ -13,6 +13,7 @@ namespace Boruto.Extensions.Framework
             "Create",
             "Update",
             "Delete",
+            "Merge",
             "Retrieve",
             "RetrieveMultiple"
         };

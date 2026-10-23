@@ -64,7 +64,7 @@ namespace Boruto
             this.PrimaryEntityId = this.PluginExecutionContext.PrimaryEntityId;
             this._trace = trace;
 
-            this.methodPattern = this.Stage.ToMethodName(this.Message, this.PluginExecutionContext.Mode);
+            this.methodPattern = this.Stage.ToMethodName(this.Message, this.PluginExecutionContext.Mode);   
 
             lock (locker)
             {

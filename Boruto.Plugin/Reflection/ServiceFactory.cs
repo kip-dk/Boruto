@@ -44,6 +44,11 @@ namespace Boruto.Reflection
                 return this.ctx.PrimaryLogicalName;
             }
 
+            if (argument.Name.ToLower() == "subordinateid" && argument.FromType == typeof(Guid))
+            {
+                return ctx.PluginExecutionContext.InputParameters["SubordinateId"];
+            }
+
             var result = this.DoResolve(argument.FromType, argument.IsTargetReference, argument.IsOrganizationRequest, argument.Admin, argument.EarlyBoundEntityType ?? argument.ToType);
 
             if (argument.EarlyBoundEntityType == null && argument.ToType == null)

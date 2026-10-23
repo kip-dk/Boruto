@@ -415,6 +415,7 @@ namespace Boruto.Deployment.Services
                     return "EntityMoniker";
                 case "Delete":
                 case "Update":
+                case "Merge":
                     return "Target";
                 case "Create":
                     return "Id";

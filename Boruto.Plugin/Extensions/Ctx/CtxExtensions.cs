@@ -17,6 +17,7 @@ namespace Boruto.Extensions.Ctx
         public const string CreateMessage = "Create";
         public const string UpdateMessage = "Update";
         public const string DeleteMessage = "Delete";
+        public const string MergeMessage = "Merge";
 
 
         /// <summary>

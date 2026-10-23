@@ -88,7 +88,7 @@ namespace Boruto.Deployment.Services
                                     Stage = stage
                                 };
 
-                                if (message == "Create" || message == "Delete" || message == "Retrieve" || message == "RetrieveMultiple" || step.TargetFilterAttributes != null || step.PostImage != null || step.PreImage != null)
+                                if (message == "Create" || message == "Delete" || message == "Retrieve" || message == "RetrieveMultiple" || message == "Merge" || step.TargetFilterAttributes != null || step.PostImage != null || step.PreImage != null)
                                 {
                                     allLogicalSteps.Add(step);
                                 }
@@ -154,6 +154,7 @@ namespace Boruto.Deployment.Services
             if (method.Name.EndsWith("RetrieveAsync")) return "Retrieve";
             if (method.Name.EndsWith("RetrieveMultiple")) return "RetrieveMultiple";
             if (method.Name.EndsWith("RetrieveMultipleAsync")) return "RetrieveMultiple";
+            if (method.Name.EndsWith("Merge")) return "Merge";
 
             foreach (var arg in method.GetParameters())
             {
