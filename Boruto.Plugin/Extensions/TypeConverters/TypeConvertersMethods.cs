@@ -93,6 +93,11 @@ namespace Boruto.Extensions.TypeConverters
                 }
             }
 
+            if (from is Enum e1 && other is Enum e2)
+            {
+                return Convert.ToInt64(e1) == Convert.ToInt64(e2);
+            }
+
             {
                 if (from is Microsoft.Xrm.Sdk.Money f && other is decimal t)
                 {
