@@ -43,6 +43,7 @@ A plugin is always executed by the plaform with a Payload. This is basically the
 * **Target**,  the target data for the operation 
 	* Create,Update => Entity
 	* Delete => EntityReference 
+	* Merge => EntityReference, Guid SubordinateId 
 	* Retrieve => EntityId and EntityLogicalName
 	* RetrieveMultiple => EntityLogicalName and Query
 	* OrganizationRequest
