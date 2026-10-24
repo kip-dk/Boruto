@@ -150,6 +150,8 @@ export class XrmuiInput implements OnDestroy {
   isselectable = computed(() => !this.isautocomplete() && this.selectable() != null);
   ismultible = computed(() => this.multiselected() != undefined);
 
+  inputalign = input<'left' | 'right' | null>(null);
+
   autoopenonblank = computed(() => {
     const au = this._autoopenonblank();
     if (au != undefined) {
@@ -199,6 +201,12 @@ export class XrmuiInput implements OnDestroy {
   isnumber = computed(() => this.validate() == 'decimal' || this.validate() == 'number');
 
   inputclasses = computed(() => {
+    if (this.inputalign() == 'left') return 'left';
+    if (this.inputalign() == 'right') return 'right';
+
+    if (this.isnumber() && this.formScope?.formScope().inputalign == 'left') return 'left';
+    if (this.isnumber() && this.formScope?.formScope().inputalign == 'right') return 'right';
+
     if (!this.isnumber()) return this.type();
     return this.type() + ' ' + 'number';
   });
