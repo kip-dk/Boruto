@@ -1,5 +1,5 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, computed, DestroyRef, effect, ElementRef, EventEmitter, inject, input, Input, isSignal, model, OnChanges, output, Output, QueryList, Signal, signal, SimpleChanges, ViewChild, ViewChildren, ChangeDetectionStrategy, TemplateRef, ViewEncapsulation, untracked } from '@angular/core';
+import { Component, computed, DestroyRef, effect, ElementRef, EventEmitter, inject, input, Input, isSignal, model, OnChanges, output, Output, QueryList, Signal, signal, SimpleChanges, ViewChild, ViewChildren, ChangeDetectionStrategy, TemplateRef, ViewEncapsulation, untracked, OnDestroy } from '@angular/core';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { ViewContainerRef } from '@angular/core';
@@ -9,7 +9,7 @@ import { ISelectable } from '../api/iselectable.interface';
 import { ISearchService } from '../api/isearchservice.interface';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/datepicker';
-import { OptionSetValue } from '../api/optionsetvalue.interface';
+import { createOptionSetValue, OptionSetValue } from '../api/optionsetvalue.interface';
 import { MultiOptionSetValue } from '../api/multioptionsetvalue.interface';
 import { ChangeScopeDirective } from '../changedscope/changedscope.directive';
 import { EntityReference } from '../api/entityreference.interface';
@@ -46,7 +46,7 @@ const bo_nextId = function () {
   encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, NgClass, MatIcon, TextFieldModule, MatDatepickerModule, MatCheckboxModule, XrmuiIcon, NgTemplateOutlet]
 })
-export class XrmuiInput {
+export class XrmuiInput implements OnDestroy {
   @ViewChild('inputfield') searchElement?: ElementRef;
   @ViewChild('textareafield') textareaElement?: ElementRef;
   @ViewChild('datefield') datefieldElement?: ElementRef;
@@ -662,15 +662,31 @@ export class XrmuiInput {
   private SetSelectedItem(v: ISelectable | undefined) {
     if (this.ismultible()) {
       if (v != undefined) {
-        const issel = this.isSelected(v);
-        if (v == this.selectall) {
-          const allSelected = untracked(() => this.allIsSelected());
+        try {
+          const issel = this.isSelected(v);
+          if (v == this.selectall) {
+            const allSelected = untracked(() => this.allIsSelected());
 
-          if (allSelected) {
-            this.multiselected.set([]);
-          } else {
-            this.multiselected.set([...this.selectable()!])
+            if (allSelected) {
+              this.multiselected.set([]);
+            } else {
+              this.multiselected.set([...this.selectable()!])
+            }
+            return;
           }
+          if (issel) {
+            const next = this.multiselected()!.filter(r => r.id != v.id);
+            this.multiselected.set(next);
+            this.notifyOnChange();
+          } else {
+            const next = [...this.multiselected()!, v];
+            this.multiselected.set(next);
+          }
+          this.current = v;
+          this.currentindex.set(this.itemlist()!.indexOf(v));
+          return;
+        } finally {
+          this.syncToMultiOptionSetValue();
           this.notifyOnChange();
           this.autoRefocus();
           setTimeout(() => {
@@ -678,25 +694,7 @@ export class XrmuiInput {
               this.overlayRef.updatePosition();
             }
           }, 100);
-          return;
         }
-        if (issel) {
-          const next = this.multiselected()!.filter(r => r.id != v.id);
-          this.multiselected.set(next);
-          this.notifyOnChange();
-        } else {
-          const next = [...this.multiselected()!, v];
-          this.multiselected.set(next);
-        }
-        this.current = v;
-        this.currentindex.set(this.itemlist()!.indexOf(v));
-        this.notifyOnChange();
-        this.autoRefocus();
-        setTimeout(() => {
-          if (this.overlayRef) {
-            this.overlayRef.updatePosition();
-          }
-        }, 100);
       }
       return;
     } else {
@@ -727,6 +725,20 @@ export class XrmuiInput {
     }
   }
 
+  private syncToMultiOptionSetValue() {
+    const multi = untracked(() => this.multioptionsetvalue());
+    if (multi) {
+      const multiValues = untracked(() => multi.values());
+      const newValues = untracked(() => this.multiselected()) ?? [];
+      const multiIds = multiValues.map(r => untracked(() => r.value$() ?? -1).toString());
+      const newIds = newValues?.map(r => r.id);
+
+      if (multiIds.length != newIds?.length || !multiIds.every(m => newIds.includes(m))) {
+        const next = newValues.map(n => createOptionSetValue(Number(n.id), n.name ?? '')).sort((a, b) => a.name.localeCompare(b.name));
+        multi.values.set(next);
+      }
+    }
+  }
 
   private next(e: number) {
     if (!this.showitems()) {
@@ -952,6 +964,7 @@ export class XrmuiInput {
     e.stopPropagation();
     const nextMS = this.multiselected()!.filter(r => r.id != v.id);
     this.multiselected.set(nextMS);
+    this.syncToMultiOptionSetValue();
     this.notifyOnChange();
   }
 
@@ -1007,6 +1020,10 @@ export class XrmuiInput {
       );
       this.overlayRef.attach(portal);
 
+      this.overlayRef.updateSize({
+        width: this.searchElement.nativeElement.getBoundingClientRect().width
+      });
+
       const autocomplete = this.overlayRef.overlayElement
         .querySelector('.autocomplete') as HTMLElement;
 
@@ -1014,10 +1031,33 @@ export class XrmuiInput {
         autocomplete.style.width =
           `${this.searchElement.nativeElement.offsetWidth}px`;
       }
+      this.observeInputResize();
     }
   }
 
   private hideAutocompleteSuggestions(): void {
     this.overlayRef?.detach();
+  }
+
+  private resizeObserver?: ResizeObserver;
+
+
+  private observeInputResize() {
+      this.resizeObserver = new ResizeObserver(() => {
+        const w = this.searchElement?.nativeElement.getBoundingClientRect().width;
+        if (this.overlayRef?.hasAttached()) {
+          this.overlayRef.updateSize({
+            width: w
+          });
+          this.overlayRef.updatePosition();
+        }
+      });
+      this.resizeObserver.observe(this.searchElement?.nativeElement);
+  }
+
+  ngOnDestroy(): void {
+    this.resizeObserver?.disconnect();
+    this.overlayRef?.detach();
+    this.overlayRef?.dispose();
   }
 }

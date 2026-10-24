@@ -3,6 +3,12 @@
     margin-bottom: 10px;
 }
 
+.boruto-ui.autocomplete {
+    width: 100%;
+    display: flex;
+    flex-grow: 1;
+}
+
 .boruto-ui div.autocomplete {
     display: block;
     box-sizing: border-box;
@@ -13,9 +19,11 @@
     border-color: lightgray;
     border-radius: 4px;
     padding: 5px 5px 5px 5px;
-    max-height: 200px;
+    max-height: 250px;
     overflow-x: hidden;
     overflow-y: auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .boruto-ui  div.autocomplete.nolabel {
@@ -342,7 +350,7 @@
 .boruto-ui div.multi-select-input input {
     position: absolute;
     opacity: 0;
-    width: 100%;
+    width: calc(100% + 30px);
     height: 11px;
     padding: 0;
     border: 0;

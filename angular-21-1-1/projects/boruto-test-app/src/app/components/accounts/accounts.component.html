@@ -16,6 +16,7 @@
                 <xrmui-input label="Dato" [(value)]="acc.createdon" validate="date" [disabled]="true"></xrmui-input>
                 <xrmui-input label="Last on hold" [(value)]="acc.lastonholdtime" validate="date"></xrmui-input>
                 <xrmui-input label="Type" [selectable]="ownershipOptions" [optionsetvalue]="acc.ownershipcode"></xrmui-input>
+                <xrmui-input label="groups" [selectable]="groupOptions" [multioptionsetvalue]="acc.bor_groups"></xrmui-input>
                 <br />
                 <br />
                 Number of of changed fields: {{ acc.numberOfChangedFields() }}<br />

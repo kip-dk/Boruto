@@ -116,48 +116,59 @@
             <div class="bo-row">
                 <div class=bo-grid-columns>
                     <div class="bo-column">{{ selected()?.name ?? setdefaultitem.name }}</div>
-                    <div class="bo-column bo-fixed" style="--bo-fixed-size: 25  px; margin-top: -10px;position: relative;">
-                        <xrmui-icon icon="keyboard_arrow_down" type="font" style="color: black"></xrmui-icon>
-                    </div>
+                    @if (!disabled()) {
+                        <div class="bo-column bo-fixed" style="--bo-fixed-size: 25  px; margin-top: -2px;position: relative;">
+                            <xrmui-icon icon="keyboard_arrow_down" type="font" style="color: black"></xrmui-icon>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
         </button>
     }
     @if (options && options.length > 0 && ismultible()) {
-        <div class="multi-select">
-        @let optionsselected = multiselected()!;
-        @for (ms of optionsselected; track ms.id; let ix = $index) {
-            <div class="multi-select-item" [ngClass]="{ over: isover() && !showitems() }">@if(ix>0 && (!isover() || showitems())) {, }
-                <button tabindex="-1" (click)="removeMultiSelected($event, ms)">
-                @if (ms.icon && ms.icon.length > 0) {
-                    <span class="material-symbols-outlined" style="font-size: small; position: relative; top: 3px">{{ ms.icon }}</span>
+        <div style="display: flex; flex-direction: row;">
+        <div style="flex-grow: 1;">
+            <div class="multi-select">
+                @let optionsselected = multiselected()!;
+                @for (ms of optionsselected; track ms.id; let ix = $index) {
+                    <div class="multi-select-item" [ngClass]="{ over: isover() && !showitems() }">@if(ix>0 && (!isover() || showitems())) {, }
+                        <button tabindex="-1" (click)="removeMultiSelected($event, ms)">
+                        @if (ms.icon && ms.icon.length > 0) {
+                            <span class="material-symbols-outlined" style="font-size: small; position: relative; top: 3px">{{ ms.icon }}</span>
+                        }
+                        {{ ms.name }}
+                        @if (isover() && !showitems() && !disabled()) {
+                            <span class="material-symbols-outlined" style="font-size: small; position: relative; top: 3px">close_small</span>
+                        }
+                        </button>
+                    </div>
                 }
-                 {{ ms.name }}
-                @if (isover() && !showitems()) {
-                    <span class="material-symbols-outlined" style="font-size: small; position: relative; top: 3px">close_small</span>
-                }
-                </button>
+            </div>
+            <div style="height: 2px" class="multi-select-input">
+                <input 
+                    #inputfield 
+                    readonly
+                    [id]="inputid()"
+                    [name]="name()"
+                    (click)="openSelect()"
+                    (focus)="onFocus()"
+                    (blur)="onBlur()"
+                    [disabled]="disabled()"
+                    (keydown.arrowdown)="ondown($event)"
+                    (keydown.arrowup)="onup($event)"
+                    (keydown.enter)="onenter($event)"
+                    (keydown.esc)="onesc($event)"
+                    (keydown.backspace)="onbackspace($event)"
+                    (keydown)="onkeydown($event)"
+                    />
+            </div>
+        </div>
+        @if (!disabled()) {
+            <div style="max-width: 25px; max-width: 25px; width: 25px; margin-right: 5px;margin-top: 5px; cursor: pointer;">
+                <xrmui-icon icon="keyboard_arrow_down" type="font" style="color: black"></xrmui-icon>
             </div>
         }
-        </div>
-        <div style="height: 2px" class="multi-select-input">
-            <input 
-                #inputfield 
-                readonly
-                [id]="inputid()"
-                [name]="name()"
-                (click)="openSelect()"
-                (focus)="onFocus()"
-                (blur)="onBlur()"
-                [disabled]="disabled()"
-                (keydown.arrowdown)="ondown($event)"
-                (keydown.arrowup)="onup($event)"
-                (keydown.enter)="onenter($event)"
-                (keydown.esc)="onesc($event)"
-                (keydown.backspace)="onbackspace($event)"
-                (keydown)="onkeydown($event)"
-                />
         </div>
     }
     @let ti = toolIcon();
@@ -178,7 +189,7 @@
 </div>
 
 <ng-template #suggestionsTemplate>
-    <div class="boruto-ui">
+    <div class="boruto-ui autocomplete">
         <div class="autocomplete" [ngClass]="{ nolabel: (!label() || label().length == 0 || shortLabel() == 'above'), shortLabel: shortLabel() == true, notdark: notdark() }">
             @if (itemlist().length == 0) {
             <div class="element"><div class="item">Ingen fundet</div></div>

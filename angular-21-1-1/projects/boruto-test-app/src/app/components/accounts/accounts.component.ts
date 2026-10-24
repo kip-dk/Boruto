@@ -3,6 +3,7 @@ import { BorutoXrmUIModule } from 'boruto-xrmui';
 import { AccountService } from '../../services/account.service';
 import { Account } from '../../entities/account.entity';
 import { OwnershipcodeOptions } from '../../models/ownership.enum';
+import { GroupOptions } from '../../models/group.enum';
 
 @Component({
   selector: 'app-accounts',
@@ -18,6 +19,7 @@ export class AccountsComponent {
     account = signal<Account | null>(null);
 
     ownershipOptions = OwnershipcodeOptions;
+    groupOptions = GroupOptions;
 
     constructor() {
         this.init();
