@@ -30,6 +30,9 @@ namespace Bor
                 {
                     case "deploy":
                         {
+                            //onsole.WriteLine("Attach debugger now");
+                            //Console.ReadLine();
+
                             var configString = System.Configuration.ConfigurationManager.ConnectionStrings["CRM"].ConnectionString;
                             var connectionString = Bor.XrmOrganization.ConnectionString.ResolveConnectionStringFromStorage(configString);
                             using (var instance = new Microsoft.PowerPlatform.Dataverse.Client.ServiceClient(connectionString))

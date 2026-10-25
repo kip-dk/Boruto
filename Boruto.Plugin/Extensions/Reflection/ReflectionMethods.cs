@@ -429,5 +429,26 @@ namespace Boruto.Extensions.Reflection
                     select instanceProperty.GetCustomAttribute<Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute>().LogicalName
                     ).Distinct().ToArray();
         }
+
+        private static readonly HashSet<Type> excluded = new HashSet<Type>
+        {
+            typeof(Boruto.ITarget),
+            typeof(Boruto.IPostImage),
+            typeof(Boruto.IPreImage),
+            typeof(Boruto.IMerged),
+            typeof(Boruto.IEntity)
+        };
+
+        public static PropertyInfo[] GetAllProperties(this Type type)
+        {
+            return new[] { type }
+                    .Concat(type.IsInterface ? type.GetInterfaces() : Array.Empty<Type>())
+                    .Where(t => !excluded.Contains(t))
+                    .SelectMany(t => t.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                    .Where(p => p.CanRead)
+                    .GroupBy(p => p.Name)
+                    .Select(g => g.First())
+                    .ToArray();
+        }
     }
 }

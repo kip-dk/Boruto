@@ -386,6 +386,10 @@ namespace Boruto.Deployment.Services
 
         internal static Image TargetFilters(this MethodInfo method, string logicalName, Assembly[] assms)
         {
+            if (method.DeclaringType.Name == "AccountAddressPlugin")
+            {
+                var x = 0;
+            }
             var result = new List<string>();
 
             foreach (var arg in method.GetParameters())
@@ -488,7 +492,7 @@ namespace Boruto.Deployment.Services
 
         public static string[] GetEntityAttributes(this Type interfaceType, Type implType, Func<PropertyInfo, bool> interfaceTypeFilter)
         {
-            var interfaceTypeProperties = interfaceType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(r => r.CanRead).ToArray();
+            var interfaceTypeProperties = interfaceType.GetAllProperties();
             if (interfaceTypeFilter != null)
             {
                 interfaceTypeProperties = interfaceTypeProperties.Where(r => interfaceTypeFilter(r)).ToArray();

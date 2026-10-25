@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2026-10-23 10:25
+## updated: 2026-10-25 16:50
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -445,6 +445,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 1. No tools in the nuget package
 
 ## Changelog
+### 1.0.4.23 Support for Payload (ITarget,IMerged,IPreImage,IPostImage) inherited properties, allow interfaces to be defined in multi levels
 ### 1.0.4.22 Deploy tool now support 4.8 builds, boruto is still 4.6.2
 ### 1.0.4.21 Understøtte merge message
 ### 1.0.4.20 IsSame support for compare of enums

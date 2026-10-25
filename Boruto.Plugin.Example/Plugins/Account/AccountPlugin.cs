@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boruto.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,21 @@ namespace Boruto.Plugin.Example.Plugins.Account
         public void OnPreDelete(ITargetReference<Boruto.Plugin.Entities.Account> target, Microsoft.Xrm.Sdk.ITracingService trace)
         {
             trace.Trace($"Deleting: { target.LogicalName } { target.Id }");
+        }
+    }
+
+    public class AccountAddressPlugin : BasePlugin
+    {
+        [Sort(1)]
+        public void OnPreCreate(Payloads.AccountAdr.IAddressExtension target)
+        {
+
+        }
+
+        [Sort(1)]
+        public void OnPreUpdate(Payloads.AccountAdr.IAddressExtension target)
+        {
+
         }
     }
 }
