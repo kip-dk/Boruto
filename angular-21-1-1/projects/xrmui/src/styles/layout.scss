@@ -23,6 +23,10 @@
     overflow-x: auto;
   }
 
+  .bo-auto {
+    flex: 0 0 auto;
+  }
+
   .bo-fixed {
     flex: 0 0 var(--bo-fixed-size);
   }
@@ -104,6 +108,10 @@
     flex: 0 0 var(--bo-fixed-size);
   }
 
+  .bo-auto {
+    flex: 0 0 auto;
+  }
+
   .bo-fixed-25 {
     flex: 0 0 25px;
   }
@@ -175,6 +183,10 @@
     overflow-x: auto;
   }
 
+  .bo-auto {
+    flex: 0 0 auto;
+  }
+
   .bo-fixed {
     flex: 0 0 var(--bo-fixed-size);
   }
@@ -200,6 +212,10 @@
 
   .bo-overflow-x {
     overflow-x: auto;
+  }
+
+  .bo-auto {
+    flex: 0 0 auto;
   }
 
   .bo-fixed {
