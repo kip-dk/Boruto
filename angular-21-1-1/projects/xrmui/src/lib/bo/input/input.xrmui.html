@@ -13,7 +13,7 @@
 </div>
 }
 <div class="input" 
-    [ngClass]="{ focus: hasfocus(), multi: ismultible(), error: error(), textarea: numberoflines() > 1, labelabove: shortLabel() == 'above', toolicon: toolIcon()?.length ?? 0 > 0 }" 
+    [ngClass]="{ focus: hasfocus(), multi: ismultible(), error: error(), textarea: numberoflines() > 1, labelabove: shortLabel() == 'above', toolicon: hasToolIcon() }" 
     (mouseover)="isover.set(true)"
     (mouseleave)="isover.set(false)"
     (click)="focusMe($event, true)">
@@ -115,10 +115,15 @@
         <div class="bo-grid-rows">
             <div class="bo-row">
                 <div class=bo-grid-columns>
-                    <div class="bo-column">{{ selected()?.name ?? setdefaultitem.name }}</div>
+                    <div class="bo-column">{{ selected()?.name ?? '--select--' }}</div>
                     @if (!disabled()) {
                         <div class="bo-column bo-fixed" style="--bo-fixed-size: 25  px; margin-top: -2px;position: relative;">
-                            <xrmui-icon icon="keyboard_arrow_down" type="font" style="color: black"></xrmui-icon>
+                            @if (selected() === undefined) {
+                                <xrmui-icon icon="keyboard_arrow_down" type="font" style="color: black"></xrmui-icon>
+                            }
+                            @if (selected() !== undefined) {
+                                <xrmui-icon icon="close_small" type="font" style="color: black; cursor: pointer" (click)="clearSelect($event)"></xrmui-icon>
+                            }
                         </div>
                     }
                 </div>
@@ -175,6 +180,14 @@
     @if (!disabled() && ti && ti.length > 0) {
         <mat-icon class="toolicon" fontSet="material-symbols-outlined" (click)="toolClicked($event)">{{ ti }}</mat-icon>
     }
+
+    @if (!ti && !disabled()) {
+        @let er = entityreference();
+        @if (er && autocomplete() !== null && er.id$()) {
+            <mat-icon class="toolicon" fontSet="material-symbols-outlined" (click)="clearReference($event)">close_small</mat-icon>
+        }
+    }
+
 </div>
 
 @if (label() == '' && type() != 'number' && showlock()) {

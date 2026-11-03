@@ -65,7 +65,7 @@ export class XrmuiInput implements OnDestroy {
 
   readonly setdefaultitem: ISelectable = {
     id: "-999999",
-    name: "--select--"
+    name: "--clear value--"
   }
 
   readonly selectall: ISelectable = {
@@ -151,6 +151,15 @@ export class XrmuiInput implements OnDestroy {
   ismultible = computed(() => this.multiselected() != undefined);
 
   inputalign = input<'left' | 'right' | null>(null);
+
+  hasToolIcon= computed(() => {
+    if (this.toolIcon()?.length ?? 0 > 0) return true;
+    const re = this.entityreference();
+    if (re && this.autocomplete() && !this.disabled() && re.id$()) {
+      return true;
+    }
+    return false;
+  })
 
   autoopenonblank = computed(() => {
     const au = this._autoopenonblank();
@@ -580,6 +589,24 @@ export class XrmuiInput implements OnDestroy {
 
       this.showitems.set(false);
       this.shadowValue.set(this.current.name ?? '');
+      this.notifyOnChange();
+    }
+  }
+
+  clearSelect(e: Event) {
+    e.stopPropagation();
+    this.selected.set(undefined);
+    this.onselect.emit(undefined);
+    this.showitems.set(false);
+    this.notifyOnChange();
+  }
+
+  clearReference(e: Event) {
+    e.stopPropagation();
+    const er = this.entityreference();
+    if (er) {
+      er.set(undefined, undefined);
+      this.showitems.set(false);
       this.notifyOnChange();
     }
   }
