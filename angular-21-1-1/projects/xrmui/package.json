@@ -1,6 +1,6 @@
 {
   "name": "boruto-xrmui",
-  "version": "1.22.34",
+  "version": "1.22.35",
   "peerDependencies": {
     "@angular/common": "^22.1.0",
     "@angular/core": "^22.1.0",
