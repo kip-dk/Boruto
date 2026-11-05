@@ -197,6 +197,7 @@ export class XrmuiInput implements OnDestroy {
   currentindex = signal<number>(-1);
 
   shadowValue = signal<string>('');
+  shadowValueLog = input<boolean>(false);
   shadowDate = signal<Date | null>(null);
 
   shadowBool = signal<boolean>(false);
@@ -257,7 +258,7 @@ export class XrmuiInput implements OnDestroy {
     effect(() => {
       const value = this.value();
       if (value == null) {
-        this.shadowValue.set('');
+        this.shadowValue.set(''); this.shadowValueLogging("1: value == null");
         this.shadowDate.set(null);
         this.shadowBool.set(false);
         return;
@@ -278,7 +279,7 @@ export class XrmuiInput implements OnDestroy {
         return;
       }
 
-      this.shadowValue.set(value.toString());
+      this.shadowValue.set(value.toString()); this.shadowValueLogging("2: toString()");
     });
 
     effect(() => {
@@ -286,7 +287,7 @@ export class XrmuiInput implements OnDestroy {
       const sels = this.selectable();
       if (osv) {
         const n = osv.name$() ?? '';
-        this.shadowValue.set(n);
+        this.shadowValue.set(n); this.shadowValueLogging("3: n");
       }
 
       if (osv && sels && sels.length > 0) {
@@ -330,7 +331,7 @@ export class XrmuiInput implements OnDestroy {
       const re = this.entityreference();
       if (re) {
         const name = re.name$() ?? '';
-        this.shadowValue.set(name);
+        this.shadowValue.set(name); this.shadowValueLogging("4: re.name");
       }
     });
 
@@ -358,14 +359,14 @@ export class XrmuiInput implements OnDestroy {
         this.bindItems(sels);
         const sel = this.selected();
         if (sel) {
-          this.shadowValue.set(sel.name ?? '');
+          this.shadowValue.set(sel.name ?? ''); this.shadowValueLogging("5: sel.name");
           this.current = sel;
           const ci = sels.findIndex(s => s.id == sel.id);
           if (ci >= 0) {
             this.currentindex.set(ci);
           }
         } else {
-          this.shadowValue.set(this.setdefaultitem.name ?? '');
+          this.shadowValue.set(this.setdefaultitem.name ?? ''); this.shadowValueLogging("6: setdefaultitemname");
           this.currentindex.set(-1);
         }
       }
@@ -486,7 +487,7 @@ export class XrmuiInput implements OnDestroy {
       if (sel && sel.name != sv) {
         this.selected.set(undefined);
         this.onselect.emit(undefined);
-        this.shadowValue.set('');
+        this.shadowValue.set(''); this.shadowValueLogging("7: sel ''");
         this.notifyOnChange();
       }
 
@@ -494,7 +495,7 @@ export class XrmuiInput implements OnDestroy {
       if (re && re.name$() != sv) {
         re.set(undefined, undefined);
         this.onselect.emit(undefined);
-        this.shadowValue.set('');
+        this.shadowValue.set(''); this.shadowValueLogging("8: re ''")
         this.notifyOnChange();
       }
 
@@ -588,7 +589,7 @@ export class XrmuiInput implements OnDestroy {
       this.onselect.emit(this.current);
 
       this.showitems.set(false);
-      this.shadowValue.set(this.current.name ?? '');
+      this.shadowValue.set(this.current.name ?? ''); this.shadowValueLogging("9: this.current.name");
       this.notifyOnChange();
     }
   }
@@ -739,13 +740,13 @@ export class XrmuiInput implements OnDestroy {
         if (os) {
           os.set(undefined, undefined);
         }
-        this.shadowValue.set(this.setdefaultitem.name ?? '');
+        this.shadowValue.set(this.setdefaultitem.name ?? ''); this.shadowValueLogging("10: this.setdefaultitem.name");
       } else {
         this.selected.set(v);
         if (os) {
           os.set(Number(v.id), v.name);
         }
-        this.shadowValue.set(v.name ?? '');
+        this.shadowValue.set(v.name ?? ''); this.shadowValueLogging("11: v.name");
       }
       this.current = v;
       if (v) {
@@ -983,7 +984,7 @@ export class XrmuiInput implements OnDestroy {
 
   async complete(ev: Event, e: ISelectable) {
     ev.stopImmediatePropagation();
-    this.shadowValue.set(e.name ?? '');
+    this.shadowValue.set(e.name ?? ''); this.shadowValueLogging("12: e.name");
     this.onValueChanged();
     this.setfocus.set(true);
   }
@@ -1007,7 +1008,7 @@ export class XrmuiInput implements OnDestroy {
     const _v = untracked(() => this.value());
 
     if (this.nullable() && (_v == undefined || _v == null || _v == '')) {
-      this.shadowValue.set('');
+      this.shadowValue.set(''); this.shadowValueLogging("13: just ''");
       return;
     }
 
@@ -1019,9 +1020,9 @@ export class XrmuiInput implements OnDestroy {
     }
 
     if (decimals != undefined) {
-      this.shadowValue.set(nFormater.format(v, decimals))
+      this.shadowValue.set(nFormater.format(v, decimals)); this.shadowValueLogging("14: nFormat");
     } else {
-      this.shadowValue.set(nFormater.flex(v));
+      this.shadowValue.set(nFormater.flex(v)); this.shadowValueLogging("15: flex");
     }
   }
 
@@ -1094,5 +1095,11 @@ export class XrmuiInput implements OnDestroy {
     this.resizeObserver?.disconnect();
     this.overlayRef?.detach();
     this.overlayRef?.dispose();
+  }
+
+  private shadowValueLogging(source: string) {
+    if (this.shadowValueLog()) {
+      console.log(source, untracked(() => this.shadowValue()));
+    }
   }
 }
