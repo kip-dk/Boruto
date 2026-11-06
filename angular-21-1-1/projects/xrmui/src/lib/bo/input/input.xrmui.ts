@@ -484,14 +484,15 @@ export class XrmuiInput implements OnDestroy {
 
       const sv = this.shadowValue();
 
-      if (sel && sel.name != sv) {
+        const re = this.entityreference();
+
+      if (!re && sel && sel.name != sv) {
         this.selected.set(undefined);
         this.onselect.emit(undefined);
         this.shadowValue.set(''); this.shadowValueLogging("7: sel ''");
         this.notifyOnChange();
       }
 
-      const re = this.entityreference();
       if (re && re.name$() != sv) {
         re.set(undefined, undefined);
         this.onselect.emit(undefined);
