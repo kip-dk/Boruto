@@ -600,6 +600,14 @@ export class XrmuiInput implements OnDestroy {
     this.selected.set(undefined);
     this.onselect.emit(undefined);
     this.showitems.set(false);
+    
+    const re = this.entityreference();
+
+    if (re) {
+      this.clearReference(e);
+      return;
+    }
+    
     this.notifyOnChange();
   }
 
@@ -736,6 +744,7 @@ export class XrmuiInput implements OnDestroy {
       return;
     } else {
       const os = this.optionsetvalue();
+      const re = this.entityreference();
       if (v == undefined || v == this.setdefaultitem) {
         this.selected.set(undefined);
         if (os) {
@@ -746,6 +755,9 @@ export class XrmuiInput implements OnDestroy {
         this.selected.set(v);
         if (os) {
           os.set(Number(v.id), v.name);
+        }
+        if (re) {
+          re.set(v.id, v.name ?? '');
         }
         this.shadowValue.set(v.name ?? ''); this.shadowValueLogging("11: v.name");
       }
