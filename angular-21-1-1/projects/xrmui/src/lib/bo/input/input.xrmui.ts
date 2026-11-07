@@ -380,6 +380,19 @@ export class XrmuiInput implements OnDestroy {
         this.hideAutocompleteSuggestions();
       }
     });
+
+    effect(() => {
+      const sels = this.selectable();
+      if (sels && sels.length > 0) {
+        const re = this.entityreference();
+        if (re && re.id$()) {
+          const sel = sels.find(s => s.id == re.id$());
+          if (sel) {
+            this.selected.set(sel);
+          }
+        }
+      }
+    });
   }
 
   private lastBind = [] as ISelectable[];
@@ -600,7 +613,7 @@ export class XrmuiInput implements OnDestroy {
     this.selected.set(undefined);
     this.onselect.emit(undefined);
     this.showitems.set(false);
-    
+
     const re = this.entityreference();
 
     if (re) {
