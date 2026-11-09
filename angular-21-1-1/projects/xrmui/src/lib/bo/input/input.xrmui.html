@@ -23,7 +23,23 @@
             @if (required()) {<span style="color: red">&nbsp;*</span>}
         </div>
     }
-    @if (numberoflines() == 1 && validate() != 'date' && validate() != 'checkbox' && !isselect()) {
+    @if (type() === 'file') {
+        <input
+        [id]="inputid()"
+        [name]="name()"
+        #inputfield 
+        [ngClass]="inputclasses()"
+        type="file"
+        [disabled]="disabled()" 
+        [placeholder]="placeholder()" 
+        (focus)="onFocus()" 
+        (blur)="onBlur()"
+        [accept]="acceptFileTypes()"
+        [multiple]="acceptMultiFiles()"
+        (change)="doUploadFiles($event)"
+        />
+    }
+    @if (numberoflines() == 1 && validate() != 'date' && validate() != 'checkbox' && !isselect() && type() !== 'file') {
     <input
         [id]="inputid()"
         [name]="name()"
@@ -59,7 +75,7 @@
          />
          </div>
     }
-    @if (numberoflines() == 1 && validate() == 'date' && !isselect()) {
+    @if (numberoflines() == 1 && validate() == 'date' && !isselect() && type() !== 'file') {
         <input
         [id]="inputid()"
         [name]="name()"
@@ -80,7 +96,7 @@
         }
         <mat-datepicker #picker></mat-datepicker>
     }
-    @if (numberoflines() > 1 && !isselect()) {
+    @if (numberoflines() > 1 && !isselect() && type() !== 'file') {
         <textarea
             [id]="inputid()"
             [name]="name()"
@@ -96,7 +112,7 @@
             (blur)="onBlur()"></textarea>
     }
     @let options = selectable();
-    @if (options && options.length > 0 && !ismultible()) {
+    @if (options && options.length > 0 && !ismultible() && type() !== 'file') {
         <button 
         #inputfield 
         [id]="inputid()"
@@ -131,7 +147,7 @@
         </div>
         </button>
     }
-    @if (options && options.length > 0 && ismultible()) {
+    @if (options && options.length > 0 && ismultible() && type() !== 'file') {
         <div style="display: flex; flex-direction: row;">
         <div style="flex-grow: 1;">
             <div class="multi-select">

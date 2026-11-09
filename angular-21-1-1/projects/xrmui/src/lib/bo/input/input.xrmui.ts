@@ -119,7 +119,12 @@ export class XrmuiInput implements OnDestroy {
   });
 
   required = input<boolean>(false);
-  type = input<'text' | 'number' | 'password' | 'checkbox'>('text');
+  type = input<'text' | 'number' | 'password' | 'checkbox' | 'file'>('text');
+
+  acceptFileTypes = input<string>('');
+  acceptMultiFiles = input<boolean>(false);
+  uploadFiles = output<FileList>();
+
   name = input<string>(bo_nextName());
   inputid = input<string>(bo_nextId())
   setfocus = model<boolean>(false);
@@ -1030,6 +1035,13 @@ export class XrmuiInput implements OnDestroy {
     this.notifyOnChange();
   }
 
+  doUploadFiles(e: Event) {
+    const input = e.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.uploadFiles.emit(input.files);
+    }
+  }
+
   private setNumberValueString() {
     const _v = untracked(() => this.value());
 
@@ -1096,6 +1108,8 @@ export class XrmuiInput implements OnDestroy {
       this.observeInputResize();
     }
   }
+
+
 
   private hideAutocompleteSuggestions(): void {
     this.overlayRef?.detach();
