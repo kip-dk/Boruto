@@ -124,6 +124,7 @@ export class XrmuiInput implements OnDestroy {
   acceptFileTypes = input<string>('');
   multiFiles = input<boolean>(false);
   uploadFiles = output<FileList>();
+  maxFileSize = input<number>(-1);
 
   name = input<string>(bo_nextName());
   inputid = input<string>(bo_nextId())
@@ -157,7 +158,7 @@ export class XrmuiInput implements OnDestroy {
 
   inputalign = input<'left' | 'right' | null>(null);
 
-  hasToolIcon= computed(() => {
+  hasToolIcon = computed(() => {
     if (this.toolIcon()?.length ?? 0 > 0) return true;
     const re = this.entityreference();
     if (re && this.autocomplete() && !this.disabled() && re.id$()) {
@@ -502,7 +503,7 @@ export class XrmuiInput implements OnDestroy {
 
       const sv = this.shadowValue();
 
-        const re = this.entityreference();
+      const re = this.entityreference();
 
       if (!re && sel && sel.name != sv) {
         this.selected.set(undefined);
@@ -625,7 +626,7 @@ export class XrmuiInput implements OnDestroy {
       this.clearReference(e);
       return;
     }
-    
+
     this.notifyOnChange();
   }
 
@@ -1038,6 +1039,23 @@ export class XrmuiInput implements OnDestroy {
   doUploadFiles(e: Event) {
     const input = e.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
+      const max = this.maxFileSize();
+      var toLarge = '';
+      if (max > 0) {
+        const fileMax = max * 1024 * 1024;
+        for (var i = 0; i < input.files.length; i++) {
+          const fi = input.files[i];
+          if (fi.size > max) {
+            toLarge += ` ${fi.name}`;
+          }
+        }
+      }
+      if (toLarge.length > 0) {
+        alert(`At least one file is above max size of ${ max }MB: ${ toLarge }`);
+        input.value = '';
+        return;
+      }
+      
       this.uploadFiles.emit(input.files);
     }
   }
@@ -1119,16 +1137,16 @@ export class XrmuiInput implements OnDestroy {
 
 
   private observeInputResize() {
-      this.resizeObserver = new ResizeObserver(() => {
-        const w = this.searchElement?.nativeElement.getBoundingClientRect().width;
-        if (this.overlayRef?.hasAttached()) {
-          this.overlayRef.updateSize({
-            width: w
-          });
-          this.overlayRef.updatePosition();
-        }
-      });
-      this.resizeObserver.observe(this.searchElement?.nativeElement);
+    this.resizeObserver = new ResizeObserver(() => {
+      const w = this.searchElement?.nativeElement.getBoundingClientRect().width;
+      if (this.overlayRef?.hasAttached()) {
+        this.overlayRef.updateSize({
+          width: w
+        });
+        this.overlayRef.updatePosition();
+      }
+    });
+    this.resizeObserver.observe(this.searchElement?.nativeElement);
   }
 
   ngOnDestroy(): void {
