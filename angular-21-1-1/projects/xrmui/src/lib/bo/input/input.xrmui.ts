@@ -122,7 +122,7 @@ export class XrmuiInput implements OnDestroy {
   type = input<'text' | 'number' | 'password' | 'checkbox' | 'file'>('text');
 
   acceptFileTypes = input<string>('');
-  acceptMultiFiles = input<boolean>(false);
+  multiFiles = input<boolean>(false);
   uploadFiles = output<FileList>();
 
   name = input<string>(bo_nextName());
