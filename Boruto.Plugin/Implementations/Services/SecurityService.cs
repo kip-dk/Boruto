@@ -79,7 +79,6 @@ namespace Boruto.Implementations.Services
                 throw new ArgumentException($"Key file for {keyname} was not found");
             };
 
-            Console.WriteLine(res);
             return res;
         }
     }
