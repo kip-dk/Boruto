@@ -26,7 +26,7 @@ namespace Boruto.Deployment.Services
             return this.spec;
         }
 
-        public DLLCode[] GetLibNet64()
+        public DLLCode[] GetLibNet48_462()
         {
             this.initialize();
             return this.dlls;
@@ -67,23 +67,6 @@ namespace Boruto.Deployment.Services
                         }
                     }
 
-                    if (entry.FullName.StartsWith("lib/net462/") && entry.Name != "Boruto.Plugin.dll")
-                    {
-                        var next = new DLLCode
-                        {
-                            Name = entry.Name
-                        };
-                        using (var ent = entry.Open())
-                        {
-                            using (var mem = new System.IO.MemoryStream())
-                            {
-                                ent.CopyTo(mem);
-                                next.Code = mem.ToArray();
-                            }
-                            result.Add(next);
-                        }
-                    }
-
                     if (entry.FullName.StartsWith("lib/net48/") && entry.Name != "Boruto.Plugin.dll")
                     {
                         var next = new DLLCode
@@ -99,8 +82,26 @@ namespace Boruto.Deployment.Services
                             }
                             result.Add(next);
                         }
+                        continue;
                     }
 
+                    if (entry.FullName.StartsWith("lib/net462/") && entry.Name != "Boruto.Plugin.dll")
+                    {
+                        var next = new DLLCode
+                        {
+                            Name = entry.Name
+                        };
+                        using (var ent = entry.Open())
+                        {
+                            using (var mem = new System.IO.MemoryStream())
+                            {
+                                ent.CopyTo(mem);
+                                next.Code = mem.ToArray();
+                            }
+                            result.Add(next);
+                        }
+                        continue;
+                    }
                 }
                 this.dlls = result.ToArray();
             }

@@ -75,7 +75,7 @@ namespace Boruto.Deployment.Services
                     throw new Exception($"The package uploaded did not create any PluginAssemblies");
                 }
 
-                var dlls = nugetService.GetLibNet64();
+                var dlls = nugetService.GetLibNet48_462();
 
 
                 var dyns = new Dictionary<string, Assembly>();

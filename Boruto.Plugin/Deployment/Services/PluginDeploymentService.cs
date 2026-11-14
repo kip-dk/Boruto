@@ -386,10 +386,6 @@ namespace Boruto.Deployment.Services
 
         internal static Image TargetFilters(this MethodInfo method, string logicalName, Assembly[] assms)
         {
-            if (method.DeclaringType.Name == "AccountAddressPlugin")
-            {
-                var x = 0;
-            }
             var result = new List<string>();
 
             foreach (var arg in method.GetParameters())

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
     <PowerAppsTargetsPath>$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\PowerApps</PowerAppsTargetsPath>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Boruto.Plugin.Entities.snk</AssemblyOriginatorKeyFile>

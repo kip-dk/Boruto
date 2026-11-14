@@ -9,6 +9,6 @@ namespace Boruto.Deployment.ServiceAPI
     internal interface INugetService
     {
         Models.NugetSpec GetSpec();
-        Models.DLLCode[] GetLibNet64();
+        Models.DLLCode[] GetLibNet48_462();
     }
 }
