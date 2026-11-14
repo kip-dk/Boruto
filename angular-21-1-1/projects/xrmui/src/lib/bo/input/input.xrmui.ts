@@ -1045,7 +1045,7 @@ export class XrmuiInput implements OnDestroy {
         const fileMax = max * 1024 * 1024;
         for (var i = 0; i < input.files.length; i++) {
           const fi = input.files[i];
-          if (fi.size > max) {
+          if (fi.size > fileMax) {
             toLarge += ` ${fi.name}`;
           }
         }
@@ -1055,7 +1055,7 @@ export class XrmuiInput implements OnDestroy {
         input.value = '';
         return;
       }
-      
+
       this.uploadFiles.emit(input.files);
     }
   }
