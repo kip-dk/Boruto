@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2026-10-25 16:50
+## updated: 2026-11-14 13:00
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -447,6 +447,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 ## Changelog
 ********************************************************************************************************************************************
 .NET 4.8
+### 2.0.0.2 cleanup console log
 ### 2.0.0.1 Added method to secure connection string locally
 ### 2.0.0.0 Upgraded Boruto.Plugin to .NET 4.8 Verify that your online project has newest oct. 2026 version from Microsoft before using.
 ********************************************************************************************************************************************
