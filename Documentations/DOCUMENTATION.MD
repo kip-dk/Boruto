@@ -447,6 +447,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot a similarities
 ## Changelog
 ********************************************************************************************************************************************
 .NET 4.8
+### 2.0.0.1 Added method to secure connection string locally
 ### 2.0.0.0 Upgraded Boruto.Plugin to .NET 4.8 Verify that your online project has newest oct. 2026 version from Microsoft before using.
 ********************************************************************************************************************************************
 ### Everytning below is .NET 4.6.2
