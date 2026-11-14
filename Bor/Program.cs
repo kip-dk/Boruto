@@ -65,6 +65,37 @@ namespace Bor
                             break;
 
                         }
+                    case "createkey":
+                        {
+                            var service = new Boruto.Implementations.Services.SecurityService();
+                            Console.Write($"Enter key name: ");
+                            var keyname = Console.ReadLine();
+                            Console.Write("Enter key: ");
+                            var key = Console.ReadLine();
+                            service.SaveKey(keyname, key);
+                            Console.WriteLine($"Key was created.");
+                            break;
+                        }
+                    case "createconnectionstring":
+                        {
+                            var service = new Boruto.Implementations.Services.SecurityService();
+                            Console.Write($"Enter key name: ");
+                            var keyname = Console.ReadLine();
+                            Console.Write("Enter connectionstring: ");
+                            var conn = Console.ReadLine();
+                            service.Encrypt(keyname, "conn.txt", conn);
+                            Console.WriteLine("Connectionstring was stored");
+                            break;
+                        }
+                    case "print-conn":
+                        {
+                            var service = new Boruto.Implementations.Services.SecurityService();
+                            Console.Write($"Enter key name: ");
+                            var keyname = Console.ReadLine();
+                            var conn = service.Decrypt(keyname, "conn.txt");
+                            Console.WriteLine($"Fandt: { conn }");
+                            break;
+                        }
                     default:
                         {
                             ICmd cmd = null;

@@ -65,5 +65,18 @@ namespace Boruto.Extensions.Strings
 
             return $"{startwith}{value}";
         }
+
+
+        [System.Diagnostics.DebuggerNonUserCode()]
+        public static string ResolveConnectionString(this string value)
+        {
+            if (!string.IsNullOrEmpty(value) && value.StartsWith("key="))
+            {
+                var service = new Implementations.Services.SecurityService();
+                var name = value.Substring(4).Trim();
+                return service.Decrypt(name, "conn.txt");
+            }
+            return value;
+        }
     }
 }

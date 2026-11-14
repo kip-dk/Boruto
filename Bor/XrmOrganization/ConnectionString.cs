@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boruto.Extensions.Strings;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -84,6 +85,10 @@ namespace Bor.XrmOrganization
 
         public static string ResolveConnectionStringFromStorage(string _value)
         {
+            if (_value != null && _value.StartsWith("key="))
+            {
+                return _value.ResolveConnectionString();
+            }
             if (_value != null && _value.StartsWith("auth="))
             {
                 string name = null;
