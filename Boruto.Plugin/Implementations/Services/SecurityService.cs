@@ -30,6 +30,18 @@ namespace Boruto.Implementations.Services
 
             var encrypted = ProtectedData.Protect(Encoding.UTF8.GetBytes(key),null,DataProtectionScope.CurrentUser);
             File.WriteAllBytes(file, encrypted);
+
+            var connFile = @"C:\Temp\{name}.txt";
+            if (System.IO.File.Exists(connFile))
+            {
+                var data = System.IO.File.ReadAllText(connFile);
+
+                if (!string.IsNullOrEmpty(data))
+                {
+                    this.Encrypt(name, "conn.txt", data);
+                    Console.WriteLine($"Connectionstring was copied from: { connFile }.");
+                }
+            }
         }
 
         public string Decrypt(string keyname, string filename)

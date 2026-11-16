@@ -445,12 +445,13 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot of similaritie
 1. No tools in the nuget package
 
 ## Changelog
-********************************************************************************************************************************************
+**********************************************************************************************************************************************
 ### NET 4.8
+### 2.0.0.3 tool save-key can now take the content to be entrypted from C:\Temp\{{name}}.txt.  Remember to hard-delete the file in temp after.
 ### 2.0.0.2 cleanup console log
 ### 2.0.0.1 Added method to secure connection string locally
 ### 2.0.0.0 Upgraded Boruto.Plugin to .NET 4.8 Verify that your online project has newest oct. 2026 version from Microsoft before using.
-********************************************************************************************************************************************
+**********************************************************************************************************************************************
 ### Everytning below is .NET 4.6.2
 ### 1.0.4.23 Support for Payload (ITarget,IMerged,IPreImage,IPostImage) inherited properties, allow interfaces to be defined in multi levels
 ### 1.0.4.22 Deploy tool now support 4.8 builds, boruto is still 4.6.2
