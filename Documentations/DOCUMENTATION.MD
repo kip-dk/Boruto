@@ -1,6 +1,6 @@
 # Boruto.Dataverse.Plugin
 
-## updated: 2026-11-14 13:00
+## updated: 2026-11-17 08:25
 
 1. Build plugin for dataverse using SOLID software princips
 1. Keep you plugin registration in dataverse in sync. with your code, using a simple plugin self-deployment solution
@@ -447,6 +447,7 @@ The Kipon.Solid.Plugin and the Boruto plugin frameworks has a lot of similaritie
 ## Changelog
 **********************************************************************************************************************************************
 ### NET 4.8
+### 2.0.0.4 same .. but now it works :-)
 ### 2.0.0.3 tool save-key can now take the content to be entrypted from C:\Temp\{{name}}.txt.  Remember to hard-delete the file in temp after.
 ### 2.0.0.2 cleanup console log
 ### 2.0.0.1 Added method to secure connection string locally

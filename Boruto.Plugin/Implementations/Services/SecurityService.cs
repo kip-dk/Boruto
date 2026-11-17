@@ -31,7 +31,7 @@ namespace Boruto.Implementations.Services
             var encrypted = ProtectedData.Protect(Encoding.UTF8.GetBytes(key),null,DataProtectionScope.CurrentUser);
             File.WriteAllBytes(file, encrypted);
 
-            var connFile = @"C:\Temp\{name}.txt";
+            var connFile = $@"C:\Temp\{name}.txt";
             if (System.IO.File.Exists(connFile))
             {
                 var data = System.IO.File.ReadAllText(connFile);
