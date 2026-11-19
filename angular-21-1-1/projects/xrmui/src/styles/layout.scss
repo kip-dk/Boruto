@@ -222,3 +222,16 @@
     flex: 0 0 var(--bo-fixed-size);
   }
 }
+
+.bo-header {
+  display: flex;
+  align-items: center;
+  background-color: rgb(241, 237, 237);
+  padding-left: 15px;
+  font-size: large;
+  --bo-fixed-size: 40px;
+  &.center {
+    justify-content:center;
+    padding-left: 0;
+  }
+}
