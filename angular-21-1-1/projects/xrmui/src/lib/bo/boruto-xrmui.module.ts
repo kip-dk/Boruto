@@ -9,6 +9,7 @@ import { XrmuiSpinner } from './spinner/spinner.xrmui';
 import { XrmuiButton } from './button/button.xrmui';
 import { XrmuiDevider } from './devider/devider.xrmui';
 import { XrmuiTabs } from './tabs/tabs.xrmui';
+import { XrmuiGreedy } from './greedy/greedy.xrmui'
 import { ChangeScopeDirective } from './changedscope/changedscope.directive';
 import { FormScopeDirective } from './form/formscope.directive';
 import { XrmuiSection } from './section/section.xrmui';
@@ -26,6 +27,7 @@ import { XrmuiSection } from './section/section.xrmui';
     XrmuiDevider,
     XrmuiTabs,
     XrmuiSection,
+    XrmuiGreedy,
     ChangeScopeDirective,
     FormScopeDirective,
   ],
@@ -41,6 +43,7 @@ import { XrmuiSection } from './section/section.xrmui';
     XrmuiDevider,
     XrmuiTabs,
     XrmuiSection,
+    XrmuiGreedy,
     ChangeScopeDirective,
     FormScopeDirective
   ]
