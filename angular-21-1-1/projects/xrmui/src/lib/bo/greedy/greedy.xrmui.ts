@@ -5,7 +5,8 @@ import {
   signal,
   AfterViewInit,
   OnDestroy,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  input
 } from '@angular/core';
 
 @Component({
@@ -20,6 +21,7 @@ import {
 })
 export class XrmuiGreedy implements AfterViewInit, OnDestroy {
   private element = inject(ElementRef<HTMLElement>);
+  leave = input<number>(50);
 
   height = signal(0);
 
@@ -27,7 +29,7 @@ export class XrmuiGreedy implements AfterViewInit, OnDestroy {
 
   private updateHeight = () => {
     const top = this.element.nativeElement.getBoundingClientRect().top;
-    this.height.set(Math.max(0, window.innerHeight - top - 15));
+    this.height.set(Math.max(0, window.innerHeight - top - this.leave()));
   };
 
   ngAfterViewInit(): void {
