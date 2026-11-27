@@ -461,14 +461,7 @@ export class XrmuiInput implements OnDestroy {
           return;
         }
         case 'email': {
-          const valid = this.searchElement!.nativeElement.checkValidity();
-          if (valid) {
-            this.error.set(false);
-            this.value.set(sv);
-            this.notifyOnChange();
-          } else {
-            this.error.set(true);
-          }
+          // syncvalue on on blur
           return;
         }
         default:
@@ -539,6 +532,18 @@ export class XrmuiInput implements OnDestroy {
       if (validate == 'decimal' || validate == 'number') {
         this.setNumberValueString();
       }
+
+      if (validate == 'email') {
+        const valid = this.searchElement!.nativeElement.checkValidity();
+        if (valid) {
+          this.error.set(false);
+          this.value.set(sv);
+          this.notifyOnChange();
+        } else {
+          this.error.set(true);
+        }
+      }
+
       this.onblurEvent.emit();
     }, 200);
   }
@@ -980,6 +985,9 @@ export class XrmuiInput implements OnDestroy {
         }
         case 'decimal': {
           this.value.set(Number(next));
+          break;
+        }
+        case 'email': {
           break;
         }
         default:
