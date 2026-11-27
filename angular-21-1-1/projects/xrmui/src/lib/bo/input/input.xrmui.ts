@@ -47,7 +47,7 @@ const bo_nextId = function () {
   imports: [FormsModule, NgClass, MatIcon, TextFieldModule, MatDatepickerModule, MatCheckboxModule, XrmuiIcon, NgTemplateOutlet]
 })
 export class XrmuiInput implements OnDestroy {
-  @ViewChild('inputfield') searchElement?: ElementRef;
+  @ViewChild('inputfield') searchElement?: ElementRef<HTMLInputElement | HTMLButtonElement>;
   @ViewChild('textareafield') textareaElement?: ElementRef;
   @ViewChild('datefield') datefieldElement?: ElementRef;
   @ViewChildren('option') options!: QueryList<ElementRef<HTMLDivElement>>;
@@ -119,7 +119,7 @@ export class XrmuiInput implements OnDestroy {
   });
 
   required = input<boolean>(false);
-  type = input<'text' | 'number' | 'password' | 'checkbox' | 'file'>('text');
+  type = model<'text' | 'number' | 'password' | 'checkbox' | 'file'| 'email'>('text');
 
   acceptFileTypes = input<string>('');
   multiFiles = input<boolean>(false);
@@ -137,8 +137,8 @@ export class XrmuiInput implements OnDestroy {
   multioptionsetvalue = input<MultiOptionSetValue | null>(null);
   entityreference = input<EntityReference | null>(null);
   onselect = output<ISelectable | undefined>();
-  error = input<boolean>(false);
-  validate = model<'number' | 'decimal' | 'date' | 'checkbox' | null>(null);
+  error = model<boolean>(false);
+  validate = model<'number' | 'decimal' | 'date' | 'checkbox' | 'email' | null>(null);
   decimals = input<number | undefined>(undefined);
   onfocusEvent = output<void>({ alias: 'focus' });
   onblurEvent = output<void>({ alias: 'blur' });
@@ -258,6 +258,11 @@ export class XrmuiInput implements OnDestroy {
 
       if (type == 'checkbox' && validate != 'checkbox') {
         this.validate.set('checkbox');
+      }
+
+      if (type == 'email' || validate == 'email') {
+        this.validate.set('email');
+        this.type.set('email');
       }
     });
 
@@ -453,6 +458,17 @@ export class XrmuiInput implements OnDestroy {
         }
         case 'decimal': {
           // syncvalue on blur ... this is to early
+          return;
+        }
+        case 'email': {
+          const valid = this.searchElement!.nativeElement.checkValidity();
+          if (valid) {
+            this.error.set(false);
+            this.value.set(sv);
+            this.notifyOnChange();
+          } else {
+            this.error.set(true);
+          }
           return;
         }
         default:
@@ -1146,7 +1162,10 @@ export class XrmuiInput implements OnDestroy {
         this.overlayRef.updatePosition();
       }
     });
-    this.resizeObserver.observe(this.searchElement?.nativeElement);
+
+    if (this.searchElement) {
+      this.resizeObserver.observe(this.searchElement.nativeElement);
+    }
   }
 
   ngOnDestroy(): void {

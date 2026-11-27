@@ -39,7 +39,7 @@
         (change)="doUploadFiles($event)"
         />
     }
-    @if (numberoflines() == 1 && validate() != 'date' && validate() != 'checkbox' && !isselect() && type() !== 'file') {
+    @if (numberoflines() == 1 && validate() != 'date' && validate() != 'checkbox' && !isselect() && type() !== 'file' && validate() != 'email') {
     <input
         [id]="inputid()"
         [name]="name()"
@@ -47,6 +47,28 @@
         autocomplete="off"
         [ngClass]="inputclasses()"
         [type]="type() != 'password'? 'text' : 'password'"
+        [disabled]="disabled()" 
+        [placeholder]="placeholder()" 
+        [(ngModel)]="shadowValue" 
+        (ngModelChange)="onValueChanged()" 
+        (focus)="onFocus()" 
+        (blur)="onBlur()"
+        (keydown.arrowdown)="ondown($event)"
+        (keydown.arrowup)="onup($event)"
+        (keydown.enter)="onenter($event)"
+        (keydown.esc)="onesc($event)"
+        (keydown)="onkeydown($event)"
+        [maxlength]="maxlength()"/>
+    }
+    @if (validate() == 'email') {
+    <input
+        [id]="inputid()"
+        [name]="name()"
+        #inputfield 
+        autocomplete="off"
+        [ngClass]="inputclasses()"
+        type="email"
+        pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
         [disabled]="disabled()" 
         [placeholder]="placeholder()" 
         [(ngModel)]="shadowValue" 

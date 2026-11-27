@@ -24,6 +24,7 @@ export class Account extends Entity implements ISelectable {
     lastonholdtime: Date | null = null;
     ownershipcode: OptionSetValue = new OptionSetValue();
     bor_groups = new MultiOptionSetValue();
+    emailaddress1: string | null = null;
 
 
     override OnChanged(): void {
