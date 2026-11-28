@@ -249,3 +249,24 @@
     color: rgb(207, 53, 53);
   }
 }
+
+.bo-progress::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 20%;
+  background-color: var(--bo-progress-color, #4280ef);
+  animation: bo-progress 1.5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes bo-progress {
+  from {
+    left: -20%;
+  }
+  to {
+    left: 100%;
+  }
+}
